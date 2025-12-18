@@ -1,82 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>BibleMapped</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --bg-main: #0B0F1A;
+      --text-main: #F1F3F5;
+      --text-muted: #C9CDD3;
+      --accent-purple: #6B4C7A;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: #e5e7eb;
-      line-height: 1.6;
+      background: var(--bg-main);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
     }
-    header {
-      padding: 4rem 2rem;
-      text-align: center;
-      background: linear-gradient(135deg, #0ea5e9, #9333ea);
+
+    /* HERO SECTION */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 4rem 6rem;
     }
-    h1 {
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* LEFT TEXT */
+    .hero-text h1 {
+      font-family: 'Libre Baskerville', serif;
       font-size: 3rem;
-      margin-bottom: 1rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
     }
-    section {
-      max-width: 800px;
-      margin: auto;
-      padding: 3rem 2rem;
+
+    .hero-text p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
     }
-    .card {
-      background: #020617;
-      padding: 2rem;
+
+    .hero-cta {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--accent-purple);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero-cta:hover {
+      text-decoration: underline;
+    }
+
+    /* RIGHT MAP PLACEHOLDER */
+    .hero-map {
+      background: rgba(255,255,255,0.03);
       border-radius: 12px;
-      margin-bottom: 2rem;
-    }
-    footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8A8F98;
+      font-size: 0.9rem;
       text-align: center;
       padding: 2rem;
-      font-size: 0.9rem;
-      color: #94a3b8;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero {
+        padding: 3rem 2rem;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-map {
+        min-height: 260px;
+      }
+
+      .hero-text h1 {
+        font-size: 2.4rem;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<header>
-  <h1>BibleMapped</h1>
-  <p>See Scripture geographically, historically, and visually.</p>
-</header>
+  <section class="hero">
+    <div class="hero-grid">
 
-<section>
-  <div class="card">
-    <h2>What is BibleMapped?</h2>
-    <p>
-      BibleMapped is a visual storytelling project that explains the Bible
-      using maps, movement, and historical context.
-    </p>
-  </div>
+      <!-- LEFT: TEXT -->
+      <div class="hero-text">
+        <h1>The Bible Tells a Real Story</h1>
+        <p>
+          Of real people, in real places, over real time.
+          Seeing where it happens clarifies what it means.
+        </p>
+        <a href="#map-tool" class="hero-cta">
+          ▶ Find Your Place on the Map
+        </a>
+      </div>
 
-  <div class="card">
-    <h2>Why Maps?</h2>
-    <p>
-      Biblical stories happen in real places, with real distances,
-      borders, and consequences.
-    </p>
-  </div>
+      <!-- RIGHT: MAP -->
+      <div class="hero-map">
+        [ Map visual goes here ]
+      </div>
 
-  <div class="card">
-    <h2>Start Here</h2>
-    <ul>
-      <li>Jonah: Running West from God</li>
-      <li>Jericho: When the Story Comes Back Around</li>
-      <li>Jacob Wrestles: Where Israel Gets Its Name</li>
-    </ul>
-  </div>
-</section>
-
-<footer>
-  © BibleMapped • Built with GitHub Pages
-</footer>
+    </div>
+  </section>
 
 </body>
 </html>
