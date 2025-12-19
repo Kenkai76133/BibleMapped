@@ -272,4 +272,17 @@ h1{
   border-color: rgba(255,255,255,.18);
   background: rgba(255,255,255,.045);
 }
+.badge{
+  display:inline-flex;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  color: rgba(238,241,247,.78);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
 
