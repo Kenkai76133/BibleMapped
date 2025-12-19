@@ -38,3 +38,20 @@ document.addEventListener("click", (e) => {
   if (e.target.closest("#popcard") || e.target.closest("#israelHotspot")) return;
   popcard.style.display = "none";
 });
+// Start Journey: make the globe feel interactive instantly
+const startBtn = document.getElementById("startJourney");
+const globe = document.querySelector(".globe-wrap");
+
+if (startBtn && globe) {
+  startBtn.addEventListener("click", () => {
+    // tiny cinematic pulse
+    globe.animate(
+      [
+        { transform: "translateX(-50%) scale(1)", filter: "brightness(1)" },
+        { transform: "translateX(-50%) scale(1.06)", filter: "brightness(1.08)" },
+        { transform: "translateX(-50%) scale(1.02)", filter: "brightness(1.02)" }
+      ],
+      { duration: 520, easing: "cubic-bezier(.2,.8,.2,1)" }
+    );
+  });
+}
