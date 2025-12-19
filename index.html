@@ -1,149 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>BibleMapped</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<section class="why-it-matters">
+  <div class="container">
+    <h2>Why This Matters</h2>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <p class="lead">
+      The Bible wasn’t written in abstraction.
+      It unfolded across real terrain, real cities, and real empires.
+      When geography is restored, meaning sharpens.
+    </p>
 
-  <style>
-    :root {
-      --gunmetal: #0B0F1A;
-      --gunmetal-soft: #121726;
-      --burnt-purple: #6B4C7A;
-      --text-main: #F1F3F5;
-      --text-muted: #C9CDD3;
-      --border-subtle: rgba(255,255,255,0.08);
-    }
+    <div class="pillars">
+      <div class="pillar">
+        <h3>Real Places</h3>
+        <p>Scripture happened in specific locations — deserts, rivers, trade routes, and borders.</p>
+      </div>
 
-    * { box-sizing: border-box; }
+      <div class="pillar">
+        <h3>Real Movement</h3>
+        <p>Journeys, exile, conquest, and return all follow geographic logic.</p>
+      </div>
 
-    body {
-      margin: 0;
-      background: var(--gunmetal);
-      color: var(--text-main);
-      font-family: 'Inter', sans-serif;
-    }
-
-    /* ───────────────── HEADER PLAQUE ───────────────── */
-    header {
-      background: var(--burnt-purple);
-      padding: 0.85rem 2rem;
-      display: flex;
-      align-items: center;
-    }
-
-    header h1 {
-      font-family: 'Fraunces', serif;
-      font-size: 1.4rem;
-      letter-spacing: 0.04em;
-      margin: 0;
-      color: var(--text-main);
-    }
-
-    /* ───────────────── HERO MAP FIELD ───────────────── */
-    .hero {
-      min-height: calc(100vh - 64px);
-      background: var(--gunmetal-soft);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 4rem 2rem;
-      position: relative;
-    }
-
-    .map-frame {
-      width: 100%;
-      max-width: 1400px;
-      height: 70vh;
-      border: 1px solid var(--border-subtle);
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at center,
-          rgba(107,76,122,0.18),
-          rgba(11,15,26,0.95) 70%);
-    }
-
-    /* Simulated Burnt Purple Map Layer */
-    .map-overlay {
-      position: absolute;
-      inset: 0;
-      background-image:
-        repeating-linear-gradient(
-          45deg,
-          rgba(107,76,122,0.35),
-          rgba(107,76,122,0.35) 2px,
-          transparent 2px,
-          transparent 10px
-        );
-      opacity: 0.4;
-      mix-blend-mode: screen;
-      pointer-events: none;
-    }
-
-    /* Headline Overlay */
-    .hero-text {
-      position: absolute;
-      bottom: 3rem;
-      left: 3rem;
-      max-width: 520px;
-    }
-
-    .hero-text h2 {
-      font-family: 'Fraunces', serif;
-      font-size: 2.8rem;
-      line-height: 1.15;
-      margin-bottom: 1rem;
-    }
-
-    .hero-text p {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-      line-height: 1.6;
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .map-frame {
-        height: 60vh;
-      }
-
-      .hero-text {
-        left: 1.5rem;
-        bottom: 1.5rem;
-      }
-
-      .hero-text h2 {
-        font-size: 2.1rem;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- HEADER PLAQUE -->
-  <header>
-    <h1>BIBLEMAPPED</h1>
-  </header>
-
-  <!-- HERO MAP FIELD -->
-  <section class="hero">
-    <div class="map-frame">
-      <div class="map-overlay"></div>
-
-      <div class="hero-text">
-        <h2>The Bible Tells a Real Story</h2>
-        <p>
-          Real people. Real places. Real time.
-          Scripture understood through geography and movement.
-        </p>
+      <div class="pillar">
+        <h3>Real Meaning</h3>
+        <p>Understanding where events happened changes how we understand why they happened.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+.why-it-matters {
+  background: #0B0F1A; /* Gunmetal */
+  padding: 6rem 1.5rem;
+  color: #F1F3F5;
+}
 
-</body>
-</html>
+.why-it-matters .container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.why-it-matters h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 2.4rem;
+  margin-bottom: 1.5rem;
+  color: #F1F3F5;
+}
+
+.why-it-matters .lead {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #C9CDD3;
+  margin-bottom: 3rem;
+}
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+}
+
+.pillar h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #6B4C7A; /* Burnt Purple */
+  margin-bottom: 0.5rem;
+}
+
+.pillar p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #C9CDD3;
+}
