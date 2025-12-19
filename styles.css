@@ -223,3 +223,53 @@ h1{
 @media (max-width: 860px){
   .steps, .cards{ grid-template-columns: 1fr; }
   .globe-wrap{ bottom:-180px; }
+  /* ===== Premium polish pass ===== */
+
+/* Make headings pop subtly */
+.hero-content h1{
+  text-shadow: 0 10px 30px rgba(0,0,0,.45);
+}
+
+/* Add a soft spotlight behind the hero content */
+.hero{
+  background:
+    radial-gradient(900px 500px at 50% 20%, rgba(255,255,255,.06), transparent 65%),
+    radial-gradient(700px 400px at 50% 85%, rgba(34,230,208,.06), transparent 70%);
+}
+
+/* Give the hero content more "glass" and depth */
+.hero-content{
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.55),
+    inset 0 0 0 1px rgba(255,255,255,.06);
+}
+
+/* Buttons look more premium */
+.btn.primary{
+  border-color: rgba(255,255,255,.16);
+  box-shadow: 0 14px 40px rgba(0,0,0,.35);
+}
+.btn.primary:hover{
+  transform: translateY(-1px);
+}
+
+/* Cards feel interactive */
+.card{
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+.card:hover{
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,.18);
+  background: rgba(255,255,255,.045);
+}
+
+/* Steps get the same hover polish */
+.step{
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+.step:hover{
+  transform: translateY(-3px);
+  border-color: rgba(255,255,255,.18);
+  background: rgba(255,255,255,.045);
+}
+
