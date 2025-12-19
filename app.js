@@ -38,9 +38,32 @@ document.addEventListener("click", (e) => {
   if (e.target.closest("#popcard") || e.target.closest("#israelHotspot")) return;
   popcard.style.display = "none";
 });
-// Start Journey: make the globe feel interactive instantly
+// Start Journey: pulse globe, then smooth scroll
 const startBtn = document.getElementById("startJourney");
 const globe = document.querySelector(".globe-wrap");
+const books = document.getElementById("books");
+
+if (startBtn && globe) {
+  startBtn.addEventListener("click", (e) => {
+    e.preventDefault(); // stop the instant jump
+
+    globe.animate(
+      [
+        { transform: "translateX(-50%) scale(1)" },
+        { transform: "translateX(-50%) scale(1.08)" },
+        { transform: "translateX(-50%) scale(1.02)" }
+      ],
+      { duration: 520, easing: "cubic-bezier(.2,.8,.2,1)" }
+    );
+
+    // scroll after a beat so the pulse is visible
+    setTimeout(() => {
+      if (books) books.scrollIntoView({ behavior: "smooth", block: "start" });
+      else location.hash = "books";
+    }, 180);
+  });
+}
+
 
 if (startBtn && globe) {
   startBtn.addEventListener("click", () => {
