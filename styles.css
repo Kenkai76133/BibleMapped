@@ -41,7 +41,25 @@ body::before{
   border-bottom: 1px solid var(--stroke);
 }
 
-.brand{ font-weight:700; letter-spacing:.2px; }
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  color: var(--text);
+  font-weight:700;
+  letter-spacing:.2px;
+}
+
+.brand-logo{
+  height:34px;   /* change to 28–44 if needed */
+  width:auto;
+  display:block;
+}
+
+.brand-text{
+  line-height:1;
+}
 
 .nav{ display:flex; gap:16px; align-items:center; }
 .nav a{
