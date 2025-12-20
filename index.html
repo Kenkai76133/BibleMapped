@@ -4,128 +4,137 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BibleMapped</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Visual Bible storytelling using maps." />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
+
 <body>
-  <header class="header">
-<a class="brand" href="/">
-  <img src="assets/logo.svg" alt="BibleMapped logo" class="brand-logo">
-  <span class="brand-text">BibleMapped</span>
-</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./">
+        <img src="./assets/brand/logo.svg" alt="BibleMapped" class="brand-logo" />
+        <span class="brand-name">BibleMapped</span>
+      </a>
 
-
-    <nav class="nav">
-      <a href="#explore">Explore</a>
-      <a href="#how">How It Works</a>
-      <a href="#books">Books</a>
-      <a class="nav-cta" href="#support">Support</a>
-    </nav>
+      <nav class="nav">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="btn">Get Updates</a>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section class="hero" id="explore">
-      <div class="hero-content">
-          <div class="badge">Interactive Bible Geography</div>
-        <h1>The Bible is a story rooted in real geography.</h1>
-        <p class="hero-sub">
-          Start where it starts: a real place, on a real map.
-        </p>
-        <p class="hero-sub2">
-          Click <strong>Israel</strong> to begin exploring locations, context, and story.
+    <section class="hero">
+      <div class="container hero-inner">
+        <p class="kicker">Maps • History • Scripture</p>
+
+        <h1>See the Bible on a map—so the story hits different.</h1>
+
+        <p class="sub">
+          BibleMapped turns places, routes, and empires into visual explainers—evidence-forward and easy to follow.
         </p>
 
-        <div class="hero-actions">
-       <a class="btn primary" href="#books" id="startJourney">Start the Journey</a>
-          <a class="btn secondary" href="#how">How It Works</a>
+        <div class="cta-row">
+          <a class="btn primary" href="#projects">Explore Projects</a>
+          <a class="btn ghost" href="#about">How it works</a>
         </div>
 
-        <div class="hint">Explore the map</div>
-      </div>
-
-      <!-- Bottom half-globe -->
-      <div class="globe-wrap" aria-hidden="true">
-        <video
-          id="globeVideo"
-          class="globe"
-          autoplay
-          muted
-          playsinline
-          preload="auto"
-          poster="assets/globe-poster.jpg"
-        >
-          <source src="assets/globe.webm" type="video/webm" />
-          <source src="assets/globe.mp4" type="video/mp4" />
-        </video>
-
-        <!-- Invisible hotspot (we’ll fine-tune its position later) -->
-        <button class="hotspot" id="israelHotspot" aria-label="Israel"></button>
-
-        <!-- Pop card -->
-        <div class="popcard" id="popcard" role="dialog" aria-modal="false">
-          <div class="popcard-title">Start with Israel</div>
-          <div class="popcard-links">
-            <a href="#books">Places</a>
-            <a href="#books">Stories</a>
-            <a href="#videos">Videos</a>
+        <div class="hero-card">
+          <div class="hero-card-top">
+            <span class="pill">New</span>
+            <span class="muted">Jonah’s Detour — map story</span>
+          </div>
+          <div class="hero-card-body">
+            <div class="fake-map" aria-hidden="true"></div>
+            <div class="hero-mini">
+              <div class="mini-item">
+                <span class="dot"></span>
+                <span>Joppa → Tarshish</span>
+              </div>
+              <div class="mini-item">
+                <span class="dot"></span>
+                <span>Back to the mission</span>
+              </div>
+              <div class="mini-item">
+                <span class="dot"></span>
+                <span>East to Nineveh</span>
+              </div>
+            </div>
           </div>
         </div>
+
       </div>
     </section>
 
-    <section class="section" id="how">
-      <h2>How It Works</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="icon">◎</div>
-          <div class="step-title">Choose a place</div>
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Projects</h2>
+          <p class="muted">Short explainers, map routes, and visual evidence stacks.</p>
         </div>
-        <div class="step">
-          <div class="icon">▦</div>
-          <div class="step-title">See the context</div>
-        </div>
-        <div class="step">
-          <div class="icon">➜</div>
-          <div class="step-title">Follow the story</div>
+
+        <div class="grid">
+          <article class="card">
+            <h3>Jonah’s Route</h3>
+            <p>Joppa → Tarshish → back → Nineveh. A rebellion you can measure.</p>
+            <a class="card-link" href="#">Open</a>
+          </article>
+
+          <article class="card">
+            <h3>Assyria Explained</h3>
+            <p>Empire geography + why Nineveh mattered in the ancient world.</p>
+            <a class="card-link" href="#">Open</a>
+          </article>
+
+          <article class="card">
+            <h3>Jericho Layers</h3>
+            <p>Terrain, archaeology, and the story—stacked visually.</p>
+            <a class="card-link" href="#">Open</a>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="books">
-      <h2>Featured</h2>
-      <div class="cards">
-        <article class="card">
-          <div class="card-icon">🌳</div>
-          <h3>Genesis</h3>
-          <p>Where everything starts—creation, calling, covenant.</p>
-        </article>
-        <article class="card">
-          <div class="card-icon">📜</div>
-          <h3>Old Testament</h3>
-          <p>History, law, prophets—mapped to real regions and empires.</p>
-        </article>
-        <article class="card">
-          <div class="card-icon">✝</div>
-          <h3>New Testament</h3>
-          <p>Jesus and the early church—cities, routes, and context.</p>
-        </article>
+    <section id="about" class="section">
+      <div class="container split">
+        <div>
+          <h2>What BibleMapped is</h2>
+          <p class="muted">
+            A Christian explainer project built like a newsroom piece: maps first, sources visible, story tight.
+            The goal isn’t hype—it's clarity.
+          </p>
+        </div>
+
+        <div class="panel">
+          <h3>Format</h3>
+          <ul>
+            <li>Map movement + visual anchors</li>
+            <li>Evidence stack (quick citations on-screen)</li>
+            <li>Short-form + long-form breakdowns</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <section class="section" id="videos">
-      <h2>Latest Videos</h2>
-      <p class="muted">We’ll wire your real videos next.</p>
+    <section id="contact" class="section">
+      <div class="container contact">
+        <h2>Get updates</h2>
+        <p class="muted">Drop a link to your YouTube or email list later. For now this button is the placeholder.</p>
+        <a class="btn primary" href="#">Subscribe (soon)</a>
+      </div>
     </section>
-
-    <footer class="footer" id="support">
-      <span class="muted">© BibleMapped</span>
-    </footer>
   </main>
 
-  <script src="app.js"></script>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="muted">© <span id="y"></span> BibleMapped</span>
+      <span class="muted">Built on GitHub Pages</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
-
-
-
-
-
