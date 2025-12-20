@@ -48,7 +48,7 @@ body::before{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:18px 26px;
+  padding:16px 22px;
 }
 
 .brand{
@@ -56,25 +56,28 @@ body::before{
   align-items:center;
   gap:12px;
   text-decoration:none;
+  color:inherit;
 }
 
 .brand-logo{
-  height:42px;
+  height:34px;
   width:auto;
   display:block;
 }
 
 .brand-name{
-  font-size:20px;
   font-weight:800;
+  font-size:20px;
   letter-spacing:0.2px;
-  color:inherit;
 }
 
 .nav a{
   margin-left:18px;
   text-decoration:none;
   opacity:0.9;
+}
+.nav a:hover{ opacity:1; }
+
 }
 .nav a:hover{ opacity:1; }
 
