@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BibleMapped — Concordance</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="./">
+    <img src="./assets/logo.svg" alt="BibleMapped" class="brand-logo">
+  </a>
+
+  <nav class="nav">
+    <a href="./#projects">Projects</a>
+    <a href="./#about">About</a>
+    <a href="./concordance.html">Concordance</a>
+    <a href="./#updates" class="btn">Get Updates</a>
+  </nav>
+</header>
+
+<main class="concordance">
+  <h1>Strong Concordance</h1>
+  <p>Search a word, a Strong’s number (G/H), or a verse reference.</p>
+
+  <form id="strongForm" class="strong-form">
+    <input id="q" type="text" placeholder="Try: mercy • G3056 • Jonah 1:3" autocomplete="off" />
+    <button type="submit">Search</button>
+  </form>
+
+  <div class="quick-links">
+    <a id="blb" target="_blank" rel="noopener">Open in Blue Letter Bible</a>
+    <a id="hub" target="_blank" rel="noopener">Open in BibleHub</a>
+  </div>
+</main>
+
+<script>
+  const form = document.getElementById('strongForm');
+  const q = document.getElementById('q');
+  const blb = document.getElementById('blb');
+  const hub = document.getElementById('hub');
+
+  function setLinks(query) {
+    const s = query.trim();
+
+    const strongMatch = s.match(/^([gGhH])\s*0*([0-9]{1,5})$/);
+    if (strongMatch) {
+      const lang = strongMatch[1].toUpperCase();
+      const raw = parseInt(strongMatch[2], 10);
+      const padded = String(raw).padStart(4, '0');
+      const strong = `${lang}${padded}`;
+
+      blb.href = `https://www.blueletterbible.org/lexicon/${strong}/kjv/`;
+      hub.href = `https://biblehub.com/${lang === 'G' ? 'greek' : 'hebrew'}/${raw}.htm`;
+      return;
+    }
+
+    const encoded = encodeURIComponent(s);
+    blb.href = `https://www.blueletterbible.org/search/search.cfm?Criteria=${encoded}&t=KJV`;
+    hub.href = `https://biblehub.com/search.php?q=${encoded}`;
+  }
+
+  q.addEventListener('input', () => setLinks(q.value));
+  setLinks("");
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    setLinks(q.value);
+    window.open(hub.href, '_blank', 'noopener');
+  });
+</script>
+
+</body>
+</html>
