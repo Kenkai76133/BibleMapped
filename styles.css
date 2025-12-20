@@ -52,7 +52,7 @@ body::before{
 }
 
 .brand-logo{
-  height:34px;   /* change to 28–44 if needed */
+  height:46px;   /* change to 28–44 if needed */
   width:auto;
   display:block;
 }
