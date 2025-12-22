@@ -1,1 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BibleMapped</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <!-- Burnt purple strip -->
+    <div class="top-strip" aria-hidden="true"></div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="container header-inner">
+        <a class="brand" href="/" aria-label="BibleMapped Home">
+          <!-- We'll add your real logo file next step -->
+          <div class="logo-placeholder">BibleMapped</div>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          <a href="#explainers">Explainers</a>
+          <a href="#maps">Maps</a>
+          <a href="#history">History</a>
+          <a href="#characters">Characters</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="search-btn" id="searchBtn" type="button">Search</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main class="container">
+      <section class="hero">
+        <h1>Explainers, anchored to real places.</h1>
+        <p>
+          BibleMapped is a Vox-style Bible explainer hub — maps, history, and character deep dives with sources you can check.
+        </p>
+      </section>
+
+      <section id="explainers" class="section">
+        <div class="section-head">
+          <h2>Explainers</h2>
+          <a class="see-all" href="#">See all</a>
+        </div>
+        <div class="grid" id="explainersGrid"></div>
+      </section>
+
+      <section id="maps" class="section">
+        <div class="section-head">
+          <h2>Maps</h2>
+          <a class="see-all" href="#">See all</a>
+        </div>
+        <div class="grid" id="mapsGrid"></div>
+      </section>
+
+      <section id="history" class="section">
+        <div class="section-head">
+          <h2>History</h2>
+          <a class="see-all" href="#">See all</a>
+        </div>
+        <div class="grid" id="historyGrid"></div>
+      </section>
+
+      <section id="characters" class="section">
+        <div class="section-head">
+          <h2>Characters</h2>
+          <a class="see-all" href="#">See all</a>
+        </div>
+        <div class="grid" id="charactersGrid"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p>© <span id="year"></span> BibleMapped</p>
+        <div class="footer-links">
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+          <a href="#">Privacy</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./src/app.js"></script>
+  </body>
+</html>
 
