@@ -19,10 +19,10 @@ const demo = {
     { kicker: "HISTORY", title: "Temple politics", desc: "Why Jerusalem was always tense." },
     { kicker: "HISTORY", title: "Roman provincial control", desc: "How empire governance worked on the ground." }
   ],
-  characters: [
-    { kicker: "CHARACTER", title: "Mary", desc: "What the texts emphasize — and what’s later tradition." },
-    { kicker: "CHARACTER", title: "Joseph", desc: "The quiet backbone of the narrative." },
-    { kicker: "CHARACTER", title: "The Magi", desc: "Who they might have been (and who they weren’t)." }
+  people: [
+    { kicker: "PERSON", title: "Mary", desc: "What the texts emphasize — and what’s later tradition." },
+    { kicker: "PERSON", title: "Joseph", desc: "The quiet backbone of the narrative." },
+    { kicker: "PERSON", title: "The Magi", desc: "Who they might have been (and who they weren’t)." }
   ]
 };
 
@@ -47,7 +47,7 @@ function fillGrid(gridId, items) {
 fillGrid("explainersGrid", demo.explainers);
 fillGrid("mapsGrid", demo.maps);
 fillGrid("historyGrid", demo.history);
-fillGrid("charactersGrid", demo.characters);
+fillGrid("peopleGrid", demo.characters);
 
 // Placeholder search behavior (we'll build real search later)
 const searchBtn = document.getElementById("searchBtn");
