@@ -47,7 +47,7 @@ function fillGrid(gridId, items) {
 fillGrid("explainersGrid", demo.explainers);
 fillGrid("mapsGrid", demo.maps);
 fillGrid("historyGrid", demo.history);
-fillGrid("peopleGrid", demo.characters);
+fillGrid("peopleGrid", demo.people);
 
 // Placeholder search behavior (we'll build real search later)
 const searchBtn = document.getElementById("searchBtn");
