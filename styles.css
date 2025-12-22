@@ -83,12 +83,11 @@ body::before{
 
 }
 
-.brand-logo{
-  height:60px;
-  width:auto;
-  display:block;
-  /* keeps SVG crisp and stable */
-  flex:0 0 auto;
+.brand-logo {
+  height: 60px; /* or 64px */
+  width: auto;
+}
+
 }
 
 .brand-name{
