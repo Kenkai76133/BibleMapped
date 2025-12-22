@@ -172,3 +172,23 @@ body {
   .grid { grid-template-columns: 1fr; }
   .nav { display: none; } /* later: add mobile menu */
 }
+/* --- Vox polish pass (BibleMapped) --- */
+
+.header-inner { min-height: 64px; gap: 18px; }
+.logo { height: 28px; width: auto; display: block; }
+
+.nav { gap: 16px; }
+.nav a {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 10px 6px;
+}
+
+.hero { padding-top: 28px; padding-bottom: 10px; }
+.section { padding: 22px 0; }
+.grid { gap: 14px; }
+.card { padding: 14px; border-radius: 14px; }
+.kicker { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+.footer { margin-top: 34px; padding: 18px 0; }
