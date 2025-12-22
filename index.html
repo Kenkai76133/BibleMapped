@@ -1,50 +1,44 @@
-<header class="siteHeader">
-  <div class="headerInner">
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BibleMapped</title>
+  <meta name="description" content="BibleMapped — Explainers that connect Scripture to real places, timelines, and evidence." />
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-    <div class="brand">
-      <span class="brandMark">BibleMapped</span>
-    </div>
-
-    <nav class="nav">
-      <a href="#">Explainers</a>
-      <a href="#">Maps</a>
-      <a href="#">History</a>
-      <a href="#">Characters</a>
-    </nav>
-
-    <button class="menuBtn" aria-label="Open menu">☰</button>
-
-  </div>
-</header>
 <body>
-  <!-- Top strip -->
+  <!-- Top color strip -->
   <div class="topStrip"></div>
 
-  <!-- Site Header -->
+  <!-- Header -->
   <header class="siteHeader">
     <div class="headerInner">
-      <a class="brand" href="#">
-        <span class="brandMark">BibleMapped</span>
-      </a>
+      <a class="brand" href="#">BibleMapped</a>
 
-      <nav class="nav">
-        <a href="#" class="navLink">Explainers</a>
-        <a href="#" class="navLink">Maps</a>
-        <a href="#" class="navLink">History</a>
-        <a href="#" class="navLink">People</a>
+      <nav class="navLinks" aria-label="Primary navigation">
+        <a href="#explainers">Explainers</a>
+        <a href="#maps">Maps</a>
+        <a href="#history">History</a>
+        <a href="#characters">Characters</a>
       </nav>
 
-      <button class="menuBtn" aria-label="Open menu">
-        ☰
-      </button>
+      <button class="menuBtn" aria-label="Open menu">☰</button>
     </div>
   </header>
 
-  <!-- Main Content -->
+  <!-- Main -->
   <main class="wrap">
+    <!-- Hero -->
     <section class="hero">
-      <h1>The Bible doesn’t open in a storybook — it opens on a map.</h1>
-      <p>Short, documentary explainers connecting Scripture to real places, timelines, and evidence.</p>
+      <p class="kicker">Making sense of it all:</p>
+
+      <h1 class="headline">The Bible doesn’t open in a storybook — it opens on a map.</h1>
+
+      <p class="subhead">
+        Short, documentary explainers connecting Scripture to real places, timelines, and evidence.
+      </p>
 
       <div class="ctaRow">
         <a class="btn primary" href="#">Watch on YouTube</a>
@@ -52,39 +46,45 @@
       </div>
     </section>
 
+    <!-- Grid -->
     <section class="grid">
-      <article class="card">
+      <article class="card" id="explainers">
         <div class="thumb"></div>
         <h2>Why Bethlehem mattered</h2>
         <p>What geography reveals about the Christmas claim.</p>
         <a class="link" href="#">Watch</a>
       </article>
 
-      <article class="card">
+      <article class="card" id="maps">
         <div class="thumb"></div>
-        <h2>Jericho in context</h2>
-        <p>Where the story sits on the ground — and in history.</p>
-        <a class="link" href="#">Watch</a>
+        <h2>Map: Judea in the Roman world</h2>
+        <p>A fast visual orientation to the setting.</p>
+        <a class="link" href="#">Explore</a>
       </article>
 
-      <article class="card">
+      <article class="card" id="history">
         <div class="thumb"></div>
         <h2>Assyria & 701 BC</h2>
         <p>The siege, the map, and what the records say.</p>
         <a class="link" href="#">Watch</a>
       </article>
 
-      <article class="card">
+      <article class="card" id="characters">
         <div class="thumb"></div>
-        <h2>Start here</h2>
-        <p>Your fastest path into BibleMapped.</p>
+        <h2>Herod: the political backdrop</h2>
+        <p>Who he was — and why he matters to the timeline.</p>
         <a class="link" href="#">Watch</a>
       </article>
     </section>
 
+    <!-- Footer -->
     <footer class="footer">
       <div class="footerInner">
-        <div class="footerBrand">BibleMapped</div>
+        <div class="footerBrand">
+          <div class="brandSmall">BibleMapped</div>
+          <div class="tagline">See for Yourself.</div>
+        </div>
+
         <div class="footerLinks">
           <a href="#">YouTube</a>
           <a href="#">TikTok</a>
@@ -94,4 +94,4 @@
     </footer>
   </main>
 </body>
-
+</html>
