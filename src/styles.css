@@ -220,3 +220,18 @@ body {
 .top-strip{
   height:10px;           /* burnt purple strip thickness */
 }
+/* --- BIGGER LOGO + THICKER STRIP (global override) --- */
+.top-strip { height: 14px !important; }
+
+.logo {
+  height: 44px !important;
+  width: auto !important;
+  display: block !important;
+}
+
+.header-inner {
+  min-height: 84px !important;
+}
+
+/* Keep nav from looking cramped when the logo grows */
+.nav { gap: 18px !important; }
