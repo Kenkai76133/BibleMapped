@@ -217,9 +217,6 @@ body {
   gap:12px;
 }
 
-.top-strip{
-  height:10px;           /* burnt purple strip thickness */
-}
 /* --- BIGGER LOGO + THICKER STRIP (global override) --- */
 .top-strip { height: 14px !important; }
 
@@ -235,3 +232,16 @@ body {
 
 /* Keep nav from looking cramped when the logo grows */
 .nav { gap: 18px !important; }
+/* Make the menu look like a clean website header (Vox-ish) */
+.nav a{
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 4px;
+}
+
+/* On phones: keep the menu from squishing */
+@media (max-width: 640px){
+  .nav{ gap: 12px !important; flex-wrap: wrap; justify-content: center; }
+  .nav a{ font-size: 11px; padding: 8px 3px; }
+}
