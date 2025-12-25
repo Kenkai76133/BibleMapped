@@ -1,4 +1,4 @@
-/* BibleMapped Map Navigator (simple dark UI) */
+/* BibleMapped Map Navigator (dark UI with filters + drawer) */
 
 :root{
   --bg:#070b12;
@@ -6,6 +6,8 @@
   --line:#223142;
   --text:#e7eef7;
   --muted:#9fb0c2;
+  --pill:#17243a;
+  --accent:#5ec2e5;
 }
 
 html, body { height:100%; margin:0; background:var(--bg); color:var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; }
@@ -13,12 +15,13 @@ html, body { height:100%; margin:0; background:var(--bg); color:var(--text); fon
 .layout{ height:100vh; display:flex; width:100%; }
 
 .sidebar{
-  width: 320px;
+  width: 340px;
   max-width: 90vw;
   background: var(--panel);
   border-right: 1px solid var(--line);
   padding: 12px;
   box-sizing: border-box;
+  overflow-y: auto;
 }
 
 .brand{ margin-bottom:10px; }
@@ -41,6 +44,20 @@ html, body { height:100%; margin:0; background:var(--bg); color:var(--text); fon
 
 .list{ display:flex; flex-direction:column; gap:8px; }
 
+.placeBtn{
+  width:100%;
+  text-align:left;
+  padding:10px;
+  border:1px solid var(--line);
+  background:#0b1220;
+  color:var(--text);
+  border-radius:10px;
+  cursor:pointer;
+}
+.placeBtn__name{ font-weight:700; }
+.placeBtn__meta{ opacity:.8; font-size:12px; margin-top:2px; }
+.placeBtn__tags{ display:flex; flex-wrap:wrap; gap:4px; margin-top:6px; }
+
 .check{ display:flex; align-items:center; gap:8px; color:var(--text); margin:8px 0; }
 .check input{ transform: scale(1.1); }
 
@@ -55,10 +72,48 @@ html, body { height:100%; margin:0; background:var(--bg); color:var(--text); fon
   cursor:pointer;
 }
 
-.mapWrap{ flex:1; position:relative; }
+.filterGroup{ margin-bottom:12px; }
+.filterGroup__label{ font-weight:700; margin-bottom:4px; }
+.filterOptions{ display:flex; flex-wrap:wrap; gap:8px; }
+.filterOption{ display:flex; align-items:center; gap:6px; padding:6px 10px; border:1px solid var(--line); border-radius:10px; background:#0c1526; cursor:pointer; }
+.filterOption input{ transform:scale(1.05); }
+
+.pill{ display:inline-flex; align-items:center; padding:4px 8px; background:var(--pill); border-radius:999px; font-size:12px; color:var(--muted); border:1px solid var(--line); }
+.chips{ display:flex; flex-wrap:wrap; gap:6px; }
+.chip{ padding:6px 10px; background:#0f1a2c; border:1px solid var(--line); border-radius:12px; font-size:12px; color:var(--text); }
+.muted{ color:var(--muted); }
+
+.mapWrap{ flex:1; position:relative; background:var(--bg); }
 #map{ height:100%; width:100%; }
 
-/* Mobile: sidebar overlay */
+.drawer{
+  position:absolute;
+  right:0;
+  top:0;
+  height:100vh;
+  width:340px;
+  max-width:90vw;
+  background:rgba(11,18,32,.97);
+  border-left:1px solid var(--line);
+  box-shadow: -10px 0 30px rgba(0,0,0,.35);
+  transform: translateX(105%);
+  transition: transform .25s ease;
+  z-index:1250;
+  box-sizing:border-box;
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.drawer.open{ transform: translateX(0); }
+.drawer__header{ display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
+.drawer__title{ font-size:18px; font-weight:800; }
+.drawer__meta{ color:var(--muted); margin-top:2px; }
+.drawer__close{ border:1px solid var(--line); background:#0f1a2c; color:var(--text); border-radius:10px; cursor:pointer; padding:6px 10px; }
+.drawer__body{ display:flex; flex-direction:column; gap:10px; }
+.drawer__row{ display:flex; gap:10px; align-items:flex-start; flex-wrap:wrap; }
+
+/* Mobile: sidebar overlay & drawer bottom sheet */
 .menuBtn{
   position:absolute;
   left:12px;
@@ -86,5 +141,17 @@ html, body { height:100%; margin:0; background:var(--bg); color:var(--text); fon
   }
   .sidebar.open{ transform: translateX(0); }
   .menuBtn{ display:block; }
+  .drawer{
+    width:100%;
+    left:0;
+    right:auto;
+    bottom:0;
+    top:auto;
+    height:48vh;
+    transform: translateY(105%);
+    border-left:0;
+    border-top:1px solid var(--line);
+    box-shadow: 0 -10px 30px rgba(0,0,0,.35);
+  }
+  .drawer.open{ transform: translateY(0); }
 }
-

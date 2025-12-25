@@ -1,1 +1,109 @@
-
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [35.235, 31.778] },
+      "properties": {
+        "id": "jerusalem",
+        "name": "Jerusalem",
+        "meta": "Capital city and center of worship",
+        "type": "city",
+        "book": "Acts",
+        "tags": ["temple", "pilgrimage"],
+        "refs": ["Acts 2:1", "Luke 19:28"]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [35.207, 31.705] },
+      "properties": {
+        "id": "bethlehem",
+        "name": "Bethlehem",
+        "meta": "Birthplace of Jesus",
+        "type": "city",
+        "book": "Matthew",
+        "tags": ["nativity", "david"],
+        "refs": ["Matthew 2:1", "Luke 2:4"]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [35.444, 32.832] },
+      "properties": {
+        "id": "sea-of-galilee",
+        "name": "Sea of Galilee",
+        "meta": "Ministry hub for Jesus and disciples",
+        "type": "journey_stop",
+        "book": "Mark",
+        "tags": ["fishing", "miracles"],
+        "refs": ["Mark 1:16", "Luke 5:1"]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [35.458, 32.827] },
+      "properties": {
+        "id": "capernaum",
+        "name": "Capernaum",
+        "meta": "Home base during Galilean ministry",
+        "type": "city",
+        "book": "Luke",
+        "tags": ["healing", "synagogue"],
+        "refs": ["Luke 7:1", "Matthew 4:13"]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [35.55, 32.67] },
+      "properties": {
+        "id": "mt-carmel",
+        "name": "Mount Carmel",
+        "meta": "Elijah's contest with the prophets of Baal",
+        "type": "battle",
+        "book": "1 Kings",
+        "tags": ["prophets", "altar"],
+        "refs": ["1 Kings 18:19"]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [35.443, 31.871] },
+      "properties": {
+        "id": "jericho",
+        "name": "Jericho",
+        "meta": "Walls fell before Israel entered the land",
+        "type": "city",
+        "book": "Joshua",
+        "tags": ["conquest", "miracle"],
+        "refs": ["Joshua 6:20"]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [36.291, 33.513] },
+      "properties": {
+        "id": "damascus",
+        "name": "Damascus",
+        "meta": "Paul's conversion road",
+        "type": "journey_stop",
+        "book": "Acts",
+        "tags": ["conversion", "mission"],
+        "refs": ["Acts 9:3"]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [33.975, 28.539] },
+      "properties": {
+        "id": "mount-sinai",
+        "name": "Mount Sinai",
+        "meta": "Israel received the covenant",
+        "type": "temple",
+        "book": "Exodus",
+        "tags": ["law", "covenant"],
+        "refs": ["Exodus 19:20"]
+      }
+    }
+  ]
+}
