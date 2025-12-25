@@ -1,1 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BibleMapped — Map Navigator</title>
+
+  <!-- Leaflet -->
+  <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+
+  <!-- Your local files -->
+  <link rel="stylesheet" href="./map.css?v=1" />
+  <script src="./map.js?v=1" defer></script>
+</head>
+
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand__title">BibleMapped</div>
+        <div class="brand__sub">Map Navigator</div>
+      </div>
+
+      <div class="search">
+        <input id="searchInput" type="text" placeholder="Search places..." />
+      </div>
+
+      <div class="section">
+        <div class="section__title">Places</div>
+        <div id="placesList" class="list"></div>
+      </div>
+
+      <div class="section">
+        <div class="section__title">Layers</div>
+        <label class="check">
+          <input type="checkbox" id="togglePlaces" checked />
+          <span>Show places</span>
+        </label>
+        <label class="check">
+          <input type="checkbox" id="toggleRoutes" />
+          <span>Show routes (optional)</span>
+        </label>
+      </div>
+
+      <div class="section">
+        <button id="homeBtn" class="btn">Home view</button>
+      </div>
+    </aside>
+
+    <main class="mapWrap">
+      <div id="map"></div>
+      <button id="menuBtn" class="menuBtn" aria-label="Toggle menu">☰</button>
+    </main>
+  </div>
+</body>
+</html>
 
