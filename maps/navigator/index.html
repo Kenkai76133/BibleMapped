@@ -6,11 +6,16 @@
   <title>BibleMapped — Map Navigator</title>
 
   <!-- Leaflet -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<link rel="stylesheet" href="/maps/navigator/map.css?v=9" />
-<script src="/maps/navigator/map.js?v=9" defer></script>
+  <!-- MarkerCluster -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js" defer></script>
+
+  <link rel="stylesheet" href="/maps/navigator/map.css?v=10" />
+  <script src="/maps/navigator/map.js?v=10" defer></script>
 
 </head>
 
@@ -24,6 +29,18 @@
 
       <div class="search">
         <input id="searchInput" type="text" placeholder="Search places..." />
+      </div>
+
+      <div class="section">
+        <div class="section__title">Filters</div>
+        <div class="filterGroup">
+          <div class="filterGroup__label">Type</div>
+          <div id="typeFilters" class="filterOptions"></div>
+        </div>
+        <div class="filterGroup">
+          <div class="filterGroup__label">Book</div>
+          <div id="bookFilters" class="filterOptions"></div>
+        </div>
       </div>
 
       <div class="section">
@@ -50,10 +67,36 @@
 
     <main class="mapWrap">
       <div id="map" style="height:100vh; width:100%;"></div>
+      <div id="infoDrawer" class="drawer" aria-live="polite">
+        <div class="drawer__header">
+          <div>
+            <div id="drawerTitle" class="drawer__title">Select a place</div>
+            <div id="drawerMeta" class="drawer__meta"></div>
+          </div>
+          <button id="drawerClose" class="drawer__close" aria-label="Close details">×</button>
+        </div>
+        <div class="drawer__body">
+          <div class="drawer__row">
+            <span class="pill">Type</span>
+            <span id="drawerType" class="muted"></span>
+          </div>
+          <div class="drawer__row">
+            <span class="pill">Book</span>
+            <span id="drawerBook" class="muted"></span>
+          </div>
+          <div class="drawer__row">
+            <span class="pill">Refs</span>
+            <div id="drawerRefs" class="chips"></div>
+          </div>
+          <div class="drawer__row">
+            <span class="pill">Tags</span>
+            <div id="drawerTags" class="chips"></div>
+          </div>
+        </div>
+      </div>
 
       <button id="menuBtn" class="menuBtn" aria-label="Toggle menu">☰</button>
     </main>
   </div>
 </body>
 </html>
-
