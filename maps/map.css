@@ -1,2 +1,4 @@
-#map { height: 100vh; width: 100%; }
-
+html, body { height: 100%; margin: 0; }
+.layout { height: 100vh; display: flex; }
+.mapWrap { flex: 1; position: relative; }
+#map { height: 100%; width: 100%; }
