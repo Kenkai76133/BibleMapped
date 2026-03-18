@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Genesis | BibleMapped</title>
+  <style>
+    :root {
+      --bg-dark: #1c1f26;
+      --bg-dark-2: #252933;
+      --cloud-white: #f7f8fa;
+      --text-dark: #111111;
+      --text-light: #f4f4f4;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --accent: #c62828;
+      --max-width: 1100px;
+      --reading-width: 760px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cloud-white);
+      color: var(--text-dark);
+      line-height: 1.7;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .reading-container {
+      width: min(92%, var(--reading-width));
+      margin: 0 auto;
+    }
+
+    header {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .brand {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .hero {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      padding: 90px 0 80px;
+    }
+
+    .hero-inner {
+      width: min(92%, 820px);
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.08;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    .hero p {
+      max-width: 700px;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--cloud-white);
+      color: var(--text-dark);
+    }
+
+    .btn-secondary {
+      border-color: rgba(255,255,255,0.18);
+      color: var(--text-light);
+      margin-left: 10px;
+    }
+
+    .content-section {
+      padding: 80px 0;
+      background: #fff;
+    }
+
+    .section-block {
+      margin-bottom: 48px;
+    }
+
+    .section-block:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-label {
+      color: var(--accent);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2.3rem);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    p {
+      font-size: 1.02rem;
+      margin-bottom: 16px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    ul {
+      padding-left: 22px;
+      margin-bottom: 16px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    .quote {
+      border-left: 4px solid var(--accent);
+      padding-left: 18px;
+      margin: 20px 0;
+      font-size: 1.08rem;
+      font-weight: 600;
+    }
+
+    .map-placeholder {
+      background: linear-gradient(180deg, #e8ebf0, #d8dde5);
+      min-height: 280px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4b5563;
+      font-weight: 600;
+      padding: 20px;
+      text-align: center;
+      margin: 26px 0 10px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .info-card {
+      background: var(--cloud-white);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .dark-band {
+      background: var(--bg-dark-2);
+      color: var(--text-light);
+      padding: 80px 0;
+    }
+
+    .dark-band p,
+    .dark-band li {
+      color: rgba(255,255,255,0.85);
+    }
+
+    .dark-band .muted {
+      color: rgba(255,255,255,0.68);
+    }
+
+    .cta {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      text-align: center;
+      padding: 72px 0;
+    }
+
+    .cta p {
+      color: rgba(255,255,255,0.76);
+      max-width: 680px;
+      margin: 12px auto 24px;
+    }
+
+    footer {
+      background: #11151b;
+      color: rgba(255,255,255,0.72);
+      padding: 26px 0;
+      font-size: 0.92rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    @media (max-width: 900px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 70px 0 60px;
+      }
+
+      .content-section,
+      .dark-band {
+        padding: 64px 0;
+      }
+
+      .btn-secondary {
+        margin-left: 0;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <div class="brand"><a href="index.html">BibleMapped</a></div>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="#overview">Overview</a>
+        <a href="#structure">Structure</a>
+        <a href="#meaning">Meaning</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Book Explainer</div>
+      <h1>Genesis: The Beginning That Defines Everything</h1>
+      <p>
+        Genesis does not just open the Bible. It establishes the patterns, problems, promises, and people that shape the rest of Scripture.
+      </p>
+      <a href="#overview" class="btn btn-primary">Start Reading</a>
+      <a href="index.html" class="btn btn-secondary">Back to Homepage</a>
+    </div>
+  </section>
+
+  <section id="overview" class="content-section">
+    <div class="reading-container">
+
+      <div class="section-block">
+        <div class="section-label">Hook</div>
+        <h2>Genesis does not just start the Bible. It defines it.</h2>
+        <p>
+          If you understand Genesis, you understand why the rest of the Bible exists.
+        </p>
+        <p>
+          This book explains where everything came from, why the world is broken, why people die, and why redemption is necessary.
+        </p>
+      </div>
+
+      <div class="section-block">
+        <div class="section-label">Meaning of the Name</div>
+        <h2>What does “Genesis” mean?</h2>
+        <p>
+          The word <strong>Genesis</strong> comes from a Greek word meaning <strong>origin</strong>, <strong>beginning</strong>, or <strong>source</strong>.
+        </p>
+        <p>
+          That makes the title fitting, because this book introduces the beginning of the world, the beginning of sin, the beginning of death, the beginning of covenant, and the beginning of God’s redemptive plan unfolding in history.
+        </p>
+      </div>
+
+      <div class="section-block">
+        <div class="section-label">Why It Comes First</div>
+        <h2>Why is Genesis placed first?</h2>
+        <p>
+          Genesis is first because it answers the biggest foundational questions of the Bible:
+        </p>
+        <ul>
+          <li>Who made the world?</li>
+          <li>Why was creation originally good?</li>
+          <li>What went wrong?</li>
+          <li>Why is there death and separation?</li>
+          <li>Why do humans need salvation?</li>
+        </ul>
+        <div class="quote">
+          Genesis is the foundation layer of the biblical story.
+        </div>
+      </div>
+
+      <div class="map-placeholder">
+        Add a Genesis map, creation visual, Eden diagram, or timeline here
+      </div>
+      <p class="muted">
+        You can replace this placeholder later with your visual.
+      </p>
+
+    </div>
+  </section>
+
+  <section class="dark-band">
+    <div class="reading-container">
+      <div class="section-block">
+        <div class="section-label">Authorship</div>
+        <h2>Who wrote Genesis?</h2>
+        <p>
+          The traditional view is that <strong>Moses</strong> wrote Genesis, along with the rest of the first five books of the Bible.
+        </p>
+        <p>
+          Whether readers focus on Mosaic authorship, compilation, or early tradition, Genesis presents itself as deliberate, structured, and foundational for the rest of Scripture.
+        </p>
+      </div>
+
+      <div class="section-block">
+        <div class="section-label">Main Idea</div>
+        <h2>What is Genesis really showing us?</h2>
+        <p>
+          Genesis shows that God created the world good and shared that good creation with humanity.
+        </p>
+        <p>
+          Humanity then disobeyed God, and sin and death entered the human story. From that point on, the rest of the Bible explains the consequences of that rebellion and the unfolding plan of restoration.
+        </p>
+        <p>
+          Genesis also shows God removing humanity from Eden, not only in judgment, but in protection—so fallen humanity would not remain forever in that broken state.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="structure" class="content-section">
+    <div class="reading-container">
+
+      <div class="section-block">
+        <div class="section-label">Structure</div>
+        <h2>How many chapters are in Genesis?</h2>
+        <p>
+          Genesis has <strong>50 chapters</strong>, and the book is usually understood in two major sections.
+        </p>
+      </div>
+
+      <div class="two-col">
+        <div class="info-card">
+          <div class="section-label">Chapters 1–11</div>
+          <h2 style="font-size:1.45rem;">The beginning of the world</h2>
+          <p>
+            This section focuses on humanity as a whole.
+          </p>
+          <ul>
+            <li>Creation</li>
+            <li>The Fall</li>
+            <li>Cain and Abel</li>
+            <li>The Flood</li>
+            <li>The Tower of Babel</li>
+          </ul>
+          <p class="muted">
+            Big idea: how everything broke.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <div class="section-label">Chapters 12–50</div>
+          <h2 style="font-size:1.45rem;">The beginning of a people</h2>
+          <p>
+            This section focuses on God’s covenant through a family.
+          </p>
+          <ul>
+            <li>Abraham</li>
+            <li>Isaac</li>
+            <li>Jacob</li>
+            <li>Joseph</li>
+          </ul>
+          <p class="muted">
+            Big idea: how God begins restoration through promise.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="meaning" class="content-section" style="background:#f7f8fa;">
+    <div class="reading-container">
+
+      <div class="section-block">
+        <div class="section-label">Key Words</div>
+        <h2>Key words and repeating themes in Genesis</h2>
+        <p>
+          Genesis uses repeated words and ideas that shape the rest of the Bible.
+        </p>
+        <ul>
+          <li><strong>Blessing</strong> — God’s intention for life and fruitfulness</li>
+          <li><strong>Seed / offspring</strong> — the future line of promise</li>
+          <li><strong>Land</strong> — place matters in God’s plan</li>
+          <li><strong>Covenant</strong> — God binds Himself to His promises</li>
+          <li><strong>Life and death</strong> — the core tension of human existence after the fall</li>
+        </ul>
+      </div>
+
+      <div class="section-block">
+        <div class="section-label">Why It Matters</div>
+        <h2>Why Genesis matters for the rest of the Bible</h2>
+        <p>
+          Genesis explains why the world is good, why the world is broken, why people die, and why salvation is needed.
+        </p>
+        <p>
+          It is not just a beginning. It is the blueprint for everything that follows.
+        </p>
+      </div>
+
+      <div class="section-block">
+        <div class="section-label">Connection</div>
+        <h2>How Genesis points to Jesus</h2>
+        <p>
+          Even in Genesis, the story is moving forward. God begins making promises that reach beyond the first pages of Scripture.
+        </p>
+        <p>
+          The Bible is one unified story of God’s love revealed through Jesus, and Genesis is where that story begins to take shape.
+        </p>
+        <div class="quote">
+          Genesis is not just the beginning of the Bible. It is the reason the rest of the Bible exists.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <h2>Keep exploring the story</h2>
+      <p>
+        BibleMapped exists to help readers move beyond tradition into context and see the Bible clearly.
+      </p>
+      <a href="index.html" class="btn btn-primary">Return Home</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      © 2026 BibleMapped. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
