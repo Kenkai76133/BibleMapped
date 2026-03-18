@@ -1,95 +1,558 @@
-<!doctype html>
+I want to add this code is this nessacary: <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BibleMapped</title>
-    <link rel="stylesheet" href="./src/styles.css" />
-  </head>
-  <body>
-    <!-- Burnt purple strip -->
-    <div class="top-strip" aria-hidden="true"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BibleMapped</title>
+  <style>
+    :root {
+      --bg-dark: #1c1f26;
+      --bg-dark-2: #252933;
+      --cloud-white: #f7f8fa;
+      --text-dark: #111111;
+      --text-light: #f4f4f4;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --accent: #c62828;
+      --max-width: 1100px;
+      --reading-width: 720px;
+    }
 
-    <!-- Header -->
-    <header class="header">
-      <div class="container header-inner">
-        <a class="brand" href="/" aria-label="BibleMapped Home">
-          <!-- We'll add your real logo file next step -->
-          <img class="logo" src="./assets/logo.png" alt="BibleMapped logo" />
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        </a>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cloud-white);
+      color: var(--text-dark);
+      line-height: 1.7;
+    }
 
-      <nav class="nav" aria-label="Primary">
-  <a href="/explainers/">Explainers</a>
-  <a href="/maps/">Maps</a>
-  <a href="/history/">History</a>
-<a href="/people/">People</a>
-</nav>
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-        <div class="header-actions">
-          <button class="search-btn" id="searchBtn" type="button">Search</button>
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .reading-container {
+      width: min(92%, var(--reading-width));
+      margin: 0 auto;
+    }
+
+    header {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .brand {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .hero {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      padding: 100px 0 90px;
+    }
+
+    .hero-inner {
+      width: min(92%, 820px);
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .eyebrow {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4.4rem);
+      line-height: 1.08;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    .hero p {
+      max-width: 680px;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--cloud-white);
+      color: var(--text-dark);
+    }
+
+    .btn-primary:hover {
+      opacity: 0.92;
+    }
+
+    .btn-secondary {
+      border-color: rgba(255,255,255,0.18);
+      color: var(--text-light);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.06);
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.5rem);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      max-width: 700px;
+      margin-bottom: 36px;
+    }
+
+    .featured {
+      background: #ffffff;
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .featured-copy h2 {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      margin-bottom: 14px;
+      line-height: 1.1;
+    }
+
+    .featured-copy p {
+      color: var(--muted);
+      margin-bottom: 18px;
+      max-width: 600px;
+    }
+
+    .featured-card {
+      background: linear-gradient(180deg, #e8ebf0, #d8dde5);
+      min-height: 360px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4b5563;
+      font-weight: 600;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .articles {
+      background: var(--cloud-white);
+    }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .article-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      transition: 0.2s ease;
+    }
+
+    .article-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+    }
+
+    .article-card .label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .article-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+
+    .article-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .about {
+      background: #ffffff;
+    }
+
+    .about .reading-container p {
+      font-size: 1.04rem;
+      margin-bottom: 18px;
+    }
+
+    .about .reading-container strong {
+      font-weight: 700;
+    }
+
+    .map-section {
+      background: var(--bg-dark-2);
+      color: var(--text-light);
+    }
+
+    .map-box {
+      margin-top: 28px;
+      min-height: 420px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(rgba(255,255,255,0.04), rgba(255,255,255,0.04)),
+        radial-gradient(circle at center, rgba(255,255,255,0.06), transparent 50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.72);
+      text-align: center;
+      padding: 24px;
+    }
+
+    .mission {
+      background: var(--cloud-white);
+    }
+
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .mission-box {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+    }
+
+    .mission-box h3 {
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+    }
+
+    .mission-box p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .cta {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      text-align: center;
+    }
+
+    .cta p {
+      color: rgba(255,255,255,0.76);
+      max-width: 680px;
+      margin: 12px auto 24px;
+    }
+
+    footer {
+      background: #11151b;
+      color: rgba(255,255,255,0.72);
+      padding: 26px 0;
+      font-size: 0.92rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    @media (max-width: 900px) {
+      .featured-grid,
+      .articles-grid,
+      .mission-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 80px 0 70px;
+      }
+
+      section {
+        padding: 64px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <div class="brand">BibleMapped</div>
+      <nav class="nav-links">
+        <a href="#featured">Featured</a>
+        <a href="#articles">Articles</a>
+        <a href="#about">About</a>
+        <a href="#map">Map</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Christian Vox Explainer</div>
+      <h1>Understand the Bible through place, context, and meaning.</h1>
+      <p>
+        BibleMapped helps readers move beyond tradition into context—so the Bible is not just read, but clearly seen.
+      </p>
+      <div class="hero-actions">
+        <a href="#featured" class="btn btn-primary">Start Exploring</a>
+        <a href="#about" class="btn btn-secondary">About BibleMapped</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="featured" class="featured">
+    <div class="container featured-grid">
+      <div class="featured-copy">
+        <div class="eyebrow" style="color:#6b7280;">Featured Explainer</div>
+        <h2>Genesis — the beginning of the story</h2>
+        <p>
+          The Bible is one unified story of God’s love revealed through Jesus. Genesis lays the foundation.
+        </p>
+        <p>
+          Start with the people, places, and first movements of the biblical story—then follow how it connects forward.
+        </p>
+        <a href="#" class="btn btn-primary" style="background:#111;color:#fff;">Read Genesis</a>
+      </div>
+      <div class="featured-card">
+        Your featured Genesis map or visual goes here
+      </div>
+    </div>
+  </section>
+
+  <section id="articles" class="articles">
+    <div class="container">
+      <h2 class="section-title">Latest explainers</h2>
+      <p class="section-subtitle">
+        Short, clear pieces designed to help readers see the Bible through geography, culture, and connection.
+      </p>
+
+      <div class="articles-grid">
+        <article class="article-card">
+          <div class="label">Place</div>
+          <h3>Where did Abraham travel?</h3>
+          <p>
+            Follow Abraham’s movement across real land and see how geography shapes the story.
+          </p>
+        </article>
+
+        <article class="article-card">
+          <div class="label">Context</div>
+          <h3>What does Eden actually represent?</h3>
+          <p>
+            Look past assumptions and explore Eden through biblical language, setting, and meaning.
+          </p>
+        </article>
+
+        <article class="article-card">
+          <div class="label">Connection</div>
+          <h3>How does Genesis point to Jesus?</h3>
+          <p>
+            Trace the first promises and patterns that connect the opening book to the gospel.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="reading-container">
+      <h2 class="section-title">About BibleMapped</h2>
+
+      <p><strong>You don’t start with a map.</strong></p>
+
+      <p>You start with a picture.</p>
+
+      <p>
+        When I read the Bible, I don’t just see words—I see places. Landscapes. People moving through real geography, shaped by real cultures. The stories feel alive. Almost tangible.
+      </p>
+
+      <p><strong>But there’s a problem.</strong></p>
+
+      <p>
+        Imagination, by itself, isn’t reliable.
+      </p>
+
+      <p>
+        Because without direction, what we see can drift away from what the text actually means.
+      </p>
+
+      <p><strong>That’s where BibleMapped begins.</strong></p>
+
+      <p>
+        The Bible was written in real places, shaped by real culture. And that context isn’t extra—it’s essential.
+      </p>
+
+      <p>
+        Without it, we risk misunderstanding the story entirely.
+      </p>
+
+      <p>
+        Because the Bible is one unified story—pointing to Jesus Christ.
+      </p>
+
+      <p>
+        He is God in the flesh. He lived, died on the cross, and rose again.
+      </p>
+
+      <p><strong>And the message is clear:</strong></p>
+
+      <p>
+        Whoever believes in Him will have everlasting life.
+      </p>
+
+      <p>
+        Anyone who calls on His name—trusting in Him—will be saved.
+      </p>
+
+      <p>
+        And that salvation is secure.
+      </p>
+
+      <p><strong>So the mission is simple:</strong></p>
+
+      <p>
+        To move beyond tradition into context—so we don’t just read the Bible…
+      </p>
+
+      <p><strong>We see it clearly.</strong></p>
+    </div>
+  </section>
+
+  <section id="map" class="map-section">
+    <div class="container">
+      <h2 class="section-title">Explore the story geographically</h2>
+      <p class="section-subtitle" style="color:rgba(255,255,255,0.72);">
+        Maps are not decoration here. They help show where the Bible happens and why place matters.
+      </p>
+
+      <div class="map-box">
+        Interactive map placeholder<br />
+        Replace this box with your Bible map, image, or embedded visual
+      </div>
+    </div>
+  </section>
+
+  <section class="mission">
+    <div class="container">
+      <h2 class="section-title">How BibleMapped teaches</h2>
+      <p class="section-subtitle">
+        Built for readers at different levels, from first visuals to deeper explanation.
+      </p>
+
+      <div class="mission-grid">
+        <div class="mission-box">
+          <h3>Start with images</h3>
+          <p>
+            Begin with visual learning so the story feels concrete, memorable, and easy to enter.
+          </p>
+        </div>
+
+        <div class="mission-box">
+          <h3>Move into words</h3>
+          <p>
+            Grow into explanation, language, and context so the reader can understand what the text is saying.
+          </p>
+        </div>
+
+        <div class="mission-box">
+          <h3>Connect meaning</h3>
+          <p>
+            Tie together visuals, geography, and theology so the Bible is seen as one connected story.
+          </p>
         </div>
       </div>
-    </header>
+    </div>
+  </section>
 
-    <!-- Main -->
-    <main class="container">
-      <section class="hero">
-        <h1>Explainers, anchored to real places.</h1>
-       <p>
-  Explainers, maps, and historical context — built for people who want receipts.
-</p>
+  <section class="cta">
+    <div class="container">
+      <h2 class="section-title">Follow the map. Understand the story.</h2>
+      <p>
+        BibleMapped exists to preach the gospel by helping people understand the Bible as the Word of God.
+      </p>
+      <a href="#" class="btn btn-primary">Explore More</a>
+    </div>
+  </section>
 
-      </section>
+  <footer>
+    <div class="container">
+      © 2026 BibleMapped. All rights reserved.
+    </div>
+  </footer>
 
-      <section id="explainers" class="section">
-        <div class="section-head">
-          <h2>Explainers</h2>
-        <a class="see-all" href="/explainers/">See all</a>
-
-
-        </div>
-        <div class="grid" id="explainersGrid"></div>
-      </section>
-
-      <section id="maps" class="section">
-        <div class="section-head">
-          <h2>Maps</h2>
-          <a class="see-all" href="/maps/">See all</a>
-        </div>
-        <div class="grid" id="mapsGrid"></div>
-      </section>
-
-      <section id="history" class="section">
-        <div class="section-head">
-          <h2>History</h2>
-          <a class="see-all" href="#">See all</a>
-        </div>
-        <div class="grid" id="historyGrid"></div>
-      </section>
-
-     <section id="people" class="section">
-        <div class="section-head">
-        <h2>People</h2>
-          <a class="see-all" href="/people/">See all</a>
-        </div>
-       <div class="grid" id="peopleGrid"></div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <div class="container footer-inner">
-        <p>© <span id="year"></span> BibleMapped</p>
-        <div class="footer-links">
-          <a href="#">About</a>
-          <a href="#">Contact</a>
-          <a href="#">Privacy</a>
-        </div>
-      </div>
-    </footer>
-
-    <script src="./src/app.js"></script>
-  </body>
+</body>
 </html>
-
