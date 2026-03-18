@@ -552,6 +552,20 @@
       © 2026 BibleMapped. All rights reserved.
     </div>
   </footer>
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoiYmlibGVtYXBwZWQiLCJhIjoiY21pdXY5a3YyMXIyeTNkb2d3NGxtampyOSJ9.-3d2mQmagg2Ft46Z4jWGZA';
 
+  const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/dark-v11',
+    center: [35.2137, 31.7683],
+    zoom: 5
+  });
+
+  new mapboxgl.Marker()
+    .setLngLat([35.2137, 31.7683])
+    .setPopup(new mapboxgl.Popup().setHTML("<h3>Jerusalem</h3>"))
+    .addTo(map);
+</script>
 </body>
 </html>
