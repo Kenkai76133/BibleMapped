@@ -553,19 +553,54 @@
     </div>
   </footer>
 <script>
-  mapboxgl.accessToken = 'pk.eyJ1IjoiYmlibGVtYXBwZWQiLCJhIjoiY21pdXY5a3YyMXIyeTNkb2d3NGxtampyOSJ9.-3d2mQmagg2Ft46Z4jWGZA';
+  mapboxgl.accessToken = 'YOUR_TOKEN_HERE';
 
   const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/dark-v11',
-    center: [35.2137, 31.7683],
-    zoom: 5
+    center: [35, 30],
+    zoom: 4.5
   });
 
-  new mapboxgl.Marker()
-    .setLngLat([35.2137, 31.7683])
-    .setPopup(new mapboxgl.Popup().setHTML("<h3>Jerusalem</h3>"))
-    .addTo(map);
+  const locations = [
+    {
+      name: "Eden",
+      coords: [44.0, 33.0],
+      description: "The beginning of creation and the fall of man.",
+      link: "genesis.html"
+    },
+    {
+      name: "Jerusalem",
+      coords: [35.2137, 31.7683],
+      description: "Central city in biblical history and Jesus’ ministry.",
+      link: "genesis.html"
+    },
+    {
+      name: "Babylon",
+      coords: [44.423, 32.542],
+      description: "A symbol of rebellion and human pride.",
+      link: "#"
+    },
+    {
+      name: "Egypt",
+      coords: [31.2357, 30.0444],
+      description: "Place of Israel’s bondage and Exodus.",
+      link: "#"
+    }
+  ];
+
+  locations.forEach(loc => {
+    const popupContent = `
+      <div style="font-family: Arial; font-size: 14px;">
+        <strong>${loc.name}</strong><br/>
+        <p>${loc.description}</p>
+        <a href="${loc.link}" style="color:#c62828;">Explore →</a>
+      </div>
+    `;
+
+    new mapboxgl.Marker()
+      .setLngLat(loc.coords)
+      .setPopup(new mapboxgl.Popup().setHTML(popupContent))
+      .addTo(map);
+  });
 </script>
-</body>
-</html>
