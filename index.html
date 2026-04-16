@@ -1,32 +1,3 @@
-import React, { useEffect, useMemo, useRef, useState } from "react"; import { motion } from "framer-motion"; import { ChevronDown } from "lucide-react";
-const storySections = [ { id: "intro", eyebrow: "BIBLEMAPPED", title: "Your headline goes here.", body: "This is the opening section. Replace this with your own narration. The left side works like a Vox-style explainer intro while the right side stays pinned as your visual stage.", label: "Drop Image / Video 01", }, { id: "context", eyebrow: "CONTEXT", title: "Set the world before the story moves.", body: "Use this section to explain the historical, biblical, geographic, or theological setup. Each section activates a different visual state on the sticky panel.", label: "Drop Map / Diagram 02", }, { id: "tension", eyebrow: "TENSION", title: "Introduce the problem or turning point.", body: "This is where the viewer starts feeling the argument. In a real production, this could trigger a zoom, a photo swap, a map highlight, or motion graphics.", label: "Drop Visual 03", }, { id: "insight", eyebrow: "KEY INSIGHT", title: "Deliver the main idea clearly.", body: "This section is ideal for your central biblical point, historical clarification, or apologetics insight. Keep the wording sharp and visual-friendly.", label: "Drop Visual 04", }, { id: "close", eyebrow: "CONCLUSION", title: "Land the final takeaway.", body: "End with a strong final thought. You can use this final panel for a quote, a map, a call to action, or a final image that emotionally seals the piece.", label: "Drop Final Visual 05", }, ];
-function useActiveSection(ids) { const [activeId, setActiveId] = useState(ids[0]);
-useEffect(() => { const elements = ids .map((id) => document.getElementById(id)) .filter(Boolean);
-if (!elements.length) return;
-
-const observer = new IntersectionObserver(
-  (entries) => {
-    const visible = entries
-      .filter((entry) => entry.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-    if (visible[0]?.target?.id) {
-      setActiveId(visible[0].target.id);
-    }
-  },
-  {
-    root: null,
-    rootMargin: "-15% 0px -35% 0px",
-    threshold: [0.2, 0.35, 0.5, 0.7, 0.9],
-  }
-);
-
-elements.forEach((el) => observer.observe(el));
-return () => observer.disconnect();
-}, [ids]);
-return activeId; }
-function ProgressBar({ activeIndex, total }) { const progress = ((activeIndex + 1) / total) * 100;
-return ( 
 <motion.div className="h-full bg-black" animate={{ width: ${progress}% }} transition={{ duration: 0.4, ease: "easeOut" }} /> 
 ); } 
 function StickyVisual({ section, index, total }) { return ( 
