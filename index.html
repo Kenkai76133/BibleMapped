@@ -18,7 +18,6 @@
       --gold: #b6924b;
       --shadow: 0 10px 28px rgba(18, 24, 38, 0.08);
       --max: 1320px;
-      --radius: 18px;
     }* { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
@@ -28,7 +27,12 @@ body {
   font-family: "DM Sans", sans-serif;
 }
 
+body.overlay-open {
+  overflow: hidden;
+}
+
 a { color: inherit; text-decoration: none; }
+button { font: inherit; }
 
 .topbar {
   background: var(--navy);
@@ -36,7 +40,7 @@ a { color: inherit; text-decoration: none; }
   border-bottom: 1px solid rgba(255,255,255,0.1);
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 30;
 }
 
 .topbar-inner,
@@ -75,23 +79,30 @@ a { color: inherit; text-decoration: none; }
   padding: 42px 0 18px;
 }
 
-.hero-card {
+.hero-card,
+.map-panel,
+.youtube-panel {
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 24px;
   box-shadow: var(--shadow);
+}
+
+.hero-card {
   padding: 34px;
 }
 
-.eyebrow {
+.eyebrow,
+.section-label,
+.panel-label,
+.book-label {
   font-size: 0.76rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   color: var(--gold);
-  margin-bottom: 12px;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
   font-family: "Cormorant Garamond", serif;
   margin: 0;
   letter-spacing: -0.03em;
@@ -102,14 +113,25 @@ h1 {
   font-size: clamp(2.7rem, 6vw, 4.8rem);
   line-height: 0.94;
   max-width: 10ch;
+  margin-top: 10px;
+}
+
+.hero-copy,
+.section-copy,
+.youtube-copy p,
+.panel-copy,
+.overlay-intro,
+.overlay-meta,
+.overlay-box p,
+.overlay-box li {
+  color: var(--muted);
+  line-height: 1.6;
 }
 
 .hero-copy {
   margin-top: 14px;
   max-width: 68ch;
-  color: var(--muted);
   font-size: 1.04rem;
-  line-height: 1.6;
 }
 
 .hero-links {
@@ -125,53 +147,45 @@ h1 {
   padding: 18px 0 30px;
 }
 
-.section-header {
-  margin-bottom: 18px;
-}
-
-.section-label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--gold);
-  margin-bottom: 8px;
-}
-
 .section-title {
   font-size: clamp(1.9rem, 3vw, 3rem);
   line-height: 0.96;
+  margin-top: 8px;
 }
 
 .section-copy {
   margin-top: 10px;
   max-width: 72ch;
-  color: var(--muted);
-  line-height: 1.6;
 }
 
 .mindmap-shell {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1fr;
   gap: 24px;
   align-items: start;
 }
 
 .map-panel,
-.detail-panel,
 .youtube-panel {
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 24px;
-  box-shadow: var(--shadow);
+  padding: 24px;
 }
 
-.map-panel,
-.detail-panel { padding: 24px; }
-.youtube-panel { padding: 26px; }
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.panel-copy {
+  max-width: 70ch;
+  margin-top: 8px;
+}
 
 .map-canvas {
   position: relative;
-  min-height: 2520px;
+  min-height: 1200px;
   border: 1px solid var(--line);
   border-radius: 20px;
   background: #fcfbf7;
@@ -190,43 +204,34 @@ h1 {
   pointer-events: none;
 }
 
-.trunk, .branch {
+.line {
   position: absolute;
   background: var(--navy);
-  opacity: 0.18;
+  opacity: 0.12;
   border-radius: 999px;
+  pointer-events: none;
 }
-
-.trunk { width: 2px; left: 50%; top: 80px; height: 520px; transform: translateX(-50%); }
-.branch.h1 { height: 2px; width: 20%; left: 50%; top: 150px; }
-.branch.h2 { height: 2px; width: 20%; left: 30%; top: 150px; }
-.branch.v1 { width: 2px; height: 150px; left: 30%; top: 150px; }
-.branch.v2 { width: 2px; height: 150px; left: 70%; top: 150px; }
-.branch.h3 { height: 2px; width: 16%; left: 30%; top: 300px; }
-.branch.h4 { height: 2px; width: 16%; left: 54%; top: 300px; }
-.branch.v3 { width: 2px; height: 130px; left: 14%; top: 300px; }
-.branch.v4 { width: 2px; height: 130px; left: 46%; top: 300px; }
-.branch.v5 { width: 2px; height: 130px; left: 62%; top: 300px; }
-.branch.v6 { width: 2px; height: 130px; left: 86%; top: 300px; }
 
 .node {
   position: absolute;
   min-width: 128px;
-  max-width: 174px;
+  max-width: 172px;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 12px 14px;
   box-shadow: 0 6px 18px rgba(18,24,38,0.05);
   cursor: pointer;
-  transition: transform 0.18s ease, border-color 0.18s ease;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
   text-align: left;
+  z-index: 1;
 }
 
 .node:hover,
 .node.active {
   transform: translateY(-2px);
   border-color: rgba(24,39,66,0.35);
+  box-shadow: 0 10px 24px rgba(18,24,38,0.08);
 }
 
 .node small {
@@ -241,7 +246,7 @@ h1 {
 .node strong {
   display: block;
   font-family: "Cormorant Garamond", serif;
-  font-size: 1.22rem;
+  font-size: 1.2rem;
   line-height: 1;
   margin-bottom: 4px;
   color: var(--navy);
@@ -254,56 +259,24 @@ h1 {
   line-height: 1.3;
 }
 
-.detail-panel h3 {
-  font-size: 2rem;
-  color: var(--navy);
-  margin-bottom: 8px;
+.node.book-node {
+  border-left: 3px solid var(--gold);
 }
 
-.detail-intro {
-  color: var(--muted);
-  line-height: 1.6;
-  margin-bottom: 18px;
+.legend {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 18px;
 }
 
-.detail-blocks {
-  display: grid;
-  gap: 12px;
-}
-
-.detail-block {
-  background: #fff;
+.legend-pill {
   border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 15px;
-}
-
-.detail-block h4 {
-  margin: 0 0 8px;
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--gold);
-  font-family: "DM Sans", sans-serif;
-}
-
-.detail-block p,
-.detail-block ul {
-  margin: 0;
-  color: #334155;
-  line-height: 1.55;
-}
-
-.detail-block ul {
-  padding-left: 18px;
-  display: grid;
-  gap: 6px;
-}
-
-.youtube-panel {
-  margin-top: 8px;
-  display: grid;
-  gap: 12px;
+  background: #fff;
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: var(--muted);
+  font-size: 0.84rem;
 }
 
 .youtube-row {
@@ -324,12 +297,6 @@ h1 {
   font-size: 0.92rem;
 }
 
-.youtube-copy p {
-  color: var(--muted);
-  line-height: 1.6;
-  margin: 8px 0 0;
-}
-
 .youtube-link {
   display: inline-block;
   margin-top: 12px;
@@ -337,22 +304,138 @@ h1 {
   font-weight: 700;
 }
 
+.overlay-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(18,24,38,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 40;
+}
+
+.overlay-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: min(680px, 100vw);
+  background: var(--paper);
+  border-left: 1px solid var(--line);
+  box-shadow: -12px 0 32px rgba(18,24,38,0.12);
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+}
+
+.overlay.open {
+  transform: translateX(0);
+}
+
+.overlay-header {
+  padding: 22px 22px 18px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: start;
+  background: #fff;
+}
+
+.overlay-title-wrap h2 {
+  font-size: 2.2rem;
+  color: var(--navy);
+  margin-top: 6px;
+}
+
+.overlay-intro {
+  margin-top: 10px;
+  max-width: 58ch;
+}
+
+.overlay-close {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--navy);
+  border-radius: 999px;
+  padding: 9px 14px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.overlay-scroll {
+  overflow: auto;
+  padding: 20px 22px 30px;
+  display: grid;
+  gap: 14px;
+}
+
+.overlay-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.overlay-box {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.overlay-box h4 {
+  margin-bottom: 8px;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  font-family: "DM Sans", sans-serif;
+}
+
+.overlay-box ul {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+}
+
+.overlay-grid.two {
+  grid-template-columns: 1fr 1fr;
+}
+
 @media (max-width: 1120px) {
-  .mindmap-shell,
-  .youtube-row {
+  .youtube-row,
+  .overlay-grid.two {
     grid-template-columns: 1fr;
   }
-  .map-canvas { min-height: 900px; }
 }
 
 @media (max-width: 760px) {
-  .topbar-inner { flex-direction: column; align-items: flex-start; padding: 14px 0; }
+  .topbar-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 0;
+  }
+
   .hero-card,
   .map-panel,
-  .detail-panel,
-  .youtube-panel { padding: 18px; }
-  .container, .topbar-inner { width: min(var(--max), calc(100% - 20px)); }
-  .map-canvas { min-height: 980px; }
+  .youtube-panel {
+    padding: 18px;
+  }
+
+  .container, .topbar-inner {
+    width: min(var(--max), calc(100% - 20px));
+  }
+
+  .map-canvas {
+    min-height: 1260px;
+  }
 }
 
   </style>
@@ -370,7 +453,7 @@ h1 {
           <div class="eyebrow">BibleMapped</div>
           <h1>Explore the Bible like a map.</h1>
           <p class="hero-copy">
-            Start with the Bible, open the Old Testament and New Testament, then follow each branch into books, characters, and themes. The site is designed to feel like a book-based mind map—clean, minimal, and easy to explore.
+            Start with the Bible, open the Old Testament and New Testament, then follow each branch into books and themes. Click a book to open a full teaching panel instead of cluttering the map.
           </p>
           <div class="hero-links">
             <a href="#map">What is the Bible</a>
@@ -380,38 +463,25 @@ h1 {
       </div>
     </section><section class="section" id="map">
   <div class="container">
-    <div class="section-header">
-      <div class="section-label">Interactive structure</div>
-      <h2 class="section-title">A mind map built out of books.</h2>
-      <p class="section-copy">
-        Click the Bible to open the Old Testament and New Testament. Click the Old Testament to open the book groups. Click a group to explore books. Click a book to see its meaning, theme, major characters, and how it points to Jesus.
-      </p>
+    <div class="panel-head">
+      <div>
+        <div class="section-label">Interactive structure</div>
+        <h2 class="section-title">A mind map built out of books.</h2>
+        <p class="panel-copy">
+          Click the Bible to open the Testaments. Click a Testament to open the book groups. Click a group to reveal books. Click a book to open the teaching view.
+        </p>
+      </div>
     </div>
 
     <div class="mindmap-shell">
       <section class="map-panel">
-        <div class="map-canvas" id="mapCanvas">
-          <div class="trunk"></div>
-          <div class="branch h1"></div>
-          <div class="branch h2"></div>
-          <div class="branch v1"></div>
-          <div class="branch v2"></div>
-          <div class="branch h3"></div>
-          <div class="branch h4"></div>
-          <div class="branch v3"></div>
-          <div class="branch v4"></div>
-          <div class="branch v5"></div>
-          <div class="branch v6"></div>
+        <div class="map-canvas" id="mapCanvas"></div>
+        <div class="legend">
+          <div class="legend-pill">Bible → Testaments → Groups → Books</div>
+          <div class="legend-pill">Books open a teaching panel</div>
+          <div class="legend-pill">Characters can be added next inside each book</div>
         </div>
       </section>
-
-      <aside class="detail-panel" id="detailPanel">
-        <h3 id="detailTitle">What is the Bible?</h3>
-        <p class="detail-intro" id="detailIntro">
-          The Bible is a unified collection of writings that reveal God’s relationship with humanity through creation, covenant, redemption, and fulfillment.
-        </p>
-        <div class="detail-blocks" id="detailBlocks"></div>
-      </aside>
     </div>
   </div>
 </section>
@@ -426,7 +496,7 @@ h1 {
         <div class="youtube-copy">
           <h3 style="font-size:2rem; color:var(--navy);">BibleMapped on YouTube</h3>
           <p>
-            This section can feature your latest video, a playlist, or a callout to your channel. It works as the final section of the page so visitors move from the map of the Bible into your teaching content.
+            This section can feature your latest video, a playlist, or a callout to your channel. It works as the final section of the page so visitors move from the Bible map into your teaching content.
           </p>
           <a class="youtube-link" href="#">Add your channel link</a>
         </div>
@@ -435,40 +505,56 @@ h1 {
   </div>
 </section>
 
-  </main> <script>
+  </main> <div class="overlay-backdrop" id="overlayBackdrop"></div>
+  <aside class="overlay" id="overlay">
+    <div class="overlay-header">
+      <div class="overlay-title-wrap">
+        <div class="book-label" id="overlayType">Book</div>
+        <h2 id="overlayTitle">Genesis</h2>
+        <p class="overlay-intro" id="overlayIntro"></p>
+      </div>
+      <button class="overlay-close" id="overlayClose" aria-label="Close teaching panel">Close</button>
+    </div>
+    <div class="overlay-scroll">
+      <div class="overlay-grid two" id="overlayMeta"></div>
+      <div class="overlay-grid" id="overlayBlocks"></div>
+    </div>
+  </aside> <script>
     const data = {
       bible: {
-        type: 'Root',
+        kind: 'root',
+        typeLabel: 'Root',
         title: 'What is the Bible?',
         intro: 'The Bible is a unified collection of writings that reveal God’s relationship with humanity through creation, covenant, redemption, and fulfillment.',
         blocks: [
           { heading: 'Big idea', body: 'The Bible is one story told through many books, authors, genres, and settings.' },
           { heading: 'Main movements', list: ['Creation', 'Fall', 'Covenant', 'Israel', 'Messiah', 'Church', 'New creation'] },
-          { heading: 'How this site works', body: 'From this root node, the map opens into the Old Testament and New Testament, then into book groups, books, and later character nodes.' }
+          { heading: 'How this site works', body: 'From this root node, the map opens into the Old Testament and New Testament, then into book groups and books.' }
         ]
       },
       old: {
-        type: 'Testament',
+        kind: 'branch',
+        typeLabel: 'Testament',
         title: 'Old Testament',
         intro: 'The Old Testament is the earlier covenant record showing creation, law, history, kingdom, exile, and promise.',
         blocks: [
           { heading: 'Meaning', body: 'Old means earlier or prior. Testament points to covenant.' },
-          { heading: 'Groups', list: ['Torah', 'History', 'Wisdom', 'Prophets'] },
-          { heading: 'Books included', body: 'This branch holds the Protestant Old Testament books, grouped for easier exploration and later expandable to canon comparison.' }
+          { heading: 'Groups', list: ['Torah', 'History', 'Wisdom', 'Prophets'] }
         ]
       },
       new: {
-        type: 'Testament',
+        kind: 'branch',
+        typeLabel: 'Testament',
         title: 'New Testament',
         intro: 'The New Testament presents Jesus Christ, the church, salvation, mission, and the hope of new creation.',
         blocks: [
           { heading: 'Meaning', body: 'The New Testament centers on the new covenant fulfilled in Christ.' },
-          { heading: 'Groups', list: ['Gospels', 'Acts', 'Letters', 'Revelation'] },
-          { heading: 'Books included', body: 'This branch holds the New Testament books and later can unfold into people, places, and themes.' }
+          { heading: 'Groups', list: ['Gospels', 'Acts', 'Letters', 'Revelation'] }
         ]
       },
       torah: {
-        type: 'Book group',
+        kind: 'branch',
+        typeLabel: 'Book group',
         title: 'Torah',
         intro: 'The Torah forms the opening foundation of the Bible: creation, covenant, law, wilderness, and preparation for promise.',
         blocks: [
@@ -477,7 +563,8 @@ h1 {
         ]
       },
       history: {
-        type: 'Book group',
+        kind: 'branch',
+        typeLabel: 'Book group',
         title: 'History',
         intro: 'The History books trace conquest, judges, kingship, exile, return, and the national story of Israel.',
         blocks: [
@@ -486,7 +573,8 @@ h1 {
         ]
       },
       wisdom: {
-        type: 'Book group',
+        kind: 'branch',
+        typeLabel: 'Book group',
         title: 'Wisdom',
         intro: 'Wisdom books explore suffering, worship, skill for living, meaning, and covenant love.',
         blocks: [
@@ -495,7 +583,8 @@ h1 {
         ]
       },
       prophets: {
-        type: 'Book group',
+        kind: 'branch',
+        typeLabel: 'Book group',
         title: 'Prophets',
         intro: 'The Prophets warn, call for repentance, announce judgment, and hold out the hope of restoration and Messiah.',
         blocks: [
@@ -504,7 +593,8 @@ h1 {
         ]
       },
       gospels: {
-        type: 'Book group',
+        kind: 'branch',
+        typeLabel: 'Book group',
         title: 'Gospels',
         intro: 'The Gospels present Jesus Christ through four witnesses, showing His life, ministry, death, and resurrection.',
         blocks: [
@@ -513,7 +603,8 @@ h1 {
         ]
       },
       acts: {
-        type: 'Book group',
+        kind: 'branch',
+        typeLabel: 'Book group',
         title: 'Acts',
         intro: 'Acts tells how the risen Christ continues His mission through the Holy Spirit and the early church.',
         blocks: [
@@ -522,7 +613,8 @@ h1 {
         ]
       },
       letters: {
-        type: 'Book group',
+        kind: 'branch',
+        typeLabel: 'Book group',
         title: 'Letters',
         intro: 'The New Testament letters teach doctrine, church life, holiness, endurance, and hope in Christ.',
         blocks: [
@@ -531,7 +623,8 @@ h1 {
         ]
       },
       revelation: {
-        type: 'Book group',
+        kind: 'branch',
+        typeLabel: 'Book group',
         title: 'Revelation',
         intro: 'Revelation unveils the final victory of God, the triumph of Christ, judgment, and new creation.',
         blocks: [
@@ -540,77 +633,98 @@ h1 {
         ]
       },
 
-      genesis: { type: 'Book', title: 'Genesis', intro: 'Genesis means beginning. It explains origins, sin, nations, covenant, and the family line that leads toward Israel and the promise of redemption.', blocks: [ { heading: 'Theme', body: 'Creation, fall, judgment, covenant, and promise.' }, { heading: 'Main characters', list: ['Adam', 'Eve', 'Noah', 'Abraham', 'Sarah', 'Isaac', 'Jacob', 'Joseph'] }, { heading: 'Points to Jesus', body: 'Promised seed, covenant line, sacrificial imagery, Judah’s royal line, and Joseph as a suffering-and-exalted pattern.' } ] },
-      exodus: { type: 'Book', title: 'Exodus', intro: 'Exodus means departure. It tells how God rescues Israel from Egypt, gives covenant law, and dwells with His people.', blocks: [ { heading: 'Theme', body: 'Deliverance, covenant, law, worship, holiness.' }, { heading: 'Main characters', list: ['Moses', 'Aaron', 'Pharaoh', 'Miriam', 'Joshua'] }, { heading: 'Points to Jesus', body: 'Passover lamb, mediator pattern, redemption from bondage, and God dwelling with His people.' } ] },
-      leviticus: { type: 'Book', title: 'Leviticus', intro: 'Leviticus teaches Israel how to live in holiness before a holy God through sacrifices, priesthood, purity, and sacred order.', blocks: [ { heading: 'Theme', body: 'Holiness, sacrifice, priesthood, atonement, worship.' }, { heading: 'Main characters', list: ['Moses', 'Aaron', 'Aaron’s sons', 'Priests'] }, { heading: 'Points to Jesus', body: 'Perfect sacrifice, true high priest, and atonement fulfilled in Christ.' } ] },
-      numbers: { type: 'Book', title: 'Numbers', intro: 'Numbers records Israel’s wilderness journey, rebellion, discipline, and preparation for the promised land.', blocks: [ { heading: 'Theme', body: 'Unbelief, testing, leadership, judgment, and God’s faithfulness.' }, { heading: 'Main characters', list: ['Moses', 'Aaron', 'Miriam', 'Joshua', 'Caleb', 'Balaam'] }, { heading: 'Points to Jesus', body: 'Lifted serpent imagery, faithful leadership, and inheritance hope.' } ] },
-      deuteronomy: { type: 'Book', title: 'Deuteronomy', intro: 'Deuteronomy is Moses’ final set of speeches calling the new generation to covenant loyalty before entering the land.', blocks: [ { heading: 'Theme', body: 'Covenant renewal, obedience, blessing and curse, memory, and inheritance.' }, { heading: 'Main characters', list: ['Moses', 'Joshua', 'Israelites'] }, { heading: 'Points to Jesus', body: 'Prophet like Moses, covenant mediator, and faithful obedience fulfilled in Christ.' } ] },
+      genesis: makeBook('Genesis', 'Beginning', 50, 'Primeval history and patriarchal history from creation to Joseph.', ['Adam', 'Eve', 'Noah', 'Abraham', 'Sarah', 'Isaac', 'Jacob', 'Joseph'], ['Creation', 'Fall', 'Covenant', 'Promise'], 'Promised seed, covenant line, sacrificial imagery, and Judah’s royal line.'),
+      exodus: makeBook('Exodus', 'Departure', 40, 'Deliverance from Egypt, covenant at Sinai, and tabernacle worship.', ['Moses', 'Aaron', 'Pharaoh', 'Miriam', 'Joshua'], ['Deliverance', 'Covenant', 'Law', 'Worship'], 'Passover lamb, mediator pattern, redemption from bondage, and God dwelling with His people.'),
+      leviticus: makeBook('Leviticus', 'Relating to the Levites', 27, 'Sacrifice, holiness, priesthood, and the ordering of life before a holy God.', ['Moses', 'Aaron', 'Priests'], ['Holiness', 'Sacrifice', 'Priesthood', 'Atonement'], 'Perfect sacrifice, true high priest, and atonement fulfilled in Christ.'),
+      numbers: makeBook('Numbers', 'Censuses and wilderness journey', 36, 'The wilderness generation tested between rescue and inheritance.', ['Moses', 'Aaron', 'Miriam', 'Joshua', 'Caleb', 'Balaam'], ['Testing', 'Unbelief', 'Judgment', 'Faithfulness'], 'Lifted serpent imagery, faithful leadership, and inheritance hope.'),
+      deuteronomy: makeBook('Deuteronomy', 'Second law / renewed law', 34, 'Moses’ final covenant speeches before Israel enters the land.', ['Moses', 'Joshua', 'Israelites'], ['Covenant renewal', 'Obedience', 'Blessing and curse'], 'Prophet like Moses, covenant mediator, and faithful obedience fulfilled in Christ.'),
 
-      joshua: { type: 'Book', title: 'Joshua', intro: 'Joshua records Israel’s entry into the promised land, conquest, and inheritance.', blocks: [ { heading: 'Theme', body: 'Promise fulfilled, conquest, inheritance, covenant faithfulness.' }, { heading: 'Main characters', list: ['Joshua', 'Rahab', 'Caleb', 'Eleazar'] }, { heading: 'Points to Jesus', body: 'Joshua as a salvation leader pattern, inheritance imagery, and rest themes.' } ] },
-      judges: { type: 'Book', title: 'Judges', intro: 'Judges records cycles of sin, oppression, crying out, deliverance, and relapse in Israel.', blocks: [ { heading: 'Theme', body: 'Covenant failure, deliverance, moral chaos, need for godly leadership.' }, { heading: 'Main characters', list: ['Deborah', 'Gideon', 'Jephthah', 'Samson'] }, { heading: 'Points to Jesus', body: 'Failed deliverers and the need for a righteous king and better Savior.' } ] },
-      ruth: { type: 'Book', title: 'Ruth', intro: 'Ruth tells a story of loyalty, redemption, and providence in the time of the judges.', blocks: [ { heading: 'Theme', body: 'Loyalty, redemption, providence, covenant kindness.' }, { heading: 'Main characters', list: ['Ruth', 'Naomi', 'Boaz'] }, { heading: 'Points to Jesus', body: 'Kinsman-redeemer imagery and the Davidic line leading forward.' } ] },
-      samuel1: { type: 'Book', title: '1 Samuel', intro: '1 Samuel records the end of the judges, the rise of monarchy, the failure of Saul, and the anointing of David.', blocks: [ { heading: 'Theme', body: 'Leadership, kingship, obedience, rejection, faith.' }, { heading: 'Main characters', list: ['Samuel', 'Saul', 'David', 'Jonathan', 'Hannah'] }, { heading: 'Points to Jesus', body: 'Failed kings point to a true king; anointed shepherd imagery.' } ] },
-      samuel2: { type: 'Book', title: '2 Samuel', intro: '2 Samuel records David’s reign, victories, sins, and the covenant promise to his house.', blocks: [ { heading: 'Theme', body: 'Kingship, covenant, sin, repentance, Davidic promise.' }, { heading: 'Main characters', list: ['David', 'Bathsheba', 'Nathan', 'Absalom', 'Joab'] }, { heading: 'Points to Jesus', body: 'Davidic covenant and the hope of a greater king.' } ] },
-      kings1: { type: 'Book', title: '1 Kings', intro: '1 Kings tells of Solomon’s reign, the temple, and the division of the kingdom.', blocks: [ { heading: 'Theme', body: 'Wisdom, temple, division, idolatry, prophetic confrontation.' }, { heading: 'Main characters', list: ['Solomon', 'Rehoboam', 'Jeroboam', 'Elijah', 'Ahab', 'Jezebel'] }, { heading: 'Points to Jesus', body: 'Temple themes, wisdom themes, and true kingdom hope.' } ] },
-      kings2: { type: 'Book', title: '2 Kings', intro: '2 Kings records the decline of both kingdoms, prophetic ministry, and eventual exile.', blocks: [ { heading: 'Theme', body: 'Exile, judgment, prophetic warning, reform, covenant unfaithfulness.' }, { heading: 'Main characters', list: ['Elisha', 'Hezekiah', 'Josiah', 'Nebuchadnezzar'] }, { heading: 'Points to Jesus', body: 'Failed kings intensify messianic hope and restoration longing.' } ] },
-      chronicles1: { type: 'Book', title: '1 Chronicles', intro: '1 Chronicles retells Israel’s history with focus on genealogies, David, worship, and temple preparation.', blocks: [ { heading: 'Theme', body: 'Covenant identity, genealogy, worship, David, temple preparation.' }, { heading: 'Main characters', list: ['David', 'Priests', 'Levites'] }, { heading: 'Points to Jesus', body: 'Davidic line and temple-centered hope leading toward Messiah.' } ] },
-      chronicles2: { type: 'Book', title: '2 Chronicles', intro: '2 Chronicles retells Solomon’s reign, Judah’s reforms, judgment, and exile.', blocks: [ { heading: 'Theme', body: 'Temple, reform, worship, repentance, judgment, restoration.' }, { heading: 'Main characters', list: ['Solomon', 'Asa', 'Jehoshaphat', 'Hezekiah', 'Josiah'] }, { heading: 'Points to Jesus', body: 'Temple glory, reform, and Davidic kingship point toward fuller renewal.' } ] },
-      ezra: { type: 'Book', title: 'Ezra', intro: 'Ezra records return from exile, temple rebuilding, and restoration of the Law.', blocks: [ { heading: 'Theme', body: 'Return, restoration, temple, law, covenant renewal.' }, { heading: 'Main characters', list: ['Ezra', 'Zerubbabel', 'Jeshua', 'Cyrus'] }, { heading: 'Points to Jesus', body: 'Restoration themes, temple renewal, and return from exile imagery.' } ] },
-      nehemiah: { type: 'Book', title: 'Nehemiah', intro: 'Nehemiah records the rebuilding of Jerusalem’s walls and the renewal of the community.', blocks: [ { heading: 'Theme', body: 'Restoration, leadership, prayer, perseverance, covenant renewal.' }, { heading: 'Main characters', list: ['Nehemiah', 'Ezra', 'Sanballat', 'Tobiah'] }, { heading: 'Points to Jesus', body: 'Rebuilding and restoration themes anticipating deeper renewal.' } ] },
-      esther: { type: 'Book', title: 'Esther', intro: 'Esther tells how God preserves His people in exile through courage, wisdom, and providence.', blocks: [ { heading: 'Theme', body: 'Providence, courage, reversal, preservation, identity.' }, { heading: 'Main characters', list: ['Esther', 'Mordecai', 'Haman', 'the king'] }, { heading: 'Points to Jesus', body: 'Deliverance and reversal themes, preserving God’s covenant people.' } ] },
+      joshua: makeBook('Joshua', 'Yahweh is salvation', 24, 'Conquest, inheritance, and covenant renewal in the promised land.', ['Joshua', 'Rahab', 'Caleb'], ['Promise fulfilled', 'Inheritance', 'Obedience'], 'Joshua as salvation leader and inheritance imagery.'),
+      judges: makeBook('Judges', 'Deliverer leaders', 21, 'Cycles of sin, oppression, deliverance, and collapse before the monarchy.', ['Deborah', 'Gideon', 'Jephthah', 'Samson'], ['Covenant failure', 'Chaos', 'Need for a king'], 'Failed deliverers point to a righteous king and better Savior.'),
+      ruth: makeBook('Ruth', 'Named for Ruth', 4, 'A quiet story of loyalty, providence, redemption, and the Davidic line.', ['Ruth', 'Naomi', 'Boaz'], ['Redemption', 'Providence', 'Loyalty'], 'Kinsman-redeemer imagery and the line leading to David.'),
+      samuel1: makeBook('1 Samuel', 'Samuel narrative', 31, 'The rise of monarchy, the failure of Saul, and the emergence of David.', ['Samuel', 'Saul', 'David', 'Jonathan', 'Hannah'], ['Kingship', 'Obedience', 'Anointing'], 'Failed kings and shepherd-king imagery point beyond Saul and David.'),
+      samuel2: makeBook('2 Samuel', 'Samuel narrative continued', 24, 'David’s reign, covenant promise, sin, and the hope of a lasting throne.', ['David', 'Bathsheba', 'Nathan', 'Absalom'], ['Kingship', 'Covenant', 'Repentance'], 'Davidic covenant and the hope of a greater king.'),
+      kings1: makeBook('1 Kings', 'Kings narrative', 22, 'Solomon, the temple, divided kingdom, and prophetic confrontation.', ['Solomon', 'Rehoboam', 'Jeroboam', 'Elijah', 'Ahab'], ['Temple', 'Division', 'Idolatry'], 'Temple themes, wisdom themes, and kingdom hope.'),
+      kings2: makeBook('2 Kings', 'Kings narrative continued', 25, 'The decline of Israel and Judah, ending in exile.', ['Elisha', 'Hezekiah', 'Josiah', 'Nebuchadnezzar'], ['Judgment', 'Reform', 'Exile'], 'Failed kings intensify restoration and messianic longing.'),
+      chronicles1: makeBook('1 Chronicles', 'Historical records', 29, 'A worship-shaped retelling of Israel’s history with David at the center.', ['David', 'Priests', 'Levites'], ['Genealogy', 'Worship', 'Davidic focus'], 'Davidic line and temple-centered hope.'),
+      chronicles2: makeBook('2 Chronicles', 'Historical records continued', 36, 'Temple, reform, judgment, exile, and restoration hope in Judah.', ['Solomon', 'Hezekiah', 'Josiah'], ['Temple', 'Reform', 'Repentance'], 'Temple glory, kingship, and restoration themes.'),
+      ezra: makeBook('Ezra', 'Named for Ezra', 10, 'Return from exile, temple rebuilding, and restoration of God’s word.', ['Ezra', 'Zerubbabel', 'Jeshua'], ['Return', 'Restoration', 'Law'], 'Temple renewal and return-from-exile imagery.'),
+      nehemiah: makeBook('Nehemiah', 'Named for Nehemiah', 13, 'Rebuilding Jerusalem’s walls and renewing covenant community life.', ['Nehemiah', 'Ezra'], ['Restoration', 'Leadership', 'Perseverance'], 'Rebuilding and restoration themes anticipating deeper renewal.'),
+      esther: makeBook('Esther', 'Named for Esther', 10, 'Providential preservation of God’s people in exile.', ['Esther', 'Mordecai', 'Haman'], ['Providence', 'Reversal', 'Preservation'], 'Deliverance and reversal themes preserving covenant people.'),
 
-      job: { type: 'Book', title: 'Job', intro: 'Job wrestles with suffering, righteousness, divine justice, and the limits of human understanding.', blocks: [ { heading: 'Theme', body: 'Suffering, righteousness, wisdom, sovereignty of God.' }, { heading: 'Main characters', list: ['Job', 'Eliphaz', 'Bildad', 'Zophar', 'Elihu'] }, { heading: 'Points to Jesus', body: 'Righteous suffering, mediator longing, and restoration after suffering.' } ] },
-      psalms: { type: 'Book', title: 'Psalms', intro: 'Psalms is the prayer and worship book of Israel, expressing praise, lament, repentance, thanksgiving, kingship, and hope.', blocks: [ { heading: 'Theme', body: 'Worship, lament, praise, trust, messianic hope.' }, { heading: 'Main characters', list: ['David', 'Asaph', 'Sons of Korah', 'Israel collectively'] }, { heading: 'Points to Jesus', body: 'Messianic kingship, suffering, shepherd imagery, and enthronement hope.' } ] },
-      proverbs: { type: 'Book', title: 'Proverbs', intro: 'Proverbs teaches wisdom for daily life, moral discernment, speech, relationships, and the fear of the Lord.', blocks: [ { heading: 'Theme', body: 'Wisdom, fear of the Lord, integrity, speech, discipline.' }, { heading: 'Main characters', list: ['The wise', 'The fool', 'Lady Wisdom', 'Lady Folly'] }, { heading: 'Points to Jesus', body: 'Wisdom fulfilled in Christ and skillful righteous living.' } ] },
-      ecclesiastes: { type: 'Book', title: 'Ecclesiastes', intro: 'Ecclesiastes wrestles with meaning, mortality, time, pleasure, toil, and the limits of life under the sun.', blocks: [ { heading: 'Theme', body: 'Vanity, mortality, meaning, time, fear of God.' }, { heading: 'Main characters', list: ['The Teacher', 'Humanity in general'] }, { heading: 'Points to Jesus', body: 'Exposes the insufficiency of life without ultimate redemption.' } ] },
-      song: { type: 'Book', title: 'Song of Solomon', intro: 'Song of Solomon is a poetic celebration of love, beauty, desire, union, and covenant affection.', blocks: [ { heading: 'Theme', body: 'Love, covenant intimacy, delight, faithful union.' }, { heading: 'Main characters', list: ['Bride', 'Bridegroom', 'Companions'] }, { heading: 'Points to Jesus', body: 'Bridegroom imagery and covenant love fulfilled in Christ and His people.' } ] },
+      job: makeBook('Job', 'Named for Job', 42, 'A wisdom drama wrestling with suffering, righteousness, and divine sovereignty.', ['Job', 'Eliphaz', 'Bildad', 'Zophar', 'Elihu'], ['Suffering', 'Wisdom', 'Sovereignty'], 'Righteous suffering, mediator longing, and restoration after suffering.'),
+      psalms: makeBook('Psalms', 'Songs / sacred poems', 150, 'The prayer and worship book of God’s people.', ['David', 'Asaph', 'Sons of Korah'], ['Worship', 'Lament', 'Praise', 'Messianic hope'], 'Messianic kingship, shepherd imagery, and enthronement hope.'),
+      proverbs: makeBook('Proverbs', 'Wise sayings', 31, 'Practical wisdom for speech, character, work, and the fear of the Lord.', ['The wise', 'The fool', 'Lady Wisdom', 'Lady Folly'], ['Wisdom', 'Fear of the Lord', 'Integrity'], 'Wisdom fulfilled in Christ and skillful righteous living.'),
+      ecclesiastes: makeBook('Ecclesiastes', 'Teacher / preacher', 12, 'A reflection on meaning, mortality, and life under the sun.', ['The Teacher'], ['Meaning', 'Mortality', 'Fear of God'], 'Exposes the insufficiency of life without ultimate redemption.'),
+      song: makeBook('Song of Solomon', 'Greatest song', 8, 'Poetic celebration of covenant love, delight, beauty, and union.', ['Bride', 'Bridegroom'], ['Love', 'Covenant intimacy', 'Delight'], 'Bridegroom imagery and covenant love fulfilled in Christ and His people.'),
 
-      isaiah: { type: 'Book', title: 'Isaiah', intro: 'Isaiah warns Judah of judgment while proclaiming hope, restoration, and a coming Savior.', blocks: [ { heading: 'Theme', body: 'Judgment, holiness, salvation, Messiah, restoration.' }, { heading: 'Main characters', list: ['Isaiah', 'Ahaz', 'Hezekiah', 'The Servant figure'] }, { heading: 'Points to Jesus', body: 'Suffering Servant, virgin birth prophecy, messianic kingdom.' } ] },
-      jeremiah: { type: 'Book', title: 'Jeremiah', intro: 'Jeremiah warns Judah before and during the fall of Jerusalem, calling for repentance while announcing inevitable judgment.', blocks: [ { heading: 'Theme', body: 'Judgment, repentance, covenant failure, new covenant.' }, { heading: 'Main characters', list: ['Jeremiah', 'Baruch', 'Kings of Judah'] }, { heading: 'Points to Jesus', body: 'New Covenant promise and suffering prophet pattern.' } ] },
-      lamentations: { type: 'Book', title: 'Lamentations', intro: 'Lamentations mourns the destruction of Jerusalem and reflects on suffering, loss, and mercy.', blocks: [ { heading: 'Theme', body: 'Grief, judgment, loss, hope, faithfulness.' }, { heading: 'Main characters', list: ['The grieving community', 'The narrator'] }, { heading: 'Points to Jesus', body: 'Sorrow, judgment endured, and hope in mercy.' } ] },
-      ezekiel: { type: 'Book', title: 'Ezekiel', intro: 'Ezekiel prophesies during exile, using vivid visions and symbolic actions to communicate judgment and restoration.', blocks: [ { heading: 'Theme', body: 'God’s glory, judgment, responsibility, restoration, new heart.' }, { heading: 'Main characters', list: ['Ezekiel', 'Exiled Israelites'] }, { heading: 'Points to Jesus', body: 'New heart and spirit, shepherd imagery, restoration.' } ] },
-      daniel: { type: 'Book', title: 'Daniel', intro: 'Daniel tells stories of faithfulness in exile and visions of future kingdoms and God’s ultimate rule.', blocks: [ { heading: 'Theme', body: 'Faithfulness, sovereignty, kingdoms, hope.' }, { heading: 'Main characters', list: ['Daniel', 'Shadrach', 'Meshach', 'Abednego', 'Nebuchadnezzar', 'Darius'] }, { heading: 'Points to Jesus', body: 'Son of Man imagery and eternal kingdom hope.' } ] },
-      hosea: { type: 'Book', title: 'Hosea', intro: 'Hosea uses the imagery of covenant marriage to expose Israel’s unfaithfulness and God’s persistent love.', blocks: [ { heading: 'Theme', body: 'Covenant love, unfaithfulness, mercy, restoration.' }, { heading: 'Main characters', list: ['Hosea', 'Gomer'] }, { heading: 'Points to Jesus', body: 'Redeeming love and restoration of an unfaithful people.' } ] },
-      joel: { type: 'Book', title: 'Joel', intro: 'Joel uses disaster imagery and the day of the Lord to call for repentance and promise restoration.', blocks: [ { heading: 'Theme', body: 'Day of the Lord, repentance, restoration, Spirit outpouring.' }, { heading: 'Main characters', list: ['Joel', 'Judah'] }, { heading: 'Points to Jesus', body: 'Spirit outpouring fulfilled in Acts and final day themes.' } ] },
-      amos: { type: 'Book', title: 'Amos', intro: 'Amos confronts injustice, false security, and hypocrisy in Israel.', blocks: [ { heading: 'Theme', body: 'Justice, judgment, righteousness, restoration.' }, { heading: 'Main characters', list: ['Amos', 'Northern kingdom of Israel'] }, { heading: 'Points to Jesus', body: 'Restoration of David’s fallen tent and righteous kingdom themes.' } ] },
-      obadiah: { type: 'Book', title: 'Obadiah', intro: 'Obadiah announces judgment on Edom for pride and violence against Judah.', blocks: [ { heading: 'Theme', body: 'Judgment, pride, justice, kingdom of the Lord.' }, { heading: 'Main characters', list: ['Obadiah', 'Edom', 'Judah'] }, { heading: 'Points to Jesus', body: 'The Lord’s kingdom and reversal themes.' } ] },
-      jonah: { type: 'Book', title: 'Jonah', intro: 'Jonah tells of a reluctant prophet, divine mercy, and God’s concern for nations beyond Israel.', blocks: [ { heading: 'Theme', body: 'Mercy, repentance, mission, divine compassion.' }, { heading: 'Main characters', list: ['Jonah', 'Ninevites'] }, { heading: 'Points to Jesus', body: 'Jonah’s sign and mission to the nations.' } ] },
-      micah: { type: 'Book', title: 'Micah', intro: 'Micah condemns injustice and false leadership while promising a ruler from Bethlehem.', blocks: [ { heading: 'Theme', body: 'Justice, judgment, restoration, messianic hope.' }, { heading: 'Main characters', list: ['Micah', 'Judah', 'Israel'] }, { heading: 'Points to Jesus', body: 'Bethlehem ruler prophecy and shepherd-king imagery.' } ] },
-      nahum: { type: 'Book', title: 'Nahum', intro: 'Nahum announces the fall of Nineveh and the justice of God against violent empire.', blocks: [ { heading: 'Theme', body: 'Judgment, justice, downfall of empire.' }, { heading: 'Main characters', list: ['Nahum', 'Nineveh'] }, { heading: 'Points to Jesus', body: 'Justice and the final overthrow of evil powers.' } ] },
-      habakkuk: { type: 'Book', title: 'Habakkuk', intro: 'Habakkuk wrestles with how God uses nations and evil while learning to live by faith.', blocks: [ { heading: 'Theme', body: 'Faith, justice, waiting, divine sovereignty.' }, { heading: 'Main characters', list: ['Habakkuk'] }, { heading: 'Points to Jesus', body: 'The righteous shall live by faith.' } ] },
-      zephaniah: { type: 'Book', title: 'Zephaniah', intro: 'Zephaniah warns of the day of the Lord and promises purification and restoration.', blocks: [ { heading: 'Theme', body: 'Day of the Lord, judgment, purification, hope.' }, { heading: 'Main characters', list: ['Zephaniah', 'Judah'] }, { heading: 'Points to Jesus', body: 'Purified people and final restoration themes.' } ] },
-      haggai: { type: 'Book', title: 'Haggai', intro: 'Haggai calls the returned exiles to rebuild the temple and reorder their priorities.', blocks: [ { heading: 'Theme', body: 'Temple, obedience, renewal, future glory.' }, { heading: 'Main characters', list: ['Haggai', 'Zerubbabel', 'Joshua the high priest'] }, { heading: 'Points to Jesus', body: 'Temple glory and future kingdom hope.' } ] },
-      zechariah: { type: 'Book', title: 'Zechariah', intro: 'Zechariah combines visions, restoration hope, and rich messianic imagery.', blocks: [ { heading: 'Theme', body: 'Restoration, priesthood, kingship, messianic hope.' }, { heading: 'Main characters', list: ['Zechariah', 'Joshua', 'Zerubbabel'] }, { heading: 'Points to Jesus', body: 'Pierced one, humble king, shepherd imagery, temple hope.' } ] },
-      malachi: { type: 'Book', title: 'Malachi', intro: 'Malachi confronts spiritual apathy and calls the people back to covenant faithfulness.', blocks: [ { heading: 'Theme', body: 'Covenant faithfulness, worship, judgment, coming messenger.' }, { heading: 'Main characters', list: ['Malachi', 'Priests', 'Judah'] }, { heading: 'Points to Jesus', body: 'Messenger preparation and day of the Lord themes.' } ] },
+      isaiah: makeBook('Isaiah', 'Yahweh is salvation', 66, 'Judgment, holiness, comfort, restoration, and the coming Servant-King.', ['Isaiah', 'Ahaz', 'Hezekiah'], ['Salvation', 'Holiness', 'Messiah', 'Restoration'], 'Suffering Servant, virgin birth prophecy, and messianic kingdom.'),
+      jeremiah: makeBook('Jeremiah', 'Yahweh appoints', 52, 'Warnings before and during Jerusalem’s fall, with the promise of a new covenant.', ['Jeremiah', 'Baruch'], ['Judgment', 'Repentance', 'New covenant'], 'New Covenant promise and suffering prophet pattern.'),
+      lamentations: makeBook('Lamentations', 'Poetic sorrow', 5, 'Grief over Jerusalem’s destruction, held together with hope in mercy.', ['The grieving community'], ['Grief', 'Judgment', 'Hope'], 'Sorrow, judgment endured, and hope in mercy.'),
+      ezekiel: makeBook('Ezekiel', 'God strengthens', 48, 'Exilic visions of glory, judgment, responsibility, and restoration.', ['Ezekiel'], ['Glory', 'Judgment', 'Restoration', 'New heart'], 'New heart, shepherd imagery, and restoration.'),
+      daniel: makeBook('Daniel', 'God is my judge', 12, 'Faithfulness in exile and visions of kingdoms under God’s rule.', ['Daniel', 'Shadrach', 'Meshach', 'Abednego'], ['Sovereignty', 'Faithfulness', 'Kingdom'], 'Son of Man imagery and eternal kingdom hope.'),
+      hosea: makeBook('Hosea', 'Named for Hosea', 14, 'A covenant marriage metaphor exposing unfaithfulness and divine love.', ['Hosea', 'Gomer'], ['Covenant love', 'Unfaithfulness', 'Mercy'], 'Redeeming love and restoration of an unfaithful people.'),
+      joel: makeBook('Joel', 'Named for Joel', 3, 'Disaster, repentance, day of the Lord, and promised Spirit outpouring.', ['Joel'], ['Repentance', 'Day of the Lord', 'Restoration'], 'Spirit outpouring themes fulfilled in Acts and final-day hope.'),
+      amos: makeBook('Amos', 'Named for Amos', 9, 'A prophet of justice confronting hypocrisy and false security.', ['Amos'], ['Justice', 'Judgment', 'Righteousness'], 'Restoration of David’s fallen tent and righteous kingdom themes.'),
+      obadiah: makeBook('Obadiah', 'Named for Obadiah', 1, 'Judgment against Edom for pride and violence.', ['Obadiah'], ['Judgment', 'Pride', 'Justice'], 'The Lord’s kingdom and reversal themes.'),
+      jonah: makeBook('Jonah', 'Named for Jonah', 4, 'A reluctant prophet, a merciful God, and concern for the nations.', ['Jonah'], ['Mercy', 'Repentance', 'Mission'], 'Jonah’s sign and mission to the nations.'),
+      micah: makeBook('Micah', 'Named for Micah', 7, 'Justice, warning, and hope centered on a ruler from Bethlehem.', ['Micah'], ['Justice', 'Judgment', 'Messianic hope'], 'Bethlehem ruler prophecy and shepherd-king imagery.'),
+      nahum: makeBook('Nahum', 'Named for Nahum', 3, 'The fall of Nineveh and the justice of God against empire.', ['Nahum'], ['Judgment', 'Justice'], 'Justice and the overthrow of evil powers.'),
+      habakkuk: makeBook('Habakkuk', 'Named for Habakkuk', 3, 'A dialogue about evil, justice, waiting, and living by faith.', ['Habakkuk'], ['Faith', 'Justice', 'Waiting'], 'The righteous shall live by faith.'),
+      zephaniah: makeBook('Zephaniah', 'Named for Zephaniah', 3, 'Day of the Lord warning with hope of purified restoration.', ['Zephaniah'], ['Judgment', 'Purification', 'Hope'], 'Purified people and final restoration themes.'),
+      haggai: makeBook('Haggai', 'Named for Haggai', 2, 'A call to rebuild the temple and reorder priorities after exile.', ['Haggai', 'Zerubbabel'], ['Temple', 'Obedience', 'Renewal'], 'Temple glory and future kingdom hope.'),
+      zechariah: makeBook('Zechariah', 'Named for Zechariah', 14, 'Visions, restoration, priesthood, kingship, and messianic hope.', ['Zechariah', 'Joshua', 'Zerubbabel'], ['Restoration', 'Kingship', 'Messianic hope'], 'Pierced one, humble king, shepherd imagery, and temple hope.'),
+      malachi: makeBook('Malachi', 'Named for Malachi', 4, 'Confronting spiritual apathy and announcing a coming messenger.', ['Malachi', 'Priests'], ['Covenant faithfulness', 'Worship', 'Messenger'], 'Messenger preparation and day of the Lord themes.'),
 
-      matthew: { type: 'Book', title: 'Matthew', intro: 'Matthew presents Jesus as the Messiah and King who fulfills the Old Testament story.', blocks: [ { heading: 'Theme', body: 'Kingdom of heaven, fulfillment, discipleship, authority of Jesus.' }, { heading: 'Main characters', list: ['Jesus', 'Matthew', 'Peter', 'John the Baptist', 'Pilate'] }, { heading: 'Points to Jesus', body: 'Matthew directly presents Him as Son of David, Son of Abraham, promised King, and risen Lord.' } ] },
-      mark: { type: 'Book', title: 'Mark', intro: 'Mark gives a fast-moving portrait of Jesus as the suffering servant and powerful Son of God.', blocks: [ { heading: 'Theme', body: 'Action, authority, discipleship, suffering.' }, { heading: 'Main characters', list: ['Jesus', 'Peter', 'Disciples', 'John the Baptist', 'Pilate'] }, { heading: 'Points to Jesus', body: 'Mark highlights Jesus as the suffering servant whose path to glory passes through the cross.' } ] },
-      luke: { type: 'Book', title: 'Luke', intro: 'Luke presents an orderly account of Jesus’ life with emphasis on compassion, salvation, and inclusion.', blocks: [ { heading: 'Theme', body: 'Salvation, compassion, reversal, prayer, joy, inclusion.' }, { heading: 'Main characters', list: ['Jesus', 'Mary', 'John the Baptist', 'Peter', 'Disciples'] }, { heading: 'Points to Jesus', body: 'Luke presents Jesus as Savior for all people and Spirit-anointed Messiah.' } ] },
-      john: { type: 'Book', title: 'John', intro: 'John presents a theological portrait of Jesus as the Word made flesh and the Son of God.', blocks: [ { heading: 'Theme', body: 'Belief, eternal life, signs, glory, divine identity.' }, { heading: 'Main characters', list: ['Jesus', 'John the Baptist', 'Nicodemus', 'Samaritan woman', 'Lazarus', 'Thomas'] }, { heading: 'Points to Jesus', body: 'John explicitly presents Jesus as the Word, the I Am, the Lamb of God, and the resurrection and the life.' } ] },
-      actsBook: { type: 'Book', title: 'Acts', intro: 'Acts records the rise and spread of the early church after Jesus’ resurrection and ascension.', blocks: [ { heading: 'Theme', body: 'Holy Spirit, mission, witness, church growth, gospel expansion.' }, { heading: 'Main characters', list: ['Peter', 'Paul', 'Stephen', 'Philip', 'Barnabas', 'James'] }, { heading: 'Points to Jesus', body: 'Acts presents Jesus as the risen Lord who continues His mission through His Spirit and His people.' } ] },
-      romans: { type: 'Book', title: 'Romans', intro: 'Romans is Paul’s clearest explanation of the gospel, focusing on sin, grace, righteousness, faith, and transformed living.', blocks: [ { heading: 'Theme', body: 'Sin, justification, grace, faith, sanctification, Israel, unity.' }, { heading: 'Main characters', list: ['Paul', 'Abraham', 'Adam', 'Israel', 'Roman believers'] }, { heading: 'Points to Jesus', body: 'Jesus as the atoning sacrifice, second Adam, risen Lord, and source of righteousness.' } ] },
-      corinthians1: { type: 'Book', title: '1 Corinthians', intro: '1 Corinthians corrects a troubled church struggling with division, pride, immorality, and confusion in worship.', blocks: [ { heading: 'Theme', body: 'Unity, holiness, worship, gifts, love, resurrection.' }, { heading: 'Main characters', list: ['Paul', 'Apollos', 'Peter', 'Corinthian believers'] }, { heading: 'Points to Jesus', body: 'Jesus as crucified wisdom, Passover lamb, and source of resurrection hope.' } ] },
-      corinthians2: { type: 'Book', title: '2 Corinthians', intro: '2 Corinthians reveals Paul’s heart, suffering, ministry, weakness, and defense of his apostleship.', blocks: [ { heading: 'Theme', body: 'Weakness and strength, suffering, reconciliation, generosity, ministry.' }, { heading: 'Main characters', list: ['Paul', 'Titus', 'Corinthian believers'] }, { heading: 'Points to Jesus', body: 'Jesus as the center of the new covenant and reconciling Savior.' } ] },
-      galatians: { type: 'Book', title: 'Galatians', intro: 'Galatians defends the gospel of grace against legalism and insists on justification by faith.', blocks: [ { heading: 'Theme', body: 'Grace, freedom, justification, Spirit, promise.' }, { heading: 'Main characters', list: ['Paul', 'Peter', 'Abraham', 'Galatian believers'] }, { heading: 'Points to Jesus', body: 'Jesus redeems from the curse and brings true sonship and freedom.' } ] },
-      ephesians: { type: 'Book', title: 'Ephesians', intro: 'Ephesians presents the cosmic scope of salvation in Christ and the identity, unity, and calling of the church.', blocks: [ { heading: 'Theme', body: 'Union with Christ, grace, church, unity, spiritual warfare.' }, { heading: 'Main characters', list: ['Paul', 'The church', 'Jews and Gentiles in Christ'] }, { heading: 'Points to Jesus', body: 'Jesus as exalted Lord, head of the church, and peace-maker.' } ] },
-      philippians: { type: 'Book', title: 'Philippians', intro: 'Philippians is a joyful letter emphasizing humility, perseverance, partnership, and Christ-centered living.', blocks: [ { heading: 'Theme', body: 'Joy, humility, perseverance, contentment, gospel partnership.' }, { heading: 'Main characters', list: ['Paul', 'Timothy', 'Epaphroditus', 'Philippian believers'] }, { heading: 'Points to Jesus', body: 'Jesus as the humble yet exalted Lord and true center of joy.' } ] },
-      colossians: { type: 'Book', title: 'Colossians', intro: 'Colossians confronts false teaching by declaring the absolute supremacy and sufficiency of Christ.', blocks: [ { heading: 'Theme', body: 'Supremacy of Christ, fullness, truth, holiness, new life.' }, { heading: 'Main characters', list: ['Paul', 'Timothy', 'Epaphras', 'Colossian believers'] }, { heading: 'Points to Jesus', body: 'Jesus as image of the invisible God, creator, sustainer, and head of the church.' } ] },
-      thessalonians1: { type: 'Book', title: '1 Thessalonians', intro: '1 Thessalonians encourages a young church facing persecution and gives instruction about holy living and Christ’s return.', blocks: [ { heading: 'Theme', body: 'Perseverance, holiness, encouragement, second coming, hope.' }, { heading: 'Main characters', list: ['Paul', 'Silas', 'Timothy', 'Thessalonian believers'] }, { heading: 'Points to Jesus', body: 'Jesus as returning Lord, deliverer from wrath, and source of hope.' } ] },
-      thessalonians2: { type: 'Book', title: '2 Thessalonians', intro: '2 Thessalonians corrects confusion about the day of the Lord and encourages steadfastness under persecution.', blocks: [ { heading: 'Theme', body: 'Perseverance, judgment, day of the Lord, order, steadfastness.' }, { heading: 'Main characters', list: ['Paul', 'Thessalonian believers'] }, { heading: 'Points to Jesus', body: 'Jesus as returning Judge and glorified Lord.' } ] },
-      timothy1: { type: 'Book', title: '1 Timothy', intro: '1 Timothy instructs Timothy on church leadership, doctrine, worship, and pastoral care.', blocks: [ { heading: 'Theme', body: 'Sound doctrine, leadership, worship, godliness, order.' }, { heading: 'Main characters', list: ['Paul', 'Timothy', 'Elders', 'Deacons'] }, { heading: 'Points to Jesus', body: 'Jesus as mediator, Savior, and Lord of the church.' } ] },
-      timothy2: { type: 'Book', title: '2 Timothy', intro: '2 Timothy is Paul’s final encouragement to remain faithful in suffering and ministry.', blocks: [ { heading: 'Theme', body: 'Faithfulness, suffering, Scripture, endurance, finishing well.' }, { heading: 'Main characters', list: ['Paul', 'Timothy'] }, { heading: 'Points to Jesus', body: 'Jesus as risen Lord and the center of the gospel worth suffering for.' } ] },
-      titus: { type: 'Book', title: 'Titus', intro: 'Titus gives instruction for establishing order, appointing leaders, and promoting sound doctrine and good works.', blocks: [ { heading: 'Theme', body: 'Church order, good works, sound doctrine, leadership, grace.' }, { heading: 'Main characters', list: ['Paul', 'Titus', 'Elders'] }, { heading: 'Points to Jesus', body: 'Jesus as Savior who redeems and purifies a people for Himself.' } ] },
-      philemon: { type: 'Book', title: 'Philemon', intro: 'Philemon is a personal letter about forgiveness, reconciliation, and receiving Onesimus as a brother in Christ.', blocks: [ { heading: 'Theme', body: 'Forgiveness, reconciliation, grace, transformed relationships.' }, { heading: 'Main characters', list: ['Paul', 'Philemon', 'Onesimus'] }, { heading: 'Points to Jesus', body: 'Jesus as reconciler and the basis for receiving others with grace.' } ] },
-      hebrews: { type: 'Book', title: 'Hebrews', intro: 'Hebrews explains how Jesus is greater than everything in the old covenant—greater than angels, Moses, priests, and sacrifices.', blocks: [ { heading: 'Theme', body: 'Supremacy of Christ, priesthood, sacrifice, faith, endurance.' }, { heading: 'Main characters', list: ['Jesus', 'Moses', 'Abraham', 'Old Testament figures'] }, { heading: 'Points to Jesus', body: 'Jesus as perfect High Priest, final sacrifice, and mediator of a better covenant.' } ] },
-      james: { type: 'Book', title: 'James', intro: 'James focuses on practical faith—what real faith looks like in action.', blocks: [ { heading: 'Theme', body: 'Faith and works, wisdom, speech, humility, endurance.' }, { heading: 'Main characters', list: ['James', 'Believers under trial'] }, { heading: 'Points to Jesus', body: 'Jesus shapes wise obedience and visible faithfulness.' } ] },
-      peter1: { type: 'Book', title: '1 Peter', intro: '1 Peter encourages believers suffering persecution and reminds them of their identity and hope.', blocks: [ { heading: 'Theme', body: 'Suffering, hope, holiness, identity, endurance.' }, { heading: 'Main characters', list: ['Peter', 'Scattered believers'] }, { heading: 'Points to Jesus', body: 'Jesus as suffering servant and source of living hope.' } ] },
-      peter2: { type: 'Book', title: '2 Peter', intro: '2 Peter warns against false teachers and calls believers to stay grounded in truth.', blocks: [ { heading: 'Theme', body: 'Truth, judgment, growth, return of Christ.' }, { heading: 'Main characters', list: ['Peter', 'Believers', 'False teachers'] }, { heading: 'Points to Jesus', body: 'Jesus as returning Lord and anchor of truth.' } ] },
-      john1: { type: 'Book', title: '1 John', intro: '1 John focuses on love, truth, assurance, and walking in the light.', blocks: [ { heading: 'Theme', body: 'Love, truth, light, assurance, discernment.' }, { heading: 'Main characters', list: ['John', 'Believers'] }, { heading: 'Points to Jesus', body: 'Jesus as the Son of God, advocate, and source of eternal life.' } ] },
-      john2: { type: 'Book', title: '2 John', intro: '2 John is a short letter on truth, love, and warning against false teaching.', blocks: [ { heading: 'Theme', body: 'Truth, love, warning, faithfulness.' }, { heading: 'Main characters', list: ['John', 'The chosen lady and her children'] }, { heading: 'Points to Jesus', body: 'Jesus as the truth believers are called to walk in.' } ] },
-      john3: { type: 'Book', title: '3 John', intro: '3 John encourages hospitality for truth and addresses unhealthy leadership.', blocks: [ { heading: 'Theme', body: 'Hospitality, truth, leadership, faithfulness.' }, { heading: 'Main characters', list: ['John', 'Gaius', 'Diotrephes', 'Demetrius'] }, { heading: 'Points to Jesus', body: 'Jesus shapes truth, love, and faithful support for gospel work.' } ] },
-      jude: { type: 'Book', title: 'Jude', intro: 'Jude gives a strong warning against false teachers and calls believers to contend for the faith.', blocks: [ { heading: 'Theme', body: 'Judgment, truth, warning, perseverance.' }, { heading: 'Main characters', list: ['Jude', 'False teachers', 'Believers'] }, { heading: 'Points to Jesus', body: 'Jesus preserves His people and will judge evil.' } ] },
-      revelationBook: { type: 'Book', title: 'Revelation', intro: 'Revelation is an unveiling of God’s ultimate victory, the triumph of Christ, judgment, and new creation.', blocks: [ { heading: 'Theme', body: 'Victory, judgment, worship, sovereignty, new creation.' }, { heading: 'Main characters', list: ['Jesus', 'John', 'The church', 'Angels', 'The beast', 'Satan'] }, { heading: 'Points to Jesus', body: 'Jesus as King of kings, Lamb, Judge, and victorious ruler.' } ] }
+      matthew: makeBook('Matthew', 'Named for Matthew', 28, 'Jesus as Messiah and King fulfilling the Old Testament story.', ['Jesus', 'Matthew', 'Peter', 'John the Baptist', 'Pilate'], ['Kingdom', 'Fulfillment', 'Discipleship'], 'Jesus as Son of David, Son of Abraham, promised King, and risen Lord.'),
+      mark: makeBook('Mark', 'Named for John Mark', 16, 'A fast-moving portrait of Jesus as suffering servant and Son of God.', ['Jesus', 'Peter', 'Disciples', 'Pilate'], ['Action', 'Authority', 'Suffering'], 'Jesus as the suffering servant whose path to glory passes through the cross.'),
+      luke: makeBook('Luke', 'Named for Luke', 24, 'An orderly account emphasizing salvation, compassion, and inclusion.', ['Jesus', 'Mary', 'John the Baptist', 'Peter'], ['Salvation', 'Compassion', 'Inclusion'], 'Jesus as Savior for all people and Spirit-anointed Messiah.'),
+      john: makeBook('John', 'Named for John', 21, 'A theological portrait of Jesus as the Word made flesh and Son of God.', ['Jesus', 'John the Baptist', 'Nicodemus', 'Thomas'], ['Belief', 'Eternal life', 'Divine identity'], 'Jesus as the Word, the I Am, the Lamb of God, and the resurrection and the life.'),
+      actsBook: makeBook('Acts', 'Acts of the Apostles', 28, 'The rise and spread of the early church through the Holy Spirit.', ['Peter', 'Paul', 'Stephen', 'Philip', 'Barnabas'], ['Mission', 'Witness', 'Holy Spirit'], 'Jesus as the risen Lord continuing His mission through His Spirit and His people.'),
+      romans: makeBook('Romans', 'Letter to Rome', 16, 'Paul’s clearest explanation of the gospel, grace, righteousness, and transformed life.', ['Paul', 'Abraham', 'Adam', 'Israel'], ['Grace', 'Justification', 'Faith', 'Righteousness'], 'Jesus as atoning sacrifice, second Adam, and risen Lord.'),
+      corinthians1: makeBook('1 Corinthians', 'First Corinthian letter', 16, 'Correction for a divided church struggling with pride, disorder, and immorality.', ['Paul', 'Apollos', 'Corinthian believers'], ['Unity', 'Holiness', 'Worship', 'Resurrection'], 'Jesus as crucified wisdom, Passover lamb, and resurrection hope.'),
+      corinthians2: makeBook('2 Corinthians', 'Second Corinthian letter', 13, 'Paul’s deeply personal defense of ministry through weakness and suffering.', ['Paul', 'Titus'], ['Weakness and strength', 'Reconciliation', 'Ministry'], 'Jesus as the center of the new covenant and reconciling Savior.'),
+      galatians: makeBook('Galatians', 'Letter to Galatia', 6, 'A defense of grace and freedom against legalism.', ['Paul', 'Peter', 'Abraham'], ['Grace', 'Freedom', 'Promise', 'Spirit'], 'Jesus redeems from the curse and brings true sonship.'),
+      ephesians: makeBook('Ephesians', 'Letter to Ephesus', 6, 'The cosmic scope of salvation and the identity and unity of the church.', ['Paul', 'The church'], ['Unity', 'Grace', 'Church', 'Spiritual warfare'], 'Jesus as exalted Lord, head of the church, and peace-maker.'),
+      philippians: makeBook('Philippians', 'Letter to Philippi', 4, 'A joyful letter centered on humility, perseverance, and Christ-centered living.', ['Paul', 'Timothy', 'Epaphroditus'], ['Joy', 'Humility', 'Perseverance'], 'Jesus as the humble yet exalted Lord and center of joy.'),
+      colossians: makeBook('Colossians', 'Letter to Colossae', 4, 'A declaration of the supremacy and sufficiency of Christ.', ['Paul', 'Epaphras'], ['Supremacy of Christ', 'Truth', 'New life'], 'Jesus as image of the invisible God and head of the church.'),
+      thessalonians1: makeBook('1 Thessalonians', 'First letter to Thessalonica', 5, 'Encouragement for a young church facing persecution and waiting for Christ’s return.', ['Paul', 'Silas', 'Timothy'], ['Hope', 'Holiness', 'Perseverance'], 'Jesus as returning Lord and deliverer from wrath.'),
+      thessalonians2: makeBook('2 Thessalonians', 'Second letter to Thessalonica', 3, 'Correction about the day of the Lord and a call to stand firm.', ['Paul'], ['Steadfastness', 'Judgment', 'Order'], 'Jesus as returning Judge and glorified Lord.'),
+      timothy1: makeBook('1 Timothy', 'First letter to Timothy', 6, 'Instruction on church leadership, doctrine, worship, and pastoral care.', ['Paul', 'Timothy'], ['Church order', 'Doctrine', 'Godliness'], 'Jesus as mediator, Savior, and Lord of the church.'),
+      timothy2: makeBook('2 Timothy', 'Second letter to Timothy', 4, 'Paul’s final call to remain faithful under pressure.', ['Paul', 'Timothy'], ['Faithfulness', 'Scripture', 'Endurance'], 'Jesus as risen Lord and center of the gospel worth suffering for.'),
+      titus: makeBook('Titus', 'Letter to Titus', 3, 'Instruction for church order, sound doctrine, and good works.', ['Paul', 'Titus'], ['Church order', 'Good works', 'Grace'], 'Jesus as Savior who redeems and purifies a people.'),
+      philemon: makeBook('Philemon', 'Letter to Philemon', 1, 'A personal letter about reconciliation and receiving Onesimus as a brother.', ['Paul', 'Philemon', 'Onesimus'], ['Forgiveness', 'Reconciliation', 'Grace'], 'Jesus as reconciler and basis for receiving others with grace.'),
+      hebrews: makeBook('Hebrews', 'Letter to Hebrews', 13, 'Jesus is greater than angels, Moses, priests, and sacrifices.', ['Jesus', 'Moses', 'Abraham'], ['Supremacy of Christ', 'Priesthood', 'Faith'], 'Jesus as perfect High Priest, final sacrifice, and mediator of a better covenant.'),
+      james: makeBook('James', 'Letter from James', 5, 'Practical faith that is visible in wisdom, speech, endurance, and obedience.', ['James'], ['Faith and works', 'Wisdom', 'Endurance'], 'Jesus shapes wise obedience and visible faithfulness.'),
+      peter1: makeBook('1 Peter', 'First letter of Peter', 5, 'Encouragement for believers suffering as exiles with living hope.', ['Peter'], ['Hope', 'Suffering', 'Holiness'], 'Jesus as suffering servant and source of living hope.'),
+      peter2: makeBook('2 Peter', 'Second letter of Peter', 3, 'Warning against false teachers and a call to stay grounded in truth.', ['Peter'], ['Truth', 'Judgment', 'Growth'], 'Jesus as returning Lord and anchor of truth.'),
+      john1: makeBook('1 John', 'First letter of John', 5, 'Love, truth, assurance, and walking in the light.', ['John'], ['Love', 'Truth', 'Assurance'], 'Jesus as Son of God, advocate, and source of eternal life.'),
+      john2: makeBook('2 John', 'Second letter of John', 1, 'A short warning to walk in truth and love.', ['John'], ['Truth', 'Love', 'Warning'], 'Jesus as the truth believers are called to walk in.'),
+      john3: makeBook('3 John', 'Third letter of John', 1, 'Encouragement in hospitality, truth, and faithful support of gospel work.', ['John', 'Gaius', 'Diotrephes'], ['Hospitality', 'Truth', 'Leadership'], 'Jesus shapes truth, love, and faithfulness.'),
+      jude: makeBook('Jude', 'Letter of Jude', 1, 'A call to contend for the faith against corrupt teachers.', ['Jude'], ['Warning', 'Judgment', 'Perseverance'], 'Jesus preserves His people and will judge evil.'),
+      revelationBook: makeBook('Revelation', 'Unveiling', 22, 'The final victory of God, the triumph of Christ, judgment, and new creation.', ['Jesus', 'John', 'The church', 'The beast', 'Satan'], ['Victory', 'Judgment', 'Worship', 'New creation'], 'Jesus as King of kings, Lamb, Judge, and victorious ruler.')
     };
+
+    function makeBook(title, meaning, chapters, context, characters, themes, pointsToJesus) {
+      return {
+        kind: 'book',
+        typeLabel: 'Book',
+        title,
+        meaning,
+        chapters,
+        intro: context,
+        characters,
+        themes,
+        pointsToJesus,
+        blocks: [
+          { heading: 'Meaning', body: meaning },
+          { heading: 'Context', body: context },
+          { heading: 'Main characters', list: characters },
+          { heading: 'Main themes', list: themes },
+          { heading: 'How it points to Jesus', body: pointsToJesus }
+        ]
+      };
+    }
 
     const tree = {
       bible: ['old', 'new'],
@@ -627,110 +741,162 @@ h1 {
     };
 
     const layout = {
-      bible: { x: 42, y: 26, label: 'Root', title: 'The Bible', subtitle: 'Start here' },
-      old: { x: 18, y: 136, label: 'Testament', title: 'Old Testament', subtitle: 'Earlier covenant' },
-      new: { x: 66, y: 136, label: 'Testament', title: 'New Testament', subtitle: 'Fulfillment in Christ' },
-      torah: { x: 2, y: 286, label: 'Group', title: 'Torah', subtitle: 'Genesis–Deuteronomy' },
-      history: { x: 20, y: 286, label: 'Group', title: 'History', subtitle: 'Joshua–Esther' },
-      wisdom: { x: 38, y: 286, label: 'Group', title: 'Wisdom', subtitle: 'Job–Song' },
-      prophets: { x: 56, y: 286, label: 'Group', title: 'Prophets', subtitle: 'Isaiah–Malachi' },
-      gospels: { x: 56, y: 396, label: 'Group', title: 'Gospels', subtitle: 'Matthew–John' },
-      acts: { x: 74, y: 396, label: 'Group', title: 'Acts', subtitle: 'Church begins' },
-      letters: { x: 56, y: 506, label: 'Group', title: 'Letters', subtitle: 'Church teaching' },
-      revelation: { x: 74, y: 506, label: 'Group', title: 'Revelation', subtitle: 'Final victory' },
+      bible: { x: 42, y: 28, label: 'Root', title: 'The Bible', subtitle: 'Start here' },
+      old: { x: 18, y: 150, label: 'Testament', title: 'Old Testament', subtitle: 'Earlier covenant' },
+      new: { x: 66, y: 150, label: 'Testament', title: 'New Testament', subtitle: 'Fulfillment in Christ' },
 
-      genesis: { x: 0, y: 456, label: 'Book', title: 'Genesis', subtitle: 'Beginnings' },
-      exodus: { x: 16, y: 456, label: 'Book', title: 'Exodus', subtitle: 'Deliverance' },
-      leviticus: { x: 0, y: 586, label: 'Book', title: 'Leviticus', subtitle: 'Holiness' },
-      numbers: { x: 16, y: 586, label: 'Book', title: 'Numbers', subtitle: 'Wilderness' },
-      deuteronomy: { x: 8, y: 696, label: 'Book', title: 'Deuteronomy', subtitle: 'Renewed covenant' },
+      torah: { x: 2, y: 320, label: 'Group', title: 'Torah', subtitle: 'Genesis–Deuteronomy' },
+      history: { x: 20, y: 320, label: 'Group', title: 'History', subtitle: 'Joshua–Esther' },
+      wisdom: { x: 38, y: 320, label: 'Group', title: 'Wisdom', subtitle: 'Job–Song' },
+      prophets: { x: 56, y: 320, label: 'Group', title: 'Prophets', subtitle: 'Isaiah–Malachi' },
 
-      joshua: { x: 18, y: 456, label: 'Book', title: 'Joshua', subtitle: 'Inheritance' },
-      judges: { x: 30, y: 456, label: 'Book', title: 'Judges', subtitle: 'Cycles' },
-      ruth: { x: 18, y: 586, label: 'Book', title: 'Ruth', subtitle: 'Redemption' },
-      samuel1: { x: 30, y: 586, label: 'Book', title: '1 Samuel', subtitle: 'Kings arise' },
-      samuel2: { x: 18, y: 716, label: 'Book', title: '2 Samuel', subtitle: 'David reigns' },
-      kings1: { x: 30, y: 716, label: 'Book', title: '1 Kings', subtitle: 'Temple & split' },
-      kings2: { x: 18, y: 846, label: 'Book', title: '2 Kings', subtitle: 'Exile nears' },
-      chronicles1: { x: 30, y: 846, label: 'Book', title: '1 Chronicles', subtitle: 'David remembered' },
-      chronicles2: { x: 18, y: 976, label: 'Book', title: '2 Chronicles', subtitle: 'Judah & temple' },
-      ezra: { x: 30, y: 976, label: 'Book', title: 'Ezra', subtitle: 'Return & Law' },
-      nehemiah: { x: 18, y: 1106, label: 'Book', title: 'Nehemiah', subtitle: 'Walls rebuilt' },
-      esther: { x: 30, y: 1106, label: 'Book', title: 'Esther', subtitle: 'Providence' },
+      gospels: { x: 56, y: 470, label: 'Group', title: 'Gospels', subtitle: 'Matthew–John' },
+      acts: { x: 74, y: 470, label: 'Group', title: 'Acts', subtitle: 'Church begins' },
+      letters: { x: 56, y: 620, label: 'Group', title: 'Letters', subtitle: 'Church teaching' },
+      revelation: { x: 74, y: 620, label: 'Group', title: 'Revelation', subtitle: 'Final victory' },
 
-      job: { x: 36, y: 456, label: 'Book', title: 'Job', subtitle: 'Suffering' },
-      psalms: { x: 48, y: 456, label: 'Book', title: 'Psalms', subtitle: 'Prayer & praise' },
-      proverbs: { x: 36, y: 586, label: 'Book', title: 'Proverbs', subtitle: 'Wisdom' },
-      ecclesiastes: { x: 48, y: 586, label: 'Book', title: 'Ecclesiastes', subtitle: 'Meaning' },
-      song: { x: 42, y: 716, label: 'Book', title: 'Song', subtitle: 'Covenant love' },
+      genesis: { x: 0, y: 500, label: 'Book', title: 'Genesis', subtitle: 'Beginnings' },
+      exodus: { x: 16, y: 500, label: 'Book', title: 'Exodus', subtitle: 'Deliverance' },
+      leviticus: { x: 0, y: 650, label: 'Book', title: 'Leviticus', subtitle: 'Holiness' },
+      numbers: { x: 16, y: 650, label: 'Book', title: 'Numbers', subtitle: 'Wilderness' },
+      deuteronomy: { x: 8, y: 800, label: 'Book', title: 'Deuteronomy', subtitle: 'Renewed law' },
 
-      isaiah: { x: 54, y: 456, label: 'Book', title: 'Isaiah', subtitle: 'Salvation' },
-      jeremiah: { x: 66, y: 456, label: 'Book', title: 'Jeremiah', subtitle: 'Warning' },
-      lamentations: { x: 78, y: 456, label: 'Book', title: 'Lament.', subtitle: 'Grief' },
-      ezekiel: { x: 54, y: 586, label: 'Book', title: 'Ezekiel', subtitle: 'Glory in exile' },
-      daniel: { x: 66, y: 586, label: 'Book', title: 'Daniel', subtitle: 'Kingdoms' },
-      hosea: { x: 78, y: 586, label: 'Book', title: 'Hosea', subtitle: 'Covenant love' },
-      joel: { x: 54, y: 716, label: 'Book', title: 'Joel', subtitle: 'Day of the Lord' },
-      amos: { x: 66, y: 716, label: 'Book', title: 'Amos', subtitle: 'Justice' },
-      obadiah: { x: 78, y: 716, label: 'Book', title: 'Obadiah', subtitle: 'Edom judged' },
-      jonah: { x: 54, y: 846, label: 'Book', title: 'Jonah', subtitle: 'Mercy to nations' },
-      micah: { x: 66, y: 846, label: 'Book', title: 'Micah', subtitle: 'Bethlehem ruler' },
-      nahum: { x: 78, y: 846, label: 'Book', title: 'Nahum', subtitle: 'Nineveh falls' },
-      habakkuk: { x: 54, y: 976, label: 'Book', title: 'Habakkuk', subtitle: 'Live by faith' },
-      zephaniah: { x: 66, y: 976, label: 'Book', title: 'Zephaniah', subtitle: 'Purify & restore' },
-      haggai: { x: 78, y: 976, label: 'Book', title: 'Haggai', subtitle: 'Rebuild' },
-      zechariah: { x: 60, y: 1106, label: 'Book', title: 'Zechariah', subtitle: 'Visions & hope' },
-      malachi: { x: 74, y: 1106, label: 'Book', title: 'Malachi', subtitle: 'Messenger' },
+      joshua: { x: 18, y: 500, label: 'Book', title: 'Joshua', subtitle: 'Inheritance' },
+      judges: { x: 30, y: 500, label: 'Book', title: 'Judges', subtitle: 'Cycles' },
+      ruth: { x: 18, y: 650, label: 'Book', title: 'Ruth', subtitle: 'Redemption' },
+      samuel1: { x: 30, y: 650, label: 'Book', title: '1 Samuel', subtitle: 'Kings arise' },
+      samuel2: { x: 18, y: 800, label: 'Book', title: '2 Samuel', subtitle: 'David reigns' },
+      kings1: { x: 30, y: 800, label: 'Book', title: '1 Kings', subtitle: 'Temple & split' },
+      kings2: { x: 18, y: 950, label: 'Book', title: '2 Kings', subtitle: 'Exile nears' },
+      chronicles1: { x: 30, y: 950, label: 'Book', title: '1 Chron.', subtitle: 'David remembered' },
+      chronicles2: { x: 18, y: 1100, label: 'Book', title: '2 Chron.', subtitle: 'Judah & temple' },
+      ezra: { x: 30, y: 1100, label: 'Book', title: 'Ezra', subtitle: 'Return & law' },
+      nehemiah: { x: 18, y: 1250, label: 'Book', title: 'Nehemiah', subtitle: 'Walls rebuilt' },
+      esther: { x: 30, y: 1250, label: 'Book', title: 'Esther', subtitle: 'Providence' },
 
-      matthew: { x: 54, y: 616, label: 'Book', title: 'Matthew', subtitle: 'Messiah & King' },
-      mark: { x: 72, y: 616, label: 'Book', title: 'Mark', subtitle: 'Servant' },
-      luke: { x: 54, y: 746, label: 'Book', title: 'Luke', subtitle: 'Savior for all' },
-      john: { x: 72, y: 746, label: 'Book', title: 'John', subtitle: 'Word made flesh' },
-      actsBook: { x: 72, y: 876, label: 'Book', title: 'Acts', subtitle: 'Spirit & mission' },
-      romans: { x: 54, y: 966, label: 'Book', title: 'Romans', subtitle: 'The gospel' },
-      corinthians1: { x: 72, y: 966, label: 'Book', title: '1 Cor.', subtitle: 'Church corrected' },
-      corinthians2: { x: 54, y: 1096, label: 'Book', title: '2 Cor.', subtitle: 'Weakness & power' },
-      galatians: { x: 72, y: 1096, label: 'Book', title: 'Galatians', subtitle: 'Grace & freedom' },
-      ephesians: { x: 54, y: 1226, label: 'Book', title: 'Ephesians', subtitle: 'Church identity' },
-      philippians: { x: 72, y: 1226, label: 'Book', title: 'Philippians', subtitle: 'Joy in Christ' },
-      colossians: { x: 54, y: 1356, label: 'Book', title: 'Colossians', subtitle: 'Christ supreme' },
-      thessalonians1: { x: 72, y: 1356, label: 'Book', title: '1 Thess.', subtitle: 'Hope' },
-      thessalonians2: { x: 54, y: 1486, label: 'Book', title: '2 Thess.', subtitle: 'Stand firm' },
-      timothy1: { x: 72, y: 1486, label: 'Book', title: '1 Tim.', subtitle: 'Church order' },
-      timothy2: { x: 54, y: 1616, label: 'Book', title: '2 Tim.', subtitle: 'Finish well' },
-      titus: { x: 72, y: 1616, label: 'Book', title: 'Titus', subtitle: 'Sound doctrine' },
-      philemon: { x: 54, y: 1746, label: 'Book', title: 'Philemon', subtitle: 'Reconciliation' },
-      hebrews: { x: 72, y: 1746, label: 'Book', title: 'Hebrews', subtitle: 'Better covenant' },
-      james: { x: 54, y: 1876, label: 'Book', title: 'James', subtitle: 'Living faith' },
-      peter1: { x: 72, y: 1876, label: 'Book', title: '1 Peter', subtitle: 'Hope in suffering' },
-      peter2: { x: 54, y: 2006, label: 'Book', title: '2 Peter', subtitle: 'Truth' },
-      john1: { x: 72, y: 2006, label: 'Book', title: '1 John', subtitle: 'Love & assurance' },
-      john2: { x: 54, y: 2136, label: 'Book', title: '2 John', subtitle: 'Walk in truth' },
-      john3: { x: 72, y: 2136, label: 'Book', title: '3 John', subtitle: 'Hospitality' },
-      jude: { x: 63, y: 2266, label: 'Book', title: 'Jude', subtitle: 'Contend' },
-      revelationBook: { x: 74, y: 2396, label: 'Book', title: 'Revelation', subtitle: 'Victory' }
+      job: { x: 36, y: 500, label: 'Book', title: 'Job', subtitle: 'Suffering' },
+      psalms: { x: 48, y: 500, label: 'Book', title: 'Psalms', subtitle: 'Prayer & praise' },
+      proverbs: { x: 36, y: 650, label: 'Book', title: 'Proverbs', subtitle: 'Wisdom' },
+      ecclesiastes: { x: 48, y: 650, label: 'Book', title: 'Eccles.', subtitle: 'Meaning' },
+      song: { x: 42, y: 800, label: 'Book', title: 'Song', subtitle: 'Covenant love' },
+
+      isaiah: { x: 54, y: 500, label: 'Book', title: 'Isaiah', subtitle: 'Salvation' },
+      jeremiah: { x: 66, y: 500, label: 'Book', title: 'Jeremiah', subtitle: 'Warning' },
+      lamentations: { x: 78, y: 500, label: 'Book', title: 'Lament.', subtitle: 'Grief' },
+      ezekiel: { x: 54, y: 650, label: 'Book', title: 'Ezekiel', subtitle: 'Glory in exile' },
+      daniel: { x: 66, y: 650, label: 'Book', title: 'Daniel', subtitle: 'Kingdoms' },
+      hosea: { x: 78, y: 650, label: 'Book', title: 'Hosea', subtitle: 'Covenant love' },
+      joel: { x: 54, y: 800, label: 'Book', title: 'Joel', subtitle: 'Day of the Lord' },
+      amos: { x: 66, y: 800, label: 'Book', title: 'Amos', subtitle: 'Justice' },
+      obadiah: { x: 78, y: 800, label: 'Book', title: 'Obadiah', subtitle: 'Edom judged' },
+      jonah: { x: 54, y: 950, label: 'Book', title: 'Jonah', subtitle: 'Mercy to nations' },
+      micah: { x: 66, y: 950, label: 'Book', title: 'Micah', subtitle: 'Bethlehem ruler' },
+      nahum: { x: 78, y: 950, label: 'Book', title: 'Nahum', subtitle: 'Nineveh falls' },
+      habakkuk: { x: 54, y: 1100, label: 'Book', title: 'Habakkuk', subtitle: 'Live by faith' },
+      zephaniah: { x: 66, y: 1100, label: 'Book', title: 'Zephaniah', subtitle: 'Restore' },
+      haggai: { x: 78, y: 1100, label: 'Book', title: 'Haggai', subtitle: 'Rebuild' },
+      zechariah: { x: 60, y: 1250, label: 'Book', title: 'Zechariah', subtitle: 'Visions & hope' },
+      malachi: { x: 74, y: 1250, label: 'Book', title: 'Malachi', subtitle: 'Messenger' },
+
+      matthew: { x: 54, y: 760, label: 'Book', title: 'Matthew', subtitle: 'Messiah & King' },
+      mark: { x: 72, y: 760, label: 'Book', title: 'Mark', subtitle: 'Servant' },
+      luke: { x: 54, y: 910, label: 'Book', title: 'Luke', subtitle: 'Savior for all' },
+      john: { x: 72, y: 910, label: 'Book', title: 'John', subtitle: 'Word made flesh' },
+      actsBook: { x: 72, y: 1060, label: 'Book', title: 'Acts', subtitle: 'Spirit & mission' },
+      romans: { x: 54, y: 1210, label: 'Book', title: 'Romans', subtitle: 'The gospel' },
+      corinthians1: { x: 72, y: 1210, label: 'Book', title: '1 Cor.', subtitle: 'Church corrected' },
+      corinthians2: { x: 54, y: 1360, label: 'Book', title: '2 Cor.', subtitle: 'Weakness & power' },
+      galatians: { x: 72, y: 1360, label: 'Book', title: 'Galatians', subtitle: 'Grace & freedom' },
+      ephesians: { x: 54, y: 1510, label: 'Book', title: 'Ephesians', subtitle: 'Church identity' },
+      philippians: { x: 72, y: 1510, label: 'Book', title: 'Philippians', subtitle: 'Joy in Christ' },
+      colossians: { x: 54, y: 1660, label: 'Book', title: 'Colossians', subtitle: 'Christ supreme' },
+      thessalonians1: { x: 72, y: 1660, label: 'Book', title: '1 Thess.', subtitle: 'Hope' },
+      thessalonians2: { x: 54, y: 1810, label: 'Book', title: '2 Thess.', subtitle: 'Stand firm' },
+      timothy1: { x: 72, y: 1810, label: 'Book', title: '1 Tim.', subtitle: 'Church order' },
+      timothy2: { x: 54, y: 1960, label: 'Book', title: '2 Tim.', subtitle: 'Finish well' },
+      titus: { x: 72, y: 1960, label: 'Book', title: 'Titus', subtitle: 'Sound doctrine' },
+      philemon: { x: 54, y: 2110, label: 'Book', title: 'Philemon', subtitle: 'Reconciliation' },
+      hebrews: { x: 72, y: 2110, label: 'Book', title: 'Hebrews', subtitle: 'Better covenant' },
+      james: { x: 54, y: 2260, label: 'Book', title: 'James', subtitle: 'Living faith' },
+      peter1: { x: 72, y: 2260, label: 'Book', title: '1 Peter', subtitle: 'Hope in suffering' },
+      peter2: { x: 54, y: 2410, label: 'Book', title: '2 Peter', subtitle: 'Truth' },
+      john1: { x: 72, y: 2410, label: 'Book', title: '1 John', subtitle: 'Love & assurance' },
+      john2: { x: 54, y: 2560, label: 'Book', title: '2 John', subtitle: 'Walk in truth' },
+      john3: { x: 72, y: 2560, label: 'Book', title: '3 John', subtitle: 'Hospitality' },
+      jude: { x: 63, y: 2710, label: 'Book', title: 'Jude', subtitle: 'Contend' },
+      revelationBook: { x: 74, y: 2860, label: 'Book', title: 'Revelation', subtitle: 'Victory' }
+    };
+
+    const lines = [
+      { x: 50, y: 92, w: 2, h: 120 },
+      { x: 30, y: 212, w: 20, h: 2 },
+      { x: 50, y: 212, w: 20, h: 2 },
+      { x: 30, y: 212, w: 2, h: 190 },
+      { x: 70, y: 212, w: 2, h: 520 },
+      { x: 14, y: 402, w: 16, h: 2 },
+      { x: 32, y: 402, w: 16, h: 2 },
+      { x: 50, y: 402, w: 16, h: 2 },
+      { x: 68, y: 402, w: 16, h: 2 },
+      { x: 14, y: 402, w: 2, h: 470 },
+      { x: 32, y: 402, w: 2, h: 850 },
+      { x: 50, y: 402, w: 2, h: 420 },
+      { x: 68, y: 402, w: 2, h: 420 },
+      { x: 70, y: 732, w: 4, h: 2 },
+      { x: 70, y: 882, w: 4, h: 2 },
+      { x: 70, y: 1032, w: 4, h: 2 },
+      { x: 70, y: 1182, w: 4, h: 2 },
+      { x: 70, y: 1332, w: 4, h: 2 },
+      { x: 70, y: 1482, w: 4, h: 2 },
+      { x: 70, y: 1632, w: 4, h: 2 },
+      { x: 70, y: 1782, w: 4, h: 2 },
+      { x: 70, y: 1932, w: 4, h: 2 },
+      { x: 70, y: 2082, w: 4, h: 2 },
+      { x: 70, y: 2232, w: 4, h: 2 },
+      { x: 70, y: 2382, w: 4, h: 2 },
+      { x: 70, y: 2532, w: 4, h: 2 },
+      { x: 63, y: 2682, w: 7, h: 2 },
+      { x: 74, y: 2832, w: 0, h: 2 }
+    ];
+
+    const tree = {
+      bible: ['old', 'new'],
+      old: ['torah', 'history', 'wisdom', 'prophets'],
+      new: ['gospels', 'acts', 'letters', 'revelation'],
+      torah: ['genesis', 'exodus', 'leviticus', 'numbers', 'deuteronomy'],
+      history: ['joshua', 'judges', 'ruth', 'samuel1', 'samuel2', 'kings1', 'kings2', 'chronicles1', 'chronicles2', 'ezra', 'nehemiah', 'esther'],
+      wisdom: ['job', 'psalms', 'proverbs', 'ecclesiastes', 'song'],
+      prophets: ['isaiah', 'jeremiah', 'lamentations', 'ezekiel', 'daniel', 'hosea', 'joel', 'amos', 'obadiah', 'jonah', 'micah', 'nahum', 'habakkuk', 'zephaniah', 'haggai', 'zechariah', 'malachi'],
+      gospels: ['matthew', 'mark', 'luke', 'john'],
+      acts: ['actsBook'],
+      letters: ['romans', 'corinthians1', 'corinthians2', 'galatians', 'ephesians', 'philippians', 'colossians', 'thessalonians1', 'thessalonians2', 'timothy1', 'timothy2', 'titus', 'philemon', 'hebrews', 'james', 'peter1', 'peter2', 'john1', 'john2', 'john3', 'jude'],
+      revelation: ['revelationBook']
     };
 
     const mapCanvas = document.getElementById('mapCanvas');
-    const detailTitle = document.getElementById('detailTitle');
-    const detailIntro = document.getElementById('detailIntro');
-    const detailBlocks = document.getElementById('detailBlocks');
-
-    function renderDetail(id) {
-      const item = data[id];
-      if (!item) return;
-      detailTitle.textContent = item.title;
-      detailIntro.textContent = item.intro;
-      detailBlocks.innerHTML = item.blocks.map(block => {
-        if (block.list) {
-          return `<div class="detail-block"><h4>${block.heading}</h4><ul>${block.list.map(x => `<li>${x}</li>`).join('')}</ul></div>`;
-        }
-        return `<div class="detail-block"><h4>${block.heading}</h4><p>${block.body}</p></div>`;
-      }).join('');
-    }
+    const overlay = document.getElementById('overlay');
+    const overlayBackdrop = document.getElementById('overlayBackdrop');
+    const overlayClose = document.getElementById('overlayClose');
+    const overlayType = document.getElementById('overlayType');
+    const overlayTitle = document.getElementById('overlayTitle');
+    const overlayIntro = document.getElementById('overlayIntro');
+    const overlayMeta = document.getElementById('overlayMeta');
+    const overlayBlocks = document.getElementById('overlayBlocks');
 
     let expanded = new Set(['bible']);
     let activeId = 'bible';
+
+    function collectDescendants(id) {
+      const out = [];
+      function walk(nodeId) {
+        const children = tree[nodeId] || [];
+        children.forEach(child => {
+          out.push(child);
+          walk(child);
+        });
+      }
+      walk(id);
+      return out;
+    }
 
     function getVisibleNodes() {
       const results = ['bible'];
@@ -746,50 +912,86 @@ h1 {
       return [...new Set(results)];
     }
 
+    function renderLines() {
+      lines.forEach(line => {
+        const div = document.createElement('div');
+        div.className = 'line';
+        div.style.left = `${line.x}%`;
+        div.style.top = `${line.y}px`;
+        div.style.width = line.w === 2 ? '2px' : `${line.w}%`;
+        div.style.height = line.h === 2 ? '2px' : `${line.h}px`;
+        mapCanvas.appendChild(div);
+      });
+    }
+
     function renderMap() {
-      mapCanvas.querySelectorAll('.node').forEach(n => n.remove());
+      mapCanvas.innerHTML = '';
+      renderLines();
       const visible = getVisibleNodes();
+      const maxY = Math.max(...visible.map(id => layout[id]?.y || 0));
+      mapCanvas.style.minHeight = `${maxY + 260}px`;
+
       visible.forEach(id => {
         const node = layout[id];
-        if (!node) return;
+        const item = data[id];
+        if (!node || !item) return;
         const button = document.createElement('button');
-        button.className = `node ${activeId === id ? 'active' : ''}`;
+        button.className = `node ${activeId === id ? 'active' : ''} ${item.kind === 'book' ? 'book-node' : ''}`;
         button.dataset.id = id;
         button.style.left = `${node.x}%`;
         button.style.top = `${node.y}px`;
         button.innerHTML = `<small>${node.label}</small><strong>${node.title}</strong><span>${node.subtitle}</span>`;
         button.addEventListener('click', () => {
           activeId = id;
-          if (tree[id]) {
+          if (item.kind === 'book') {
+            openOverlay(id);
+          } else if (tree[id]) {
             if (expanded.has(id) && id !== 'bible') {
               expanded.delete(id);
-              const descendants = collectDescendants(id);
-              descendants.forEach(d => expanded.delete(d));
+              collectDescendants(id).forEach(d => expanded.delete(d));
             } else {
               expanded.add(id);
             }
           }
-          renderDetail(id);
           renderMap();
         });
         mapCanvas.appendChild(button);
       });
     }
 
-    function collectDescendants(id) {
-      const out = [];
-      function walk(nodeId) {
-        const children = tree[nodeId] || [];
-        children.forEach(child => {
-          out.push(child);
-          walk(child);
-        });
-      }
-      walk(id);
-      return out;
+    function openOverlay(id) {
+      const item = data[id];
+      if (!item) return;
+      overlayType.textContent = item.typeLabel || 'Book';
+      overlayTitle.textContent = item.title;
+      overlayIntro.textContent = item.intro || '';
+      overlayMeta.innerHTML = `
+        <div class="overlay-box"><h4>Meaning</h4><p>${item.meaning || 'Not added yet.'}</p></div>
+        <div class="overlay-box"><h4>Chapters</h4><p>${item.chapters || '—'}</p></div>
+      `;
+      overlayBlocks.innerHTML = item.blocks.map(block => {
+        if (block.list) {
+          return `<div class="overlay-box"><h4>${block.heading}</h4><ul>${block.list.map(x => `<li>${x}</li>`).join('')}</ul></div>`;
+        }
+        return `<div class="overlay-box"><h4>${block.heading}</h4><p>${block.body}</p></div>`;
+      }).join('');
+      overlay.classList.add('open');
+      overlayBackdrop.classList.add('open');
+      document.body.classList.add('overlay-open');
     }
 
-    renderDetail('bible');
+    function closeOverlay() {
+      overlay.classList.remove('open');
+      overlayBackdrop.classList.remove('open');
+      document.body.classList.remove('overlay-open');
+    }
+
+    overlayClose.addEventListener('click', closeOverlay);
+    overlayBackdrop.addEventListener('click', closeOverlay);
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeOverlay();
+    });
+
     renderMap();
   </script></body>
 </html>
