@@ -1,6 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>!-- Add this inside your <head> tag -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/framer-motion@11/dist/framer-motion.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&family=Inter:wght@400;600;700&display=swap');
+.font-serif { font-family: 'Source Serif 4', serif; }
+.font-sans { font-family: 'Inter', sans-serif; }
+</style>
+
+<!-- Add this inside your <body> where you want the scrollytelling section -->
+<div id="bible-mapped-scrolly"></div>
+
+<script type="text/babel">
+  const { useState, useEffect, useMemo } = React;
+  const { motion, useScroll, useSpring } = Motion;
+
+  const storySections = [
+    {
+      id: "part-1",
+      kicker: "Part 1",
+      label: "Genesis: Mapping Eden",
+      title: "Where we think Eden was",
+      body: "For centuries, scholars have tried to place the Garden of Eden on a modern map. The text gives us four rivers — Pishon, Gihon, Tigris, Euphrates — but only two still exist.",
+      visual: "map-eden",
+    },
+    {
+      id: "part-2",
+      kicker: "Part 2", 
+      label: "Exodus: Route Debates",
+      title: "The most disputed journey in history",
+      body: "Did they cross the Red Sea or the Reed Sea? Did they go south to Jebel Musa or north to Saudi Arabia? Every dot on this map is a theory with a PhD behind it.",
+      visual: "map-exodus",
+    },
+    {
+      id: "part-3",
+      kicker: "Part 3",
+      label: "Kings: Jerusalem Layered", 
+      title: "One city, 3,000 years of builds",
+      body: "David’s city was tiny. Herod’s was massive. Between them: destruction, exile, rebuilds. Scroll to peel back the layers.",
+      visual: "map-jerusalem",
+    },
+  ];
+
+  function useActiveSection(sectionIds) {
+    const [activeId, setActiveId] = React.useState(sectionIds[0] || "");
+    React.useEffect(() => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) setActiveId(entry.target.id);
+          });
+        },
+        { rootMargin: "-50% 0px -50% 0px", threshold: 0 }
+      );
+      sectionIds.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+      return () => observer.disconnect();
+    }, [sectionIds]);
+    return activeId;
+  }
+
+  function StickyVisual({ section, index, total }) {
+    return (
+      <div className="sticky top-0 flex h-screen w-full items-center justify-center bg-[#f7f5f0] p-4 lg:p-8">
+        <motion.div
+          key={section.id}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4 }}
+          className="relative flex h-[85vh] w-full max-w-3xl flex-col overflow-hidden border border-black bg-white"
+        >
+          <div className="border-b border-black bg-white px-4 py-2 text-xs font-mono uppercase tracking-wider">
+            Visual: {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+          </div>
+
+          <div className="flex flex-1 items-center justify-center p-6">
+            {/* REPLACE THESE WITH YOUR ACTUAL IMAGES/MAPS */}
+            {section.visual === "map-eden" && (
+              <img src="https://placehold.co/800x600/e2e8f0/000?text=Eden+Map" className="h-full w-full object-cover" alt="Eden Map" />
+            )}
+            {section.visual === "map-exodus" && (
+              <img src="https://placehold.co/800x600/dbeafe/000?text=Exodus+Routes" className="h-full w-full object-cover" alt="Exodus Routes" />
+            )}
+            {section.visual === "map-jerusalem" && (
+              <img src="https://placehold.co/800x600/fecaca/000?text=Jerusalem+Layers" className="h-full w-full object-cover" alt="Jerusalem Layers" />
+            )}
+          </div>
+
+          <div className="border-t border-black bg-white px-4 py-2 text-xs font-sans">
+            {section.label}
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
+
+  function StoryBlock({ section, isActive }) {
+    return (
+      <section id={section.id} className="min-h-[100vh] border-b border-black/10 px-6 py-24 lg:px-16">
+        <motion.div
+          initial={false}
+          animate={{ opacity: isActive? 1 : 0.3 }}
+          transition={{ duration: 0.3 }}
+          className="max-w-xl"
+        >
+          <div className="mb-4 font-sans text-xs font-bold uppercase tracking-widest text-red-600">
+            {section.kicker}
+          </div>
+          <h2 className="font-serif text-4xl font-bold leading-[1.1] tracking-tight lg:text-5xl">
+            {section.title}
+          </h2>
+          <p className="mt-8 font-sans text-[20px] leading-[1.7] text-neutral-800">
+            {section.body}
+          </p>
+        </motion.div>
+      </section>
+    );
+  }
+
+  function App() {
+    const ids = React.useMemo(() => storySections.map((s) => s.id), []);
+    const activeId = useActiveSection(ids);
+    const activeIndex = Math.max(0, storySections.findIndex((s) => s.id === activeId));
+    const activeSection = storySections[activeIndex] || storySections[0];
+
+    const { scrollYProgress } = useScroll();
+    const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+
+    return (
+      <div className="bg-white text-black">
+        <motion.div
+          className="fixed top-0 left-0 right-0 z-50 h-1 origin-left bg-red-600"
+          style={{ scaleX }}
+        />
+
+        <main className="mx-auto max-w-[1600px] lg:grid lg:grid-cols-[1fr_1.1fr]">
+          <div className="relative">
+            {storySections.map((section) => (
+              <StoryBlock
+                key={section.id}
+                section={section}
+                isActive={activeId === section.id}
+              />
+            ))}
+          </div>
+
+          <div className="relative hidden lg:block">
+            <StickyVisual
+              section={activeSection}
+              index={activeIndex}
+              total={storySections.length}
+            />
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('bible-mapped-scrolly')).render(<App />);
+</script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Scripture Library — Bible Mapped</title>
