@@ -1,1496 +1,1195 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>!-- Add this inside your <head> tag -->
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/framer-motion@11/dist/framer-motion.js"></script>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&family=Inter:wght@400;600;700&display=swap');
-.font-serif { font-family: 'Source Serif 4', serif; }
-.font-sans { font-family: 'Inter', sans-serif; }
-</style>
-
-<!-- Add this inside your <body> where you want the scrollytelling section -->
-<div id="bible-mapped-scrolly"></div>
-
-<script type="text/babel">
-  const { useState, useEffect, useMemo } = React;
-  const { motion, useScroll, useSpring } = Motion;
-
-  const storySections = [
-    {
-      id: "part-1",
-      kicker: "Part 1",
-      label: "Genesis: Mapping Eden",
-      title: "Where we think Eden was",
-      body: "For centuries, scholars have tried to place the Garden of Eden on a modern map. The text gives us four rivers — Pishon, Gihon, Tigris, Euphrates — but only two still exist.",
-      visual: "map-eden",
-    },
-    {
-      id: "part-2",
-      kicker: "Part 2", 
-      label: "Exodus: Route Debates",
-      title: "The most disputed journey in history",
-      body: "Did they cross the Red Sea or the Reed Sea? Did they go south to Jebel Musa or north to Saudi Arabia? Every dot on this map is a theory with a PhD behind it.",
-      visual: "map-exodus",
-    },
-    {
-      id: "part-3",
-      kicker: "Part 3",
-      label: "Kings: Jerusalem Layered", 
-      title: "One city, 3,000 years of builds",
-      body: "David’s city was tiny. Herod’s was massive. Between them: destruction, exile, rebuilds. Scroll to peel back the layers.",
-      visual: "map-jerusalem",
-    },
-  ];
-
-  function useActiveSection(sectionIds) {
-    const [activeId, setActiveId] = React.useState(sectionIds[0] || "");
-    React.useEffect(() => {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) setActiveId(entry.target.id);
-          });
-        },
-        { rootMargin: "-50% 0px -50% 0px", threshold: 0 }
-      );
-      sectionIds.forEach((id) => {
-        const el = document.getElementById(id);
-        if (el) observer.observe(el);
-      });
-      return () => observer.disconnect();
-    }, [sectionIds]);
-    return activeId;
-  }
-
-  function StickyVisual({ section, index, total }) {
-    return (
-      <div className="sticky top-0 flex h-screen w-full items-center justify-center bg-[#f7f5f0] p-4 lg:p-8">
-        <motion.div
-          key={section.id}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4 }}
-          className="relative flex h-[85vh] w-full max-w-3xl flex-col overflow-hidden border border-black bg-white"
-        >
-          <div className="border-b border-black bg-white px-4 py-2 text-xs font-mono uppercase tracking-wider">
-            Visual: {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-          </div>
-
-          <div className="flex flex-1 items-center justify-center p-6">
-            {/* REPLACE THESE WITH YOUR ACTUAL IMAGES/MAPS */}
-            {section.visual === "map-eden" && (
-              <img src="https://placehold.co/800x600/e2e8f0/000?text=Eden+Map" className="h-full w-full object-cover" alt="Eden Map" />
-            )}
-            {section.visual === "map-exodus" && (
-              <img src="https://placehold.co/800x600/dbeafe/000?text=Exodus+Routes" className="h-full w-full object-cover" alt="Exodus Routes" />
-            )}
-            {section.visual === "map-jerusalem" && (
-              <img src="https://placehold.co/800x600/fecaca/000?text=Jerusalem+Layers" className="h-full w-full object-cover" alt="Jerusalem Layers" />
-            )}
-          </div>
-
-          <div className="border-t border-black bg-white px-4 py-2 text-xs font-sans">
-            {section.label}
-          </div>
-        </motion.div>
-      </div>
-    );
-  }
-
-  function StoryBlock({ section, isActive }) {
-    return (
-      <section id={section.id} className="min-h-[100vh] border-b border-black/10 px-6 py-24 lg:px-16">
-        <motion.div
-          initial={false}
-          animate={{ opacity: isActive? 1 : 0.3 }}
-          transition={{ duration: 0.3 }}
-          className="max-w-xl"
-        >
-          <div className="mb-4 font-sans text-xs font-bold uppercase tracking-widest text-red-600">
-            {section.kicker}
-          </div>
-          <h2 className="font-serif text-4xl font-bold leading-[1.1] tracking-tight lg:text-5xl">
-            {section.title}
-          </h2>
-          <p className="mt-8 font-sans text-[20px] leading-[1.7] text-neutral-800">
-            {section.body}
-          </p>
-        </motion.div>
-      </section>
-    );
-  }
-
-  function App() {
-    const ids = React.useMemo(() => storySections.map((s) => s.id), []);
-    const activeId = useActiveSection(ids);
-    const activeIndex = Math.max(0, storySections.findIndex((s) => s.id === activeId));
-    const activeSection = storySections[activeIndex] || storySections[0];
-
-    const { scrollYProgress } = useScroll();
-    const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-
-    return (
-      <div className="bg-white text-black">
-        <motion.div
-          className="fixed top-0 left-0 right-0 z-50 h-1 origin-left bg-red-600"
-          style={{ scaleX }}
-        />
-
-        <main className="mx-auto max-w-[1600px] lg:grid lg:grid-cols-[1fr_1.1fr]">
-          <div className="relative">
-            {storySections.map((section) => (
-              <StoryBlock
-                key={section.id}
-                section={section}
-                isActive={activeId === section.id}
-              />
-            ))}
-          </div>
-
-          <div className="relative hidden lg:block">
-            <StickyVisual
-              section={activeSection}
-              index={activeIndex}
-              total={storySections.length}
-            />
-          </div>
-        </main>
-      </div>
-    );
-  }
-
-  ReactDOM.createRoot(document.getElementById('bible-mapped-scrolly')).render(<App />);
-</script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Scripture Library — Bible Mapped</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BibleMapped</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Lora:wght@400;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
     :root {
-      --gunmetal:      #1e2d3d;
-      --gunmetal-mid:  #2c3f54;
-      --gunmetal-light:#3d566e;
-      --gunmetal-mist: #e8edf2;
-      --gold:          #c8881e;
-      --gold-light:    #e8a832;
-      --gold-pale:     #fdf3dc;
-      --cloud:         #f6f7f8;
-      --cloud-warm:    #f0f2f4;
-      --white:         #ffffff;
-      --ink:           #111820;
-      --ink-mid:       #2e3d4d;
-      --ink-light:     #5a6a7a;
-      --ink-faint:     #9aabb8;
-      --rule:          #d8dfe6;
-      --ot:            #2a5a3a;
-      --ot-pale:       #e8f0ea;
-    }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--cloud);
-      color: var(--ink);
-      overflow-x: hidden;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0; z-index: 200;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 3rem;
-      background: rgba(246,247,248,0.96);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--rule);
-    }
-
-    .nav-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1rem;
-      color: var(--gunmetal);
-      text-decoration: none;
-      letter-spacing: -0.01em;
-    }
-
-    .nav-logo .mapped { color: var(--gold); }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-      align-items: center;
-    }
-
-    .nav-links a {
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--ink-light);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: var(--gunmetal); }
-    .nav-links a.active { color: var(--gunmetal); font-weight: 600; }
-
-    .nav-cta {
-      padding: 0.45rem 1.2rem;
-      background: var(--gunmetal);
-      color: white !important;
-      border-radius: 2px;
-      font-size: 0.78rem !important;
-    }
-
-    /* ── HERO ── */
-    .hero {
-      background: var(--gunmetal);
-      padding: 4rem 3rem 3.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      right: -60px; top: -60px;
-      width: 400px; height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(200,136,30,0.14) 0%, transparent 65%);
-      pointer-events: none;
-    }
-
-    .hero-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: end;
-    }
-
-    .hero-kicker {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .kicker-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--gold);
-      flex-shrink: 0;
-    }
-
-    .hero-kicker span {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
-    }
-
-    .hero-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(2.2rem, 4vw, 3.8rem);
-      line-height: 0.97;
-      letter-spacing: -0.03em;
-      color: white;
-      margin-bottom: 1.2rem;
-    }
-
-    .hero-title em {
-      font-style: italic;
-      font-family: 'Lora', serif;
-      font-weight: 500;
-      color: var(--gold-light);
-    }
-
-    .hero-desc {
-      font-family: 'Lora', serif;
-      font-size: 1rem;
-      line-height: 1.8;
-      color: rgba(255,255,255,0.55);
-    }
-
-    .hero-panel {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 1.8rem;
-    }
-
-    .hero-panel-label {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold-light);
-      margin-bottom: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .hero-panel-label::before {
-      content: '';
-      display: block;
-      width: 20px; height: 2px;
-      background: var(--gold);
-    }
-
-    .hero-steps {
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-    }
-
-    .hero-step {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-    }
-
-    .step-num {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 0.72rem;
-      color: var(--gold);
-      flex-shrink: 0;
-      padding-top: 0.12rem;
-      width: 1.4rem;
-    }
-
-    .step-text {
-      font-size: 0.85rem;
-      line-height: 1.6;
-      color: rgba(255,255,255,0.55);
-    }
-
-    .step-text strong { color: rgba(255,255,255,0.85); font-weight: 500; }
-
-    /* ── STATS BAR ── */
-    .stats-bar {
-      background: var(--white);
-      border-bottom: 1px solid var(--rule);
-      padding: 1.2rem 3rem;
-    }
-
-    .stats-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      gap: 0;
-      align-items: center;
-    }
-
-    .stat {
-      display: flex;
-      align-items: baseline;
-      gap: 0.5rem;
-      padding: 0 2rem;
-      border-right: 1px solid var(--rule);
-    }
-
-    .stat:first-child { padding-left: 0; }
-    .stat:last-child { border-right: none; }
-
-    .stat-num {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.3rem;
-      color: var(--gunmetal);
-      letter-spacing: -0.02em;
-    }
-
-    .stat-lbl {
-      font-size: 0.75rem;
-      color: var(--ink-faint);
-    }
-
-    /* ── LIBRARY SHELL ── */
-    .library {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 3rem 3rem 6rem;
-    }
-
-    /* ── SECTION HEADER ── */
-    .section-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 2rem;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .section-label {
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: 0.6rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .section-label::before {
-      content: '';
-      display: block;
-      width: 20px; height: 2px;
-      background: var(--gold);
-    }
-
-    .section-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      letter-spacing: -0.02em;
-      color: var(--gunmetal);
-      line-height: 1;
-    }
-
-    /* ── FILTER TABS ── */
-    .filter-tabs {
-      display: flex;
-      gap: 0;
-      border: 1px solid var(--rule);
-      background: var(--white);
-      width: fit-content;
-    }
-
-    .filter-btn {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 0.72rem;
-      letter-spacing: 0.04em;
-      padding: 0.65rem 1.4rem;
-      background: transparent;
-      border: none;
-      border-right: 1px solid var(--rule);
-      color: var(--ink-faint);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .filter-btn:last-child { border-right: none; }
-    .filter-btn.active { background: var(--gunmetal); color: white; }
-    .filter-btn:hover:not(.active) { background: var(--cloud); color: var(--gunmetal); }
-
-    /* ── CATEGORY GRID ── */
-    .category-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--rule);
-      border: 1px solid var(--rule);
-      margin-bottom: 2.5rem;
-    }
-
-    .cat-card {
-      background: var(--white);
-      cursor: pointer;
-      transition: background 0.18s;
-      position: relative;
-    }
-
-    .cat-card:hover { background: #fafbfc; }
-
-    .cat-card.active {
-      background: var(--gunmetal);
-    }
-
-    .cat-card::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--gold);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease;
-    }
-
-    .cat-card:hover::after,
-    .cat-card.active::after { transform: scaleX(1); }
-
-    .cat-map {
-      border-bottom: 1px solid var(--rule);
-      background: var(--cloud);
-      padding: 0.8rem;
-      aspect-ratio: 16/9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .cat-card.active .cat-map {
-      background: var(--gunmetal-mid);
-      border-color: transparent;
-    }
-
-    .cat-copy {
-      padding: 1.2rem 1.4rem;
-    }
-
-    .cat-testament {
-      font-size: 0.6rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.4rem;
-    }
-
-    .cat-card.active .cat-testament { color: var(--gold-light); }
-
-    .cat-name {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      letter-spacing: -0.01em;
-      color: var(--gunmetal);
-      margin-bottom: 0.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .cat-card.active .cat-name { color: white; }
-
-    .cat-count {
-      font-size: 0.65rem;
-      color: var(--ink-faint);
-      font-weight: 400;
-    }
-
-    .cat-card.active .cat-count { color: rgba(255,255,255,0.4); }
-
-    .cat-desc {
-      font-size: 0.78rem;
-      line-height: 1.65;
-      color: var(--ink-light);
-      margin-top: 0.4rem;
-    }
-
-    .cat-card.active .cat-desc { color: rgba(255,255,255,0.5); }
-
-    /* ── DETAIL SHELL ── */
-    .detail-shell {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 1px;
-      background: var(--rule);
-      border: 1px solid var(--rule);
-      min-height: 600px;
-    }
-
-    /* ── BOOK LIST ── */
-    .book-list-panel {
-      background: var(--white);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .panel-head {
-      padding: 1.2rem 1.4rem;
-      border-bottom: 1px solid var(--rule);
-      background: var(--cloud);
-    }
-
-    .panel-head-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 0.9rem;
-      color: var(--gunmetal);
-      letter-spacing: -0.01em;
-      margin-bottom: 0.2rem;
-    }
-
-    .panel-head-sub {
-      font-size: 0.72rem;
-      color: var(--ink-faint);
-    }
-
-    .book-buttons {
-      flex: 1;
-      overflow-y: auto;
-      padding: 0.6rem;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .book-btn {
-      width: 100%;
-      text-align: left;
-      border: 1px solid transparent;
-      background: transparent;
-      padding: 0.85rem 1rem;
-      cursor: pointer;
-      transition: all 0.18s;
-      border-radius: 1px;
-    }
-
-    .book-btn:hover {
-      background: var(--cloud);
-      border-color: var(--rule);
-    }
-
-    .book-btn.active {
-      background: var(--gold-pale);
-      border-color: var(--gold);
-    }
-
-    .book-btn-name {
-      display: block;
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 0.88rem;
-      color: var(--gunmetal);
-      letter-spacing: -0.01em;
-      margin-bottom: 0.2rem;
-    }
-
-    .book-btn-meta {
-      font-size: 0.72rem;
-      color: var(--ink-faint);
-      line-height: 1.4;
-    }
-
-    /* ── BOOK DETAIL ── */
-    .book-detail-panel {
-      background: var(--white);
-      overflow-y: auto;
-    }
-
-    .detail-head {
-      padding: 1.8rem 2rem 1.4rem;
-      border-bottom: 1px solid var(--rule);
-      background: var(--cloud);
-    }
-
-    .detail-testament-badge {
-      display: inline-block;
-      font-size: 0.6rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      padding: 0.28rem 0.7rem;
-      background: var(--gunmetal-mist);
-      color: var(--gunmetal);
-      border-radius: 2px;
-      margin-bottom: 0.8rem;
-    }
-
-    .detail-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(1.8rem, 3vw, 2.8rem);
-      letter-spacing: -0.03em;
-      color: var(--gunmetal);
-      line-height: 0.97;
-      margin-bottom: 0.4rem;
-    }
-
-    .detail-meaning {
-      font-family: 'Lora', serif;
-      font-size: 0.9rem;
-      font-style: italic;
-      color: var(--gold);
-    }
-
-    .detail-body {
-      padding: 1.8rem 2rem;
-    }
-
-    /* Quick stats */
-    .quick-stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--rule);
-      border: 1px solid var(--rule);
-      margin-bottom: 1.8rem;
-    }
-
-    .qs-item {
-      background: var(--cloud);
-      padding: 1rem;
-      text-align: center;
-    }
-
-    .qs-val {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.3rem;
-      color: var(--gunmetal);
-      letter-spacing: -0.02em;
-      display: block;
-      margin-bottom: 0.2rem;
-    }
-
-    .qs-lbl {
-      font-size: 0.62rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-    }
-
-    /* Info blocks */
-    .info-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: var(--rule);
-      border: 1px solid var(--rule);
-      margin-bottom: 1px;
-    }
-
-    .info-block {
-      background: var(--white);
-      padding: 1.2rem 1.4rem;
-    }
-
-    .info-block.full {
-      grid-column: span 2;
-    }
-
-    .info-label {
-      font-size: 0.62rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .info-label::before {
-      content: '';
-      display: block;
-      width: 14px; height: 2px;
-      background: var(--gold);
-    }
-
-    .info-value {
-      font-family: 'Lora', serif;
-      font-size: 0.92rem;
-      line-height: 1.75;
-      color: var(--ink-mid);
-    }
-
-    .info-value strong {
-      color: var(--gunmetal);
-      font-weight: 500;
-    }
-
-    /* Case study */
-    .case-study {
-      background: var(--gunmetal);
-      padding: 1.6rem;
-      margin-bottom: 1px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .case-study::before {
-      content: '';
-      position: absolute;
-      right: -30px; top: -30px;
-      width: 150px; height: 150px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(200,136,30,0.15) 0%, transparent 65%);
-    }
-
-    .case-label {
-      font-size: 0.6rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold-light);
-      margin-bottom: 0.6rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .case-label::before {
-      content: '';
-      display: block;
-      width: 14px; height: 2px;
-      background: var(--gold);
-    }
-
-    .case-question {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      color: white;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.7rem;
-    }
-
-    .case-answer {
-      font-family: 'Lora', serif;
-      font-size: 0.88rem;
-      line-height: 1.8;
-      color: rgba(255,255,255,0.6);
-    }
-
-    .case-answer strong { color: rgba(255,255,255,0.88); font-weight: 500; }
-
-    /* Jesus connection */
-    .jesus-block {
-      background: var(--gold-pale);
-      border: 1px solid rgba(200,136,30,0.2);
-      padding: 1.4rem;
-      margin-bottom: 1px;
-    }
-
-    .jesus-label {
-      font-size: 0.6rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .jesus-label::before {
-      content: '✦';
-      color: var(--gold);
-      font-size: 0.55rem;
-    }
-
-    .jesus-text {
-      font-family: 'Lora', serif;
-      font-size: 0.9rem;
-      line-height: 1.78;
-      color: var(--ink-mid);
-    }
-
-    /* Characters list */
-    .characters-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.4rem;
-    }
-
-    .char-chip {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 500;
-      padding: 0.25rem 0.7rem;
-      background: var(--gunmetal-mist);
-      color: var(--gunmetal);
-      border-radius: 2px;
-    }
-
-    /* ── FOOTER ── */
-    .page-footer {
-      background: var(--cloud-warm);
-      border-top: 1px solid var(--rule);
-      padding: 1.8rem 3rem;
-    }
-
-    .page-footer-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .footer-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 0.9rem;
-      color: var(--gunmetal);
-      text-decoration: none;
-    }
-
-    .footer-logo .mapped { color: var(--gold); }
-    .footer-copy { font-size: 0.72rem; color: var(--ink-faint); }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .animate-in { animation: fadeIn 0.25s ease both; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1000px) {
-      nav { padding: 0 1.5rem; }
-      .nav-links li:not(:last-child) { display: none; }
-      .hero { padding: 3rem 1.5rem; }
-      .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
-      .stats-bar { padding: 1rem 1.5rem; }
-      .stats-inner { flex-wrap: wrap; gap: 1rem; }
-      .stat { border-right: none; padding: 0; }
-      .library { padding: 2rem 1.5rem 4rem; }
-      .category-grid { grid-template-columns: repeat(2, 1fr); }
-      .detail-shell { grid-template-columns: 1fr; }
-      .book-list-panel { max-height: 300px; }
-      .quick-stats { grid-template-columns: repeat(2, 1fr); }
-      .info-block.full { grid-column: span 1; }
-      .info-grid { grid-template-columns: 1fr; }
-      .page-footer { padding: 1.5rem; }
-      .page-footer-inner { flex-direction: column; gap: 0.8rem; text-align: center; }
-    }
-
-    @media (max-width: 640px) {
-      .category-grid { grid-template-columns: 1fr; }
-      .quick-stats { grid-template-columns: repeat(2, 1fr); }
-    }
+      --bg: #f7f4ee;
+      --paper: #fffdf8;
+      --ink: #141414;
+      --muted: #6f6a62;
+      --rule: rgba(20,20,20,0.12);
+      --accent: #8b6a2b;
+      --accent-2: #33261a;
+      --card: #ffffff;
+      --shadow: 0 12px 35px rgba(0,0,0,0.06);
+      --max: 1380px;
+    }* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "DM Sans", sans-serif;
+  line-height: 1.5;
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  background: rgba(247, 244, 238, 0.88);
+  border-bottom: 1px solid var(--rule);
+}
+
+.topbar-inner,
+.container {
+  width: min(var(--max), calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 74px;
+  gap: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  border: 1.4px solid var(--ink);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: "Syne", sans-serif;
+  font-weight: 800;
+  font-size: 0.95rem;
+  background: var(--paper);
+  flex-shrink: 0;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+}
+
+.brand-title {
+  font-family: "Syne", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  font-size: 0.95rem;
+}
+
+.nav-links a {
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  color: var(--ink);
+}
+
+.hero {
+  padding: 52px 0 20px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.hero-copy,
+.hero-panel {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+
+.hero-copy {
+  padding: 38px;
+}
+
+.hero-panel {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  color: var(--accent-2);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.hero-kicker::before {
+  content: "";
+  width: 38px;
+  height: 1px;
+  background: var(--ink);
+  display: inline-block;
+}
+
+h1 {
+  margin: 0 0 16px;
+  font-family: "Syne", sans-serif;
+  font-size: clamp(2.4rem, 5vw, 5rem);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+
+.hero-sub {
+  margin: 0;
+  max-width: 760px;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.hero-actions {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 13px 18px;
+  border: 1px solid var(--ink);
+  font-weight: 600;
+  transition: transform 0.16s ease, background 0.16s ease, color 0.16s ease;
+}
+
+.btn:hover { transform: translateY(-1px); }
+.btn-primary {
+  background: var(--ink);
+  color: #fff;
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.stat {
+  border: 1px solid var(--rule);
+  border-radius: 18px;
+  padding: 16px;
+  background: #fff;
+}
+
+.stat-number {
+  font-family: "Syne", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.stat-label {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.placeholder-map {
+  min-height: 260px;
+  border: 1px dashed rgba(20,20,20,0.2);
+  border-radius: 22px;
+  background:
+    linear-gradient(rgba(20,20,20,0.03), rgba(20,20,20,0.03)),
+    repeating-linear-gradient(
+      90deg,
+      rgba(20,20,20,0.03) 0px,
+      rgba(20,20,20,0.03) 1px,
+      transparent 1px,
+      transparent 48px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(20,20,20,0.03) 0px,
+      rgba(20,20,20,0.03) 1px,
+      transparent 1px,
+      transparent 48px
+    );
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  text-align: center;
+  padding: 20px;
+}
+
+.section {
+  padding: 30px 0 10px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding-top: 8px;
+  border-top: 1px solid var(--rule);
+}
+
+.section-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.section-title {
+  margin: 0;
+  font-family: "Syne", sans-serif;
+  font-size: clamp(1.5rem, 2.8vw, 2.5rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.section-copy {
+  margin: 8px 0 0;
+  color: var(--muted);
+  max-width: 680px;
+}
+
+.quick-jump {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.jump-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+
+.jump-card small {
+  display: block;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  margin-bottom: 10px;
+  font-size: 0.7rem;
+}
+
+.jump-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.jump-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.lineup {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 18px;
+}
+
+.story-card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.story-thumb {
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(135deg, #e5dfd2, #cfc1a3);
+  display: grid;
+  place-items: center;
+  color: rgba(20,20,20,0.55);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--rule);
+  text-align: center;
+  padding: 12px;
+}
+
+.story-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.72rem;
+  color: var(--muted);
+  background: #fff;
+}
+
+.story-title {
+  margin: 0;
+  font-family: "Syne", sans-serif;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.story-desc {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.96rem;
+}
+
+.story-link {
+  margin-top: auto;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.story-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.explorer {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 22px;
+  margin-top: 18px;
+}
+
+.explorer-panel,
+.directory {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+
+.explorer-panel {
+  padding: 24px;
+}
+
+.explorer-panel h3,
+.directory h3 {
+  margin: 0 0 10px;
+  font-family: "Syne", sans-serif;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+}
+
+.explorer-panel p,
+.directory p {
+  margin: 0 0 18px;
+  color: var(--muted);
+}
+
+.feature-list {
+  display: grid;
+  gap: 12px;
+}
+
+.feature-item {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.feature-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+.feature-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--ink);
+  margin-top: 7px;
+}
+
+.directory {
+  padding: 24px;
+}
+
+.directory-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.dir-item {
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  padding: 14px;
+  background: #fff;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.16s ease, border-color 0.16s ease;
+}
+
+.dir-item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(20,20,20,0.28);
+}
+
+.dir-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+
+.dir-title {
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.15;
+}
+
+.dir-meta {
+  color: var(--muted);
+  font-size: 0.86rem;
+  margin-top: auto;
+}
+
+.detail-section {
+  margin-top: 22px;
+  display: grid;
+  gap: 18px;
+}
+
+.detail-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 28px;
+  scroll-margin-top: 96px;
+}
+
+.detail-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: start;
+  margin-bottom: 16px;
+}
+
+.detail-card h3 {
+  margin: 0;
+  font-family: "Syne", sans-serif;
+  font-size: 1.9rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 22px;
+}
+
+.detail-block {
+  display: grid;
+  gap: 16px;
+}
+
+.detail-box {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 18px;
+  padding: 16px;
+}
+
+.detail-box h4 {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.detail-box p,
+.detail-box ul {
+  margin: 0;
+  color: #2a2a2a;
+}
+
+.detail-box ul {
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+}
+
+footer {
+  padding: 48px 0 72px;
+  color: var(--muted);
+}
+
+.footer-box {
+  border-top: 1px solid var(--rule);
+  padding-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1100px) {
+  .hero-grid,
+  .explorer,
+  .detail-layout,
+  .lineup,
+  .quick-jump {
+    grid-template-columns: 1fr;
+  }
+
+  .directory-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .topbar-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 0;
+  }
+
+  .nav-links {
+    gap: 14px;
+    justify-content: flex-start;
+  }
+
+  .hero-copy,
+  .hero-panel,
+  .explorer-panel,
+  .directory,
+  .detail-card {
+    padding: 20px;
+  }
+
+  .directory-grid,
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-top {
+    flex-direction: column;
+  }
+}
+
   </style>
 </head>
 <body>
-
-  <!-- NAV -->
-  <nav>
-    <a href="index.html" class="nav-logo">Bible<span class="mapped">Mapped</span></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="books.html" class="active">Library</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="genesis.html" class="nav-cta">Start Reading</a></li>
-    </ul>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top">
+        <div class="brand-mark">BM</div>
+        <div class="brand-text">
+          <span class="eyebrow">Christian Vox Explainer</span>
+          <span class="brand-title">BibleMapped</span>
+        </div>
+      </a><nav class="nav-links" aria-label="Main navigation">
+    <a href="#featured">Featured</a>
+    <a href="#books">Books</a>
+    <a href="#characters">Characters</a>
+    <a href="#cases">Case Studies</a>
+    <a href="#explore">Explore</a>
   </nav>
+</div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div>
-        <div class="hero-kicker">
-          <div class="kicker-dot"></div>
-          <span>Scripture Library</span>
-        </div>
-        <h1 class="hero-title">
-          Every book.<br>Every place.<br><em>Every story.</em>
-        </h1>
-        <p class="hero-desc">
-          66 books. 2 testaments. One unified story pointing to Jesus Christ. Each book mapped to real geography, real characters, real history — and its connection to the gospel.
-        </p>
-      </div>
-      <div class="hero-panel">
-        <div class="hero-panel-label">How to use this library</div>
-        <div class="hero-steps">
-          <div class="hero-step">
-            <span class="step-num">01</span>
-            <span class="step-text"><strong>Pick a category</strong> — Law, History, Wisdom, Prophets, Gospels, or Letters.</span>
-          </div>
-          <div class="hero-step">
-            <span class="step-num">02</span>
-            <span class="step-text"><strong>Choose a book</strong> from the left panel that appears.</span>
-          </div>
-          <div class="hero-step">
-            <span class="step-num">03</span>
-            <span class="step-text"><strong>Read the full profile</strong> — theme, characters, geography, case study, and gospel connection.</span>
-          </div>
-        </div>
+  </header> <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="hero-kicker">Place · Context · Meaning</div>
+          <h1>Understand the Bible through story, setting, and people.</h1>
+          <p class="hero-sub">
+            A BibleMapped homepage built for deep dives. Organize every book, every major character, and every case study into a clean editorial experience that feels cinematic, clickable, and easy to expand.
+          </p><div class="hero-actions">
+        <a class="btn btn-primary" href="#explore">Start Exploring</a>
+        <a class="btn btn-secondary" href="#books">Browse Books</a>
       </div>
     </div>
-  </section>
 
-  <!-- STATS BAR -->
-  <div class="stats-bar">
-    <div class="stats-inner">
-      <div class="stat"><span class="stat-num">66</span><span class="stat-lbl">Total books</span></div>
-      <div class="stat"><span class="stat-num">39</span><span class="stat-lbl">Old Testament</span></div>
-      <div class="stat"><span class="stat-num">27</span><span class="stat-lbl">New Testament</span></div>
-      <div class="stat"><span class="stat-num">9</span><span class="stat-lbl">Categories</span></div>
-      <div class="stat"><span class="stat-num">1</span><span class="stat-lbl">Story</span></div>
-    </div>
+    <aside class="hero-panel">
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-number">66</div>
+          <div class="stat-label">Books of the Bible</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">100+</div>
+          <div class="stat-label">Characters & profiles</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Context layers to add</div>
+        </div>
+      </div>
+
+      <div class="placeholder-map">
+        <div>
+          <strong>Hero visual / map placeholder</strong><br />
+          Add your map, thumbnail, or featured visual here.
+        </div>
+      </div>
+    </aside>
   </div>
+</section>
 
-  <!-- LIBRARY -->
-  <section class="library">
-
+<section class="section" id="featured">
+  <div class="container">
     <div class="section-header">
       <div>
-        <p class="section-label">Browse by category</p>
-        <h2 class="section-title">Books of the Bible</h2>
-      </div>
-      <div class="filter-tabs" id="filterTabs">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="ot">Old Testament</button>
-        <button class="filter-btn" data-filter="nt">New Testament</button>
+        <div class="section-label">Front page lineup</div>
+        <h2 class="section-title">Featured stories</h2>
+        <p class="section-copy">This is the Vox-style lineup area. Each card can lead to a section lower on the page, a dedicated article page, or another folder later.</p>
       </div>
     </div>
 
-    <div class="category-grid" id="categoryGrid"></div>
+    <div class="quick-jump">
+      <a class="jump-card" href="#abraham-profile">
+        <small>Jump to</small>
+        <h3>Abraham</h3>
+        <p>Story origin, covenant, geography, and why he matters.</p>
+      </a>
+      <a class="jump-card" href="#genesis-overview">
+        <small>Jump to</small>
+        <h3>Genesis</h3>
+        <p>Beginnings, structure, themes, and the people introduced there.</p>
+      </a>
+      <a class="jump-card" href="#exodus-case-study">
+        <small>Jump to</small>
+        <h3>Exodus Case Study</h3>
+        <p>Liberation, law, wilderness, and the shape of covenant identity.</p>
+      </a>
+      <a class="jump-card" href="#david-profile">
+        <small>Jump to</small>
+        <h3>David</h3>
+        <p>Kingship, failure, worship, and messianic significance.</p>
+      </a>
+    </div>
 
-    <div class="detail-shell">
-      <div class="book-list-panel">
-        <div class="panel-head">
-          <div class="panel-head-title" id="panelTitle">Select a category</div>
-          <div class="panel-head-sub" id="panelSub">Click a card above to begin</div>
+    <div class="lineup">
+      <article class="story-card">
+        <div class="story-thumb">Featured image placeholder</div>
+        <div class="story-body">
+          <div class="tag-row">
+            <span class="tag">Character</span>
+            <span class="tag">Geography</span>
+            <span class="tag">Covenant</span>
+          </div>
+          <h3 class="story-title">Why Abraham matters more than most people realize</h3>
+          <p class="story-desc">A deep dive into the man from Ur, the promise that shaped Israel, and the map behind the story.</p>
+          <a class="story-link" href="#abraham-profile">Read the story ↓</a>
         </div>
-        <div class="book-buttons" id="bookButtons">
-          <div style="padding:1.5rem 1rem; font-size:0.82rem; color:var(--ink-faint); font-family:'Lora',serif; font-style:italic; line-height:1.7;">
-            Choose a category above to see its books listed here.
+      </article>
+
+      <article class="story-card">
+        <div class="story-thumb">Featured image placeholder</div>
+        <div class="story-body">
+          <div class="tag-row">
+            <span class="tag">Book</span>
+            <span class="tag">Origins</span>
+            <span class="tag">Structure</span>
+          </div>
+          <h3 class="story-title">Genesis is not just the beginning. It is the blueprint.</h3>
+          <p class="story-desc">Track the people, patterns, failures, and promises that echo through the rest of the Bible.</p>
+          <a class="story-link" href="#genesis-overview">Open overview ↓</a>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <div class="story-thumb">Featured image placeholder</div>
+        <div class="story-body">
+          <div class="tag-row">
+            <span class="tag">Case study</span>
+            <span class="tag">Deliverance</span>
+            <span class="tag">Law</span>
+          </div>
+          <h3 class="story-title">Exodus changed the identity of a people</h3>
+          <p class="story-desc">A case study layout you can use for story arcs, conflicts, outcomes, and modern reflection.</p>
+          <a class="story-link" href="#exodus-case-study">View case study ↓</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="explore">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Site architecture</div>
+        <h2 class="section-title">Build the library</h2>
+        <p class="section-copy">This section gives you a framework for books, characters, and study paths. You can duplicate these cards as your site grows.</p>
+      </div>
+    </div>
+
+    <div class="explorer">
+      <div class="explorer-panel">
+        <h3>What each page can include</h3>
+        <p>Instead of just naming a person or book, each page can act like a mini-documentary.</p>
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-dot"></div>
+            <div><strong>Context:</strong> historical background, date range, setting, and surrounding events.</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-dot"></div>
+            <div><strong>Story:</strong> what happened, in order, and why it matters in the broader biblical narrative.</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-dot"></div>
+            <div><strong>Case study:</strong> a focused analysis on a major moment, conflict, theme, or turning point.</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-dot"></div>
+            <div><strong>Map layer:</strong> locations, routes, nations, cities, or regional significance.</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-dot"></div>
+            <div><strong>Why it matters:</strong> theological meaning, practical insight, and connections to Christ.</div>
           </div>
         </div>
       </div>
 
-      <div class="book-detail-panel" id="bookDetailPanel">
-        <div class="detail-head">
-          <div class="detail-testament-badge">Scripture Library</div>
-          <div class="detail-title">Choose a book</div>
-          <div class="detail-meaning">Select a category, then pick a book to see its full profile.</div>
+      <div class="directory">
+        <h3>Browse the collection</h3>
+        <p>These are starter categories. Replace or expand them however you want.</p>
+        <div class="directory-grid">
+          <a class="dir-item" href="#books">
+            <span class="dir-label">Collection</span>
+            <span class="dir-title">Books of the Bible</span>
+            <span class="dir-meta">Overview pages, authors, themes, timelines</span>
+          </a>
+          <a class="dir-item" href="#characters">
+            <span class="dir-label">Collection</span>
+            <span class="dir-title">Characters</span>
+            <span class="dir-meta">Profiles, arcs, strengths, failures, impact</span>
+          </a>
+          <a class="dir-item" href="#cases">
+            <span class="dir-label">Collection</span>
+            <span class="dir-title">Case Studies</span>
+            <span class="dir-meta">Focused studies on moments and themes</span>
+          </a>
+          <a class="dir-item" href="#maps">
+            <span class="dir-label">Collection</span>
+            <span class="dir-title">Maps & Places</span>
+            <span class="dir-meta">Journeys, kingdoms, cities, regions</span>
+          </a>
+          <a class="dir-item" href="#themes">
+            <span class="dir-label">Collection</span>
+            <span class="dir-title">Themes</span>
+            <span class="dir-meta">Covenant, exile, kingdom, sacrifice, wisdom</span>
+          </a>
+          <a class="dir-item" href="#study">
+            <span class="dir-label">Collection</span>
+            <span class="dir-title">Study Paths</span>
+            <span class="dir-meta">Guided learning tracks for viewers and readers</span>
+          </a>
         </div>
-        <div class="detail-body">
-          <div class="case-study">
-            <div class="case-label">About this library</div>
-            <div class="case-question">What does each book profile include?</div>
-            <div class="case-answer">
-              Every book has a <strong>meaning, author, chapters, theme, topic, key characters, geographical setting, historical backdrop, a case study question</strong>, and a section showing how it connects to Jesus Christ. The Bible is one story — every book points somewhere.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="books">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Books</div>
+        <h2 class="section-title">Start with the books</h2>
+        <p class="section-copy">You said you want every book of the Bible on the page. This layout lets you do that one book at a time.</p>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <article class="detail-card" id="genesis-overview">
+        <div class="detail-top">
+          <div>
+            <h3>Genesis</h3>
+            <div class="tag-row" style="margin-top:10px;">
+              <span class="tag">Book overview</span>
+              <span class="tag">Origins</span>
+              <span class="tag">Patriarchs</span>
+            </div>
+          </div>
+          <a class="btn btn-secondary" href="#top">Back to top</a>
+        </div>
+
+        <div class="detail-layout">
+          <div class="detail-block">
+            <div class="detail-box">
+              <h4>Context</h4>
+              <p>Use this box for authorship notes, timeline questions, original audience, and the ancient Near Eastern setting.</p>
+            </div>
+            <div class="detail-box">
+              <h4>Story behind the book</h4>
+              <p>Use this space to summarize the flow: creation, fall, flood, Babel, Abraham, Isaac, Jacob, Joseph.</p>
+            </div>
+            <div class="detail-box">
+              <h4>Why it matters</h4>
+              <p>Show how Genesis introduces the patterns the rest of Scripture builds on: sin, promise, blessing, covenant, and seed.</p>
+            </div>
+          </div>
+
+          <div class="detail-block">
+            <div class="detail-box">
+              <h4>Case study ideas</h4>
+              <ul>
+                <li>The image of God and human purpose</li>
+                <li>Babel and the scattering of nations</li>
+                <li>The covenant with Abraham</li>
+                <li>Joseph and providence in suffering</li>
+              </ul>
+            </div>
+            <div class="detail-box">
+              <h4>Map layer</h4>
+              <p>Insert a map, route, or geographic visual for Eden, Mesopotamia, Canaan, Egypt, or patriarchal travel.</p>
             </div>
           </div>
         </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="characters">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Characters</div>
+        <h2 class="section-title">Build people pages</h2>
+        <p class="section-copy">Every major biblical figure can have a profile page section like this.</p>
       </div>
     </div>
 
-  </section>
+    <div class="detail-section">
+      <article class="detail-card" id="abraham-profile">
+        <div class="detail-top">
+          <div>
+            <h3>Abraham</h3>
+            <div class="tag-row" style="margin-top:10px;">
+              <span class="tag">Character profile</span>
+              <span class="tag">Promise</span>
+              <span class="tag">Journey</span>
+            </div>
+          </div>
+          <a class="btn btn-secondary" href="#featured">Featured lineup</a>
+        </div>
 
-  <!-- FOOTER -->
-  <footer class="page-footer">
-    <div class="page-footer-inner">
-      <a href="index.html" class="footer-logo">Bible<span class="mapped">Mapped</span></a>
-      <span class="footer-copy">© 2026 Bible Mapped. All rights reserved.</span>
-    </div>
-  </footer>
+        <div class="detail-layout">
+          <div class="detail-block">
+            <div class="detail-box">
+              <h4>Who he is</h4>
+              <p>Write a simple summary of Abraham’s place in the Bible and why he becomes central to both the Old and New Testaments.</p>
+            </div>
+            <div class="detail-box">
+              <h4>Story behind the person</h4>
+              <p>Trace his movement from Ur to Canaan, the covenant promise, the birth of Isaac, and the testing of faith.</p>
+            </div>
+            <div class="detail-box">
+              <h4>Practical takeaway</h4>
+              <p>Connect his life to trust, obedience, waiting, and the cost of faith when the outcome is still unseen.</p>
+            </div>
+          </div>
 
-  <script>
-  const data = [
-    {
-      id:'law', testament:'Old Testament', filter:'ot', title:'The Law', count:5,
-      desc:'Creation, covenant, exodus, and the formation of God\'s people.',
-      map:`<svg viewBox="0 0 280 160" width="100%" height="100%"><rect width="280" height="160" fill="#eef3f7"/>
-        <path d="M32 118 C60 85 82 58 118 44 C140 36 174 38 200 54 C215 63 234 78 252 100" fill="none" stroke="#1e2d3d" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="32" cy="118" r="5" fill="#c8881e"/><circle cx="118" cy="44" r="5" fill="#c8881e"/><circle cx="252" cy="100" r="5" fill="#c8881e"/>
-        <text x="22" y="138" font-size="9" fill="#5a6a7a" font-family="sans-serif">EGYPT</text>
-        <text x="100" y="34" font-size="9" fill="#5a6a7a" font-family="sans-serif">SINAI</text>
-        <text x="228" y="92" font-size="9" fill="#5a6a7a" font-family="sans-serif">MOAB</text>
-        <text x="100" y="150" font-size="11" fill="#1e2d3d" font-family="sans-serif" font-weight="600">LAW / TORAH</text></svg>`,
-      books:[
-        { name:'Genesis', meaning:'Beginning / Origins', chapters:50, author:'Moses (traditional)', period:'c. 1440 BC',
-          theme:'God creates the world good, humanity falls, and God begins His rescue plan through a chosen family.',
-          topic:'Creation, fall, flood, Babel, patriarchs, slavery in Egypt.',
-          characters:['Adam','Eve','Noah','Abraham','Sarah','Hagar','Isaac','Rebekah','Jacob','Rachel','Leah','Joseph'],
-          location:'Eden, Mesopotamia (Ur), Canaan, Egypt',
-          backdrop:'The foundations of humanity, sin, nations, and Israel\'s family line are established. God chooses Abraham from the pagan city of Ur to begin a people through whom all nations will be blessed.',
-          caseStudy:{ q:'Why did God choose Abraham, and what was Ur actually like?', a:'Ur was one of the most advanced cities in the ancient world — a thriving Sumerian metropolis with temples to moon gods, sophisticated culture, and a population of tens of thousands. Abraham wasn\'t called out of ignorance. <strong>He was called out of prosperity, comfort, and a fully functioning religious system.</strong> God\'s choice of Abraham was a deliberate rupture — a call into the unknown that required real faith. The geography matters: every step from Ur to Canaan was through foreign territory, under foreign skies, guided only by a promise.' },
-          jesus:'God\'s promise to Abraham — "in you all nations will be blessed" — is the first explicit gospel statement. Paul calls this "the gospel preached in advance." Joseph\'s story of rejection, suffering, exaltation, and saving his brothers foreshadows the entire arc of Christ.' },
-
-        { name:'Exodus', meaning:'Departure / Going Out', chapters:40, author:'Moses (traditional)', period:'c. 1440 BC',
-          theme:'God redeems His enslaved people through blood, water, and fire — and comes to dwell among them.',
-          topic:'Ten plagues, Passover, Red Sea crossing, Sinai covenant, Tabernacle.',
-          characters:['Moses','Aaron','Miriam','Pharaoh','Jethro','Bezalel'],
-          location:'Egypt (Goshen, Nile Delta), Red Sea, Sinai Peninsula',
-          backdrop:'Israel has been enslaved in Egypt for over 400 years. The Nile Delta was the heartland of Egyptian power, and Pharaoh was considered a living god. Moses\' confrontation with Pharaoh was not just political — it was a direct theological confrontation between Egypt\'s gods and the God of Israel.',
-          caseStudy:{ q:'What was the Passover, and why does the geography of Egypt matter?', a:'The ten plagues systematically attacked Egypt\'s religious system — the Nile (sacred), the sun (worshipped), the firstborn (Pharaoh\'s heir was considered divine). <strong>The Passover was not just an escape plan — it was a declaration that Egypt\'s gods were powerless.</strong> The lamb\'s blood on the doorpost was a visible act of trust. The crossing of the Red Sea happened at the edge of Egyptian military territory — walking out was an act of extraordinary faith in terrain the Egyptians controlled.' },
-          jesus:'The Passover lamb is the central image the New Testament uses for Jesus. John the Baptist calls Jesus "the Lamb of God who takes away the sin of the world." Paul says "Christ our Passover has been sacrificed." The Exodus pattern — slavery, redemption through blood, journey, dwelling with God — is the shape of the whole gospel.' },
-
-        { name:'Leviticus', meaning:'Concerning the Levites', chapters:27, author:'Moses (traditional)', period:'c. 1440 BC',
-          theme:'A holy God teaches His people what holiness looks like — so He can live among them.',
-          topic:'Sacrificial system, clean and unclean laws, Day of Atonement, festivals.',
-          characters:['Moses','Aaron','Nadab','Abihu'],
-          location:'Foot of Mount Sinai',
-          backdrop:'Israel is camped at Sinai. The tabernacle has just been completed. God\'s presence has filled it — but that presence is terrifying and holy. Leviticus is the instruction manual for approaching a God of absolute holiness. Every sacrifice, every law about food and disease and worship is about the same question: <em>How does an unholy people live near a holy God?</em>',
-          caseStudy:{ q:'Why are there so many strange laws in Leviticus, and do they matter?', a:'The purity laws in Leviticus weren\'t arbitrary. <strong>They marked Israel as visibly different from surrounding nations</strong> — in diet, in body, in worship, in economics. Archaeologists note that Israel\'s food laws map closely onto avoiding animals associated with Canaanite cultic practices. The laws weren\'t just religious hygiene — they were cultural boundary markers. The Day of Atonement (Yom Kippur) involved two goats: one slaughtered, one sent into the wilderness bearing the sins of the nation — a picture of substitution and removal.' },
-          jesus:'The entire sacrificial system points to Jesus as the perfect, final sacrifice. Hebrews 9–10 explains this explicitly. Jesus is simultaneously the priest who offers the sacrifice and the lamb who is sacrificed. Every Levitical offering was a shadow — He is the substance.' },
-
-        { name:'Numbers', meaning:'Numbering / In the Wilderness', chapters:36, author:'Moses (traditional)', period:'c. 1440–1400 BC',
-          theme:'God remains faithful to His promises even when His people do not remain faithful to Him.',
-          topic:'Census, scouting Canaan, rebellion, 40 years wandering, bronze serpent.',
-          characters:['Moses','Aaron','Miriam','Joshua','Caleb','Balaam','Korah'],
-          location:'Sinai wilderness, Kadesh Barnea, Plains of Moab',
-          backdrop:'Israel stands at the edge of the Promised Land at Kadesh Barnea. They send 12 spies. Ten come back with fear; two — Joshua and Caleb — come back with faith. The nation\'s choice in that moment costs them 40 years. An 11-day journey becomes a 40-year detour.',
-          caseStudy:{ q:'What was actually happening at Kadesh Barnea, and how did geography shape the decision?', a:'Kadesh Barnea was a real oasis at the southern edge of Canaan — a strategic entry point. The spies\' report was geographically accurate: fortified cities, large populations, difficult terrain. <strong>The failure wasn\'t a failure of intelligence — it was a failure of trust.</strong> The land was exactly what God said it was. The giants were real. The walls were real. The question was never whether the obstacles existed, but whether God was greater than them.' },
-          jesus:'The bronze serpent lifted up in the wilderness (Numbers 21) is directly cited by Jesus in John 3: "As Moses lifted up the serpent in the wilderness, so the Son of Man must be lifted up." Jesus identifies Himself as the object people must look to in order to live.' },
-
-        { name:'Deuteronomy', meaning:'Second Law / Repeated Law', chapters:34, author:'Moses (traditional)', period:'c. 1406 BC',
-          theme:'A new generation is called to covenant faithfulness before entering the land.',
-          topic:'Moses\' farewell speeches, renewed law, blessings and curses, Moses\' death.',
-          characters:['Moses','Joshua','Israel (new generation)'],
-          location:'Plains of Moab, overlooking the Jordan Valley',
-          backdrop:'Moses is 120 years old and standing on the east bank of the Jordan River. He can see the land but will not enter it. He delivers three long speeches retelling Israel\'s history and renewing the covenant with the generation born in the wilderness — who have never known Egypt and are about to enter what their parents forfeited.',
-          caseStudy:{ q:'Why does Moses repeat the Law, and what can be seen from Mount Nebo?', a:'The view from Mount Nebo is extraordinary — the entire Jordan Valley, Jericho, and the hills of Judah stretching west. Moses would have seen exactly what lay ahead. <strong>Deuteronomy is not just repetition — it is recontextualization.</strong> The wilderness generation needed to understand why the law existed, not just what it said. Deuteronomy 6:4 — the Shema — becomes the defining statement of Jewish faith: "Hear O Israel, the LORD our God, the LORD is one."' },
-          jesus:'Moses promises in Deuteronomy 18 that God will raise up "a Prophet like me" — one who speaks face to face with God and mediates a new covenant. The New Testament explicitly identifies Jesus as this prophet. Jesus also quotes Deuteronomy three times when resisting temptation in the wilderness.' }
-      ]
-    },
-
-    {
-      id:'history-ot', testament:'Old Testament', filter:'ot', title:'History', count:12,
-      desc:'Conquest, judges, kings, exile, and return to the land.',
-      map:`<svg viewBox="0 0 280 160" width="100%" height="100%"><rect width="280" height="160" fill="#eef3f7"/>
-        <path d="M36 118 L96 74 L148 106 L240 56" fill="none" stroke="#1e2d3d" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="36" cy="118" r="5" fill="#c8881e"/><circle cx="96" cy="74" r="5" fill="#c8881e"/>
-        <circle cx="148" cy="106" r="5" fill="#c8881e"/><circle cx="240" cy="56" r="5" fill="#c8881e"/>
-        <text x="22" y="135" font-size="9" fill="#5a6a7a" font-family="sans-serif">CANAAN</text>
-        <text x="80" y="64" font-size="9" fill="#5a6a7a" font-family="sans-serif">JERUSALEM</text>
-        <text x="214" y="46" font-size="9" fill="#5a6a7a" font-family="sans-serif">BABYLON</text>
-        <text x="105" y="150" font-size="11" fill="#1e2d3d" font-family="sans-serif" font-weight="600">HISTORY</text></svg>`,
-      books:[
-        { name:'Joshua', meaning:'Yahweh Saves', chapters:24, author:'Joshua / later editor', period:'c. 1400–1380 BC',
-          theme:'God gives the land He promised — but possession requires faith and obedience.',
-          topic:'Crossing Jordan, Jericho, conquest, land allotment, covenant renewal.',
-          characters:['Joshua','Rahab','Caleb','Achan','the angel of the LORD'],
-          location:'Jordan River, Jericho, Ai, Gibeon, Canaan',
-          backdrop:'Joshua inherits leadership from Moses at the Jordan River. The land ahead is occupied by seven nations with walled cities, chariots, and established armies. Israel has no cavalry and no siege equipment. The conquest is meant to be understood as a theological act — God giving what He promised — not merely a military campaign.',
-          caseStudy:{ q:'Did the walls of Jericho really fall — and what does archaeology say?', a:'Jericho is one of the oldest continuously occupied sites on earth — sitting in the Jordan Valley 850 feet below sea level, surrounded by springs that made it a strategic stronghold. Archaeological work at Tell es-Sultan has found evidence of collapsed walls and burning consistent with the biblical account\'s period. <strong>The method of conquest — marching, trumpets, shouting — deliberately removed military credit from Israel.</strong> It was designed to be inexplicable by conventional military logic.' },
-          jesus:'Rahab the prostitute — a Canaanite outsider — is saved by a red cord in her window, trusting Israel\'s God. She ends up in the genealogy of Jesus (Matthew 1). Joshua\'s name is the Hebrew form of the name Jesus — both mean "Yahweh saves."' },
-
-        { name:'Ruth', meaning:'Companion / Friend', chapters:4, author:'Unknown (possibly Samuel)', period:'c. 1100 BC',
-          theme:'God\'s redemptive purposes move through loyalty, love, and the unexpected.',
-          topic:'Famine, loyalty, gleaning, kinsman-redeemer, marriage, lineage.',
-          characters:['Ruth','Naomi','Boaz','Orpah'],
-          location:'Moab (modern Jordan), Bethlehem',
-          backdrop:'The book is set "in the days of the Judges" — Israel\'s darkest period of moral and political chaos. Against that backdrop, a foreign widow from Moab shows extraordinary covenant loyalty to her Israelite mother-in-law. The book is quiet, domestic, and deeply countercultural in a time of violence and self-interest.',
-          caseStudy:{ q:'What was the kinsman-redeemer system, and why does it matter?', a:'The "go\'el" — kinsman-redeemer — was a legal institution in Israel where a male relative could purchase back land or people from poverty or slavery to keep the family line intact. <strong>Boaz is not legally required to redeem Ruth — he chooses to out of extraordinary kindness (hesed).</strong> The threshing floor scene was a formal legal moment, not romantic in the modern sense. Ruth\'s request was a claim on covenant loyalty — and Boaz honoured it at personal cost.' },
-          jesus:'Boaz is the supreme Old Testament portrait of the kinsman-redeemer — someone who had the right, the means, and the willingness to pay the price of redemption. The New Testament presents Jesus as the ultimate go\'el: fully human (the right), unlimited in power (the means), and choosing to redeem at the cost of His own life.' }
-      ]
-    },
-
-    {
-      id:'wisdom', testament:'Old Testament', filter:'ot', title:'Wisdom & Poetry', count:5,
-      desc:'Songs, suffering, wisdom, love, and the honest language of the soul.',
-      map:`<svg viewBox="0 0 280 160" width="100%" height="100%"><rect width="280" height="160" fill="#eef3f7"/>
-        <path d="M30 110 Q90 60 148 84 T260 62" fill="none" stroke="#1e2d3d" stroke-width="3" stroke-linecap="round"/>
-        <path d="M30 138 Q100 92 148 112 T258 90" fill="none" stroke="#c8881e" stroke-width="2" stroke-dasharray="4 3" stroke-linecap="round"/>
-        <text x="88" y="40" font-size="12" fill="#1e2d3d" font-family="sans-serif" font-weight="600">WISDOM</text>
-        <text x="52" y="152" font-size="9" fill="#5a6a7a" font-family="sans-serif">POETRY · SONG · REFLECTION</text></svg>`,
-      books:[
-        { name:'Job', meaning:'Personal name (possibly "persecuted")', chapters:42, author:'Unknown', period:'Unknown — possibly patriarchal era',
-          theme:'God is sovereign, good, and beyond full human understanding — even in inexplicable suffering.',
-          topic:'Satan\'s accusation, loss, three friends\' failed theology, God\'s speech from the whirlwind.',
-          characters:['Job','Satan','Eliphaz','Bildad','Zophar','Elihu','Job\'s wife'],
-          location:'Land of Uz (possibly Edom region, modern southern Jordan)',
-          backdrop:'Job is the wealthiest man in the east — blameless, righteous, a man of prayer and integrity. In a single day he loses his children, his wealth, and his health. The three friends who come to comfort him represent three versions of a common theological error: that suffering is always direct punishment for sin. God\'s final speech demolishes their arguments without fully explaining His reasons.',
-          caseStudy:{ q:'What is the Book of Job actually arguing, and why does it matter for how we talk about suffering?', a:'Job\'s friends are not obviously wrong — they represent mainstream ancient wisdom theology. <strong>What God condemns at the end is not their belief in justice but their presumption that they could explain God\'s actions.</strong> Job, who argued and complained and demanded answers, is vindicated over the friends who gave tidy theological answers. The book is a protest against glib explanations of suffering, and a defense of honest lament.' },
-          jesus:'Job\'s desperate cry — "I know that my Redeemer lives" (Job 19) — is one of the most remarkable forward-looking statements in the Old Testament. Jesus enters suffering not to explain it but to bear it. The cross is God\'s answer to Job\'s question: not an explanation, but a presence.' },
-
-        { name:'Psalms', meaning:'Songs / Praises', chapters:150, author:'David chiefly, plus Asaph, Korah, Moses, others', period:'c. 1000–400 BC',
-          theme:'All of human experience — joy, grief, doubt, praise, rage, and trust — belongs before God.',
-          topic:'Lament, praise, royal psalms, wisdom psalms, ascent psalms, imprecatory psalms.',
-          characters:['David','Asaph','Sons of Korah','Moses'],
-          location:'Jerusalem (especially), wilderness, exile',
-          backdrop:'The Psalms span nearly a thousand years of Israel\'s life — from Moses in the wilderness to the return from Babylon. They are the hymnbook, the prayer book, and the emotional vocabulary of the people of God. More than a third are laments — cries of pain and disorientation addressed to a God who is trusted even when He seems absent.',
-          caseStudy:{ q:'Why are the Psalms so honest about pain, doubt, and even anger at God?', a:'Psalm 88 ends with the word "darkness" — there is no resolution, no tidy bow. Psalm 44 accuses God of sleeping while His people suffer. <strong>The Psalms give God\'s people permission to bring their whole unedited selves into prayer</strong> — not because God is weak, but because He is large enough to receive every human emotion. The lament form itself (complaint → trust → praise) is a theological statement: honest prayer is the path through, not around, suffering.' },
-          jesus:'The Psalms are the most-quoted Old Testament book in the New Testament. Psalm 22 describes crucifixion in detail centuries before crucifixion was invented. Psalm 16 is quoted at Pentecost as proof of resurrection. Psalm 110 is the most-quoted single verse in the NT. Jesus quotes Psalms from the cross. He is the true King of the Psalms.' }
-      ]
-    },
-
-    {
-      id:'gospels', testament:'New Testament', filter:'nt', title:'Gospels', count:4,
-      desc:'The life, death, and resurrection of Jesus Christ in real places.',
-      map:`<svg viewBox="0 0 280 160" width="100%" height="100%"><rect width="280" height="160" fill="#eef3f7"/>
-        <ellipse cx="85" cy="72" rx="30" ry="20" fill="#dce8f0" stroke="#7aa0b8" stroke-width="1"/>
-        <text x="85" y="76" text-anchor="middle" font-size="8" fill="#7aa0b8" font-family="sans-serif">Galilee</text>
-        <path d="M85,92 Q88,115 84,135" fill="none" stroke="#7aa0b8" stroke-width="1.5" opacity="0.8"/>
-        <circle cx="84" cy="140" r="6" fill="#1e2d3d"/>
-        <text x="84" y="156" text-anchor="middle" font-size="8" fill="#1e2d3d" font-family="sans-serif" font-weight="600">Jerusalem</text>
-        <circle cx="68" cy="60" r="4" fill="#c8881e"/>
-        <text x="54" y="52" font-size="7" fill="#c8881e" font-family="sans-serif">Nazareth</text>
-        <text x="155" y="75" font-size="11" fill="#1e2d3d" font-family="sans-serif" font-weight="600">GOSPELS</text>
-        <text x="130" y="92" font-size="8" fill="#5a6a7a" font-family="sans-serif">Galilee · Judea · Jerusalem</text></svg>`,
-      books:[
-        { name:'Matthew', meaning:'Gift of Yahweh', chapters:28, author:'Matthew (Levi)', period:'c. AD 50–70',
-          theme:'Jesus is the long-promised Messiah and King who fulfills everything Israel was waiting for.',
-          topic:'Genealogy, birth, baptism, Sermon on the Mount, miracles, parables, death, resurrection.',
-          characters:['Jesus','Mary','Joseph','John the Baptist','12 Disciples','Pharisees','Pilate','Mary Magdalene'],
-          location:'Bethlehem, Egypt, Nazareth, Galilee, Jerusalem',
-          backdrop:'Matthew writes to a Jewish audience and structures his Gospel around five great teaching sections — mirroring the five books of Moses. He quotes the Old Testament over 60 times. His opening genealogy immediately signals his purpose: this is the story of Abraham\'s son, David\'s son, the culmination of Israel\'s entire history.',
-          caseStudy:{ q:'Why does Jesus flee to Egypt as a baby, and what does Herod\'s massacre reveal about the political reality?', a:'Herod the Great was a client king under Rome — brilliant, paranoid, and willing to murder his own sons to maintain power. <strong>The threat to Jesus was entirely real and historically plausible.</strong> Josephus records Herod\'s brutality extensively. The flight to Egypt — Israel\'s ancient place of slavery — and the return mirrors the Exodus. Matthew quotes Hosea 11:1: "Out of Egypt I called my son" — a deliberate echo. Jesus relives Israel\'s story and succeeds where Israel failed.' },
-          jesus:'Matthew\'s entire Gospel is the Jesus connection. Five times he says "this happened to fulfill what was written." The Sermon on the Mount repeatedly uses the formula "you have heard it said... but I say to you" — Jesus speaks with authority greater than Moses. The final commission sends his followers to all nations — the fulfillment of the promise to Abraham.' },
-
-        { name:'John', meaning:'Yahweh is gracious', chapters:21, author:'John son of Zebedee', period:'c. AD 85–95',
-          theme:'Jesus is the eternal Word of God made flesh — belief in Him is eternal life.',
-          topic:'Seven signs, seven I Am statements, Upper Room Discourse, resurrection.',
-          characters:['Jesus','John the Baptist','Lazarus','Mary','Martha','Nicodemus','Samaritan Woman','Thomas','Peter'],
-          location:'Judea, Galilee, Samaria, Jerusalem',
-          backdrop:'John writes last of the four Gospel writers, probably from Ephesus in the AD 80s–90s. His audience is broader — Greek-speaking believers and inquirers encountering Greco-Roman philosophical ideas about God and the divine. John opens not with a genealogy but with the most expansive statement in Scripture: "In the beginning was the Word."',
-          caseStudy:{ q:'Why does Jesus speak to a Samaritan woman at Jacob\'s Well, and why was this so shocking?', a:'The conversation at Jacob\'s Well (John 4) breaks three cultural rules simultaneously: <strong>Jews did not speak to Samaritans</strong> (centuries of ethnic-religious hostility), <strong>men did not speak publicly to unrelated women</strong>, and <strong>this particular woman had a complicated social history</strong> (five husbands). The well location itself is symbolic — Jacob\'s Well connected to the entire patriarchal history of the region. Jesus\' offer of "living water" deliberately echoes Jeremiah 2:13 where God calls Himself the fountain of living water.' },
-          jesus:'John\'s Gospel is the most theologically explicit about Jesus\' identity. "I Am the Bread of Life. I Am the Light of the World. I Am the Resurrection and the Life. I Am the Way, the Truth, and the Life." Each I Am statement echoes God\'s self-revelation to Moses in Exodus 3. John\'s purpose statement is unambiguous: "These are written so that you may believe that Jesus is the Christ, the Son of God, and that by believing you may have life in his name."' }
-      ]
-    },
-
-    {
-      id:'acts', testament:'New Testament', filter:'nt', title:'Acts / History', count:1,
-      desc:'The gospel moves from Jerusalem to Rome, carried by the Spirit.',
-      map:`<svg viewBox="0 0 280 160" width="100%" height="100%"><rect width="280" height="160" fill="#eef3f7"/>
-        <path d="M32 128 L88 100 L144 72 L216 36" fill="none" stroke="#1e2d3d" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="32" cy="128" r="5" fill="#c8881e"/><circle cx="88" cy="100" r="5" fill="#c8881e"/>
-        <circle cx="144" cy="72" r="5" fill="#c8881e"/><circle cx="216" cy="36" r="5" fill="#c8881e"/>
-        <text x="18" y="145" font-size="8" fill="#5a6a7a" font-family="sans-serif">Jerusalem</text>
-        <text x="72" y="118" font-size="8" fill="#5a6a7a" font-family="sans-serif">Antioch</text>
-        <text x="128" y="90" font-size="8" fill="#5a6a7a" font-family="sans-serif">Ephesus</text>
-        <text x="200" y="26" font-size="8" fill="#5a6a7a" font-family="sans-serif">Rome</text>
-        <text x="100" y="150" font-size="11" fill="#1e2d3d" font-family="sans-serif" font-weight="600">ACTS</text></svg>`,
-      books:[
-        { name:'Acts', meaning:'Acts / Deeds (of the Apostles)', chapters:28, author:'Luke', period:'c. AD 62–64',
-          theme:'The risen Christ builds His church through the Spirit across every ethnic and geographic boundary.',
-          topic:'Pentecost, persecution, Stephen, conversion of Paul, three missionary journeys, Rome.',
-          characters:['Peter','Paul','Stephen','Barnabas','Silas','Timothy','Lydia','Cornelius','James','Philip'],
-          location:'Jerusalem → Judea → Samaria → Asia Minor → Greece → Rome',
-          backdrop:'Acts opens exactly where Luke\'s Gospel ends — in Jerusalem, 50 days after Passover (Pentecost), with 120 followers of a recently executed teacher. By the end of the book, the gospel has reached the capital of the Roman Empire. The book traces three of Paul\'s missionary journeys along actual Roman road networks and sea routes that archaeologists and historians have verified.',
-          caseStudy:{ q:'How did the Roman road system make the spread of the gospel possible, and was it planned?', a:'Rome\'s road network — over 250,000 miles of paved roads — connected the empire in ways never seen before. <strong>Paul\'s missionary strategy was explicitly urban and logistical: he targeted city centres on major trade routes, knowing that converts would carry the gospel outward along commercial networks.</strong> Antioch, Ephesus, Corinth, and Rome were not random choices — they were the nerve centres of the ancient world. The Pax Romana (Roman Peace) and common Greek language (koine) created a unique window that early Christians moved through with remarkable speed.' },
-          jesus:'Acts begins with Jesus\' final instructions and ascension, and ends with the gospel reaching Rome — but is deliberately incomplete. Luke\'s point is that Acts is an unfinished book because the story of Jesus\' ongoing mission through His church is still being written. Every Christian community is a continuation of the story Acts starts.' }
-      ]
-    },
-
-    {
-      id:'paul', testament:'New Testament', filter:'nt', title:'Pauline Letters', count:13,
-      desc:'Letters carrying the theology of the cross into real churches and real crises.',
-      map:`<svg viewBox="0 0 280 160" width="100%" height="100%"><rect width="280" height="160" fill="#eef3f7"/>
-        <line x1="28" y1="82" x2="252" y2="82" stroke="#1e2d3d" stroke-width="3" stroke-dasharray="6 5"/>
-        <circle cx="52" cy="82" r="5" fill="#c8881e"/><circle cx="104" cy="82" r="5" fill="#c8881e"/>
-        <circle cx="164" cy="82" r="5" fill="#c8881e"/><circle cx="228" cy="82" r="5" fill="#c8881e"/>
-        <text x="52" y="102" text-anchor="middle" font-size="8" fill="#5a6a7a" font-family="sans-serif">Corinth</text>
-        <text x="104" y="102" text-anchor="middle" font-size="8" fill="#5a6a7a" font-family="sans-serif">Ephesus</text>
-        <text x="164" y="102" text-anchor="middle" font-size="8" fill="#5a6a7a" font-family="sans-serif">Philippi</text>
-        <text x="228" y="102" text-anchor="middle" font-size="8" fill="#5a6a7a" font-family="sans-serif">Rome</text>
-        <text x="140" y="44" text-anchor="middle" font-size="11" fill="#1e2d3d" font-family="sans-serif" font-weight="600">PAUL'S LETTERS</text></svg>`,
-      books:[
-        { name:'Romans', meaning:'To the Romans', chapters:16, author:'Paul', period:'c. AD 57',
-          theme:'The gospel reveals God\'s righteousness — available to all, Jew and Gentile, by faith alone.',
-          topic:'Sin\'s universality, justification by faith, sanctification, Israel\'s future, Christian living.',
-          characters:['Paul','Phoebe','Priscilla','Aquila','Timothy'],
-          location:'Written from Corinth, addressed to Rome',
-          backdrop:'Rome was the most powerful city in the world — a metropolis of over a million people, capital of a Mediterranean empire. The Christian community there was mixed: Jewish believers who had been expelled under Claudius and then returned, alongside Gentile converts. Tension between these groups about identity, food laws, and the status of Israel shaped the questions Romans answers.',
-          caseStudy:{ q:'Why does Paul write the longest theological letter to a church he has never visited?', a:'Paul was planning to visit Rome on his way to Spain — the edge of the known world. <strong>Romans is not just a letter; it is Paul\'s theological manifesto, his most complete statement of the gospel.</strong> He writes it to a church he hasn\'t founded, with no personal history, which means he can\'t assume shared context. Every assumption must be explained. This constraint produced the most systematic and comprehensive gospel explanation in the New Testament.' },
-          jesus:'Romans 3:21–26 is arguably the densest theological passage in Scripture: "God presented Christ as a sacrifice of atonement... to demonstrate his righteousness... so as to be just and the one who justifies those who have faith in Jesus." Every major doctrine of salvation — justification, redemption, propitiation — is packed into six verses.' },
-
-        { name:'Philippians', meaning:'To the Philippians', chapters:4, author:'Paul', period:'c. AD 61–62',
-          theme:'Joy in Christ is not dependent on circumstances — it is possible even from a prison cell.',
-          topic:'Partnership in the gospel, humility of Christ, contentment, peace that surpasses understanding.',
-          characters:['Paul','Timothy','Epaphroditus','Euodia','Syntyche','Lydia (implied)'],
-          location:'Written from Rome (prison), addressed to Philippi',
-          backdrop:'Philippi was a Roman colony in northern Greece — settled by Roman veterans, fiercely proud of its Roman citizenship. Paul founded the church there on his second missionary journey after a vision of a "man of Macedonia." The first convert was Lydia, a businesswoman. Paul is now in Roman custody, and the Philippians have sent Epaphroditus with a financial gift — the letter is partly a thank you.',
-          caseStudy:{ q:'How did Philippi\'s Roman identity shape how Paul\'s letter was heard there?', a:'When Paul writes "our citizenship is in heaven" (Philippians 3:20), he is making a pointed political statement in a city obsessed with Roman citizenship. <strong>Philippian citizens had legal rights and privileges that others did not.</strong> Paul is telling a community that prizes earthly citizenship above all else that their ultimate identity — and therefore their ultimate security — is located elsewhere. The Christ-hymn of chapter 2 (the kenosis passage) directly inverts Roman ideas of power and status.' },
-          jesus:'Philippians 2:5–11 — the Christ-hymn — is one of the earliest and most complete pictures of the incarnation in all of Scripture. From equality with God → human form → servant → death on a cross → exaltation → every knee bowing. Paul uses it not as a doctrine lesson but as a pattern for daily relationships: "Have this mind among yourselves."' }
-      ]
-    },
-
-    {
-      id:'general', testament:'New Testament', filter:'nt', title:'General Letters', count:8,
-      desc:'Letters to scattered believers about endurance, truth, love, and discernment.',
-      map:`<svg viewBox="0 0 280 160" width="100%" height="100%"><rect width="280" height="160" fill="#eef3f7"/>
-        <path d="M34 132 Q84 96 140 112 T258 72" fill="none" stroke="#1e2d3d" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="34" cy="132" r="5" fill="#c8881e"/><circle cx="140" cy="110" r="5" fill="#c8881e"/><circle cx="258" cy="72" r="5" fill="#c8881e"/>
-        <line x1="46" y1="46" x2="218" y2="46" stroke="#c8881e" stroke-width="2.5" stroke-linecap="round"/>
-        <text x="100" y="34" font-size="11" fill="#1e2d3d" font-family="sans-serif" font-weight="600">GENERAL LETTERS</text>
-        <text x="62" y="150" font-size="8" fill="#5a6a7a" font-family="sans-serif">To scattered believers everywhere</text></svg>`,
-      books:[
-        { name:'Hebrews', meaning:'To the Hebrews', chapters:13, author:'Unknown (possibly Paul, Apollos, or Barnabas)', period:'c. AD 60–70',
-          theme:'Jesus is the fulfilment and surpassing of everything in the Old Testament — the final word.',
-          topic:'Jesus greater than angels, Moses, the priesthood, the sacrificial system. Hall of Faith.',
-          characters:['Jesus (as High Priest)','Old Testament figures in chapter 11'],
-          location:'Jewish-Christian audience, possibly in Rome',
-          backdrop:'Jewish Christians are under pressure — possibly from the Roman state, possibly from the Jewish community — and are tempted to drift back to Judaism. Hebrews argues not that Judaism was wrong but that it was always pointing forward to something — and that something has now arrived.',
-          caseStudy:{ q:'What was the Melchizedek priesthood, and why does it matter so much in Hebrews?', a:'Melchizedek appears in Genesis 14 — a mysterious priest-king of Salem (Jerusalem) who blesses Abraham and receives tithes from him. No lineage is given. No death recorded. <strong>Hebrews uses this mysterious figure to argue that Jesus\' priesthood is older, higher, and more permanent than the Levitical priesthood</strong> — which itself descended from Abraham. If Abraham honoured Melchizedek, then the Levitical priests — who are in Abraham — honoured him too. Jesus\' priesthood "after the order of Melchizedek" transcends the whole Mosaic system.' },
-          jesus:'Hebrews is the New Testament\'s most sustained theological treatment of how Jesus fulfills and replaces the Old Testament system. The central image is the Day of Atonement: Jesus is simultaneously the High Priest who enters the Most Holy Place and the sacrifice whose blood he carries. But unlike the earthly high priest who went in once a year, Jesus entered "once for all," securing eternal redemption.' },
-
-        { name:'James', meaning:'Jacob', chapters:5, author:'James the brother of Jesus', period:'c. AD 45–50',
-          theme:'Real faith is always visible in how you live — especially in how you treat the poor.',
-          topic:'Trials, wisdom, faith and works, the tongue, the rich and poor, prayer, endurance.',
-          characters:['James and his audience of scattered Jewish believers'],
-          location:'Jerusalem-based author, diaspora audience',
-          backdrop:'James is likely the earliest New Testament letter — written before most of Paul\'s letters. James was the leader of the Jerusalem church and a pillar of early Christianity. His audience is "the twelve tribes scattered abroad" — Jewish Christians dispersed across the Roman world. The letter reads almost like a collection of wisdom teachings similar to Proverbs.',
-          caseStudy:{ q:'Is James contradicting Paul when he says "faith without works is dead"?', a:'This apparent contradiction has generated centuries of debate. Luther famously called James "a letter of straw." But read carefully: <strong>Paul and James are answering different questions.</strong> Paul asks "how is a person justified before God?" (faith alone). James asks "how do you know someone has genuine faith?" (by what it produces). James is not arguing against Paul\'s doctrine of justification — he is arguing against a dead profession of faith that produces no change in behaviour. The Greek word "justified" carries a courtroom sense (Paul) and a vindicated-before-observers sense (James).' },
-          jesus:'James never mentions the resurrection and rarely names Jesus directly — yet the teaching of James is saturated with the Sermon on the Mount. Most scholars believe James knew Jesus\' teaching intimately (having grown up with him). The ethics of the Kingdom — care for the poor, integrity of speech, patience, prayer — are James\' practical guide to living as someone who actually believes what Jesus taught.' }
-      ]
-    },
-
-    {
-      id:'revelation', testament:'New Testament', filter:'nt', title:'Prophecy', count:1,
-      desc:'The unveiling of Jesus Christ — cosmic victory, judgment, and new creation.',
-      map:`<svg viewBox="0 0 280 160" width="100%" height="100%"><rect width="280" height="160" fill="#1e2d3d"/>
-        <circle cx="140" cy="76" r="48" fill="none" stroke="#c8881e" stroke-width="1.5" opacity="0.4"/>
-        <circle cx="140" cy="76" r="32" fill="none" stroke="#c8881e" stroke-width="1" opacity="0.3"/>
-        <path d="M140 28 L152 62 L188 76 L152 90 L140 124 L128 90 L92 76 L128 62 Z" fill="#c8881e" opacity="0.9"/>
-        <text x="140" y="148" text-anchor="middle" font-size="10" fill="#e8a832" font-family="sans-serif" font-weight="600">THE APOCALYPSE</text>
-        <text x="140" y="18" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.45)" font-family="sans-serif">PATMOS · SEVEN CHURCHES · NEW CREATION</text></svg>`,
-      books:[
-        { name:'Revelation', meaning:'Apocalypse / Unveiling', chapters:22, author:'John', period:'c. AD 95–96',
-          theme:'Jesus Christ is Lord over all history — He has already won, His enemies will be defeated, and He will make all things new.',
-          topic:'Seven churches, seven seals, trumpets, bowls, Babylon, the beast, the Lamb, new Jerusalem.',
-          characters:['Jesus (as Lamb and Rider on white horse)','John','The seven churches','The four living creatures','The 144,000','The Woman','The Beast','The Dragon'],
-          location:'Written from Patmos (small island off the coast of modern Turkey), addressed to seven churches in Asia Minor',
-          backdrop:'Patmos was a Roman penal island — John has been exiled there under Domitian\'s persecution. The seven churches he writes to (Ephesus, Smyrna, Pergamum, Thyatira, Sardis, Philadelphia, Laodicea) are all real cities within 100 miles of each other in a Roman postal circuit. Each letter addresses the specific spiritual and political conditions of that city — verifiable through archaeology and Roman history.',
-          caseStudy:{ q:'Is Revelation primarily about the future, or about the first century Roman Empire?', a:'Both — and this is the key to reading it well. <strong>Revelation uses "apocalyptic" language — a Jewish literary genre of symbolic visions — to address real historical pressures facing first-century Christians.</strong> "Babylon" almost certainly refers to Rome (Peter uses the same code in 1 Peter 5:13). The number 666 likely refers to Nero Caesar (whose name in Hebrew letters adds to 666). But the images also have timeless significance — they describe the nature of all human empires that set themselves against God. The book is about Rome, and about every Rome that will ever exist.' },
-          jesus:'Revelation opens with the most majestic vision of Jesus in all of Scripture — robed, with eyes like fire, face like the sun, holding stars in his right hand. The book\'s central image is "the Lamb who was slain" standing in the centre of the throne — the crucified one is the sovereign one. The final chapters describe a new Jerusalem coming down from heaven, God dwelling with His people, and every tear wiped away. The last prayer in the Bible is "Come, Lord Jesus."' }
-      ]
-    }
-  ];
-
-  let activeCat = data[0];
-  let activeBook = data[0].books[0];
-  let activeFilter = 'all';
-
-  const categoryGrid  = document.getElementById('categoryGrid');
-  const bookButtons   = document.getElementById('bookButtons');
-  const bookDetail    = document.getElementById('bookDetailPanel');
-  const panelTitle    = document.getElementById('panelTitle');
-  const panelSub      = document.getElementById('panelSub');
-
-  function getFilteredData() {
-    if (activeFilter === 'all') return data;
-    return data.filter(d => d.filter === activeFilter);
-  }
-
-  function renderCategories() {
-    const filtered = getFilteredData();
-    categoryGrid.innerHTML = filtered.map(cat => `
-      <article class="cat-card ${activeCat.id === cat.id ? 'active' : ''}" data-id="${cat.id}">
-        <div class="cat-map">${cat.map}</div>
-        <div class="cat-copy">
-          <div class="cat-testament">${cat.testament}</div>
-          <div class="cat-name">${cat.title} <span class="cat-count">${cat.count} books</span></div>
-          <div class="cat-desc">${cat.desc}</div>
+          <div class="detail-block">
+            <div class="detail-box">
+              <h4>Case study angles</h4>
+              <ul>
+                <li>Leaving Ur and the risk of obedience</li>
+                <li>The covenant promise versus biological reality</li>
+                <li>Mount Moriah and radical trust</li>
+                <li>How Abraham points forward to Christ</li>
+              </ul>
+            </div>
+            <div class="detail-box">
+              <h4>Map layer</h4>
+              <p>Add journey routes, region highlights, or a location card for Ur, Haran, Canaan, Hebron, and Moriah.</p>
+            </div>
+          </div>
         </div>
       </article>
-    `).join('');
 
-    categoryGrid.querySelectorAll('.cat-card').forEach(card => {
-      card.addEventListener('click', () => {
-        const found = data.find(d => d.id === card.dataset.id);
-        activeCat = found;
-        activeBook = found.books[0];
-        renderAll();
-      });
-    });
-  }
+      <article class="detail-card" id="david-profile">
+        <div class="detail-top">
+          <div>
+            <h3>David</h3>
+            <div class="tag-row" style="margin-top:10px;">
+              <span class="tag">Character profile</span>
+              <span class="tag">Kingship</span>
+              <span class="tag">Psalmist</span>
+            </div>
+          </div>
+          <a class="btn btn-secondary" href="#top">Back to top</a>
+        </div>
 
-  function renderBooks() {
-    panelTitle.textContent = activeCat.title;
-    panelSub.textContent = `${activeCat.books.length} book${activeCat.books.length === 1 ? '' : 's'} shown · ${activeCat.count} in category`;
+        <div class="detail-layout">
+          <div class="detail-block">
+            <div class="detail-box">
+              <h4>Who he is</h4>
+              <p>Use this to explain David as shepherd, warrior, king, worshiper, sinner, and covenant figure.</p>
+            </div>
+            <div class="detail-box">
+              <h4>Story behind the person</h4>
+              <p>Cover Saul, Goliath, exile, kingship, Jerusalem, Bathsheba, repentance, and legacy.</p>
+            </div>
+            <div class="detail-box">
+              <h4>Why he matters</h4>
+              <p>Show how the Davidic covenant shapes messianic expectation and connects deeply to Jesus.</p>
+            </div>
+          </div>
 
-    bookButtons.innerHTML = activeCat.books.map(b => `
-      <button class="book-btn ${b.name === activeBook.name ? 'active' : ''}" data-name="${b.name}">
-        <span class="book-btn-name">${b.name}</span>
-        <span class="book-btn-meta">${b.chapters} chapters · ${b.meaning}</span>
-      </button>
-    `).join('');
+          <div class="detail-block">
+            <div class="detail-box">
+              <h4>Case study angles</h4>
+              <ul>
+                <li>Confidence in God versus armor and appearance</li>
+                <li>The danger of power without vigilance</li>
+                <li>Repentance after moral collapse</li>
+                <li>Jerusalem as royal and theological center</li>
+              </ul>
+            </div>
+            <div class="detail-box">
+              <h4>Map layer</h4>
+              <p>Place Bethlehem, the Valley of Elah, Jerusalem, Hebron, and the wider kingdom map here.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
 
-    bookButtons.querySelectorAll('.book-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        activeBook = activeCat.books.find(b => b.name === btn.dataset.name);
-        renderDetail();
-        renderBooks();
-      });
-    });
-  }
-
-  function renderDetail() {
-    const b = activeBook;
-    const chars = b.characters.map(c => `<span class="char-chip">${c}</span>`).join('');
-
-    bookDetail.innerHTML = `
-      <div class="detail-head animate-in">
-        <div class="detail-testament-badge">${activeCat.testament} · ${activeCat.title}</div>
-        <div class="detail-title">${b.name}</div>
-        <div class="detail-meaning">"${b.meaning}"</div>
+<section class="section" id="cases">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Case studies</div>
+        <h2 class="section-title">Go deeper on moments that changed everything</h2>
+        <p class="section-copy">This section is for focused breakdowns that feel almost like mini documentaries.</p>
       </div>
-      <div class="detail-body animate-in">
+    </div>
 
-        <div class="quick-stats">
-          <div class="qs-item"><span class="qs-val">${b.chapters}</span><span class="qs-lbl">Chapters</span></div>
-          <div class="qs-item"><span class="qs-val">${b.period.split(' ')[0]}</span><span class="qs-lbl">Period</span></div>
-          <div class="qs-item"><span class="qs-val">${b.characters.length}</span><span class="qs-lbl">Key figures</span></div>
-          <div class="qs-item"><span class="qs-val">↗</span><span class="qs-lbl">Points to Christ</span></div>
+    <div class="detail-section">
+      <article class="detail-card" id="exodus-case-study">
+        <div class="detail-top">
+          <div>
+            <h3>The Exodus</h3>
+            <div class="tag-row" style="margin-top:10px;">
+              <span class="tag">Case study</span>
+              <span class="tag">Deliverance</span>
+              <span class="tag">Identity</span>
+            </div>
+          </div>
+          <a class="btn btn-secondary" href="#featured">Back to lineup</a>
         </div>
 
-        <div class="info-grid">
-          <div class="info-block full">
-            <div class="info-label">Theme</div>
-            <div class="info-value">${b.theme}</div>
+        <div class="detail-layout">
+          <div class="detail-block">
+            <div class="detail-box">
+              <h4>The event</h4>
+              <p>Explain the oppression in Egypt, Moses’ rise, the plagues, the crossing, and the wilderness formation of Israel.</p>
+            </div>
+            <div class="detail-box">
+              <h4>What changed</h4>
+              <p>Use this area to show that the Exodus did not just rescue a people. It gave them identity, law, worship, and memory.</p>
+            </div>
+            <div class="detail-box">
+              <h4>Modern reflection</h4>
+              <p>Add why this story still matters for redemption, freedom, obedience, and the biblical pattern of rescue.</p>
+            </div>
           </div>
-          <div class="info-block">
-            <div class="info-label">Author</div>
-            <div class="info-value">${b.author}</div>
-          </div>
-          <div class="info-block">
-            <div class="info-label">Setting / Location</div>
-            <div class="info-value">${b.location}</div>
-          </div>
-          <div class="info-block full">
-            <div class="info-label">Topics Covered</div>
-            <div class="info-value">${b.topic}</div>
-          </div>
-          <div class="info-block full">
-            <div class="info-label">Key Characters</div>
-            <div class="info-value"><div class="characters-row">${chars}</div></div>
-          </div>
-          <div class="info-block full">
-            <div class="info-label">Historical Backdrop</div>
-            <div class="info-value">${b.backdrop}</div>
+
+          <div class="detail-block">
+            <div class="detail-box">
+              <h4>Case study structure</h4>
+              <ul>
+                <li>Problem: bondage and oppression</li>
+                <li>Conflict: Pharaoh versus the word of God</li>
+                <li>Turning point: Passover and sea crossing</li>
+                <li>Outcome: covenant identity and wilderness testing</li>
+              </ul>
+            </div>
+            <div class="detail-box">
+              <h4>Map layer</h4>
+              <p>Add Egypt, Goshen, Sinai, and the route of deliverance as a guided visual.</p>
+            </div>
           </div>
         </div>
+      </article>
+    </div>
+  </div>
+</section>
 
-        <div class="case-study" style="margin-top:1px;">
-          <div class="case-label">Case Study</div>
-          <div class="case-question">${b.caseStudy.q}</div>
-          <div class="case-answer">${b.caseStudy.a}</div>
-        </div>
-
-        <div class="jesus-block" style="margin-top:1px;">
-          <div class="jesus-label">How it points to Jesus</div>
-          <div class="jesus-text">${b.jesus}</div>
-        </div>
-
+<section class="section" id="maps">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Maps & Places</div>
+        <h2 class="section-title">Keep a geography layer across the whole site</h2>
+        <p class="section-copy">Because this is BibleMapped, your location system should feel built-in, not bolted on later.</p>
       </div>
-    `;
-  }
+    </div>
 
-  function renderAll() {
-    renderCategories();
-    renderBooks();
-    renderDetail();
-  }
+    <div class="quick-jump">
+      <div class="jump-card">
+        <small>Region</small>
+        <h3>Mesopotamia</h3>
+        <p>Origins, empires, patriarchal world, exile backdrop.</p>
+      </div>
+      <div class="jump-card">
+        <small>Region</small>
+        <h3>Canaan</h3>
+        <p>Promise land, tribal setting, kingship, prophets.</p>
+      </div>
+      <div class="jump-card">
+        <small>Region</small>
+        <h3>Egypt</h3>
+        <p>Joseph, oppression, Exodus, refuge, and empire.</p>
+      </div>
+      <div class="jump-card">
+        <small>Region</small>
+        <h3>Jerusalem</h3>
+        <p>Temple, kingship, exile memory, and Christ.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  // Filter tabs
-  document.getElementById('filterTabs').querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      activeFilter = btn.dataset.filter;
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filtered = getFilteredData();
-      if (!filtered.find(d => d.id === activeCat.id)) {
-        activeCat = filtered[0];
-        activeBook = filtered[0].books[0];
-      }
-      renderAll();
-    });
-  });
+<section class="section" id="themes">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Themes</div>
+        <h2 class="section-title">Thread the big ideas together</h2>
+        <p class="section-copy">A strong BibleMapped site is not only organized by books and people. It is organized by patterns.</p>
+      </div>
+    </div>
 
-  renderAll();
-  </script>
+    <div class="directory-grid">
+      <div class="dir-item"><span class="dir-label">Theme</span><span class="dir-title">Covenant</span><span class="dir-meta">Promise, relationship, faithfulness</span></div>
+      <div class="dir-item"><span class="dir-label">Theme</span><span class="dir-title">Kingdom</span><span class="dir-meta">Rule, throne, inheritance, Messiah</span></div>
+      <div class="dir-item"><span class="dir-label">Theme</span><span class="dir-title">Exile</span><span class="dir-meta">Judgment, displacement, hope, return</span></div>
+      <div class="dir-item"><span class="dir-label">Theme</span><span class="dir-title">Sacrifice</span><span class="dir-meta">Atonement, priesthood, substitution</span></div>
+      <div class="dir-item"><span class="dir-label">Theme</span><span class="dir-title">Temple</span><span class="dir-meta">Presence, holiness, worship, mediation</span></div>
+      <div class="dir-item"><span class="dir-label">Theme</span><span class="dir-title">Wisdom</span><span class="dir-meta">Fear of the Lord, skillful living</span></div>
+    </div>
+  </div>
+</section>
 
+<section class="section" id="study">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Study paths</div>
+        <h2 class="section-title">Guide people through the site</h2>
+        <p class="section-copy">These can become learning paths, playlists, or article series.</p>
+      </div>
+    </div>
+
+    <div class="lineup">
+      <article class="story-card">
+        <div class="story-thumb">Series placeholder</div>
+        <div class="story-body">
+          <div class="tag-row"><span class="tag">Path</span><span class="tag">Beginner</span></div>
+          <h3 class="story-title">Start here: the Bible in 10 stories</h3>
+          <p class="story-desc">A guided route for new readers who need the grand narrative first.</p>
+          <a class="story-link" href="#">Add link later</a>
+        </div>
+      </article>
+      <article class="story-card">
+        <div class="story-thumb">Series placeholder</div>
+        <div class="story-body">
+          <div class="tag-row"><span class="tag">Path</span><span class="tag">Maps</span></div>
+          <h3 class="story-title">Understand the Bible through geography</h3>
+          <p class="story-desc">A place-first path through major events, kingdoms, and movements.</p>
+          <a class="story-link" href="#">Add link later</a>
+        </div>
+      </article>
+      <article class="story-card">
+        <div class="story-thumb">Series placeholder</div>
+        <div class="story-body">
+          <div class="tag-row"><span class="tag">Path</span><span class="tag">People</span></div>
+          <h3 class="story-title">The people who shaped the biblical story</h3>
+          <p class="story-desc">A character-driven route through prophets, kings, disciples, and enemies.</p>
+          <a class="story-link" href="#">Add link later</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+  </main> <footer>
+    <div class="container footer-box">
+      <div>© BibleMapped — built for story, context, and meaning.</div>
+      <div>Replace placeholders with your real pages, images, and links.</div>
+    </div>
+  </footer>
 </body>
 </html>
