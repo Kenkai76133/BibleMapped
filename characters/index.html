@@ -1,61 +1,79 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>People — BibleMapped</title>
-    <link rel="stylesheet" href="../src/styles.css" />
-  </head>
-  <body>
-    <div class="top-strip" aria-hidden="true"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Characters | BibleMapped</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Cormorant+Garamond:wght@600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../src/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="../index.html">BibleMapped</a>
+      <nav class="main-nav">
+        <a href="../index.html#start-here">Start Here</a>
+        <a href="../books/index.html">Books</a>
+        <a href="index.html">Characters</a>
+        <a href="../places/index.html">Places</a>
+        <a href="../themes/index.html">Themes</a>
+        <a href="../case-studies/index.html">Case Studies</a>
+        <a href="../traditions/index.html">Bible Traditions</a>
+      </nav>
+    </div>
+  </header>
 
-    <header class="header">
-      <div class="container header-inner">
-        <a class="brand" href="/" aria-label="BibleMapped Home">
-          <img class="logo" src="../assets/logo.svg" alt="BibleMapped logo" />
-        </a>
-
-        <nav class="nav" aria-label="Primary">
-          <a href="/explainers/">Explainers</a>
-          <a href="/maps/">Maps</a>
-          <a href="/history/">History</a>
-          <a href="/people/">People</a>
-        </nav>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow">Characters</p>
+        <h1>Follow the people who move the biblical story.</h1>
+        <p class="hero-copy">
+          Character pages connect people to books, places, themes, and the larger arc of Scripture.
+        </p>
       </div>
-    </header>
+    </section>
 
-    <main class="container">
-      <section class="hero">
-        <h1>People</h1>
-        <p>Profiles and context — who they were, where they lived, why they mattered.</p>
-      </section>
-
-      <section class="section">
+    <section class="section">
+      <div class="container">
         <div class="section-head">
-          <h2>Latest</h2>
-          <span class="see-all">Updated manually for now</span>
+          <p class="eyebrow">Old Testament</p>
+          <h2>Patriarchs, prophets, kings, and exiles.</h2>
         </div>
 
-        <div class="grid">
-          <article class="card">
-            <div class="kicker">PERSON</div>
-            <h3>Mary</h3>
-            <p>What the texts emphasize — and what’s later tradition.</p>
-          </article>
+        <div class="card-grid three">
+          <a class="info-card" href="abraham.html">
+            <h3>Abraham</h3>
+            <p>The covenant patriarch called out of Mesopotamia into promise.</p>
+          </a>
 
-          <article class="card">
-            <div class="kicker">PERSON</div>
-            <h3>Joseph</h3>
-            <p>The quiet backbone of the narrative.</p>
-          </article>
+          <a class="info-card" href="#">
+            <h3>Moses</h3>
+            <p>Coming soon.</p>
+          </a>
 
-          <article class="card">
-            <div class="kicker">GROUP</div>
-            <h3>The Magi</h3>
-            <p>Who they might have been (and who they weren’t).</p>
-          </article>
+          <a class="info-card" href="#">
+            <h3>David</h3>
+            <p>Coming soon.</p>
+          </a>
         </div>
-      </section>
-    </main>
-  </body>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <div>
+        <strong>BibleMapped</strong>
+        <p>Understand the Bible through place, context, and story.</p>
+      </div>
+      <div class="footer-links">
+        <a href="../books/index.html">Books</a>
+        <a href="../index.html">Home</a>
+      </div>
+    </div>
+  </footer>
+</body>
 </html>
