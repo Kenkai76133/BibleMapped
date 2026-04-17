@@ -6,103 +6,143 @@
   <title>BibleMapped</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Cormorant+Garamond:wght@500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Cormorant+Garamond:wght@600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="src/styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand">
-        <span class="main">Bible</span>
-        <span class="sub">Mapped</span>
-      </div>
-      <div class="tagline">Explaining the Bible through maps.</div>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html">BibleMapped</a>
+      <nav class="main-nav">
+        <a href="#start-here">Start Here</a>
+        <a href="books/index.html">Books</a>
+        <a href="characters/index.html">Characters</a>
+        <a href="places/index.html">Places</a>
+        <a href="themes/index.html">Themes</a>
+        <a href="case-studies/index.html">Case Studies</a>
+        <a href="traditions/index.html">Bible Traditions</a>
+      </nav>
     </div>
   </header>
 
   <main>
     <section class="hero">
-      <div class="container">
-        <div class="hero-card">
-          <div class="eyebrow">BibleMapped</div>
-          <h1>Explore the Bible like a map.</h1>
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">BibleMapped</p>
+          <h1>Understand the Bible through place, context, and story.</h1>
           <p class="hero-copy">
-            Start with the Bible, open the Old Testament and New Testament, then follow each branch into books and teaching. Click a book to open a full study panel.
+            Explore books, characters, places, themes, and case studies in a way that feels connected, visual, and readable.
           </p>
-          <div class="hero-links">
-            <a href="#map">What is the Bible</a>
-            <a href="#youtube">YouTube</a>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="books/index.html">Explore Books</a>
+            <a class="btn btn-secondary" href="case-studies/index.html">Read Case Studies</a>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <div class="hero-card">
+            <span class="tag">Start Here</span>
+            <h3>Why are there different Bibles?</h3>
+            <p>Understand Protestant, Catholic, and Orthodox canons with context and history.</p>
+            <a href="case-studies/why-66-vs-73.html">Read more →</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="map">
+    <section id="start-here" class="section">
       <div class="container">
-        <div class="panel-head">
-          <div>
-            <div class="section-label">Interactive structure</div>
-            <h2 class="section-title">A mind map built out of books.</h2>
-            <p class="panel-copy">
-              Click the Bible to open the Testaments. Click a Testament to open the book groups. Click a group to reveal books. Click a book to open the teaching panel.
-            </p>
-          </div>
+        <div class="section-head">
+          <p class="eyebrow">Start Here</p>
+          <h2>The best first doors into BibleMapped.</h2>
         </div>
-
-        <div class="mindmap-shell">
-          <section class="map-panel">
-            <div class="map-canvas" id="mapCanvas"></div>
-            <div class="legend">
-              <div class="legend-pill">Bible → Testaments → Groups → Books</div>
-              <div class="legend-pill">Books open a teaching panel</div>
-              <div class="legend-pill">Characters can be added next inside each book</div>
-            </div>
-          </section>
+        <div class="card-grid three">
+          <a class="info-card" href="case-studies/what-is-the-bible.html">
+            <h3>What is the Bible?</h3>
+            <p>A clear starting point for what the Bible is and how it is organized.</p>
+          </a>
+          <a class="info-card" href="case-studies/old-vs-new-testament.html">
+            <h3>Old Testament vs New Testament</h3>
+            <p>See how covenant, promise, and fulfillment hold the story together.</p>
+          </a>
+          <a class="info-card" href="case-studies/why-66-vs-73.html">
+            <h3>Why 66 books and 73 books?</h3>
+            <p>A case study in canon, tradition, and why Christians differ.</p>
+          </a>
         </div>
       </div>
     </section>
 
-    <section class="section" id="youtube">
+    <section class="section alt">
       <div class="container">
-        <div class="youtube-panel">
-          <div class="section-label">YouTube</div>
-          <h2 class="section-title">Bring the map into video.</h2>
-          <div class="youtube-row">
-            <div class="youtube-thumb">BibleMapped Channel</div>
-            <div class="youtube-copy">
-              <h3 class="youtube-title">BibleMapped on YouTube</h3>
-              <p>
-                Watch BibleMapped for visual explainers that break down the Bible through maps, context, and story. Each video connects back to what you are exploring here.
-              </p>
-              <a class="youtube-link"
-                 href="https://youtube.com/@biblemapped?si=AjdmH5kr0JrC2Nck"
-                 target="_blank"
-                 rel="noopener noreferrer">
-                 Visit the Channel →
-              </a>
-            </div>
-          </div>
+        <div class="section-head">
+          <p class="eyebrow">Explore</p>
+          <h2>Learn the Bible through different pathways.</h2>
+        </div>
+        <div class="category-grid">
+          <a class="category-card" href="books/index.html">
+            <h3>Books</h3>
+            <p>Author, context, meaning, order, key verse, characters, and Jesus connection.</p>
+          </a>
+          <a class="category-card" href="characters/index.html">
+            <h3>Characters</h3>
+            <p>Who they are, where they’re from, why they matter, and how their story fits.</p>
+          </a>
+          <a class="category-card" href="places/index.html">
+            <h3>Places</h3>
+            <p>Map the story through cities, kingdoms, journeys, and regions.</p>
+          </a>
+          <a class="category-card" href="themes/index.html">
+            <h3>Themes</h3>
+            <p>Covenant, kingdom, exile, Messiah, temple, sacrifice, and more.</p>
+          </a>
+          <a class="category-card" href="case-studies/index.html">
+            <h3>Case Studies</h3>
+            <p>Story-first explainers that answer major Bible questions clearly.</p>
+          </a>
+          <a class="category-card" href="traditions/index.html">
+            <h3>Bible Traditions</h3>
+            <p>Protestant, Catholic, Orthodox, and the history of the biblical canon.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Featured</p>
+          <h2>Case studies people can click into.</h2>
+        </div>
+        <div class="card-grid two">
+          <a class="feature-card" href="case-studies/why-is-genesis-first.html">
+            <span class="tag">Case Study</span>
+            <h3>Why is Genesis first?</h3>
+            <p>Why the Bible opens with beginnings, covenant, and the architecture of the story.</p>
+          </a>
+          <a class="feature-card" href="case-studies/why-do-catholics-have-73-books.html">
+            <span class="tag">Canon</span>
+            <h3>Why do Catholics have 73 books?</h3>
+            <p>A map through tradition, canon history, and why the difference matters.</p>
+          </a>
         </div>
       </div>
     </section>
   </main>
 
-  <div class="overlay-backdrop" id="overlayBackdrop"></div>
-
-  <aside class="overlay" id="overlay">
-    <div class="overlay-header">
-      <div class="overlay-title-wrap">
-        <div class="book-label" id="overlayType">Book</div>
-        <h2 id="overlayTitle">Genesis</h2>
-        <p class="overlay-intro" id="overlayIntro"></p>
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <div>
+        <strong>BibleMapped</strong>
+        <p>Understand the Bible through place, context, and story.</p>
       </div>
-      <button class="overlay-close" id="overlayClose" aria-label="Close teaching panel">Close</button>
+      <div class="footer-links">
+        <a href="books/index.html">Books</a>
+        <a href="characters/index.html">Characters</a>
+        <a href="places/index.html">Places</a>
+        <a href="case-studies/index.html">Case Studies</a>
+      </div>
     </div>
-    <div class="overlay-scroll">
-      <div class="overlay-grid two" id="overlayMeta"></div>
-      <div class="overlay-grid" id="overlayBlocks"></div>
-    </div>
-  </aside>
-<script src="src/app.js"></script>
+  </footer>
 </body>
 </html>
