@@ -3,108 +3,170 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BibleMapped</title>
+  <title>Genesis | BibleMapped</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Cormorant+Garamond:wght@500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Cormorant+Garamond:wght@600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../src/styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand">
-        <span class="main">Bible</span>
-        <span class="sub">Mapped</span>
-      </div>
-      <div class="tagline">Explaining the Bible through maps.</div>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="../index.html">BibleMapped</a>
+      <nav class="main-nav">
+        <a href="../index.html#start-here">Start Here</a>
+        <a href="index.html">Books</a>
+        <a href="../characters/index.html">Characters</a>
+        <a href="../places/index.html">Places</a>
+        <a href="../themes/index.html">Themes</a>
+        <a href="../case-studies/index.html">Case Studies</a>
+        <a href="../traditions/index.html">Bible Traditions</a>
+      </nav>
     </div>
   </header>
 
   <main>
     <section class="hero">
-      <div class="container">
-        <div class="hero-card">
-          <div class="eyebrow">BibleMapped</div>
-          <h1>Explore the Bible like a map.</h1>
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Book Study</p>
+          <h1>Genesis</h1>
           <p class="hero-copy">
-            Start with the Bible, open the Old Testament and New Testament, then follow each branch into books and teaching. Click a book to open a full study panel.
+            Genesis is the book of beginnings. It opens the Bible with creation, rebellion, judgment, covenant, family, land, and promise. It introduces the world that the rest of Scripture will build on.
           </p>
-          <div class="hero-links">
-            <a href="#map">What is the Bible</a>
-            <a href="#youtube">YouTube</a>
+        </div>
+
+        <div class="hero-panel">
+          <div class="hero-card">
+            <span class="tag">Quick Facts</span>
+            <p><strong>Meaning:</strong> beginnings / origins</p>
+            <p><strong>Category:</strong> Torah</p>
+            <p><strong>Testament:</strong> Old Testament</p>
+            <p><strong>Key verse:</strong> Genesis 1:1</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="map">
+    <section class="section">
       <div class="container">
-        <div class="panel-head">
-          <div>
-            <div class="section-label">Interactive structure</div>
-            <h2 class="section-title">A mind map built out of books.</h2>
-            <p class="panel-copy">
-              Click the Bible to open the Testaments. Click a Testament to open the book groups. Click a group to reveal books. Click a book to open the teaching panel.
-            </p>
+        <div class="card-grid two">
+          <div class="feature-card">
+            <span class="tag">Author</span>
+            <h3>Traditional author</h3>
+            <p>Moses is the traditional author in Jewish and Christian understanding, though discussions about composition and final form are broader in scholarship.</p>
           </div>
-        </div>
 
-        <div class="mindmap-shell">
-          <section class="map-panel">
-            <div class="map-canvas" id="mapCanvas"></div>
-            <div class="legend">
-              <div class="legend-pill">Bible → Testaments → Groups → Books</div>
-              <div class="legend-pill">Books open a teaching panel</div>
-              <div class="legend-pill">Characters can be added next inside each book</div>
-            </div>
-          </section>
+          <div class="feature-card">
+            <span class="tag">Place</span>
+            <h3>Where was it written?</h3>
+            <p>Traditionally associated with Moses and the wilderness period, though the book’s story world stretches from Eden to Mesopotamia, Canaan, and Egypt.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="youtube">
+    <section class="section alt">
       <div class="container">
-        <div class="youtube-panel">
-          <div class="section-label">YouTube</div>
-          <h2 class="section-title">Bring the map into video.</h2>
-          <div class="youtube-row">
-            <div class="youtube-thumb">BibleMapped Channel</div>
-            <div class="youtube-copy">
-              <h3 class="youtube-title">BibleMapped on YouTube</h3>
-              <p>
-                Watch BibleMapped for visual explainers that break down the Bible through maps, context, and story. Each video connects back to what you are exploring here.
-              </p>
-              <a class="youtube-link"
-                 href="https://youtube.com/@biblemapped?si=AjdmH5kr0JrC2Nck"
-                 target="_blank"
-                 rel="noopener noreferrer">
-                 Visit the Channel →
-              </a>
-            </div>
+        <div class="section-head">
+          <p class="eyebrow">Context</p>
+          <h2>What Genesis is doing in the Bible.</h2>
+        </div>
+
+        <div class="card-grid two">
+          <div class="feature-card">
+            <h3>Main theme</h3>
+            <p>Genesis lays the foundation for the Bible’s story: God creates, humanity falls, judgment comes, and covenant promise begins moving through one family.</p>
           </div>
+
+          <div class="feature-card">
+            <h3>Why it is first</h3>
+            <p>Genesis stands first because it establishes the categories the rest of the Bible depends on: creation, sin, blessing, covenant, land, nations, and promise.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Main Characters</p>
+          <h2>The people who shape the book.</h2>
+        </div>
+
+        <div class="card-grid three">
+          <a class="info-card" href="../characters/abraham.html">
+            <h3>Abraham</h3>
+            <p>The covenant figure through whom blessing to the nations is promised.</p>
+          </a>
+
+          <a class="info-card" href="#">
+            <h3>Sarah</h3>
+            <p>The matriarch whose story is tied to promise, barrenness, and fulfillment.</p>
+          </a>
+
+          <a class="info-card" href="#">
+            <h3>Joseph</h3>
+            <p>The son whose descent into Egypt becomes the bridge to Exodus.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Jesus Connection</p>
+          <h2>How Genesis points forward.</h2>
+        </div>
+
+        <div class="feature-card">
+          <p>
+            Genesis introduces the patterns that the New Testament will later interpret through Christ: the promised seed, blessing to the nations, sacrifice, covenant, kingship, and the hope that God will undo the curse.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Related Paths</p>
+          <h2>Keep exploring.</h2>
+        </div>
+
+        <div class="card-grid three">
+          <a class="info-card" href="../characters/abraham.html">
+            <h3>Read Abraham</h3>
+            <p>Follow the patriarch who becomes central to covenant promise.</p>
+          </a>
+
+          <a class="info-card" href="../case-studies/why-is-genesis-first.html">
+            <h3>Why is Genesis first?</h3>
+            <p>See why this book stands at the front of the canon.</p>
+          </a>
+
+          <a class="info-card" href="../places/index.html">
+            <h3>Mapped places</h3>
+            <p>Ur, Canaan, Egypt, and the geography behind Genesis.</p>
+          </a>
         </div>
       </div>
     </section>
   </main>
 
-  <div class="overlay-backdrop" id="overlayBackdrop"></div>
-
-  <aside class="overlay" id="overlay">
-    <div class="overlay-header">
-      <div class="overlay-title-wrap">
-        <div class="book-label" id="overlayType">Book</div>
-        <h2 id="overlayTitle">Genesis</h2>
-        <p class="overlay-intro" id="overlayIntro"></p>
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <div>
+        <strong>BibleMapped</strong>
+        <p>Understand the Bible through place, context, and story.</p>
       </div>
-      <button class="overlay-close" id="overlayClose" aria-label="Close teaching panel">Close</button>
+      <div class="footer-links">
+        <a href="index.html">Books</a>
+        <a href="../characters/index.html">Characters</a>
+        <a href="../index.html">Home</a>
+      </div>
     </div>
-    <div class="overlay-scroll">
-      <div class="overlay-grid two" id="overlayMeta"></div>
-      <div class="overlay-grid" id="overlayBlocks"></div>
-    </div>
-  </aside>
-
-  <script src="data.js"></script>
-  <script src="script.js"></script>
+  </footer>
 </body>
 </html>
