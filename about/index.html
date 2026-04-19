@@ -1,1 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bible Mapped | About Me</title>
+  <style>
+    /*
+      To use Editorial Old on your live site:
+      1) Add your font files to a /fonts folder
+      2) Uncomment the @font-face block below
 
+      @font-face {
+        font-family: 'PPEditorialOld';
+        src: url('../fonts/PPEditorialOld-Regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+      }
+    */
+
+    :root {
+      --bg: #f8f3eb;
+      --paper: rgba(255, 255, 255, 0.86);
+      --card: #fbf6ef;
+      --line: #d8cdc0;
+      --text: #241d18;
+      --muted: #6f6054;
+      --accent: #9f1d1d;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'PPEditorialOld', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+      line-height: 1.75;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      min-height: 100vh;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .top {
+      padding: 48px 0 28px;
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      color: #8a7563;
+      font-size: 0.85rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      font-weight: 500;
+    }
+
+    .intro-rule {
+      margin-top: 26px;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 0.95fr 1.15fr;
+      gap: 42px;
+      align-items: start;
+      padding: 32px 0 58px;
+    }
+
+    .photo-card,
+    .text-card,
+    .caption-card {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      overflow: hidden;
+    }
+
+    .photo-card {
+      background: #efe5d8;
+      box-shadow: 0 20px 50px -30px rgba(46, 30, 19, 0.4);
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 4 / 5;
+      background: linear-gradient(135deg, #eadfce, #f9f4ec);
+    }
+
+    .caption-card {
+      margin-top: 18px;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 20px 22px;
+      color: #473b33;
+      font-size: 1.05rem;
+    }
+
+    .text-card {
+      background: var(--paper);
+      padding: 30px;
+      box-shadow: 0 20px 50px -30px rgba(46, 30, 19, 0.22);
+    }
+
+    .lead {
+      margin-top: 0;
+      font-size: clamp(1.5rem, 2.7vw, 2.15rem);
+      line-height: 1.45;
+      color: #1f1915;
+    }
+
+    .text-card p {
+      margin: 0 0 24px;
+      font-size: 1.18rem;
+    }
+
+    .highlight {
+      background: var(--card);
+      border: 1px solid #eadbc8;
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    .signoff {
+      padding-top: 8px;
+    }
+
+    .signoff .label {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .signoff .name {
+      margin: 6px 0 0;
+      font-size: 1.8rem;
+    }
+
+    .social-bar {
+      color: #fff;
+      padding: 24px 0;
+      display: block;
+      text-decoration: none;
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+
+    .social-bar:hover {
+      transform: translateY(-1px);
+      opacity: 0.98;
+    }
+
+    .social-youtube {
+      background: #9f1d1d;
+    }
+
+    .social-tiktok {
+      background: #111;
+    }
+
+    .social-instagram {
+      background: #e95aa6;
+    }
+
+    .social-inner {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .social-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .social-text {
+      margin: 0;
+      font-size: clamp(1.2rem, 2vw, 1.7rem);
+      line-height: 1.4;
+    }
+
+    .social-arrow {
+      font-size: 1.8rem;
+      line-height: 1;
+      opacity: 0.9;
+    }
+
+    .icon {
+      width: 28px;
+      height: 28px;
+      flex: 0 0 28px;
+      display: inline-block;
+    }
+
+    .icon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      fill: currentColor;
+    }
+
+    @media (max-width: 960px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .text-card {
+        padding: 24px;
+      }
+
+      .social-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 24px, 1180px);
+      }
+
+      .top {
+        padding-top: 30px;
+      }
+
+      .layout {
+        gap: 24px;
+        padding-top: 24px;
+        padding-bottom: 42px;
+      }
+
+      .text-card p {
+        font-size: 1.06rem;
+      }
+
+      .highlight {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <main class="container">
+      <section class="top">
+        <p class="eyebrow">Bible Mapped</p>
+        <h1>About Me</h1>
+        <div class="intro-rule"></div>
+      </section>
+
+      <section class="layout">
+        <div>
+          <div class="photo-card">
+            <img src="../assets/calvin-photo.jpg" alt="Calvin smiling in front of a large map" />
+          </div>
+          <div class="caption-card">Calvin, serving behind Bible Mapped</div>
+        </div>
+
+        <article class="text-card">
+          <p class="lead">I’m Calvin, and I have the privilege of serving behind Bible Mapped.</p>
+
+          <p>
+            The Bible is often treated as if it floats above history — important, certainly, but abstract.
+            For many readers, that can make Scripture feel distant. But the Bible is deeply rooted in real
+            places, real people, real culture, and real history. And when we begin to see that, its message
+            becomes clearer.
+          </p>
+
+          <p>That is the heart behind <strong>Bible Mapped</strong>.</p>
+
+          <p>
+            <strong>Bible Mapped</strong> exists to help people see that the Bible is not a disconnected
+            collection of stories, but one unified story that ultimately points to <strong>Jesus Christ</strong>.
+            Through maps, history, language, context, and visual storytelling, the goal is to help bring
+            Scripture into focus and make its meaning easier to see.
+          </p>
+
+          <div class="highlight">
+            <p>
+              The people inside the Bible did not stand where we stand now. Abraham did not have the full story
+              in his hands. Moses did not read the finished pages of Scripture the way we can. But we can. And
+              that is a gift. What we hold is not a vague spiritual tradition floating above history. It is a
+              real story, unfolding through real people, in real places, across real time. And all of it points
+              to <strong>Jesus Christ</strong> — the Creator, the center of the story, and the One who invites us
+              to know Him.
+            </p>
+          </div>
+
+          <p style="margin-top: 24px;">
+            My prayer is that <strong>Bible Mapped</strong> helps you see His Word more clearly, and through it,
+            see Him more fully. I invite you to send your questions to
+            <a href="mailto:BibleMapped@gmail.com">BibleMapped@gmail.com</a>
+            — we may even make a video answering them.
+          </p>
+
+          <div class="signoff">
+            <p class="label">In Christ’s love,</p>
+            <p class="name">Calvin</p>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <a class="social-bar social-youtube" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noreferrer" aria-label="Visit Bible Mapped on YouTube">
+      <div class="container social-inner">
+        <div class="social-left">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 6.5v11l9-5.5-9-5.5z" />
+            </svg>
+          </span>
+          <p class="social-text">Watch our videos on YouTube</p>
+        </div>
+        <span class="social-arrow" aria-hidden="true">→</span>
+      </div>
+    </a>
+
+    <a class="social-bar social-tiktok" href="https://www.tiktok.com/@biblemapped?is_from_webapp=1&amp;sender_device=pc" target="_blank" rel="noreferrer" aria-label="Visit Bible Mapped on TikTok">
+      <div class="container social-inner">
+        <div class="social-left">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.5 3c.4 2 1.6 3.6 3.5 4.4V10c-1.3 0-2.5-.4-3.5-1.1v5.5c0 3.6-2.8 6.1-6.1 6.1-2.1 0-4-.9-5.2-2.5 1 .6 2 .9 3.1.9 2.2 0 4-1.8 4-4V3h4.2z" />
+            </svg>
+          </span>
+          <p class="social-text">Follow us on TikTok</p>
+        </div>
+        <span class="social-arrow" aria-hidden="true">→</span>
+      </div>
+    </a>
+
+    <a class="social-bar social-instagram" href="https://www.instagram.com/biblemapped/" target="_blank" rel="noreferrer" aria-label="Visit Bible Mapped on Instagram">
+      <div class="container social-inner">
+        <div class="social-left">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7zm10.25 1.65a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6z" />
+            </svg>
+          </span>
+          <p class="social-text">Follow us on Instagram</p>
+        </div>
+        <span class="social-arrow" aria-hidden="true">→</span>
+      </div>
+    </a>
+  </div>
+</body>
+</html>
