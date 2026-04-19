@@ -12,7 +12,7 @@
 
       @font-face {
         font-family: 'PPEditorialOld';
-        src: url('../fonts/PPEditorialOld-Regular.woff2') format('woff2');
+        src: url('./fonts/PPEditorialOld-Regular.woff2') format('woff2');
         font-weight: 400;
         font-style: normal;
       }
@@ -26,6 +26,7 @@
       --text: #241d18;
       --muted: #6f6054;
       --accent: #9f1d1d;
+      --accent-dark: #7f1717;
     }
 
     * {
@@ -178,7 +179,7 @@
     }
 
     .social-youtube {
-      background: #9f1d1d;
+      background: var(--accent);
     }
 
     .social-tiktok {
@@ -280,47 +281,76 @@
 
       <section class="layout">
         <div>
+          <!--
+            Replace calvin-photo.jpg with your actual image file name.
+            Keep the image in the same folder as this index.html file.
+          -->
           <div class="photo-card">
-            <img src="../assets/calvin-photo.jpg.png" alt="Calvin smiling in front of a large map" />
+            <img src="calvin-photo.jpg" alt="Calvin smiling in front of a large map" />
           </div>
           <div class="caption-card">Calvin, serving behind Bible Mapped</div>
         </div>
 
         <article class="text-card">
-          <p class="lead">I’m Calvin, and I have the privilege of serving behind Bible Mapped.</p>
+          <p class="lead">Welcome, I’m Calvin, and I have the privilege of stewarding the vision behind Bible Mapped.</p>
 
           <p>
-            The Bible is often treated as if it floats above history — important, certainly, but abstract.
-            For many readers, that can make Scripture feel distant. But the Bible is deeply rooted in real
-            places, real people, real culture, and real history. And when we begin to see that, its message
-            becomes clearer.
+            The Bible is often treated as if it floats above history. Important, certainly. But still abstract.
+            And for many people, that can make Scripture feel distant.
           </p>
 
-          <p>That is the heart behind <strong>Bible Mapped</strong>.</p>
+          <p>
+            But the Bible is not distant.
+          </p>
 
           <p>
-            <strong>Bible Mapped</strong> exists to help people see that the Bible is not a disconnected
-            collection of stories, but one unified story that ultimately points to <strong>Jesus Christ</strong>.
-            Through maps, history, language, context, and visual storytelling, the goal is to help bring
-            Scripture into focus and make its meaning easier to see.
+            It is rooted in real places, real people, real culture, and real history. And when we begin to see
+            that more clearly, its message becomes clearer too.
+          </p>
+
+          <p>
+            That is the heart behind <strong>Bible Mapped</strong>.
+          </p>
+
+          <p>
+            <strong>Bible Mapped</strong> exists to help people understand that the Bible is not a disconnected
+            collection of stories. It is one unified story. A real story. And from beginning to end, it points to
+            <strong>Jesus Christ</strong>.
+          </p>
+
+          <p>
+            Through maps, history, language, context, and visual storytelling, my goal is to help bring Scripture
+            into focus in a way that feels clear, meaningful, and alive.
           </p>
 
           <div class="highlight">
             <p>
               The people inside the Bible did not stand where we stand now. Abraham did not have the full story
-              in his hands. Moses did not read the finished pages of Scripture the way we can. But we can. And
-              that is a gift. What we hold is not a vague spiritual tradition floating above history. It is a
-              real story, unfolding through real people, in real places, across real time. And all of it points
-              to <strong>Jesus Christ</strong> — the Creator, the center of the story, and the One who invites us
-              to know Him.
+              in his hands. Moses did not read the finished pages of Scripture the way we can.
+            </p>
+            <p>
+              But we can.
+            </p>
+            <p>
+              And that is a gift.
+            </p>
+            <p>
+              What we hold is not a vague spiritual tradition floating above history. It is a real story,
+              unfolding through real people, in real places, across real time. And all of it points to
+              <strong>Jesus Christ</strong> — the Creator, the center of the story, and the One who invites us to
+              know Him.
             </p>
           </div>
 
           <p style="margin-top: 24px;">
             My prayer is that <strong>Bible Mapped</strong> helps you see His Word more clearly, and through it,
-            see Him more fully. I invite you to send your questions to
-            <a href="mailto:BibleMapped@gmail.com">BibleMapped@gmail.com</a>
-            — we may even make a video answering them.
+            see Him more fully.
+          </p>
+
+          <p>
+            And if you have questions, I’d love to hear from you. You can reach out at
+            <a href="mailto:BibleMapped@gmail.com">BibleMapped@gmail.com</a>. We may even make a video
+            answering your question.
           </p>
 
           <div class="signoff">
