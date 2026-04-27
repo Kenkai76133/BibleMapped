@@ -53,22 +53,81 @@
     .hero{padding:0 0 42px;display:grid;grid-template-columns:1.04fr .96fr;gap:34px;align-items:start;margin-top:-28px;position:relative;z-index:3}.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:rgba(255,253,247,.88);color:var(--muted);border-radius:999px;padding:7px 12px;font-size:.78rem;font-weight:900;letter-spacing:.07em;text-transform:uppercase}.dot{width:8px;height:8px;border-radius:50%;background:var(--purple)}
 
     .hero-copy{min-width:0}
-    .hero-video{min-width:0;padding-top:52px}
+    .hero-video{
+      min-width:0;
+      padding-top:32px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:14px;
+    }
+
     .video-frame{
       position:relative;
-      width:100%;
-      aspect-ratio:16/9;
-      border:1px solid var(--line);
-      border-radius:22px;
+      width:min(100%,360px);
+      aspect-ratio:9/16;
+      border:1px solid rgba(255,0,0,.32);
+      border-radius:24px;
       overflow:hidden;
       background:#000;
-      box-shadow:0 18px 40px rgba(17,28,58,.10);
+      box-shadow:
+        0 18px 40px rgba(17,28,58,.10),
+        0 0 0 7px rgba(255,0,0,.045);
     }
+
+    .video-frame::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      z-index:2;
+      border-radius:24px;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);
+    }
+
     .video-frame iframe{
       width:100%;
       height:100%;
       border:0;
       display:block;
+    }
+
+    .youtube-cta{
+      width:min(100%,360px);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      border:1px solid rgba(255,0,0,.24);
+      border-radius:999px;
+      background:rgba(255,253,247,.86);
+      padding:9px 9px 9px 15px;
+      box-shadow:0 12px 26px rgba(17,28,58,.06);
+    }
+
+    .youtube-cta span{
+      color:var(--ink);
+      font-size:.88rem;
+      font-weight:900;
+      letter-spacing:.01em;
+    }
+
+    .youtube-button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:36px;
+      padding:8px 13px;
+      border-radius:999px;
+      background:#ff0033;
+      color:white;
+      font-size:.82rem;
+      font-weight:950;
+      box-shadow:0 10px 22px rgba(255,0,51,.18);
+    }
+
+    .youtube-button:hover{
+      filter:brightness(.95);
     }
 
     h1,h2,h3{margin:0;line-height:1.08;letter-spacing:-.045em}h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(4.4rem,12vw,9rem);margin-top:18px}h2{font-family:Georgia,"Times New Roman",serif;font-size:clamp(2.1rem,5vw,4rem);font-weight:500}h3{font-size:1.25rem}.lede{max-width:720px;margin:22px 0 0;font-size:clamp(1.08rem,2vw,1.38rem);color:#36342e}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{border:1px solid var(--ink);background:var(--ink);color:white;border-radius:999px;padding:12px 18px;font-weight:900;cursor:pointer}.btn.secondary{background:transparent;color:var(--ink);border-color:var(--line)}
@@ -125,7 +184,7 @@
     .webster-tag{display:inline-flex;border-radius:999px;padding:4px 8px;font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;background:rgba(46,107,79,.12);color:var(--green);margin-top:8px}
     .place-modern{font-weight:900;color:var(--ink)}
     .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}.info{padding:24px}.info p{color:var(--muted)}.warning{border-left:5px solid var(--red)}.belief{border-left:5px solid var(--green)}.footer{border-top:1px solid var(--line);padding:44px 0 65px;color:var(--muted)}
-    @media(max-width:1050px){.hero{grid-template-columns:1fr}.hero-video{padding-top:0}.genesis-stats-row{grid-template-columns:1fr 1fr}.reader-grid{grid-template-columns:1fr}.panel,.chapter-tools{position:static}.framework{grid-template-columns:1fr 1fr}.framework .f{border-bottom:1px solid var(--line)}.two{grid-template-columns:1fr}}@media(max-width:650px){.genesis-hero-visual{min-height:260px;background-position:center top}.hero{margin-top:-14px}.hero-video{padding-top:0}.genesis-stats-row{grid-template-columns:1fr}.framework,.stats{grid-template-columns:1fr}.framework .f{border-right:0}.reader{padding:18px}.scripture{font-size:1.05rem}.mapcard{min-height:auto}}
+    @media(max-width:1050px){.hero{grid-template-columns:1fr}.hero-video{padding-top:0}.genesis-stats-row{grid-template-columns:1fr 1fr}.reader-grid{grid-template-columns:1fr}.panel,.chapter-tools{position:static}.framework{grid-template-columns:1fr 1fr}.framework .f{border-bottom:1px solid var(--line)}.two{grid-template-columns:1fr}}@media(max-width:650px){.genesis-hero-visual{min-height:260px;background-position:center top}.hero{margin-top:-14px}.hero-video{padding-top:0}.video-frame,.youtube-cta{width:min(100%,330px)}.genesis-stats-row{grid-template-columns:1fr}.framework,.stats{grid-template-columns:1fr}.framework .f{border-right:0}.reader{padding:18px}.scripture{font-size:1.05rem}.mapcard{min-height:auto}}
   </style>
 </head>
 <body>
@@ -160,6 +219,11 @@
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen>
           </iframe>
+        </div>
+
+        <div class="youtube-cta" aria-label="Watch Bible Mapped on YouTube">
+          <span>Watch us on YouTube</span>
+          <a class="youtube-button" href="https://www.youtube.com/watch?v=1qighUycmuY" target="_blank" rel="noreferrer">Watch →</a>
         </div>
       </aside>
     </div>
