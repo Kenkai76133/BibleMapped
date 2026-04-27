@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+from pathlib import Path
+
+updated_html = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -68,7 +70,6 @@
       margin: 0 auto;
     }
 
-    /* Top brand bar */
     .brand-bar {
       background: var(--purple);
       color: white;
@@ -114,7 +115,6 @@
       transform: translateY(-1px);
     }
 
-    /* Hero */
     .hero {
       background: var(--cloud);
       padding: 0 0 46px;
@@ -171,10 +171,7 @@
     }
 
     .hero-grid {
-      display: grid;
-      grid-template-columns: 0.92fr 1.08fr;
-      gap: 28px;
-      align-items: end;
+      display: block;
       margin-top: -12px;
       position: relative;
       z-index: 5;
@@ -202,11 +199,11 @@
     }
 
     .hero-title {
-      max-width: 920px;
+      max-width: 100%;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 10px;
+      gap: 12px;
       font-size: clamp(3rem, 7vw, 6.6rem);
       line-height: 0.98;
       letter-spacing: -0.075em;
@@ -214,9 +211,9 @@
     }
 
     .title-line {
-      display: inline;
-      width: fit-content;
-      padding: 0.02em 0.12em 0.08em;
+      display: block;
+      width: 100%;
+      padding: 0.06em 0.16em 0.1em;
       box-decoration-break: clone;
       -webkit-box-decoration-break: clone;
     }
@@ -236,21 +233,63 @@
       color: white;
     }
 
-    .hero-copy {
-      max-width: 560px;
-      color: var(--ink);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.05rem;
-      line-height: 1.72;
-      border-top: 2px solid var(--charcoal);
-      padding-top: 22px;
+    .feature-image-wrap {
+      width: 100%;
+      margin-top: 22px;
     }
 
-    .hero-copy p + p {
-      margin-top: 18px;
+    .feature-image-frame {
+      width: 100%;
+      min-height: clamp(220px, 32vw, 420px);
+      background-image: url("../assets/about-feature-image.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+      background-color: var(--paper);
     }
 
-    /* Meet Calvin */
+    .feature-image-frame::before {
+      content: "Add about-feature-image.png";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 950;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      background:
+        linear-gradient(rgba(248,247,242,0.52), rgba(248,247,242,0.52)),
+        repeating-linear-gradient(90deg, rgba(21,21,21,0.05) 0 1px, transparent 1px 48px),
+        repeating-linear-gradient(0deg, rgba(21,21,21,0.04) 0 1px, transparent 1px 48px),
+        var(--paper);
+      z-index: 1;
+    }
+
+    .feature-image-frame.has-image::before {
+      display: none;
+    }
+
+    .feature-image-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        to bottom,
+        rgba(248, 247, 242, 0.04) 0%,
+        rgba(248, 247, 242, 0.00) 55%,
+        rgba(248, 247, 242, 0.16) 78%,
+        rgba(248, 247, 242, 0.32) 100%
+      );
+      z-index: 2;
+    }
+
     .profile-band {
       padding: 0 0 44px;
       background: var(--cloud);
@@ -337,7 +376,6 @@
       border: 1px solid rgba(21, 21, 21, 0.08);
     }
 
-    /* Gospel */
     .gospel-section {
       background: var(--purple);
       color: white;
@@ -514,7 +552,6 @@
       font-size: 0.97rem !important;
     }
 
-    /* Mission */
     .mission-section {
       background: var(--cloud);
       padding: 64px 0 74px;
@@ -606,7 +643,6 @@
     }
 
     @media (max-width: 900px) {
-      .hero-grid,
       .gospel-header,
       .mission-grid,
       .profile-inner,
@@ -649,6 +685,10 @@
         font-size: clamp(2.2rem, 13vw, 4rem);
       }
 
+      .feature-image-frame {
+        min-height: 180px;
+      }
+
       .rail-window {
         min-height: 500px;
       }
@@ -677,22 +717,15 @@
       <div class="hero-visual" aria-label="Bible Mapped editorial illustration"></div>
 
       <div class="container hero-grid">
-        <div>
-          <span class="eyebrow">About</span>
-          <h1 class="hero-title">
-            <span class="title-line title-purple">Bible Mapped helps you</span>
-            <span class="title-line title-red">understand where</span>
-            <span class="title-line title-navy">Scripture happened.</span>
-          </h1>
-        </div>
+        <span class="eyebrow">About</span>
+        <h1 class="hero-title">
+          <span class="title-line title-purple">Bible Mapped helps you</span>
+          <span class="title-line title-red">understand where</span>
+          <span class="title-line title-navy">Scripture happened.</span>
+        </h1>
 
-        <div class="hero-copy">
-          <p>
-            Bible Mapped is a visual Bible learning project built around place, context, meaning, people, books, maps, and the story that leads to Jesus Christ.
-          </p>
-          <p>
-            The Bible did not happen nowhere. It happened somewhere. And when you find the place, you start to see the meaning.
-          </p>
+        <div class="feature-image-wrap">
+          <div class="feature-image-frame" aria-label="Bible Mapped featured image"></div>
         </div>
       </div>
     </section>
@@ -706,10 +739,19 @@
         <div class="profile-meta">
           <h2>Meet Calvin</h2>
           <p>
-            I am a Christian, a husband, a father, and the creator of Bible Mapped. I was saved in 2008, and ever since then, I have loved telling people about Jesus Christ.
+            I am a Christian, a husband, a father, and the heart behind Bible Mapped.
           </p>
           <p>
-            I spent time in Bible college, later stepped away, and became fascinated again with the Bible — not just as a book of ideas, but as a real story grounded in places, people, history, language, and meaning. Bible Mapped is my way of helping people slow down, look closer, and see how Scripture points to Christ.
+            I was saved in 2008, and since then, I have loved telling people about Jesus Christ. Over the years, I’ve walked through faith, doubt, Bible college, church hurt, and questions about God. But through it all, I keep coming back to this conviction:
+          </p>
+          <p>
+            <strong>God’s Word is true, even when man fails.</strong>
+          </p>
+          <p>
+            Bible Mapped was born from that journey.
+          </p>
+          <p>
+            It exists to help people slow down, look closer, and see the Bible as a real story grounded in real places, real people, real history, language, and meaning — all pointing to Jesus Christ.
           </p>
 
           <div class="social-row" aria-label="Follow Bible Mapped">
@@ -935,6 +977,19 @@
 
       showRailStep(Number(button.dataset.next));
     });
+
+    const featureImageFrame = document.querySelector(".feature-image-frame");
+    if (featureImageFrame) {
+      const testImage = new Image();
+      testImage.onload = () => featureImageFrame.classList.add("has-image");
+      testImage.src = "../assets/about-feature-image.png";
+    }
   </script>
 </body>
 </html>
+"""
+
+output_path = Path("/mnt/data/about-index-with-feature-image-slot.html")
+output_path.write_text(updated_html, encoding="utf-8")
+print(f"Created: {output_path}")
+print("Feature image slot path: ../assets/about-feature-image.png")
