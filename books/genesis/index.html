@@ -58,6 +58,11 @@
     .framework{display:grid;grid-template-columns:repeat(5,1fr);overflow:hidden}.framework .f{padding:22px;border-right:1px solid var(--line);min-height:162px;display:flex;flex-direction:column;justify-content:space-between}.framework .f:last-child{border-right:0}.f small{color:var(--muted);font-size:.75rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.f p{margin:16px 0 0;color:var(--muted);font-size:.92rem}
     .reader-grid{display:grid;grid-template-columns:280px 1fr 330px;gap:18px;align-items:start}.chapter-tools{position:sticky;top:24px;display:grid;gap:12px}.search{width:100%;border:1px solid var(--line);border-radius:999px;background:var(--paper);padding:12px 14px;font-weight:700}.chapter-list{max-height:70vh;overflow:auto;padding-right:4px;display:grid;gap:8px}.chapter-btn{border:1px solid var(--line);background:var(--paper);border-radius:15px;padding:12px;text-align:left;cursor:pointer;font-weight:900;color:var(--ink)}.chapter-btn.active{background:var(--purple);border-color:var(--purple);color:#fff}.chapter-btn span{display:block;font-size:.82rem;font-weight:600;opacity:.74;margin-top:3px}.reader{padding:26px}.reader-top{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:start;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:16px}.reader-top p{margin:10px 0 0;color:var(--muted)}.scripture{font-family:Georgia,"Times New Roman",serif;font-size:1.13rem;line-height:1.9}.verse{margin:0 0 1.05em}.vnum{color:var(--purple);font-family:Inter,sans-serif;font-size:.72rem;font-weight:900;vertical-align:super;margin-right:5px}.word{font:inherit;color:inherit;border:0;background:transparent;padding:0 1px;margin:0;cursor:pointer;border-radius:5px}.word:hover,.word:focus{background:rgba(123,44,255,.13);outline:1px solid rgba(123,44,255,.25)}mark{background:#efe0ff;color:inherit;border-radius:4px;padding:0 2px}
     .panel{padding:22px;position:sticky;top:24px}.panel-empty{color:var(--muted)}.word-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}.pill{display:inline-flex;border-radius:999px;background:rgba(123,44,255,.1);color:var(--purple);padding:4px 8px;font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.note-row{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}.note-row strong{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}.note-row p{margin:0;color:#38352f}.refs{display:flex;flex-wrap:wrap;gap:6px}.ref{border:1px solid rgba(255,255,255,.2);background:var(--navy);color:#fff;border-radius:999px;padding:4px 8px;font-size:.76rem;font-weight:800;cursor:pointer}.mini{font-size:.88rem;color:var(--muted);margin-top:10px}.missing{border-left:4px solid var(--gold);padding-left:12px;color:var(--muted);margin-top:12px}
+
+    .place-card{border-left:5px solid var(--purple);padding-left:12px}
+    .place-confidence{display:inline-flex;border-radius:999px;padding:4px 8px;font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;background:rgba(184,135,47,.14);color:var(--gold);margin-top:8px}
+    .webster-tag{display:inline-flex;border-radius:999px;padding:4px 8px;font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;background:rgba(46,107,79,.12);color:var(--green);margin-top:8px}
+    .place-modern{font-weight:900;color:var(--ink)}
     .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}.info{padding:24px}.info p{color:var(--muted)}.warning{border-left:5px solid var(--red)}.belief{border-left:5px solid var(--green)}.footer{border-top:1px solid var(--line);padding:44px 0 65px;color:var(--muted)}
     @media(max-width:1050px){.hero,.reader-grid{grid-template-columns:1fr}.panel,.chapter-tools{position:static}.framework{grid-template-columns:1fr 1fr}.framework .f{border-bottom:1px solid var(--line)}.two{grid-template-columns:1fr}}@media(max-width:650px){.genesis-hero-visual{min-height:260px;background-position:center top}.hero{margin-top:-14px}.framework,.stats{grid-template-columns:1fr}.framework .f{border-right:0}.reader{padding:18px}.scripture{font-size:1.05rem}.mapcard{min-height:auto}}
   </style>
@@ -69,11 +74,11 @@
       <div><span class="eyebrow"><span class="dot"></span> Full KJV Book Reader</span><h1>Genesis</h1><p class="lede">Read every chapter of Genesis in the King James Version. Click any word in the Scripture to open its meaning, grammar note, and concordance trail inside Genesis.</p><div class="actions"><a class="btn" href="#reader">Open Genesis</a><a class="btn secondary" href="#framework">See study system</a><a class="btn secondary" href="../index.html">Back Home</a></div></div>
       <aside class="mapcard"><div class="map"><div class="route r1"></div><div class="route r2"></div><div class="route r3"></div><div class="pin eden" data-label="Eden"></div><div class="pin haran" data-label="Haran"></div><div class="pin canaan" data-label="Canaan"></div><div class="pin egypt" data-label="Egypt"></div></div><div class="stats"><div class="stat"><span>Hebrew Name</span><strong>Bereshith</strong></div><div class="stat"><span>Meaning</span><strong>In the beginning</strong></div><div class="stat"><span>Chapters</span><strong>50</strong></div><div class="stat"><span>Reader</span><strong>Clickable KJV</strong></div></div></aside>
     </div>
-    <section id="framework"><div class="shell"><div class="head"><div class="kicker">The Bible Mapped Framework</div><h2>Minimal on the page. Deep when you click.</h2><p>The page stays clean until the reader touches the text. Then the study layer opens: meaning, KJV-era definition, original-language note, grammar, red flag, and concordance.</p></div><div class="framework card"><article class="f"><small>01</small><h3>Places</h3><p>Where did it happen?</p></article><article class="f"><small>02</small><h3>People</h3><p>Who was involved?</p></article><article class="f"><small>03</small><h3>Time</h3><p>When does this happen in the story?</p></article><article class="f"><small>04</small><h3>Meaning</h3><p>Why does this matter?</p></article><article class="f"><small>05</small><h3>Jesus</h3><p>How does it point forward without forcing the text?</p></article></div></div></section>
-    <section id="reader"><div class="shell"><div class="head"><div class="kicker">KJV Scripture Reader</div><h2>Click the words. Study the layers.</h2><p>Use the chapter list, search the book, then click any Scripture word to open the study panel.</p></div><div class="reader-grid"><aside class="chapter-tools"><input id="searchBox" class="search" placeholder="Search Genesis, e.g. covenant" /><div id="chapterList" class="chapter-list"></div></aside><article class="reader"><div class="reader-top"><div><span class="eyebrow"><span class="dot"></span><span id="chapterKicker">Genesis</span></span><h2 id="chapterTitle" style="margin-top:14px"></h2><p id="chapterSummary"></p></div><button class="btn secondary" id="clearSearch">Clear search</button></div><div id="scripture" class="scripture"></div></article><aside class="panel" id="wordPanel"><h3>Word study</h3><p class="panel-empty">Click a word in the Scripture. This panel will show meaning, KJV-era definition, original-language note, grammar, red flag, and where that word appears in Genesis.</p></aside></div></div></section>
+    <section id="framework"><div class="shell"><div class="framework card"><article class="f"><small>01</small><h3>Places</h3><p>Where did it happen?</p></article><article class="f"><small>02</small><h3>People</h3><p>Who was involved?</p></article><article class="f"><small>03</small><h3>Time</h3><p>When does this happen in the story?</p></article><article class="f"><small>04</small><h3>Meaning</h3><p>Why does this matter?</p></article><article class="f"><small>05</small><h3>Jesus</h3><p>How does it point forward without forcing the text?</p></article></div></div></section>
+    <section id="reader"><div class="shell"><div class="head"><div class="kicker">KJV Scripture Reader</div><h2>Click the words. Study the layers.</h2><p>Use the chapter list, search the book, then click any Scripture word to open the study panel.</p></div><div class="reader-grid"><aside class="chapter-tools"><input id="searchBox" class="search" placeholder="Search Genesis, e.g. covenant" /><div id="chapterList" class="chapter-list"></div></aside><article class="reader"><div class="reader-top"><div><span class="eyebrow"><span class="dot"></span><span id="chapterKicker">Genesis</span></span><h2 id="chapterTitle" style="margin-top:14px"></h2><p id="chapterSummary"></p></div><button class="btn secondary" id="clearSearch">Clear search</button></div><div id="scripture" class="scripture"></div></article><aside class="panel" id="wordPanel"><h3>Word study</h3><p class="panel-empty">Click a word in the Scripture. This panel will show meaning, Noah Webster 1828-style help, KJV-era notes, original-language notes, place geography, modern location notes, and where that word appears in Genesis.</p></aside></div></div></section>
     <section id="notes"><div class="shell two"><article class="info card belief"><div class="kicker">Common Belief</div><h2>Genesis is the book of beginnings.</h2><p>Creation, humanity, sin, judgment, covenant, family, land, exile, and promise all begin here.</p></article><article class="info card warning"><div class="kicker">Red Flag</div><h2>Do not make the text say more than it says.</h2><p>For example, Genesis does not name the forbidden fruit. The site should teach what is there and warn where tradition or speculation has been added.</p></article></div></section>
   </main>
-  <footer class="footer"><div class="shell"><strong>Bible Mapped Genesis Reader</strong><p>This build loads full Genesis KJV from <code>kjv-genesis.js</code> and study notes from <code>word-definitions.js</code>.</p></div></footer>
+  <footer class="footer"><div class="shell"><strong>Bible Mapped Genesis Reader</strong></div></footer>
   <script>
 window.BIBLEMAPPED_GENESIS = {
   "book": "Genesis",
@@ -5945,6 +5950,327 @@ window.BIBLEMAPPED_ALIASES = {
   "forgiveness": "forgive",
   "forgive": "forgive"
 };
+window.BIBLEMAPPED_WEBSTER_1828 = {
+  "beginning": {
+    "term": "Beginning",
+    "definition": "The first cause, origin, source, or first part of a thing.",
+    "note": "In Genesis 1:1, the word frames creation as the beginning of the biblical story."
+  },
+  "created": {
+    "term": "Created",
+    "definition": "Caused to exist; formed; brought into being.",
+    "note": "Genesis begins with God as the active Creator."
+  },
+  "heaven": {
+    "term": "Heaven",
+    "definition": "The sky, the region above the earth, or the dwelling place of God depending on context.",
+    "note": "In Genesis 1, heaven is part of the created order."
+  },
+  "earth": {
+    "term": "Earth",
+    "definition": "The world, land, soil, or ground depending on context.",
+    "note": "Genesis often moves between earth as creation and ground as the place of human life."
+  },
+  "void": {
+    "term": "Void",
+    "definition": "Empty; vacant; without contents or form.",
+    "note": "In Genesis 1:2, this describes the early condition of the earth before God orders creation."
+  },
+  "firmament": {
+    "term": "Firmament",
+    "definition": "The expanse or sky; the region of the air or heavens.",
+    "note": "This is a KJV word connected to the ordered space God establishes in Genesis 1."
+  },
+  "dominion": {
+    "term": "Dominion",
+    "definition": "Sovereign authority; power of governing or ruling.",
+    "note": "In Genesis 1, humanity receives stewardship under God, not independent ownership."
+  },
+  "replenish": {
+    "term": "Replenish",
+    "definition": "To fill; to stock with abundance.",
+    "note": "In older English, this can mean fill, not necessarily refill."
+  },
+  "subtil": {
+    "term": "Subtil",
+    "definition": "Crafty, sly, artful, or cunning.",
+    "note": "Used of the serpent in Genesis 3:1."
+  },
+  "beguiled": {
+    "term": "Beguiled",
+    "definition": "Deceived; misled by craft or persuasion.",
+    "note": "This captures the serpent’s deception in Genesis 3."
+  },
+  "enmity": {
+    "term": "Enmity",
+    "definition": "Hostility; hatred; opposition.",
+    "note": "In Genesis 3:15, it names the conflict between the serpent and the woman’s seed."
+  },
+  "seed": {
+    "term": "Seed",
+    "definition": "That from which something springs; offspring or descendants.",
+    "note": "In Genesis, seed can mean offspring and becomes a major promise theme."
+  },
+  "covenant": {
+    "term": "Covenant",
+    "definition": "An agreement, compact, or solemn promise.",
+    "note": "Genesis uses covenant language around Noah, Abraham, and God’s promises."
+  },
+  "ark": {
+    "term": "Ark",
+    "definition": "A chest, vessel, or place of preservation.",
+    "note": "In Genesis, the ark is the vessel by which God preserves Noah’s household and animal life."
+  },
+  "righteous": {
+    "term": "Righteous",
+    "definition": "Just; upright; conforming to what is right.",
+    "note": "Noah is described in connection with righteousness and walking with God."
+  },
+  "grace": {
+    "term": "Grace",
+    "definition": "Favor; kindness; goodwill shown to another.",
+    "note": "Noah finds grace in the eyes of the LORD in Genesis 6:8."
+  },
+  "altar": {
+    "term": "Altar",
+    "definition": "A raised place or structure for sacrifice or offering.",
+    "note": "Altars mark worship, covenant memory, and encounter with God in Genesis."
+  },
+  "begat": {
+    "term": "Begat",
+    "definition": "Fathered; generated; brought forth as offspring.",
+    "note": "A key genealogy word tracing family lines in Genesis."
+  },
+  "generations": {
+    "term": "Generations",
+    "definition": "Genealogy, descent, family history, or successive offspring.",
+    "note": "Genesis uses generations to structure the story."
+  },
+  "famine": {
+    "term": "Famine",
+    "definition": "Extreme scarcity of food.",
+    "note": "Famine often moves the Genesis story across geography."
+  },
+  "pharaoh": {
+    "term": "Pharaoh",
+    "definition": "A title for the ruler or king of Egypt.",
+    "note": "In Genesis, Pharaoh is a royal title rather than a personal name."
+  },
+  "bless": {
+    "term": "Bless",
+    "definition": "To favor, prosper, or pronounce good upon.",
+    "note": "Blessing is one of Genesis’s major theological themes."
+  },
+  "curse": {
+    "term": "Curse",
+    "definition": "To pronounce evil, judgment, or severe harm upon.",
+    "note": "Genesis contrasts blessing and curse throughout the story."
+  },
+  "offering": {
+    "term": "Offering",
+    "definition": "Something presented in worship, service, or devotion.",
+    "note": "Cain and Abel’s offerings become a key moment in Genesis 4."
+  }
+};
+window.BIBLEMAPPED_PLACES = {
+  "eden": {
+    "name": "Eden",
+    "modern": "Exact location unknown",
+    "region": "Often discussed in relation to ancient Mesopotamia",
+    "confidence": "Low",
+    "note": "Genesis describes Eden with rivers and garden imagery, but its precise modern location is debated."
+  },
+  "havilah": {
+    "name": "Havilah",
+    "modern": "Uncertain",
+    "region": "Possibly Arabian or northeast African associations depending on interpretation",
+    "confidence": "Low",
+    "note": "Genesis connects Havilah with gold, bdellium, and onyx, but the location is not certain."
+  },
+  "pison": {
+    "name": "Pison",
+    "modern": "Uncertain",
+    "region": "River associated with Eden in Genesis 2",
+    "confidence": "Low",
+    "note": "The Pison river cannot be confidently identified today."
+  },
+  "gihon": {
+    "name": "Gihon",
+    "modern": "Debated / uncertain",
+    "region": "Connected in Genesis 2 with Cush/Ethiopia in the KJV wording",
+    "confidence": "Low",
+    "note": "This should be presented carefully because identifications are debated."
+  },
+  "ethiopia": {
+    "name": "Ethiopia / Cush",
+    "modern": "Often associated broadly with the Nile region / Nubia, not always modern Ethiopia only",
+    "region": "Northeast Africa",
+    "confidence": "Medium",
+    "note": "KJV 'Ethiopia' often reflects Cush. Do not automatically reduce it to the modern nation-state only."
+  },
+  "hiddekel": {
+    "name": "Hiddekel",
+    "modern": "Often identified with the Tigris River",
+    "region": "Turkey, Syria, Iraq region",
+    "confidence": "Medium to High",
+    "note": "Hiddekel is commonly associated with the Tigris."
+  },
+  "euphrates": {
+    "name": "Euphrates",
+    "modern": "Turkey, Syria, and Iraq",
+    "region": "Mesopotamia",
+    "confidence": "High",
+    "note": "A major river of the ancient Near East and biblical geography."
+  },
+  "assyria": {
+    "name": "Assyria",
+    "modern": "Northern Iraq and surrounding region",
+    "region": "Ancient Mesopotamia",
+    "confidence": "High",
+    "note": "Assyria later becomes a major empire in the biblical story."
+  },
+  "nod": {
+    "name": "Nod",
+    "modern": "Unknown",
+    "region": "East of Eden in Genesis 4",
+    "confidence": "Low",
+    "note": "Genesis gives direction, not enough data for a secure modern location."
+  },
+  "ararat": {
+    "name": "Ararat",
+    "modern": "Traditionally associated with eastern Turkey / Armenian highlands",
+    "region": "Eastern Anatolia / Armenian highlands",
+    "confidence": "Medium",
+    "note": "Genesis 8 says the ark rested on the mountains of Ararat, a regional phrase."
+  },
+  "shinar": {
+    "name": "Shinar",
+    "modern": "Southern Iraq region",
+    "region": "Mesopotamia / Babylonia",
+    "confidence": "Medium to High",
+    "note": "Shinar is associated with Babel and early Mesopotamian civilization."
+  },
+  "babel": {
+    "name": "Babel",
+    "modern": "Often associated with Babylon in Iraq",
+    "region": "Mesopotamia",
+    "confidence": "Medium to High",
+    "note": "Genesis 11 connects Babel with language confusion and scattering."
+  },
+  "canaan": {
+    "name": "Canaan",
+    "modern": "Israel, Palestinian territories, Lebanon, and surrounding Levant region",
+    "region": "Southern Levant",
+    "confidence": "High",
+    "note": "Canaan becomes central to the promise of land in Genesis."
+  },
+  "egypt": {
+    "name": "Egypt",
+    "modern": "Egypt",
+    "region": "Northeast Africa",
+    "confidence": "High",
+    "note": "Egypt is a major place of famine survival, danger, refuge, and later oppression."
+  },
+  "haran": {
+    "name": "Haran",
+    "modern": "Often associated with Harran, Turkey",
+    "region": "Upper Mesopotamia",
+    "confidence": "Medium to High",
+    "note": "Haran is connected with Abram’s family journey before entering Canaan."
+  },
+  "ur": {
+    "name": "Ur",
+    "modern": "Often associated with Tell el-Muqayyar, southern Iraq",
+    "region": "Southern Mesopotamia",
+    "confidence": "Medium to High",
+    "note": "Ur of the Chaldees is connected with Abram’s origin story."
+  },
+  "sodom": {
+    "name": "Sodom",
+    "modern": "Exact site debated; often placed near the Dead Sea region",
+    "region": "Dead Sea / Jordan Rift area",
+    "confidence": "Low to Medium",
+    "note": "Sodom is central to the Lot narrative, but exact identification is debated."
+  },
+  "gomorrah": {
+    "name": "Gomorrah",
+    "modern": "Exact site debated; often placed near the Dead Sea region",
+    "region": "Dead Sea / Jordan Rift area",
+    "confidence": "Low to Medium",
+    "note": "Often paired with Sodom in the biblical narrative."
+  },
+  "gaza": {
+    "name": "Gaza",
+    "modern": "Gaza",
+    "region": "Southern coastal Levant",
+    "confidence": "High",
+    "note": "Gaza is mentioned as a border marker in Genesis 10."
+  },
+  "sidon": {
+    "name": "Sidon",
+    "modern": "Sidon, Lebanon",
+    "region": "Lebanon / Phoenician coast",
+    "confidence": "High",
+    "note": "Sidon is an ancient coastal city."
+  },
+  "gerar": {
+    "name": "Gerar",
+    "modern": "Likely in the Negev / southern Israel region, exact site debated",
+    "region": "Southern Levant",
+    "confidence": "Medium",
+    "note": "Gerar appears in the patriarchal narratives."
+  },
+  "nineveh": {
+    "name": "Nineveh",
+    "modern": "Near Mosul, Iraq",
+    "region": "Northern Mesopotamia",
+    "confidence": "High",
+    "note": "Nineveh later becomes the Assyrian capital and is important in the prophets."
+  },
+  "jordan": {
+    "name": "Jordan",
+    "modern": "Jordan River / modern Israel, Jordan, and Palestinian territories region",
+    "region": "Jordan Rift Valley",
+    "confidence": "High",
+    "note": "A major geographical marker in biblical narrative."
+  },
+  "bethel": {
+    "name": "Bethel",
+    "modern": "Often associated near Beitin in the West Bank",
+    "region": "Central hill country",
+    "confidence": "Medium",
+    "note": "Bethel becomes a major patriarchal worship site."
+  },
+  "hebron": {
+    "name": "Hebron",
+    "modern": "Hebron, West Bank",
+    "region": "Judean hill country",
+    "confidence": "High",
+    "note": "Hebron is tied to Abraham and the burial cave tradition."
+  },
+  "mamre": {
+    "name": "Mamre",
+    "modern": "Near Hebron, exact identification varies",
+    "region": "Judean hill country",
+    "confidence": "Medium",
+    "note": "Associated with Abraham’s encampment near Hebron."
+  },
+  "beersheba": {
+    "name": "Beersheba",
+    "modern": "Beersheba, Israel",
+    "region": "Negev",
+    "confidence": "High",
+    "note": "Important in the patriarchal narratives."
+  },
+  "moriah": {
+    "name": "Moriah",
+    "modern": "Traditionally associated with Jerusalem/Temple Mount, but debated in Genesis context",
+    "region": "Jerusalem tradition",
+    "confidence": "Medium",
+    "note": "Genesis 22 names the land of Moriah; later tradition connects Moriah with the temple site."
+  }
+};
+
 
 </script>
   <script>
@@ -5952,6 +6278,8 @@ window.BIBLEMAPPED_ALIASES = {
     const DATA = window.BIBLEMAPPED_GENESIS || fallback;
     const NOTES = window.BIBLEMAPPED_WORDS || {};
     const ALIASES = window.BIBLEMAPPED_ALIASES || {};
+    const WEBSTER = window.BIBLEMAPPED_WEBSTER_1828 || {};
+    const PLACES = window.BIBLEMAPPED_PLACES || {};
     let currentChapter = DATA.chapters[0];
     let searchTerm = '';
 
@@ -5971,9 +6299,43 @@ window.BIBLEMAPPED_ALIASES = {
     function renderChapters(){chapterList.innerHTML = DATA.chapters.map(ch=>`<button class="chapter-btn ${ch.chapter===currentChapter.chapter?'active':''}" data-chapter="${ch.chapter}">Genesis ${ch.chapter}<span>${escapeHtml(ch.title)}</span></button>`).join('');}
     function renderChapter(ch){currentChapter = ch; chapterKicker.textContent = `${DATA.translation || 'KJV'} • Chapter ${ch.chapter}`; chapterTitle.textContent = `Genesis ${ch.chapter}: ${ch.title}`; chapterSummary.textContent = ch.summary || ''; scripture.innerHTML = ch.verses.map(v=>`<p class="verse"><sup class="vnum">${v.verse}</sup>${tokenize(v.text)}</p>`).join(''); renderChapters();}
     function occurrences(raw){const key=normalize(raw); const lem=lemma(raw); const refs=[]; let count=0; DATA.chapters.forEach(ch=>ch.verses.forEach(v=>{const words=(v.text.match(/[A-Za-z][A-Za-z'’\-]*/g)||[]); let hit=false; words.forEach(w=>{if(normalize(w)===key || lemma(w)===lem){count++; hit=true;}}); if(hit) refs.push({chapter:ch.chapter,verse:v.verse});})); return {count,refs};}
-    function showWord(raw){const key=lemma(raw); const note=NOTES[key]; const occ=occurrences(raw); const refs=occ.refs.slice(0,20).map(r=>`<button class="ref" data-ref="${r.chapter}:${r.verse}">Gen ${r.chapter}:${r.verse}</button>`).join('');
-      if(note){panel.innerHTML = `<div class="word-title"><h3>${escapeHtml(note.label || raw)}</h3><span class="pill">${escapeHtml(note.category || 'Word')}</span></div><div class="note-row"><strong>Simple meaning</strong><p>${escapeHtml(note.simple)}</p></div><div class="note-row"><strong>KJV-era definition</strong><p>${escapeHtml(note.kjv)}</p></div><div class="note-row"><strong>Hebrew / Greek note</strong><p>${escapeHtml(note.original)}</p></div><div class="note-row"><strong>Grammar reason</strong><p>${escapeHtml(note.grammar)}</p></div><div class="note-row"><strong>Red flag</strong><p>${escapeHtml(note.redFlag)}</p></div><div class="note-row"><strong>Concordance inside Genesis</strong><div class="refs">${refs || '<span class="mini">No other matches found.</span>'}</div><p class="mini">${occ.count} occurrence${occ.count===1?'':'s'} found for this clicked form/family in Genesis. Showing first 20 references.</p></div>`;}
-      else {panel.innerHTML = `<h3>${escapeHtml(raw)}</h3><p class="missing">This word is clickable and searchable, but a Bible Mapped definition has not been added yet. Add it inside <code>word-definitions.js</code>.</p><div class="note-row"><strong>Concordance inside Genesis</strong><div class="refs">${refs || '<span class="mini">No matches found.</span>'}</div><p class="mini">${occ.count} occurrence${occ.count===1?'':'s'} found in Genesis.</p></div>`;}
+    function showWord(raw){
+      const key=lemma(raw);
+      const cleanKey=normalize(raw);
+      const note=NOTES[key];
+      const webster=WEBSTER[key] || WEBSTER[cleanKey] || null;
+      const place=PLACES[key] || PLACES[cleanKey] || null;
+      const occ=occurrences(raw);
+      const refs=occ.refs.slice(0,20).map(r=>`<button class="ref" data-ref="${r.chapter}:${r.verse}">Gen ${r.chapter}:${r.verse}</button>`).join('');
+
+      const title = place ? place.name : (note?.label || webster?.term || raw);
+      const category = place ? 'Place' : (note?.category || (webster ? 'Webster 1828' : 'Word'));
+
+      let html = `<div class="word-title"><h3>${escapeHtml(title)}</h3><span class="pill">${escapeHtml(category)}</span></div>`;
+
+      if(place){
+        html += `<div class="note-row place-card"><strong>Modern location</strong><p><span class="place-modern">${escapeHtml(place.modern)}</span></p><span class="place-confidence">Confidence: ${escapeHtml(place.confidence)}</span></div>`;
+        html += `<div class="note-row"><strong>Region</strong><p>${escapeHtml(place.region)}</p></div>`;
+        html += `<div class="note-row"><strong>Bible Mapped place note</strong><p>${escapeHtml(place.note)}</p></div>`;
+      }
+
+      if(note){
+        html += `<div class="note-row"><strong>Simple meaning</strong><p>${escapeHtml(note.simple)}</p></div>`;
+        html += `<div class="note-row"><strong>KJV-era definition</strong><p>${escapeHtml(note.kjv)}</p></div>`;
+        html += `<div class="note-row"><strong>Hebrew / Greek note</strong><p>${escapeHtml(note.original)}</p></div>`;
+        html += `<div class="note-row"><strong>Grammar reason</strong><p>${escapeHtml(note.grammar)}</p></div>`;
+        html += `<div class="note-row"><strong>Red flag</strong><p>${escapeHtml(note.redFlag)}</p></div>`;
+      } else if(webster){
+        html += `<div class="note-row"><strong>Noah Webster 1828-style definition</strong><p>${escapeHtml(webster.definition)}</p><span class="webster-tag">KJV vocabulary help</span></div>`;
+        html += `<div class="note-row"><strong>Bible Mapped note</strong><p>${escapeHtml(webster.note)}</p></div>`;
+      }
+
+      if(!note && !webster && !place){
+        html += `<p class="missing">This word is clickable and searchable, but a Bible Mapped definition has not been added yet. Add it inside the word data for this page.</p>`;
+      }
+
+      html += `<div class="note-row"><strong>Concordance inside Genesis</strong><div class="refs">${refs || '<span class="mini">No matches found.</span>'}</div><p class="mini">${occ.count} occurrence${occ.count===1?'':'s'} found for this clicked form/family in Genesis. Showing first 20 references.</p></div>`;
+      panel.innerHTML = html;
     }
     function goRef(ref){const [c,v]=ref.split(':').map(Number); const ch=DATA.chapters.find(x=>x.chapter===c); if(!ch) return; renderChapter(ch); setTimeout(()=>{const verses=[...document.querySelectorAll('.verse')]; const target=verses[v-1]; if(target){target.scrollIntoView({behavior:'smooth',block:'center'}); target.style.background='rgba(123,44,255,.08)'; target.style.borderRadius='10px'; setTimeout(()=>target.style.background='',1400);}},30);}
 
