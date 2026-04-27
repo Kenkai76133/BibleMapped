@@ -555,15 +555,11 @@
       padding: 64px 0 74px;
     }
 
-    .mission-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 56px;
-      align-items: start;
+    .mission-copy-wide {
+      max-width: 100%;
     }
 
-    .mission-copy h2,
-    .principles h2 {
+    .mission-copy h2 {
       font-size: clamp(2rem, 4vw, 3.7rem);
       line-height: 0.98;
       letter-spacing: -0.06em;
@@ -576,10 +572,11 @@
       font-size: 1.06rem;
       line-height: 1.72;
       margin-bottom: 18px;
+      max-width: 920px;
     }
 
     .quote-block {
-      margin-top: 34px;
+      margin: 24px 0 24px;
       border-top: 4px solid var(--purple);
       border-bottom: 1px solid var(--line);
       padding: 22px 0;
@@ -592,31 +589,54 @@
       font-weight: 950;
     }
 
-    .principles {
-      background: var(--paper);
+    .framework-block {
+      margin-top: 30px;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+    }
+
+    .framework-block h3 {
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      line-height: 1;
+      letter-spacing: -0.055em;
+      margin-bottom: 18px;
+    }
+
+    .framework-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
       border: 1px solid var(--line);
-      padding: 24px;
+      background: var(--paper);
     }
 
-    .principle-item {
-      padding: 16px 0;
-      border-top: 1px dashed var(--line);
+    .framework-card {
+      min-height: 138px;
+      padding: 18px;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    .principle-item:first-of-type {
-      border-top: 0;
-      padding-top: 0;
+    .framework-card:last-child {
+      border-right: 0;
     }
 
-    .principle-item h3 {
-      font-size: 1.05rem;
-      letter-spacing: -0.02em;
-      margin-bottom: 6px;
+    .framework-card h4 {
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--purple);
+      margin-bottom: 12px;
     }
 
-    .principle-item p {
-      color: var(--muted);
-      font-size: 0.96rem;
+    .framework-card p {
+      margin: 0;
+      color: var(--charcoal);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.98rem;
+      font-weight: 850;
+      line-height: 1.35;
     }
 
     footer {
@@ -647,6 +667,22 @@
       .rail-step {
         grid-template-columns: 1fr;
       }
+
+      .framework-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .framework-card {
+        min-height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+        gap: 12px;
+      }
+
+      .framework-card:last-child {
+        border-bottom: 0;
+      }
+
 
       .profile-photo {
         width: 180px;
@@ -724,50 +760,6 @@
 
         <div class="feature-image-wrap">
           <div class="feature-image-frame" aria-label="Bible Mapped featured image"></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="profile-band">
-      <div class="container profile-inner">
-        <div class="profile-photo">
-          <img src="../assets/calvin-photo.jpg.png" alt="Calvin in front of a map" />
-        </div>
-
-        <div class="profile-meta">
-          <h2>Meet Calvin</h2>
-          <p>
-            I am a Christian, a husband, a father, and the heart behind Bible Mapped.
-          </p>
-          <p>
-            I was saved in 2008, and since then, I have loved telling people about Jesus Christ. Over the years, I’ve walked through faith, doubt, Bible college, church hurt, and questions about God. But through it all, I keep coming back to this conviction:
-          </p>
-          <p>
-            <strong>God’s Word is true, even when man fails.</strong>
-          </p>
-          <p>
-            Bible Mapped was born from that journey.
-          </p>
-          <p>
-            It exists to help people slow down, look closer, and see the Bible as a real story grounded in real places, real people, real history, language, and meaning — all pointing to Jesus Christ.
-          </p>
-
-          <div class="social-row" aria-label="Follow Bible Mapped">
-            <a class="social-link" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noreferrer">
-              <img src="../assets/youtube-logo.png" alt="YouTube" />
-              <span>YouTube</span>
-            </a>
-
-            <a class="social-link" href="https://www.tiktok.com/@biblemapped?is_from_webapp=1&amp;sender_device=pc" target="_blank" rel="noreferrer">
-              <img src="../assets/tiktok-logo.png" alt="TikTok" />
-              <span>TikTok</span>
-            </a>
-
-            <a class="social-link" href="https://www.instagram.com/biblemapped/" target="_blank" rel="noreferrer">
-              <img src="../assets/instagram-logo.png" alt="Instagram" />
-              <span>Instagram</span>
-            </a>
-          </div>
         </div>
       </div>
     </section>
@@ -893,48 +885,98 @@
       </div>
     </section>
 
-    <section class="mission-section">
-      <div class="container mission-grid">
-        <div class="mission-copy">
-          <h2>What Bible Mapped does</h2>
-          <p>
-            The Bible can feel abstract because we are thousands of years removed from the places, languages, empires, and cultures inside it.
-          </p>
-          <p>
-            Bible Mapped helps close that distance by showing the Bible through geography, history, people, themes, and visual storytelling.
-          </p>
-          <p>
-            The goal is not just information. The goal is clarity — so that people can understand Scripture better, ask better questions, and see how the whole story points to Jesus Christ.
-          </p>
-
-          <div class="quote-block">
-            <blockquote>“The Bible happened somewhere. And when you find the place, you start to see the meaning.”</blockquote>
-          </div>
+    <section class="profile-band">
+      <div class="container profile-inner">
+        <div class="profile-photo">
+          <img src="../assets/calvin-photo.jpg.png" alt="Calvin in front of a map" />
         </div>
 
-        <aside class="principles">
-          <h2>What we cover</h2>
+        <div class="profile-meta">
+          <h2>Meet Calvin</h2>
+          <p>
+            I am a Christian, a husband, a father, and the heart behind Bible Mapped.
+          </p>
+          <p>
+            I was saved in 2008, and since then, I have loved telling people about Jesus Christ. Over the years, I’ve walked through faith, doubt, Bible college, church hurt, and questions about God. But through it all, I keep coming back to this conviction:
+          </p>
+          <p>
+            <strong>God’s Word is true, even when man fails.</strong>
+          </p>
+          <p>
+            Bible Mapped was born from that journey.
+          </p>
+          <p>
+            It exists to help people slow down, look closer, and see the Bible as a real story grounded in real places, real people, real history, language, and meaning — all pointing to Jesus Christ.
+          </p>
 
-          <div class="principle-item">
-            <h3>Books</h3>
-            <p>Context, structure, authorship, themes, and how each book fits into the whole story.</p>
+          <div class="social-row" aria-label="Follow Bible Mapped">
+            <a class="social-link" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noreferrer">
+              <img src="../assets/youtube-logo.png" alt="YouTube" />
+              <span>YouTube</span>
+            </a>
+
+            <a class="social-link" href="https://www.tiktok.com/@biblemapped?is_from_webapp=1&amp;sender_device=pc" target="_blank" rel="noreferrer">
+              <img src="../assets/tiktok-logo.png" alt="TikTok" />
+              <span>TikTok</span>
+            </a>
+
+            <a class="social-link" href="https://www.instagram.com/biblemapped/" target="_blank" rel="noreferrer">
+              <img src="../assets/instagram-logo.png" alt="Instagram" />
+              <span>Instagram</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <div class="container">
+        <div class="mission-copy mission-copy-wide">
+          <h2>How Bible Mapped Works</h2>
+
+          <div class="quote-block">
+            <blockquote>“The Bible does not float above history. It is inside history.”</blockquote>
           </div>
 
-          <div class="principle-item">
-            <h3>Maps</h3>
-            <p>Places, regions, journeys, empires, cities, and the geography behind Scripture.</p>
-          </div>
+          <p>
+            Bible Mapped helps people see Scripture through real places, real people, real timelines, and real meaning. From Abraham and Lot to Eden, Jerusalem, and the Kidron Valley, the Bible tells a story grounded in history and aimed at the human condition.
+          </p>
 
-          <div class="principle-item">
-            <h3>People</h3>
-            <p>Main characters, genealogies, roles, relationships, and how their stories connect.</p>
-          </div>
+          <p>
+            This is not about moving people into a denomination. It is about helping people follow the trail of Scripture and see how the whole story points to Jesus Christ: His life, death, and resurrection.
+          </p>
 
-          <div class="principle-item">
-            <h3>Themes</h3>
-            <p>Covenant, kingdom, exile, temple, sacrifice, wisdom, Messiah, and redemption.</p>
+          <div class="framework-block" aria-label="Bible Mapped framework">
+            <h3>Places · People · Time · Meaning · Jesus</h3>
+
+            <div class="framework-grid">
+              <div class="framework-card">
+                <h4>Places</h4>
+                <p>Where did it happen?</p>
+              </div>
+
+              <div class="framework-card">
+                <h4>People</h4>
+                <p>Who was involved?</p>
+              </div>
+
+              <div class="framework-card">
+                <h4>Time</h4>
+                <p>When did it happen?</p>
+              </div>
+
+              <div class="framework-card">
+                <h4>Meaning</h4>
+                <p>Why does it matter?</p>
+              </div>
+
+              <div class="framework-card">
+                <h4>Jesus</h4>
+                <p>How does it point to Christ?</p>
+              </div>
+            </div>
           </div>
-        </aside>
+        </div>
       </div>
     </section>
   </main>
