@@ -1,6 +1,6 @@
 from pathlib import Path
 
-about_code = r'''<!DOCTYPE html>
+about_code = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -68,6 +68,8 @@ about_code = r'''<!DOCTYPE html>
     .brand-bar {
       background: var(--purple);
       color: white;
+      position: relative;
+      z-index: 20;
     }
 
     .brand-bar-inner {
@@ -109,61 +111,58 @@ about_code = r'''<!DOCTYPE html>
     }
 
     .hero {
-      padding: 30px 0 44px;
       background: var(--cloud);
+      padding: 0 0 46px;
     }
 
-    .hero-static {
+    .hero-visual {
       position: relative;
       width: 100%;
-      margin: 0 0 22px;
-      background: var(--cloud);
+      min-height: clamp(310px, 48vw, 560px);
+      background-image: url("../assets/about-static.png");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
       overflow: hidden;
-      border: none;
-      box-shadow: none;
+      isolation: isolate;
     }
 
-    .hero-static img {
-      width: 100%;
-      height: auto;
-      min-height: 220px;
-      max-height: 360px;
-      display: block;
-      object-fit: cover;
-      object-position: center;
-    }
-
-    .hero-static-fade::before {
+    .hero-visual::before {
       content: "";
       position: absolute;
       inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(248,247,242,0.06) 0%,
+          rgba(248,247,242,0.02) 42%,
+          rgba(248,247,242,0.48) 78%,
+          rgba(248,247,242,0.86) 92%,
+          rgba(248,247,242,1) 100%
+        ),
+        linear-gradient(
+          to right,
+          rgba(248,247,242,0.86) 0%,
+          rgba(248,247,242,0.18) 9%,
+          rgba(248,247,242,0) 19%,
+          rgba(248,247,242,0) 81%,
+          rgba(248,247,242,0.18) 91%,
+          rgba(248,247,242,0.86) 100%
+        );
       pointer-events: none;
+    }
+
+    .hero-visual::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 36%;
       z-index: 2;
-      background: linear-gradient(
-        to bottom,
-        rgba(248, 247, 242, 0) 0%,
-        rgba(248, 247, 242, 0) 62%,
-        rgba(248, 247, 242, 0.30) 78%,
-        rgba(248, 247, 242, 0.70) 91%,
-        rgba(248, 247, 242, 1) 100%
-      );
-    }
-
-    .hero-static-fade::after {
-      content: "";
-      position: absolute;
-      inset: 0;
+      background: linear-gradient(to bottom, rgba(248,247,242,0), var(--cloud) 82%);
       pointer-events: none;
-      z-index: 3;
-      background: linear-gradient(
-        to right,
-        rgba(248, 247, 242, 0.88) 0%,
-        rgba(248, 247, 242, 0.18) 8%,
-        rgba(248, 247, 242, 0) 18%,
-        rgba(248, 247, 242, 0) 82%,
-        rgba(248, 247, 242, 0.18) 92%,
-        rgba(248, 247, 242, 0.88) 100%
-      );
     }
 
     .hero-grid {
@@ -171,6 +170,9 @@ about_code = r'''<!DOCTYPE html>
       grid-template-columns: 0.92fr 1.08fr;
       gap: 28px;
       align-items: end;
+      margin-top: -12px;
+      position: relative;
+      z-index: 5;
     }
 
     .eyebrow {
@@ -282,9 +284,13 @@ about_code = r'''<!DOCTYPE html>
     }
 
     .profile-meta p {
-      max-width: 620px;
+      max-width: 720px;
       color: var(--muted);
       font-size: 1rem;
+    }
+
+    .profile-meta p + p {
+      margin-top: 12px;
     }
 
     .social-row {
@@ -623,23 +629,12 @@ about_code = r'''<!DOCTYPE html>
       }
 
       .hero {
-        padding-top: 22px;
+        padding-bottom: 40px;
       }
 
-      .hero-static img {
-        min-height: 180px;
-        max-height: 260px;
-      }
-
-      .hero-static-fade::before {
-        background: linear-gradient(
-          to bottom,
-          rgba(248, 247, 242, 0) 0%,
-          rgba(248, 247, 242, 0) 58%,
-          rgba(248, 247, 242, 0.40) 78%,
-          rgba(248, 247, 242, 0.78) 91%,
-          rgba(248, 247, 242, 1) 100%
-        );
+      .hero-visual {
+        min-height: 260px;
+        background-position: center top;
       }
 
       .hero-title {
@@ -671,29 +666,25 @@ about_code = r'''<!DOCTYPE html>
 
   <main>
     <section class="hero">
-      <div class="container">
-        <div class="hero-static hero-static-fade">
-          <img src="../assets/about-static.png" alt="Bible Mapped editorial illustration" />
+      <div class="hero-visual" aria-label="Bible Mapped editorial illustration"></div>
+
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">About</span>
+          <h1 class="hero-title">
+            <span class="title-line title-purple">Bible Mapped helps you</span>
+            <span class="title-line title-red">understand where</span>
+            <span class="title-line title-navy">Scripture happened.</span>
+          </h1>
         </div>
 
-        <div class="hero-grid">
-          <div>
-            <span class="eyebrow">About</span>
-            <h1 class="hero-title">
-              <span class="title-line title-purple">Bible Mapped helps you</span>
-              <span class="title-line title-red">understand where</span>
-              <span class="title-line title-navy">Scripture happened.</span>
-            </h1>
-          </div>
-
-          <div class="hero-copy">
-            <p>
-              Bible Mapped is a visual Bible learning project built around place, context, meaning, people, books, maps, and the story that leads to Jesus Christ.
-            </p>
-            <p>
-              The Bible did not happen nowhere. It happened somewhere. And when you find the place, you start to see the meaning.
-            </p>
-          </div>
+        <div class="hero-copy">
+          <p>
+            Bible Mapped is a visual Bible learning project built around place, context, meaning, people, books, maps, and the story that leads to Jesus Christ.
+          </p>
+          <p>
+            The Bible did not happen nowhere. It happened somewhere. And when you find the place, you start to see the meaning.
+          </p>
         </div>
       </div>
     </section>
@@ -705,9 +696,12 @@ about_code = r'''<!DOCTYPE html>
         </div>
 
         <div class="profile-meta">
-          <h2>Calvin, creator of Bible Mapped</h2>
+          <h2>Meet Calvin</h2>
           <p>
-            I built Bible Mapped to help people see Scripture more clearly — through real places, real people, real history, and the Gospel of Jesus Christ at the center.
+            I am a Christian, a husband, a father, and the creator of Bible Mapped. I was saved in 2008, and ever since then, I have loved telling people about Jesus Christ.
+          </p>
+          <p>
+            I spent time in Bible college, later stepped away, and became fascinated again with the Bible — not just as a book of ideas, but as a real story grounded in places, people, history, language, and meaning. Bible Mapped is my way of helping people slow down, look closer, and see how Scripture points to Christ.
           </p>
           <div class="social-row" aria-label="Follow Bible Mapped">
             <a class="social-link" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noreferrer">
@@ -918,8 +912,8 @@ about_code = r'''<!DOCTYPE html>
   </script>
 </body>
 </html>
-'''
+"""
 
-path = Path("/mnt/data/about-index-updated.html")
+path = Path("/mnt/data/about-index-clean-final.html")
 path.write_text(about_code, encoding="utf-8")
 path.as_posix()
