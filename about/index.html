@@ -1,12 +1,15 @@
-from pathlib import Path
-
-about_code = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Bible Mapped | About</title>
-  <meta name="description" content="About Bible Mapped, the Gospel message, and the mission behind helping people understand Scripture through place, context, and meaning." />
+
+  <meta
+    name="description"
+    content="About Bible Mapped, the Gospel message, and the mission behind helping people understand Scripture through place, context, and meaning."
+  />
 
   <style>
     :root {
@@ -22,9 +25,9 @@ about_code = """<!DOCTYPE html>
       --sand: #E7C891;
       --red: #FF1F2D;
       --slate: #46515D;
-      --line: rgba(21,21,21,0.14);
-      --soft-line: rgba(21,21,21,0.08);
-      --shadow: 0 18px 42px rgba(21,21,21,0.08);
+      --line: rgba(21, 21, 21, 0.14);
+      --soft-line: rgba(21, 21, 21, 0.08);
+      --shadow: 0 18px 42px rgba(21, 21, 21, 0.08);
       --max: 1080px;
     }
 
@@ -65,6 +68,7 @@ about_code = """<!DOCTYPE html>
       margin: 0 auto;
     }
 
+    /* Top brand bar */
     .brand-bar {
       background: var(--purple);
       color: white;
@@ -97,7 +101,7 @@ about_code = """<!DOCTYPE html>
       min-height: 38px;
       padding: 8px 13px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.28);
+      border: 1px solid rgba(255, 255, 255, 0.28);
       color: white;
       font-size: 0.86rem;
       font-weight: 900;
@@ -106,10 +110,11 @@ about_code = """<!DOCTYPE html>
     }
 
     .back-home-link:hover {
-      background: rgba(255,255,255,0.12);
+      background: rgba(255, 255, 255, 0.12);
       transform: translateY(-1px);
     }
 
+    /* Hero */
     .hero {
       background: var(--cloud);
       padding: 0 0 46px;
@@ -135,20 +140,20 @@ about_code = """<!DOCTYPE html>
       background:
         linear-gradient(
           to bottom,
-          rgba(248,247,242,0.06) 0%,
-          rgba(248,247,242,0.02) 42%,
-          rgba(248,247,242,0.48) 78%,
-          rgba(248,247,242,0.86) 92%,
-          rgba(248,247,242,1) 100%
+          rgba(248, 247, 242, 0.06) 0%,
+          rgba(248, 247, 242, 0.02) 42%,
+          rgba(248, 247, 242, 0.48) 78%,
+          rgba(248, 247, 242, 0.86) 92%,
+          rgba(248, 247, 242, 1) 100%
         ),
         linear-gradient(
           to right,
-          rgba(248,247,242,0.86) 0%,
-          rgba(248,247,242,0.18) 9%,
-          rgba(248,247,242,0) 19%,
-          rgba(248,247,242,0) 81%,
-          rgba(248,247,242,0.18) 91%,
-          rgba(248,247,242,0.86) 100%
+          rgba(248, 247, 242, 0.86) 0%,
+          rgba(248, 247, 242, 0.18) 9%,
+          rgba(248, 247, 242, 0) 19%,
+          rgba(248, 247, 242, 0) 81%,
+          rgba(248, 247, 242, 0.18) 91%,
+          rgba(248, 247, 242, 0.86) 100%
         );
       pointer-events: none;
     }
@@ -161,7 +166,7 @@ about_code = """<!DOCTYPE html>
       bottom: -1px;
       height: 36%;
       z-index: 2;
-      background: linear-gradient(to bottom, rgba(248,247,242,0), var(--cloud) 82%);
+      background: linear-gradient(to bottom, rgba(248, 247, 242, 0), var(--cloud) 82%);
       pointer-events: none;
     }
 
@@ -193,7 +198,7 @@ about_code = """<!DOCTYPE html>
       height: 10px;
       border-radius: 50%;
       background: var(--purple);
-      box-shadow: 0 0 0 8px rgba(123,44,255,0.14);
+      box-shadow: 0 0 0 8px rgba(123, 44, 255, 0.14);
     }
 
     .hero-title {
@@ -245,6 +250,7 @@ about_code = """<!DOCTYPE html>
       margin-top: 18px;
     }
 
+    /* Meet Calvin */
     .profile-band {
       padding: 0 0 44px;
       background: var(--cloud);
@@ -328,9 +334,10 @@ about_code = """<!DOCTYPE html>
       border-radius: 999px;
       object-fit: contain;
       background: var(--cloud);
-      border: 1px solid rgba(21,21,21,0.08);
+      border: 1px solid rgba(21, 21, 21, 0.08);
     }
 
+    /* Gospel */
     .gospel-section {
       background: var(--purple);
       color: white;
@@ -353,19 +360,19 @@ about_code = """<!DOCTYPE html>
     }
 
     .section-copy {
-      color: rgba(255,255,255,0.82);
+      color: rgba(255, 255, 255, 0.82);
       font-family: Georgia, "Times New Roman", serif;
       font-size: 1.06rem;
       line-height: 1.72;
-      border-top: 2px solid rgba(255,255,255,0.82);
+      border-top: 2px solid rgba(255, 255, 255, 0.82);
       padding-top: 18px;
     }
 
     .salvation-rail {
       background: var(--cloud);
       color: var(--charcoal);
-      border: 1px solid rgba(255,255,255,0.35);
-      box-shadow: 0 18px 48px rgba(21,21,21,0.18);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 18px 48px rgba(21, 21, 21, 0.18);
     }
 
     .rail-top {
@@ -376,8 +383,8 @@ about_code = """<!DOCTYPE html>
 
     .rail-progress-item {
       min-height: 14px;
-      background: rgba(21,21,21,0.12);
-      border-right: 1px solid rgba(21,21,21,0.12);
+      background: rgba(21, 21, 21, 0.12);
+      border-right: 1px solid rgba(21, 21, 21, 0.12);
       transition: background 220ms ease;
     }
 
@@ -507,6 +514,7 @@ about_code = """<!DOCTYPE html>
       font-size: 0.97rem !important;
     }
 
+    /* Mission */
     .mission-section {
       background: var(--cloud);
       padding: 64px 0 74px;
@@ -591,9 +599,9 @@ about_code = """<!DOCTYPE html>
     }
 
     .footer-rule {
-      border-top: 1px dashed rgba(255,255,255,0.55);
+      border-top: 1px dashed rgba(255, 255, 255, 0.55);
       padding-top: 18px;
-      color: rgba(255,255,255,0.78);
+      color: rgba(255, 255, 255, 0.78);
       font-size: 0.92rem;
     }
 
@@ -703,15 +711,18 @@ about_code = """<!DOCTYPE html>
           <p>
             I spent time in Bible college, later stepped away, and became fascinated again with the Bible — not just as a book of ideas, but as a real story grounded in places, people, history, language, and meaning. Bible Mapped is my way of helping people slow down, look closer, and see how Scripture points to Christ.
           </p>
+
           <div class="social-row" aria-label="Follow Bible Mapped">
             <a class="social-link" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noreferrer">
               <img src="../assets/youtube-logo.png" alt="YouTube" />
               <span>YouTube</span>
             </a>
+
             <a class="social-link" href="https://www.tiktok.com/@biblemapped?is_from_webapp=1&amp;sender_device=pc" target="_blank" rel="noreferrer">
               <img src="../assets/tiktok-logo.png" alt="TikTok" />
               <span>TikTok</span>
             </a>
+
             <a class="social-link" href="https://www.instagram.com/biblemapped/" target="_blank" rel="noreferrer">
               <img src="../assets/instagram-logo.png" alt="Instagram" />
               <span>Instagram</span>
@@ -825,9 +836,13 @@ about_code = """<!DOCTYPE html>
               <div class="rail-content">
                 <h3>A prayer of confession and faith.</h3>
                 <div class="prayer-line">
-                  <p>Lord Jesus, I know that I have sinned. I believe You died for my sins and rose again. I turn to You, trust You, and ask You to save me. Thank You for Your grace and forgiveness. Amen.</p>
+                  <p>
+                    Lord Jesus, I know that I have sinned. I believe You died for my sins and rose again. I turn to You, trust You, and ask You to save me. Thank You for Your grace and forgiveness. Amen.
+                  </p>
                 </div>
-                <p class="prayer-note"><strong>The prayer is not magic.</strong> These words do not save by themselves. What matters is true faith in Jesus Christ — trusting Him from the heart.</p>
+                <p class="prayer-note">
+                  <strong>The prayer is not magic.</strong> These words do not save by themselves. What matters is true faith in Jesus Christ — trusting Him from the heart.
+                </p>
                 <div class="rail-actions">
                   <button class="rail-btn" data-next="0">Start over</button>
                 </div>
@@ -859,18 +874,22 @@ about_code = """<!DOCTYPE html>
 
         <aside class="principles">
           <h2>What we cover</h2>
+
           <div class="principle-item">
             <h3>Books</h3>
             <p>Context, structure, authorship, themes, and how each book fits into the whole story.</p>
           </div>
+
           <div class="principle-item">
             <h3>Maps</h3>
             <p>Places, regions, journeys, empires, cities, and the geography behind Scripture.</p>
           </div>
+
           <div class="principle-item">
             <h3>People</h3>
             <p>Main characters, genealogies, roles, relationships, and how their stories connect.</p>
           </div>
+
           <div class="principle-item">
             <h3>Themes</h3>
             <p>Covenant, kingdom, exile, temple, sacrifice, wisdom, Messiah, and redemption.</p>
@@ -888,32 +907,34 @@ about_code = """<!DOCTYPE html>
   </footer>
 
   <script>
-    const railSteps = document.querySelectorAll('.rail-step');
-    const railProgress = document.querySelectorAll('.rail-progress-item');
+    const railSteps = document.querySelectorAll(".rail-step");
+    const railProgress = document.querySelectorAll(".rail-progress-item");
 
     function showRailStep(index) {
       railSteps.forEach((step) => {
         const current = Number(step.dataset.step);
-        step.classList.remove('active', 'exit-left');
-        if (current < index) step.classList.add('exit-left');
-        if (current === index) step.classList.add('active');
+        step.classList.remove("active", "exit-left");
+
+        if (current < index) {
+          step.classList.add("exit-left");
+        }
+
+        if (current === index) {
+          step.classList.add("active");
+        }
       });
 
       railProgress.forEach((dot, i) => {
-        dot.classList.toggle('active', i <= index);
+        dot.classList.toggle("active", i <= index);
       });
     }
 
-    document.addEventListener('click', (event) => {
-      const button = event.target.closest('[data-next]');
+    document.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-next]");
       if (!button) return;
+
       showRailStep(Number(button.dataset.next));
     });
   </script>
 </body>
 </html>
-"""
-
-path = Path("/mnt/data/about-index-clean-final.html")
-path.write_text(about_code, encoding="utf-8")
-path.as_posix()
