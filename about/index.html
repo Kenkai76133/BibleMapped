@@ -267,16 +267,17 @@
     .social-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 12px;
       margin-top: 18px;
+      align-items: center;
     }
 
     .social-link {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      min-height: 40px;
-      padding: 9px 13px;
+      gap: 9px;
+      min-height: 44px;
+      padding: 7px 13px 7px 7px;
       border: 1px solid var(--line);
       border-radius: 999px;
       background: var(--white);
@@ -292,9 +293,13 @@
     }
 
     .social-link img {
-      width: 19px;
-      height: 19px;
+      width: 30px;
+      height: 30px;
+      padding: 5px;
+      border-radius: 999px;
       object-fit: contain;
+      background: var(--cloud);
+      border: 1px solid rgba(21,21,21,0.08);
     }
 
     .gospel-section {
@@ -676,7 +681,7 @@
           <p>
             I built Bible Mapped to help people see Scripture more clearly — through real places, real people, real history, and the Gospel of Jesus Christ at the center.
           </p>
-          <div class="social-row">
+          <div class="social-row" aria-label="Follow Bible Mapped">
             <a class="social-link" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noreferrer">
               <img src="../assets/youtube-logo.png" alt="YouTube" />
               <span>YouTube</span>
