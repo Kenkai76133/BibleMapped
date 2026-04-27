@@ -4,56 +4,93 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bible Mapped | Scripture Through Place, Context, and Meaning</title>
-  <meta name="description" content="Bible Mapped is an interactive Bible learning platform with maps, KJV reading, concordance word studies, and context locations." />
+  <meta name="description" content="Bible Mapped helps people understand the Bible through place, context, meaning, maps, word studies, and visual explainers." />
 
   <style>
     :root {
       --purple: #7B2CFF;
       --purple-dark: #2D0A78;
+      --purple-mid: #6A24D8;
       --purple-soft: #EEE6FF;
-      --cloud: #F8F7F2;
-      --paper: #FFFDF6;
+      --purple-mist: #F5F0FF;
+
       --charcoal: #151515;
       --ink: #27231F;
-      --muted: #6D6760;
-      --gold: #C9A227;
-      --teal: #2BBBC5;
-      --red-earth: #8B2E22;
-      --green: #587D47;
+      --slate: #46515D;
+      --navy: #0E376E;
+      --teal: #75A9A3;
+      --sand: #E7C891;
+      --red: #FF1F2D;
+      --cloud: #F8F7F2;
+      --paper: #FFFDF6;
+      --white: #FFFFFF;
+      --muted: #6E6861;
       --line: rgba(21, 21, 21, 0.12);
-      --shadow: 0 28px 80px rgba(21, 21, 21, 0.12);
+      --line-soft: rgba(21, 21, 21, 0.075);
+      --shadow: 0 24px 70px rgba(21, 21, 21, 0.10);
+      --shadow-soft: 0 14px 34px rgba(21, 21, 21, 0.065);
       --radius-xl: 34px;
       --radius-lg: 24px;
       --radius-md: 16px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--charcoal);
-      background:
-        radial-gradient(circle at 4% 0%, rgba(123, 44, 255, 0.15), transparent 32rem),
-        radial-gradient(circle at 92% 12%, rgba(201, 162, 39, 0.13), transparent 28rem),
-        linear-gradient(180deg, var(--cloud), #fff 44%, var(--cloud));
+      background: var(--cloud);
       overflow-x: hidden;
     }
 
-    a, button { color: inherit; }
-    a { text-decoration: none; }
-    button { font: inherit; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    select {
+      font: inherit;
+    }
 
     .container {
-      width: min(1210px, calc(100% - 42px));
+      width: min(1180px, calc(100% - 42px));
       margin: 0 auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 12px;
+      background: var(--charcoal);
+      color: white;
+      padding: 10px 14px;
+      border-radius: 999px;
+      z-index: 999;
+    }
+
+    .skip-link:focus {
+      left: 16px;
+    }
+
+    .top-line {
+      height: 6px;
+      background: var(--purple);
     }
 
     .nav-wrap {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(248, 247, 242, 0.86);
+      background: rgba(248, 247, 242, 0.88);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(21, 21, 21, 0.08);
     }
@@ -70,9 +107,9 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      font-size: 1.25rem;
       font-weight: 950;
       letter-spacing: -0.045em;
-      font-size: 1.25rem;
       white-space: nowrap;
     }
 
@@ -82,52 +119,71 @@
       border-radius: 14px;
       display: grid;
       place-items: center;
+      background: var(--charcoal);
       color: white;
-      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
       font-family: Georgia, serif;
-      box-shadow: 0 14px 36px rgba(123, 44, 255, 0.25);
+      letter-spacing: -0.08em;
+      box-shadow: 0 12px 30px rgba(21, 21, 21, 0.14);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 7px;
+      background: var(--purple);
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 23px;
+      gap: 22px;
       color: var(--muted);
       font-size: 0.92rem;
-      font-weight: 800;
+      font-weight: 850;
     }
 
-    .nav-links a:hover { color: var(--purple); }
+    .nav-links a:hover {
+      color: var(--purple);
+    }
 
     .nav-cta {
-      background: var(--charcoal);
       color: white !important;
+      background: var(--charcoal);
       padding: 11px 15px;
       border-radius: 999px;
-      box-shadow: 0 16px 36px rgba(21, 21, 21, 0.16);
+      box-shadow: 0 14px 30px rgba(21, 21, 21, 0.14);
     }
 
-    .ticker {
-      border-bottom: 1px solid rgba(21, 21, 21, 0.08);
+    .current-location {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 80;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 13px;
+      border: 1px solid rgba(21, 21, 21, 0.1);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 14px 36px rgba(21, 21, 21, 0.08);
+      font-size: 0.76rem;
+      font-weight: 950;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .current-location .pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
       background: var(--purple);
-      color: white;
-      overflow: hidden;
-    }
-
-    .ticker-track {
-      display: flex;
-      gap: 34px;
-      white-space: nowrap;
-      padding: 9px 0;
-      font-size: 0.82rem;
-      font-weight: 900;
-      letter-spacing: 0.04em;
-      animation: ticker 30s linear infinite;
-    }
-
-    @keyframes ticker {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
+      box-shadow: 0 0 0 7px rgba(123, 44, 255, 0.14);
     }
 
     .eyebrow {
@@ -135,14 +191,15 @@
       align-items: center;
       gap: 10px;
       padding: 9px 13px;
-      border-radius: 999px;
       border: 1px solid var(--line);
+      border-radius: 999px;
       color: var(--muted);
-      background: rgba(255, 255, 255, 0.74);
+      background: rgba(255, 255, 255, 0.72);
       backdrop-filter: blur(18px);
-      font-size: 0.81rem;
-      font-weight: 900;
-      letter-spacing: 0.025em;
+      font-size: 0.78rem;
+      font-weight: 950;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
     .dot {
@@ -154,41 +211,48 @@
     }
 
     .hero {
-      min-height: calc(100vh - 112px);
+      padding: 64px 0 78px;
+      min-height: auto;
       display: grid;
       align-items: center;
-      padding: 64px 0 86px;
+      background: var(--cloud);
     }
 
-    .hero-grid {
+    .hero-inner {
       display: grid;
-      grid-template-columns: 1.02fr 0.98fr;
-      gap: 48px;
+      grid-template-columns: 1fr;
+      gap: 34px;
       align-items: center;
+      text-align: center;
     }
 
-    h1, h2, h3 {
+    h1,
+    h2,
+    h3 {
       letter-spacing: -0.06em;
       line-height: 0.95;
     }
 
     h1 {
-      margin-top: 24px;
-      font-size: clamp(4rem, 8.5vw, 8.7rem);
-      max-width: 760px;
+      margin: 34px auto 0;
+      max-width: 980px;
+      font-size: clamp(3.9rem, 8.7vw, 8.6rem);
+      letter-spacing: -0.075em;
+      line-height: 0.94;
     }
 
-    .hero p {
-      margin-top: 26px;
-      max-width: 650px;
+    .hero-copy p {
+      max-width: 720px;
+      margin: 26px auto 0;
       color: var(--muted);
-      font-size: clamp(1.05rem, 1.6vw, 1.32rem);
+      font-size: clamp(1.05rem, 1.6vw, 1.28rem);
       line-height: 1.66;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 14px;
       margin-top: 32px;
     }
@@ -198,773 +262,580 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
+      min-height: 50px;
+      padding: 14px 19px;
       border: 1px solid var(--line);
       border-radius: 999px;
-      padding: 15px 20px;
-      background: rgba(255,255,255,0.76);
-      cursor: pointer;
+      background: rgba(255, 255, 255, 0.74);
+      color: var(--charcoal);
       font-weight: 950;
-      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      cursor: pointer;
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
     }
 
-    .button:hover { transform: translateY(-2px); }
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 32px rgba(21, 21, 21, 0.09);
+    }
 
     .button-primary {
+      border-color: transparent;
       background: var(--purple);
       color: white;
-      border-color: transparent;
-      box-shadow: 0 22px 48px rgba(123, 44, 255, 0.28);
+      box-shadow: 0 20px 44px rgba(123, 44, 255, 0.24);
     }
 
-    .button-dark {
-      background: var(--charcoal);
-      color: white;
-      border-color: transparent;
+    .hero-art {
+      display: none;
     }
 
-    .hero-board {
-      position: relative;
-      min-height: 610px;
-      border-radius: var(--radius-xl);
-      border: 1px solid rgba(21, 21, 21, 0.1);
-      background:
-        linear-gradient(rgba(255,255,255,0.70), rgba(255,255,255,0.78)),
-        repeating-linear-gradient(0deg, rgba(21,21,21,0.045) 0, rgba(21,21,21,0.045) 1px, transparent 1px, transparent 32px),
-        repeating-linear-gradient(90deg, rgba(21,21,21,0.04) 0, rgba(21,21,21,0.04) 1px, transparent 1px, transparent 32px),
-        radial-gradient(circle at 76% 20%, rgba(43,187,197,0.18), transparent 20rem),
-        radial-gradient(circle at 28% 78%, rgba(123,44,255,0.20), transparent 25rem),
-        var(--paper);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .hero-map-line {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    .route-line {
-      fill: none;
-      stroke: var(--purple);
-      stroke-width: 4;
-      stroke-linecap: round;
-      stroke-dasharray: 10 13;
-      animation: dash 18s linear infinite;
-      filter: drop-shadow(0 8px 16px rgba(123,44,255,0.26));
-    }
-
-    @keyframes dash { to { stroke-dashoffset: -430; } }
-
-    .board-label {
-      position: absolute;
-      top: 22px;
-      left: 22px;
-      right: 22px;
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
+    .hero-announcement {
+      display: inline-flex;
       align-items: center;
-      z-index: 3;
-    }
-
-    .small-chip {
-      padding: 8px 11px;
-      border-radius: 999px;
-      border: 1px solid rgba(21, 21, 21, 0.1);
-      background: rgba(255,255,255,0.78);
-      color: var(--muted);
-      font-size: 0.76rem;
+      gap: 10px;
+      max-width: min(620px, 100%);
+      margin: 0 auto;
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(21, 21, 21, 0.10);
+      background: var(--paper);
+      color: var(--charcoal);
+      box-shadow: 0 12px 26px rgba(21, 21, 21, 0.06);
+      font-size: 0.92rem;
       font-weight: 900;
     }
 
-    .place {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      display: grid;
-      gap: 7px;
-      justify-items: center;
-      border: 0;
-      background: transparent;
-      cursor: pointer;
-      z-index: 3;
-    }
-
-    .pin {
-      width: 19px;
-      height: 19px;
-      border-radius: 999px;
-      background: var(--charcoal);
-      border: 4px solid white;
-      box-shadow: 0 0 0 8px rgba(123,44,255,0.15), 0 12px 24px rgba(21,21,21,0.16);
-    }
-
-    .place strong {
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.9);
-      border: 1px solid rgba(21,21,21,0.1);
-      box-shadow: 0 10px 22px rgba(21,21,21,0.08);
-      font-size: 0.75rem;
-    }
-
-    .place.active .pin { background: var(--purple); }
-
-    .context-panel {
-      position: absolute;
-      left: 22px;
-      bottom: 22px;
-      width: min(430px, calc(100% - 44px));
-      border-radius: 25px;
-      padding: 22px;
-      background: rgba(255,255,255,0.88);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(21,21,21,0.1);
-      box-shadow: 0 24px 54px rgba(21,21,21,0.12);
-      z-index: 5;
-    }
-
-    .context-panel .label {
-      color: var(--purple);
-      font-size: 0.76rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .hero-announcement .new-label {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 9px;
+      border-radius: 8px;
+      background: var(--white);
+      color: var(--charcoal);
+      border: 1px solid rgba(21, 21, 21, 0.08);
+      font-size: 0.78rem;
       font-weight: 950;
     }
 
-    .context-panel h3 {
-      font-size: 2.25rem;
-      margin-top: 8px;
+    .hero-announcement .announcement-text {
+      color: var(--charcoal);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .context-panel p {
-      margin-top: 10px;
-      color: var(--muted);
-      line-height: 1.58;
-      font-size: 0.96rem;
+    .hero-announcement .arrow {
+      margin-left: auto;
+      font-size: 1.4rem;
+      line-height: 1;
+      color: var(--purple);
     }
 
-    .context-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 16px;
+    section {
+      padding: 92px 0;
     }
-
-    .context-stat {
-      padding: 12px;
-      border-radius: 16px;
-      background: rgba(248,247,242,0.9);
-      border: 1px solid rgba(21,21,21,0.08);
-    }
-
-    .context-stat b {
-      display: block;
-      font-size: 0.75rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .context-stat span {
-      display: block;
-      margin-top: 5px;
-      font-weight: 900;
-      font-size: 0.92rem;
-    }
-
-    section { padding: 94px 0; }
 
     .section-header {
       display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
+      grid-template-columns: 0.86fr 1.14fr;
       gap: 34px;
       align-items: end;
       margin-bottom: 34px;
     }
 
-    h2 { font-size: clamp(2.8rem, 5.1vw, 5.7rem); }
+    h2 {
+      font-size: clamp(2.7rem, 5.1vw, 5.7rem);
+    }
 
     .section-header p {
+      max-width: 710px;
       color: var(--muted);
+      font-size: 1.07rem;
       line-height: 1.68;
-      font-size: 1.08rem;
-      max-width: 720px;
     }
 
-    .influence-grid {
+    .shelf-section {
+      padding: 92px 0;
+      background: var(--cloud);
+      border-block: 1px solid rgba(21, 21, 21, 0.07);
+    }
+
+    .shelf-nav-wrap {
+      margin-top: 30px;
+    }
+
+    .shelf-nav {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 0;
+      overflow: visible;
+      border: 1px solid rgba(21, 21, 21, 0.12);
+      background: var(--charcoal);
+      box-shadow: var(--shadow-soft);
     }
 
-    .influence-card, .card, .reader-card, .map-data-card, .word-card {
-      border: 1px solid rgba(21,21,21,0.1);
-      border-radius: var(--radius-lg);
-      background: rgba(255,255,255,0.76);
-      box-shadow: 0 14px 44px rgba(21,21,21,0.07);
-    }
-
-    .influence-card {
-      padding: 24px;
-      min-height: 250px;
-    }
-
-    .tag {
-      display: inline-flex;
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: var(--purple-soft);
-      color: var(--purple-dark);
-      font-size: 0.75rem;
-      font-weight: 950;
-    }
-
-    .influence-card h3, .card h3 {
-      margin-top: 18px;
-      font-size: 2.1rem;
-    }
-
-    .influence-card p, .card p {
-      margin-top: 12px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .reader-layout {
-      display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap: 18px;
-      align-items: start;
-    }
-
-    .reader-card {
-      padding: 28px;
-      background: var(--paper);
-      position: sticky;
-      top: 100px;
-    }
-
-    .reader-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 22px;
-      flex-wrap: wrap;
-    }
-
-    .select-row {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    select {
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 10px 12px;
-      background: white;
-      font-weight: 850;
-      color: var(--ink);
-    }
-
-    .scripture {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: clamp(1.35rem, 2vw, 1.75rem);
-      line-height: 1.72;
-      color: var(--ink);
-    }
-
-    .verse-num {
-      color: var(--purple);
-      font-family: Inter, sans-serif;
-      font-size: 0.75rem;
-      font-weight: 950;
-      vertical-align: super;
-      margin-right: 4px;
-    }
-
-    .word {
-      border: 0;
-      background: transparent;
-      border-bottom: 2px dotted rgba(123, 44, 255, 0.34);
-      cursor: pointer;
-      font-family: inherit;
-      font-size: inherit;
-      color: inherit;
-      padding: 0 1px;
-    }
-
-    .word:hover, .word.active {
-      color: var(--purple);
-      background: rgba(123, 44, 255, 0.08);
-      border-radius: 6px;
-    }
-
-    .study-panel {
-      display: grid;
-      gap: 14px;
-    }
-
-    .word-card { padding: 24px; }
-
-    .word-card h3 {
-      font-size: 2.5rem;
-      color: var(--purple-dark);
-    }
-
-    .word-card .sub {
-      margin-top: 6px;
-      color: var(--muted);
-      font-weight: 900;
-    }
-
-    .word-card p {
-      margin-top: 14px;
-      color: var(--muted);
-      line-height: 1.62;
-    }
-
-    .pill-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 18px;
-    }
-
-    .pill {
-      display: inline-flex;
-      border-radius: 999px;
-      padding: 8px 10px;
-      background: rgba(123,44,255,0.09);
-      color: var(--purple-dark);
-      font-size: 0.82rem;
-      font-weight: 900;
-    }
-
-    .map-data-layout {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    .map-index {
-      display: grid;
-      gap: 12px;
-    }
-
-    .map-data-card {
-      padding: 22px;
-      cursor: pointer;
-      transition: transform 170ms ease, border-color 170ms ease;
-    }
-
-    .map-data-card:hover, .map-data-card.active {
-      transform: translateY(-2px);
-      border-color: rgba(123,44,255,0.45);
-    }
-
-    .map-data-card h3 {
-      font-size: 1.8rem;
-    }
-
-    .map-data-card p {
-      color: var(--muted);
-      margin-top: 8px;
-      line-height: 1.55;
-    }
-
-    .database-panel {
-      border-radius: var(--radius-xl);
-      border: 1px solid rgba(21,21,21,0.1);
-      background:
-        linear-gradient(rgba(255,255,255,0.76), rgba(255,255,255,0.76)),
-        repeating-linear-gradient(0deg, rgba(21,21,21,0.04) 0, rgba(21,21,21,0.04) 1px, transparent 1px, transparent 36px),
-        repeating-linear-gradient(90deg, rgba(21,21,21,0.035) 0, rgba(21,21,21,0.035) 1px, transparent 1px, transparent 36px),
-        var(--paper);
-      padding: 28px;
-      box-shadow: var(--shadow);
-      min-height: 570px;
+    .shelf-tab {
       position: relative;
+      appearance: none;
+      border: 0;
+      border-right: 1px solid rgba(255,255,255,0.18);
+      height: 138px;
+      padding: 18px 16px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      cursor: pointer;
+      background: var(--tab-color);
+      color: var(--tab-text);
+      transition: transform 240ms ease, height 240ms ease, box-shadow 240ms ease;
+      z-index: 1;
+    }
+
+    .shelf-tab:last-child {
+      border-right: 0;
+    }
+
+    .shelf-tab::before {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      top: 12px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.32);
+      opacity: 0.65;
+    }
+
+    .tab-label {
+      writing-mode: horizontal-tb;
+      font-size: 0.82rem;
+      font-weight: 950;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .shelf-tab:hover {
+      transform: translateY(-7px);
+    }
+
+    .shelf-tab.active {
+      height: 164px;
+      transform: translateY(-20px);
+      z-index: 4;
+      box-shadow: 0 24px 46px rgba(21, 21, 21, 0.18);
+    }
+
+    .shelf-tab.active::after {
+      content: "";
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: -15px;
+      height: 9px;
+      border-radius: 999px;
+      background: rgba(21, 21, 21, 0.18);
+      filter: blur(7px);
+      opacity: 0.55;
+    }
+
+    .shelf-line {
+      position: relative;
+      height: 3px;
+      background: rgba(21, 21, 21, 0.12);
       overflow: hidden;
     }
 
-    .database-panel::after {
-      content: "";
+    .shelf-line-fill {
       position: absolute;
-      inset: 50px 40px auto auto;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background: rgba(123,44,255,0.09);
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0;
+      background: var(--purple);
+      transition: width 260ms ease, transform 260ms ease, background 260ms ease;
     }
 
-    .db-content { position: relative; z-index: 2; }
-
-    .db-content h3 {
-      font-size: clamp(2.5rem, 4vw, 4.4rem);
+    .shelf-content {
+      position: relative;
+      padding-top: 30px;
+      min-height: 290px;
     }
 
-    .db-content p {
-      color: var(--muted);
-      margin-top: 14px;
-      line-height: 1.65;
-      max-width: 680px;
+    .shelf-panel {
+      display: none;
+      border: 1px solid rgba(21, 21, 21, 0.10);
+      border-top: 9px solid var(--panel-color, var(--purple));
+      background: white;
+      padding: 34px;
+      box-shadow: 0 18px 38px rgba(21,21,21,0.08);
     }
 
-    .data-table {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .data-cell {
-      background: rgba(255,255,255,0.72);
-      border: 1px solid rgba(21,21,21,0.09);
-      border-radius: 18px;
-      padding: 16px;
-    }
-
-    .data-cell b {
+    .shelf-panel.active {
       display: block;
+      animation: panelReveal 280ms ease;
+    }
+
+    @keyframes panelReveal {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .panel-kicker {
+      display: inline-block;
+      margin-bottom: 14px;
       color: var(--muted);
-      font-size: 0.76rem;
+      font-size: 0.74rem;
+      font-weight: 950;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
-    .data-cell span {
-      display: block;
-      margin-top: 7px;
-      font-weight: 900;
-      line-height: 1.4;
+    .shelf-panel h3 {
+      font-size: clamp(2.15rem, 4vw, 3.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
     }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+    .shelf-panel p {
+      margin-top: 16px;
+      max-width: 790px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1.05rem;
     }
 
-    .card {
-      padding: 24px;
-      min-height: 290px;
-      position: relative;
-      overflow: hidden;
+    .panel-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
     }
 
-    .card::after {
-      content: "";
-      position: absolute;
-      width: 170px;
-      height: 170px;
-      right: -64px;
-      bottom: -72px;
-      border-radius: 50%;
-      background: rgba(123,44,255,0.08);
-    }
-
-    .feature-strip {
-      border-radius: var(--radius-xl);
+    .build-note {
+      padding: 96px 0 110px;
       background: var(--charcoal);
       color: white;
-      padding: 42px;
+    }
+
+    .build-panel {
       display: grid;
       grid-template-columns: 0.9fr 1.1fr;
-      gap: 28px;
+      gap: 30px;
       align-items: center;
-      overflow: hidden;
-      position: relative;
+      padding: 46px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-xl);
+      background: #211E24;
     }
 
-    .feature-strip::after {
-      content: "";
-      position: absolute;
-      right: -160px;
-      bottom: -180px;
-      width: 420px;
-      height: 420px;
-      border-radius: 50%;
-      background: rgba(123,44,255,0.42);
+    .build-panel p {
+      color: rgba(255, 255, 255, 0.72);
+      line-height: 1.7;
+      font-size: 1.05rem;
     }
 
-    .feature-strip h2, .feature-strip p, .feature-strip .button { position: relative; z-index: 2; }
-    .feature-strip p { color: rgba(255,255,255,0.72); line-height: 1.68; font-size: 1.06rem; }
+    .build-panel .eyebrow {
+      color: rgba(255, 255, 255, 0.72);
+      border-color: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .build-panel h2 {
+      margin-top: 20px;
+    }
 
     footer {
       padding: 34px 0;
-      border-top: 1px solid rgba(21,21,21,0.1);
+      border-top: 1px solid rgba(21, 21, 21, 0.09);
       color: var(--muted);
+      background: var(--cloud);
     }
 
     .footer-inner {
       display: flex;
       justify-content: space-between;
-      gap: 20px;
       align-items: center;
+      gap: 20px;
       font-size: 0.92rem;
     }
 
     @media (max-width: 960px) {
-      .hero-grid, .section-header, .reader-layout, .map-data-layout, .feature-strip { grid-template-columns: 1fr; }
-      .influence-grid, .cards, .data-table { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-      .reader-card { position: relative; top: auto; }
+      .hero-inner,
+      .section-header,
+      .build-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .shelf-nav {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .nav-links {
+        display: none;
+      }
     }
 
-    @media (max-width: 560px) {
-      .container { width: min(100% - 26px, 1210px); }
-      h1 { font-size: 3.55rem; }
-      section { padding: 70px 0; }
-      .hero-board { min-height: 650px; }
-      .context-grid { grid-template-columns: 1fr; }
-      .footer-inner { flex-direction: column; align-items: flex-start; }
+    @media (max-width: 650px) {
+      .container {
+        width: min(100% - 26px, 1180px);
+      }
+
+      h1 {
+        font-size: 3.55rem;
+      }
+
+      section {
+        padding: 70px 0;
+      }
+
+      .hero {
+        padding-top: 50px;
+      }
+
+      .hero-announcement {
+        max-width: 100%;
+      }
+
+      .shelf-nav {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .shelf-tab {
+        height: 112px;
+      }
+
+      .shelf-tab.active {
+        height: 130px;
+        transform: translateY(-10px);
+      }
+
+      .shelf-panel {
+        padding: 24px;
+      }
+
+      .current-location {
+        left: 13px;
+        right: 13px;
+        justify-content: center;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker-track">
-      <span>MAPS</span><span>CONTEXT</span><span>KJV READER</span><span>CONCORDANCE</span><span>WORD STUDIES</span><span>BOOK GUIDES</span><span>PEOPLE</span><span>PLACES</span>
-      <span>MAPS</span><span>CONTEXT</span><span>KJV READER</span><span>CONCORDANCE</span><span>WORD STUDIES</span><span>BOOK GUIDES</span><span>PEOPLE</span><span>PLACES</span>
-    </div>
-  </div>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="top-line" aria-hidden="true"></div>
 
   <header class="nav-wrap">
     <div class="container">
       <nav aria-label="Main navigation">
-        <a class="brand" href="#top"><span class="brand-mark">BM</span><span>Bible Mapped</span></a>
+        <a class="brand" href="#top" data-location="Home">
+          <span class="brand-mark">BM</span>
+          <span>Bible Mapped</span>
+        </a>
+
         <div class="nav-links">
-          <a href="#explore">Explore</a>
-          <a href="#reader">KJV Reader</a>
-          <a href="#map-data">Map Data</a>
-          <a href="#guides">Guides</a>
-          <a class="nav-cta" href="#build">Start Building</a>
+          <a href="#topics" data-location="Explore">Explore</a>
+          <a href="#books" data-location="Books">Books</a>
+          <a href="#maps" data-location="Maps">Maps</a>
+          <a href="#videos" data-location="Videos">Videos</a>
+          <a href="#about" data-location="About">About</a>
+          <a class="nav-cta" href="#topics" data-location="Start Exploring">Start Exploring</a>
         </div>
       </nav>
     </div>
   </header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <span class="eyebrow"><span class="dot"></span> A visual Bible atlas, reader, and learning library</span>
-          <h1>The Bible happened somewhere.</h1>
+  <div class="current-location" id="currentLocation" aria-live="polite">
+    <span class="pulse"></span>
+    <span>Current location: Home</span>
+  </div>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <a class="hero-announcement" href="#topics" data-location="Explore Bible Mapped">
+            <span class="new-label">New</span>
+            <span class="announcement-text">Explore Scripture through place, context, and meaning</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+
+          <h1>We help people understand the Bible through place.</h1>
           <p>
-            Bible Mapped helps people read Scripture with the map open: every passage can connect to places, people, empires, original-language word studies, concordance links, and Christ-centered context.
+            Bible Mapped is a visual Bible learning platform built around maps, context, word studies, people, themes, and the story that points to Jesus.
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#reader">Open KJV Reader →</a>
-            <a class="button" href="#map-data">Explore Map Data</a>
+            <a class="button button-primary" href="#topics" data-location="Explore">Explore Bible Mapped →</a>
+            <a class="button" href="about.html" data-location="About Page">Read the Mission</a>
           </div>
         </div>
-
-        <aside class="hero-board" aria-label="Bible Mapped interactive preview">
-          <div class="board-label">
-            <span class="small-chip">Interactive Context Map</span>
-            <span class="small-chip">KJV + Concordance</span>
-          </div>
-
-          <svg class="hero-map-line" viewBox="0 0 600 600" preserveAspectRatio="none" aria-hidden="true">
-            <path class="route-line" d="M 90 490 C 152 398, 136 304, 236 262 C 334 222, 318 124, 430 105 C 520 90, 515 186, 452 245 C 390 304, 430 366, 360 420 C 285 476, 190 454, 90 490" />
-          </svg>
-
-          <button class="place active" style="left: 18%; top: 80%;" data-title="Egypt" data-label="Empire / Deliverance" data-copy="Egypt is where Israel suffers, where God judges empire, and where Exodus becomes a foundation for redemption language." data-coords="30.0444° N, 31.2357° E" data-books="Genesis, Exodus, Matthew" data-theme="Bondage, judgment, deliverance" data-jesus="Christ is the greater deliverer and true Son called out of Egypt.">
-            <span class="pin"></span><strong>Egypt</strong>
-          </button>
-
-          <button class="place" style="left: 40%; top: 43%;" data-title="Sinai" data-label="Covenant / Law" data-copy="Sinai is where God forms Israel as a covenant people and gives the law in the wilderness." data-coords="Traditional: Sinai Peninsula" data-books="Exodus, Leviticus, Numbers" data-theme="Law, holiness, covenant" data-jesus="Christ fulfills the law and mediates the better covenant.">
-            <span class="pin"></span><strong>Sinai</strong>
-          </button>
-
-          <button class="place" style="left: 60%; top: 70%;" data-title="Jerusalem" data-label="Kingdom / Temple" data-copy="Jerusalem becomes the center of kingship, temple worship, prophecy, judgment, crucifixion, and resurrection." data-coords="31.7683° N, 35.2137° E" data-books="Samuel, Kings, Psalms, Gospels, Acts" data-theme="Kingdom, worship, sacrifice" data-jesus="The city of the king becomes the place where the true King gives His life and rises.">
-            <span class="pin"></span><strong>Jerusalem</strong>
-          </button>
-
-          <button class="place" style="left: 72%; top: 17%;" data-title="Babylon" data-label="Exile / False Kingdom" data-copy="Babylon is both a historical empire and a biblical symbol of pride, exile, and opposition to God." data-coords="Near Hillah, Iraq" data-books="Daniel, Jeremiah, Revelation" data-theme="Exile, pride, judgment" data-jesus="Christ brings His people out of exile and defeats the kingdoms of this world.">
-            <span class="pin"></span><strong>Babylon</strong>
-          </button>
-
-          <button class="place" style="left: 83%; top: 40%;" data-title="Galilee" data-label="Jesus’ Ministry" data-copy="Galilee is where Jesus calls disciples, teaches crowds, heals the sick, calms waters, and announces the kingdom." data-coords="Northern Israel" data-books="Matthew, Mark, Luke, John" data-theme="Kingdom, discipleship, miracles" data-jesus="The light comes to Galilee as Jesus begins His public ministry.">
-            <span class="pin"></span><strong>Galilee</strong>
-          </button>
-
-          <div class="context-panel" aria-live="polite">
-            <span class="label" id="mapLabel">Empire / Deliverance</span>
-            <h3 id="mapTitle">Egypt</h3>
-            <p id="mapCopy">Egypt is where Israel suffers, where God judges empire, and where Exodus becomes a foundation for redemption language.</p>
-            <div class="context-grid">
-              <div class="context-stat"><b>Coordinates</b><span id="mapCoords">30.0444° N, 31.2357° E</span></div>
-              <div class="context-stat"><b>Books</b><span id="mapBooks">Genesis, Exodus, Matthew</span></div>
-              <div class="context-stat"><b>Theme</b><span id="mapTheme">Bondage, judgment, deliverance</span></div>
-              <div class="context-stat"><b>Jesus</b><span id="mapJesus">Greater deliverer</span></div>
-            </div>
-          </div>
-        </aside>
       </div>
     </section>
 
-    <section id="explore">
+    <section class="shelf-section" id="topics">
       <div class="container">
         <div class="section-header">
-          <h2>Three inspirations. One Bible Mapped lane.</h2>
+          <h2>Browse the Bible like a shelf.</h2>
           <p>
-            The site should feel editorial like a modern explainer, immersive like a museum exhibit, and useful like a Bible learning app — but the center is your unique idea: Scripture through place, context, and meaning.
+            Each color tab is a route into Bible Mapped. Click a section and it pulls forward like a book, becomes a line, then opens the content below it.
           </p>
         </div>
 
-        <div class="influence-grid">
-          <article class="influence-card">
-            <span class="tag">Editorial</span>
-            <h3>Explainers</h3>
-            <p>Feature stories, visual essays, big questions, topic hubs, and clear “why this matters” framing.</p>
-          </article>
-          <article class="influence-card">
-            <span class="tag">Museum</span>
-            <h3>Exhibits</h3>
-            <p>Artifact-style cards, immersive sections, curiosity prompts, historical context, and guided journeys.</p>
-          </article>
-          <article class="influence-card">
-            <span class="tag">Study Tool</span>
-            <h3>Bible Reader</h3>
-            <p>KJV reading, clickable words, concordance data, maps, videos, book guides, and reading pathways.</p>
-          </article>
-        </div>
-      </div>
-    </section>
+        <div class="shelf-nav-wrap">
+          <div class="shelf-nav" role="tablist" aria-label="Bible Mapped sections">
+            <button class="shelf-tab active" role="tab" aria-selected="true" data-tab="overview" data-location="Overview" style="--tab-color: var(--paper); --tab-text: var(--charcoal);">
+              <span class="tab-label">Overview</span>
+            </button>
 
-    <section id="reader">
-      <div class="container">
-        <div class="section-header">
-          <h2>KJV reader with clickable concordance.</h2>
-          <p>
-            This is the core tool: a King James Bible reading experience where important words open a study panel with Hebrew or Greek, Strong’s-style tagging, meaning, related verses, and map context.
-          </p>
-        </div>
+            <button class="shelf-tab" role="tab" aria-selected="false" data-tab="books" data-location="Books" style="--tab-color: var(--navy); --tab-text: white;">
+              <span class="tab-label">Books</span>
+            </button>
 
-        <div class="reader-layout">
-          <article class="reader-card">
-            <div class="reader-top">
-              <span class="eyebrow"><span class="dot"></span> King James Version</span>
-              <div class="select-row">
-                <select aria-label="Book"><option>Genesis</option><option>Matthew</option><option>John</option></select>
-                <select aria-label="Chapter"><option>1</option><option>2</option><option>3</option></select>
-              </div>
-            </div>
+            <button class="shelf-tab" role="tab" aria-selected="false" data-tab="maps" data-location="Maps" style="--tab-color: var(--teal); --tab-text: var(--charcoal);">
+              <span class="tab-label">Maps</span>
+            </button>
 
-            <p class="scripture">
-              <sup class="verse-num">1</sup>In the <button class="word active" data-word="beginning">beginning</button> God <button class="word" data-word="created">created</button> the <button class="word" data-word="heaven">heaven</button> and the <button class="word" data-word="earth">earth</button>.
-              <br><br>
-              <sup class="verse-num">2</sup>And the earth was without form, and void; and darkness was upon the face of the deep. And the <button class="word" data-word="Spirit">Spirit</button> of God moved upon the face of the waters.
-              <br><br>
-              <sup class="verse-num">3</sup>And God said, Let there be <button class="word" data-word="light">light</button>: and there was light.
-            </p>
-          </article>
+            <button class="shelf-tab" role="tab" aria-selected="false" data-tab="people" data-location="People" style="--tab-color: var(--slate); --tab-text: white;">
+              <span class="tab-label">People</span>
+            </button>
 
-          <aside class="study-panel">
-            <article class="word-card">
-              <span class="tag">Concordance</span>
-              <h3 id="wordTitle">beginning</h3>
-              <div class="sub" id="wordSub">Hebrew: bereshith · Strong’s-style: H7225</div>
-              <p id="wordMeaning">
-                Means beginning, first, chief, or starting point. In Genesis 1:1, it frames creation as the opening moment of the biblical story.
-              </p>
-              <div class="pill-list" id="wordPills">
-                <span class="pill">Genesis 1:1</span><span class="pill">John 1:1</span><span class="pill">Creation</span><span class="pill">Origin</span>
-              </div>
-            </article>
+            <button class="shelf-tab" role="tab" aria-selected="false" data-tab="themes" data-location="Themes" style="--tab-color: var(--sand); --tab-text: var(--charcoal);">
+              <span class="tab-label">Themes</span>
+            </button>
 
-            <article class="word-card">
-              <span class="tag">Map Connection</span>
-              <h3 id="wordMapTitle">Creation / Eden</h3>
-              <p id="wordMapCopy">
-                Genesis begins before a normal map can locate the scene, but the story quickly moves toward Eden, rivers, lands, exile, and the geography of promise.
-              </p>
-            </article>
-          </aside>
-        </div>
-      </div>
-    </section>
+            <button class="shelf-tab" role="tab" aria-selected="false" data-tab="videos" data-location="Videos" style="--tab-color: var(--purple); --tab-text: white;">
+              <span class="tab-label">Videos</span>
+            </button>
 
-    <section id="map-data">
-      <div class="container">
-        <div class="section-header">
-          <h2>Map data for every context location.</h2>
-          <p>
-            Every location should have a structured record: coordinates, modern location, ancient name, associated passages, books, themes, people, events, and how the place connects to the larger biblical story.
-          </p>
-        </div>
+            <button class="shelf-tab" role="tab" aria-selected="false" data-tab="tools" data-location="Study Tools" style="--tab-color: var(--red); --tab-text: white;">
+              <span class="tab-label">Tools</span>
+            </button>
 
-        <div class="map-data-layout">
-          <div class="map-index">
-            <article class="map-data-card active" data-location="Jerusalem" data-modern="Jerusalem, Israel" data-ancient="City of David / Zion" data-coords="31.7683° N, 35.2137° E" data-passages="2 Samuel 5; Psalm 48; Matthew 21; Luke 24; Acts 2" data-people="David, Solomon, Hezekiah, Jesus, Peter" data-events="David captures the city; temple worship; triumphal entry; crucifixion and resurrection; Pentecost" data-meaning="Jerusalem is where kingship, temple, sacrifice, judgment, and resurrection converge." data-jesus="Jesus enters as King, dies outside the city, rises, and sends witnesses from Jerusalem.">
-              <h3>Jerusalem</h3><p>Kingdom, temple, crucifixion, resurrection, Pentecost.</p>
-            </article>
-            <article class="map-data-card" data-location="Galilee" data-modern="Northern Israel" data-ancient="Galilee of the nations" data-coords="Approx. 32.8° N, 35.5° E" data-passages="Isaiah 9; Matthew 4; Mark 1; John 21" data-people="Jesus, Peter, Andrew, James, John" data-events="Calling of disciples; Sermon on the Mount region; miracles; Sea of Galilee ministry" data-meaning="Galilee shows the kingdom arriving in a region often treated as distant from Jerusalem’s religious center." data-jesus="Jesus begins His public ministry in Galilee, fulfilling the light-to-the-nations theme.">
-              <h3>Galilee</h3><p>Jesus’ ministry, disciples, miracles, kingdom announcement.</p>
-            </article>
-            <article class="map-data-card" data-location="Babylon" data-modern="Near Hillah, Iraq" data-ancient="Babylon" data-coords="32.5364° N, 44.4200° E" data-passages="Genesis 11; 2 Kings 25; Daniel 1; Revelation 18" data-people="Nebuchadnezzar, Daniel, Shadrach, Meshach, Abednego" data-events="Tower of Babel pattern; exile of Judah; Daniel in Babylon; prophetic image of world empire" data-meaning="Babylon becomes a symbol of human pride, exile, empire, and false worship." data-jesus="Christ defeats Babylon-like kingdoms and gathers His people into the New Jerusalem.">
-              <h3>Babylon</h3><p>Exile, empire, pride, judgment, prophetic symbolism.</p>
-            </article>
+            <button class="shelf-tab" role="tab" aria-selected="false" data-tab="about" data-location="About Bible Mapped" style="--tab-color: var(--charcoal); --tab-text: white;">
+              <span class="tab-label">About</span>
+            </button>
           </div>
 
-          <article class="database-panel">
-            <div class="db-content">
-              <span class="eyebrow"><span class="dot"></span> Location Record</span>
-              <h3 id="dbTitle">Jerusalem</h3>
-              <p id="dbMeaning">Jerusalem is where kingship, temple, sacrifice, judgment, and resurrection converge.</p>
-              <div class="data-table">
-                <div class="data-cell"><b>Modern Location</b><span id="dbModern">Jerusalem, Israel</span></div>
-                <div class="data-cell"><b>Ancient Name</b><span id="dbAncient">City of David / Zion</span></div>
-                <div class="data-cell"><b>Coordinates</b><span id="dbCoords">31.7683° N, 35.2137° E</span></div>
-                <div class="data-cell"><b>Passages</b><span id="dbPassages">2 Samuel 5; Psalm 48; Matthew 21; Luke 24; Acts 2</span></div>
-                <div class="data-cell"><b>People</b><span id="dbPeople">David, Solomon, Hezekiah, Jesus, Peter</span></div>
-                <div class="data-cell"><b>Events</b><span id="dbEvents">David captures the city; temple worship; triumphal entry; crucifixion and resurrection; Pentecost</span></div>
-                <div class="data-cell"><b>Jesus Connection</b><span id="dbJesus">Jesus enters as King, dies outside the city, rises, and sends witnesses from Jerusalem.</span></div>
-                <div class="data-cell"><b>Content Types</b><span>Map layer, article, video, word study, timeline, downloadable guide</span></div>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="guides">
-      <div class="container">
-        <div class="section-header">
-          <h2>Turn Bible learning into guided paths.</h2>
-          <p>
-            Instead of only having a blog, Bible Mapped should have guided paths that connect books, places, people, words, and videos into one learning system.
-          </p>
-        </div>
-
-        <div class="cards">
-          <article class="card"><span class="tag">Path 01</span><h3>How to Read the Bible</h3><p>A beginner-friendly path explaining what the Bible is, how it is structured, and why context matters.</p></article>
-          <article class="card"><span class="tag">Path 02</span><h3>Jesus’ World</h3><p>Galilee, Jerusalem, Judea, Samaria, Rome, temple life, synagogues, fishing towns, roads, and political pressure.</p></article>
-          <article class="card"><span class="tag">Path 03</span><h3>Exile & Return</h3><p>Assyria, Babylon, Persia, Jerusalem, prophets, judgment, hope, and the promise of restoration.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section id="build">
-      <div class="container">
-        <div class="feature-strip">
-          <div>
-            <span class="eyebrow"><span class="dot"></span> Bible Mapped 2.0</span>
-            <h2>Build it as a Bible intelligence platform.</h2>
+          <div class="shelf-line" aria-hidden="true">
+            <div class="shelf-line-fill" id="shelfLineFill"></div>
           </div>
-          <div>
+        </div>
+
+        <div class="shelf-content">
+          <article class="shelf-panel active" id="panel-overview" role="tabpanel" style="--panel-color: var(--paper);">
+            <span class="panel-kicker">Start here</span>
+            <h3>The Bible happened somewhere.</h3>
             <p>
-              The real version should use a structured database behind the scenes: Bible books, verses, words, Strong’s-style references, map locations, routes, people, timelines, themes, videos, and sources. The front end should feel like an editorial museum exhibit with a Bible reader at the center.
+              Bible Mapped helps people understand Scripture through place, context, meaning, language, history, and the story that leads to Jesus Christ.
             </p>
-            <div class="hero-actions"><a class="button button-primary" href="#reader">Test the Reader</a><a class="button" href="#map-data">View Location Schema</a></div>
+            <div class="panel-actions">
+              <a class="button button-primary" href="#next" data-location="Next Build Phase">Start Exploring →</a>
+              <a class="button" href="about.html" data-location="About Page">Read the Mission</a>
+            </div>
+          </article>
+
+          <article class="shelf-panel" id="panel-books" role="tabpanel" style="--panel-color: var(--navy);">
+            <span class="panel-kicker">Canon / 66</span>
+            <h3>Walk through every book of the Bible.</h3>
+            <p>
+              Learn each book’s name meaning, structure, author tradition, setting, key people, major themes, map points, and how it points to Jesus.
+            </p>
+            <div class="panel-actions">
+              <a class="button button-primary" href="books.html" data-location="Books Page">Open Books →</a>
+            </div>
+          </article>
+
+          <article class="shelf-panel" id="panel-maps" role="tabpanel" style="--panel-color: var(--teal);">
+            <span class="panel-kicker">Atlas / 01</span>
+            <h3>See the geography behind the story.</h3>
+            <p>
+              Trace biblical places through maps, routes, coordinates, terrain, empires, cities, regions, and context tied to specific passages.
+            </p>
+            <div class="panel-actions">
+              <a class="button button-primary" href="maps.html" data-location="Maps Page">Open Maps →</a>
+            </div>
+          </article>
+
+          <article class="shelf-panel" id="panel-people" role="tabpanel" style="--panel-color: var(--slate);">
+            <span class="panel-kicker">Lineage / 02</span>
+            <h3>Study the people inside the biblical world.</h3>
+            <p>
+              Explore biblical figures through biography, geography, timeline, role, relationships, and narrative significance.
+            </p>
+            <div class="panel-actions">
+              <a class="button button-primary" href="people.html" data-location="People Page">Open People →</a>
+            </div>
+          </article>
+
+          <article class="shelf-panel" id="panel-themes" role="tabpanel" style="--panel-color: var(--sand);">
+            <span class="panel-kicker">Threads / 03</span>
+            <h3>Trace the big ideas of Scripture.</h3>
+            <p>
+              Follow covenant, exile, kingdom, sacrifice, temple, wisdom, Messiah, creation, land, nations, and redemption across the whole Bible.
+            </p>
+            <div class="panel-actions">
+              <a class="button button-primary" href="themes.html" data-location="Themes Page">Open Themes →</a>
+            </div>
+          </article>
+
+          <article class="shelf-panel" id="panel-videos" role="tabpanel" style="--panel-color: var(--purple);">
+            <span class="panel-kicker">Explainers / 04</span>
+            <h3>Watch visual explainers and map-based teaching.</h3>
+            <p>
+              Dive into Bible Mapped episodes, visual essays, explainers, source notes, maps, and documentary-style breakdowns.
+            </p>
+            <div class="panel-actions">
+              <a class="button button-primary" href="videos.html" data-location="Videos Page">Open Videos →</a>
+            </div>
+          </article>
+
+          <article class="shelf-panel" id="panel-tools" role="tabpanel" style="--panel-color: var(--red);">
+            <span class="panel-kicker">Lexicon / 05</span>
+            <h3>Use study tools built for discovery.</h3>
+            <p>
+              Explore the KJV reader, concordance, clickable words, Strong’s-style references, timelines, and location-linked study resources.
+            </p>
+            <div class="panel-actions">
+              <a class="button button-primary" href="tools.html" data-location="Tools Page">Open Tools →</a>
+            </div>
+          </article>
+
+          <article class="shelf-panel" id="panel-about" role="tabpanel" style="--panel-color: var(--charcoal);">
+            <span class="panel-kicker">Origin / 06</span>
+            <h3>Why Bible Mapped exists.</h3>
+            <p>
+              Bible Mapped exists to help people see Scripture more clearly through place, context, language, history, and the person of Jesus Christ.
+            </p>
+            <div class="panel-actions">
+              <a class="button button-primary" href="about.html" data-location="About Page">Open About →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="build-note" id="next">
+      <div class="container">
+        <div class="build-panel">
+          <div>
+            <span class="eyebrow"><span class="dot"></span> Next build phase</span>
+            <h2>Now we build the content pages.</h2>
           </div>
+          <p>
+            This landing page is the gateway. Next, create one page at a time: Books, Maps, People, Themes, Videos, Tools, and About. Each page should keep the same map logic: a clean layout, one main purpose, a subtle location marker, and content that connects Scripture to place, context, and meaning.
+          </p>
         </div>
       </div>
     </section>
@@ -978,116 +849,88 @@
   </footer>
 
   <script>
-    const places = document.querySelectorAll('.place');
-    const mapTitle = document.getElementById('mapTitle');
-    const mapLabel = document.getElementById('mapLabel');
-    const mapCopy = document.getElementById('mapCopy');
-    const mapCoords = document.getElementById('mapCoords');
-    const mapBooks = document.getElementById('mapBooks');
-    const mapTheme = document.getElementById('mapTheme');
-    const mapJesus = document.getElementById('mapJesus');
+    const shelfTabs = document.querySelectorAll('.shelf-tab');
+    const shelfPanels = document.querySelectorAll('.shelf-panel');
+    const shelfLineFill = document.getElementById('shelfLineFill');
 
-    places.forEach((place) => {
-      place.addEventListener('click', () => {
-        places.forEach((item) => item.classList.remove('active'));
-        place.classList.add('active');
-        mapTitle.textContent = place.dataset.title;
-        mapLabel.textContent = place.dataset.label;
-        mapCopy.textContent = place.dataset.copy;
-        mapCoords.textContent = place.dataset.coords;
-        mapBooks.textContent = place.dataset.books;
-        mapTheme.textContent = place.dataset.theme;
-        mapJesus.textContent = place.dataset.jesus;
+    function activateShelfTab(tab) {
+      shelfTabs.forEach((item) => {
+        item.classList.remove('active');
+        item.setAttribute('aria-selected', 'false');
+      });
+
+      shelfPanels.forEach((panel) => panel.classList.remove('active'));
+
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+
+      const panel = document.getElementById(`panel-${tab.dataset.tab}`);
+      if (panel) panel.classList.add('active');
+
+      const navRect = tab.parentElement.getBoundingClientRect();
+      const tabRect = tab.getBoundingClientRect();
+      const left = tabRect.left - navRect.left;
+      const width = tabRect.width;
+
+      shelfLineFill.style.width = `${width}px`;
+      shelfLineFill.style.transform = `translateX(${left}px)`;
+      shelfLineFill.style.background = getComputedStyle(tab).backgroundColor;
+    }
+
+    shelfTabs.forEach((tab) => {
+      tab.addEventListener('click', () => activateShelfTab(tab));
+    });
+
+    window.addEventListener('load', () => {
+      const activeTab = document.querySelector('.shelf-tab.active');
+      if (activeTab) activateShelfTab(activeTab);
+    });
+
+    window.addEventListener('resize', () => {
+      const activeTab = document.querySelector('.shelf-tab.active');
+      if (activeTab) activateShelfTab(activeTab);
+    });
+
+    const locationLabel = document.querySelector('#currentLocation span:last-child');
+    const locationTriggers = document.querySelectorAll('[data-location]');
+
+    function updateLocation(label) {
+      locationLabel.textContent = `Current location: ${label}`;
+    }
+
+    locationTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        updateLocation(trigger.dataset.location);
       });
     });
 
-    const wordData = {
-      beginning: {
-        title: 'beginning', sub: 'Hebrew: bereshith · Strong’s-style: H7225',
-        meaning: 'Means beginning, first, chief, or starting point. In Genesis 1:1, it frames creation as the opening moment of the biblical story.',
-        pills: ['Genesis 1:1', 'John 1:1', 'Creation', 'Origin'],
-        mapTitle: 'Creation / Eden', mapCopy: 'Genesis begins before a normal map can locate the scene, but the story quickly moves toward Eden, rivers, lands, exile, and the geography of promise.'
-      },
-      created: {
-        title: 'created', sub: 'Hebrew: bara · Strong’s-style: H1254',
-        meaning: 'A verb commonly associated with divine creative action. It emphasizes God as the source and maker of the ordered world.',
-        pills: ['Genesis 1:1', 'Genesis 1:27', 'Isaiah 40:28', 'Creation'],
-        mapTitle: 'The Whole Created World', mapCopy: 'The first verse expands beyond one land or people. The map begins with all creation before narrowing toward Eden, Canaan, Israel, and the nations.'
-      },
-      heaven: {
-        title: 'heaven', sub: 'Hebrew: shamayim · Strong’s-style: H8064',
-        meaning: 'Can refer to sky, heavens, or the realm above. Genesis opens with God creating the ordered heavens and earth.',
-        pills: ['Genesis 1:1', 'Psalm 19:1', 'Matthew 6:10', 'Heavens'],
-        mapTitle: 'Cosmic Geography', mapCopy: 'Bible Mapped can show that biblical geography is not only horizontal land. Scripture also uses vertical space: heaven, earth, sea, wilderness, mountain, temple.'
-      },
-      earth: {
-        title: 'earth', sub: 'Hebrew: erets · Strong’s-style: H776',
-        meaning: 'Can mean earth, land, ground, or country depending on context. This is one reason concordance and context matter.',
-        pills: ['Genesis 1:1', 'Genesis 12:1', 'Exodus 3:8', 'Land'],
-        mapTitle: 'Land and Promise', mapCopy: 'The word “earth/land” becomes important later when God promises land to Abraham and forms Israel in a specific territory.'
-      },
-      Spirit: {
-        title: 'Spirit', sub: 'Hebrew: ruach · Strong’s-style: H7307',
-        meaning: 'Can mean spirit, wind, or breath. Context determines whether the focus is God’s Spirit, wind, breath, or life-giving power.',
-        pills: ['Genesis 1:2', 'Ezekiel 37', 'John 3:8', 'Spirit'],
-        mapTitle: 'Waters / Creation Scene', mapCopy: 'Genesis 1 uses waters and deep imagery before land appears. A Bible Mapped reader can connect geography, symbols, and theology.'
-      },
-      light: {
-        title: 'light', sub: 'Hebrew: or · Strong’s-style: H216',
-        meaning: 'Light begins the ordering of creation and later becomes a major biblical image for revelation, life, holiness, and Christ.',
-        pills: ['Genesis 1:3', 'Isaiah 9:2', 'John 1:4-5', 'Light'],
-        mapTitle: 'Galilee Connection', mapCopy: 'Isaiah’s “great light” language becomes connected to Galilee in Matthew 4, linking word study to place context.'
-      }
+    const observedSections = document.querySelectorAll('#top, #topics, #books, #maps, #people, #themes, #videos, #tools, #about, #next');
+
+    const sectionNames = {
+      top: 'Home',
+      topics: 'Explore',
+      books: 'Books',
+      maps: 'Maps',
+      people: 'People',
+      themes: 'Themes',
+      videos: 'Videos',
+      tools: 'Study Tools',
+      about: 'About Bible Mapped',
+      next: 'Next Build Phase'
     };
 
-    const words = document.querySelectorAll('.word');
-    const wordTitle = document.getElementById('wordTitle');
-    const wordSub = document.getElementById('wordSub');
-    const wordMeaning = document.getElementById('wordMeaning');
-    const wordPills = document.getElementById('wordPills');
-    const wordMapTitle = document.getElementById('wordMapTitle');
-    const wordMapCopy = document.getElementById('wordMapCopy');
-
-    words.forEach((word) => {
-      word.addEventListener('click', () => {
-        words.forEach((item) => item.classList.remove('active'));
-        word.classList.add('active');
-        const data = wordData[word.dataset.word];
-        wordTitle.textContent = data.title;
-        wordSub.textContent = data.sub;
-        wordMeaning.textContent = data.meaning;
-        wordMapTitle.textContent = data.mapTitle;
-        wordMapCopy.textContent = data.mapCopy;
-        wordPills.innerHTML = data.pills.map((pill) => `<span class="pill">${pill}</span>`).join('');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          updateLocation(sectionNames[entry.target.id] || 'Bible Mapped');
+        }
       });
+    }, {
+      root: null,
+      threshold: 0.45
     });
 
-    const locationCards = document.querySelectorAll('.map-data-card');
-    const dbTitle = document.getElementById('dbTitle');
-    const dbMeaning = document.getElementById('dbMeaning');
-    const dbModern = document.getElementById('dbModern');
-    const dbAncient = document.getElementById('dbAncient');
-    const dbCoords = document.getElementById('dbCoords');
-    const dbPassages = document.getElementById('dbPassages');
-    const dbPeople = document.getElementById('dbPeople');
-    const dbEvents = document.getElementById('dbEvents');
-    const dbJesus = document.getElementById('dbJesus');
-
-    locationCards.forEach((card) => {
-      card.addEventListener('click', () => {
-        locationCards.forEach((item) => item.classList.remove('active'));
-        card.classList.add('active');
-        dbTitle.textContent = card.dataset.location;
-        dbMeaning.textContent = card.dataset.meaning;
-        dbModern.textContent = card.dataset.modern;
-        dbAncient.textContent = card.dataset.ancient;
-        dbCoords.textContent = card.dataset.coords;
-        dbPassages.textContent = card.dataset.passages;
-        dbPeople.textContent = card.dataset.people;
-        dbEvents.textContent = card.dataset.events;
-        dbJesus.textContent = card.dataset.jesus;
-      });
-    });
+    observedSections.forEach((section) => observer.observe(section));
   </script>
 </body>
 </html>
