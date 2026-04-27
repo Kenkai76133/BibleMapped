@@ -1,6 +1,4 @@
-from pathlib import Path
-
-updated_html = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -987,9 +985,3 @@ updated_html = """<!DOCTYPE html>
   </script>
 </body>
 </html>
-"""
-
-output_path = Path("/mnt/data/about-index-with-feature-image-slot.html")
-output_path.write_text(updated_html, encoding="utf-8")
-print(f"Created: {output_path}")
-print("Feature image slot path: ../assets/about-feature-image.png")
