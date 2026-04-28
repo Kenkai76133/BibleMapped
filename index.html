@@ -236,6 +236,312 @@
       box-shadow: 0 20px 44px rgba(123, 44, 255, 0.22);
     }
 
+
+    /* Lux update: connected hero buttons */
+    .hero-connected-actions {
+      gap: 0;
+    }
+
+    .hero-connected-actions .button {
+      border-radius: 0;
+      min-width: 214px;
+      border-color: rgba(21, 21, 21, 0.14);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-connected-actions .button + .button {
+      border-left: 0;
+    }
+
+    .hero-connected-actions .button-primary {
+      box-shadow: none;
+    }
+
+    .button-mission {
+      background: #EAF1FF;
+      color: var(--navy);
+      border-color: rgba(14, 55, 110, 0.22) !important;
+    }
+
+    .button-mission::after {
+      content: "";
+      position: absolute;
+      left: -40%;
+      top: 0;
+      width: 38%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(14,55,110,0.14), transparent);
+      transform: skewX(-18deg);
+      animation: missionSweep 3.4s ease-in-out infinite;
+    }
+
+    @keyframes missionSweep {
+      0%, 62% { left: -45%; }
+      100% { left: 110%; }
+    }
+
+    /* Lux update: book-spine shelf system */
+    .shelf-nav {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      min-height: 188px;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+      perspective: 1200px;
+    }
+
+    .shelf-tab {
+      flex: 1 1 0;
+      min-width: 86px;
+      height: 176px;
+      border-right: 1px solid rgba(255,255,255,0.22);
+      border-left: 1px solid rgba(0,0,0,0.08);
+      border-radius: 12px 12px 0 0;
+      box-shadow:
+        inset 12px 0 18px rgba(255,255,255,0.12),
+        inset -12px 0 18px rgba(0,0,0,0.12),
+        0 18px 28px rgba(21,21,21,0.10);
+      transform-origin: bottom center;
+      overflow: hidden;
+    }
+
+    .shelf-tab::before {
+      left: 14px;
+      right: 14px;
+      top: 16px;
+      background: rgba(255,255,255,0.28);
+    }
+
+    .shelf-tab::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 10px;
+      background: rgba(0,0,0,0.20);
+      opacity: 0.32;
+      filter: none;
+      border-radius: 0;
+    }
+
+    .shelf-tab:hover {
+      transform: translateY(-10px) rotateX(-3deg);
+    }
+
+    .shelf-tab.active {
+      flex: 1.45 1 0;
+      height: 196px;
+      transform: translateY(-18px) rotateX(-4deg);
+      box-shadow:
+        inset 14px 0 20px rgba(255,255,255,0.15),
+        inset -14px 0 22px rgba(0,0,0,0.15),
+        0 28px 52px rgba(21,21,21,0.22);
+      z-index: 5;
+    }
+
+    .tab-label {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 0.88rem;
+      line-height: 1;
+      letter-spacing: 0.12em;
+      align-self: flex-end;
+      margin: auto auto 4px auto;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.10);
+    }
+
+    .shelf-line {
+      display: none !important;
+    }
+
+    .shelf-content {
+      padding-top: 0;
+      margin-top: -8px;
+      min-height: 420px;
+    }
+
+    .shelf-panel {
+      border: 0;
+      border-radius: 0 0 28px 28px;
+      border-top: 12px solid var(--panel-color, var(--purple));
+      background: var(--panel-color, var(--paper));
+      color: white;
+      padding: 0;
+      box-shadow: 0 30px 70px rgba(21,21,21,0.14);
+      overflow: hidden;
+    }
+
+    .shelf-panel.active {
+      animation: bookOpen 360ms ease both;
+    }
+
+    @keyframes bookOpen {
+      from { opacity: 0; transform: rotateX(-8deg) translateY(-12px); }
+      to { opacity: 1; transform: rotateX(0deg) translateY(0); }
+    }
+
+    .shelf-panel > .panel-kicker,
+    .shelf-panel > h3,
+    .shelf-panel > p,
+    .shelf-panel > .panel-actions,
+    .shelf-panel > .guide-layer,
+    .shelf-panel > .route-preview-grid {
+      margin-left: 24px;
+      margin-right: 24px;
+    }
+
+    .shelf-panel > .panel-kicker {
+      margin-top: 24px;
+      color: rgba(255,255,255,0.76);
+    }
+
+    .shelf-panel h3 {
+      color: white;
+    }
+
+    .shelf-panel p {
+      color: rgba(255,255,255,0.78);
+    }
+
+    .shelf-panel[style*="var(--paper)"],
+    .shelf-panel[style*="var(--sand)"],
+    .shelf-panel[style*="var(--teal)"] {
+      color: var(--charcoal);
+    }
+
+    .shelf-panel[style*="var(--paper)"] h3,
+    .shelf-panel[style*="var(--sand)"] h3,
+    .shelf-panel[style*="var(--teal)"] h3 {
+      color: var(--charcoal);
+    }
+
+    .shelf-panel[style*="var(--paper)"] p,
+    .shelf-panel[style*="var(--sand)"] p,
+    .shelf-panel[style*="var(--teal)"] p,
+    .shelf-panel[style*="var(--paper)"] .panel-kicker,
+    .shelf-panel[style*="var(--sand)"] .panel-kicker,
+    .shelf-panel[style*="var(--teal)"] .panel-kicker {
+      color: rgba(21,21,21,0.66);
+    }
+
+    .guide-layer,
+    .route-preview-grid,
+    .panel-actions {
+      background: rgba(255,253,246,0.16);
+      padding: 24px;
+      border-top: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .shelf-panel[style*="var(--paper)"] .guide-layer,
+    .shelf-panel[style*="var(--sand)"] .guide-layer,
+    .shelf-panel[style*="var(--teal)"] .guide-layer,
+    .shelf-panel[style*="var(--paper)"] .route-preview-grid,
+    .shelf-panel[style*="var(--sand)"] .route-preview-grid,
+    .shelf-panel[style*="var(--teal)"] .route-preview-grid,
+    .shelf-panel[style*="var(--paper)"] .panel-actions,
+    .shelf-panel[style*="var(--sand)"] .panel-actions,
+    .shelf-panel[style*="var(--teal)"] .panel-actions {
+      background: rgba(255,255,255,0.44);
+      border-top: 1px solid rgba(21,21,21,0.08);
+    }
+
+    .guide-title {
+      color: inherit;
+      opacity: 0.72;
+    }
+
+    .chip-row {
+      gap: 0;
+    }
+
+    .guide-chip {
+      border-radius: 0;
+      border-left-width: 0;
+      border-top: 8px solid var(--chip-color, var(--navy));
+      background: rgba(255,255,255,0.86);
+    }
+
+    .guide-chip.active {
+      background: var(--chip-color, var(--navy));
+      color: white;
+      box-shadow: none;
+    }
+
+    .book-results {
+      display: block;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transform: translateY(-10px);
+      transition: max-height 520ms ease, opacity 260ms ease, transform 320ms ease;
+    }
+
+    .book-results.active {
+      max-height: 3400px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .book-results.active .treemap-group {
+      animation: foldShelfIn 420ms ease both;
+    }
+
+    .book-results.active .treemap-group:nth-child(2) { animation-delay: 50ms; }
+    .book-results.active .treemap-group:nth-child(3) { animation-delay: 100ms; }
+    .book-results.active .treemap-group:nth-child(4) { animation-delay: 150ms; }
+    .book-results.active .treemap-group:nth-child(5) { animation-delay: 200ms; }
+    .book-results.active .treemap-group:nth-child(6) { animation-delay: 250ms; }
+
+    @keyframes foldShelfIn {
+      from { opacity: 0; transform: rotateX(-8deg) translateY(-10px); }
+      to { opacity: 1; transform: rotateX(0deg) translateY(0); }
+    }
+
+    .treemap-group {
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.20);
+      background: rgba(255,253,246,0.92);
+      box-shadow: 0 14px 28px rgba(21,21,21,0.08);
+    }
+
+    .treemap-group:nth-child(1) { border-top: 8px solid var(--navy); }
+    .treemap-group:nth-child(2) { border-top: 8px solid var(--purple); }
+    .treemap-group:nth-child(3) { border-top: 8px solid var(--sand); }
+    .treemap-group:nth-child(4) { border-top: 8px solid var(--red); }
+    .treemap-group:nth-child(5) { border-top: 8px solid var(--teal); }
+    .treemap-group:nth-child(6) { border-top: 8px solid var(--slate); }
+
+    .group-explainer {
+      margin: -4px 0 14px !important;
+      color: var(--muted) !important;
+      font-size: 0.9rem !important;
+      line-height: 1.52 !important;
+    }
+
+    .book-tile {
+      border-radius: 4px;
+      box-shadow: inset 8px 0 0 var(--navy);
+    }
+
+    .book-tile::before,
+    .book-tile::after {
+      display: none;
+    }
+
+    .selected-book-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .selected-book-actions .button {
+      border-radius: 0;
+    }
+
+
     section {
       padding: 90px 0;
     }
@@ -821,34 +1127,6 @@
       line-height: 1.55;
     }
 
-    .build-note {
-      padding: 90px 0 108px;
-      background: var(--charcoal);
-      color: white;
-    }
-
-    .build-panel {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 30px;
-      align-items: center;
-      padding: 46px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: var(--radius-xl);
-      background: #211E24;
-    }
-
-    .build-panel h2 {
-      margin-top: 20px;
-      font-size: clamp(2.5rem, 5vw, 5rem);
-    }
-
-    .build-panel p {
-      color: rgba(255, 255, 255, 0.72);
-      line-height: 1.7;
-      font-size: 1.05rem;
-    }
-
     .eyebrow {
       display: inline-flex;
       align-items: center;
@@ -1006,9 +1284,9 @@
           Bible Mapped is a visual Bible learning platform built around maps, context, word studies, people, themes, and the story that points to Jesus.
         </p>
 
-        <div class="hero-actions">
+        <div class="hero-actions hero-connected-actions">
           <a class="button button-primary" href="#topics">Enter Bible Mapped →</a>
-          <a class="button" href="about/">Read the Mission</a>
+          <a class="button button-mission" href="about/">Read the Mission</a>
         </div>
       </div>
     </section>
@@ -1033,10 +1311,7 @@
             <button class="shelf-tab" role="tab" aria-selected="false" data-tab="tools" style="--tab-color: var(--red); --tab-text: white;"><span class="tab-label">Tools</span></button>
             <button class="shelf-tab" role="tab" aria-selected="false" data-tab="about" style="--tab-color: var(--charcoal); --tab-text: white;"><span class="tab-label">About</span></button>
           </div>
-
-          <div class="shelf-line" aria-hidden="true">
-            <div class="shelf-line-fill" id="shelfLineFill"></div>
-          </div>
+        </div>
         </div>
 
         <div class="shelf-content">
@@ -1056,7 +1331,7 @@
             <span class="panel-kicker">Canon / 66</span>
             <h3>Walk through every book of the Bible.</h3>
             <p>
-              Choose a testament, then explore the books like a visual library map. Each block represents a group, and each tile acts like a book you can open.
+              Choose a testament, then let the shelf fold open into book categories. Each category explains what that section does in the Bible’s story, and each book can open into its own Bible Mapped page.
             </p>
 
             <div class="guide-layer">
@@ -1070,9 +1345,9 @@
               <div class="book-results active" id="books-ot">
                 <div class="treemap-grid">
                   <section class="treemap-group treemap-group-large">
-                    <div class="treemap-group-head"><h4>Law / Torah</h4><span>5 books</span></div>
+                    <div class="treemap-group-head"><h4>Law / Torah</h4><span>5 books</span></div><p class="group-explainer">The Torah is the foundation: creation, covenant, deliverance, worship, law, wilderness, and Israel’s identity before God.</p>
                     <div class="treemap-books">
-                      <a class="book-tile large" href="books/genesis/">Genesis</a>
+                      <button class="book-tile large" data-book="Genesis">Genesis</button>
                       <button class="book-tile" data-book="Exodus">Exodus</button>
                       <button class="book-tile" data-book="Leviticus">Leviticus</button>
                       <button class="book-tile" data-book="Numbers">Numbers</button>
@@ -1081,7 +1356,7 @@
                   </section>
 
                   <section class="treemap-group treemap-group-large">
-                    <div class="treemap-group-head"><h4>History</h4><span>12 books</span></div>
+                    <div class="treemap-group-head"><h4>History</h4><span>12 books</span></div><p class="group-explainer">History follows Israel in the land: conquest, judges, kings, division, exile, return, and covenant consequences.</p>
                     <div class="treemap-books">
                       <button class="book-tile" data-book="Joshua">Joshua</button>
                       <button class="book-tile" data-book="Judges">Judges</button>
@@ -1099,7 +1374,7 @@
                   </section>
 
                   <section class="treemap-group">
-                    <div class="treemap-group-head"><h4>Wisdom / Poetry</h4><span>5 books</span></div>
+                    <div class="treemap-group-head"><h4>Wisdom / Poetry</h4><span>5 books</span></div><p class="group-explainer">Wisdom and poetry teach prayer, suffering, worship, practical wisdom, meaning, and love.</p>
                     <div class="treemap-books">
                       <button class="book-tile" data-book="Job">Job</button>
                       <button class="book-tile large" data-book="Psalms">Psalms</button>
@@ -1110,7 +1385,7 @@
                   </section>
 
                   <section class="treemap-group">
-                    <div class="treemap-group-head"><h4>Major Prophets</h4><span>5 books</span></div>
+                    <div class="treemap-group-head"><h4>Major Prophets</h4><span>5 books</span></div><p class="group-explainer">The major prophets speak judgment, exile, hope, restoration, and the coming work of God.</p>
                     <div class="treemap-books">
                       <button class="book-tile large" data-book="Isaiah">Isaiah</button>
                       <button class="book-tile" data-book="Jeremiah">Jeremiah</button>
@@ -1121,7 +1396,7 @@
                   </section>
 
                   <section class="treemap-group treemap-group-wide">
-                    <div class="treemap-group-head"><h4>Minor Prophets</h4><span>12 books</span></div>
+                    <div class="treemap-group-head"><h4>Minor Prophets</h4><span>12 books</span></div><p class="group-explainer">Shorter books with major force: warning, repentance, justice, mercy, nations, and future hope.</p>
                     <div class="treemap-books">
                       <button class="book-tile" data-book="Hosea">Hosea</button>
                       <button class="book-tile" data-book="Joel">Joel</button>
@@ -1143,7 +1418,7 @@
               <div class="book-results" id="books-nt">
                 <div class="treemap-grid">
                   <section class="treemap-group">
-                    <div class="treemap-group-head"><h4>Gospels</h4><span>4 books</span></div>
+                    <div class="treemap-group-head"><h4>Gospels</h4><span>4 books</span></div><p class="group-explainer">The Gospels announce Jesus Christ: His life, teaching, death, resurrection, and fulfillment of Scripture.</p>
                     <div class="treemap-books">
                       <button class="book-tile large" data-book="Matthew">Matthew</button>
                       <button class="book-tile" data-book="Mark">Mark</button>
@@ -1153,7 +1428,7 @@
                   </section>
 
                   <section class="treemap-group">
-                    <div class="treemap-group-head"><h4>History</h4><span>1 book</span></div>
+                    <div class="treemap-group-head"><h4>History</h4><span>1 book</span></div><p class="group-explainer">Acts traces the risen Christ working through the Spirit, the apostles, and the spread of the Gospel.</p>
                     <div class="treemap-books"><button class="book-tile large" data-book="Acts">Acts</button></div>
                   </section>
 
@@ -1219,6 +1494,9 @@
               <div class="selected-book-panel" id="selectedBookPanel">
                 <h4 id="selectedBookTitle">Genesis</h4>
                 <p id="selectedBookCopy">Genesis introduces creation, fall, covenant, promise, and the family line that moves the biblical story toward Christ.</p>
+                <div class="selected-book-actions">
+                  <a class="button button-primary" id="selectedBookLink" href="books/genesis/">Open Book Page →</a>
+                </div>
                 <div class="linked-row">
                   <div class="linked-box"><b>People</b><div class="mini-tags" id="linkedPeople"></div></div>
                   <div class="linked-box"><b>Places</b><div class="mini-tags" id="linkedPlaces"></div></div>
@@ -1420,21 +1698,7 @@
         </div>
       </div>
     </section>
-
-    <section class="build-note" id="next">
-      <div class="container">
-        <div class="build-panel">
-          <div>
-            <span class="eyebrow"><span class="dot"></span> Next build phase</span>
-            <h2>We build the content one layer at a time.</h2>
-          </div>
-          <p>
-            The landing page is now a gateway. Next, we can build real pages for Books, Maps, People, Themes, Videos, Tools, and About — then connect them with shared data so every book can reveal people, places, themes, and study tools.
-          </p>
-        </div>
-      </div>
-    </section>
-  </main>
+</main>
 
   <footer>
     <div class="container footer-inner">
@@ -1462,14 +1726,18 @@
       const panel = document.getElementById(`panel-${tab.dataset.tab}`);
       if (panel) panel.classList.add('active');
 
-      const navRect = tab.parentElement.getBoundingClientRect();
-      const tabRect = tab.getBoundingClientRect();
-      const left = tabRect.left - navRect.left;
-      const width = tabRect.width;
+      if (shelfLineFill) {
+        const navRect = tab.parentElement.getBoundingClientRect();
+        const tabRect = tab.getBoundingClientRect();
+        const left = tabRect.left - navRect.left;
+        const width = tabRect.width;
 
-      shelfLineFill.style.width = `${width}px`;
-      shelfLineFill.style.transform = `translateX(${left}px)`;
-      shelfLineFill.style.background = getComputedStyle(tab).backgroundColor;
+        shelfLineFill.style.width = `${width}px`;
+        shelfLineFill.style.transform = `translateX(${left}px)`;
+        shelfLineFill.style.background = getComputedStyle(tab).backgroundColor;
+      }
+
+      tab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     }
 
     shelfTabs.forEach((tab) => {
@@ -1738,6 +2006,7 @@
       const people = document.getElementById('linkedPeople');
       const places = document.getElementById('linkedPlaces');
       const themes = document.getElementById('linkedThemes');
+      const bookLink = document.getElementById('selectedBookLink');
 
       const data = bookData[bookName] || {
         copy: `${bookName} is ready for a Bible Mapped profile. We can add people, places, themes, videos, and word studies as content grows.`,
@@ -1751,6 +2020,16 @@
       renderTags(people, data.people);
       renderTags(places, data.places);
       renderTags(themes, data.themes);
+
+      if (bookLink) {
+        const slug = bookName
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-|-$/g, '');
+
+        bookLink.href = bookName === 'Genesis' ? 'books/genesis/' : `books/${slug}/`;
+      }
+
       panel.classList.add('active');
     }
 
