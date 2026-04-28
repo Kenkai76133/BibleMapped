@@ -542,6 +542,359 @@
     }
 
 
+
+    /* Lux update: mission button, full-length book shelf animation */
+    .hero-connected-actions {
+      gap: 0;
+    }
+
+    .hero-connected-actions .button {
+      border-radius: 0;
+      min-width: 214px;
+      border-color: rgba(21, 21, 21, 0.14);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-connected-actions .button + .button {
+      border-left: 0;
+    }
+
+    .hero-connected-actions .button-primary {
+      box-shadow: none;
+    }
+
+    .button-mission {
+      background: rgba(123, 44, 255, 0.12);
+      color: var(--purple);
+      border-color: rgba(123, 44, 255, 0.24) !important;
+    }
+
+    .button-mission::after {
+      content: "";
+      position: absolute;
+      left: -40%;
+      top: 0;
+      width: 38%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(123,44,255,0.14), transparent);
+      transform: skewX(-18deg);
+      animation: missionSweep 3.4s ease-in-out infinite;
+    }
+
+    @keyframes missionSweep {
+      0%, 62% { left: -45%; }
+      100% { left: 110%; }
+    }
+
+    .bookcase-section {
+      padding-top: 72px;
+      background: var(--cloud);
+      border-top: 1px solid rgba(21, 21, 21, 0.06);
+    }
+
+    .bookcase {
+      width: 100%;
+      min-height: 680px;
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      perspective: 1200px;
+      border-bottom: 18px solid rgba(21,21,21,0.16);
+    }
+
+    .library-book {
+      flex: 0.62 1 0;
+      min-width: 72px;
+      display: flex;
+      align-items: stretch;
+      background: var(--book-color);
+      color: var(--book-text);
+      overflow: hidden;
+      transition: flex 460ms cubic-bezier(.2,.8,.2,1), transform 360ms ease, box-shadow 360ms ease;
+      box-shadow:
+        inset 14px 0 22px rgba(255,255,255,0.14),
+        inset -16px 0 24px rgba(0,0,0,0.14),
+        0 22px 42px rgba(21,21,21,0.12);
+      border-right: 1px solid rgba(255,255,255,0.18);
+      transform-origin: bottom center;
+      position: relative;
+    }
+
+    .library-book::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.12), transparent 24%, transparent 76%, rgba(0,0,0,0.16)),
+        linear-gradient(to bottom, rgba(255,255,255,0.10), transparent 18%, transparent 86%, rgba(0,0,0,0.12));
+      opacity: 0.84;
+    }
+
+    .library-book:hover {
+      transform: translateY(-8px);
+    }
+
+    .library-book.active {
+      flex: 6 1 0;
+      min-width: min(760px, 58vw);
+      transform: translateY(-16px);
+      box-shadow:
+        inset 16px 0 28px rgba(255,255,255,0.16),
+        inset -18px 0 30px rgba(0,0,0,0.18),
+        0 34px 70px rgba(21,21,21,0.20);
+      z-index: 5;
+    }
+
+    .book-spine {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      width: 100%;
+      min-width: 72px;
+      padding: 18px 10px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 2;
+    }
+
+    .library-book.active .book-spine {
+      width: 84px;
+      flex: 0 0 84px;
+      border-right: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .spine-number {
+      font-size: 0.7rem;
+      font-weight: 950;
+      opacity: 0.72;
+      letter-spacing: 0.08em;
+    }
+
+    .spine-title {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 0.88rem;
+      line-height: 1;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      font-weight: 950;
+    }
+
+    .book-open-page {
+      display: none;
+      flex: 1;
+      min-width: 0;
+      position: relative;
+      z-index: 3;
+      padding: 34px;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)),
+        var(--book-color);
+      overflow: auto;
+    }
+
+    .library-book.active .book-open-page {
+      display: block;
+      animation: openBookPage 420ms ease both;
+    }
+
+    @keyframes openBookPage {
+      from {
+        opacity: 0;
+        transform: translateX(-18px) rotateY(-5deg);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0) rotateY(0);
+      }
+    }
+
+    .book-open-page .panel-kicker {
+      color: rgba(255,255,255,0.78);
+    }
+
+    .library-book[style*="--book-text: var(--charcoal)"] .book-open-page .panel-kicker,
+    .library-book[style*="--book-text: var(--charcoal)"] .book-open-page p {
+      color: rgba(21,21,21,0.68);
+    }
+
+    .book-open-page h3 {
+      color: inherit;
+      font-size: clamp(2.2rem, 4.2vw, 4.6rem);
+      max-width: 900px;
+    }
+
+    .book-open-page p {
+      max-width: 900px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.7;
+      margin-top: 14px;
+      font-size: 1.02rem;
+    }
+
+    .testament-definitions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .definition-card {
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.12);
+      padding: 16px;
+      min-height: 150px;
+    }
+
+    .definition-card strong {
+      display: block;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .definition-card p {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .book-route-switch {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-top: 24px;
+    }
+
+    .route-chip {
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.10);
+      color: inherit;
+      padding: 12px 14px;
+      cursor: pointer;
+      font-weight: 950;
+    }
+
+    .route-chip.active {
+      background: rgba(255,255,255,0.88);
+      color: var(--navy);
+    }
+
+    .book-route {
+      display: block;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: max-height 560ms ease, opacity 300ms ease, transform 340ms ease;
+    }
+
+    .book-route.active {
+      max-height: 4000px;
+      opacity: 1;
+      transform: translateY(0);
+      margin-top: 22px;
+    }
+
+    .category-shelf {
+      background: rgba(255,255,255,0.90);
+      color: var(--charcoal);
+      border: 1px solid rgba(255,255,255,0.24);
+      padding: 18px;
+      margin-top: 12px;
+      box-shadow: 0 14px 28px rgba(21,21,21,0.08);
+      animation: foldShelfDown 380ms ease both;
+    }
+
+    .book-route.active .category-shelf:nth-child(2) { animation-delay: 45ms; }
+    .book-route.active .category-shelf:nth-child(3) { animation-delay: 90ms; }
+    .book-route.active .category-shelf:nth-child(4) { animation-delay: 135ms; }
+    .book-route.active .category-shelf:nth-child(5) { animation-delay: 180ms; }
+
+    @keyframes foldShelfDown {
+      from {
+        opacity: 0;
+        transform: rotateX(-8deg) translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: rotateX(0deg) translateY(0);
+      }
+    }
+
+    .category-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .category-head h4 {
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 0.98rem;
+    }
+
+    .category-head span {
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .category-shelf p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .book-tile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+      gap: 8px;
+    }
+
+    .book-tile {
+      display: block;
+      min-height: 52px;
+      border: 1px solid rgba(21,21,21,0.10);
+      background: white;
+      color: var(--charcoal);
+      padding: 12px 12px 12px 18px;
+      font-weight: 950;
+      box-shadow: inset 7px 0 0 var(--navy);
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .book-tile:hover {
+      transform: translateY(-2px);
+      box-shadow: inset 7px 0 0 var(--purple), 0 12px 24px rgba(21,21,21,0.10);
+    }
+
+    .route-preview-grid.compact {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .book-open-page .route-preview-card {
+      background: rgba(255,255,255,0.88);
+      color: var(--charcoal);
+    }
+
+
     section {
       padding: 90px 0;
     }
@@ -1291,413 +1644,329 @@
       </div>
     </section>
 
-    <section class="shelf-section" id="topics">
+    <section class="shelf-section bookcase-section" id="topics">
       <div class="container">
         <div class="section-header">
           <h2>Browse the Bible like a shelf.</h2>
           <p>
-            If a topic catches your eye, open it. Each shelf tab pulls forward, becomes a route line, and reveals a guided path underneath.
+            Choose a book-spine. The selected spine expands into a full color panel, while the other spines stay visible on the shelf.
           </p>
         </div>
 
-        <div class="shelf-nav-wrap">
-          <div class="shelf-nav" role="tablist" aria-label="Bible Mapped sections">
-            <button class="shelf-tab active" role="tab" aria-selected="true" data-tab="overview" style="--tab-color: var(--paper); --tab-text: var(--charcoal);"><span class="tab-label">Overview</span></button>
-            <button class="shelf-tab" role="tab" aria-selected="false" data-tab="books" style="--tab-color: var(--navy); --tab-text: white;"><span class="tab-label">Books</span></button>
-            <button class="shelf-tab" role="tab" aria-selected="false" data-tab="maps" style="--tab-color: var(--teal); --tab-text: var(--charcoal);"><span class="tab-label">Maps</span></button>
-            <button class="shelf-tab" role="tab" aria-selected="false" data-tab="people" style="--tab-color: var(--slate); --tab-text: white;"><span class="tab-label">People</span></button>
-            <button class="shelf-tab" role="tab" aria-selected="false" data-tab="themes" style="--tab-color: var(--sand); --tab-text: var(--charcoal);"><span class="tab-label">Themes</span></button>
-            <button class="shelf-tab" role="tab" aria-selected="false" data-tab="videos" style="--tab-color: var(--purple); --tab-text: white;"><span class="tab-label">Videos</span></button>
-            <button class="shelf-tab" role="tab" aria-selected="false" data-tab="tools" style="--tab-color: var(--red); --tab-text: white;"><span class="tab-label">Tools</span></button>
-            <button class="shelf-tab" role="tab" aria-selected="false" data-tab="about" style="--tab-color: var(--charcoal); --tab-text: white;"><span class="tab-label">About</span></button>
-          </div>
-        </div>
-        </div>
+        <div class="bookcase" aria-label="Bible Mapped book shelf navigation">
+          <article class="library-book active" data-book-panel="overview" style="--book-color: var(--paper); --book-text: var(--charcoal); --book-soft: #f0ece2;">
+            <button class="book-spine" type="button" aria-expanded="true">
+              <span class="spine-number">01</span>
+              <span class="spine-title">Overview</span>
+            </button>
 
-        <div class="shelf-content">
-          <article class="shelf-panel active" id="panel-overview" role="tabpanel" style="--panel-color: var(--paper);">
-            <span class="panel-kicker">Start here</span>
-            <h3>The Bible happened somewhere.</h3>
-            <p>
-              Bible Mapped starts with one idea: Scripture is not floating in abstract space. It is connected to real places, people, languages, empires, routes, and moments in history.
-            </p>
-            <div class="panel-actions">
-              <a class="button button-primary" href="#topics">Choose a route →</a>
-              <a class="button" href="about/">Read the mission</a>
-            </div>
-          </article>
-
-          <article class="shelf-panel" id="panel-books" role="tabpanel" style="--panel-color: var(--navy);">
-            <span class="panel-kicker">Canon / 66</span>
-            <h3>Walk through every book of the Bible.</h3>
-            <p>
-              Choose a testament, then let the shelf fold open into book categories. Each category explains what that section does in the Bible’s story, and each book can open into its own Bible Mapped page.
-            </p>
-
-            <div class="guide-layer">
-              <div class="guide-title">Choose a shelf inside Books</div>
-              <div class="chip-row">
-                <button class="guide-chip active" data-book-route="ot" style="--chip-color: var(--navy);">Old Testament</button>
-                <button class="guide-chip" data-book-route="nt" style="--chip-color: var(--purple);">New Testament</button>
-                <button class="guide-chip" data-book-route="noncanonical" style="--chip-color: var(--sand);">Non-canonical / Deuterocanonical</button>
-              </div>
-
-              <div class="book-results active" id="books-ot">
-                <div class="treemap-grid">
-                  <section class="treemap-group treemap-group-large">
-                    <div class="treemap-group-head"><h4>Law / Torah</h4><span>5 books</span></div><p class="group-explainer">The Torah is the foundation: creation, covenant, deliverance, worship, law, wilderness, and Israel’s identity before God.</p>
-                    <div class="treemap-books">
-                      <button class="book-tile large" data-book="Genesis">Genesis</button>
-                      <button class="book-tile" data-book="Exodus">Exodus</button>
-                      <button class="book-tile" data-book="Leviticus">Leviticus</button>
-                      <button class="book-tile" data-book="Numbers">Numbers</button>
-                      <button class="book-tile" data-book="Deuteronomy">Deuteronomy</button>
-                    </div>
-                  </section>
-
-                  <section class="treemap-group treemap-group-large">
-                    <div class="treemap-group-head"><h4>History</h4><span>12 books</span></div><p class="group-explainer">History follows Israel in the land: conquest, judges, kings, division, exile, return, and covenant consequences.</p>
-                    <div class="treemap-books">
-                      <button class="book-tile" data-book="Joshua">Joshua</button>
-                      <button class="book-tile" data-book="Judges">Judges</button>
-                      <button class="book-tile" data-book="Ruth">Ruth</button>
-                      <button class="book-tile" data-book="1 Samuel">1 Samuel</button>
-                      <button class="book-tile" data-book="2 Samuel">2 Samuel</button>
-                      <button class="book-tile" data-book="1 Kings">1 Kings</button>
-                      <button class="book-tile" data-book="2 Kings">2 Kings</button>
-                      <button class="book-tile" data-book="1 Chronicles">1 Chronicles</button>
-                      <button class="book-tile" data-book="2 Chronicles">2 Chronicles</button>
-                      <button class="book-tile" data-book="Ezra">Ezra</button>
-                      <button class="book-tile" data-book="Nehemiah">Nehemiah</button>
-                      <button class="book-tile" data-book="Esther">Esther</button>
-                    </div>
-                  </section>
-
-                  <section class="treemap-group">
-                    <div class="treemap-group-head"><h4>Wisdom / Poetry</h4><span>5 books</span></div><p class="group-explainer">Wisdom and poetry teach prayer, suffering, worship, practical wisdom, meaning, and love.</p>
-                    <div class="treemap-books">
-                      <button class="book-tile" data-book="Job">Job</button>
-                      <button class="book-tile large" data-book="Psalms">Psalms</button>
-                      <button class="book-tile" data-book="Proverbs">Proverbs</button>
-                      <button class="book-tile" data-book="Ecclesiastes">Ecclesiastes</button>
-                      <button class="book-tile" data-book="Song of Solomon">Song of Solomon</button>
-                    </div>
-                  </section>
-
-                  <section class="treemap-group">
-                    <div class="treemap-group-head"><h4>Major Prophets</h4><span>5 books</span></div><p class="group-explainer">The major prophets speak judgment, exile, hope, restoration, and the coming work of God.</p>
-                    <div class="treemap-books">
-                      <button class="book-tile large" data-book="Isaiah">Isaiah</button>
-                      <button class="book-tile" data-book="Jeremiah">Jeremiah</button>
-                      <button class="book-tile" data-book="Lamentations">Lamentations</button>
-                      <button class="book-tile" data-book="Ezekiel">Ezekiel</button>
-                      <button class="book-tile" data-book="Daniel">Daniel</button>
-                    </div>
-                  </section>
-
-                  <section class="treemap-group treemap-group-wide">
-                    <div class="treemap-group-head"><h4>Minor Prophets</h4><span>12 books</span></div><p class="group-explainer">Shorter books with major force: warning, repentance, justice, mercy, nations, and future hope.</p>
-                    <div class="treemap-books">
-                      <button class="book-tile" data-book="Hosea">Hosea</button>
-                      <button class="book-tile" data-book="Joel">Joel</button>
-                      <button class="book-tile" data-book="Amos">Amos</button>
-                      <button class="book-tile" data-book="Obadiah">Obadiah</button>
-                      <button class="book-tile" data-book="Jonah">Jonah</button>
-                      <button class="book-tile" data-book="Micah">Micah</button>
-                      <button class="book-tile" data-book="Nahum">Nahum</button>
-                      <button class="book-tile" data-book="Habakkuk">Habakkuk</button>
-                      <button class="book-tile" data-book="Zephaniah">Zephaniah</button>
-                      <button class="book-tile" data-book="Haggai">Haggai</button>
-                      <button class="book-tile" data-book="Zechariah">Zechariah</button>
-                      <button class="book-tile" data-book="Malachi">Malachi</button>
-                    </div>
-                  </section>
-                </div>
-              </div>
-
-              <div class="book-results" id="books-nt">
-                <div class="treemap-grid">
-                  <section class="treemap-group">
-                    <div class="treemap-group-head"><h4>Gospels</h4><span>4 books</span></div><p class="group-explainer">The Gospels announce Jesus Christ: His life, teaching, death, resurrection, and fulfillment of Scripture.</p>
-                    <div class="treemap-books">
-                      <button class="book-tile large" data-book="Matthew">Matthew</button>
-                      <button class="book-tile" data-book="Mark">Mark</button>
-                      <button class="book-tile" data-book="Luke">Luke</button>
-                      <button class="book-tile large" data-book="John">John</button>
-                    </div>
-                  </section>
-
-                  <section class="treemap-group">
-                    <div class="treemap-group-head"><h4>History</h4><span>1 book</span></div><p class="group-explainer">Acts traces the risen Christ working through the Spirit, the apostles, and the spread of the Gospel.</p>
-                    <div class="treemap-books"><button class="book-tile large" data-book="Acts">Acts</button></div>
-                  </section>
-
-                  <section class="treemap-group treemap-group-large">
-                    <div class="treemap-group-head"><h4>Pauline Epistles</h4><span>13 books</span></div>
-                    <div class="treemap-books">
-                      <button class="book-tile large" data-book="Romans">Romans</button>
-                      <button class="book-tile" data-book="1 Corinthians">1 Corinthians</button>
-                      <button class="book-tile" data-book="2 Corinthians">2 Corinthians</button>
-                      <button class="book-tile" data-book="Galatians">Galatians</button>
-                      <button class="book-tile" data-book="Ephesians">Ephesians</button>
-                      <button class="book-tile" data-book="Philippians">Philippians</button>
-                      <button class="book-tile" data-book="Colossians">Colossians</button>
-                      <button class="book-tile" data-book="1 Thessalonians">1 Thessalonians</button>
-                      <button class="book-tile" data-book="2 Thessalonians">2 Thessalonians</button>
-                      <button class="book-tile" data-book="1 Timothy">1 Timothy</button>
-                      <button class="book-tile" data-book="2 Timothy">2 Timothy</button>
-                      <button class="book-tile" data-book="Titus">Titus</button>
-                      <button class="book-tile" data-book="Philemon">Philemon</button>
-                    </div>
-                  </section>
-
-                  <section class="treemap-group">
-                    <div class="treemap-group-head"><h4>General Epistles</h4><span>8 books</span></div>
-                    <div class="treemap-books">
-                      <button class="book-tile" data-book="Hebrews">Hebrews</button>
-                      <button class="book-tile" data-book="James">James</button>
-                      <button class="book-tile" data-book="1 Peter">1 Peter</button>
-                      <button class="book-tile" data-book="2 Peter">2 Peter</button>
-                      <button class="book-tile" data-book="1 John">1 John</button>
-                      <button class="book-tile" data-book="2 John">2 John</button>
-                      <button class="book-tile" data-book="3 John">3 John</button>
-                      <button class="book-tile" data-book="Jude">Jude</button>
-                    </div>
-                  </section>
-
-                  <section class="treemap-group">
-                    <div class="treemap-group-head"><h4>Apocalypse</h4><span>1 book</span></div>
-                    <div class="treemap-books"><button class="book-tile large" data-book="Revelation">Revelation</button></div>
-                  </section>
-                </div>
-              </div>
-
-              <div class="book-results" id="books-noncanonical">
-                <div class="treemap-grid">
-                  <section class="treemap-group treemap-group-wide">
-                    <div class="treemap-group-head"><h4>Deuterocanonical / Apocrypha</h4><span>Sample grouping</span></div>
-                    <div class="treemap-books">
-                      <button class="book-tile" data-book="Tobit">Tobit</button>
-                      <button class="book-tile" data-book="Judith">Judith</button>
-                      <button class="book-tile large" data-book="Wisdom of Solomon">Wisdom of Solomon</button>
-                      <button class="book-tile" data-book="Sirach">Sirach</button>
-                      <button class="book-tile" data-book="Baruch">Baruch</button>
-                      <button class="book-tile" data-book="1 Maccabees">1 Maccabees</button>
-                      <button class="book-tile" data-book="2 Maccabees">2 Maccabees</button>
-                      <button class="book-tile" data-book="Additions to Esther">Additions to Esther</button>
-                      <button class="book-tile" data-book="Additions to Daniel">Additions to Daniel</button>
-                    </div>
-                  </section>
-                </div>
-              </div>
-
-              <div class="selected-book-panel" id="selectedBookPanel">
-                <h4 id="selectedBookTitle">Genesis</h4>
-                <p id="selectedBookCopy">Genesis introduces creation, fall, covenant, promise, and the family line that moves the biblical story toward Christ.</p>
-                <div class="selected-book-actions">
-                  <a class="button button-primary" id="selectedBookLink" href="books/genesis/">Open Book Page →</a>
-                </div>
-                <div class="linked-row">
-                  <div class="linked-box"><b>People</b><div class="mini-tags" id="linkedPeople"></div></div>
-                  <div class="linked-box"><b>Places</b><div class="mini-tags" id="linkedPlaces"></div></div>
-                  <div class="linked-box"><b>Themes</b><div class="mini-tags" id="linkedThemes"></div></div>
-                </div>
+            <div class="book-open-page">
+              <span class="panel-kicker">Start here</span>
+              <h3>Start with the shelf.</h3>
+              <p>
+                Bible Mapped is built to keep the first page simple. Each spine opens into a focused route: books, maps, people, themes, videos, tools, and the mission behind it.
+              </p>
+              <div class="panel-actions">
+                <button class="button button-primary open-spine-button" type="button" data-open-book="books">Open Books →</button>
+                <a class="button" href="about/">Read the mission</a>
               </div>
             </div>
           </article>
 
-          <article class="shelf-panel" id="panel-maps" role="tabpanel" style="--panel-color: var(--teal);">
-            <span class="panel-kicker">Atlas / 01</span>
-            <h3>See the geography behind the story.</h3>
-            <p>
-              Maps will eventually open by regions, cities, empires, journeys, rivers, mountains, and major story locations. Each place can connect back to books, people, themes, and videos.
-            </p>
-            <div class="route-preview-grid">
-              <div class="route-preview-card" style="--route-color: var(--teal);"><h4>Regions</h4><p>Galilee, Judea, Egypt, Mesopotamia, Sinai, Asia Minor.</p></div>
-              <div class="route-preview-card" style="--route-color: var(--navy);"><h4>Cities</h4><p>Jerusalem, Bethlehem, Rome, Babylon, Nineveh, Ephesus.</p></div>
-              <div class="route-preview-card" style="--route-color: var(--purple);"><h4>Journeys</h4><p>Exodus, exile, return, Jesus’ ministry, Paul’s missionary journeys.</p></div>
-            </div>
-            <div class="panel-actions"><a class="button button-primary" href="maps.html">Open Maps →</a></div>
-          </article>
+          <article class="library-book" data-book-panel="books" style="--book-color: var(--navy); --book-text: white; --book-soft: #1c548d;">
+            <button class="book-spine" type="button" aria-expanded="false">
+              <span class="spine-number">02</span>
+              <span class="spine-title">Books</span>
+            </button>
 
-          <article class="shelf-panel" id="panel-people" role="tabpanel" style="--panel-color: var(--slate);">
-            <span class="panel-kicker">Lineage / 02</span>
-            <h3>Find the people inside the biblical world.</h3>
-            <p>
-              Explore people by Bible era, role, and family line. Some people open as character profiles, while the genealogy path traces the story from Adam toward Jesus.
-            </p>
+            <div class="book-open-page">
+              <span class="panel-kicker">Canon / Books</span>
+              <h3>Open the Bible by section.</h3>
+              <p>
+                The Bible is easier to study when the books are grouped by function. Choose Old Testament, New Testament, or the books received differently across Christian traditions.
+              </p>
 
-            <div class="guide-layer">
-              <div class="guide-title">Choose a people map</div>
-              <div class="chip-row">
-                <button class="guide-chip active" data-people-route="main" style="--chip-color: var(--slate);">Main Characters</button>
-                <button class="guide-chip" data-people-route="genealogy" style="--chip-color: var(--purple);">Genealogy to Jesus</button>
-                <button class="guide-chip" data-people-route="roles" style="--chip-color: var(--sand);">By Role</button>
-              </div>
-
-              <div class="people-results active" id="people-main">
-                <div class="people-treemap-grid">
-                  <section class="people-group people-group-large">
-                    <div class="people-group-head"><h4>Genesis Foundations</h4><span>Creation to patriarchs</span></div>
-                    <div class="people-tiles">
-                      <button class="person-tile large" data-person="Adam">Adam</button>
-                      <button class="person-tile" data-person="Eve">Eve</button>
-                      <button class="person-tile" data-person="Noah">Noah</button>
-                      <button class="person-tile large" data-person="Abraham">Abraham</button>
-                      <button class="person-tile" data-person="Sarah">Sarah</button>
-                      <button class="person-tile" data-person="Isaac">Isaac</button>
-                      <button class="person-tile" data-person="Jacob">Jacob</button>
-                      <button class="person-tile" data-person="Joseph">Joseph</button>
-                    </div>
-                  </section>
-
-                  <section class="people-group people-group-large">
-                    <div class="people-group-head"><h4>Exodus & Wilderness</h4><span>Deliverance generation</span></div>
-                    <div class="people-tiles">
-                      <button class="person-tile large" data-person="Moses">Moses</button>
-                      <button class="person-tile" data-person="Aaron">Aaron</button>
-                      <button class="person-tile" data-person="Miriam">Miriam</button>
-                      <button class="person-tile" data-person="Joshua">Joshua</button>
-                      <button class="person-tile" data-person="Caleb">Caleb</button>
-                      <button class="person-tile" data-person="Pharaoh">Pharaoh</button>
-                    </div>
-                  </section>
-
-                  <section class="people-group">
-                    <div class="people-group-head"><h4>Kings & Kingdom</h4><span>United monarchy</span></div>
-                    <div class="people-tiles">
-                      <button class="person-tile" data-person="Samuel">Samuel</button>
-                      <button class="person-tile" data-person="Saul">Saul</button>
-                      <button class="person-tile large" data-person="David">David</button>
-                      <button class="person-tile" data-person="Solomon">Solomon</button>
-                    </div>
-                  </section>
-
-                  <section class="people-group">
-                    <div class="people-group-head"><h4>Prophets</h4><span>Warning and hope</span></div>
-                    <div class="people-tiles">
-                      <button class="person-tile" data-person="Elijah">Elijah</button>
-                      <button class="person-tile" data-person="Elisha">Elisha</button>
-                      <button class="person-tile large" data-person="Isaiah">Isaiah</button>
-                      <button class="person-tile" data-person="Jeremiah">Jeremiah</button>
-                      <button class="person-tile" data-person="Daniel">Daniel</button>
-                    </div>
-                  </section>
-
-                  <section class="people-group people-group-wide">
-                    <div class="people-group-head"><h4>New Testament Witnesses</h4><span>Jesus and the early church</span></div>
-                    <div class="people-tiles">
-                      <button class="person-tile large" data-person="Jesus">Jesus</button>
-                      <button class="person-tile" data-person="Mary">Mary</button>
-                      <button class="person-tile" data-person="Joseph of Nazareth">Joseph</button>
-                      <button class="person-tile" data-person="John the Baptist">John the Baptist</button>
-                      <button class="person-tile" data-person="Peter">Peter</button>
-                      <button class="person-tile" data-person="John">John</button>
-                      <button class="person-tile" data-person="Paul">Paul</button>
-                    </div>
-                  </section>
+              <div class="testament-definitions">
+                <div class="definition-card">
+                  <strong>Old Testament</strong>
+                  <p>The covenant Scriptures before the coming of Christ. These books give the foundation: creation, promise, law, wisdom, prophecy, exile, and hope.</p>
+                </div>
+                <div class="definition-card">
+                  <strong>New Testament</strong>
+                  <p>The writings centered on Jesus Christ, His life, death, resurrection, the apostles, the church, and the hope of new creation.</p>
+                </div>
+                <div class="definition-card">
+                  <strong>Non-canonical / Deuterocanonical</strong>
+                  <p>Books received differently across Christian traditions. Bible Mapped labels them clearly so readers know how Protestant, Catholic, and Orthodox canons differ.</p>
                 </div>
               </div>
 
-              <div class="people-results" id="people-genealogy">
-                <div class="genealogy-map" aria-label="Genealogy path leading to Jesus">
-                  <button class="gene-node" data-person="Adam">Adam</button>
-                  <span class="gene-line"></span>
-                  <button class="gene-node" data-person="Noah">Noah</button>
-                  <span class="gene-line"></span>
-                  <button class="gene-node" data-person="Abraham">Abraham</button>
-                  <span class="gene-line"></span>
-                  <button class="gene-node" data-person="Isaac">Isaac</button>
-                  <span class="gene-line"></span>
-                  <button class="gene-node" data-person="Jacob">Jacob</button>
-                  <span class="gene-line"></span>
-                  <button class="gene-node" data-person="Judah">Judah</button>
-                  <span class="gene-line"></span>
-                  <button class="gene-node" data-person="David">David</button>
-                  <span class="gene-line"></span>
-                  <button class="gene-node" data-person="Solomon">Solomon</button>
-                  <span class="gene-line"></span>
-                  <button class="gene-node" data-person="Jesus">Jesus</button>
-                </div>
-                <p class="gene-note">
-                  This is a simplified visual route. Later, we can expand it into a full Matthew 1 / Luke 3 genealogy explorer with branches, women in the genealogy, kings, exile, and covenant markers.
-                </p>
+              <div class="book-route-switch" aria-label="Choose testament route">
+                <button class="route-chip active" type="button" data-route="old">Old Testament</button>
+                <button class="route-chip" type="button" data-route="new">New Testament</button>
+                <button class="route-chip" type="button" data-route="noncanonical">Non-canonical / Deuterocanonical</button>
               </div>
 
-              <div class="people-results" id="people-roles">
-                <div class="people-treemap-grid">
-                  <section class="people-group"><div class="people-group-head"><h4>Patriarchs</h4><span>Promise line</span></div><div class="people-tiles"><button class="person-tile" data-person="Abraham">Abraham</button><button class="person-tile" data-person="Isaac">Isaac</button><button class="person-tile" data-person="Jacob">Jacob</button><button class="person-tile" data-person="Joseph">Joseph</button></div></section>
-                  <section class="people-group"><div class="people-group-head"><h4>Deliverers</h4><span>Rescue figures</span></div><div class="people-tiles"><button class="person-tile" data-person="Moses">Moses</button><button class="person-tile" data-person="Joshua">Joshua</button><button class="person-tile" data-person="Deborah">Deborah</button><button class="person-tile" data-person="Gideon">Gideon</button></div></section>
-                  <section class="people-group"><div class="people-group-head"><h4>Kings</h4><span>Throne and kingdom</span></div><div class="people-tiles"><button class="person-tile" data-person="Saul">Saul</button><button class="person-tile" data-person="David">David</button><button class="person-tile" data-person="Solomon">Solomon</button><button class="person-tile" data-person="Hezekiah">Hezekiah</button></div></section>
-                  <section class="people-group"><div class="people-group-head"><h4>Apostles</h4><span>Witnesses</span></div><div class="people-tiles"><button class="person-tile" data-person="Peter">Peter</button><button class="person-tile" data-person="John">John</button><button class="person-tile" data-person="Paul">Paul</button><button class="person-tile" data-person="James">James</button></div></section>
-                </div>
+              <div class="book-route active" id="route-old">
+                <section class="category-shelf">
+                  <div class="category-head">
+                    <h4>Law / Torah</h4>
+                    <span>5 books</span>
+                  </div>
+                  <p>The foundation shelf: creation, covenant, deliverance, worship, law, wilderness, and Israel’s identity before God.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/genesis/">Genesis</a>
+                    <a class="book-tile" href="books/exodus/">Exodus</a>
+                    <a class="book-tile" href="books/leviticus/">Leviticus</a>
+                    <a class="book-tile" href="books/numbers/">Numbers</a>
+                    <a class="book-tile" href="books/deuteronomy/">Deuteronomy</a>
+                  </div>
+                </section>
+
+                <section class="category-shelf">
+                  <div class="category-head">
+                    <h4>History</h4>
+                    <span>12 books</span>
+                  </div>
+                  <p>Israel in the land: conquest, judges, kings, division, exile, return, and covenant consequences.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/joshua/">Joshua</a>
+                    <a class="book-tile" href="books/judges/">Judges</a>
+                    <a class="book-tile" href="books/ruth/">Ruth</a>
+                    <a class="book-tile" href="books/1-samuel/">1 Samuel</a>
+                    <a class="book-tile" href="books/2-samuel/">2 Samuel</a>
+                    <a class="book-tile" href="books/1-kings/">1 Kings</a>
+                    <a class="book-tile" href="books/2-kings/">2 Kings</a>
+                    <a class="book-tile" href="books/1-chronicles/">1 Chronicles</a>
+                    <a class="book-tile" href="books/2-chronicles/">2 Chronicles</a>
+                    <a class="book-tile" href="books/ezra/">Ezra</a>
+                    <a class="book-tile" href="books/nehemiah/">Nehemiah</a>
+                    <a class="book-tile" href="books/esther/">Esther</a>
+                  </div>
+                </section>
+
+                <section class="category-shelf">
+                  <div class="category-head">
+                    <h4>Wisdom / Poetry</h4>
+                    <span>5 books</span>
+                  </div>
+                  <p>Prayer, suffering, worship, practical wisdom, meaning, and love through Hebrew reflection.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/job/">Job</a>
+                    <a class="book-tile" href="books/psalms/">Psalms</a>
+                    <a class="book-tile" href="books/proverbs/">Proverbs</a>
+                    <a class="book-tile" href="books/ecclesiastes/">Ecclesiastes</a>
+                    <a class="book-tile" href="books/song-of-songs/">Song of Songs</a>
+                  </div>
+                </section>
+
+                <section class="category-shelf">
+                  <div class="category-head">
+                    <h4>Major Prophets</h4>
+                    <span>5 books</span>
+                  </div>
+                  <p>Judgment, exile, hope, restoration, and the coming work of God on behalf of His people.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/isaiah/">Isaiah</a>
+                    <a class="book-tile" href="books/jeremiah/">Jeremiah</a>
+                    <a class="book-tile" href="books/lamentations/">Lamentations</a>
+                    <a class="book-tile" href="books/ezekiel/">Ezekiel</a>
+                    <a class="book-tile" href="books/daniel/">Daniel</a>
+                  </div>
+                </section>
+
+                <section class="category-shelf">
+                  <div class="category-head">
+                    <h4>Minor Prophets</h4>
+                    <span>12 books</span>
+                  </div>
+                  <p>Shorter books with major force: warning, repentance, justice, mercy, nations, and future hope.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/hosea/">Hosea</a>
+                    <a class="book-tile" href="books/joel/">Joel</a>
+                    <a class="book-tile" href="books/amos/">Amos</a>
+                    <a class="book-tile" href="books/obadiah/">Obadiah</a>
+                    <a class="book-tile" href="books/jonah/">Jonah</a>
+                    <a class="book-tile" href="books/micah/">Micah</a>
+                    <a class="book-tile" href="books/nahum/">Nahum</a>
+                    <a class="book-tile" href="books/habakkuk/">Habakkuk</a>
+                    <a class="book-tile" href="books/zephaniah/">Zephaniah</a>
+                    <a class="book-tile" href="books/haggai/">Haggai</a>
+                    <a class="book-tile" href="books/zechariah/">Zechariah</a>
+                    <a class="book-tile" href="books/malachi/">Malachi</a>
+                  </div>
+                </section>
               </div>
 
-              <div class="selected-person-panel" id="selectedPersonPanel">
-                <h4 id="selectedPersonTitle">Abraham</h4>
-                <p id="selectedPersonCopy">Abraham is called from Ur and becomes the covenant father through whom God promises blessing to the nations.</p>
-                <div class="linked-row">
-                  <div class="linked-box"><b>Books</b><div class="mini-tags" id="personBooks"></div></div>
-                  <div class="linked-box"><b>Places</b><div class="mini-tags" id="personPlaces"></div></div>
-                  <div class="linked-box"><b>Connections</b><div class="mini-tags" id="personConnections"></div></div>
-                </div>
+              <div class="book-route" id="route-new">
+                <section class="category-shelf">
+                  <div class="category-head"><h4>Gospels</h4><span>4 books</span></div>
+                  <p>The life, teaching, death, resurrection, and fulfillment work of Jesus Christ.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/matthew/">Matthew</a>
+                    <a class="book-tile" href="books/mark/">Mark</a>
+                    <a class="book-tile" href="books/luke/">Luke</a>
+                    <a class="book-tile" href="books/john/">John</a>
+                  </div>
+                </section>
+
+                <section class="category-shelf">
+                  <div class="category-head"><h4>History</h4><span>1 book</span></div>
+                  <p>Acts traces the risen Christ working through the Spirit, the apostles, and the spread of the Gospel.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/acts/">Acts</a>
+                  </div>
+                </section>
+
+                <section class="category-shelf">
+                  <div class="category-head"><h4>Pauline Letters</h4><span>13 books</span></div>
+                  <p>Doctrine, church life, grace, faith, holiness, suffering, mission, and life in Christ.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/romans/">Romans</a>
+                    <a class="book-tile" href="books/1-corinthians/">1 Corinthians</a>
+                    <a class="book-tile" href="books/2-corinthians/">2 Corinthians</a>
+                    <a class="book-tile" href="books/galatians/">Galatians</a>
+                    <a class="book-tile" href="books/ephesians/">Ephesians</a>
+                    <a class="book-tile" href="books/philippians/">Philippians</a>
+                    <a class="book-tile" href="books/colossians/">Colossians</a>
+                    <a class="book-tile" href="books/1-thessalonians/">1 Thessalonians</a>
+                    <a class="book-tile" href="books/2-thessalonians/">2 Thessalonians</a>
+                    <a class="book-tile" href="books/1-timothy/">1 Timothy</a>
+                    <a class="book-tile" href="books/2-timothy/">2 Timothy</a>
+                    <a class="book-tile" href="books/titus/">Titus</a>
+                    <a class="book-tile" href="books/philemon/">Philemon</a>
+                  </div>
+                </section>
+
+                <section class="category-shelf">
+                  <div class="category-head"><h4>General Letters</h4><span>8 books</span></div>
+                  <p>Faith, endurance, love, truth, warning, and faithful witness.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/hebrews/">Hebrews</a>
+                    <a class="book-tile" href="books/james/">James</a>
+                    <a class="book-tile" href="books/1-peter/">1 Peter</a>
+                    <a class="book-tile" href="books/2-peter/">2 Peter</a>
+                    <a class="book-tile" href="books/1-john/">1 John</a>
+                    <a class="book-tile" href="books/2-john/">2 John</a>
+                    <a class="book-tile" href="books/3-john/">3 John</a>
+                    <a class="book-tile" href="books/jude/">Jude</a>
+                  </div>
+                </section>
+
+                <section class="category-shelf">
+                  <div class="category-head"><h4>Apocalyptic</h4><span>1 book</span></div>
+                  <p>Revelation shows Jesus as victorious King and gives hope through judgment, worship, endurance, and new creation.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/revelation/">Revelation</a>
+                  </div>
+                </section>
+              </div>
+
+              <div class="book-route" id="route-noncanonical">
+                <section class="category-shelf">
+                  <div class="category-head"><h4>Received Differently</h4><span>Examples</span></div>
+                  <p>These books are handled differently across Christian traditions. This section helps label those differences clearly.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/tobit/">Tobit</a>
+                    <a class="book-tile" href="books/judith/">Judith</a>
+                    <a class="book-tile" href="books/wisdom/">Wisdom</a>
+                    <a class="book-tile" href="books/sirach/">Sirach</a>
+                    <a class="book-tile" href="books/baruch/">Baruch</a>
+                    <a class="book-tile" href="books/1-maccabees/">1 Maccabees</a>
+                    <a class="book-tile" href="books/2-maccabees/">2 Maccabees</a>
+                  </div>
+                </section>
               </div>
             </div>
           </article>
 
-          <article class="shelf-panel" id="panel-themes" role="tabpanel" style="--panel-color: var(--sand);">
-            <span class="panel-kicker">Threads / 03</span>
-            <h3>Trace the big ideas of Scripture.</h3>
-            <p>
-              Themes can reveal covenant, exile, kingdom, sacrifice, temple, wisdom, Messiah, land, nations, holiness, and redemption across the full Bible.
-            </p>
-            <div class="route-preview-grid">
-              <div class="route-preview-card" style="--route-color: var(--sand);"><h4>Covenant</h4><p>Promise, people, land, blessing, law, and fulfillment.</p></div>
-              <div class="route-preview-card" style="--route-color: var(--navy);"><h4>Kingdom</h4><p>God’s reign, David’s line, exile, Messiah, and New Creation.</p></div>
-              <div class="route-preview-card" style="--route-color: var(--red);"><h4>Sacrifice</h4><p>Altar, temple, atonement, Passover, cross, and redemption.</p></div>
+          <article class="library-book" data-book-panel="maps" style="--book-color: var(--teal); --book-text: var(--charcoal); --book-soft: #b9d2ce;">
+            <button class="book-spine" type="button" aria-expanded="false">
+              <span class="spine-number">03</span>
+              <span class="spine-title">Maps</span>
+            </button>
+            <div class="book-open-page">
+              <span class="panel-kicker">Atlas / Places</span>
+              <h3>See the geography behind the story.</h3>
+              <p>Open regions, cities, empires, journeys, rivers, mountains, and story locations connected to the Bible.</p>
+              <div class="route-preview-grid compact">
+                <div class="route-preview-card"><h4>Regions</h4><p>Galilee, Judea, Egypt, Mesopotamia, Sinai.</p></div>
+                <div class="route-preview-card"><h4>Cities</h4><p>Jerusalem, Bethlehem, Rome, Babylon, Nineveh.</p></div>
+                <div class="route-preview-card"><h4>Journeys</h4><p>Exodus, exile, return, Jesus’ ministry, Paul’s journeys.</p></div>
+              </div>
             </div>
-            <div class="panel-actions"><a class="button button-primary" href="themes.html">Open Themes →</a></div>
           </article>
 
-          <article class="shelf-panel" id="panel-videos" role="tabpanel" style="--panel-color: var(--purple);">
-            <span class="panel-kicker">Explainers / 04</span>
-            <h3>Watch visual explainers and map-based teaching.</h3>
-            <p>
-              Your videos can become hubs with maps, summaries, source notes, related passages, people, places, and downloadable study guides.
-            </p>
-            <div class="route-preview-grid">
-              <div class="route-preview-card" style="--route-color: var(--purple);"><h4>Latest</h4><p>Newest Bible Mapped episodes and visual explainers.</p></div>
-              <div class="route-preview-card" style="--route-color: var(--teal);"><h4>By Place</h4><p>Videos organized by city, region, empire, or journey.</p></div>
-              <div class="route-preview-card" style="--route-color: var(--navy);"><h4>By Book</h4><p>Videos tied to book pages and study paths.</p></div>
+          <article class="library-book" data-book-panel="people" style="--book-color: var(--slate); --book-text: white; --book-soft: #6b7680;">
+            <button class="book-spine" type="button" aria-expanded="false">
+              <span class="spine-number">04</span>
+              <span class="spine-title">People</span>
+            </button>
+            <div class="book-open-page">
+              <span class="panel-kicker">Lineage / People</span>
+              <h3>Find the people inside the biblical world.</h3>
+              <p>People belong to places, families, covenants, conflicts, and moments in the story.</p>
+              <div class="route-preview-grid compact">
+                <div class="route-preview-card"><h4>Genesis</h4><p>Adam, Eve, Noah, Abraham, Sarah, Joseph.</p></div>
+                <div class="route-preview-card"><h4>Kings</h4><p>Saul, David, Solomon, Judah’s line.</p></div>
+                <div class="route-preview-card"><h4>Gospels</h4><p>Jesus, Mary, disciples, Pharisees, Rome.</p></div>
+              </div>
             </div>
-            <div class="panel-actions"><a class="button button-primary" href="videos.html">Open Videos →</a></div>
           </article>
 
-          <article class="shelf-panel" id="panel-tools" role="tabpanel" style="--panel-color: var(--red);">
-            <span class="panel-kicker">Lexicon / 05</span>
-            <h3>Use study tools built for discovery.</h3>
-            <p>
-              Tools can include the KJV reader, concordance, clickable words, Strong’s-style data, timelines, canon comparison, and location-linked study resources.
-            </p>
-            <div class="route-preview-grid">
-              <div class="route-preview-card" style="--route-color: var(--red);"><h4>KJV Reader</h4><p>Read Scripture and click words for deeper study.</p></div>
-              <div class="route-preview-card" style="--route-color: var(--purple);"><h4>Concordance</h4><p>Connect English words to original-language study data.</p></div>
-              <div class="route-preview-card" style="--route-color: var(--slate);"><h4>Timelines</h4><p>Trace events, people, books, and empires through time.</p></div>
+          <article class="library-book" data-book-panel="themes" style="--book-color: var(--sand); --book-text: var(--charcoal); --book-soft: #f0d9a9;">
+            <button class="book-spine" type="button" aria-expanded="false">
+              <span class="spine-number">05</span>
+              <span class="spine-title">Themes</span>
+            </button>
+            <div class="book-open-page">
+              <span class="panel-kicker">Themes</span>
+              <h3>Trace ideas across the Bible.</h3>
+              <p>Covenant, kingdom, exile, temple, sacrifice, wisdom, Messiah, resurrection, and new creation unfold across many books.</p>
             </div>
-            <div class="panel-actions"><a class="button button-primary" href="tools.html">Open Tools →</a></div>
           </article>
 
-          <article class="shelf-panel" id="panel-about" role="tabpanel" style="--panel-color: var(--charcoal);">
-            <span class="panel-kicker">Origin / 06</span>
-            <h3>Why Bible Mapped exists.</h3>
-            <p>
-              Bible Mapped exists to help people see Scripture more clearly through place, context, language, history, and the person of Jesus Christ.
-            </p>
-            <div class="panel-actions"><a class="button button-primary" href="about/">Open About →</a></div>
+          <article class="library-book" data-book-panel="videos" style="--book-color: var(--purple); --book-text: white; --book-soft: #9151ff;">
+            <button class="book-spine" type="button" aria-expanded="false">
+              <span class="spine-number">06</span>
+              <span class="spine-title">Videos</span>
+            </button>
+            <div class="book-open-page">
+              <span class="panel-kicker">Visual Explainers</span>
+              <h3>Watch Bible Mapped studies.</h3>
+              <p>Short and long-form visual explainers can connect books, maps, word studies, and themes.</p>
+              <div class="panel-actions"><a class="button button-primary" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noreferrer">Watch on YouTube →</a></div>
+            </div>
+          </article>
+
+          <article class="library-book" data-book-panel="tools" style="--book-color: var(--red); --book-text: white; --book-soft: #ff5060;">
+            <button class="book-spine" type="button" aria-expanded="false">
+              <span class="spine-number">07</span>
+              <span class="spine-title">Tools</span>
+            </button>
+            <div class="book-open-page">
+              <span class="panel-kicker">Study Tools</span>
+              <h3>Open concordance, dictionary, and context tools.</h3>
+              <p>Build study layers for KJV words, Webster-style definitions, places, people, timelines, and red flags.</p>
+            </div>
+          </article>
+
+          <article class="library-book" data-book-panel="about" style="--book-color: var(--charcoal); --book-text: white; --book-soft: #333033;">
+            <button class="book-spine" type="button" aria-expanded="false">
+              <span class="spine-number">08</span>
+              <span class="spine-title">About</span>
+            </button>
+            <div class="book-open-page">
+              <span class="panel-kicker">Mission</span>
+              <h3>Why Bible Mapped exists.</h3>
+              <p>Bible Mapped exists to help people see Scripture more clearly through place, context, language, history, and Jesus Christ.</p>
+              <div class="panel-actions"><a class="button button-primary" href="about/">Open About →</a></div>
+            </div>
           </article>
         </div>
       </div>
     </section>
+
 </main>
 
   <footer>
@@ -1708,377 +1977,50 @@
   </footer>
 
   <script>
-    const shelfTabs = document.querySelectorAll('.shelf-tab');
-    const shelfPanels = document.querySelectorAll('.shelf-panel');
-    const shelfLineFill = document.getElementById('shelfLineFill');
+    const libraryBooks = document.querySelectorAll('.library-book');
 
-    function activateShelfTab(tab) {
-      shelfTabs.forEach((item) => {
-        item.classList.remove('active');
-        item.setAttribute('aria-selected', 'false');
+    function openLibraryBook(targetBook) {
+      libraryBooks.forEach((book) => {
+        const isActive = book === targetBook;
+        book.classList.toggle('active', isActive);
+
+        const button = book.querySelector('.book-spine');
+        if (button) {
+          button.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+        }
       });
 
-      shelfPanels.forEach((panel) => panel.classList.remove('active'));
-
-      tab.classList.add('active');
-      tab.setAttribute('aria-selected', 'true');
-
-      const panel = document.getElementById(`panel-${tab.dataset.tab}`);
-      if (panel) panel.classList.add('active');
-
-      if (shelfLineFill) {
-        const navRect = tab.parentElement.getBoundingClientRect();
-        const tabRect = tab.getBoundingClientRect();
-        const left = tabRect.left - navRect.left;
-        const width = tabRect.width;
-
-        shelfLineFill.style.width = `${width}px`;
-        shelfLineFill.style.transform = `translateX(${left}px)`;
-        shelfLineFill.style.background = getComputedStyle(tab).backgroundColor;
-      }
-
-      tab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      targetBook.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     }
 
-    shelfTabs.forEach((tab) => {
-      tab.addEventListener('click', () => activateShelfTab(tab));
-    });
-
-    const peopleData = {
-      Adam: {
-        copy: 'Adam is presented as the first man, placed in Eden, and connected to creation, fall, and humanity’s need for redemption.',
-        books: ['Genesis', 'Romans', '1 Corinthians'],
-        places: ['Eden'],
-        connections: ['Eve', 'Seth', 'Humanity', 'Jesus as last Adam']
-      },
-      Eve: {
-        copy: 'Eve is the first woman and mother of all living, central to the Eden story and the promise of the seed.',
-        books: ['Genesis', '2 Corinthians', '1 Timothy'],
-        places: ['Eden'],
-        connections: ['Adam', 'Cain', 'Abel', 'Seth']
-      },
-      Noah: {
-        copy: 'Noah is preserved through the flood and becomes a major figure in judgment, mercy, covenant, and new beginning.',
-        books: ['Genesis', 'Hebrews', '1 Peter'],
-        places: ['Ark', 'Ararat'],
-        connections: ['Shem', 'Ham', 'Japheth', 'Covenant']
-      },
-      Abraham: {
-        copy: 'Abraham is called from Ur and becomes the covenant father through whom God promises blessing to the nations.',
-        books: ['Genesis', 'Romans', 'Galatians', 'Hebrews'],
-        places: ['Ur', 'Haran', 'Canaan', 'Moriah'],
-        connections: ['Sarah', 'Isaac', 'Lot', 'Covenant promise']
-      },
-      Sarah: {
-        copy: 'Sarah is the wife of Abraham and mother of Isaac, tied to promise, waiting, covenant, and God’s faithfulness.',
-        books: ['Genesis', 'Hebrews', '1 Peter'],
-        places: ['Haran', 'Canaan'],
-        connections: ['Abraham', 'Isaac', 'Hagar']
-      },
-      Isaac: {
-        copy: 'Isaac is the child of promise and the son through whom the covenant line continues.',
-        books: ['Genesis', 'Romans', 'Hebrews'],
-        places: ['Canaan', 'Moriah', 'Beersheba'],
-        connections: ['Abraham', 'Sarah', 'Rebekah', 'Jacob']
-      },
-      Jacob: {
-        copy: 'Jacob, later named Israel, becomes father of the twelve tribes and a key figure in the promise line.',
-        books: ['Genesis', 'Hosea', 'Romans'],
-        places: ['Canaan', 'Bethel', 'Haran', 'Egypt'],
-        connections: ['Isaac', 'Rebekah', 'Esau', 'Joseph', 'Judah']
-      },
-      Judah: {
-        copy: 'Judah becomes the tribe connected to kingship, David, and the messianic line.',
-        books: ['Genesis', 'Matthew', 'Revelation'],
-        places: ['Canaan', 'Egypt'],
-        connections: ['Jacob', 'David', 'Jesus', 'Lion of Judah']
-      },
-      Joseph: {
-        copy: 'Joseph is sold into Egypt, rises to power, and becomes a providential means of preserving his family.',
-        books: ['Genesis', 'Acts', 'Hebrews'],
-        places: ['Canaan', 'Egypt'],
-        connections: ['Jacob', 'Judah', 'Pharaoh', 'Brothers']
-      },
-      Moses: {
-        copy: 'Moses is the deliverer, prophet, mediator, and lawgiver who leads Israel from Egypt toward the promised land.',
-        books: ['Exodus', 'Leviticus', 'Numbers', 'Deuteronomy'],
-        places: ['Egypt', 'Sinai', 'Wilderness', 'Moab'],
-        connections: ['Aaron', 'Miriam', 'Joshua', 'Pharaoh']
-      },
-      David: {
-        copy: 'David is Israel’s king, psalmist, warrior, and the royal line through whom the Messiah is promised.',
-        books: ['1 Samuel', '2 Samuel', 'Psalms', 'Matthew'],
-        places: ['Bethlehem', 'Hebron', 'Jerusalem'],
-        connections: ['Saul', 'Jonathan', 'Solomon', 'Jesus']
-      },
-      Solomon: {
-        copy: 'Solomon is David’s son, king of Israel, builder of the temple, and a major figure in wisdom and kingdom history.',
-        books: ['1 Kings', '2 Chronicles', 'Proverbs', 'Ecclesiastes'],
-        places: ['Jerusalem', 'Temple'],
-        connections: ['David', 'Bathsheba', 'Temple', 'Wisdom']
-      },
-      Isaiah: {
-        copy: 'Isaiah is a major prophet who speaks of judgment, holiness, hope, the servant, and messianic restoration.',
-        books: ['Isaiah', 'Matthew', 'Luke', 'Romans'],
-        places: ['Jerusalem', 'Judah'],
-        connections: ['Hezekiah', 'Servant songs', 'Messiah']
-      },
-      Daniel: {
-        copy: 'Daniel is an exile in Babylon whose faithfulness and visions reveal God’s rule over empires.',
-        books: ['Daniel', 'Matthew', 'Revelation'],
-        places: ['Jerusalem', 'Babylon'],
-        connections: ['Nebuchadnezzar', 'Exile', 'Son of Man']
-      },
-      Mary: {
-        copy: 'Mary is the mother of Jesus, connected to promise, humility, incarnation, and the fulfillment of messianic hope.',
-        books: ['Matthew', 'Luke', 'John', 'Acts'],
-        places: ['Nazareth', 'Bethlehem', 'Jerusalem'],
-        connections: ['Jesus', 'Joseph of Nazareth', 'Elizabeth']
-      },
-      'Joseph of Nazareth': {
-        copy: 'Joseph is the husband of Mary and legal father of Jesus, connected to David’s line and the protection of the child Messiah.',
-        books: ['Matthew', 'Luke'],
-        places: ['Nazareth', 'Bethlehem', 'Egypt'],
-        connections: ['Mary', 'Jesus', 'Davidic line']
-      },
-      'John the Baptist': {
-        copy: 'John the Baptist prepares the way for Jesus, calling Israel to repentance and announcing the coming Lamb of God.',
-        books: ['Matthew', 'Mark', 'Luke', 'John'],
-        places: ['Wilderness', 'Jordan River'],
-        connections: ['Jesus', 'Elizabeth', 'Zechariah']
-      },
-      Peter: {
-        copy: 'Peter is one of Jesus’ closest disciples and a leading witness in the early church.',
-        books: ['Gospels', 'Acts', '1 Peter', '2 Peter'],
-        places: ['Galilee', 'Jerusalem', 'Rome tradition'],
-        connections: ['Jesus', 'John', 'Andrew', 'Early church']
-      },
-      Paul: {
-        copy: 'Paul is an apostle to the nations whose missionary journeys and letters shape much of the New Testament.',
-        books: ['Acts', 'Romans', 'Pauline Epistles'],
-        places: ['Tarsus', 'Damascus', 'Antioch', 'Rome'],
-        connections: ['Barnabas', 'Timothy', 'Silas', 'Gentile mission']
-      },
-      Jesus: {
-        copy: 'Jesus Christ is the center of Scripture: Son of God, Messiah, King, Savior, and fulfillment of the biblical story.',
-        books: ['Gospels', 'Acts', 'Epistles', 'Revelation'],
-        places: ['Bethlehem', 'Nazareth', 'Galilee', 'Jerusalem'],
-        connections: ['Davidic line', 'Son of Man', 'Lamb of God', 'Resurrection']
-      }
-    };
-
-    const bookData = {
-      Genesis: {
-        copy: 'Genesis introduces creation, fall, covenant, promise, and the family line that moves the biblical story toward Christ.',
-        people: ['Adam', 'Eve', 'Noah', 'Abraham', 'Sarah', 'Isaac', 'Jacob', 'Joseph'],
-        places: ['Eden', 'Ur', 'Haran', 'Canaan', 'Egypt'],
-        themes: ['Creation', 'Fall', 'Covenant', 'Promise', 'Land']
-      },
-      Exodus: {
-        copy: 'Exodus tells how God delivers Israel from Egypt, forms them as His covenant people, and dwells among them.',
-        people: ['Moses', 'Aaron', 'Miriam', 'Pharaoh'],
-        places: ['Egypt', 'Red Sea', 'Sinai', 'Wilderness'],
-        themes: ['Deliverance', 'Law', 'Covenant', 'Tabernacle']
-      },
-      Leviticus: {
-        copy: 'Leviticus focuses on holiness, sacrifice, priesthood, purity, worship, and life with God at the center.',
-        people: ['Moses', 'Aaron', 'Priests'],
-        places: ['Sinai', 'Tabernacle'],
-        themes: ['Holiness', 'Sacrifice', 'Atonement', 'Priesthood']
-      },
-      Numbers: {
-        copy: 'Numbers follows Israel through the wilderness and shows the tension between promise, rebellion, judgment, and God’s faithfulness.',
-        people: ['Moses', 'Aaron', 'Miriam', 'Joshua', 'Caleb'],
-        places: ['Sinai', 'Wilderness', 'Moab'],
-        themes: ['Wilderness', 'Testing', 'Faithfulness', 'Promise']
-      },
-      Deuteronomy: {
-        copy: 'Deuteronomy retells the covenant for a new generation before Israel enters the land.',
-        people: ['Moses', 'Joshua', 'Israel'],
-        places: ['Moab', 'Jordan River', 'Canaan'],
-        themes: ['Covenant', 'Law', 'Memory', 'Obedience']
-      },
-      Joshua: {
-        copy: 'Joshua tells of Israel entering the land, conquest, inheritance, and the challenge of covenant faithfulness.',
-        people: ['Joshua', 'Rahab', 'Caleb'],
-        places: ['Jordan River', 'Jericho', 'Canaan'],
-        themes: ['Land', 'Promise', 'Courage', 'Inheritance']
-      },
-      Ruth: {
-        copy: 'Ruth is a story of loyalty, providence, redemption, and the family line leading to David and Christ.',
-        people: ['Ruth', 'Naomi', 'Boaz'],
-        places: ['Moab', 'Bethlehem'],
-        themes: ['Redemption', 'Faithfulness', 'Providence', 'Lineage']
-      },
-      Psalms: {
-        copy: 'Psalms is Israel’s prayer and worship book, giving language for praise, lament, wisdom, kingship, and hope.',
-        people: ['David', 'Asaph', 'Sons of Korah'],
-        places: ['Jerusalem', 'Zion', 'Temple'],
-        themes: ['Worship', 'Lament', 'Kingdom', 'Wisdom']
-      },
-      Isaiah: {
-        copy: 'Isaiah announces judgment, hope, the holiness of God, the servant, and future restoration.',
-        people: ['Isaiah', 'Uzziah', 'Hezekiah'],
-        places: ['Jerusalem', 'Judah', 'Assyria'],
-        themes: ['Holiness', 'Judgment', 'Servant', 'Messiah']
-      },
-      Daniel: {
-        copy: 'Daniel shows faithfulness in exile, God’s rule over kingdoms, visions of empire, and the hope of the Son of Man.',
-        people: ['Daniel', 'Nebuchadnezzar', 'Shadrach', 'Meshach', 'Abednego'],
-        places: ['Jerusalem', 'Babylon'],
-        themes: ['Exile', 'Empire', 'Faithfulness', 'Son of Man']
-      },
-      Matthew: {
-        copy: 'Matthew presents Jesus as Messiah, Son of David, teacher, King, and fulfillment of Israel’s story.',
-        people: ['Jesus', 'Mary', 'Joseph', 'Peter', 'John the Baptist'],
-        places: ['Bethlehem', 'Galilee', 'Jerusalem', 'Egypt'],
-        themes: ['Kingdom', 'Fulfillment', 'Messiah', 'Discipleship']
-      },
-      Mark: {
-        copy: 'Mark moves quickly through Jesus’ actions, suffering, authority, and the call to follow the crucified Messiah.',
-        people: ['Jesus', 'Peter', 'John the Baptist'],
-        places: ['Galilee', 'Jerusalem', 'Capernaum'],
-        themes: ['Authority', 'Discipleship', 'Suffering', 'Kingdom']
-      },
-      Luke: {
-        copy: 'Luke highlights Jesus as Savior for Israel and the nations, with concern for the poor, outsiders, and the Spirit’s work.',
-        people: ['Jesus', 'Mary', 'Elizabeth', 'Zacharias'],
-        places: ['Bethlehem', 'Nazareth', 'Jerusalem'],
-        themes: ['Salvation', 'Mercy', 'Spirit', 'Nations']
-      },
-      John: {
-        copy: 'John emphasizes Jesus as the Word made flesh, the Son of God, and the source of life and light.',
-        people: ['Jesus', 'John', 'Mary', 'Nicodemus', 'Lazarus'],
-        places: ['Galilee', 'Jerusalem', 'Bethany', 'Samaria'],
-        themes: ['Word', 'Life', 'Light', 'Belief', 'Glory']
-      },
-      Acts: {
-        copy: 'Acts traces the spread of the gospel from Jerusalem to the nations through the Spirit-empowered church.',
-        people: ['Peter', 'Paul', 'Stephen', 'Barnabas', 'Philip'],
-        places: ['Jerusalem', 'Antioch', 'Asia Minor', 'Rome'],
-        themes: ['Spirit', 'Mission', 'Church', 'Nations']
-      },
-      Romans: {
-        copy: 'Romans explains the gospel, righteousness, faith, sin, grace, Israel, and life in Christ.',
-        people: ['Paul', 'Phoebe', 'Roman believers'],
-        places: ['Rome', 'Corinth'],
-        themes: ['Gospel', 'Faith', 'Grace', 'Righteousness']
-      },
-      Revelation: {
-        copy: 'Revelation unveils Jesus as victorious King and shows the final defeat of evil and the coming New Creation.',
-        people: ['Jesus', 'John', 'Seven Churches'],
-        places: ['Patmos', 'Asia Minor', 'New Jerusalem'],
-        themes: ['Victory', 'Judgment', 'Worship', 'New Creation']
-      }
-    };
-
-    function renderTags(target, items) {
-      target.innerHTML = items.map((item) => `<span class="mini-tag">${item}</span>`).join('');
-    }
-
-    function showSelectedPerson(personName) {
-      const panel = document.getElementById('selectedPersonPanel');
-      const title = document.getElementById('selectedPersonTitle');
-      const copy = document.getElementById('selectedPersonCopy');
-      const books = document.getElementById('personBooks');
-      const places = document.getElementById('personPlaces');
-      const connections = document.getElementById('personConnections');
-
-      const data = peopleData[personName] || {
-        copy: `${personName} is ready for a Bible Mapped character profile. We can add books, places, timeline, connections, and themes as content grows.`,
-        books: ['Coming soon'],
-        places: ['Coming soon'],
-        connections: ['Coming soon']
-      };
-
-      title.textContent = personName;
-      copy.textContent = data.copy;
-      renderTags(books, data.books);
-      renderTags(places, data.places);
-      renderTags(connections, data.connections);
-      panel.classList.add('active');
-    }
-
-    function showSelectedBook(bookName) {
-      const panel = document.getElementById('selectedBookPanel');
-      const title = document.getElementById('selectedBookTitle');
-      const copy = document.getElementById('selectedBookCopy');
-      const people = document.getElementById('linkedPeople');
-      const places = document.getElementById('linkedPlaces');
-      const themes = document.getElementById('linkedThemes');
-      const bookLink = document.getElementById('selectedBookLink');
-
-      const data = bookData[bookName] || {
-        copy: `${bookName} is ready for a Bible Mapped profile. We can add people, places, themes, videos, and word studies as content grows.`,
-        people: ['Coming soon'],
-        places: ['Coming soon'],
-        themes: ['Coming soon']
-      };
-
-      title.textContent = bookName;
-      copy.textContent = data.copy;
-      renderTags(people, data.people);
-      renderTags(places, data.places);
-      renderTags(themes, data.themes);
-
-      if (bookLink) {
-        const slug = bookName
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, '-')
-          .replace(/^-|-$/g, '');
-
-        bookLink.href = bookName === 'Genesis' ? 'books/genesis/' : `books/${slug}/`;
-      }
-
-      panel.classList.add('active');
-    }
-
-    document.addEventListener('click', (event) => {
-      const routeButton = event.target.closest('[data-book-route]');
-      if (routeButton) {
-        document.querySelectorAll('[data-book-route]').forEach((btn) => btn.classList.remove('active'));
-        routeButton.classList.add('active');
-
-        document.querySelectorAll('.book-results').forEach((result) => result.classList.remove('active'));
-        document.getElementById(`books-${routeButton.dataset.bookRoute}`).classList.add('active');
-        document.getElementById('selectedBookPanel').classList.remove('active');
-        document.querySelectorAll('.book-tile').forEach((btn) => btn.classList.remove('active'));
-      }
-
-      const bookButton = event.target.closest('.book-tile');
-      if (bookButton) {
-        document.querySelectorAll('.book-tile').forEach((btn) => btn.classList.remove('active'));
-        bookButton.classList.add('active');
-        showSelectedBook(bookButton.dataset.book);
-      }
-
-      const peopleRouteButton = event.target.closest('[data-people-route]');
-      if (peopleRouteButton) {
-        document.querySelectorAll('[data-people-route]').forEach((btn) => btn.classList.remove('active'));
-        peopleRouteButton.classList.add('active');
-
-        document.querySelectorAll('.people-results').forEach((result) => result.classList.remove('active'));
-        document.getElementById(`people-${peopleRouteButton.dataset.peopleRoute}`).classList.add('active');
-        document.getElementById('selectedPersonPanel').classList.remove('active');
-        document.querySelectorAll('.person-tile, .gene-node').forEach((btn) => btn.classList.remove('active'));
-      }
-
-      const personButton = event.target.closest('.person-tile, .gene-node');
-      if (personButton) {
-        document.querySelectorAll('.person-tile, .gene-node').forEach((btn) => btn.classList.remove('active'));
-        personButton.classList.add('active');
-        showSelectedPerson(personButton.dataset.person);
+    libraryBooks.forEach((book) => {
+      const spine = book.querySelector('.book-spine');
+      if (spine) {
+        spine.addEventListener('click', () => openLibraryBook(book));
       }
     });
 
-    window.addEventListener('load', () => {
-      const activeTab = document.querySelector('.shelf-tab.active');
-      if (activeTab) activateShelfTab(activeTab);
+    document.querySelectorAll('[data-open-book]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const panelName = button.dataset.openBook;
+        const target = document.querySelector(`.library-book[data-book-panel="${panelName}"]`);
+        if (target) openLibraryBook(target);
+      });
     });
 
-    window.addEventListener('resize', () => {
-      const activeTab = document.querySelector('.shelf-tab.active');
-      if (activeTab) activateShelfTab(activeTab);
+    const routeButtons = document.querySelectorAll('.route-chip');
+    const bookRoutes = document.querySelectorAll('.book-route');
+
+    routeButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        routeButtons.forEach((btn) => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const routeName = button.dataset.route;
+        bookRoutes.forEach((route) => {
+          route.classList.toggle('active', route.id === `route-${routeName}`);
+        });
+      });
     });
   </script>
 </body>
