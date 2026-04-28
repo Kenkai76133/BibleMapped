@@ -1,528 +1,854 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Genesis – Vox‑style Bible Mapped</title>
-  <!--
-    This file is a more colourful, "Vox" inspired redesign of the Genesis page.
-    It retains the hero image and orientation summary, but adds icons, coloured
-    cards, and a fully clickable Bible text with concordance. Each word in
-    the Bible text is wrapped in a span with a `data-word` attribute; clicking
-    a word opens the dictionary panel with the associated definition.
-  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bible Mapped | Genesis Minimal Future Reader</title>
+
   <style>
     :root {
-      --bg-color: #fdfbfa;
-      --card-bg: #ffffff;
-      --accent: #3b2d74;        /* deeper purple for Vox feel */
-      --accent-light: #e6e1f3;  /* light lavender for backgrounds */
-      --accent-alt: #fde9d9;    /* soft peach for alternating cards */
-      --text-color: #353433;
-      --muted: #77716b;
-      --border-color: #e4dfd6;
+      --cloud: #f7f5ef;
+      --paper: #fffdf7;
+      --ink: #141414;
+      --muted: #6c675f;
+      --line: #ddd7ca;
+      --purple: #7b2cff;
+      --navy: #111c3a;
+      --red: #b9332a;
+      --gold: #b8872f;
+      --green: #2e6b4f;
+      --shadow: 0 24px 70px rgba(17, 28, 58, .10);
+      --soft: 0 10px 30px rgba(17, 28, 58, .06);
+      --radius: 24px;
     }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: 'Inter', Arial, sans-serif;
-      color: var(--text-color);
-      background-color: var(--bg-color);
-      line-height: 1.6;
-    }
-    header.hero {
-      position: relative;
-      height: 60vh;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      background-image: url('2d829766-9bc2-4fba-a913-f8e703a1c33a.png');
-      background-size: cover;
-      background-position: center;
-    }
-    .hero-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.35);
-    }
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 4rem;
-      margin-bottom: 0.3em;
-    }
-    .hero p.subheading {
-      font-size: 1.2rem;
-      margin-bottom: 1.5em;
-      letter-spacing: 0.05em;
-    }
-    .action-buttons {
-      display: flex;
-      gap: 1rem;
-    }
-    .btn {
-      padding: 0.6rem 1.4rem;
-      border: 2px solid #fff;
-      background: rgba(255,255,255,0.15);
-      color: #fff;
-      text-decoration: none;
-      border-radius: 999px;
-      font-weight: bold;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    .btn:hover {
-      background-color: #fff;
-      color: var(--accent);
-    }
-
-    /* Section container */
-    .section {
-      padding: 4rem 5%;
-    }
-    .card {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 1rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      padding: 2rem;
-      margin-bottom: 2rem;
-    }
-    .orientation {
-      display: grid;
-      gap: 2rem;
-      grid-template-columns: 1fr 1fr;
-    }
-    .orientation h2 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 2.7rem;
-      margin-bottom: 0.5rem;
-      color: var(--accent);
-    }
-    /* Theme verse card */
-    .theme-verse {
-      border: 1px solid var(--border-color);
-      border-radius: 0.8rem;
-      padding: 1rem;
-      background-color: var(--accent-light);
-      margin-top: 1rem;
-    }
-    .theme-verse span {
-      font-size: 0.75rem;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      display: block;
-      margin-bottom: 0.3rem;
-      font-weight: 800;
-    }
-    /* Story beats with icons */
-    .story-beats {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-    .beat {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      gap: 0.7rem;
-      border: 1px solid var(--border-color);
-      border-radius: 0.8rem;
-      padding: 0.7rem;
-      background-color: var(--accent-alt);
-    }
-    .beat .icon {
-      font-size: 1.3rem;
-      color: var(--accent);
-    }
-    .beat span.label {
-      font-size: 0.8rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 700;
-    }
-    .beat strong {
-      display: block;
-      font-weight: 700;
-      color: var(--accent);
-    }
-
-    /* Quick facts grid with icons & alternating colours */
-    .facts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .fact-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.7rem;
-      border: 1px solid var(--border-color);
-      border-radius: 0.8rem;
-      padding: 0.8rem;
-      font-size: 0.9rem;
-    }
-    .fact-item:nth-child(odd) {
-      background-color: var(--accent-light);
-    }
-    .fact-item:nth-child(even) {
-      background-color: var(--accent-alt);
-    }
-    .fact-item .icon {
-      font-size: 1.4rem;
-      color: var(--accent);
-    }
-    .fact-item span.label {
-      font-size: 0.75rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 700;
-      display: block;
-      margin-bottom: 0.2rem;
-    }
-    .fact-item p {
       margin: 0;
-      font-weight: 600;
+      background:
+        radial-gradient(circle at 88% 20%, rgba(123,44,255,.08), transparent 26%),
+        linear-gradient(180deg, #fbfaf6 0%, var(--cloud) 48%, #f2efe8 100%);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
     }
 
-    /* Coloured details (accordion) */
-    details {
-      border: 1px solid var(--border-color);
-      background-color: var(--card-bg);
-      border-radius: 0.8rem;
-      margin-bottom: 1rem;
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+
+    .shell {
+      width: min(1240px, calc(100% - 36px));
+      margin: auto;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 620px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        linear-gradient(90deg, rgba(7,9,19,.94) 0%, rgba(7,9,19,.72) 38%, rgba(7,9,19,.22) 70%, rgba(7,9,19,.78) 100%),
+        linear-gradient(to bottom, rgba(7,9,19,.05), rgba(7,9,19,.64)),
+        url("../../assets/genesis-hero.png");
+      background-size: cover;
+      background-position: center center;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 -1px 0;
+      height: 36%;
+      z-index: 1;
+      background: linear-gradient(to bottom, transparent, var(--cloud) 88%);
+      pointer-events: none;
+    }
+
+    .topbar {
+      position: relative;
+      z-index: 5;
+      height: 76px;
+      display: flex;
+      align-items: center;
+    }
+
+    .topbar-inner {
+      width: min(1240px, calc(100% - 36px));
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: Georgia, serif;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-weight: 700;
+      font-size: .98rem;
+    }
+
+    .brand-symbol {
+      width: 30px;
+      height: 30px;
+      border: 2px solid #c9a0ff;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      color: #c9a0ff;
+      line-height: 1;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: .74rem;
+      font-weight: 900;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.92);
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 4;
+      width: min(1240px, calc(100% - 36px));
+      margin: auto;
+      padding: 72px 0 120px;
+    }
+
+    .book-chip {
+      color: #b98cff;
+      font-size: .78rem;
+      font-weight: 950;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(4.8rem, 11vw, 9rem);
+      line-height: .88;
+      letter-spacing: -.06em;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .hero-subtitle {
+      margin: 16px 0 10px;
+      color: #f3d482;
+      font-family: Georgia, serif;
+      font-size: clamp(1.5rem, 3vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -.025em;
+    }
+
+    .hero-copy p {
+      max-width: 600px;
+      margin: 0 0 28px;
+      color: rgba(255,255,255,.88);
+      font-size: 1.12rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 1px solid rgba(255,255,255,.35);
+      background: var(--purple);
+      color: #fff;
+      min-height: 48px;
+      padding: 13px 20px;
+      border-radius: 999px;
+      font-weight: 950;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      box-shadow: 0 14px 32px rgba(123,44,255,.24);
+    }
+
+    .btn.secondary {
+      background: rgba(255,255,255,.08);
+      box-shadow: none;
+      backdrop-filter: blur(8px);
+    }
+
+    /* LANDING BOOK COLOR STRIP */
+    .book-strip {
+      position: relative;
+      z-index: 6;
+      margin-top: -74px;
+    }
+
+    .book-ribbon {
+      min-height: 84px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.44);
+      background:
+        linear-gradient(90deg, var(--purple), #4b2bd7 30%, var(--navy) 72%, #050814 100%);
+      color: white;
+      display: grid;
+      grid-template-columns: 160px 1fr auto;
+      align-items: center;
+      gap: 18px;
+      padding: 18px 22px;
+      box-shadow: var(--shadow);
       overflow: hidden;
     }
-    details summary {
-      list-style: none;
-      font-weight: 700;
-      font-size: 1.1rem;
-      cursor: pointer;
-      padding: 1rem;
-      background-color: var(--accent-light);
-      border-bottom: 1px solid var(--border-color);
-    }
-    details[open] summary {
-      background-color: var(--accent-alt);
-    }
-    details .section-content {
-      padding: 1rem;
-      background-color: #fff;
-    }
 
-    /* Dictionary side panel */
-    #dictionary-panel {
-      position: fixed;
-      top: 0;
-      right: -400px;
-      width: 350px;
-      height: 100%;
-      background-color: var(--card-bg);
-      border-left: 1px solid var(--border-color);
-      box-shadow: -2px 0 6px rgba(0,0,0,0.1);
-      padding: 1.5rem;
-      overflow-y: auto;
-      transition: right 0.4s ease;
-      z-index: 1000;
-    }
-    #dictionary-panel.open {
-      right: 0;
-    }
-    #dictionary-panel h3 {
-      margin-top: 0;
-      color: var(--accent);
-    }
-    #dictionary-panel .close-btn {
+    .book-ribbon::after {
+      content: "";
       position: absolute;
-      top: 1rem;
-      right: 1rem;
-      cursor: pointer;
-      font-size: 1.2rem;
-      color: var(--accent);
+      inset: 0;
+      background: radial-gradient(circle at 78% 50%, rgba(255,255,255,.18), transparent 32%);
+      pointer-events: none;
     }
 
-    /* Scroll reveal */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    .book-ribbon strong {
+      font-family: Georgia, serif;
+      font-size: 1.45rem;
+      letter-spacing: -.03em;
+      position: relative;
+      z-index: 2;
     }
-    .reveal.in-view {
-      opacity: 1;
-      transform: translateY(0);
+
+    .book-ribbon span {
+      color: rgba(255,255,255,.82);
+      font-size: .94rem;
+      position: relative;
+      z-index: 2;
     }
-    @media (max-width: 900px) {
-      .orientation {
-        grid-template-columns: 1fr;
-      }
+
+    .ribbon-symbol {
+      position: relative;
+      z-index: 2;
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 17px;
+      background: rgba(255,255,255,.12);
+      font-size: 1.6rem;
+    }
+
+    /* FUTURISTIC BARS */
+    section { padding: 34px 0; }
+
+    .bar-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .study-bar {
+      border: 1px solid rgba(17,28,58,.10);
+      background: rgba(255,253,247,.82);
+      border-radius: 24px;
+      box-shadow: var(--soft);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .study-bar summary {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 78px 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 22px 24px;
+      min-height: 92px;
+      cursor: pointer;
+    }
+
+    .study-bar summary::-webkit-details-marker { display: none; }
+
+    .bar-symbol {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 1.45rem;
+      font-weight: 950;
+    }
+
+    .summary-bar .bar-symbol { background: rgba(123,44,255,.12); color: var(--purple); }
+    .structure-bar .bar-symbol { background: rgba(17,28,58,.09); color: var(--navy); }
+    .places-bar .bar-symbol { background: rgba(46,107,79,.12); color: var(--green); }
+    .redflag-bar .bar-symbol { background: rgba(185,51,42,.12); color: var(--red); }
+
+    .bar-text h2 {
+      margin: 0;
+      font-family: Inter, sans-serif;
+      font-size: clamp(1.35rem, 2vw, 2rem);
+      line-height: 1.1;
+      font-weight: 950;
+      letter-spacing: -.04em;
+    }
+
+    .bar-text p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      max-width: 860px;
+    }
+
+    .bar-action {
+      color: var(--muted);
+      font-weight: 950;
+      transition: transform .25s ease;
+    }
+
+    .study-bar[open] .bar-action { transform: rotate(45deg); }
+
+    .bar-body {
+      border-top: 1px solid var(--line);
+      padding: 22px 24px 26px 96px;
+      color: #38342f;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .mini-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      min-height: 140px;
+      background: var(--paper);
+    }
+
+    .mini-card small {
+      display: block;
+      color: var(--purple);
+      font-size: .72rem;
+      font-weight: 950;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .mini-card strong { display: block; line-height: 1.3; }
+    .mini-card p { margin: 8px 0 0; color: var(--muted); }
+
+    .read-launch {
+      padding: 56px 0 80px;
+    }
+
+    .read-panel {
+      border: 1px solid rgba(17,28,58,.12);
+      border-radius: 32px;
+      background: rgba(255,253,247,.86);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .read-top {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .read-top h2 {
+      font-family: Georgia, serif;
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      margin: 0;
+      letter-spacing: -.05em;
+    }
+
+    .read-top p {
+      max-width: 640px;
+      color: var(--muted);
+      margin: 8px 0 0;
+    }
+
+    .reader-grid {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .chapter-rail {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--paper);
+      padding: 14px;
+      position: sticky;
+      top: 18px;
+      max-height: 76vh;
+      overflow: auto;
+    }
+
+    .chapter-rail input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 11px 13px;
+      background: #fff;
+      margin-bottom: 12px;
+    }
+
+    .chapter-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .chapter-btn {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      text-align: left;
+      padding: 12px;
+      font-weight: 950;
+    }
+
+    .chapter-btn span {
+      display: block;
+      color: var(--muted);
+      font-weight: 650;
+      font-size: .82rem;
+      margin-top: 2px;
+    }
+
+    .chapter-btn.active {
+      background: var(--purple);
+      border-color: var(--purple);
+      color: #fff;
+    }
+
+    .chapter-btn.active span { color: rgba(255,255,255,.8); }
+
+    .bible-open {
+      min-height: 80vh;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background:
+        linear-gradient(90deg, rgba(123,44,255,.035), transparent 26%),
+        var(--paper);
+      padding: clamp(24px, 4vw, 54px);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.35);
+      position: relative;
+    }
+
+    .reader-heading {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .reader-heading h3 {
+      margin: 0;
+      font-family: Georgia, serif;
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      letter-spacing: -.04em;
+    }
+
+    .reader-heading p { color: var(--muted); margin: 8px 0 0; }
+
+    .scripture {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.15rem, 1.4vw, 1.38rem);
+      line-height: 2.05;
+      color: #211f1d;
+    }
+
+    .verse { margin: 0 0 1.15em; }
+
+    .vnum {
+      color: var(--purple);
+      font-family: Inter, sans-serif;
+      font-size: .75rem;
+      font-weight: 950;
+      vertical-align: super;
+      margin-right: 7px;
+    }
+
+    .word {
+      font: inherit;
+      color: inherit;
+      background: transparent;
+      border: 0;
+      padding: 0 2px;
+      border-radius: 6px;
+      text-decoration: underline;
+      text-decoration-color: rgba(123,44,255,.18);
+      text-underline-offset: 4px;
+    }
+
+    .word:hover,
+    .word.active {
+      background: rgba(123,44,255,.12);
+      outline: 1px solid rgba(123,44,255,.22);
+    }
+
+    .word-popover {
+      position: fixed;
+      z-index: 50;
+      width: min(360px, calc(100vw - 24px));
+      background: rgba(255,253,247,.97);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 22px 60px rgba(17,28,58,.20);
+      padding: 16px;
+      display: none;
+      backdrop-filter: blur(14px);
+    }
+
+    .word-popover.open { display: block; }
+
+    .pop-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+
+    .pop-head h3 {
+      margin: 0;
+      font-family: Georgia, serif;
+      font-size: 1.7rem;
+      letter-spacing: -.04em;
+    }
+
+    .pill {
+      border-radius: 999px;
+      background: rgba(123,44,255,.1);
+      color: var(--purple);
+      padding: 4px 8px;
+      font-size: .7rem;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .pop-block { margin-top: 10px; }
+
+    .pop-block strong {
+      display: block;
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .pop-block p { margin: 0; color: #34302b; }
+
+    .refs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .ref {
+      border: 0;
+      background: var(--navy);
+      color: #fff;
+      border-radius: 999px;
+      padding: 5px 8px;
+      font-size: .76rem;
+      font-weight: 850;
+    }
+
+    mark {
+      background: #efe0ff;
+      border-radius: 4px;
+      color: inherit;
+    }
+
+    @media (max-width: 1000px) {
+      .nav { display: none; }
+      .book-ribbon { grid-template-columns: 1fr; }
+      .mini-grid, .reader-grid { grid-template-columns: 1fr; }
+      .chapter-rail { position: static; max-height: none; }
+    }
+
+    @media (max-width: 700px) {
+      .study-bar summary { grid-template-columns: 58px 1fr auto; padding: 18px; }
+      .bar-body { padding: 18px; }
+      .hero { min-height: 540px; }
     }
   </style>
 </head>
+
 <body>
   <header class="hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div style="font-size:0.8rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.5rem;">Book 01 / Torah</div>
-      <h1>Genesis</h1>
-      <p class="subheading">The Book of Beginnings</p>
-      <div class="action-buttons">
-        <a href="#read-genesis" class="btn">Read Genesis</a>
-        <a href="#study" class="btn">Study the Book</a>
+    <nav class="topbar" aria-label="Bible Mapped navigation">
+      <div class="topbar-inner">
+        <a class="brand" href="../../index.html"><span class="brand-symbol">▱</span> Bible Mapped</a>
+        <div class="nav">
+          <a href="#bars">Book Guide</a>
+          <a href="#read-genesis">Read</a>
+          <a href="#bars">Study</a>
+          <a href="#places">Maps</a>
+          <a href="#read-genesis">Dictionary</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="hero-copy">
+      <div class="book-chip">Book 01 / Torah</div>
+      <h1 class="hero-title">Genesis</h1>
+      <div class="hero-subtitle">The Book of Beginnings</div>
+      <p>The Bible opens with creation, collapse, exile, covenant, and a family through whom blessing will move toward the nations.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#read-genesis">Read Genesis</a>
+        <a class="btn secondary" href="#bars">Open the map</a>
       </div>
     </div>
   </header>
 
-  <!-- dictionary panel hidden offscreen -->
-  <div id="dictionary-panel">
-    <span class="close-btn" onclick="closeDictionary()">×</span>
-    <h3>Definition</h3>
-    <div id="dictionary-content"></div>
-  </div>
-
-  <section class="section" id="study">
-    <div class="card orientation reveal">
-      <div class="orientation">
-        <div>
-          <h2>What happens in Genesis?</h2>
-          <p>Genesis introduces the world, humanity, sin, and God’s promise to bless all nations through one family. From creation to the patriarchs, it sets the stage for the story of redemption.</p>
-          <div class="theme-verse">
-            <span>Theme Verse</span>
-            <p><strong>Genesis 1:1</strong> — “In the beginning God created the heaven and the earth.”</p>
-          </div>
+  <main>
+    <section class="book-strip">
+      <div class="shell">
+        <div class="book-ribbon">
+          <div class="ribbon-symbol">𐤀</div>
+          <strong>Genesis</strong>
+          <span>Color identity: purple / navy / gold — origin, order, covenant, place.</span>
         </div>
-        <div>
-          <div class="story-beats">
-            <div class="beat">
-              <span class="icon">🌍</span>
-              <div>
-                <span class="label">Creation</span>
-                <strong>All is good</strong>
-              </div>
-            </div>
-            <div class="beat">
-              <span class="icon">🍎</span>
-              <div>
-                <span class="label">Fall</span>
-                <strong>Rebellion & exile</strong>
-              </div>
-            </div>
-            <div class="beat">
-              <span class="icon">🌊</span>
-              <div>
-                <span class="label">Flood</span>
-                <strong>Judgment & mercy</strong>
-              </div>
-            </div>
-            <div class="beat">
-              <span class="icon">🧑‍🤝‍🧑</span>
-              <div>
-                <span class="label">Patriarchs</span>
-                <strong>Abraham to Joseph</strong>
-              </div>
+      </div>
+    </section>
+
+    <section id="bars">
+      <div class="shell bar-stack">
+        <details class="study-bar summary-bar" open>
+          <summary>
+            <span class="bar-symbol">◈</span>
+            <span class="bar-text"><h2>Summary of Genesis</h2><p>Creation begins the story, but covenant gives the book its forward motion.</p></span>
+            <span class="bar-action">+</span>
+          </summary>
+          <div class="bar-body">
+            <div class="mini-grid">
+              <article class="mini-card"><small>Creation</small><strong>God creates order, life, and a world called good.</strong><p>Genesis 1:1–2:3</p></article>
+              <article class="mini-card"><small>Fall</small><strong>Humanity crosses the boundary and exile begins.</strong><p>Genesis 3:1–24</p></article>
+              <article class="mini-card"><small>Flood</small><strong>Violence spreads, judgment comes, and mercy preserves life.</strong><p>Genesis 6:5–9:17</p></article>
+              <article class="mini-card"><small>Patriarchs</small><strong>God calls Abraham and begins the covenant family.</strong><p>Genesis 12:1–50:26</p></article>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </details>
 
-    <div class="card reveal">
-      <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size:2.2rem; margin-bottom:1rem; color: var(--accent);">Quick Facts</h2>
-      <div class="facts-grid">
-        <div class="fact-item">
-          <span class="icon">📖</span>
-          <div>
-            <span class="label">Meaning</span>
-            <p>“Genesis” means “origin”</p>
+        <details class="study-bar structure-bar">
+          <summary>
+            <span class="bar-symbol">▦</span>
+            <span class="bar-text"><h2>Chapter structure</h2><p>The next item pushes you from big story into organized movement.</p></span>
+            <span class="bar-action">+</span>
+          </summary>
+          <div class="bar-body">
+            <p><strong>Genesis 1–11</strong> — Primeval history. <strong>Genesis 12–25</strong> — Abraham. <strong>Genesis 26–36</strong> — Isaac and Jacob. <strong>Genesis 37–50</strong> — Joseph.</p>
           </div>
-        </div>
-        <div class="fact-item">
-          <span class="icon">✍️</span>
-          <div>
-            <span class="label">Author</span>
-            <p>Moses (traditionally)</p>
-          </div>
-        </div>
-        <div class="fact-item">
-          <span class="icon">⏳</span>
-          <div>
-            <span class="label">Time Period</span>
-            <p>c. 1450–1400 BC</p>
-          </div>
-        </div>
-        <div class="fact-item">
-          <span class="icon">👥</span>
-          <div>
-            <span class="label">Major People</span>
-            <p>Adam, Eve, Noah, Abraham, Isaac, Jacob, Joseph</p>
-          </div>
-        </div>
-        <div class="fact-item">
-          <span class "icon">📍</span>
-          <div>
-            <span class="label">Major Places</span>
-            <p>Eden, Ararat, Babel, Canaan, Egypt</p>
-          </div>
-        </div>
-        <div class="fact-item">
-          <span class="icon">🎯</span>
-          <div>
-            <span class="label">Key Themes</span>
-            <p>Creation, sin, covenant, promise</p>
-          </div>
-        </div>
-      </div>
-    </div>
+        </details>
 
-    <details class="reveal">
-      <summary>Chapters & Structure</summary>
-      <div class="section-content">
-        <p><strong>Primeval History (1–11).</strong> Creation, Fall, Flood, Nations.</p>
-        <p><strong>Abraham (12–25).</strong> Call of Abram, covenant, Isaac’s birth.</p>
-        <p><strong>Isaac & Jacob (26–36).</strong> Isaac’s life, Jacob’s journey and family.</p>
-        <p><strong>Joseph (37–50).</strong> Joseph’s dreams, betrayal, and rise in Egypt.</p>
-      </div>
-    </details>
-    <details class="reveal">
-      <summary>People in Genesis</summary>
-      <div class="section-content">
-        <p><strong>Adam & Eve</strong> – The first humans placed in Eden.</p>
-        <p><strong>Noah</strong> – Builder of the ark, survivor of the flood.</p>
-        <p><strong>Abraham & Sarah</strong> – Parents of Isaac, recipients of the covenant.</p>
-        <p><strong>Jacob</strong> – Renamed Israel; father of the twelve tribes.</p>
-        <p><strong>Joseph</strong> – Betrayed by brothers, becomes ruler in Egypt.</p>
-      </div>
-    </details>
-    <details class="reveal">
-      <summary>Places in Genesis</summary>
-      <div class="section-content">
-        <p><strong>Eden</strong> – The garden paradise where humanity begins.</p>
-        <p><strong>Ararat</strong> – Mountains where the ark came to rest.</p>
-        <p><strong>Babel</strong> – City where languages were confused.</p>
-        <p><strong>Canaan</strong> – Land promised to Abraham’s descendants.</p>
-        <p><strong>Egypt</strong> – Place of Joseph’s rise and family’s refuge.</p>
-      </div>
-    </details>
-    <details class="reveal">
-      <summary>Themes & Meaning</summary>
-      <div class="section-content">
-        <p><strong>Divine Sovereignty</strong> – God speaks the world into existence and directs history.</p>
-        <p><strong>Human Sin & Grace</strong> – Rebellion brings judgment; grace offers new beginnings.</p>
-        <p><strong>Covenant</strong> – Promises to Noah and Abraham reveal God’s plan for redemption.</p>
-        <p><strong>Promise & Blessing</strong> – God’s blessing flows through Abraham to all nations.</p>
-      </div>
-    </details>
-    <details class="reveal">
-      <summary>● Red Flags</summary>
-      <div class="section-content">
-        <p>Genesis does not specify the fruit in Eden – avoid speculative symbolism.</p>
-        <p>Avoid flattening ancient narratives into modern categories before understanding context.</p>
-        <p>Remember that genealogies and numbers serve theological as well as historical purposes.</p>
-      </div>
-    </details>
+        <details class="study-bar places-bar" id="places">
+          <summary>
+            <span class="bar-symbol">⌖</span>
+            <span class="bar-text"><h2>Places and modern locations</h2><p>When a place name appears in the Bible text, the pop-up can show today’s geography and confidence level.</p></span>
+            <span class="bar-action">+</span>
+          </summary>
+          <div class="bar-body">
+            <p><strong>Eden:</strong> exact location unknown. <strong>Babel:</strong> Mesopotamia / Babylon region. <strong>Canaan:</strong> Southern Levant. <strong>Egypt:</strong> Northeast Africa.</p>
+          </div>
+        </details>
 
-    <details id="read-genesis" class="reveal">
-      <summary>Read Genesis</summary>
-      <div class="section-content" style="font-size: 1rem; line-height: 1.5;">
-        <!-- sample of the full Bible text, with every word clickable -->
-        <h3 style="font-family: 'Playfair Display', Georgia, serif; color: var(--accent);">Genesis 1</h3>
-        <p>
-          <span class="word" data-def="In – the first part of a sequence">In</span>
-          <span class="word" data-def="the – definite article">the</span>
-          <span class="word" data-def="beginning – the start of all things">beginning</span>
-          <span class="word" data-def="God – Elohim, the Creator">God</span>
-          <span class="word" data-def="created – made out of nothing">created</span>
-          <span class="word" data-def="the – definite article">the</span>
-          <span class="word" data-def="heaven – the skies, the cosmos">heaven</span>
-          <span class="word" data-def="and – connecting word">and</span>
-          <span class="word" data-def="the – definite article">the</span>
-          <span class="word" data-def="earth – the land, the world">earth</span>
-          .
-        </p>
-        <p>
-          <span class="word" data-def="And – connecting word">And</span>
-          <span class="word" data-def="the – definite article">the</span>
-          <span class="word" data-def="earth – the land, the world">earth</span>
-          <span class="word" data-def="was – to exist, to be">was</span>
-          <span class="word" data-def="without form – shapeless, chaotic">without form</span>
-          <span class="word" data-def="and – connecting word">and</span>
-          <span class="word" data-def="void – empty, nothingness">void</span>
-          ;
-          <span class="word" data-def="and – connecting word">and</span>
-          <span class="word" data-def="darkness – absence of light">darkness</span>
-          <span class="word" data-def="was – to exist, to be">was</span>
-          <span class="word" data-def="upon – on the surface of">upon</span>
-          <span class="word" data-def="the – definite article">the</span>
-          <span class="word" data-def="face – surface">face</span>
-          <span class="word" data-def="of – belonging to">of</span>
-          <span class="word" data-def="the – definite article">the</span>
-          <span class="word" data-def="deep – the abyss, the waters">deep</span>
-          :
-          <span class="word" data-def="and – connecting word">and</span>
-          <span class="word" data-def="the – definite article">the</span>
-          <span class="word" data-def="Spirit – Hebrew ruach, breath">Spirit</span>
-          <span class="word" data-def="of – belonging to">of</span>
-          <span class="word" data-def="God – Elohim, the Creator">God</span>
-          <span class="word" data-def="moved – hovered, brooded">moved</span>
-          <span class="word" data-def="upon – over">upon</span>
-          <span class="word" data-def="the – definite article">the</span>
-          <span class="word" data-def="face – surface">face</span>
-          <span class="word" data-def="of – belonging to">of</span>
-          <span class="word" data-def="the – definite article">the</span>
-          <span class="word" data-def="waters – the primeval ocean">waters</span>
-          .
-        </p>
-        <!-- add more verses or load dynamically as needed -->
-        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--muted);">Click any underlined word to see a definition.</p>
+        <details class="study-bar redflag-bar">
+          <summary>
+            <span class="bar-symbol">🚩</span>
+            <span class="bar-text"><h2>Red flags while reading</h2><p>Guardrails for common misreadings without making the page feel heavy.</p></span>
+            <span class="bar-action">+</span>
+          </summary>
+          <div class="bar-body">
+            <p>Genesis does not name the forbidden fruit. Do not flatten ancient narrative into modern categories before asking what the text is doing in context.</p>
+          </div>
+        </details>
       </div>
-    </details>
-  </section>
+    </section>
+
+    <section class="read-launch" id="read-genesis">
+      <div class="shell read-panel">
+        <div class="read-top">
+          <div>
+            <h2>Open Genesis</h2>
+            <p>The Bible opens wide here. Click a word and a pop-up appears over the text with definition, concordance, grammar notes, and mapped locations when relevant.</p>
+          </div>
+          <select id="chapterSelect" aria-label="Choose Genesis chapter"></select>
+        </div>
+
+        <div class="reader-grid">
+          <aside class="chapter-rail">
+            <input id="searchBox" placeholder="Search Genesis" />
+            <div id="chapterList" class="chapter-list"></div>
+          </aside>
+
+          <article class="bible-open">
+            <div class="reader-heading">
+              <div>
+                <h3 id="chapterTitle"></h3>
+                <p id="chapterSummary"></p>
+              </div>
+            </div>
+            <div id="scripture" class="scripture"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside id="wordPopover" class="word-popover" aria-live="polite"></aside>
 
   <script>
-    // Scroll reveal logic
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
+    const DATA = {
+      book: 'Genesis',
+      translation: 'KJV',
+      chapters: [
+        {
+          chapter: 1,
+          title: 'Creation begins',
+          summary: 'God creates the heavens and earth, speaks light, forms order, fills creation, and makes humanity in His image.',
+          verses: [
+            { verse: 1, text: 'In the beginning God created the heaven and the earth.' },
+            { verse: 2, text: 'And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters.' },
+            { verse: 3, text: 'And God said, Let there be light: and there was light.' },
+            { verse: 4, text: 'And God saw the light, that it was good: and God divided the light from the darkness.' },
+            { verse: 5, text: 'And God called the light Day, and the darkness he called Night. And the evening and the morning were the first day.' }
+          ]
+        },
+        {
+          chapter: 2,
+          title: 'Garden, man, and woman',
+          summary: 'The narrative slows around Eden, the formation of man, the garden, the command, and the creation of woman.',
+          verses: [
+            { verse: 1, text: 'Thus the heavens and the earth were finished, and all the host of them.' },
+            { verse: 2, text: 'And on the seventh day God ended his work which he had made; and he rested on the seventh day from all his work which he had made.' },
+            { verse: 7, text: 'And the LORD God formed man of the dust of the ground, and breathed into his nostrils the breath of life; and man became a living soul.' },
+            { verse: 8, text: 'And the LORD God planted a garden eastward in Eden; and there he put the man whom he had formed.' }
+          ]
+        },
+        {
+          chapter: 3,
+          title: 'Fall and promise',
+          summary: 'The serpent deceives, humanity falls, judgment enters the story, and God gives the first promise of victory over the serpent.',
+          verses: [
+            { verse: 1, text: 'Now the serpent was more subtil than any beast of the field which the LORD God had made.' },
+            { verse: 6, text: 'And when the woman saw that the tree was good for food, and that it was pleasant to the eyes, and a tree to be desired to make one wise, she took of the fruit thereof, and did eat.' },
+            { verse: 15, text: 'And I will put enmity between thee and the woman, and between thy seed and her seed; it shall bruise thy head, and thou shalt bruise his heel.' },
+            { verse: 24, text: 'So he drove out the man; and he placed at the east of the garden of Eden Cherubims, and a flaming sword which turned every way, to keep the way of the tree of life.' }
+          ]
         }
-      });
-    }, { threshold: 0.15 });
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+      ]
+    };
 
-    // Dictionary panel logic
-    function closeDictionary() {
-      document.getElementById('dictionary-panel').classList.remove('open');
+    const NOTES = {
+      beginning: { label:'Beginning', category:'Origin', simple:'The start, first point, or origin of something.', original:'Hebrew bereshith, “in the beginning.”', grammar:'This phrase sets the time frame for the entire story.', redFlag:'Do not read this as just a title; it frames creation as intentional.' },
+      god: { label:'God', category:'Divine subject', simple:'The Creator and supreme ruler over heaven and earth.', original:'Hebrew Elohim in Genesis 1.', grammar:'God is the subject of the first verb; the story begins with divine action.', redFlag:'Genesis starts with God, not humanity.' },
+      created: { label:'Created', category:'Action', simple:'Brought into being by divine will and power.', original:'Hebrew bara, used with God as subject.', grammar:'The verb connects God directly to heaven and earth as Creator.', redFlag:'The text presents creation as ordered and purposeful.' },
+      serpent: { label:'Serpent', category:'Character', simple:'The creature who deceives the woman in Genesis 3.', original:'Hebrew nachash.', grammar:'Introduced as more subtil than any beast of the field.', redFlag:'Later Scripture develops this theme; do not flatten it too early.' }
+    };
+
+    const PLACES = {
+      eden: { name:'Eden', modern:'Exact location unknown', region:'Ancient Near East / debated', confidence:'Low', note:'A place of presence, blessing, boundary, and exile.' },
+      babel: { name:'Babel', modern:'Babylon region in Mesopotamia', region:'Mesopotamia', confidence:'Medium', note:'A story about name-making, pride, language, and scattering.' },
+      canaan: { name:'Canaan', modern:'Southern Levant', region:'Promised land region', confidence:'High', note:'Central to the Abrahamic promise.' },
+      egypt: { name:'Egypt', modern:'Egypt', region:'Northeast Africa', confidence:'High', note:'Joseph rises in Egypt and preserves his family there.' }
+    };
+
+    let currentChapter = DATA.chapters[0];
+    let searchTerm = '';
+    const chapterList = document.getElementById('chapterList');
+    const chapterSelect = document.getElementById('chapterSelect');
+    const chapterTitle = document.getElementById('chapterTitle');
+    const chapterSummary = document.getElementById('chapterSummary');
+    const scripture = document.getElementById('scripture');
+    const popover = document.getElementById('wordPopover');
+    const searchBox = document.getElementById('searchBox');
+
+    function normalize(word){ return (word || '').toLowerCase().replace(/[^a-z]/g,''); }
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+    function highlight(text){ if(!searchTerm) return escapeHtml(text); const re = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\]/g,'\$&')})`,'ig'); return escapeHtml(text).replace(re,'<mark>$1</mark>'); }
+    function tokenize(text){ return escapeHtml(text).replace(/([A-Za-z][A-Za-z'’\-]*)/g, m => `<button class="word" data-word="${escapeHtml(m)}">${highlight(m)}</button>`); }
+
+    function renderNavigation(){
+      chapterSelect.innerHTML = DATA.chapters.map((ch,i)=>`<option value="${i}">Genesis ${ch.chapter}</option>`).join('');
+      chapterSelect.value = DATA.chapters.indexOf(currentChapter);
+      chapterList.innerHTML = DATA.chapters.map(ch=>`<button class="chapter-btn ${ch.chapter===currentChapter.chapter?'active':''}" data-chapter="${ch.chapter}">Genesis ${ch.chapter}<span>${escapeHtml(ch.title)}</span></button>`).join('');
     }
-    function openDictionary(word, definition) {
-      const panel = document.getElementById('dictionary-panel');
-      const content = document.getElementById('dictionary-content');
-      content.innerHTML = '<h4 style="margin-top:0; color: var(--accent);">' + word + '</h4><p>' + definition + '</p>';
-      panel.classList.add('open');
+
+    function renderChapter(ch){
+      currentChapter = ch;
+      chapterTitle.textContent = `Genesis ${ch.chapter}: ${ch.title}`;
+      chapterSummary.textContent = ch.summary || '';
+      scripture.innerHTML = ch.verses.map(v=>`<p class="verse"><sup class="vnum">${v.verse}</sup>${tokenize(v.text)}</p>`).join('');
+      renderNavigation();
     }
-    document.querySelectorAll('.word').forEach(el => {
-      el.style.textDecoration = 'underline';
-      el.style.cursor = 'pointer';
-      const definition = el.getAttribute('data-def');
-      const word = el.textContent;
-      el.addEventListener('click', () => {
-        openDictionary(word, definition);
-      });
-    });
+
+    function occurrences(raw){
+      const key = normalize(raw); const refs=[]; let count=0;
+      DATA.chapters.forEach(ch=>ch.verses.forEach(v=>{
+        const words=(v.text.match(/[A-Za-z][A-Za-z'’\-]*/g)||[]);
+        let hit=false;
+        words.forEach(w=>{ if(normalize(w)===key){ count++; hit=true; }});
+        if(hit) refs.push({chapter:ch.chapter, verse:v.verse});
+      }));
+      return {count, refs};
+    }
+
+    function showWord(raw, target){
+      document.querySelectorAll('.word.active').forEach(w=>w.classList.remove('active'));
+      target.classList.add('active');
+      const key = normalize(raw);
+      const note = NOTES[key];
+      const place = PLACES[key];
+      const occ = occurrences(raw);
+      const refs = occ.refs.slice(0,10).map(r=>`<button class="ref" data-ref="${r.chapter}:${r.verse}">Gen ${r.chapter}:${r.verse}</button>`).join('');
+      const title = place ? place.name : (note?.label || raw);
+      const category = place ? 'Place' : (note?.category || 'Word');
+      popover.innerHTML = `<div class="pop-head"><h3>${escapeHtml(title)}</h3><span class="pill">${escapeHtml(category)}</span></div>
+        ${place ? `<div class="pop-block"><strong>Modern location</strong><p>${escapeHtml(place.modern)} — ${escapeHtml(place.region)}. Confidence: ${escapeHtml(place.confidence)}.</p></div><div class="pop-block"><strong>Map note</strong><p>${escapeHtml(place.note)}</p></div>` : ''}
+        <div class="pop-block"><strong>Meaning</strong><p>${escapeHtml(note?.simple || 'This word is clickable. Add a custom Bible Mapped definition for deeper study.')}</p></div>
+        ${note ? `<div class="pop-block"><strong>Original language</strong><p>${escapeHtml(note.original)}</p></div><div class="pop-block"><strong>Grammar / translator note</strong><p>${escapeHtml(note.grammar)}</p></div><div class="pop-block"><strong>Red flag</strong><p>${escapeHtml(note.redFlag)}</p></div>` : ''}
+        <div class="pop-block"><strong>Concordance in Genesis (${occ.count})</strong><div class="refs">${refs || '<span>No matches.</span>'}</div></div>`;
+      const rect = target.getBoundingClientRect();
+      popover.style.left = Math.min(rect.left, window.innerWidth - 380) + 'px';
+      popover.style.top = Math.min(rect.bottom + 10, window.innerHeight - 340) + 'px';
+      popover.classList.add('open');
+    }
+
+    chapterList.addEventListener('click', e=>{ const b=e.target.closest('.chapter-btn'); if(!b) return; renderChapter(DATA.chapters.find(ch=>ch.chapter===Number(b.dataset.chapter))); });
+    chapterSelect.addEventListener('change', e=>renderChapter(DATA.chapters[Number(e.target.value)]));
+    searchBox.addEventListener('input', e=>{ searchTerm=normalize(e.target.value); renderChapter(currentChapter); });
+    scripture.addEventListener('click', e=>{ const w=e.target.closest('.word'); if(w) showWord(w.dataset.word, w); });
+    document.addEventListener('click', e=>{ if(!e.target.closest('.word') && !e.target.closest('#wordPopover')) popover.classList.remove('open'); });
+    popover.addEventListener('click', e=>{ const ref=e.target.closest('.ref'); if(!ref) return; const [c]=ref.dataset.ref.split(':').map(Number); renderChapter(DATA.chapters.find(ch=>ch.chapter===c)); document.getElementById('read-genesis').scrollIntoView({behavior:'smooth'}); });
+
+    renderChapter(currentChapter);
   </script>
 </body>
 </html>
