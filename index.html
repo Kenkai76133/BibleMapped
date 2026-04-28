@@ -895,6 +895,27 @@
     }
 
 
+    /* Lux update: Genesis live link */
+    .book-tile-live {
+      border-color: rgba(123, 44, 255, 0.32);
+      box-shadow: inset 7px 0 0 var(--purple), 0 12px 28px rgba(123,44,255,0.10);
+    }
+
+    .book-tile-live .live-label {
+      display: inline-flex;
+      margin-left: 8px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(123,44,255,0.10);
+      color: var(--purple);
+      font-size: 0.68rem;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      vertical-align: middle;
+    }
+
+
     section {
       padding: 90px 0;
     }
@@ -1639,6 +1660,7 @@
 
         <div class="hero-actions hero-connected-actions">
           <a class="button button-primary" href="#topics">Enter Bible Mapped →</a>
+          <a class="button" href="books/genesis/index.html">Open Genesis</a>
           <a class="button button-mission" href="about/">Read the Mission</a>
         </div>
       </div>
@@ -1668,6 +1690,7 @@
               </p>
               <div class="panel-actions">
                 <button class="button button-primary open-spine-button" type="button" data-open-book="books">Open Books →</button>
+                <a class="button" href="books/genesis/index.html">Open Genesis</a>
                 <a class="button" href="about/">Read the mission</a>
               </div>
             </div>
@@ -1715,7 +1738,7 @@
                   </div>
                   <p>The foundation shelf: creation, covenant, deliverance, worship, law, wilderness, and Israel’s identity before God.</p>
                   <div class="book-tile-grid">
-                    <a class="book-tile" href="books/genesis/">Genesis</a>
+                    <a class="book-tile book-tile-live" href="books/genesis/index.html">Genesis <span class="live-label">Live</span></a>
                     <a class="book-tile" href="books/exodus/">Exodus</a>
                     <a class="book-tile" href="books/leviticus/">Leviticus</a>
                     <a class="book-tile" href="books/numbers/">Numbers</a>
