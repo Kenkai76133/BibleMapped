@@ -514,6 +514,82 @@
       font-weight:850;
     }
 
+
+    /* FULL-BLEED BOOK BARS — updated */
+    .ideas{
+      margin-top:0;
+      position:relative;
+      z-index:5;
+      transition:.35s ease;
+    }
+
+    .ideas > .shell{
+      width:100%;
+      max-width:none;
+      margin:0;
+    }
+
+    .idea-stack{
+      border-radius:0;
+      overflow:hidden;
+      box-shadow:none;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .idea-row{
+      flex:1 1 auto;
+      min-height:112px;
+      padding-left:clamp(24px, 7vw, 120px);
+      padding-right:clamp(24px, 7vw, 120px);
+    }
+
+    .summary-body{
+      padding-left:clamp(24px, 7vw, 120px);
+      padding-right:clamp(24px, 7vw, 120px);
+    }
+
+    .summary-body p{
+      max-width:980px;
+    }
+
+    /* Hide the Bible reader until Read KJV is clicked */
+    .reader-wrap{
+      display:none;
+    }
+
+    body.reader-mode .reader-wrap{
+      display:block;
+      padding:0;
+    }
+
+    body.reader-mode .reader-wrap > .shell{
+      width:100%;
+      max-width:none;
+      margin:0;
+    }
+
+    body.reader-mode .scripture-panel{
+      border-left:0;
+      border-right:0;
+      border-radius:0;
+      min-height:100vh;
+      padding:clamp(28px, 5vw, 72px);
+    }
+
+    body.reader-mode .scripture{
+      max-width:1100px;
+      margin:auto;
+    }
+
+    body.reader-mode .scripture-controls{
+      max-width:1100px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+
     @media (max-width: 900px){
       .hero-nav {
         gap: 14px;
@@ -545,24 +621,23 @@
 </head>
 <body>
 
-  <!-- HERO IMAGE SPACE: Put your hero image file named genesis-hero.png in the same folder as this page. -->
   <header class="hero" aria-label="Genesis hero image">
     <div class="topbar">
       <div class="shell topbar-inner nav-only">
         <nav class="hero-nav" aria-label="Book navigation">
           <a href="#genesis-explore">Book Guide</a>
-          <a href="#readerSection">Read</a>
+          <a href="#readerSection" id="readKJVNav">Read</a>
           <a href="#genesis-explore">Study</a>
           <a href="#genesis-explore">Maps</a>
-          <a href="#readerSection">Dictionary</a>
+          <a href="#readerSection" id="dictionaryNav">Dictionary</a>
         </nav>
       </div>
     </div>
 
-    <!-- This blank spacer lets the hero image breathe and stay the star. -->
     <div class="hero-spacer"></div>
   </header>
 
+  <!-- FULL-WIDTH HORIZONTAL BOOK BARS -->
   <section class="ideas" id="genesis-explore">
     <div class="shell">
       <div class="idea-stack">
@@ -648,6 +723,7 @@
     </div>
   </section>
 
+  <!-- HIDDEN UNTIL READ KJV IS CLICKED -->
   <section class="reader-wrap" id="readerSection">
     <div class="shell">
       <div class="reader">
@@ -6188,6 +6264,23 @@
     }
 
     document.getElementById('readKJVBand').addEventListener('click', enterReaderMode);
+
+    const readKJVNav = document.getElementById('readKJVNav');
+    const dictionaryNav = document.getElementById('dictionaryNav');
+
+    if (readKJVNav) {
+      readKJVNav.addEventListener('click', e => {
+        e.preventDefault();
+        enterReaderMode();
+      });
+    }
+
+    if (dictionaryNav) {
+      dictionaryNav.addEventListener('click', e => {
+        e.preventDefault();
+        enterReaderMode();
+      });
+    }
     document.getElementById('exitReadMode').addEventListener('click', leaveReaderMode);
 
     document.getElementById('summaryToggle').addEventListener('click', () => {
