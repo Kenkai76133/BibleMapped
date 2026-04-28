@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bible Mapped | Genesis</title>
 
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+
   <style>
     :root {
       --bg:#f6f4ef;
@@ -590,7 +597,327 @@
     }
 
 
+    /* GUIDE PANEL IMAGE SLOTS */
+    .guide-grid{
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) minmax(260px, 420px);
+      gap:22px;
+      align-items:stretch;
+      max-width:1120px;
+    }
+
+    .guide-image-slot{
+      min-height:220px;
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:
+        linear-gradient(to bottom, rgba(255,253,248,.14), rgba(18,18,18,.28)),
+        var(--slot-image),
+        #eee7ff;
+      background-size:cover;
+      background-position:center;
+      display:flex;
+      align-items:end;
+      justify-content:start;
+      overflow:hidden;
+    }
+
+    .guide-image-slot span{
+      margin:14px;
+      display:inline-flex;
+      border-radius:999px;
+      padding:8px 12px;
+      background:rgba(255,253,248,.92);
+      color:#27231f;
+      font-size:.78rem;
+      font-weight:900;
+      letter-spacing:.04em;
+    }
+
+    /* IMMERSIVE CHAPTER DRAWER */
+    .chapter-tab{
+      position:fixed;
+      left:0;
+      top:48%;
+      transform:translateY(-50%);
+      z-index:70;
+      display:none;
+      border:0;
+      border-radius:0 18px 18px 0;
+      background:var(--purple);
+      color:#fff;
+      padding:16px 12px;
+      font-weight:950;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      writing-mode:vertical-rl;
+      box-shadow:0 18px 45px rgba(0,0,0,.18);
+    }
+
+    body.reader-mode .chapter-tab{
+      display:flex;
+    }
+
+    .drawer-backdrop{
+      position:fixed;
+      inset:0;
+      z-index:75;
+      background:rgba(0,0,0,.18);
+      display:none;
+    }
+
+    .drawer-backdrop.open{
+      display:block;
+    }
+
+    body.reader-mode .chapter-rail{
+      display:block;
+      position:fixed;
+      top:0;
+      left:0;
+      z-index:80;
+      width:min(380px, 92vw);
+      height:100vh;
+      max-height:none;
+      overflow:auto;
+      border-radius:0;
+      border-top:0;
+      border-bottom:0;
+      border-left:0;
+      box-shadow:30px 0 80px rgba(0,0,0,.22);
+      transform:translateX(-100%);
+      transition:transform .32s ease;
+    }
+
+    body.reader-mode .chapter-rail.open{
+      transform:translateX(0);
+    }
+
+    .drawer-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:14px;
+    }
+
+    .drawer-kicker{
+      color:var(--purple);
+      font-size:.72rem;
+      font-weight:950;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:4px;
+    }
+
+    .drawer-close{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:999px;
+      width:40px;
+      height:40px;
+      font-weight:950;
+    }
+
+    /* INTERACTIVE MAP DRAWER */
+    .map-tab{
+      position:fixed;
+      right:0;
+      top:48%;
+      transform:translateY(-50%);
+      z-index:70;
+      display:none;
+      border:0;
+      border-radius:18px 0 0 18px;
+      background:var(--purple);
+      color:#fff;
+      padding:16px 12px;
+      font-weight:950;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      writing-mode:vertical-rl;
+      box-shadow:0 18px 45px rgba(0,0,0,.18);
+    }
+
+    body.reader-mode .map-tab{
+      display:flex;
+    }
+
+    .map-backdrop{
+      position:fixed;
+      inset:0;
+      z-index:75;
+      background:rgba(0,0,0,.18);
+      display:none;
+    }
+
+    .map-backdrop.open{
+      display:block;
+    }
+
+    .map-drawer{
+      position:fixed;
+      top:0;
+      right:0;
+      z-index:80;
+      width:min(540px, 94vw);
+      height:100vh;
+      background:var(--paper);
+      border-left:1px solid var(--line);
+      box-shadow:-30px 0 80px rgba(0,0,0,.22);
+      transform:translateX(100%);
+      transition:transform .32s ease;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .map-drawer.open{
+      transform:translateX(0);
+    }
+
+    .map-drawer-head{
+      padding:22px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      align-items:flex-start;
+    }
+
+    .map-drawer-kicker{
+      color:var(--purple);
+      font-size:.72rem;
+      font-weight:950;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    .map-drawer h2{
+      margin:4px 0 0;
+      font-family:Georgia, serif;
+      font-size:2rem;
+      letter-spacing:-.05em;
+    }
+
+    .map-close{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:999px;
+      width:40px;
+      height:40px;
+      font-weight:950;
+    }
+
+    .map-drawer-body{
+      padding:18px 22px 24px;
+      overflow:auto;
+    }
+
+    #genesisMap{
+      height:58vh;
+      min-height:360px;
+      border:1px solid var(--line);
+      border-radius:22px;
+      overflow:hidden;
+      background:#eee;
+    }
+
+    .map-place-card{
+      margin-top:16px;
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:16px;
+      background:#fff;
+    }
+
+    .map-place-card h3{
+      margin:0;
+      font-family:Georgia, serif;
+      font-size:1.8rem;
+      letter-spacing:-.04em;
+    }
+
+    .map-place-card p{
+      margin:8px 0 0;
+      color:#34302b;
+      line-height:1.55;
+    }
+
+    .certainty-pill{
+      display:inline-flex;
+      margin-top:10px;
+      border-radius:999px;
+      padding:6px 10px;
+      background:rgba(124,60,255,.1);
+      color:var(--purple);
+      font-size:.75rem;
+      font-weight:950;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .map-place-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:14px;
+    }
+
+    .map-place-btn{
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--ink);
+      border-radius:999px;
+      padding:9px 12px;
+      font-weight:850;
+    }
+
+    .map-place-btn:hover,
+    .map-place-btn.active{
+      border-color:var(--purple);
+      background:#efe7ff;
+      color:var(--purple);
+    }
+
+    .leaflet-container{
+      font-family:Inter, Arial, sans-serif;
+    }
+
+
     @media (max-width: 900px){
+
+      .guide-grid{
+        grid-template-columns:1fr;
+      }
+
+      .chapter-tab{
+        top:auto;
+        bottom:18px;
+        left:18px;
+        transform:none;
+        writing-mode:horizontal-tb;
+        border-radius:999px;
+        padding:12px 16px;
+      }
+
+      .map-tab{
+        top:auto;
+        bottom:18px;
+        right:18px;
+        transform:none;
+        writing-mode:horizontal-tb;
+        border-radius:999px;
+        padding:12px 16px;
+      }
+
+      .map-drawer{
+        width:100vw;
+      }
+
+      #genesisMap{
+        height:48vh;
+      }
+
       .hero-nav {
         gap: 14px;
         font-size: .66rem;
@@ -625,10 +952,11 @@
     <div class="topbar">
       <div class="shell topbar-inner nav-only">
         <nav class="hero-nav" aria-label="Book navigation">
+          <a href="../../index.html">← Home</a>
           <a href="#genesis-explore">Book Guide</a>
           <a href="#readerSection" id="readKJVNav">Read</a>
           <a href="#genesis-explore">Study</a>
-          <a href="#genesis-explore">Maps</a>
+          <a href="#readerSection" id="mapsNav">Maps</a>
           <a href="#readerSection" id="dictionaryNav">Dictionary</a>
         </nav>
       </div>
@@ -641,7 +969,7 @@
   <section class="ideas" id="genesis-explore">
     <div class="shell">
       <div class="idea-stack">
-        <div class="idea-row r1 open" id="summaryToggle">
+        <div class="idea-row r1 open guide-toggle" id="summaryToggle" data-panel="summaryBody">
           <div class="idea-label">01</div>
           <div class="idea-content">
             <h3>Summary</h3>
@@ -664,49 +992,109 @@
 <p>Genesis sets up the entire Bible: creation, rebellion, exile, promise, and the hope that God will restore what was lost.</p>
         </div>
 
-        <div class="idea-row r2">
+        <div class="idea-row r2 guide-toggle" data-panel="structureBody">
           <div class="idea-label">02</div>
           <div class="idea-content">
             <h3>Structure</h3>
             <p>Genesis 1–11, 12–25, 26–36, and 37–50 as the major story movements.</p>
           </div>
-          <div class="idea-arrow">→</div>
+          <div class="idea-arrow">+</div>
         </div>
 
-        <div class="idea-row r3">
+        <div class="summary-body guide-body" id="structureBody">
+          <div class="guide-grid">
+            <div>
+              <p><strong>Genesis moves like a camera lens.</strong> It starts with the whole world, then narrows into one family through Abraham, Isaac, Jacob, and Joseph.</p>
+              <p>Use this section for your chapter movement diagram, timeline, or “four-part Genesis” study guide.</p>
+            </div>
+            <div class="guide-image-slot" style="--slot-image:url('genesis-structure.png')">
+              <span>Image slot: genesis-structure.png</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="idea-row r3 guide-toggle" data-panel="peopleBody">
           <div class="idea-label">03</div>
           <div class="idea-content">
             <h3>People</h3>
             <p>Adam, Eve, Noah, Abraham, Sarah, Isaac, Jacob, Joseph, and Pharaoh.</p>
           </div>
-          <div class="idea-arrow">→</div>
+          <div class="idea-arrow">+</div>
         </div>
 
-        <div class="idea-row r4">
+        <div class="summary-body guide-body" id="peopleBody">
+          <div class="guide-grid">
+            <div>
+              <p><strong>Genesis is filled with real human tension.</strong> The people are chosen, flawed, faithful, fearful, deceptive, wounded, and still used inside God’s promise.</p>
+              <p>Use this section for character cards, family trees, portraits, or “hero/villain/context” notes.</p>
+            </div>
+            <div class="guide-image-slot" style="--slot-image:url('genesis-people.png')">
+              <span>Image slot: genesis-people.png</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="idea-row r4 guide-toggle" data-panel="placesBody">
           <div class="idea-label">04</div>
           <div class="idea-content">
             <h3>Places</h3>
             <p>Eden, Ararat, Babel, Canaan, Bethel, Hebron, Beersheba, and Egypt.</p>
           </div>
-          <div class="idea-arrow">→</div>
+          <div class="idea-arrow">+</div>
         </div>
 
-        <div class="idea-row r5">
+        <div class="summary-body guide-body" id="placesBody">
+          <div class="guide-grid">
+            <div>
+              <p><strong>Genesis is geography-heavy.</strong> Eden, Babel, Canaan, Egypt, and the patriarchal travel routes all shape how the story unfolds.</p>
+              <p>Use this section for a static overview map, location list, or “known / traditional / uncertain” geography notes.</p>
+            </div>
+            <div class="guide-image-slot" style="--slot-image:url('genesis-places.png')">
+              <span>Image slot: genesis-places.png</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="idea-row r5 guide-toggle" data-panel="themesBody">
           <div class="idea-label">05</div>
           <div class="idea-content">
             <h3>Themes</h3>
             <p>Image of God, sin, exile, covenant, blessing, promise, and land.</p>
           </div>
-          <div class="idea-arrow">→</div>
+          <div class="idea-arrow">+</div>
         </div>
 
-        <div class="idea-row r6">
+        <div class="summary-body guide-body" id="themesBody">
+          <div class="guide-grid">
+            <div>
+              <p><strong>Genesis introduces the Bible’s major themes.</strong> Creation, image-bearing, sin, exile, covenant, land, blessing, and the promised seed all begin here.</p>
+              <p>Use this section for symbols, theme cards, or visual theology notes.</p>
+            </div>
+            <div class="guide-image-slot" style="--slot-image:url('genesis-themes.png')">
+              <span>Image slot: genesis-themes.png</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="idea-row r6 guide-toggle" data-panel="redFlagsBody">
           <div class="idea-label">06</div>
           <div class="idea-content">
             <h3>Red Flags</h3>
             <p>What Genesis does not say, common assumptions, and careful reading notes.</p>
           </div>
-          <div class="idea-arrow">→</div>
+          <div class="idea-arrow">+</div>
+        </div>
+
+        <div class="summary-body guide-body" id="redFlagsBody">
+          <div class="guide-grid">
+            <div>
+              <p><strong>Careful study protects the reader.</strong> Genesis should not be reduced to modern debates or stretched beyond what the text actually says.</p>
+              <p>Use this section for common misconceptions, disputed claims, and honest reading notes.</p>
+            </div>
+            <div class="guide-image-slot" style="--slot-image:url('genesis-red-flags.png')">
+              <span>Image slot: genesis-red-flags.png</span>
+            </div>
+          </div>
         </div>
 
         <div class="idea-row r10">
@@ -727,8 +1115,14 @@
   <section class="reader-wrap" id="readerSection">
     <div class="shell">
       <div class="reader">
-        <aside class="chapter-rail">
-          <h3>Genesis Chapters</h3>
+        <aside class="chapter-rail" id="chapterDrawer" aria-label="Genesis chapter drawer">
+          <div class="drawer-head">
+            <div>
+              <div class="drawer-kicker">Chapter Drawer</div>
+              <h3>Genesis Chapters</h3>
+            </div>
+            <button class="drawer-close" id="closeChapterDrawer" type="button" aria-label="Close chapters">×</button>
+          </div>
           <input class="chapter-search" id="chapterSearch" placeholder="Search chapter or word" />
           <div class="chapter-list" id="chapterList"></div>
         </aside>
@@ -750,7 +1144,43 @@
     </div>
   </section>
 
+  <!-- IMMERSIVE READER DRAWERS -->
+  <button class="chapter-tab" id="openChapterDrawer" type="button">Chapters</button>
+  <button class="map-tab" id="openMapDrawer" type="button">Map</button>
+
+  <div class="drawer-backdrop" id="chapterBackdrop"></div>
+  <div class="map-backdrop" id="mapBackdrop"></div>
+
+  <aside class="map-drawer" id="mapDrawer" aria-label="Genesis interactive map">
+    <div class="map-drawer-head">
+      <div>
+        <div class="map-drawer-kicker">Bible Mapped Geography</div>
+        <h2>Genesis Map</h2>
+      </div>
+
+      <button class="map-close" id="closeMapDrawer" type="button" aria-label="Close map">×</button>
+    </div>
+
+    <div class="map-drawer-body">
+      <div id="genesisMap"></div>
+
+      <div class="map-place-card" id="mapPlaceCard">
+        <h3>Choose a place</h3>
+        <p>Click a place name in Genesis or choose one below to see its geography context.</p>
+        <span class="certainty-pill">Study Tool</span>
+      </div>
+
+      <div class="map-place-list" id="mapPlaceList"></div>
+    </div>
+  </aside>
+
   <aside class="word-popover" id="wordPopover"></aside>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin="">
+  </script>
 
   <script>
     window.BIBLEMAPPED_GENESIS = {
@@ -6142,14 +6572,297 @@
     };
 
     const PLACES = {
-      eden: { name:'Eden', modern:'Exact location unknown', region:'Ancient Near East / debated', confidence:'Low', note:'The first garden-place. It becomes a symbol of presence, blessing, boundary, and exile.' },
-      ararat: { name:'Ararat', modern:'Region associated with eastern Turkey / Armenian highlands', region:'Ancient Urartu region', confidence:'Medium', note:'Connected with the resting place of the ark after the flood.' },
-      babel: { name:'Babel', modern:'Often associated with Babylon region in Mesopotamia', region:'Mesopotamia', confidence:'Medium', note:'A city and tower story about name-making, power, language, and scattering.' },
-      canaan: { name:'Canaan', modern:'Southern Levant', region:'Land promised to Abraham’s descendants', confidence:'High', note:'The land becomes central to the covenant promises.' },
-      egypt: { name:'Egypt', modern:'Egypt', region:'Northeast Africa', confidence:'High', note:'Joseph rises in Egypt and preserves his family there.' },
-      bethel: { name:'Bethel', modern:'Often identified near Beitin in the West Bank', region:'Hill country north of Jerusalem', confidence:'Medium', note:'Jacob dreams there and names the place Bethel.' },
-      hebron: { name:'Hebron', modern:'Hebron, West Bank', region:'Southern hill country', confidence:'High', note:'Associated with Abraham and the burial cave of Machpelah.' },
-      beersheba: { name:'Beersheba', modern:'Beersheba, Israel', region:'Negev', confidence:'High', note:'Associated with patriarchal journeys and wells.' }
+      eden: {
+        name:'Eden',
+        modern:'Exact location unknown',
+        region:'Often discussed in relation to the Tigris and Euphrates river system',
+        confidence:'Uncertain',
+        note:'Genesis describes Eden with river language, but no confirmed archaeological location exists. Bible Mapped should show this as a possible region, not an exact pin.',
+        lat:32.5,
+        lng:44.3,
+        zoom:6,
+        shape:'circle',
+        radius:430000
+      },
+
+      havilah: {
+        name:'Havilah',
+        modern:'Exact location debated',
+        region:'Ancient region named in Genesis 2 and 10',
+        confidence:'Uncertain',
+        note:'Havilah is named in relation to Eden’s river description and later genealogical geography. Treat the exact location carefully.',
+        lat:23.9,
+        lng:45.1,
+        zoom:5,
+        shape:'circle',
+        radius:420000
+      },
+
+      euphrates: {
+        name:'Euphrates',
+        modern:'Euphrates River',
+        region:'Mesopotamia',
+        confidence:'High as a river system',
+        note:'The Euphrates is one of the major river references connecting Genesis to the ancient Near Eastern world.',
+        lat:35.9,
+        lng:39.0,
+        zoom:6,
+        shape:'circle',
+        radius:260000
+      },
+
+      assyria: {
+        name:'Assyria',
+        modern:'Northern Iraq / surrounding region',
+        region:'Upper Mesopotamia',
+        confidence:'High as a general region',
+        note:'Assyria becomes a major biblical region later, but Genesis uses it as part of early geography.',
+        lat:36.3,
+        lng:43.1,
+        zoom:6,
+        shape:'circle',
+        radius:240000
+      },
+
+      ethiopia: {
+        name:'Ethiopia',
+        modern:'KJV rendering; often discussed as Cush',
+        region:'Nile / Cushite geography',
+        confidence:'General region debated by context',
+        note:'The KJV uses Ethiopia here. Many study notes discuss the Hebrew Cush. Treat the exact geography with caution.',
+        lat:15.5,
+        lng:32.5,
+        zoom:5,
+        shape:'circle',
+        radius:500000
+      },
+
+      ararat: {
+        name:'Ararat',
+        modern:'Mountains of Ararat / eastern Turkey region',
+        region:'Ancient Urartu region',
+        confidence:'Traditional / debated',
+        note:'Genesis says the ark rested on the mountains of Ararat, not necessarily the modern peak alone.',
+        lat:39.7,
+        lng:44.3,
+        zoom:7,
+        shape:'circle',
+        radius:160000
+      },
+
+      babel: {
+        name:'Babel',
+        modern:'Often associated with the Babylon region in Iraq',
+        region:'Mesopotamia',
+        confidence:'Medium',
+        note:'Babel is tied to the story of name-making, power, language, scattering, and the wider Babylon tradition.',
+        lat:32.536,
+        lng:44.421,
+        zoom:8,
+        shape:'marker'
+      },
+
+      shinar: {
+        name:'Shinar',
+        modern:'Southern Mesopotamia / Babylonian plain',
+        region:'Mesopotamia',
+        confidence:'Medium',
+        note:'Shinar is the setting for Babel and early kingdom geography in Genesis.',
+        lat:32.8,
+        lng:44.3,
+        zoom:7,
+        shape:'circle',
+        radius:220000
+      },
+
+      canaan: {
+        name:'Canaan',
+        modern:'Southern Levant',
+        region:'Land promised to Abraham’s descendants',
+        confidence:'High as a general region',
+        note:'Canaan becomes central to the covenant promises and the biblical land story.',
+        lat:31.8,
+        lng:35.0,
+        zoom:7,
+        shape:'circle',
+        radius:120000
+      },
+
+      egypt: {
+        name:'Egypt',
+        modern:'Egypt',
+        region:'Northeast Africa',
+        confidence:'High',
+        note:'Joseph rises in Egypt and preserves his family there. Genesis ends with Israel’s family outside the promised land.',
+        lat:26.8,
+        lng:30.8,
+        zoom:5,
+        shape:'circle',
+        radius:420000
+      },
+
+      nod: {
+        name:'Nod',
+        modern:'Exact location unknown',
+        region:'East of Eden',
+        confidence:'Uncertain',
+        note:'Genesis gives a directional clue, but the location of Nod is not securely known.',
+        lat:33.0,
+        lng:45.0,
+        zoom:6,
+        shape:'circle',
+        radius:350000
+      },
+
+      sodom: {
+        name:'Sodom',
+        modern:'Often discussed near the Dead Sea region',
+        region:'Dead Sea / Jordan Valley region',
+        confidence:'Debated',
+        note:'Sodom is associated with judgment in Genesis 19. The exact site is debated, so show the region carefully.',
+        lat:31.2,
+        lng:35.5,
+        zoom:8,
+        shape:'circle',
+        radius:75000
+      },
+
+      gomorrah: {
+        name:'Gomorrah',
+        modern:'Often discussed near the Dead Sea region',
+        region:'Dead Sea / Jordan Valley region',
+        confidence:'Debated',
+        note:'Gomorrah is paired with Sodom in Genesis. Treat the exact location as debated.',
+        lat:31.1,
+        lng:35.55,
+        zoom:8,
+        shape:'circle',
+        radius:75000
+      },
+
+      bethel: {
+        name:'Bethel',
+        modern:'Often identified near Beitin in the West Bank',
+        region:'Hill country north of Jerusalem',
+        confidence:'Medium',
+        note:'Jacob dreams there and names the place Bethel, meaning “house of God.”',
+        lat:31.93,
+        lng:35.22,
+        zoom:10,
+        shape:'marker'
+      },
+
+      hebron: {
+        name:'Hebron',
+        modern:'Hebron, West Bank',
+        region:'Southern hill country',
+        confidence:'High',
+        note:'Hebron is associated with Abraham and the burial cave of Machpelah.',
+        lat:31.53,
+        lng:35.10,
+        zoom:10,
+        shape:'marker'
+      },
+
+      mamre: {
+        name:'Mamre',
+        modern:'Near Hebron region',
+        region:'Southern hill country',
+        confidence:'Traditional / general region',
+        note:'Mamre is associated with Abraham’s dwelling near Hebron.',
+        lat:31.55,
+        lng:35.10,
+        zoom:10,
+        shape:'circle',
+        radius:12000
+      },
+
+      beersheba: {
+        name:'Beersheba',
+        modern:'Beersheba, Israel',
+        region:'Negev',
+        confidence:'High',
+        note:'Beersheba is associated with patriarchal journeys, wells, and covenant scenes.',
+        lat:31.25,
+        lng:34.79,
+        zoom:10,
+        shape:'marker'
+      },
+
+      gerar: {
+        name:'Gerar',
+        modern:'Southern coastal plain / Negev area',
+        region:'Philistine / southern region',
+        confidence:'General region debated',
+        note:'Gerar appears in Abraham and Isaac narratives. Treat exact identification carefully.',
+        lat:31.39,
+        lng:34.60,
+        zoom:9,
+        shape:'circle',
+        radius:50000
+      },
+
+      shechem: {
+        name:'Shechem',
+        modern:'Nablus / Shechem region',
+        region:'Central hill country',
+        confidence:'High as a general location',
+        note:'Shechem is a major covenant and patriarchal location in the land.',
+        lat:32.22,
+        lng:35.26,
+        zoom:10,
+        shape:'marker'
+      },
+
+      haran: {
+        name:'Haran',
+        modern:'Harran, Turkey',
+        region:'Upper Mesopotamia',
+        confidence:'High as a general identification',
+        note:'Haran is connected with Abram’s family before the journey into Canaan.',
+        lat:36.86,
+        lng:39.03,
+        zoom:9,
+        shape:'marker'
+      },
+
+      ur: {
+        name:'Ur',
+        modern:'Tell el-Muqayyar, southern Iraq',
+        region:'Southern Mesopotamia',
+        confidence:'High as traditional identification',
+        note:'Ur of the Chaldees is connected to Abram’s origin story.',
+        lat:30.96,
+        lng:46.10,
+        zoom:9,
+        shape:'marker'
+      },
+
+      goshen: {
+        name:'Goshen',
+        modern:'Eastern Nile Delta region',
+        region:'Egypt',
+        confidence:'General region',
+        note:'Goshen is where Jacob’s family settles in Egypt near the end of Genesis.',
+        lat:30.8,
+        lng:31.8,
+        zoom:8,
+        shape:'circle',
+        radius:90000
+      },
+
+      moriah: {
+        name:'Moriah',
+        modern:'Region associated later with Jerusalem tradition',
+        region:'Land of Moriah',
+        confidence:'Traditional / debated',
+        note:'Genesis 22 names the land of Moriah. Later biblical tradition connects Moriah with temple geography, but careful labeling matters.',
+        lat:31.78,
+        lng:35.23,
+        zoom:9,
+        shape:'circle',
+        radius:50000
+      }
     };
 
     let currentChapter = DATA.chapters[0];
@@ -6162,10 +6875,144 @@
     const popover = document.getElementById('wordPopover');
     const searchBox = document.getElementById('chapterSearch');
 
+    const chapterDrawer = document.getElementById('chapterDrawer');
+    const chapterBackdrop = document.getElementById('chapterBackdrop');
+    const openChapterDrawerBtn = document.getElementById('openChapterDrawer');
+    const closeChapterDrawerBtn = document.getElementById('closeChapterDrawer');
+
+    const mapDrawer = document.getElementById('mapDrawer');
+    const mapBackdrop = document.getElementById('mapBackdrop');
+    const openMapDrawerBtn = document.getElementById('openMapDrawer');
+    const closeMapDrawerBtn = document.getElementById('closeMapDrawer');
+    const mapPlaceCard = document.getElementById('mapPlaceCard');
+    const mapPlaceList = document.getElementById('mapPlaceList');
+
+    let genesisMap = null;
+    let activeMapLayer = null;
+    let activePlaceKey = null;
+
     function normalize(word) { return (word || '').toLowerCase().replace(/[^a-z]/g,''); }
 
     function escapeHtml(s) {
       return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    }
+
+
+    function openChapterDrawer() {
+      if (!chapterDrawer || !chapterBackdrop) return;
+      chapterDrawer.classList.add('open');
+      chapterBackdrop.classList.add('open');
+    }
+
+    function closeChapterDrawer() {
+      if (!chapterDrawer || !chapterBackdrop) return;
+      chapterDrawer.classList.remove('open');
+      chapterBackdrop.classList.remove('open');
+    }
+
+    function initGenesisMap() {
+      if (genesisMap || typeof L === 'undefined') return;
+
+      genesisMap = L.map('genesisMap', {
+        scrollWheelZoom:false
+      }).setView([31.8, 35.2], 5);
+
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution:'&copy; OpenStreetMap contributors'
+      }).addTo(genesisMap);
+    }
+
+    function openMapDrawer(placeKey) {
+      if (!mapDrawer || !mapBackdrop) return;
+
+      mapDrawer.classList.add('open');
+      mapBackdrop.classList.add('open');
+
+      initGenesisMap();
+
+      setTimeout(() => {
+        if (genesisMap) genesisMap.invalidateSize();
+        if (placeKey) showPlaceOnMap(placeKey);
+      }, 250);
+    }
+
+    function closeMapDrawer() {
+      if (!mapDrawer || !mapBackdrop) return;
+
+      mapDrawer.classList.remove('open');
+      mapBackdrop.classList.remove('open');
+    }
+
+    function renderMapPlaceList() {
+      if (!mapPlaceList) return;
+
+      mapPlaceList.innerHTML = Object.keys(PLACES).map(key => {
+        const place = PLACES[key];
+
+        return `
+          <button class="map-place-btn ${key === activePlaceKey ? 'active' : ''}" data-place="${key}">
+            ${escapeHtml(place.name)}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function showPlaceOnMap(placeKey) {
+      const place = PLACES[placeKey];
+      if (!place) return;
+
+      activePlaceKey = placeKey;
+      initGenesisMap();
+
+      if (activeMapLayer) {
+        genesisMap.removeLayer(activeMapLayer);
+        activeMapLayer = null;
+      }
+
+      const label = `
+        <strong>${escapeHtml(place.name)}</strong><br>
+        ${escapeHtml(place.modern)}<br>
+        Confidence: ${escapeHtml(place.confidence)}
+      `;
+
+      if (place.shape === 'circle') {
+        activeMapLayer = L.circle([place.lat, place.lng], {
+          radius: place.radius || 80000,
+          color:'#7c3cff',
+          weight:2,
+          fillColor:'#7c3cff',
+          fillOpacity:.12
+        }).addTo(genesisMap).bindPopup(label);
+
+        genesisMap.fitBounds(activeMapLayer.getBounds(), {
+          padding:[35,35]
+        });
+
+        activeMapLayer.openPopup();
+      } else {
+        activeMapLayer = L.marker([place.lat, place.lng])
+          .addTo(genesisMap)
+          .bindPopup(label);
+
+        genesisMap.setView([place.lat, place.lng], place.zoom || 8);
+        activeMapLayer.openPopup();
+      }
+
+      if (mapPlaceCard) {
+        mapPlaceCard.innerHTML = `
+          <h3>${escapeHtml(place.name)}</h3>
+          <p><strong>Modern / assumed location:</strong> ${escapeHtml(place.modern)}</p>
+          <p><strong>Region:</strong> ${escapeHtml(place.region)}</p>
+          <p>${escapeHtml(place.note)}</p>
+          <span class="certainty-pill">Confidence: ${escapeHtml(place.confidence)}</span>
+        `;
+      }
+
+      renderMapPlaceList();
+
+      setTimeout(() => {
+        if (genesisMap) genesisMap.invalidateSize();
+      }, 150);
     }
 
     function highlight(text) {
@@ -6197,6 +7044,7 @@
       chapterSummary.textContent = CHAPTER_SUMMARIES[ch.chapter] || ch.title || '';
       scripture.innerHTML = ch.verses.map(v => `<p class="verse"><sup class="vnum">${v.verse}</sup>${tokenize(v.text)}</p>`).join('');
       renderChapterList();
+      renderMapPlaceList();
     }
 
     function occurrences(raw) {
@@ -6251,6 +7099,10 @@
       popover.style.left = Math.max(12, Math.min(rect.left, window.innerWidth - 404)) + 'px';
       popover.style.top = Math.max(12, Math.min(rect.bottom + 10, window.innerHeight - 430)) + 'px';
       popover.classList.add('open');
+
+      if (place) {
+        openMapDrawer(key);
+      }
     }
 
     function enterReaderMode() {
@@ -6260,18 +7112,29 @@
 
     function leaveReaderMode() {
       document.body.classList.remove('reader-mode');
+      closeChapterDrawer();
+      closeMapDrawer();
       document.getElementById('genesis-explore').scrollIntoView({ behavior:'smooth', block:'start' });
     }
 
     document.getElementById('readKJVBand').addEventListener('click', enterReaderMode);
 
     const readKJVNav = document.getElementById('readKJVNav');
+    const mapsNav = document.getElementById('mapsNav');
     const dictionaryNav = document.getElementById('dictionaryNav');
 
     if (readKJVNav) {
       readKJVNav.addEventListener('click', e => {
         e.preventDefault();
         enterReaderMode();
+      });
+    }
+
+    if (mapsNav) {
+      mapsNav.addEventListener('click', e => {
+        e.preventDefault();
+        enterReaderMode();
+        openMapDrawer(activePlaceKey || 'canaan');
       });
     }
 
@@ -6283,8 +7146,47 @@
     }
     document.getElementById('exitReadMode').addEventListener('click', leaveReaderMode);
 
-    document.getElementById('summaryToggle').addEventListener('click', () => {
-      document.getElementById('summaryToggle').classList.toggle('open');
+
+    if (openChapterDrawerBtn) {
+      openChapterDrawerBtn.addEventListener('click', openChapterDrawer);
+    }
+
+    if (closeChapterDrawerBtn) {
+      closeChapterDrawerBtn.addEventListener('click', closeChapterDrawer);
+    }
+
+    if (chapterBackdrop) {
+      chapterBackdrop.addEventListener('click', closeChapterDrawer);
+    }
+
+    if (openMapDrawerBtn) {
+      openMapDrawerBtn.addEventListener('click', () => {
+        openMapDrawer(activePlaceKey || 'canaan');
+      });
+    }
+
+    if (closeMapDrawerBtn) {
+      closeMapDrawerBtn.addEventListener('click', closeMapDrawer);
+    }
+
+    if (mapBackdrop) {
+      mapBackdrop.addEventListener('click', closeMapDrawer);
+    }
+
+    if (mapPlaceList) {
+      mapPlaceList.addEventListener('click', e => {
+        const btn = e.target.closest('.map-place-btn');
+        if (!btn) return;
+
+        showPlaceOnMap(btn.dataset.place);
+      });
+    }
+
+    document.querySelectorAll('.guide-toggle').forEach(row => {
+      row.addEventListener('click', e => {
+        if (e.target.closest('button')) return;
+        row.classList.toggle('open');
+      });
     });
 
     chapterList.addEventListener('click', e => {
@@ -6292,6 +7194,7 @@
       if(!b) return;
       const ch = DATA.chapters.find(x => x.chapter === Number(b.dataset.chapter));
       renderChapter(ch);
+      closeChapterDrawer();
     });
 
     scripture.addEventListener('click', e => {
@@ -6320,6 +7223,7 @@
     });
 
     renderChapter(currentChapter);
+    renderMapPlaceList();
   </script>
 </body>
 </html>
