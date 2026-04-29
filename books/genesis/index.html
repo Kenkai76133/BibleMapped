@@ -6571,6 +6571,311 @@
       covenant: { label:'Covenant', category:'Promise structure', simple:'A solemn binding promise or agreement.', webster:'A mutual agreement of two or more persons or parties.', original:'Hebrew berith.', grammar:'Covenant language organizes God’s promises in Genesis.', redFlag:'Do not treat God’s promises as random isolated moments.' }
     };
 
+    // Bible Mapped Genesis Word Study Starter Pack
+    // One entry powers every matching clickable word occurrence in Genesis.
+    Object.assign(NOTES, {
+      light: {
+        label: 'Light',
+        category: 'Creation word',
+        simple: 'Brightness, illumination, or visibility. In Genesis 1, light is the first thing God calls into ordered existence.',
+        webster: 'That which makes things visible; brightness; illumination.',
+        original: "Hebrew note: often connected with 'or, meaning light.",
+        grammar: 'In Genesis 1, light is separated from darkness, showing order and distinction.',
+        redFlag: "Do not reduce light here only to a modern scientific category. Read it first as part of Genesis' creation order."
+      },
+
+      darkness: {
+        label: 'Darkness',
+        category: 'Creation word',
+        simple: 'The absence of light. In Genesis 1, darkness is present before God orders creation.',
+        webster: 'Absence of light; obscurity.',
+        original: 'Hebrew note: often connected with choshek, meaning darkness or obscurity.',
+        grammar: 'Darkness is named before light is divided from it.',
+        redFlag: 'Darkness in Genesis 1 is not automatically moral evil. Context decides meaning.'
+      },
+
+      day: {
+        label: 'Day',
+        category: 'Time word',
+        simple: 'A period of time marked by light, or a named period in the creation sequence.',
+        webster: 'The time of light; the time from morning to evening; also a period of time.',
+        original: 'Hebrew note: yom can mean day, time, or period depending on context.',
+        grammar: 'Genesis 1 uses day in a repeated pattern with evening and morning.',
+        redFlag: 'Do not ignore context. The word day can carry different levels of meaning depending on usage.'
+      },
+
+      night: {
+        label: 'Night',
+        category: 'Time word',
+        simple: 'The time of darkness, paired with day in Genesis 1.',
+        webster: 'The time from evening to morning; the time of darkness.',
+        original: 'Hebrew note: often connected with laylah, meaning night.',
+        grammar: 'Night is named after darkness is divided from light.',
+        redFlag: 'Night is part of the ordered creation pattern, not automatically a symbol of evil in this chapter.'
+      },
+
+      evening: {
+        label: 'Evening',
+        category: 'Time word',
+        simple: 'The later part of the day, moving toward night. In Genesis 1, evening helps mark the repeated creation-day pattern.',
+        webster: 'The close of the day; the beginning of night.',
+        original: 'Hebrew note: often connected with erev, meaning evening.',
+        grammar: "The phrase 'evening and morning' repeats throughout Genesis 1.",
+        redFlag: 'Do not isolate the word from the repeated phrase. The pattern matters.'
+      },
+
+      morning: {
+        label: 'Morning',
+        category: 'Time word',
+        simple: 'The early part of the day after night. In Genesis 1, morning completes the repeated evening-morning cycle.',
+        webster: 'The first part of the day; the beginning portion of daylight.',
+        original: 'Hebrew note: often connected with boqer, meaning morning.',
+        grammar: 'Morning appears with evening as part of the repeated creation structure.',
+        redFlag: 'Do not build a doctrine from the English word alone. Study the full repeated phrase in context.'
+      },
+
+      good: {
+        label: 'Good',
+        category: 'Evaluation word',
+        simple: 'That which is fitting, pleasing, ordered, or morally right. In Genesis 1, God calls creation good.',
+        webster: 'Valid; sound; proper; desirable; morally right.',
+        original: 'Hebrew note: often connected with tov, meaning good, pleasant, or fitting.',
+        grammar: 'God is the one who declares creation good.',
+        redFlag: "Good here is not just human preference. It is God's evaluation of His creation."
+      },
+
+      firmament: {
+        label: 'Firmament',
+        category: 'Creation structure',
+        simple: 'The expanse or space described as dividing waters in Genesis 1.',
+        webster: 'The sky; the heavens; the expanse above.',
+        original: 'Hebrew note: often connected with raqia, meaning expanse.',
+        grammar: 'The firmament functions as a separating structure in the creation account.',
+        redFlag: 'Do not force the English word into one modern scientific model too quickly. Start with how Genesis uses it.'
+      },
+
+      waters: {
+        label: 'Waters',
+        category: 'Creation element',
+        simple: 'The waters appear early in Genesis as part of the unordered world that God begins to order.',
+        webster: 'A fluid; a collection of water; seas, rivers, or floods.',
+        original: 'Hebrew note: often connected with mayim, meaning waters.',
+        grammar: 'Waters are separated, gathered, and given boundaries in Genesis 1.',
+        redFlag: 'Water language in Genesis can be literal, symbolic, or structural depending on context.'
+      },
+
+      image: {
+        label: 'Image',
+        category: 'Human identity',
+        simple: "A representation or reflection. Humanity is made in God's image, showing human dignity and purpose.",
+        webster: 'A representation; likeness; resemblance.',
+        original: 'Hebrew note: often connected with tselem, meaning image or representation.',
+        grammar: 'Image is paired with likeness in Genesis 1:26.',
+        redFlag: 'Do not treat image of God as only appearance. It includes role, representation, dignity, and relationship.'
+      },
+
+      likeness: {
+        label: 'Likeness',
+        category: 'Human identity',
+        simple: "Resemblance or similarity. In Genesis, it works alongside image to describe humanity's relation to God.",
+        webster: 'Resemblance; form; similitude.',
+        original: 'Hebrew note: often connected with demuth, meaning likeness or resemblance.',
+        grammar: 'Likeness appears beside image, strengthening the idea of representation.',
+        redFlag: 'Do not separate image and likeness too sharply without strong textual reason.'
+      },
+
+      dominion: {
+        label: 'Dominion',
+        category: 'Human role',
+        simple: 'Rule, stewardship, or delegated authority. Humanity is given responsibility over creation.',
+        webster: 'Sovereign or supreme authority; power of governing.',
+        original: 'Hebrew note: the related verb can carry the idea of ruling or having authority.',
+        grammar: "Dominion is given after humanity is made in God's image.",
+        redFlag: "Dominion does not mean abuse. In biblical context, rule should reflect God's order and care."
+      },
+
+      fruitful: {
+        label: 'Fruitful',
+        category: 'Blessing word',
+        simple: "Able to produce, multiply, or bear fruit. In Genesis, fruitfulness is connected to blessing and life.",
+        webster: 'Bearing fruit; producing abundantly.',
+        original: 'Hebrew note: connected with language of bearing fruit or producing.',
+        grammar: "Fruitfulness is part of God's blessing command in Genesis 1.",
+        redFlag: 'Do not reduce fruitfulness only to numbers. It is tied to life, blessing, and purpose.'
+      },
+
+      multiply: {
+        label: 'Multiply',
+        category: 'Blessing word',
+        simple: "To increase or become many. In Genesis, multiplication is part of God's blessing over life.",
+        webster: 'To increase in number; to make many.',
+        original: 'Hebrew note: connected with increasing or becoming numerous.',
+        grammar: 'The command to multiply appears in creation blessing language.',
+        redFlag: 'Multiplication in Genesis is tied to blessing, not merely population growth.'
+      },
+
+      tree: {
+        label: 'Tree',
+        category: 'Creation symbol',
+        simple: 'A plant of the earth, but in Eden certain trees carry special meaning in the story.',
+        webster: 'A large plant with a woody stem or trunk.',
+        original: 'Hebrew note: often connected with ets, meaning tree or wood.',
+        grammar: 'Genesis highlights the tree of life and the tree of the knowledge of good and evil.',
+        redFlag: 'Not every tree in Genesis has symbolic meaning. Pay attention to which tree the text names.'
+      },
+
+      knowledge: {
+        label: 'Knowledge',
+        category: 'Wisdom word',
+        simple: 'Understanding, awareness, or moral discernment. In Eden, knowledge of good and evil becomes central to the test.',
+        webster: 'Clear perception of fact, truth, or duty.',
+        original: 'Hebrew note: knowledge language can include knowing by experience.',
+        grammar: "The phrase is 'knowledge of good and evil,' not knowledge by itself.",
+        redFlag: "Do not treat knowledge itself as evil. The issue is rebellion against God's command."
+      },
+
+      evil: {
+        label: 'Evil',
+        category: 'Moral word',
+        simple: "That which is wrong, harmful, corrupt, or opposed to God's good order.",
+        webster: 'Having bad qualities; morally wrong; wicked.',
+        original: 'Hebrew note: ra can mean evil, bad, harmful, or calamity depending on context.',
+        grammar: 'In Genesis 2-3, evil is paired with good in the test of obedience.',
+        redFlag: 'Do not assume every use of evil means the exact same thing. Context matters.'
+      },
+
+      naked: {
+        label: 'Naked',
+        category: 'Human condition',
+        simple: 'Uncovered or exposed. In Genesis 2-3, nakedness moves from innocence to shame after sin.',
+        webster: 'Bare; uncovered; exposed.',
+        original: 'Hebrew note: Genesis uses nakedness language to contrast innocence and shame.',
+        grammar: 'Genesis 2 says they were naked and not ashamed; Genesis 3 shows shame after disobedience.',
+        redFlag: 'Do not read Genesis 2 nakedness through Genesis 3 shame before the fall happens.'
+      },
+
+      curse: {
+        label: 'Curse',
+        category: 'Judgment word',
+        simple: 'A spoken judgment or condition of disorder under divine judgment.',
+        webster: 'To call evil upon; a sentence of misfortune or judgment.',
+        original: 'Hebrew note: curse language appears in judgment scenes after sin enters the story.',
+        grammar: 'In Genesis 3, the serpent and ground are cursed; the man and woman receive consequences.',
+        redFlag: 'Pay attention to who or what is cursed. The text is specific.'
+      },
+
+      ground: {
+        label: 'Ground',
+        category: 'Creation place',
+        simple: 'The soil or land from which man is formed and to which he returns.',
+        webster: 'The earth; soil; land.',
+        original: 'Hebrew note: adamah means ground or soil and is closely related to Adam in Genesis wordplay.',
+        grammar: 'Genesis connects the man to the ground in creation and judgment.',
+        redFlag: "The ground is not just scenery. It is tied to humanity's origin, work, and mortality."
+      },
+
+      dust: {
+        label: 'Dust',
+        category: 'Human origin',
+        simple: "Fine earth or soil. Genesis connects humanity's physical origin and mortality to dust.",
+        webster: 'Fine particles of earth or other matter.',
+        original: 'Hebrew note: dust language emphasizes creatureliness and mortality.',
+        grammar: 'Genesis says man is formed from dust and returns to dust.',
+        redFlag: 'Dust language humbles humanity, but it does not erase human dignity as image-bearers.'
+      },
+
+      altar: {
+        label: 'Altar',
+        category: 'Worship word',
+        simple: 'A place of sacrifice, worship, or calling upon the LORD.',
+        webster: 'A raised place on which sacrifices are offered.',
+        original: 'Hebrew note: altar language is connected with sacrifice and worship.',
+        grammar: 'In Genesis, patriarchs build altars at key covenant moments.',
+        redFlag: 'Altars are not random religious objects. They mark worship, memory, and encounter.'
+      },
+
+      blessing: {
+        label: 'Blessing',
+        category: 'Promise word',
+        simple: 'Favor, life, fruitfulness, or good given by God.',
+        webster: 'A gift; favor; benefit; divine favor.',
+        original: "Hebrew note: blessing language is central in Genesis, especially with Abraham's family.",
+        grammar: 'Blessing can be spoken, received, passed on, or promised.',
+        redFlag: 'Blessing is not merely comfort. In Genesis it carries covenant purpose.'
+      },
+
+      land: {
+        label: 'Land',
+        category: 'Promise place',
+        simple: "A territory, ground, or country. In Genesis, land becomes central to God's promise.",
+        webster: 'Earth; ground; country; region.',
+        original: 'Hebrew note: erets can mean land, earth, or territory.',
+        grammar: 'Land language must be read by context: local territory or whole earth.',
+        redFlag: 'Do not assume land always means the entire earth. Genesis often uses it for specific territory.'
+      },
+
+      famine: {
+        label: 'Famine',
+        category: 'Crisis word',
+        simple: 'A severe shortage of food. In Genesis, famine moves the story geographically.',
+        webster: 'General scarcity of food; dearth.',
+        original: 'Hebrew note: famine language often signals crisis, movement, and dependence.',
+        grammar: "Famine pushes Abram and later Jacob's family toward Egypt.",
+        redFlag: 'Famine is not just background. It often drives the plot.'
+      },
+
+      name: {
+        label: 'Name',
+        category: 'Identity word',
+        simple: 'A name identifies a person, place, or purpose. In Genesis, names often carry meaning and story direction.',
+        webster: 'That by which a person or thing is called or known.',
+        original: 'Hebrew name language often connects identity, reputation, and calling.',
+        grammar: 'Genesis often explains why a person or place receives a name.',
+        redFlag: 'Do not skip naming scenes. They often explain meaning, identity, or conflict.'
+      },
+
+      father: {
+        label: 'Father',
+        category: 'Family word',
+        simple: 'A male parent or ancestor. In Genesis, fathers carry family lines, promises, failures, and blessings forward.',
+        webster: 'He who begets a child; an ancestor; originator.',
+        original: 'Hebrew note: av can mean father, ancestor, or head of a household.',
+        grammar: 'Father language may refer to immediate parent or ancestral head depending on context.',
+        redFlag: 'Do not always assume father means only direct parent. Genealogies can use family language broadly.'
+      },
+
+      son: {
+        label: 'Son',
+        category: 'Family word',
+        simple: 'A male child or descendant. In Genesis, sons carry inheritance, conflict, and covenant lines.',
+        webster: 'A male child; descendant.',
+        original: 'Hebrew note: ben can mean son, descendant, or member of a group.',
+        grammar: 'Son language may be immediate or generational.',
+        redFlag: 'In Bible genealogies, son can sometimes mean descendant, not always direct child.'
+      },
+
+      wife: {
+        label: 'Wife',
+        category: 'Family word',
+        simple: 'A woman joined to a husband in marriage. Genesis presents marriage, family, conflict, and promise through wives and mothers.',
+        webster: 'A woman lawfully married to a man.',
+        original: 'Hebrew note: ishshah can mean woman or wife depending on context.',
+        grammar: 'Context decides whether the word should be read as woman or wife.',
+        redFlag: 'Do not flatten every marriage scene into an ideal example. Genesis often shows broken family patterns too.'
+      },
+
+      brother: {
+        label: 'Brother',
+        category: 'Family word',
+        simple: 'A male sibling or close kin. Genesis uses brother relationships to show rivalry, responsibility, betrayal, and reconciliation.',
+        webster: 'A male born of the same parents; a close kinsman.',
+        original: 'Hebrew note: ach can mean brother, relative, or kin.',
+        grammar: 'Brother can refer to siblings or broader family kin depending on context.',
+        redFlag: 'Do not assume brother always means full sibling without checking the passage.'
+      }
+    });
+
+
     const PLACES = {
       eden: {
         name:'Eden',
@@ -6865,6 +7170,43 @@
       }
     };
 
+    // Bible Mapped place aliases.
+    // These let related words open the correct map entry without creating duplicate map records.
+    const PLACE_ALIASES = {
+      garden: 'eden',
+      eden: 'eden',
+      pison: 'havilah',
+      gihon: 'ethiopia',
+      hiddekel: 'assyria',
+      euphrates: 'euphrates',
+      chaldees: 'ur',
+      ur: 'ur',
+      ararat: 'ararat',
+      babel: 'babel',
+      shinar: 'shinar',
+      canaan: 'canaan',
+      canaanite: 'canaan',
+      canaanites: 'canaan',
+      egypt: 'egypt',
+      egyptian: 'egypt',
+      egyptians: 'egypt',
+      goshen: 'goshen',
+      sodom: 'sodom',
+      gomorrah: 'gomorrah',
+      bethel: 'bethel',
+      luz: 'bethel',
+      hebron: 'hebron',
+      mamre: 'mamre',
+      beersheba: 'beersheba',
+      gerar: 'gerar',
+      shechem: 'shechem',
+      sichem: 'shechem',
+      haran: 'haran',
+      moriah: 'moriah',
+      nod: 'nod'
+    };
+
+
     let currentChapter = DATA.chapters[0];
     let searchTerm = '';
 
@@ -7073,7 +7415,8 @@
 
       const key = normalize(raw);
       const note = NOTES[key];
-      const place = PLACES[key];
+      const placeKey = PLACES[key] ? key : PLACE_ALIASES[key];
+      const place = placeKey ? PLACES[placeKey] : null;
       const occ = occurrences(raw);
       const refs = occ.refs.slice(0, 12).map(r => `<button class="ref" data-ref="${r.chapter}:${r.verse}">Gen ${r.chapter}:${r.verse}</button>`).join('');
 
@@ -7101,7 +7444,7 @@
       popover.classList.add('open');
 
       if (place) {
-        openMapDrawer(key);
+        openMapDrawer(placeKey);
       }
     }
 
