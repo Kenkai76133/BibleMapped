@@ -468,6 +468,76 @@
       line-height:2.1;
     }
 
+
+    /* AUDIO PLAYER BEFORE SCRIPTURE */
+    .audio-card{
+      max-width:1100px;
+      margin:0 auto 28px;
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:24px;
+      padding:18px;
+      box-shadow:0 14px 40px rgba(0,0,0,.05);
+    }
+
+    .audio-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+
+    .audio-kicker{
+      color:var(--purple);
+      font-size:.72rem;
+      font-weight:950;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:4px;
+    }
+
+    .audio-card h3{
+      margin:0;
+      font-family:Georgia, serif;
+      font-size:1.7rem;
+      letter-spacing:-.04em;
+    }
+
+    .audio-card p{
+      margin:6px 0 0;
+      color:var(--muted);
+      line-height:1.5;
+    }
+
+    .audio-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .audio-card audio{
+      width:100%;
+      margin-top:12px;
+    }
+
+    .audio-credit,
+    .audio-status{
+      font-size:.78rem;
+      color:var(--muted);
+    }
+
+    .audio-status{
+      margin-top:8px;
+      font-weight:750;
+    }
+
+    body.reader-mode .audio-card{
+      max-width:1100px;
+    }
+
     /* WORD POPOVER */
     .word-popover{
       position:fixed;
@@ -1158,6 +1228,32 @@
             </div>
             <button class="btn btn-secondary" id="exitReadMode">Show Ideas</button>
           </div>
+
+          <section class="audio-card" aria-label="Exodus audio player">
+            <div class="audio-head">
+              <div>
+                <div class="audio-kicker">Listen</div>
+                <h3 id="audioTitle">Exodus 1 Audio</h3>
+                <p id="audioSummary">Listen to the KJV reading before reading the Scripture text.</p>
+              </div>
+
+              <div class="audio-actions">
+                <button class="btn btn-primary" id="audioToggle" type="button">
+                  <span id="audioButtonLabel">▶ Play Audio</span>
+                </button>
+              </div>
+            </div>
+
+            <audio id="chapterAudio" controls preload="metadata">
+              <source id="chapterAudioSource" src="../../assets/audio/kjv/exodus-1.mp3" type="audio/mpeg">
+              Your browser does not support the audio element.
+            </audio>
+
+            <p class="audio-status" id="audioStatus">Audio file: exodus-1.mp3</p>
+            <p class="audio-credit">
+              Audio source: Public domain KJV audio. Verify the recording license before publishing.
+            </p>
+          </section>
 
           <div class="scripture" id="scripture"></div>
         </article>
@@ -6983,6 +7079,14 @@
     const popover = document.getElementById('wordPopover');
     const searchBox = document.getElementById('chapterSearch');
 
+    const chapterAudio = document.getElementById('chapterAudio');
+    const chapterAudioSource = document.getElementById('chapterAudioSource');
+    const audioTitle = document.getElementById('audioTitle');
+    const audioSummary = document.getElementById('audioSummary');
+    const audioToggle = document.getElementById('audioToggle');
+    const audioButtonLabel = document.getElementById('audioButtonLabel');
+    const audioStatus = document.getElementById('audioStatus');
+
     const chapterDrawer = document.getElementById('chapterDrawer');
     const chapterBackdrop = document.getElementById('chapterBackdrop');
     const openChapterDrawerBtn = document.getElementById('openChapterDrawer');
@@ -7209,10 +7313,40 @@
         .join('');
     }
 
+    function setAudioForChapter(ch) {
+      if (!chapterAudio || !chapterAudioSource) return;
+
+      const audioFile = `exodus-${ch.chapter}.mp3`;
+      chapterAudio.pause();
+      chapterAudioSource.src = `../../assets/audio/kjv/${audioFile}`;
+      chapterAudio.load();
+
+      if (audioTitle) {
+        audioTitle.textContent = `Exodus ${ch.chapter} Audio`;
+      }
+
+      if (audioSummary) {
+        audioSummary.textContent = ch.title
+          ? `Listen to Exodus ${ch.chapter}: ${ch.title}.`
+          : `Listen to Exodus ${ch.chapter} before reading the Scripture text.`;
+      }
+
+      if (audioButtonLabel) {
+        audioButtonLabel.textContent = '▶ Play Audio';
+      }
+
+      if (audioStatus) {
+        audioStatus.textContent = `Audio file: ${audioFile}`;
+      }
+    }
+
     function renderChapter(ch) {
       currentChapter = ch;
       chapterTitle.textContent = `Exodus ${ch.chapter}`;
       chapterSummary.textContent = CHAPTER_SUMMARIES[ch.chapter] || ch.title || '';
+
+      setAudioForChapter(ch);
+
       scripture.innerHTML = ch.verses.map(v => `<p class="verse"><sup class="vnum">${v.verse}</sup>${tokenize(v.text)}</p>`).join('');
       renderChapterList();
       renderMapPlaceList();
@@ -7388,6 +7522,42 @@
         document.getElementById('readerSection').scrollIntoView({ behavior:'smooth', block:'start' });
       }
     });
+
+    if (audioToggle && chapterAudio) {
+      audioToggle.addEventListener('click', async () => {
+        try {
+          if (chapterAudio.paused) {
+            await chapterAudio.play();
+          } else {
+            chapterAudio.pause();
+          }
+        } catch (err) {
+          if (audioStatus) {
+            audioStatus.textContent = 'Audio could not play. Check that the MP3 file exists in assets/audio/kjv/.';
+          }
+        }
+      });
+
+      chapterAudio.addEventListener('play', () => {
+        if (audioButtonLabel) audioButtonLabel.textContent = '❚❚ Pause Audio';
+        if (audioStatus) audioStatus.textContent = `Now playing: exodus-${currentChapter.chapter}.mp3`;
+      });
+
+      chapterAudio.addEventListener('pause', () => {
+        if (audioButtonLabel) audioButtonLabel.textContent = '▶ Play Audio';
+      });
+
+      chapterAudio.addEventListener('ended', () => {
+        if (audioButtonLabel) audioButtonLabel.textContent = '▶ Play Audio';
+        if (audioStatus) audioStatus.textContent = `Finished: exodus-${currentChapter.chapter}.mp3`;
+      });
+
+      chapterAudio.addEventListener('error', () => {
+        if (audioStatus) {
+          audioStatus.textContent = `Audio missing or unreadable: exodus-${currentChapter.chapter}.mp3`;
+        }
+      });
+    }
 
     searchBox.addEventListener('input', () => {
       searchTerm = normalize(searchBox.value);
