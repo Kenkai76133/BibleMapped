@@ -1631,6 +1631,427 @@
         align-items: flex-start;
       }
     }
+  
+    /* Lux final update: finished full-width shelf + cleaner spine words */
+    .bookcase-section {
+      padding-top: 72px;
+      background: var(--cloud);
+      border-top: 1px solid rgba(21, 21, 21, 0.06);
+    }
+
+    .bookcase {
+      width: 100%;
+      min-height: 680px;
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      perspective: 1200px;
+      position: relative;
+      padding-bottom: 42px;
+      overflow: visible;
+      border-bottom: 0 !important;
+    }
+
+    .bookcase::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 18px;
+      height: 18px;
+      background: #cfcac2;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.6),
+        inset 0 -1px 0 rgba(0,0,0,0.08);
+      z-index: 0;
+    }
+
+    .bookcase::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 18px;
+      background: #bdb8b0;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        0 8px 18px rgba(0,0,0,0.08);
+      z-index: 0;
+    }
+
+    .library-book {
+      position: relative;
+      z-index: 2;
+    }
+
+    .book-spine {
+      min-height: 100%;
+      padding: 20px 10px 24px;
+      gap: 14px;
+      text-align: center;
+    }
+
+    .spine-number {
+      font-size: 0.68rem;
+      font-weight: 950;
+      opacity: 0.72;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .spine-title {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 auto;
+      color: inherit !important;
+      text-align: center;
+      font-size: 0.96rem;
+      line-height: 1;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 950;
+      white-space: nowrap;
+      opacity: 0.98;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.14);
+    }
+
+    .library-book[style*="--book-text: var(--charcoal)"] .spine-title,
+    .library-book[style*="--book-text: var(--charcoal)"] .spine-number {
+      text-shadow: 0 1px 0 rgba(255,255,255,0.45);
+    }
+
+    @media (max-width: 960px) {
+      .bookcase {
+        min-height: 560px;
+        padding-bottom: 36px;
+      }
+
+      .library-book {
+        min-width: 62px;
+      }
+
+      .library-book.active {
+        min-width: min(520px, 72vw);
+      }
+
+      .library-book.active .book-spine {
+        width: 74px;
+        flex: 0 0 74px;
+      }
+
+      .spine-title {
+        font-size: 0.84rem;
+        letter-spacing: 0.17em;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .bookcase {
+        min-height: 470px;
+        padding-bottom: 32px;
+      }
+
+      .bookcase::before {
+        bottom: 14px;
+        height: 14px;
+      }
+
+      .bookcase::after {
+        height: 14px;
+      }
+
+      .library-book {
+        min-width: 54px;
+        flex: 0.56 1 0;
+      }
+
+      .library-book.active {
+        min-width: min(440px, 76vw);
+      }
+
+      .library-book.active .book-spine {
+        width: 64px;
+        flex: 0 0 64px;
+      }
+
+      .book-spine {
+        padding: 16px 8px 20px;
+      }
+
+      .spine-number {
+        font-size: 0.58rem;
+      }
+
+      .spine-title {
+        font-size: 0.75rem;
+        letter-spacing: 0.14em;
+      }
+
+      .book-open-page {
+        padding: 22px;
+      }
+    }
+
+  
+    /* Lux final update: huge readable book-spine labels */
+    .spine-title {
+      font-size: clamp(1.25rem, 1.7vw, 1.85rem) !important;
+      letter-spacing: 0.18em !important;
+      font-weight: 1000 !important;
+      line-height: 1 !important;
+    }
+
+    .library-book.active .spine-title {
+      font-size: clamp(1.35rem, 1.9vw, 2rem) !important;
+    }
+
+    .spine-number {
+      font-size: 0.82rem !important;
+      font-weight: 1000 !important;
+    }
+
+    .book-spine {
+      min-width: 88px !important;
+      padding-left: 14px !important;
+      padding-right: 14px !important;
+    }
+
+    .library-book.active .book-spine {
+      width: 104px !important;
+      flex: 0 0 104px !important;
+    }
+
+    @media (max-width: 960px) {
+      .spine-title {
+        font-size: 1.12rem !important;
+        letter-spacing: 0.16em !important;
+      }
+
+      .library-book.active .spine-title {
+        font-size: 1.25rem !important;
+      }
+
+      .book-spine {
+        min-width: 72px !important;
+      }
+
+      .library-book.active .book-spine {
+        width: 82px !important;
+        flex: 0 0 82px !important;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .spine-title {
+        font-size: 0.95rem !important;
+        letter-spacing: 0.13em !important;
+      }
+
+      .library-book.active .spine-title {
+        font-size: 1.04rem !important;
+      }
+
+      .spine-number {
+        font-size: 0.62rem !important;
+      }
+
+      .book-spine {
+        min-width: 58px !important;
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+      }
+
+      .library-book.active .book-spine {
+        width: 68px !important;
+        flex: 0 0 68px !important;
+      }
+    }
+
+  
+    /* Lux final update: extra-large, more spread-out spine labels */
+    .book-spine {
+      min-width: 110px !important;
+      padding-top: 22px !important;
+      padding-bottom: 28px !important;
+      padding-left: 16px !important;
+      padding-right: 16px !important;
+      gap: 18px !important;
+    }
+
+    .library-book.active .book-spine {
+      width: 130px !important;
+      flex: 0 0 130px !important;
+    }
+
+    .spine-title {
+      font-size: clamp(1.55rem, 2.2vw, 2.35rem) !important;
+      letter-spacing: 0.22em !important;
+      font-weight: 1000 !important;
+      line-height: 1 !important;
+      white-space: nowrap !important;
+    }
+
+    .library-book.active .spine-title {
+      font-size: clamp(1.7rem, 2.45vw, 2.55rem) !important;
+      letter-spacing: 0.23em !important;
+    }
+
+    .spine-number {
+      font-size: 0.88rem !important;
+      letter-spacing: 0.16em !important;
+      font-weight: 1000 !important;
+    }
+
+    @media (max-width: 1100px) {
+      .book-spine {
+        min-width: 94px !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+      }
+
+      .library-book.active .book-spine {
+        width: 108px !important;
+        flex: 0 0 108px !important;
+      }
+
+      .spine-title {
+        font-size: 1.28rem !important;
+        letter-spacing: 0.2em !important;
+      }
+
+      .library-book.active .spine-title {
+        font-size: 1.42rem !important;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .book-spine {
+        min-width: 66px !important;
+        padding-top: 16px !important;
+        padding-bottom: 20px !important;
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+        gap: 10px !important;
+      }
+
+      .library-book.active .book-spine {
+        width: 76px !important;
+        flex: 0 0 76px !important;
+      }
+
+      .spine-title {
+        font-size: 1.02rem !important;
+        letter-spacing: 0.16em !important;
+      }
+
+      .library-book.active .spine-title {
+        font-size: 1.12rem !important;
+        letter-spacing: 0.17em !important;
+      }
+
+      .spine-number {
+        font-size: 0.64rem !important;
+        letter-spacing: 0.12em !important;
+      }
+    }
+
+  
+    /* Lux final update: massively larger spine labels */
+    .book-spine {
+      min-width: 138px !important;
+      padding-top: 24px !important;
+      padding-bottom: 32px !important;
+      padding-left: 18px !important;
+      padding-right: 18px !important;
+      gap: 20px !important;
+    }
+
+    .library-book.active .book-spine {
+      width: 158px !important;
+      flex: 0 0 158px !important;
+    }
+
+    .spine-title {
+      font-size: clamp(2rem, 2.9vw, 3rem) !important;
+      letter-spacing: 0.22em !important;
+      font-weight: 1000 !important;
+      line-height: 1 !important;
+      white-space: nowrap !important;
+    }
+
+    .library-book.active .spine-title {
+      font-size: clamp(2.15rem, 3.15vw, 3.2rem) !important;
+      letter-spacing: 0.23em !important;
+    }
+
+    .spine-number {
+      font-size: 0.95rem !important;
+      letter-spacing: 0.16em !important;
+      font-weight: 1000 !important;
+    }
+
+    @media (max-width: 1100px) {
+      .book-spine {
+        min-width: 112px !important;
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+      }
+
+      .library-book.active .book-spine {
+        width: 126px !important;
+        flex: 0 0 126px !important;
+      }
+
+      .spine-title {
+        font-size: 1.55rem !important;
+        letter-spacing: 0.20em !important;
+      }
+
+      .library-book.active .spine-title {
+        font-size: 1.72rem !important;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .book-spine {
+        min-width: 76px !important;
+        padding-top: 16px !important;
+        padding-bottom: 20px !important;
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+        gap: 10px !important;
+      }
+
+      .library-book.active .book-spine {
+        width: 88px !important;
+        flex: 0 0 88px !important;
+      }
+
+      .spine-title {
+        font-size: 1.12rem !important;
+        letter-spacing: 0.16em !important;
+      }
+
+      .library-book.active .spine-title {
+        font-size: 1.22rem !important;
+        letter-spacing: 0.17em !important;
+      }
+
+      .spine-number {
+        font-size: 0.68rem !important;
+        letter-spacing: 0.12em !important;
+      }
+    }
+
   </style>
 </head>
 
@@ -1660,7 +2081,6 @@
 
         <div class="hero-actions hero-connected-actions">
           <a class="button button-primary" href="#topics">Enter Bible Mapped →</a>
-          <a class="button" href="books/genesis/index.html">Open Genesis</a>
           <a class="button button-mission" href="about/">Read the Mission</a>
         </div>
       </div>
@@ -1690,7 +2110,6 @@
               </p>
               <div class="panel-actions">
                 <button class="button button-primary open-spine-button" type="button" data-open-book="books">Open Books →</button>
-                <a class="button" href="books/genesis/index.html">Open Genesis</a>
                 <a class="button" href="about/">Read the mission</a>
               </div>
             </div>
