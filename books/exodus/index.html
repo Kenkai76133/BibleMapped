@@ -400,6 +400,26 @@
       outline:1px solid rgba(124,60,255,.22);
     }
 
+
+    /* Bible Mapped place-click layer: places appear green with white text inside the KJV reader */
+    .word.place-word{
+      background:#3f7f57;
+      color:#fff;
+      border-radius:8px;
+      padding:1px 6px;
+      text-decoration:none;
+      box-shadow:0 0 0 1px rgba(63,127,87,.18);
+      font-weight:850;
+    }
+
+    .word.place-word:hover,
+    .word.place-word.active{
+      background:#2f6544;
+      color:#fff;
+      outline:1px solid rgba(47,101,68,.32);
+      box-shadow:0 6px 18px rgba(47,101,68,.16);
+    }
+
     mark{
       background:#efe7ff;
       border-radius:4px;
@@ -6644,185 +6664,312 @@
 
     const PLACES = {
       "egypt": {
-            "name": "Egypt",
-            "modern": "Egypt",
-            "region": "Northeast Africa / Nile Valley",
-            "confidence": "High",
-            "note": "Egypt is the place of Israel’s oppression and the stage where the LORD confronts Pharaoh.",
-            "lat": 26.8,
-            "lng": 30.8,
-            "zoom": 5,
-            "shape": "circle",
-            "radius": 420000
+        "name": "Egypt",
+        "modern": "Egypt",
+        "region": "Northeast Africa / Nile Valley",
+        "confidence": "High",
+        "note": "Egypt is the place of Israel’s oppression and the stage where the LORD confronts Pharaoh.",
+        "lat": 26.8,
+        "lng": 30.8,
+        "zoom": 5,
+        "shape": "circle",
+        "radius": 420000
       },
       "goshen": {
-            "name": "Goshen",
-            "modern": "Eastern Nile Delta region",
-            "region": "Egypt",
-            "confidence": "General region",
-            "note": "Goshen is the region associated with the Israelites living in Egypt. The exact boundaries are debated.",
-            "lat": 30.8,
-            "lng": 31.8,
-            "zoom": 8,
-            "shape": "circle",
-            "radius": 90000
+        "name": "Goshen",
+        "modern": "Eastern Nile Delta region",
+        "region": "Egypt",
+        "confidence": "General region",
+        "note": "Goshen is the region associated with the Israelites living in Egypt. The exact boundaries are debated.",
+        "lat": 30.8,
+        "lng": 31.8,
+        "zoom": 8,
+        "shape": "circle",
+        "radius": 90000
       },
       "pithom": {
-            "name": "Pithom",
-            "modern": "Likely eastern Nile Delta / Wadi Tumilat region",
-            "region": "Egypt",
-            "confidence": "Debated",
-            "note": "Pithom is named as a treasure city built under oppression. Its precise identification is debated.",
-            "lat": 30.57,
-            "lng": 32.18,
-            "zoom": 9,
-            "shape": "circle",
-            "radius": 55000
+        "name": "Pithom",
+        "modern": "Likely eastern Nile Delta / Wadi Tumilat region",
+        "region": "Egypt",
+        "confidence": "Debated",
+        "note": "Pithom is named as a treasure city built under oppression. Its precise identification is debated.",
+        "lat": 30.57,
+        "lng": 32.18,
+        "zoom": 9,
+        "shape": "circle",
+        "radius": 55000
       },
       "raamses": {
-            "name": "Raamses",
-            "modern": "Often associated with Pi-Ramesses / Qantir region",
-            "region": "Eastern Nile Delta",
-            "confidence": "Common scholarly association, exact context debated",
-            "note": "Raamses is named as a treasure city. It is often connected with the eastern Delta, but dating and identification questions should be handled carefully.",
-            "lat": 30.79,
-            "lng": 31.82,
-            "zoom": 9,
-            "shape": "circle",
-            "radius": 55000
+        "name": "Raamses / Rameses",
+        "modern": "Often associated with Pi-Ramesses / Qantir region",
+        "region": "Eastern Nile Delta",
+        "confidence": "Common scholarly association, exact context debated",
+        "note": "Raamses/Rameses is named as a treasure city and as a departure point. Dating and identification questions should be handled carefully.",
+        "lat": 30.79,
+        "lng": 31.82,
+        "zoom": 9,
+        "shape": "circle",
+        "radius": 55000
       },
-      "midian": {
-            "name": "Midian",
-            "modern": "Northwest Arabia / region east of the Gulf of Aqaba",
-            "region": "Arabia / Sinai-adjacent region",
-            "confidence": "General region",
-            "note": "Moses flees to Midian before being called at the mountain of God. Exact territorial boundaries are debated.",
-            "lat": 28.6,
-            "lng": 35.2,
-            "zoom": 7,
-            "shape": "circle",
-            "radius": 180000
+      "succoth": {
+        "name": "Succoth",
+        "modern": "Often placed near the eastern Delta / Wadi Tumilat route",
+        "region": "Egypt-to-wilderness route",
+        "confidence": "Debated",
+        "note": "Succoth is an early stop after Israel departs from Rameses. Exact identification is debated.",
+        "lat": 30.45,
+        "lng": 32.2,
+        "zoom": 8,
+        "shape": "circle",
+        "radius": 70000
       },
-      "horeb": {
-            "name": "Horeb",
-            "modern": "Traditionally associated with the Sinai region",
-            "region": "Mountain of God / Sinai tradition",
-            "confidence": "Traditional / debated",
-            "note": "Horeb is where Moses encounters the burning bush. Many discussions connect Horeb and Sinai, but exact location is debated.",
-            "lat": 28.54,
-            "lng": 33.97,
-            "zoom": 8,
-            "shape": "circle",
-            "radius": 120000
-      },
-      "sinai": {
-            "name": "Sinai",
-            "modern": "Traditional Mount Sinai / Jebel Musa region",
-            "region": "Sinai Peninsula",
-            "confidence": "Traditional / debated",
-            "note": "Sinai is where Israel receives the covenant. Traditional identification exists, but the route and mountain location remain debated.",
-            "lat": 28.54,
-            "lng": 33.97,
-            "zoom": 9,
-            "shape": "circle",
-            "radius": 80000
-      },
-      "redsea": {
-            "name": "Red Sea / Yam Suph",
-            "modern": "Red Sea / Sea of Reeds discussion",
-            "region": "Egypt-to-wilderness crossing zone",
-            "confidence": "Route debated",
-            "note": "The KJV says Red sea. Many notes discuss Hebrew Yam Suph. Bible Mapped should label the exact crossing route as debated.",
-            "lat": 29.95,
-            "lng": 32.55,
-            "zoom": 7,
-            "shape": "circle",
-            "radius": 140000
-      },
-      "marah": {
-            "name": "Marah",
-            "modern": "Traditional wilderness stop, exact site uncertain",
-            "region": "Wilderness route after the sea",
-            "confidence": "Uncertain / traditional",
-            "note": "Marah is where bitter waters are made sweet. Exact location is not secure.",
-            "lat": 29.35,
-            "lng": 32.75,
-            "zoom": 8,
-            "shape": "circle",
-            "radius": 70000
-      },
-      "elim": {
-            "name": "Elim",
-            "modern": "Traditional oasis stop, exact site debated",
-            "region": "Wilderness route",
-            "confidence": "Uncertain / traditional",
-            "note": "Elim is remembered for twelve wells and seventy palm trees. Treat exact mapping carefully.",
-            "lat": 29.1,
-            "lng": 33.1,
-            "zoom": 8,
-            "shape": "circle",
-            "radius": 70000
-      },
-      "rephidim": {
-            "name": "Rephidim",
-            "modern": "Traditional site in Sinai region, exact site debated",
-            "region": "Wilderness near Sinai",
-            "confidence": "Uncertain / traditional",
-            "note": "Rephidim is associated with water from the rock and the battle with Amalek.",
-            "lat": 28.74,
-            "lng": 33.72,
-            "zoom": 9,
-            "shape": "circle",
-            "radius": 60000
-      },
-      "sinin": {
-            "name": "Wilderness of Sin",
-            "modern": "Traditional wilderness region between Elim and Sinai",
-            "region": "Sinai wilderness",
-            "confidence": "General / debated",
-            "note": "The Wilderness of Sin is part of the route toward Sinai, but exact boundaries are uncertain.",
-            "lat": 29.0,
-            "lng": 33.2,
-            "zoom": 8,
-            "shape": "circle",
-            "radius": 100000
+      "etham": {
+        "name": "Etham",
+        "modern": "Edge of the wilderness, exact location uncertain",
+        "region": "Egypt-to-wilderness route",
+        "confidence": "Uncertain",
+        "note": "Etham is named as a stop at the edge of the wilderness. Its exact location is not settled.",
+        "lat": 30.2,
+        "lng": 32.4,
+        "zoom": 8,
+        "shape": "circle",
+        "radius": 90000
       },
       "pihahiroth": {
-            "name": "Pi-hahiroth",
-            "modern": "Exact location unknown",
-            "region": "Near sea-crossing route in Exodus 14",
-            "confidence": "Uncertain",
-            "note": "Pi-hahiroth is part of the sea-crossing geography, but its exact location is not known.",
-            "lat": 30.2,
-            "lng": 32.6,
-            "zoom": 8,
-            "shape": "circle",
-            "radius": 90000
+        "name": "Pi-hahiroth",
+        "modern": "Exact location unknown",
+        "region": "Near sea-crossing route in Exodus 14",
+        "confidence": "Uncertain",
+        "note": "Pi-hahiroth is part of the sea-crossing geography, but its exact location is not known.",
+        "lat": 30.2,
+        "lng": 32.6,
+        "zoom": 8,
+        "shape": "circle",
+        "radius": 90000
+      },
+      "migdol": {
+        "name": "Migdol",
+        "modern": "Likely a frontier/watchtower location, exact site uncertain",
+        "region": "Sea-crossing route marker",
+        "confidence": "Uncertain",
+        "note": "Migdol is named in the sea-crossing scene. It likely refers to a tower or fortified location, but exact identification is debated.",
+        "lat": 30.35,
+        "lng": 32.35,
+        "zoom": 8,
+        "shape": "circle",
+        "radius": 95000
+      },
+      "baalzephon": {
+        "name": "Baal-zephon / Baalzephon",
+        "modern": "Exact location unknown",
+        "region": "Sea-crossing route marker",
+        "confidence": "Uncertain",
+        "note": "Baal-zephon is named as a marker near the sea. The location is debated and should be labeled with care.",
+        "lat": 30.05,
+        "lng": 32.6,
+        "zoom": 8,
+        "shape": "circle",
+        "radius": 90000
+      },
+      "redsea": {
+        "name": "Red Sea / Yam Suph",
+        "modern": "Red Sea / Sea of Reeds discussion",
+        "region": "Egypt-to-wilderness crossing zone",
+        "confidence": "Route debated",
+        "note": "The KJV says Red sea. Many notes discuss Hebrew Yam Suph. Bible Mapped should label the exact crossing route as debated.",
+        "lat": 29.95,
+        "lng": 32.55,
+        "zoom": 7,
+        "shape": "circle",
+        "radius": 140000
+      },
+      "shur": {
+        "name": "Wilderness of Shur",
+        "modern": "Northwestern Sinai region, exact boundaries uncertain",
+        "region": "Wilderness after the sea",
+        "confidence": "General region",
+        "note": "The wilderness of Shur appears after the sea crossing. It should be mapped as a broad region rather than a precise point.",
+        "lat": 30.0,
+        "lng": 33.0,
+        "zoom": 7,
+        "shape": "circle",
+        "radius": 150000
+      },
+      "marah": {
+        "name": "Marah",
+        "modern": "Traditional wilderness stop, exact site uncertain",
+        "region": "Wilderness route after the sea",
+        "confidence": "Uncertain / traditional",
+        "note": "Marah is where bitter waters are made sweet. Exact location is not secure.",
+        "lat": 29.35,
+        "lng": 32.75,
+        "zoom": 8,
+        "shape": "circle",
+        "radius": 70000
+      },
+      "elim": {
+        "name": "Elim",
+        "modern": "Traditional oasis stop, exact site debated",
+        "region": "Wilderness route",
+        "confidence": "Uncertain / traditional",
+        "note": "Elim is remembered for twelve wells and seventy palm trees. Treat exact mapping carefully.",
+        "lat": 29.1,
+        "lng": 33.1,
+        "zoom": 8,
+        "shape": "circle",
+        "radius": 70000
+      },
+      "sinin": {
+        "name": "Wilderness of Sin",
+        "modern": "Traditional wilderness region between Elim and Sinai",
+        "region": "Sinai wilderness",
+        "confidence": "General / debated",
+        "note": "The Wilderness of Sin is part of the route toward Sinai, but exact boundaries are uncertain.",
+        "lat": 29.0,
+        "lng": 33.2,
+        "zoom": 8,
+        "shape": "circle",
+        "radius": 100000
+      },
+      "rephidim": {
+        "name": "Rephidim",
+        "modern": "Traditional site in Sinai region, exact site debated",
+        "region": "Wilderness near Sinai",
+        "confidence": "Uncertain / traditional",
+        "note": "Rephidim is associated with water from the rock and the battle with Amalek.",
+        "lat": 28.74,
+        "lng": 33.72,
+        "zoom": 9,
+        "shape": "circle",
+        "radius": 60000
+      },
+      "midian": {
+        "name": "Midian",
+        "modern": "Northwest Arabia / region east of the Gulf of Aqaba",
+        "region": "Arabia / Sinai-adjacent region",
+        "confidence": "General region",
+        "note": "Moses flees to Midian before being called at the mountain of God. Exact territorial boundaries are debated.",
+        "lat": 28.6,
+        "lng": 35.2,
+        "zoom": 7,
+        "shape": "circle",
+        "radius": 180000
+      },
+      "horeb": {
+        "name": "Horeb",
+        "modern": "Traditionally associated with the Sinai region",
+        "region": "Mountain of God / Sinai tradition",
+        "confidence": "Traditional / debated",
+        "note": "Horeb is where Moses encounters the burning bush. Many discussions connect Horeb and Sinai, but exact location is debated.",
+        "lat": 28.54,
+        "lng": 33.97,
+        "zoom": 8,
+        "shape": "circle",
+        "radius": 120000
+      },
+      "sinai": {
+        "name": "Sinai",
+        "modern": "Traditional Mount Sinai / Jebel Musa region",
+        "region": "Sinai Peninsula",
+        "confidence": "Traditional / debated",
+        "note": "Sinai is where Israel receives the covenant. Traditional identification exists, but the route and mountain location remain debated.",
+        "lat": 28.54,
+        "lng": 33.97,
+        "zoom": 9,
+        "shape": "circle",
+        "radius": 80000
+      },
+      "canaan": {
+        "name": "Canaan",
+        "modern": "Southern Levant / land later associated with Israel",
+        "region": "Promised land destination",
+        "confidence": "High as a broad region",
+        "note": "Canaan is the destination promised in the covenant story. In Exodus, it functions as the land God will bring Israel toward.",
+        "lat": 31.7,
+        "lng": 35.0,
+        "zoom": 7,
+        "shape": "circle",
+        "radius": 220000
+      },
+      "edom": {
+        "name": "Edom",
+        "modern": "Region south/southeast of the Dead Sea",
+        "region": "Southern Levant / Transjordan",
+        "confidence": "Broad regional confidence",
+        "note": "Edom is mentioned in the song of Moses as the nations hear of the LORD’s deliverance.",
+        "lat": 30.7,
+        "lng": 35.6,
+        "zoom": 7,
+        "shape": "circle",
+        "radius": 120000
+      },
+      "moab": {
+        "name": "Moab",
+        "modern": "Region east of the Dead Sea",
+        "region": "Transjordan",
+        "confidence": "Broad regional confidence",
+        "note": "Moab is mentioned in Exodus 15 as part of the wider regional fear after the sea deliverance.",
+        "lat": 31.4,
+        "lng": 35.75,
+        "zoom": 8,
+        "shape": "circle",
+        "radius": 90000
+      },
+      "palestina": {
+        "name": "Palestina / Philistia",
+        "modern": "Southern coastal plain of the Levant",
+        "region": "Coastal Canaan / Philistine region",
+        "confidence": "Broad regional confidence",
+        "note": "The KJV uses Palestina in Exodus 15:14. This points to the Philistine/coastal region in the broader biblical geography.",
+        "lat": 31.5,
+        "lng": 34.6,
+        "zoom": 8,
+        "shape": "circle",
+        "radius": 90000
+      },
+      "amalek": {
+        "name": "Amalek / Amalekite region",
+        "modern": "Southern desert region, exact boundaries uncertain",
+        "region": "Wilderness / southern Levant context",
+        "confidence": "General / debated",
+        "note": "Amalek attacks Israel at Rephidim. This is a people-group name with regional implications, so map it as approximate.",
+        "lat": 30.7,
+        "lng": 34.9,
+        "zoom": 7,
+        "shape": "circle",
+        "radius": 160000
       }
 };
 
 
     const PLACE_ALIASES = {
       "egypt": "egypt",
-      "egyptians": "egypt",
-      "egyptian": "egypt",
       "goshen": "goshen",
       "pithom": "pithom",
       "raamses": "raamses",
       "rameses": "raamses",
+      "succoth": "succoth",
+      "etham": "etham",
+      "pihahiroth": "pihahiroth",
+      "migdol": "migdol",
+      "baalzephon": "baalzephon",
+      "redsea": "redsea",
+      "shur": "shur",
+      "marah": "marah",
+      "elim": "elim",
+      "wildernessofsin": "sinin",
+      "rephidim": "rephidim",
       "midian": "midian",
       "horeb": "horeb",
       "sinai": "sinai",
-      "mount": "sinai",
-      "wilderness": "sinin",
-      "sin": "sinin",
-      "red": "redsea",
-      "sea": "redsea",
-      "marah": "marah",
-      "elim": "elim",
-      "rephidim": "rephidim",
-      "pihahiroth": "pihahiroth",
-      "hiroth": "pihahiroth"
+      "mountsinai": "sinai",
+      "mounthoreb": "horeb",
+      "canaan": "canaan",
+      "edom": "edom",
+      "moab": "moab",
+      "palestina": "palestina",
+      "philistia": "palestina",
+      "amalek": "amalek"
 };
 
 
@@ -6857,6 +7004,51 @@
     function escapeHtml(s) {
       return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
     }
+
+    const PLACE_TERMS = [
+      { term:'land of Egypt', place:'egypt' },
+      { term:'Egypt', place:'egypt' },
+      { term:'land of Goshen', place:'goshen' },
+      { term:'Goshen', place:'goshen' },
+      { term:'Pithom', place:'pithom' },
+      { term:'Raamses', place:'raamses' },
+      { term:'Rameses', place:'raamses' },
+      { term:'Succoth', place:'succoth' },
+      { term:'Etham', place:'etham' },
+      { term:'Pi-hahiroth', place:'pihahiroth' },
+      { term:'Pihahiroth', place:'pihahiroth' },
+      { term:'Migdol', place:'migdol' },
+      { term:'Baal-zephon', place:'baalzephon' },
+      { term:'Baalzephon', place:'baalzephon' },
+      { term:'Red sea', place:'redsea' },
+      { term:'Wilderness of Shur', place:'shur' },
+      { term:'Shur', place:'shur' },
+      { term:'Marah', place:'marah' },
+      { term:'Elim', place:'elim' },
+      { term:'Wilderness of Sin', place:'sinin' },
+      { term:'Rephidim', place:'rephidim' },
+      { term:'Midian', place:'midian' },
+      { term:'mount Sinai', place:'sinai' },
+      { term:'Mount Sinai', place:'sinai' },
+      { term:'Sinai', place:'sinai' },
+      { term:'mount Horeb', place:'horeb' },
+      { term:'Horeb', place:'horeb' },
+      { term:'land of Canaan', place:'canaan' },
+      { term:'Canaan', place:'canaan' },
+      { term:'Edom', place:'edom' },
+      { term:'Moab', place:'moab' },
+      { term:'Palestina', place:'palestina' },
+      { term:'Philistia', place:'palestina' },
+      { term:'Amalek', place:'amalek' }
+    ].sort((a,b) => b.term.length - a.term.length);
+
+    const PLACE_TERM_LOOKUP = Object.fromEntries(PLACE_TERMS.map(item => [normalize(item.term), item.place]));
+
+    function escapeRegExp(str) {
+      return String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    const PLACE_TERM_RE = new RegExp(`(^|[^A-Za-z'’\\-])(${PLACE_TERMS.map(item => escapeRegExp(item.term)).join('|')})(?=$|[^A-Za-z'’\\-])`, 'gi');
 
 
     function openChapterDrawer() {
@@ -6939,9 +7131,9 @@
       if (place.shape === 'circle') {
         activeMapLayer = L.circle([place.lat, place.lng], {
           radius: place.radius || 80000,
-          color:'#7c3cff',
+          color:'#3f7f57',
           weight:2,
-          fillColor:'#7c3cff',
+          fillColor:'#3f7f57',
           fillOpacity:.12
         }).addTo(exodusMap).bindPopup(label);
 
@@ -6983,8 +7175,26 @@
       return escapeHtml(text).replace(re,'<mark>$1</mark>');
     }
 
+    function tokenizePlainWords(text) {
+      return escapeHtml(text).replace(/([A-Za-z][A-Za-z'’\\-]*)/g, m => `<button class="word" data-word="${escapeHtml(m)}">${highlight(m)}</button>`);
+    }
+
     function tokenize(text) {
-      return escapeHtml(text).replace(/([A-Za-z][A-Za-z'’\-]*)/g, m => `<button class="word" data-word="${escapeHtml(m)}">${highlight(m)}</button>`);
+      let output = '';
+      let lastIndex = 0;
+
+      String(text).replace(PLACE_TERM_RE, (match, prefix, term, offset) => {
+        const termStart = offset + prefix.length;
+        const placeKey = PLACE_TERM_LOOKUP[normalize(term)];
+
+        output += tokenizePlainWords(text.slice(lastIndex, termStart));
+        output += `<button class="word place-word" data-word="${escapeHtml(term)}" data-place="${escapeHtml(placeKey)}" title="Open ${escapeHtml(term)} on the map">${escapeHtml(term)}</button>`;
+        lastIndex = termStart + term.length;
+        return match;
+      });
+
+      output += tokenizePlainWords(text.slice(lastIndex));
+      return output;
     }
 
     function chapterText(ch) {
@@ -7034,7 +7244,7 @@
 
       const key = normalize(raw);
       const note = NOTES[key];
-      const placeKey = PLACES[key] ? key : PLACE_ALIASES[key];
+      const placeKey = target?.dataset?.place || (PLACES[key] ? key : PLACE_ALIASES[key]);
       const place = placeKey ? PLACES[placeKey] : null;
       const occ = occurrences(raw);
       const refs = occ.refs.slice(0, 12).map(r => `<button class="ref" data-ref="${r.chapter}:${r.verse}">Exod ${r.chapter}:${r.verse}</button>`).join('');
