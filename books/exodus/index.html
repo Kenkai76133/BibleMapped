@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Exodus deploy refresh -->
+<!-- Exodus deploy refresh: fixed MP3 audio path + controls -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -1217,15 +1217,22 @@
             </div>
             <div class="reader-actions">
               <div class="audio-controls" aria-label="Chapter audio controls">
-                <button class="audio-btn" id="audioPlayBtn" type="button">Play Audio</button>
+                <button class="audio-btn" id="audioPlayBtn" type="button">▶ Play Audio</button>
                 <button class="audio-btn secondary" id="audioPauseBtn" type="button">Pause</button>
                 <button class="audio-btn secondary" id="audioStopBtn" type="button">Stop</button>
                 <label class="volume-control" for="audioVolume">
                   Volume
-                  <input id="audioVolume" type="range" min="0" max="1" step="0.05" value="0.55" />
-                  <span class="volume-value" id="audioVolumeValue">55%</span>
+                  <input id="audioVolume" type="range" min="0" max="1" step="0.05" value="0.75" />
+                  <span class="volume-value" id="audioVolumeValue">75%</span>
                 </label>
               </div>
+
+              <audio id="chapterAudio" preload="metadata">
+                <source id="chapterAudioSource" src="../../assets/audio/kjv/exodus-01.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
+
+              <p id="audioMessage" style="width:100%; margin:8px 0 0; color:#7c3cff; font-size:.82rem; font-weight:850;"></p>
               <button class="btn btn-secondary" id="exitReadMode">Show Ideas</button>
             </div>
           </div>
@@ -7072,6 +7079,9 @@
     const audioStopBtn = document.getElementById('audioStopBtn');
     const audioVolume = document.getElementById('audioVolume');
     const audioVolumeValue = document.getElementById('audioVolumeValue');
+    const chapterAudio = document.getElementById('chapterAudio');
+    const chapterAudioSource = document.getElementById('chapterAudioSource');
+    const audioMessage = document.getElementById('audioMessage');
 
     let exodusMap = null;
     let activeMapLayer = null;
@@ -7079,69 +7089,106 @@
 
 
 
-    let audioLevel = 0.55;
-    let currentUtterance = null;
+    let audioLevel = 0.75;
+
+    function getAudioPath(chapterNumber) {
+      const padded = String(chapterNumber).padStart(2, '0');
+      return `../../assets/audio/kjv/exodus-${padded}.mp3`;
+    }
 
     function updateAudioButtons(state = 'idle') {
       if (!audioPlayBtn || !audioPauseBtn || !audioStopBtn) return;
-      audioPlayBtn.textContent = state === 'playing' ? 'Restart Audio' : 'Play Audio';
-      audioPauseBtn.textContent = window.speechSynthesis && window.speechSynthesis.paused ? 'Resume' : 'Pause';
+
+      audioPlayBtn.textContent = state === 'playing' ? '↻ Restart Audio' : '▶ Play Audio';
+      audioPauseBtn.textContent = chapterAudio && chapterAudio.paused ? 'Resume' : 'Pause';
     }
 
-    function getChapterAudioText() {
-      const title = currentChapter?.title ? `${currentChapter.title}. ` : '';
-      const verses = (currentChapter?.verses || [])
-        .map(v => `Verse ${v.verse}. ${v.text}`)
-        .join(' ');
+    function updateAudioSource() {
+      if (!chapterAudio || !chapterAudioSource || !currentChapter) return;
 
-      return `Exodus chapter ${currentChapter.chapter}. ${title}${verses}`;
+      const path = getAudioPath(currentChapter.chapter);
+      const expectedEnding = `exodus-${String(currentChapter.chapter).padStart(2, '0')}.mp3`;
+
+      if (!chapterAudioSource.getAttribute('src') || !chapterAudioSource.getAttribute('src').endsWith(expectedEnding)) {
+        chapterAudio.pause();
+        chapterAudioSource.setAttribute('src', path);
+        chapterAudio.load();
+      }
+
+      chapterAudio.volume = audioLevel;
+
+      if (audioMessage) {
+        audioMessage.textContent = `Audio ready: Exodus ${currentChapter.chapter}.`;
+      }
     }
 
     function stopAudio() {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
-      currentUtterance = null;
+      if (!chapterAudio) return;
+
+      chapterAudio.pause();
+      chapterAudio.currentTime = 0;
+
+      if (audioPauseBtn) audioPauseBtn.textContent = 'Pause';
       updateAudioButtons('idle');
+
+      if (audioMessage && currentChapter) {
+        audioMessage.textContent = `Stopped Exodus ${currentChapter.chapter}.`;
+      }
     }
 
     function playChapterAudio() {
-      if (!('speechSynthesis' in window)) {
-        alert('Audio reading is not supported in this browser.');
-        return;
-      }
+      if (!chapterAudio) return;
 
-      window.speechSynthesis.cancel();
+      updateAudioSource();
+      chapterAudio.volume = audioLevel;
+      chapterAudio.currentTime = 0;
 
-      currentUtterance = new SpeechSynthesisUtterance(getChapterAudioText());
-      currentUtterance.volume = audioLevel;
-      currentUtterance.rate = 0.88;
-      currentUtterance.pitch = 1;
-      currentUtterance.lang = 'en-US';
-
-      currentUtterance.onstart = () => updateAudioButtons('playing');
-      currentUtterance.onend = () => {
-        currentUtterance = null;
-        updateAudioButtons('idle');
-      };
-      currentUtterance.onerror = () => {
-        currentUtterance = null;
-        updateAudioButtons('idle');
-      };
-
-      window.speechSynthesis.speak(currentUtterance);
+      chapterAudio.play()
+        .then(() => {
+          updateAudioButtons('playing');
+          if (audioMessage) audioMessage.textContent = `Playing Exodus ${currentChapter.chapter}.`;
+        })
+        .catch(() => {
+          if (audioMessage) {
+            audioMessage.textContent = `Audio could not play. Check this file path: assets/audio/kjv/exodus-${String(currentChapter.chapter).padStart(2, '0')}.mp3`;
+          }
+        });
     }
 
     function pauseOrResumeAudio() {
-      if (!('speechSynthesis' in window)) return;
+      if (!chapterAudio) return;
 
-      if (window.speechSynthesis.paused) {
-        window.speechSynthesis.resume();
-      } else if (window.speechSynthesis.speaking) {
-        window.speechSynthesis.pause();
+      if (chapterAudio.paused) {
+        chapterAudio.play()
+          .then(() => {
+            if (audioPauseBtn) audioPauseBtn.textContent = 'Pause';
+            updateAudioButtons('playing');
+            if (audioMessage) audioMessage.textContent = `Playing Exodus ${currentChapter.chapter}.`;
+          })
+          .catch(() => {
+            if (audioMessage) audioMessage.textContent = 'Audio could not resume. Check the MP3 file path.';
+          });
+      } else {
+        chapterAudio.pause();
+        if (audioPauseBtn) audioPauseBtn.textContent = 'Resume';
+        if (audioMessage) audioMessage.textContent = `Paused Exodus ${currentChapter.chapter}.`;
       }
+    }
 
-      updateAudioButtons(window.speechSynthesis.speaking ? 'playing' : 'idle');
+    if (chapterAudio) {
+      chapterAudio.volume = audioLevel;
+
+      chapterAudio.addEventListener('ended', () => {
+        updateAudioButtons('idle');
+        if (audioPauseBtn) audioPauseBtn.textContent = 'Pause';
+        if (audioMessage && currentChapter) audioMessage.textContent = `Finished Exodus ${currentChapter.chapter}.`;
+      });
+
+      chapterAudio.addEventListener('error', () => {
+        if (audioMessage && currentChapter) {
+          audioMessage.textContent = `Audio file missing or blocked. Check: assets/audio/kjv/exodus-${String(currentChapter.chapter).padStart(2, '0')}.mp3`;
+        }
+      });
     }
 
     function normalize(word) { return (word || '').toLowerCase().replace(/[^a-z]/g,''); }
@@ -7358,6 +7405,7 @@
       const chapterChanged = currentChapter && ch && currentChapter.chapter !== ch.chapter;
       if (chapterChanged) stopAudio();
       currentChapter = ch;
+      updateAudioSource();
       chapterTitle.textContent = `Exodus ${ch.chapter}`;
       chapterSummary.textContent = CHAPTER_SUMMARIES[ch.chapter] || ch.title || '';
       scripture.innerHTML = ch.verses.map(v => `<p class="verse"><sup class="vnum">${v.verse}</sup>${tokenize(v.text)}</p>`).join('');
@@ -7483,7 +7531,7 @@
       audioVolume.addEventListener('input', () => {
         audioLevel = Number(audioVolume.value);
         if (audioVolumeValue) audioVolumeValue.textContent = `${Math.round(audioLevel * 100)}%`;
-        if (currentUtterance) currentUtterance.volume = audioLevel;
+        if (chapterAudio) chapterAudio.volume = audioLevel;
       });
     }
 
