@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!-- Exodus deploy refresh: natural human MP3 audio via LibriVox + controls -->
 <html lang="en">
@@ -11,6 +12,12 @@
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
     crossorigin=""
+  />
+
+  <!-- Include WaveformPlayer styles for the modern audio player -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/@arraypress/waveform-player@latest/dist/waveform-player.css"
   />
 
   <style>
@@ -1225,6 +1232,11 @@
                   <input id="audioVolume" type="range" min="0" max="1" step="0.05" value="0.75" />
                   <span class="volume-value" id="audioVolumeValue">75%</span>
                 </label>
+                <!-- Modern waveform container for audio visualisation. The WaveformPlayer instance will be
+                     created dynamically in the script when the chapter changes. -->
+                <div id="waveformContainer" data-show-info="false" data-height="60" style="width:200px;"></div>
+                <!-- Button to open the personal notes panel -->
+                <button class="audio-btn secondary" id="openNotesBtn" type="button">Notes</button>
               </div>
 
               <audio id="chapterAudio" preload="metadata">
@@ -1233,6 +1245,10 @@
               </audio>
 
               <p id="audioMessage" style="width:100%; margin:8px 0 0; color:#7c3cff; font-size:.82rem; font-weight:850;">Natural voice stream ready. LibriVox Exodus audio is grouped by chapter ranges.</p>
+              <!-- Reading progress bar: filled according to chapters you have listened to or viewed. -->
+              <div class="chapter-progress" id="chapterProgress" style="width:100%; height:8px; background:var(--line); border-radius:4px; margin-top:4px; overflow:hidden;">
+                <div id="chapterProgressValue" style="height:100%; width:0%; background:var(--purple);"></div>
+              </div>
               <button class="btn btn-secondary" id="exitReadMode">Show Ideas</button>
             </div>
           </div>
@@ -1275,10 +1291,25 @@
 
   <aside class="word-popover" id="wordPopover"></aside>
 
+  <!-- Notes panel for personal study notes. It appears as an overlay when the Notes button is clicked. -->
+  <div class="note-panel" id="notePanel" style="display:none; position:fixed; bottom:20px; right:20px; width:300px; max-width:90%; background:var(--paper); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); padding:16px; z-index:100;">
+    <h3 style="margin-top:0; font-family:Georgia, serif; font-size:1.4rem;">Notes for <span id="noteChapterTitle"></span></h3>
+    <textarea id="noteText" rows="8" style="width:100%; border:1px solid var(--line); border-radius:8px; padding:8px;"></textarea>
+    <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end;">
+      <button id="saveNoteBtn" class="btn btn-primary" type="button">Save Note</button>
+      <button id="closeNoteBtn" class="btn btn-secondary" type="button">Close</button>
+    </div>
+  </div>
+
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin="">
+  </script>
+
+  <!-- Include WaveformPlayer library for waveform visualisation -->
+  <script
+    src="https://unpkg.com/@arraypress/waveform-player@latest/dist/waveform-player.js">
   </script>
 
   <script>
@@ -7083,6 +7114,30 @@
     const chapterAudioSource = document.getElementById('chapterAudioSource');
     const audioMessage = document.getElementById('audioMessage');
 
+    // Elements for the modern waveform player and personal notes.  The waveform
+    // player shows a visual representation of the current natural audio.  The
+    // notes panel allows readers to jot down their own study notes for each
+    // chapter.  Both are optional enhancements and are hidden or unused when
+    // their corresponding buttons are not clicked.
+    const waveformContainer = document.getElementById('waveformContainer');
+    const openNotesBtn = document.getElementById('openNotesBtn');
+    const notePanel = document.getElementById('notePanel');
+    const noteChapterTitle = document.getElementById('noteChapterTitle');
+    const noteText = document.getElementById('noteText');
+    const saveNoteBtn = document.getElementById('saveNoteBtn');
+    const closeNoteBtn = document.getElementById('closeNoteBtn');
+
+    // Track which chapters have been viewed to provide a reading progress bar.
+    // Persist the progress across sessions using localStorage.
+    let readChapters = {};
+    try {
+      readChapters = JSON.parse(localStorage.getItem('exodus_readChapters') || '{}');
+    } catch(e) {
+      readChapters = {};
+    }
+
+    const chapterProgressBar = document.getElementById('chapterProgressValue');
+
     let exodusMap = null;
     let activeMapLayer = null;
     let activePlaceKey = null;
@@ -7127,6 +7182,29 @@
 
       if (audioMessage) {
         audioMessage.textContent = `Natural voice ready: ${section.label}. This stream is grouped by chapter range, so use the seek bar if needed.`;
+      }
+
+      // Rebuild the waveform visualisation for the new audio source.  Destroy
+      // any existing players before creating a new one.  The WaveformPlayer
+      // library reads options from data attributes on the container.  We
+      // update the container's data-audio-url attribute to point to the
+      // currently selected stream and then instantiate the player.  If
+      // WaveformPlayer is not loaded or fails, simply ignore errors.
+      if (waveformContainer && typeof WaveformPlayer !== 'undefined') {
+        try {
+          // Destroy all existing waveform players to avoid memory leaks.
+          if (typeof WaveformPlayer.destroyAll === 'function') {
+            WaveformPlayer.destroyAll();
+          }
+        } catch (e) {}
+        // Set the audio URL on the container and clear its contents.
+        waveformContainer.setAttribute('data-audio-url', section.src);
+        waveformContainer.innerHTML = '';
+        try {
+          WaveformPlayer.create(waveformContainer);
+        } catch (e) {
+          // If instantiation fails (e.g., offline or library missing), fail silently.
+        }
       }
     }
 
@@ -7420,6 +7498,72 @@
         .join('');
     }
 
+    // Persist a chapter as read.  If the chapter hasn't been marked yet,
+    // update the readChapters object and save it to localStorage.  Keys
+    // correspond to chapter numbers.  Numbers are stored as strings since
+    // localStorage values are serialized JSON.
+    function markChapterAsRead(chNum) {
+      const key = String(chNum);
+      if (!readChapters[key]) {
+        readChapters[key] = true;
+        try {
+          localStorage.setItem('exodus_readChapters', JSON.stringify(readChapters));
+        } catch (e) {
+          // If localStorage is unavailable, ignore and continue silently.
+        }
+      }
+    }
+
+    // Compute and update the width of the reading progress bar based on how
+    // many chapters have been read.  If the progress bar element is
+    // available, set its width via inline style.  This function should be
+    // called whenever the readChapters state changes.
+    function updateProgressBar() {
+      if (!chapterProgressBar) return;
+      const total = DATA.chapters.length;
+      const readCount = Object.keys(readChapters).length;
+      const percent = Math.min(100, Math.round((readCount / total) * 100));
+      chapterProgressBar.style.width = `${percent}%`;
+    }
+
+    // Open the personal notes panel for the current chapter.  The panel
+    // displays a textarea where the reader can write their own notes.  Any
+    // existing notes saved in localStorage will be loaded into the
+    // textarea.  The chapter title is displayed at the top of the panel.
+    function openNotePanel() {
+      if (!currentChapter || !notePanel || !noteChapterTitle || !noteText) return;
+      noteChapterTitle.textContent = `Exodus ${currentChapter.chapter}`;
+      // Load existing note from localStorage if present.
+      const noteKey = `note_exodus_${currentChapter.chapter}`;
+      let saved = '';
+      try {
+        saved = localStorage.getItem(noteKey) || '';
+      } catch (e) {
+        saved = '';
+      }
+      noteText.value = saved;
+      notePanel.style.display = 'block';
+    }
+
+    // Save the current note back to localStorage and close the panel.
+    function saveNote() {
+      if (!currentChapter || !notePanel || !noteText) return;
+      const noteKey = `note_exodus_${currentChapter.chapter}`;
+      try {
+        localStorage.setItem(noteKey, noteText.value);
+      } catch (e) {
+        // Failing to save is non-critical; just proceed.
+      }
+      notePanel.style.display = 'none';
+    }
+
+    // Close the notes panel without saving changes.  The user can reopen
+    // the panel to edit again; unsaved changes will be lost.
+    function closeNotePanel() {
+      if (!notePanel) return;
+      notePanel.style.display = 'none';
+    }
+
     function renderChapter(ch) {
       const chapterChanged = currentChapter && ch && currentChapter.chapter !== ch.chapter;
       if (chapterChanged) stopAudio();
@@ -7430,6 +7574,12 @@
       scripture.innerHTML = ch.verses.map(v => `<p class="verse"><sup class="vnum">${v.verse}</sup>${tokenize(v.text)}</p>`).join('');
       renderChapterList();
       renderMapPlaceList();
+
+      // Mark the chapter as read and update the progress bar.  This helps
+      // readers see their progress through the book.  Store the read
+      // chapters in localStorage so progress is retained across sessions.
+      markChapterAsRead(ch.chapter);
+      updateProgressBar();
     }
 
     function occurrences(raw) {
@@ -7556,6 +7706,19 @@
 
     window.addEventListener('beforeunload', stopAudio);
 
+    // Notes panel event handlers.  These allow the user to open the
+    // personal notes panel, save notes, and close the panel.  We bind
+    // listeners only when the corresponding elements exist on the page.
+    if (openNotesBtn) {
+      openNotesBtn.addEventListener('click', openNotePanel);
+    }
+    if (saveNoteBtn) {
+      saveNoteBtn.addEventListener('click', saveNote);
+    }
+    if (closeNoteBtn) {
+      closeNoteBtn.addEventListener('click', closeNotePanel);
+    }
+
 
     if (openChapterDrawerBtn) {
       openChapterDrawerBtn.addEventListener('click', openChapterDrawer);
@@ -7631,6 +7794,9 @@
       searchTerm = normalize(searchBox.value);
       renderChapter(currentChapter);
     });
+
+    // Initialize progress bar to reflect any previously read chapters.
+    updateProgressBar();
 
     renderChapter(currentChapter);
     renderMapPlaceList();
