@@ -122,7 +122,7 @@
       position: relative;
       width: 100%;
       min-height: clamp(310px, 48vw, 560px);
-      background-image: url("./assets/about-static.png");
+      background-image: url("../assets/about-static.png");
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
@@ -313,7 +313,7 @@
     .feature-image-frame {
       width: 100%;
       min-height: clamp(220px, 32vw, 420px);
-      background-image: url("./assets/about-feature-image.png");
+      background-image: url("../assets/about-feature-image.png");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -1183,7 +1183,7 @@
     <section class="profile-band">
       <div class="container profile-inner">
         <div class="profile-photo">
-          <img src="./assets/calvin-photo.jpg.png" alt="Calvin in front of a map" />
+          <img src="../assets/calvin-photo.jpg.png" alt="Calvin in front of a map" />
         </div>
 
         <div class="profile-meta">
@@ -1214,17 +1214,17 @@
 
           <div class="social-row" aria-label="Follow Bible Mapped">
             <a class="social-link" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noreferrer">
-              <img src="./assets/youtube-logo.png" alt="YouTube" />
+              <img src="../assets/youtube-logo.png" alt="YouTube" />
               <span>YouTube</span>
             </a>
 
             <a class="social-link" href="https://www.tiktok.com/@biblemapped?is_from_webapp=1&amp;sender_device=pc" target="_blank" rel="noreferrer">
-              <img src="./assets/tiktok-logo.png" alt="TikTok" />
+              <img src="../assets/tiktok-logo.png" alt="TikTok" />
               <span>TikTok</span>
             </a>
 
             <a class="social-link" href="https://www.instagram.com/biblemapped/" target="_blank" rel="noreferrer">
-              <img src="./assets/instagram-logo.png" alt="Instagram" />
+              <img src="../assets/instagram-logo.png" alt="Instagram" />
               <span>Instagram</span>
             </a>
           </div>
@@ -1310,7 +1310,7 @@
                 <div
                   class="slot-shape slot-circle"
                   data-label="Add place image"
-                  data-image-src="./assets/formula-place.png"
+                  data-image-src="../assets/formula-place.png"
                 ></div>
 
                 <h4>Places</h4>
@@ -1323,7 +1323,7 @@
                 <div
                   class="slot-shape slot-portrait"
                   data-label="Add people image"
-                  data-image-src="./assets/formula-people.png"
+                  data-image-src="../assets/formula-people.png"
                 ></div>
 
                 <h4>People</h4>
@@ -1336,7 +1336,7 @@
                 <div
                   class="slot-shape slot-landscape"
                   data-label="Add time image"
-                  data-image-src="./assets/formula-time.png"
+                  data-image-src="../assets/formula-time.png"
                 ></div>
 
                 <h4>Time</h4>
@@ -1404,7 +1404,7 @@
         featureImageFrame.classList.add("has-image");
       };
 
-      testImage.src = "./assets/about-feature-image.png";
+      testImage.src = "../assets/about-feature-image.png";
     }
 
     const formulaSlots = document.querySelectorAll(".slot-shape[data-image-src]");
