@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Exodus deploy refresh: fixed MP3 audio path + controls -->
+<!-- Exodus deploy refresh: natural human MP3 audio via LibriVox + controls -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -1228,11 +1228,11 @@
               </div>
 
               <audio id="chapterAudio" preload="metadata">
-                <source id="chapterAudioSource" src="../../assets/audio/kjv/exodus-01.mp3" type="audio/mpeg">
+                <source id="chapterAudioSource" src="https://www.archive.org/download/bible_kjv_complete_2001_librivox/bible_006_kjv_64kb.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
               </audio>
 
-              <p id="audioMessage" style="width:100%; margin:8px 0 0; color:#7c3cff; font-size:.82rem; font-weight:850;"></p>
+              <p id="audioMessage" style="width:100%; margin:8px 0 0; color:#7c3cff; font-size:.82rem; font-weight:850;">Natural voice stream ready. LibriVox Exodus audio is grouped by chapter ranges.</p>
               <button class="btn btn-secondary" id="exitReadMode">Show Ideas</button>
             </div>
           </div>
@@ -7091,34 +7091,42 @@
 
     let audioLevel = 0.75;
 
-    function getAudioPath(chapterNumber) {
-      const padded = String(chapterNumber).padStart(2, '0');
-      return `../../assets/audio/kjv/exodus-${padded}.mp3`;
+    // Natural human narration. These are LibriVox/Internet Archive MP3 streams,
+    // read by Michael Armenta. They are grouped by chapter range, not one file per chapter.
+    const LIBRIVOX_EXODUS_AUDIO = [
+      { start: 1, end: 10, label: 'Exodus 1–10', src: 'https://www.archive.org/download/bible_kjv_complete_2001_librivox/bible_006_kjv_64kb.mp3' },
+      { start: 11, end: 22, label: 'Exodus 11–22', src: 'https://www.archive.org/download/bible_kjv_complete_2001_librivox/bible_007_kjv_64kb.mp3' },
+      { start: 23, end: 33, label: 'Exodus 23–33', src: 'https://www.archive.org/download/bible_kjv_complete_2001_librivox/bible_008_kjv_64kb.mp3' },
+      { start: 34, end: 40, label: 'Exodus 34–40', src: 'https://www.archive.org/download/bible_kjv_complete_2001_librivox/bible_009_kjv_64kb.mp3' }
+    ];
+
+    function getNaturalAudioSection(chapterNumber) {
+      return LIBRIVOX_EXODUS_AUDIO.find(section => chapterNumber >= section.start && chapterNumber <= section.end) || LIBRIVOX_EXODUS_AUDIO[0];
     }
 
     function updateAudioButtons(state = 'idle') {
       if (!audioPlayBtn || !audioPauseBtn || !audioStopBtn) return;
 
-      audioPlayBtn.textContent = state === 'playing' ? '↻ Restart Audio' : '▶ Play Audio';
+      audioPlayBtn.textContent = state === 'playing' ? '↻ Restart Natural Audio' : '▶ Play Natural Audio';
       audioPauseBtn.textContent = chapterAudio && chapterAudio.paused ? 'Resume' : 'Pause';
     }
 
     function updateAudioSource() {
       if (!chapterAudio || !chapterAudioSource || !currentChapter) return;
 
-      const path = getAudioPath(currentChapter.chapter);
-      const expectedEnding = `exodus-${String(currentChapter.chapter).padStart(2, '0')}.mp3`;
+      const section = getNaturalAudioSection(currentChapter.chapter);
+      const currentSrc = chapterAudioSource.getAttribute('src');
 
-      if (!chapterAudioSource.getAttribute('src') || !chapterAudioSource.getAttribute('src').endsWith(expectedEnding)) {
+      if (currentSrc !== section.src) {
         chapterAudio.pause();
-        chapterAudioSource.setAttribute('src', path);
+        chapterAudioSource.setAttribute('src', section.src);
         chapterAudio.load();
       }
 
       chapterAudio.volume = audioLevel;
 
       if (audioMessage) {
-        audioMessage.textContent = `Audio ready: Exodus ${currentChapter.chapter}.`;
+        audioMessage.textContent = `Natural voice ready: ${section.label}. This stream is grouped by chapter range, so use the seek bar if needed.`;
       }
     }
 
@@ -7132,46 +7140,53 @@
       updateAudioButtons('idle');
 
       if (audioMessage && currentChapter) {
-        audioMessage.textContent = `Stopped Exodus ${currentChapter.chapter}.`;
+        const section = getNaturalAudioSection(currentChapter.chapter);
+        audioMessage.textContent = `Stopped natural audio: ${section.label}.`;
       }
     }
 
     function playChapterAudio() {
-      if (!chapterAudio) return;
+      if (!chapterAudio || !currentChapter) return;
 
       updateAudioSource();
       chapterAudio.volume = audioLevel;
       chapterAudio.currentTime = 0;
 
+      const section = getNaturalAudioSection(currentChapter.chapter);
+
       chapterAudio.play()
         .then(() => {
           updateAudioButtons('playing');
-          if (audioMessage) audioMessage.textContent = `Playing Exodus ${currentChapter.chapter}.`;
+          if (audioMessage) {
+            audioMessage.textContent = `Playing natural voice: ${section.label}. This is a human LibriVox recording, not robotic browser speech.`;
+          }
         })
         .catch(() => {
           if (audioMessage) {
-            audioMessage.textContent = `Audio could not play. Check this file path: assets/audio/kjv/exodus-${String(currentChapter.chapter).padStart(2, '0')}.mp3`;
+            audioMessage.textContent = 'Natural audio could not play. The stream may be blocked, offline, or blocked by the browser. Try again or host the MP3 files locally.';
           }
         });
     }
 
     function pauseOrResumeAudio() {
-      if (!chapterAudio) return;
+      if (!chapterAudio || !currentChapter) return;
+
+      const section = getNaturalAudioSection(currentChapter.chapter);
 
       if (chapterAudio.paused) {
         chapterAudio.play()
           .then(() => {
             if (audioPauseBtn) audioPauseBtn.textContent = 'Pause';
             updateAudioButtons('playing');
-            if (audioMessage) audioMessage.textContent = `Playing Exodus ${currentChapter.chapter}.`;
+            if (audioMessage) audioMessage.textContent = `Playing natural voice: ${section.label}.`;
           })
           .catch(() => {
-            if (audioMessage) audioMessage.textContent = 'Audio could not resume. Check the MP3 file path.';
+            if (audioMessage) audioMessage.textContent = 'Natural audio could not resume. Try pressing Play Natural Audio again.';
           });
       } else {
         chapterAudio.pause();
         if (audioPauseBtn) audioPauseBtn.textContent = 'Resume';
-        if (audioMessage) audioMessage.textContent = `Paused Exodus ${currentChapter.chapter}.`;
+        if (audioMessage) audioMessage.textContent = `Paused natural audio: ${section.label}.`;
       }
     }
 
@@ -7181,12 +7196,16 @@
       chapterAudio.addEventListener('ended', () => {
         updateAudioButtons('idle');
         if (audioPauseBtn) audioPauseBtn.textContent = 'Pause';
-        if (audioMessage && currentChapter) audioMessage.textContent = `Finished Exodus ${currentChapter.chapter}.`;
+        if (audioMessage && currentChapter) {
+          const section = getNaturalAudioSection(currentChapter.chapter);
+          audioMessage.textContent = `Finished natural audio: ${section.label}.`;
+        }
       });
 
       chapterAudio.addEventListener('error', () => {
         if (audioMessage && currentChapter) {
-          audioMessage.textContent = `Audio file missing or blocked. Check: assets/audio/kjv/exodus-${String(currentChapter.chapter).padStart(2, '0')}.mp3`;
+          const section = getNaturalAudioSection(currentChapter.chapter);
+          audioMessage.textContent = `Natural audio file missing or blocked: ${section.label}. Try hosting the MP3 locally if this keeps happening.`;
         }
       });
     }
