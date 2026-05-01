@@ -104,7 +104,6 @@
       color: white;
       font-size: 0.86rem;
       font-weight: 900;
-      letter-spacing: 0.01em;
       transition: background 180ms ease, transform 180ms ease;
     }
 
@@ -135,24 +134,7 @@
       position: absolute;
       inset: 0;
       z-index: 1;
-      background:
-        linear-gradient(
-          to bottom,
-          rgba(248, 247, 242, 0.06) 0%,
-          rgba(248, 247, 242, 0.02) 42%,
-          rgba(248, 247, 242, 0.48) 78%,
-          rgba(248, 247, 242, 0.86) 92%,
-          rgba(248, 247, 242, 1) 100%
-        ),
-        linear-gradient(
-          to right,
-          rgba(248, 247, 242, 0.86) 0%,
-          rgba(248, 247, 242, 0.18) 9%,
-          rgba(248, 247, 242, 0) 19%,
-          rgba(248, 247, 242, 0) 81%,
-          rgba(248, 247, 242, 0.18) 91%,
-          rgba(248, 247, 242, 0.86) 100%
-        );
+      background: rgba(248, 247, 242, 0.12);
       pointer-events: none;
     }
 
@@ -164,7 +146,8 @@
       bottom: -1px;
       height: 36%;
       z-index: 2;
-      background: linear-gradient(to bottom, rgba(248, 247, 242, 0), var(--cloud) 82%);
+      background: var(--cloud);
+      opacity: 0.86;
       pointer-events: none;
     }
 
@@ -214,6 +197,44 @@
       padding: 0.06em 0.16em 0.1em;
       box-decoration-break: clone;
       -webkit-box-decoration-break: clone;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: bannerPanUp 900ms cubic-bezier(.2,.8,.2,1) forwards;
+    }
+
+    .title-line:nth-child(1) {
+      animation-delay: 120ms;
+    }
+
+    .title-line:nth-child(2) {
+      animation-delay: 260ms;
+    }
+
+    .title-line:nth-child(3) {
+      animation-delay: 400ms;
+    }
+
+    .title-line::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.11);
+      transform: translateY(110%);
+      animation: bannerLightPan 5.8s ease-in-out infinite;
+      animation-delay: 1.2s;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .title-line:nth-child(2)::after {
+      animation-delay: 1.8s;
+    }
+
+    .title-line:nth-child(3)::after {
+      animation-delay: 2.4s;
     }
 
     .title-purple {
@@ -229,6 +250,49 @@
     .title-navy {
       background: var(--navy);
       color: white;
+    }
+
+    @keyframes bannerPanUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bannerLightPan {
+      0%,
+      68% {
+        transform: translateY(110%);
+        opacity: 0;
+      }
+
+      78% {
+        opacity: 0.42;
+      }
+
+      100% {
+        transform: translateY(-110%);
+        opacity: 0;
+      }
+    }
+
+    .banner-scroll-pan {
+      opacity: 0;
+      transform: translateY(22px);
+      transition:
+        opacity 760ms ease,
+        transform 920ms cubic-bezier(.2,.8,.2,1);
+      transition-delay: var(--banner-delay, 0ms);
+    }
+
+    .banner-scroll-pan.is-visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .feature-image-wrap {
@@ -261,11 +325,7 @@
       font-weight: 950;
       letter-spacing: 0.09em;
       text-transform: uppercase;
-      background:
-        linear-gradient(rgba(248,247,242,0.52), rgba(248,247,242,0.52)),
-        repeating-linear-gradient(90deg, rgba(21,21,21,0.05) 0 1px, transparent 1px 48px),
-        repeating-linear-gradient(0deg, rgba(21,21,21,0.04) 0 1px, transparent 1px 48px),
-        var(--paper);
+      background: var(--paper);
       z-index: 1;
     }
 
@@ -278,100 +338,8 @@
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background: linear-gradient(
-        to bottom,
-        rgba(248, 247, 242, 0.04) 0%,
-        rgba(248, 247, 242, 0.00) 55%,
-        rgba(248, 247, 242, 0.16) 78%,
-        rgba(248, 247, 242, 0.32) 100%
-      );
+      background: rgba(248, 247, 242, 0.08);
       z-index: 2;
-    }
-
-    .profile-band {
-      padding: 0 0 44px;
-      background: var(--cloud);
-    }
-
-    .profile-inner {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 24px;
-      align-items: center;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      padding: 22px 0;
-    }
-
-    .profile-photo {
-      width: 220px;
-      aspect-ratio: 4 / 5;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    .profile-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .profile-meta h2 {
-      font-size: clamp(1.8rem, 3.6vw, 3.5rem);
-      line-height: 0.96;
-      letter-spacing: -0.06em;
-      font-weight: 950;
-      margin-bottom: 10px;
-    }
-
-    .profile-meta p {
-      max-width: 720px;
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    .profile-meta p + p {
-      margin-top: 12px;
-    }
-
-    .social-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 18px;
-      align-items: center;
-    }
-
-    .social-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      min-height: 44px;
-      padding: 7px 13px 7px 7px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--white);
-      color: var(--charcoal);
-      font-size: 0.9rem;
-      font-weight: 850;
-      transition: transform 180ms ease, box-shadow 180ms ease;
-    }
-
-    .social-link:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-    }
-
-    .social-link img {
-      width: 30px;
-      height: 30px;
-      padding: 5px;
-      border-radius: 999px;
-      object-fit: contain;
-      background: var(--cloud);
-      border: 1px solid rgba(21, 21, 21, 0.08);
     }
 
     .gospel-section {
@@ -550,6 +518,92 @@
       font-size: 0.97rem !important;
     }
 
+    .profile-band {
+      padding: 44px 0;
+      background: var(--cloud);
+    }
+
+    .profile-inner {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 24px;
+      align-items: center;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 22px 0;
+    }
+
+    .profile-photo {
+      width: 220px;
+      aspect-ratio: 4 / 5;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .profile-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-meta h2 {
+      font-size: clamp(1.8rem, 3.6vw, 3.5rem);
+      line-height: 0.96;
+      letter-spacing: -0.06em;
+      font-weight: 950;
+      margin-bottom: 10px;
+    }
+
+    .profile-meta p {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .profile-meta p + p {
+      margin-top: 12px;
+    }
+
+    .social-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+      align-items: center;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 44px;
+      padding: 7px 13px 7px 7px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--charcoal);
+      font-size: 0.9rem;
+      font-weight: 850;
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .social-link:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .social-link img {
+      width: 30px;
+      height: 30px;
+      padding: 5px;
+      border-radius: 999px;
+      object-fit: contain;
+      background: var(--cloud);
+      border: 1px solid rgba(21, 21, 21, 0.08);
+    }
+
     .mission-section {
       background: var(--cloud);
       padding: 64px 0 74px;
@@ -590,53 +644,214 @@
     }
 
     .framework-block {
-      margin-top: 30px;
+      margin-top: 34px;
       border-top: 1px solid var(--line);
-      padding-top: 24px;
+      padding-top: 26px;
     }
 
     .framework-block h3 {
-      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      font-size: clamp(1.7rem, 3.2vw, 2.8rem);
       line-height: 1;
       letter-spacing: -0.055em;
-      margin-bottom: 18px;
+      margin-bottom: 12px;
     }
 
-    .framework-grid {
+    .formula-intro {
+      max-width: 760px;
+      color: var(--muted) !important;
+      margin-bottom: 22px !important;
+      font-size: 1rem !important;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+    }
+
+    .formula-row {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+      align-items: stretch;
+      gap: 14px;
+      width: 100%;
+    }
+
+    .formula-card {
+      position: relative;
+      min-height: 320px;
+      padding: 18px;
       border: 1px solid var(--line);
       background: var(--paper);
-    }
-
-    .framework-card {
-      min-height: 138px;
-      padding: 18px;
-      border-right: 1px solid var(--line);
+      box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
+      gap: 16px;
+      opacity: 0;
+      transform: translateY(28px) scale(0.985);
+      animation: formulaPop 620ms cubic-bezier(.2,.8,.2,1) forwards;
+      overflow: hidden;
     }
 
-    .framework-card:last-child {
-      border-right: 0;
+    .formula-card::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 6px;
+      background: var(--purple);
+      opacity: 0.14;
     }
 
-    .framework-card h4 {
+    .formula-card h4 {
       font-size: 0.92rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--purple);
-      margin-bottom: 12px;
+      margin: 0;
     }
 
-    .framework-card p {
-      margin: 0;
-      color: var(--charcoal);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: 0.98rem;
-      font-weight: 850;
-      line-height: 1.35;
+    .formula-question {
+      margin-top: auto !important;
+      margin-bottom: 0 !important;
+      font-size: 1rem !important;
+      font-weight: 900;
+      line-height: 1.35 !important;
+      color: var(--charcoal) !important;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+    }
+
+    .formula-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(1.4rem, 2.4vw, 2rem);
+      font-weight: 950;
+      color: var(--purple);
+      opacity: 0;
+      transform: translateY(18px);
+      animation: arrowPop 560ms cubic-bezier(.2,.8,.2,1) forwards;
+    }
+
+    .formula-card:nth-child(1) {
+      animation-delay: 90ms;
+    }
+
+    .formula-arrow:nth-child(2) {
+      animation-delay: 180ms;
+    }
+
+    .formula-card:nth-child(3) {
+      animation-delay: 270ms;
+    }
+
+    .formula-arrow:nth-child(4) {
+      animation-delay: 360ms;
+    }
+
+    .formula-card:nth-child(5) {
+      animation-delay: 450ms;
+    }
+
+    .formula-arrow:nth-child(6) {
+      animation-delay: 540ms;
+    }
+
+    .formula-card:nth-child(7) {
+      animation-delay: 630ms;
+    }
+
+    .slot-shape {
+      position: relative;
+      width: 100%;
+      background: var(--cloud);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .slot-shape::before {
+      content: attr(data-label);
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: var(--paper);
+      z-index: 1;
+      text-align: center;
+      padding: 12px;
+    }
+
+    .slot-shape.has-image::before {
+      display: none;
+    }
+
+    .slot-circle {
+      width: min(180px, 100%);
+      aspect-ratio: 1 / 1;
+      border-radius: 999px;
+      margin: 0 auto;
+    }
+
+    .slot-portrait {
+      min-height: 190px;
+      aspect-ratio: 3 / 4;
+      width: min(100%, 180px);
+      margin: 0 auto;
+      border-radius: 18px;
+    }
+
+    .slot-landscape {
+      min-height: 160px;
+      aspect-ratio: 4 / 3;
+      width: 100%;
+      border-radius: 18px;
+    }
+
+    .slot-question {
+      width: min(180px, 100%);
+      aspect-ratio: 1 / 1;
+      border-radius: 28px;
+      margin: 0 auto;
+      font-size: 3.6rem;
+      font-weight: 950;
+      color: var(--purple);
+    }
+
+    .slot-question::before {
+      content: "?";
+      font-size: 3.8rem;
+      color: var(--purple);
+      background: var(--paper);
+    }
+
+    @keyframes formulaPop {
+      from {
+        opacity: 0;
+        transform: translateY(28px) scale(0.985);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes arrowPop {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     footer {
@@ -660,29 +875,39 @@
       font-size: 0.92rem;
     }
 
+    @media (max-width: 1040px) {
+      .formula-row {
+        grid-template-columns: 1fr;
+      }
+
+      .formula-arrow {
+        transform: rotate(90deg);
+        min-height: 22px;
+      }
+
+      @keyframes arrowPop {
+        from {
+          opacity: 0;
+          transform: rotate(90deg) translateX(-14px);
+        }
+
+        to {
+          opacity: 1;
+          transform: rotate(90deg) translateX(0);
+        }
+      }
+
+      .formula-card {
+        min-height: auto;
+      }
+    }
+
     @media (max-width: 900px) {
       .gospel-header,
-      .mission-grid,
       .profile-inner,
       .rail-step {
         grid-template-columns: 1fr;
       }
-
-      .framework-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .framework-card {
-        min-height: auto;
-        border-right: 0;
-        border-bottom: 1px solid var(--line);
-        gap: 12px;
-      }
-
-      .framework-card:last-child {
-        border-bottom: 0;
-      }
-
 
       .profile-photo {
         width: 180px;
@@ -734,6 +959,29 @@
       .rail-content h3 {
         font-size: clamp(1.8rem, 11vw, 3rem);
       }
+
+      .slot-circle,
+      .slot-question {
+        width: min(150px, 100%);
+      }
+
+      .slot-portrait {
+        width: min(100%, 160px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .title-line,
+      .title-line::after,
+      .banner-scroll-pan,
+      .banner-scroll-pan.is-visible,
+      .formula-card,
+      .formula-arrow {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
     }
   </style>
 </head>
@@ -752,6 +1000,7 @@
 
       <div class="container hero-grid">
         <span class="eyebrow">About</span>
+
         <h1 class="hero-title">
           <span class="title-line title-purple">Bible Mapped helps you</span>
           <span class="title-line title-red">understand where</span>
@@ -768,8 +1017,10 @@
       <div class="container">
         <div class="gospel-header">
           <h2 class="section-title">The Gospel comes first.</h2>
+
           <p class="section-copy">
-            None of this matters if Jesus did not rise from the dead. And He did. This guide walks you through the question of salvation with Scripture and clear steps.
+            None of this matters if Jesus did not rise from the dead. And He did.
+            This guide walks you through the question of salvation with Scripture and clear steps.
           </p>
         </div>
 
@@ -787,9 +1038,11 @@
           <div class="rail-window">
             <article class="rail-step active" data-step="0">
               <span class="rail-label">Question 1</span>
+
               <div class="rail-content">
                 <h3>If you died tonight, would you know for sure that you are going to heaven?</h3>
                 <p>This is not meant to scare you. It is meant to bring the most important question into focus.</p>
+
                 <div class="rail-actions">
                   <button class="rail-btn" data-next="1">Yes</button>
                   <button class="rail-btn" data-next="1">No</button>
@@ -800,9 +1053,11 @@
 
             <article class="rail-step" data-step="1">
               <span class="rail-label">Question 2</span>
+
               <div class="rail-content">
                 <h3>If God asked why He should let you into heaven, what would your answer be?</h3>
                 <p>Many people answer with good works, religion, sincerity, or trying hard. But the Bible starts with our need for grace.</p>
+
                 <div class="rail-actions">
                   <button class="rail-btn" data-next="2">I tried to be good</button>
                   <button class="rail-btn" data-next="2">I believe in Jesus</button>
@@ -813,10 +1068,12 @@
 
             <article class="rail-step" data-step="2">
               <span class="rail-label">Step 1</span>
+
               <div class="rail-content">
                 <h3>All have sinned.</h3>
                 <p>The Bible says every person has sinned before a holy God. We do not start with self-improvement. We start with truth.</p>
                 <span class="verse-pill">Romans 3:23</span>
+
                 <div class="rail-actions">
                   <button class="rail-btn primary" data-next="3">Continue</button>
                   <button class="rail-btn" data-next="1">Back</button>
@@ -826,10 +1083,12 @@
 
             <article class="rail-step" data-step="3">
               <span class="rail-label">Step 2</span>
+
               <div class="rail-content">
                 <h3>Sin brings death, but God offers life.</h3>
                 <p>Sin separates us from God, and the wages of sin is death. But the gift of God is eternal life through Jesus Christ our Lord.</p>
                 <span class="verse-pill">Romans 6:23</span>
+
                 <div class="rail-actions">
                   <button class="rail-btn primary" data-next="4">Continue</button>
                   <button class="rail-btn" data-next="2">Back</button>
@@ -839,10 +1098,12 @@
 
             <article class="rail-step" data-step="4">
               <span class="rail-label">Step 3</span>
+
               <div class="rail-content">
                 <h3>Christ died for us.</h3>
                 <p>God showed His love toward us in that while we were still sinners, Christ died for us. The center of salvation is what Jesus did.</p>
                 <span class="verse-pill">Romans 5:8</span>
+
                 <div class="rail-actions">
                   <button class="rail-btn primary" data-next="5">Continue</button>
                   <button class="rail-btn" data-next="3">Back</button>
@@ -852,10 +1113,12 @@
 
             <article class="rail-step" data-step="5">
               <span class="rail-label">Step 4</span>
+
               <div class="rail-content">
                 <h3>Believe and call on the Lord.</h3>
                 <p>The Bible connects salvation to faith in Christ, confession, and calling on the Lord from the heart.</p>
                 <span class="verse-pill">Romans 10:9–10, 13</span>
+
                 <div class="rail-actions">
                   <button class="rail-btn primary" data-next="6">Show the prayer</button>
                   <button class="rail-btn" data-next="4">Back</button>
@@ -865,16 +1128,22 @@
 
             <article class="rail-step" data-step="6">
               <span class="rail-label">Prayer</span>
+
               <div class="rail-content">
                 <h3>A prayer of confession and faith.</h3>
+
                 <div class="prayer-line">
                   <p>
-                    Lord Jesus, I know that I have sinned. I believe You died for my sins and rose again. I turn to You, trust You, and ask You to save me. Thank You for Your grace and forgiveness. Amen.
+                    Lord Jesus, I know that I have sinned. I believe You died for my sins and rose again.
+                    I turn to You, trust You, and ask You to save me. Thank You for Your grace and forgiveness. Amen.
                   </p>
                 </div>
+
                 <p class="prayer-note">
-                  <strong>The prayer is not magic.</strong> These words do not save by themselves. What matters is true faith in Jesus Christ — trusting Him from the heart.
+                  <strong>The prayer is not magic.</strong> These words do not save by themselves.
+                  What matters is true faith in Jesus Christ — trusting Him from the heart.
                 </p>
+
                 <div class="rail-actions">
                   <button class="rail-btn" data-next="0">Start over</button>
                 </div>
@@ -893,20 +1162,22 @@
 
         <div class="profile-meta">
           <h2>Meet Calvin</h2>
+
+          <p>I am a Christian, a husband, a father, and the heart behind Bible Mapped.</p>
+
           <p>
-            I am a Christian, a husband, a father, and the heart behind Bible Mapped.
+            I was saved in 2008, and since then, I have loved telling people about Jesus Christ.
+            Over the years, I’ve walked through faith, doubt, Bible college, church hurt, and questions about God.
+            But through it all, I keep coming back to this conviction:
           </p>
+
+          <p><strong>God’s Word is true, even when man fails.</strong></p>
+
+          <p>Bible Mapped was born from that journey.</p>
+
           <p>
-            I was saved in 2008, and since then, I have loved telling people about Jesus Christ. Over the years, I’ve walked through faith, doubt, Bible college, church hurt, and questions about God. But through it all, I keep coming back to this conviction:
-          </p>
-          <p>
-            <strong>God’s Word is true, even when man fails.</strong>
-          </p>
-          <p>
-            Bible Mapped was born from that journey.
-          </p>
-          <p>
-            It exists to help people slow down, look closer, and see the Bible as a real story grounded in real places, real people, real history, language, and meaning — all pointing to Jesus Christ.
+            It exists to help people slow down, look closer, and see the Bible as a real story grounded in real places,
+            real people, real history, language, and meaning — all pointing to Jesus Christ.
           </p>
 
           <div class="social-row" aria-label="Follow Bible Mapped">
@@ -939,40 +1210,68 @@
           </div>
 
           <p>
-            Bible Mapped helps people see Scripture through real places, real people, real timelines, and real meaning. From Abraham and Lot to Eden, Jerusalem, and the Kidron Valley, the Bible tells a story grounded in history and aimed at the human condition.
+            Bible Mapped helps people see Scripture through real places, real people, real timelines, and real meaning.
+            From Abraham and Lot to Eden, Jerusalem, and the Kidron Valley, the Bible tells a story grounded in history and aimed at the human condition.
           </p>
 
           <p>
-            This is not about moving people into a denomination. It is about helping people follow the trail of Scripture and see how the whole story points to Jesus Christ: His life, death, and resurrection.
+            This is not about moving people into a denomination.
+            It is about helping people follow the trail of Scripture and see how the whole story points to Jesus Christ:
+            His life, death, and resurrection.
           </p>
 
-          <div class="framework-block" aria-label="Bible Mapped framework">
-            <h3>Places · People · Time · Meaning · Jesus</h3>
+          <div class="framework-block" aria-label="Bible Mapped formula">
+            <h3>The Formula</h3>
 
-            <div class="framework-grid">
-              <div class="framework-card">
+            <p class="formula-intro">
+              This is the simple Bible Mapped flow: place, people, time, and meaning.
+            </p>
+
+            <div class="formula-row">
+              <div class="formula-card">
+                <div
+                  class="slot-shape slot-circle"
+                  data-label="Add place image"
+                  data-image-src="../assets/formula-place.png"
+                ></div>
+
                 <h4>Places</h4>
-                <p>Where did it happen?</p>
+                <p class="formula-question">Where did it happen?</p>
               </div>
 
-              <div class="framework-card">
+              <div class="formula-arrow" aria-hidden="true">→</div>
+
+              <div class="formula-card">
+                <div
+                  class="slot-shape slot-portrait"
+                  data-label="Add people image"
+                  data-image-src="../assets/formula-people.png"
+                ></div>
+
                 <h4>People</h4>
-                <p>Who was involved?</p>
+                <p class="formula-question">Who was involved?</p>
               </div>
 
-              <div class="framework-card">
+              <div class="formula-arrow" aria-hidden="true">→</div>
+
+              <div class="formula-card">
+                <div
+                  class="slot-shape slot-landscape"
+                  data-label="Add time image"
+                  data-image-src="../assets/formula-time.png"
+                ></div>
+
                 <h4>Time</h4>
-                <p>When did it happen?</p>
+                <p class="formula-question">When did it happen?</p>
               </div>
 
-              <div class="framework-card">
+              <div class="formula-arrow" aria-hidden="true">→</div>
+
+              <div class="formula-card">
+                <div class="slot-shape slot-question" data-label="Meaning"></div>
+
                 <h4>Meaning</h4>
-                <p>Why does it matter?</p>
-              </div>
-
-              <div class="framework-card">
-                <h4>Jesus</h4>
-                <p>How does it point to Christ?</p>
+                <p class="formula-question">Why does it matter?</p>
               </div>
             </div>
           </div>
@@ -1019,11 +1318,56 @@
     });
 
     const featureImageFrame = document.querySelector(".feature-image-frame");
+
     if (featureImageFrame) {
       const testImage = new Image();
-      testImage.onload = () => featureImageFrame.classList.add("has-image");
+
+      testImage.onload = () => {
+        featureImageFrame.classList.add("has-image");
+      };
+
       testImage.src = "../assets/about-feature-image.png";
     }
+
+    const formulaSlots = document.querySelectorAll(".slot-shape[data-image-src]");
+
+    formulaSlots.forEach((slot) => {
+      const src = slot.dataset.imageSrc;
+
+      if (!src) return;
+
+      const testImage = new Image();
+
+      testImage.onload = () => {
+        slot.classList.add("has-image");
+        slot.style.backgroundImage = `url("${src}")`;
+      };
+
+      testImage.src = src;
+    });
+
+    const bannerLines = document.querySelectorAll(".title-line");
+
+    bannerLines.forEach((line, index) => {
+      line.classList.add("banner-scroll-pan");
+      line.style.setProperty("--banner-delay", `${index * 90}ms`);
+    });
+
+    const bannerObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle("is-visible", entry.isIntersecting);
+        });
+      },
+      {
+        threshold: 0.18,
+        rootMargin: "0px 0px -6% 0px"
+      }
+    );
+
+    bannerLines.forEach((line) => {
+      bannerObserver.observe(line);
+    });
   </script>
 </body>
 </html>
