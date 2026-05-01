@@ -803,17 +803,18 @@
       border-radius: 18px;
     }
 
-    .slot-question {
+    .slot-question-shape {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: min(180px, 100%);
-      aspect-ratio: 1 / 1;
-      border-radius: 26px;
-    }
-
-    .slot-question::before {
-      content: "?";
-      font-size: 3.8rem;
+      height: 180px;
+      background: transparent;
       color: var(--purple);
-      background: var(--paper);
+      font-size: clamp(5rem, 9vw, 8rem);
+      font-weight: 950;
+      line-height: 1;
+      font-family: Georgia, "Times New Roman", serif;
     }
 
     .scroll-pan-up {
@@ -926,8 +927,12 @@
       }
 
       .slot-circle,
-      .slot-question {
+      .slot-question-shape {
         width: min(150px, 100%);
+      }
+
+      .slot-question-shape {
+        height: 150px;
       }
 
       .slot-portrait {
@@ -1245,7 +1250,7 @@
               <div class="formula-arrow" aria-hidden="true">→</div>
 
               <div class="formula-card">
-                <div class="slot-shape slot-question" data-label="Meaning"></div>
+                <div class="slot-question-shape" aria-label="Meaning">?</div>
 
                 <h4>Meaning</h4>
                 <p class="formula-question">Why does it matter?</p>
