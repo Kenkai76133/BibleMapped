@@ -256,33 +256,6 @@
       border:1px solid var(--line);
     }
 
-.reader-actions{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .sound-toggle{
-      border:1px solid var(--line);
-      background:#fff;
-      color:#111;
-      border-radius:999px;
-      padding:12px 16px;
-      font-weight:950;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      box-shadow:0 10px 28px rgba(0,0,0,.04);
-    }
-
-    .sound-toggle.active{
-      background:#efe7ff;
-      border-color:rgba(124,60,255,.35);
-      color:var(--purple);
-    }
-
-
     /* READER */
     .reader-wrap{
       padding:28px 0 80px;
@@ -374,6 +347,65 @@
       padding-bottom:14px;
     }
 
+
+    .reader-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .audio-controls{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+      padding:8px;
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:999px;
+    }
+
+    .audio-btn{
+      border:0;
+      border-radius:999px;
+      padding:10px 12px;
+      background:var(--c10);
+      color:#fff;
+      font-size:.82rem;
+      font-weight:950;
+      letter-spacing:.03em;
+      cursor:pointer;
+    }
+
+    .audio-btn.secondary{
+      background:#efe7ff;
+      color:var(--purple);
+    }
+
+    .volume-control{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:0 8px 0 2px;
+      color:var(--muted);
+      font-size:.78rem;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .volume-control input[type="range"]{
+      width:92px;
+      accent-color:var(--purple);
+    }
+
+    .volume-value{
+      min-width:34px;
+      color:var(--ink);
+      font-weight:950;
+    }
+
     .scripture-controls h2{
       margin:0;
       font-family:Georgia, serif;
@@ -447,26 +479,6 @@
       box-shadow:0 6px 18px rgba(47,101,68,.16);
     }
 
-
-    .word.people-region-word{
-      background:#6d6d72;
-      color:#fff;
-      border-radius:8px;
-      padding:1px 6px;
-      text-decoration:none;
-      box-shadow:0 0 0 1px rgba(109,109,114,.18);
-      font-weight:850;
-    }
-
-    .word.people-region-word:hover,
-    .word.people-region-word.active{
-      background:#4c4c51;
-      color:#fff;
-      outline:1px solid rgba(76,76,81,.32);
-      box-shadow:0 6px 18px rgba(76,76,81,.16);
-    }
-
-
     mark{
       background:#efe7ff;
       border-radius:4px;
@@ -513,76 +525,6 @@
     body.reader-mode .scripture{
       font-size:1.35rem;
       line-height:2.1;
-    }
-
-
-    /* AUDIO PLAYER BEFORE SCRIPTURE */
-    .audio-card{
-      max-width:1100px;
-      margin:0 auto 28px;
-      border:1px solid var(--line);
-      background:#fff;
-      border-radius:24px;
-      padding:18px;
-      box-shadow:0 14px 40px rgba(0,0,0,.05);
-    }
-
-    .audio-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:16px;
-      flex-wrap:wrap;
-      margin-bottom:12px;
-    }
-
-    .audio-kicker{
-      color:var(--purple);
-      font-size:.72rem;
-      font-weight:950;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      margin-bottom:4px;
-    }
-
-    .audio-card h3{
-      margin:0;
-      font-family:Georgia, serif;
-      font-size:1.7rem;
-      letter-spacing:-.04em;
-    }
-
-    .audio-card p{
-      margin:6px 0 0;
-      color:var(--muted);
-      line-height:1.5;
-    }
-
-    .audio-actions{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .audio-card audio{
-      width:100%;
-      margin-top:12px;
-    }
-
-    .audio-credit,
-    .audio-status{
-      font-size:.78rem;
-      color:var(--muted);
-    }
-
-    .audio-status{
-      margin-top:8px;
-      font-weight:750;
-    }
-
-    body.reader-mode .audio-card{
-      max-width:1100px;
     }
 
     /* WORD POPOVER */
@@ -775,13 +717,13 @@
     /* IMMERSIVE CHAPTER DRAWER */
     .chapter-tab{
       position:fixed;
-      right:0;
-      top:36%;
+      left:0;
+      top:48%;
       transform:translateY(-50%);
       z-index:70;
       display:none;
       border:0;
-      border-radius:18px 0 0 18px;
+      border-radius:0 18px 18px 0;
       background:var(--purple);
       color:#fff;
       padding:16px 12px;
@@ -861,7 +803,7 @@
     .map-tab{
       position:fixed;
       right:0;
-      top:56%;
+      top:48%;
       transform:translateY(-50%);
       z-index:70;
       display:none;
@@ -1001,36 +943,6 @@
       margin-top:14px;
     }
 
-.map-route-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:14px;
-    }
-
-    .route-btn{
-      border:1px solid var(--line);
-      background:#fff;
-      color:var(--ink);
-      border-radius:999px;
-      padding:10px 13px;
-      font-weight:900;
-    }
-
-    .route-btn.primary{
-      background:var(--purple);
-      border-color:var(--purple);
-      color:#fff;
-    }
-
-    .route-note{
-      color:var(--muted);
-      font-size:.82rem;
-      line-height:1.45;
-      margin:10px 0 0;
-    }
-
-
     .map-place-btn{
       border:1px solid var(--line);
       background:#fff;
@@ -1060,9 +972,8 @@
 
       .chapter-tab{
         top:auto;
-        bottom:72px;
-        right:18px;
-        left:auto;
+        bottom:18px;
+        left:18px;
         transform:none;
         writing-mode:horizontal-tb;
         border-radius:999px;
@@ -1305,38 +1216,19 @@
               <p class="chapter-meta" id="chapterSummary"></p>
             </div>
             <div class="reader-actions">
-              <button class="sound-toggle" id="soundToggle" type="button" aria-pressed="false">
-                <span id="soundStateLabel">Sound Off</span>
-              </button>
+              <div class="audio-controls" aria-label="Chapter audio controls">
+                <button class="audio-btn" id="audioPlayBtn" type="button">Play Audio</button>
+                <button class="audio-btn secondary" id="audioPauseBtn" type="button">Pause</button>
+                <button class="audio-btn secondary" id="audioStopBtn" type="button">Stop</button>
+                <label class="volume-control" for="audioVolume">
+                  Volume
+                  <input id="audioVolume" type="range" min="0" max="1" step="0.05" value="0.55" />
+                  <span class="volume-value" id="audioVolumeValue">55%</span>
+                </label>
+              </div>
               <button class="btn btn-secondary" id="exitReadMode">Show Ideas</button>
             </div>
           </div>
-
-          <section class="audio-card" aria-label="Exodus audio player">
-            <div class="audio-head">
-              <div>
-                <div class="audio-kicker">Listen</div>
-                <h3 id="audioTitle">Exodus 1 Audio</h3>
-                <p id="audioSummary">Listen to the KJV reading before reading the Scripture text.</p>
-              </div>
-
-              <div class="audio-actions">
-                <button class="btn btn-primary" id="audioToggle" type="button">
-                  <span id="audioButtonLabel">▶ Play Audio</span>
-                </button>
-              </div>
-            </div>
-
-            <audio id="chapterAudio" controls preload="metadata">
-              <source id="chapterAudioSource" src="../../assets/audio/kjv/exodus-1.mp3" type="audio/mpeg">
-              Your browser does not support the audio element.
-            </audio>
-
-            <p class="audio-status" id="audioStatus">Audio file: exodus-1.mp3</p>
-            <p class="audio-credit">
-              Audio source: Public domain KJV audio. Verify the recording license before publishing.
-            </p>
-          </section>
 
           <div class="scripture" id="scripture"></div>
         </article>
@@ -1369,12 +1261,6 @@
         <p>Click a place name in Exodus or choose one below to see its geography context.</p>
         <span class="certainty-pill">Study Tool</span>
       </div>
-
-      <div class="map-route-actions" aria-label="Route controls">
-        <button class="route-btn primary" id="showRouteBtn" type="button">Show Exodus Route</button>
-        <button class="route-btn" id="clearMapBtn" type="button">Clear Route</button>
-      </div>
-      <p class="route-note">Route lines are a study visualization. Several Exodus locations are debated, so broad regions are marked carefully.</p>
 
       <div class="map-place-list" id="mapPlaceList"></div>
     </div>
@@ -7122,105 +7008,13 @@
         "lng": 34.9,
         "zoom": 7,
         "shape": "circle",
-        "radius": 160000,
-        "kind": "people-region"
-      },
-      "seaofphilistines": {
-        "name": "Sea of the Philistines",
-        "modern": "Mediterranean Sea along the southern Levant coast",
-        "region": "Western boundary language",
-        "confidence": "High as a broad coastal reference",
-        "note": "Exodus 23:31 uses the sea of the Philistines as part of Israel’s promised boundary language. Treat it as a coastal boundary, not a single city.",
-        "lat": 31.8,
-        "lng": 34.2,
-        "zoom": 7,
-        "shape": "circle",
-        "radius": 130000
-      },
-      "canaanites": {
-        "name": "Canaanites",
-        "modern": "Southern Levant / Canaan region",
-        "region": "People-region in the promised land",
-        "confidence": "Broad regional confidence",
-        "note": "The Canaanites are named as inhabitants of the land God promises to bring Israel into. This maps a people-region, not one precise location.",
-        "lat": 31.7,
-        "lng": 35.0,
-        "zoom": 7,
-        "shape": "circle",
-        "radius": 220000,
-        "kind": "people-region"
-      },
-      "hittites": {
-        "name": "Hittites",
-        "modern": "Anatolia and Levantine contexts, depending period and usage",
-        "region": "People-region",
-        "confidence": "Broad / context-dependent",
-        "note": "The Hittites are listed among peoples in the land. In Exodus mapping, show them as a broad people-region rather than a precise pin.",
-        "lat": 33.2,
-        "lng": 36.0,
-        "zoom": 6,
-        "shape": "circle",
-        "radius": 260000,
-        "kind": "people-region"
-      },
-      "amorites": {
-        "name": "Amorites",
-        "modern": "Highlands and Transjordan/Canaan contexts",
-        "region": "People-region in and around Canaan",
-        "confidence": "Broad regional confidence",
-        "note": "The Amorites are named as inhabitants connected to the promised land context. Map as a broad regional people group.",
-        "lat": 31.9,
-        "lng": 35.6,
-        "zoom": 7,
-        "shape": "circle",
-        "radius": 160000,
-        "kind": "people-region"
-      },
-      "perizzites": {
-        "name": "Perizzites",
-        "modern": "Canaan hill-country context, exact region uncertain",
-        "region": "People-region in Canaan",
-        "confidence": "Uncertain / broad",
-        "note": "The Perizzites are named among land inhabitants. Their exact territory is not secure, so this should be a cautious broad marker.",
-        "lat": 31.8,
-        "lng": 35.2,
-        "zoom": 8,
-        "shape": "circle",
-        "radius": 100000,
-        "kind": "people-region"
-      },
-      "hivites": {
-        "name": "Hivites",
-        "modern": "Canaan and northern hill-country contexts",
-        "region": "People-region in Canaan",
-        "confidence": "Uncertain / broad",
-        "note": "The Hivites are listed among inhabitants of the land. Exact territory is debated, so use a broad region.",
-        "lat": 32.3,
-        "lng": 35.1,
-        "zoom": 8,
-        "shape": "circle",
-        "radius": 110000,
-        "kind": "people-region"
-      },
-      "jebusites": {
-        "name": "Jebusites",
-        "modern": "Jerusalem / Jebus tradition",
-        "region": "Jerusalem hill-country",
-        "confidence": "High as a broad Jerusalem association",
-        "note": "The Jebusites are associated with Jebus/Jerusalem in biblical geography. Exodus lists them among inhabitants of the land.",
-        "lat": 31.778,
-        "lng": 35.235,
-        "zoom": 10,
-        "shape": "circle",
-        "radius": 35000,
-        "kind": "people-region"
+        "radius": 160000
       }
 };
 
 
     const PLACE_ALIASES = {
       "egypt": "egypt",
-      "israel": "israel",
       "goshen": "goshen",
       "pithom": "pithom",
       "raamses": "raamses",
@@ -7246,15 +7040,7 @@
       "moab": "moab",
       "palestina": "palestina",
       "philistia": "palestina",
-      "philistines": "palestina",
-      "seaofphilistines": "seaofphilistines",
-      "amalek": "amalek",
-      "canaanites": "canaanites",
-      "hittites": "hittites",
-      "amorites": "amorites",
-      "perizzites": "perizzites",
-      "hivites": "hivites",
-      "jebusites": "jebusites"
+      "amalek": "amalek"
 };
 
 
@@ -7268,14 +7054,6 @@
     const popover = document.getElementById('wordPopover');
     const searchBox = document.getElementById('chapterSearch');
 
-    const chapterAudio = document.getElementById('chapterAudio');
-    const chapterAudioSource = document.getElementById('chapterAudioSource');
-    const audioTitle = document.getElementById('audioTitle');
-    const audioSummary = document.getElementById('audioSummary');
-    const audioToggle = document.getElementById('audioToggle');
-    const audioButtonLabel = document.getElementById('audioButtonLabel');
-    const audioStatus = document.getElementById('audioStatus');
-
     const chapterDrawer = document.getElementById('chapterDrawer');
     const chapterBackdrop = document.getElementById('chapterBackdrop');
     const openChapterDrawerBtn = document.getElementById('openChapterDrawer');
@@ -7288,12 +7066,83 @@
     const mapPlaceCard = document.getElementById('mapPlaceCard');
     const mapPlaceList = document.getElementById('mapPlaceList');
 
+
+    const audioPlayBtn = document.getElementById('audioPlayBtn');
+    const audioPauseBtn = document.getElementById('audioPauseBtn');
+    const audioStopBtn = document.getElementById('audioStopBtn');
+    const audioVolume = document.getElementById('audioVolume');
+    const audioVolumeValue = document.getElementById('audioVolumeValue');
+
     let exodusMap = null;
     let activeMapLayer = null;
     let activePlaceKey = null;
-    let routeLayer = null;
-    let soundOn = false;
-    let uiAudioCtx = null;
+
+
+
+    let audioLevel = 0.55;
+    let currentUtterance = null;
+
+    function updateAudioButtons(state = 'idle') {
+      if (!audioPlayBtn || !audioPauseBtn || !audioStopBtn) return;
+      audioPlayBtn.textContent = state === 'playing' ? 'Restart Audio' : 'Play Audio';
+      audioPauseBtn.textContent = window.speechSynthesis && window.speechSynthesis.paused ? 'Resume' : 'Pause';
+    }
+
+    function getChapterAudioText() {
+      const title = currentChapter?.title ? `${currentChapter.title}. ` : '';
+      const verses = (currentChapter?.verses || [])
+        .map(v => `Verse ${v.verse}. ${v.text}`)
+        .join(' ');
+
+      return `Exodus chapter ${currentChapter.chapter}. ${title}${verses}`;
+    }
+
+    function stopAudio() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      currentUtterance = null;
+      updateAudioButtons('idle');
+    }
+
+    function playChapterAudio() {
+      if (!('speechSynthesis' in window)) {
+        alert('Audio reading is not supported in this browser.');
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      currentUtterance = new SpeechSynthesisUtterance(getChapterAudioText());
+      currentUtterance.volume = audioLevel;
+      currentUtterance.rate = 0.88;
+      currentUtterance.pitch = 1;
+      currentUtterance.lang = 'en-US';
+
+      currentUtterance.onstart = () => updateAudioButtons('playing');
+      currentUtterance.onend = () => {
+        currentUtterance = null;
+        updateAudioButtons('idle');
+      };
+      currentUtterance.onerror = () => {
+        currentUtterance = null;
+        updateAudioButtons('idle');
+      };
+
+      window.speechSynthesis.speak(currentUtterance);
+    }
+
+    function pauseOrResumeAudio() {
+      if (!('speechSynthesis' in window)) return;
+
+      if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+      } else if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.pause();
+      }
+
+      updateAudioButtons(window.speechSynthesis.speaking ? 'playing' : 'idle');
+    }
 
     function normalize(word) { return (word || '').toLowerCase().replace(/[^a-z]/g,''); }
 
@@ -7304,8 +7153,6 @@
     const PLACE_TERMS = [
       { term:'land of Egypt', place:'egypt' },
       { term:'Egypt', place:'egypt' },
-      { term:'land of Israel', place:'israel' },
-      { term:'Israel', place:'israel' },
       { term:'land of Goshen', place:'goshen' },
       { term:'Goshen', place:'goshen' },
       { term:'Pithom', place:'pithom' },
@@ -7337,18 +7184,7 @@
       { term:'Moab', place:'moab' },
       { term:'Palestina', place:'palestina' },
       { term:'Philistia', place:'palestina' },
-      { term:'sea of the Philistines', place:'seaofphilistines' },
-      { term:'Sea of the Philistines', place:'seaofphilistines' },
-      { term:'Philistines', place:'palestina' },
-      { term:'Amalek', place:'amalek' },
-      { term:'Canaanites', place:'canaanites' },
-      { term:'Hittites', place:'hittites' },
-      { term:'Amorites', place:'amorites' },
-      { term:'Perizzites', place:'perizzites' },
-      { term:'Hivites', place:'hivites' },
-      { term:'Jebusites', place:'jebusites' },
-      { term:'mount of God', place:'horeb' },
-      { term:'Mount of God', place:'horeb' }
+      { term:'Amalek', place:'amalek' }
     ].sort((a,b) => b.term.length - a.term.length);
 
     const PLACE_TERM_LOOKUP = Object.fromEntries(PLACE_TERMS.map(item => [normalize(item.term), item.place]));
@@ -7359,98 +7195,6 @@
 
     const PLACE_TERM_RE = new RegExp(`(^|[^A-Za-z'’\\-])(${PLACE_TERMS.map(item => escapeRegExp(item.term)).join('|')})(?=$|[^A-Za-z'’\\-])`, 'gi');
 
-
-    const EXODUS_ROUTE = ['raamses','succoth','etham','pihahiroth','redsea','shur','marah','elim','sinin','rephidim','sinai'];
-
-    function getUiAudioContext() {
-      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-      if (!AudioContextClass) return null;
-      if (!uiAudioCtx) uiAudioCtx = new AudioContextClass();
-      if (uiAudioCtx.state === 'suspended') uiAudioCtx.resume();
-      return uiAudioCtx;
-    }
-
-    function playUiSound(type = 'tap') {
-      if (!soundOn) return;
-
-      const ctx = getUiAudioContext();
-      if (!ctx) return;
-
-      const now = ctx.currentTime;
-      const gain = ctx.createGain();
-      const osc = ctx.createOscillator();
-
-      const settings = {
-        tap: { start: 620, end: 420, duration: 0.08, volume: 0.035, wave: 'sine' },
-        map: { start: 220, end: 360, duration: 0.18, volume: 0.028, wave: 'triangle' },
-        page: { start: 160, end: 115, duration: 0.12, volume: 0.024, wave: 'sawtooth' },
-        route: { start: 330, end: 520, duration: 0.22, volume: 0.03, wave: 'sine' }
-      }[type] || { start: 500, end: 400, duration: 0.08, volume: 0.025, wave: 'sine' };
-
-      osc.type = settings.wave;
-      osc.frequency.setValueAtTime(settings.start, now);
-      osc.frequency.exponentialRampToValueAtTime(Math.max(1, settings.end), now + settings.duration);
-
-      gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.exponentialRampToValueAtTime(settings.volume, now + 0.01);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + settings.duration);
-
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(now);
-      osc.stop(now + settings.duration + 0.02);
-    }
-
-    function clearRouteLayer() {
-      if (routeLayer && exodusMap) {
-        exodusMap.removeLayer(routeLayer);
-        routeLayer = null;
-      }
-    }
-
-    function showExodusRoute() {
-      initExodusMap();
-      if (!exodusMap) return;
-
-      clearRouteLayer();
-
-      const routePoints = EXODUS_ROUTE
-        .map(key => PLACES[key])
-        .filter(Boolean)
-        .map(place => [place.lat, place.lng]);
-
-      routeLayer = L.layerGroup().addTo(exodusMap);
-
-      const routeLine = L.polyline(routePoints, {
-        color:'#7c3cff',
-        weight:4,
-        opacity:.88,
-        dashArray:'8, 10',
-        lineJoin:'round'
-      }).addTo(routeLayer);
-
-      routePoints.forEach((point, index) => {
-        const key = EXODUS_ROUTE[index];
-        const place = PLACES[key];
-        L.circleMarker(point, {
-          radius:5,
-          color:'#7c3cff',
-          fillColor:'#7c3cff',
-          fillOpacity:.95,
-          weight:2
-        }).addTo(routeLayer).bindPopup(`<strong>${escapeHtml(index + 1 + '. ' + place.name)}</strong>`);
-      });
-
-      exodusMap.fitBounds(routeLine.getBounds(), { padding:[35,35] });
-
-      mapPlaceCard.innerHTML = `
-        <h3>Exodus Route View</h3>
-        <p>This shows a careful study route from Raamses toward Sinai using broad or debated locations where needed.</p>
-        <span class="certainty-pill">Route visualization — several points debated</span>
-      `;
-
-      playUiSound('route');
-    }
 
     function openChapterDrawer() {
       if (!chapterDrawer || !chapterBackdrop) return;
@@ -7483,7 +7227,6 @@
       mapBackdrop.classList.add('open');
 
       initExodusMap();
-      playUiSound('map');
 
       setTimeout(() => {
         if (exodusMap) exodusMap.invalidateSize();
@@ -7518,7 +7261,6 @@
 
       activePlaceKey = placeKey;
       initExodusMap();
-      playUiSound(place.kind === 'people-region' ? 'tap' : 'map');
 
       if (activeMapLayer) {
         exodusMap.removeLayer(activeMapLayer);
@@ -7532,12 +7274,11 @@
       `;
 
       if (place.shape === 'circle') {
-        const isPeopleRegion = place.kind === 'people-region';
         activeMapLayer = L.circle([place.lat, place.lng], {
           radius: place.radius || 80000,
-          color: isPeopleRegion ? '#6d6d72' : '#3f7f57',
+          color:'#3f7f57',
           weight:2,
-          fillColor: isPeopleRegion ? '#6d6d72' : '#3f7f57',
+          fillColor:'#3f7f57',
           fillOpacity:.12
         }).addTo(exodusMap).bindPopup(label);
 
@@ -7592,9 +7333,7 @@
         const placeKey = PLACE_TERM_LOOKUP[normalize(term)];
 
         output += tokenizePlainWords(text.slice(lastIndex, termStart));
-        const mappedPlace = PLACES[placeKey];
-        const placeClass = mappedPlace?.kind === 'people-region' ? 'people-region-word' : 'place-word';
-        output += `<button class="word ${placeClass}" data-word="${escapeHtml(term)}" data-place="${escapeHtml(placeKey)}" title="Open ${escapeHtml(term)} on the map">${escapeHtml(term)}</button>`;
+        output += `<button class="word place-word" data-word="${escapeHtml(term)}" data-place="${escapeHtml(placeKey)}" title="Open ${escapeHtml(term)} on the map">${escapeHtml(term)}</button>`;
         lastIndex = termStart + term.length;
         return match;
       });
@@ -7615,40 +7354,12 @@
         .join('');
     }
 
-    function setAudioForChapter(ch) {
-      if (!chapterAudio || !chapterAudioSource) return;
-
-      const audioFile = `exodus-${ch.chapter}.mp3`;
-      chapterAudio.pause();
-      chapterAudioSource.src = `../../assets/audio/kjv/${audioFile}`;
-      chapterAudio.load();
-
-      if (audioTitle) {
-        audioTitle.textContent = `Exodus ${ch.chapter} Audio`;
-      }
-
-      if (audioSummary) {
-        audioSummary.textContent = ch.title
-          ? `Listen to Exodus ${ch.chapter}: ${ch.title}.`
-          : `Listen to Exodus ${ch.chapter} before reading the Scripture text.`;
-      }
-
-      if (audioButtonLabel) {
-        audioButtonLabel.textContent = '▶ Play Audio';
-      }
-
-      if (audioStatus) {
-        audioStatus.textContent = `Audio file: ${audioFile}`;
-      }
-    }
-
     function renderChapter(ch) {
+      const chapterChanged = currentChapter && ch && currentChapter.chapter !== ch.chapter;
+      if (chapterChanged) stopAudio();
       currentChapter = ch;
       chapterTitle.textContent = `Exodus ${ch.chapter}`;
       chapterSummary.textContent = CHAPTER_SUMMARIES[ch.chapter] || ch.title || '';
-
-      setAudioForChapter(ch);
-
       scripture.innerHTML = ch.verses.map(v => `<p class="verse"><sup class="vnum">${v.verse}</sup>${tokenize(v.text)}</p>`).join('');
       renderChapterList();
       renderMapPlaceList();
@@ -7715,11 +7426,11 @@
 
     function enterReaderMode() {
       document.body.classList.add('reader-mode');
-      playUiSound('page');
       document.getElementById('readerSection').scrollIntoView({ behavior:'smooth', block:'start' });
     }
 
     function leaveReaderMode() {
+      stopAudio();
       document.body.classList.remove('reader-mode');
       closeChapterDrawer();
       closeMapDrawer();
@@ -7754,6 +7465,29 @@
       });
     }
     document.getElementById('exitReadMode').addEventListener('click', leaveReaderMode);
+
+
+    if (audioPlayBtn) {
+      audioPlayBtn.addEventListener('click', playChapterAudio);
+    }
+
+    if (audioPauseBtn) {
+      audioPauseBtn.addEventListener('click', pauseOrResumeAudio);
+    }
+
+    if (audioStopBtn) {
+      audioStopBtn.addEventListener('click', stopAudio);
+    }
+
+    if (audioVolume) {
+      audioVolume.addEventListener('input', () => {
+        audioLevel = Number(audioVolume.value);
+        if (audioVolumeValue) audioVolumeValue.textContent = `${Math.round(audioLevel * 100)}%`;
+        if (currentUtterance) currentUtterance.volume = audioLevel;
+      });
+    }
+
+    window.addEventListener('beforeunload', stopAudio);
 
 
     if (openChapterDrawerBtn) {
@@ -7791,36 +7525,6 @@
       });
     }
 
-    if (showRouteBtn) {
-      showRouteBtn.addEventListener('click', showExodusRoute);
-    }
-
-    if (clearMapBtn) {
-      clearMapBtn.addEventListener('click', () => {
-        clearRouteLayer();
-        if (activePlaceKey) {
-          showPlaceOnMap(activePlaceKey);
-        } else {
-          mapPlaceCard.innerHTML = `
-            <h3>Choose a place</h3>
-            <p>Click a place name in Exodus or choose one below to see its geography context.</p>
-            <span class="certainty-pill">Study Tool</span>
-          `;
-        }
-        playUiSound('tap');
-      });
-    }
-
-    if (soundToggle) {
-      soundToggle.addEventListener('click', () => {
-        soundOn = !soundOn;
-        soundToggle.classList.toggle('active', soundOn);
-        soundToggle.setAttribute('aria-pressed', String(soundOn));
-        if (soundStateLabel) soundStateLabel.textContent = soundOn ? 'Sound On' : 'Sound Off';
-        playUiSound('tap');
-      });
-    }
-
     document.querySelectorAll('.guide-toggle').forEach(row => {
       row.addEventListener('click', e => {
         if (e.target.closest('button')) return;
@@ -7855,42 +7559,6 @@
         document.getElementById('readerSection').scrollIntoView({ behavior:'smooth', block:'start' });
       }
     });
-
-    if (audioToggle && chapterAudio) {
-      audioToggle.addEventListener('click', async () => {
-        try {
-          if (chapterAudio.paused) {
-            await chapterAudio.play();
-          } else {
-            chapterAudio.pause();
-          }
-        } catch (err) {
-          if (audioStatus) {
-            audioStatus.textContent = 'Audio could not play. Check that the MP3 file exists in assets/audio/kjv/.';
-          }
-        }
-      });
-
-      chapterAudio.addEventListener('play', () => {
-        if (audioButtonLabel) audioButtonLabel.textContent = '❚❚ Pause Audio';
-        if (audioStatus) audioStatus.textContent = `Now playing: exodus-${currentChapter.chapter}.mp3`;
-      });
-
-      chapterAudio.addEventListener('pause', () => {
-        if (audioButtonLabel) audioButtonLabel.textContent = '▶ Play Audio';
-      });
-
-      chapterAudio.addEventListener('ended', () => {
-        if (audioButtonLabel) audioButtonLabel.textContent = '▶ Play Audio';
-        if (audioStatus) audioStatus.textContent = `Finished: exodus-${currentChapter.chapter}.mp3`;
-      });
-
-      chapterAudio.addEventListener('error', () => {
-        if (audioStatus) {
-          audioStatus.textContent = `Audio missing or unreadable: exodus-${currentChapter.chapter}.mp3`;
-        }
-      });
-    }
 
     searchBox.addEventListener('input', () => {
       searchTerm = normalize(searchBox.value);
