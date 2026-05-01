@@ -104,6 +104,7 @@
       color: white;
       font-size: 0.86rem;
       font-weight: 900;
+      letter-spacing: 0.01em;
       transition: background 180ms ease, transform 180ms ease;
     }
 
@@ -134,7 +135,24 @@
       position: absolute;
       inset: 0;
       z-index: 1;
-      background: rgba(248, 247, 242, 0.12);
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(248, 247, 242, 0.06) 0%,
+          rgba(248, 247, 242, 0.02) 42%,
+          rgba(248, 247, 242, 0.48) 78%,
+          rgba(248, 247, 242, 0.86) 92%,
+          rgba(248, 247, 242, 1) 100%
+        ),
+        linear-gradient(
+          to right,
+          rgba(248, 247, 242, 0.86) 0%,
+          rgba(248, 247, 242, 0.18) 9%,
+          rgba(248, 247, 242, 0) 19%,
+          rgba(248, 247, 242, 0) 81%,
+          rgba(248, 247, 242, 0.18) 91%,
+          rgba(248, 247, 242, 0.86) 100%
+        );
       pointer-events: none;
     }
 
@@ -144,10 +162,15 @@
       left: 0;
       right: 0;
       bottom: -1px;
-      height: 36%;
+      height: 42%;
       z-index: 2;
-      background: var(--cloud);
-      opacity: 0.86;
+      background: linear-gradient(
+        to bottom,
+        rgba(248, 247, 242, 0) 0%,
+        rgba(248, 247, 242, 0.18) 32%,
+        rgba(248, 247, 242, 0.55) 62%,
+        var(--cloud) 100%
+      );
       pointer-events: none;
     }
 
@@ -203,6 +226,7 @@
       opacity: 0;
       transform: translateY(20px);
       animation: bannerPanUp 900ms cubic-bezier(.2,.8,.2,1) forwards;
+      will-change: transform, opacity;
     }
 
     .title-line:nth-child(1) {
@@ -221,12 +245,12 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(255, 255, 255, 0.11);
+      z-index: -1;
+      background: rgba(255, 255, 255, 0.12);
       transform: translateY(110%);
       animation: bannerLightPan 5.8s ease-in-out infinite;
       animation-delay: 1.2s;
       pointer-events: none;
-      z-index: -1;
     }
 
     .title-line:nth-child(2)::after {
@@ -281,20 +305,6 @@
       }
     }
 
-    .banner-scroll-pan {
-      opacity: 0;
-      transform: translateY(22px);
-      transition:
-        opacity 760ms ease,
-        transform 920ms cubic-bezier(.2,.8,.2,1);
-      transition-delay: var(--banner-delay, 0ms);
-    }
-
-    .banner-scroll-pan.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
     .feature-image-wrap {
       width: 100%;
       margin-top: 22px;
@@ -325,7 +335,11 @@
       font-weight: 950;
       letter-spacing: 0.09em;
       text-transform: uppercase;
-      background: var(--paper);
+      background:
+        linear-gradient(rgba(248,247,242,0.52), rgba(248,247,242,0.52)),
+        repeating-linear-gradient(90deg, rgba(21,21,21,0.05) 0 1px, transparent 1px 48px),
+        repeating-linear-gradient(0deg, rgba(21,21,21,0.04) 0 1px, transparent 1px 48px),
+        var(--paper);
       z-index: 1;
     }
 
@@ -338,8 +352,100 @@
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background: rgba(248, 247, 242, 0.08);
+      background: linear-gradient(
+        to bottom,
+        rgba(248, 247, 242, 0.04) 0%,
+        rgba(248, 247, 242, 0.00) 55%,
+        rgba(248, 247, 242, 0.16) 78%,
+        rgba(248, 247, 242, 0.32) 100%
+      );
       z-index: 2;
+    }
+
+    .profile-band {
+      padding: 0 0 44px;
+      background: var(--cloud);
+    }
+
+    .profile-inner {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 24px;
+      align-items: center;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 22px 0;
+    }
+
+    .profile-photo {
+      width: 220px;
+      aspect-ratio: 4 / 5;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .profile-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-meta h2 {
+      font-size: clamp(1.8rem, 3.6vw, 3.5rem);
+      line-height: 0.96;
+      letter-spacing: -0.06em;
+      font-weight: 950;
+      margin-bottom: 10px;
+    }
+
+    .profile-meta p {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .profile-meta p + p {
+      margin-top: 12px;
+    }
+
+    .social-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+      align-items: center;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 44px;
+      padding: 7px 13px 7px 7px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--charcoal);
+      font-size: 0.9rem;
+      font-weight: 850;
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .social-link:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .social-link img {
+      width: 30px;
+      height: 30px;
+      padding: 5px;
+      border-radius: 999px;
+      object-fit: contain;
+      background: var(--cloud);
+      border: 1px solid rgba(21, 21, 21, 0.08);
     }
 
     .gospel-section {
@@ -518,92 +624,6 @@
       font-size: 0.97rem !important;
     }
 
-    .profile-band {
-      padding: 44px 0;
-      background: var(--cloud);
-    }
-
-    .profile-inner {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 24px;
-      align-items: center;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      padding: 22px 0;
-    }
-
-    .profile-photo {
-      width: 220px;
-      aspect-ratio: 4 / 5;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    .profile-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .profile-meta h2 {
-      font-size: clamp(1.8rem, 3.6vw, 3.5rem);
-      line-height: 0.96;
-      letter-spacing: -0.06em;
-      font-weight: 950;
-      margin-bottom: 10px;
-    }
-
-    .profile-meta p {
-      max-width: 720px;
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    .profile-meta p + p {
-      margin-top: 12px;
-    }
-
-    .social-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 18px;
-      align-items: center;
-    }
-
-    .social-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      min-height: 44px;
-      padding: 7px 13px 7px 7px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--white);
-      color: var(--charcoal);
-      font-size: 0.9rem;
-      font-weight: 850;
-      transition: transform 180ms ease, box-shadow 180ms ease;
-    }
-
-    .social-link:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-    }
-
-    .social-link img {
-      width: 30px;
-      height: 30px;
-      padding: 5px;
-      border-radius: 999px;
-      object-fit: contain;
-      background: var(--cloud);
-      border: 1px solid rgba(21, 21, 21, 0.08);
-    }
-
     .mission-section {
       background: var(--cloud);
       padding: 64px 0 74px;
@@ -659,7 +679,7 @@
     .formula-intro {
       max-width: 760px;
       color: var(--muted) !important;
-      margin-bottom: 22px !important;
+      margin-bottom: 26px !important;
       font-size: 1rem !important;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
     }
@@ -667,35 +687,33 @@
     .formula-row {
       display: grid;
       grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
-      align-items: stretch;
-      gap: 14px;
+      align-items: center;
+      gap: 20px;
       width: 100%;
     }
 
     .formula-card {
-      position: relative;
-      min-height: 320px;
-      padding: 18px;
-      border: 1px solid var(--line);
-      background: var(--paper);
-      box-shadow: var(--shadow);
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      min-height: auto;
+      padding: 0;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      gap: 16px;
+      align-items: center;
+      text-align: center;
+      gap: 14px;
       opacity: 0;
-      transform: translateY(28px) scale(0.985);
-      animation: formulaPop 620ms cubic-bezier(.2,.8,.2,1) forwards;
-      overflow: hidden;
+      transform: translateY(26px);
+      transition:
+        opacity 700ms ease,
+        transform 850ms cubic-bezier(.2,.8,.2,1);
+      transition-delay: var(--pan-delay, 0ms);
     }
 
-    .formula-card::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 0 0;
-      height: 6px;
-      background: var(--purple);
-      opacity: 0.14;
+    .formula-card.is-visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .formula-card h4 {
@@ -707,8 +725,7 @@
     }
 
     .formula-question {
-      margin-top: auto !important;
-      margin-bottom: 0 !important;
+      margin: 0 !important;
       font-size: 1rem !important;
       font-weight: 900;
       line-height: 1.35 !important;
@@ -724,43 +741,21 @@
       font-weight: 950;
       color: var(--purple);
       opacity: 0;
-      transform: translateY(18px);
-      animation: arrowPop 560ms cubic-bezier(.2,.8,.2,1) forwards;
+      transform: translateY(20px);
+      transition:
+        opacity 700ms ease,
+        transform 850ms cubic-bezier(.2,.8,.2,1);
+      transition-delay: var(--pan-delay, 0ms);
     }
 
-    .formula-card:nth-child(1) {
-      animation-delay: 90ms;
-    }
-
-    .formula-arrow:nth-child(2) {
-      animation-delay: 180ms;
-    }
-
-    .formula-card:nth-child(3) {
-      animation-delay: 270ms;
-    }
-
-    .formula-arrow:nth-child(4) {
-      animation-delay: 360ms;
-    }
-
-    .formula-card:nth-child(5) {
-      animation-delay: 450ms;
-    }
-
-    .formula-arrow:nth-child(6) {
-      animation-delay: 540ms;
-    }
-
-    .formula-card:nth-child(7) {
-      animation-delay: 630ms;
+    .formula-arrow.is-visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .slot-shape {
       position: relative;
-      width: 100%;
       background: var(--cloud);
-      border: 1px solid var(--line);
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -782,7 +777,6 @@
       display: grid;
       place-items: center;
       background: var(--paper);
-      z-index: 1;
       text-align: center;
       padding: 12px;
     }
@@ -795,32 +789,24 @@
       width: min(180px, 100%);
       aspect-ratio: 1 / 1;
       border-radius: 999px;
-      margin: 0 auto;
     }
 
     .slot-portrait {
-      min-height: 190px;
+      width: min(180px, 100%);
       aspect-ratio: 3 / 4;
-      width: min(100%, 180px);
-      margin: 0 auto;
       border-radius: 18px;
     }
 
     .slot-landscape {
-      min-height: 160px;
+      width: min(220px, 100%);
       aspect-ratio: 4 / 3;
-      width: 100%;
       border-radius: 18px;
     }
 
     .slot-question {
       width: min(180px, 100%);
       aspect-ratio: 1 / 1;
-      border-radius: 28px;
-      margin: 0 auto;
-      font-size: 3.6rem;
-      font-weight: 950;
-      color: var(--purple);
+      border-radius: 26px;
     }
 
     .slot-question::before {
@@ -830,28 +816,19 @@
       background: var(--paper);
     }
 
-    @keyframes formulaPop {
-      from {
-        opacity: 0;
-        transform: translateY(28px) scale(0.985);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+    .scroll-pan-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity 700ms ease,
+        transform 900ms cubic-bezier(.2,.8,.2,1);
+      transition-delay: var(--pan-delay, 0ms);
+      will-change: opacity, transform;
     }
 
-    @keyframes arrowPop {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .scroll-pan-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     footer {
@@ -878,27 +855,15 @@
     @media (max-width: 1040px) {
       .formula-row {
         grid-template-columns: 1fr;
+        gap: 12px;
       }
 
       .formula-arrow {
-        transform: rotate(90deg);
-        min-height: 22px;
+        transform: rotate(90deg) translateY(20px);
       }
 
-      @keyframes arrowPop {
-        from {
-          opacity: 0;
-          transform: rotate(90deg) translateX(-14px);
-        }
-
-        to {
-          opacity: 1;
-          transform: rotate(90deg) translateX(0);
-        }
-      }
-
-      .formula-card {
-        min-height: auto;
+      .formula-arrow.is-visible {
+        transform: rotate(90deg) translateY(0);
       }
     }
 
@@ -966,17 +931,23 @@
       }
 
       .slot-portrait {
-        width: min(100%, 160px);
+        width: min(150px, 100%);
+      }
+
+      .slot-landscape {
+        width: min(190px, 100%);
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .title-line,
       .title-line::after,
-      .banner-scroll-pan,
-      .banner-scroll-pan.is-visible,
+      .scroll-pan-up,
+      .scroll-pan-up.is-visible,
       .formula-card,
-      .formula-arrow {
+      .formula-card.is-visible,
+      .formula-arrow,
+      .formula-arrow.is-visible {
         animation: none !important;
         transition: none !important;
         transform: none !important;
@@ -1163,7 +1134,9 @@
         <div class="profile-meta">
           <h2>Meet Calvin</h2>
 
-          <p>I am a Christian, a husband, a father, and the heart behind Bible Mapped.</p>
+          <p>
+            I am a Christian, a husband, a father, and the heart behind Bible Mapped.
+          </p>
 
           <p>
             I was saved in 2008, and since then, I have loved telling people about Jesus Christ.
@@ -1171,9 +1144,13 @@
             But through it all, I keep coming back to this conviction:
           </p>
 
-          <p><strong>God’s Word is true, even when man fails.</strong></p>
+          <p>
+            <strong>God’s Word is true, even when man fails.</strong>
+          </p>
 
-          <p>Bible Mapped was born from that journey.</p>
+          <p>
+            Bible Mapped was born from that journey.
+          </p>
 
           <p>
             It exists to help people slow down, look closer, and see the Bible as a real story grounded in real places,
@@ -1346,27 +1323,39 @@
       testImage.src = src;
     });
 
-    const bannerLines = document.querySelectorAll(".title-line");
+    const panTargets = document.querySelectorAll(`
+      .title-line,
+      .feature-image-wrap,
+      .gospel-header,
+      .salvation-rail,
+      .profile-inner,
+      .quote-block,
+      .mission-copy > p,
+      .framework-block h3,
+      .formula-intro,
+      .formula-card,
+      .formula-arrow
+    `);
 
-    bannerLines.forEach((line, index) => {
-      line.classList.add("banner-scroll-pan");
-      line.style.setProperty("--banner-delay", `${index * 90}ms`);
+    panTargets.forEach((item, index) => {
+      item.classList.add("scroll-pan-up");
+      item.style.setProperty("--pan-delay", `${(index % 5) * 90}ms`);
     });
 
-    const bannerObserver = new IntersectionObserver(
+    const panObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           entry.target.classList.toggle("is-visible", entry.isIntersecting);
         });
       },
       {
-        threshold: 0.18,
-        rootMargin: "0px 0px -6% 0px"
+        threshold: 0.14,
+        rootMargin: "0px 0px -8% 0px"
       }
     );
 
-    bannerLines.forEach((line) => {
-      bannerObserver.observe(line);
+    document.querySelectorAll(".scroll-pan-up").forEach((item) => {
+      panObserver.observe(item);
     });
   </script>
 </body>
