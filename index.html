@@ -3,13 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Bible Mapped | Scripture Through Place, Context, and Meaning</title>
-
-  <meta
-    name="description"
-    content="Bible Mapped helps people understand Scripture through place, context, meaning, maps, word studies, people, themes, and visual explainers."
-  />
+  <meta name="description" content="Bible Mapped helps people understand Scripture through place, context, meaning, maps, word studies, people, themes, and visual explainers." />
 
   <style>
     :root {
@@ -29,6 +24,9 @@
       --soft-line: rgba(21, 21, 21, 0.075);
       --shadow: 0 24px 70px rgba(21, 21, 21, 0.10);
       --soft-shadow: 0 14px 34px rgba(21, 21, 21, 0.065);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 16px;
     }
 
     * {
@@ -62,8 +60,6 @@
       margin: 0 auto;
     }
 
-    /* HEADER */
-
     .brand-bar {
       position: fixed;
       top: 0;
@@ -81,10 +77,11 @@
 
     .brand-bar-inner {
       width: 100%;
+      max-width: none;
+      margin: 0;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 18px;
+      justify-content: flex-start;
     }
 
     .brand-wordmark {
@@ -94,30 +91,9 @@
       letter-spacing: -0.055em;
       color: white;
       line-height: 1;
+      margin: 0;
       text-align: left;
     }
-
-    .top-nav {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .top-nav a {
-      color: rgba(255, 255, 255, 0.86);
-      font-size: 0.86rem;
-      font-weight: 850;
-      padding: 8px 10px;
-      border-radius: 999px;
-      transition: background 180ms ease, color 180ms ease;
-    }
-
-    .top-nav a:hover {
-      color: white;
-      background: rgba(255, 255, 255, 0.12);
-    }
-
-    /* HERO */
 
     .hero {
       position: relative;
@@ -135,20 +111,7 @@
       height: min(50vh, 500px);
       background:
         linear-gradient(rgba(248, 247, 242, 0.12), rgba(248, 247, 242, 0.12)),
-        var(
-          --collage-image,
-          linear-gradient(
-            90deg,
-            var(--purple) 0 12.5%,
-            var(--charcoal) 12.5% 25%,
-            var(--paper) 25% 37.5%,
-            var(--sand) 37.5% 50%,
-            var(--red) 50% 62.5%,
-            var(--teal) 62.5% 75%,
-            var(--navy) 75% 87.5%,
-            var(--slate) 87.5% 100%
-          )
-        );
+        var(--collage-image, linear-gradient(90deg, var(--purple) 0 12.5%, var(--charcoal) 12.5% 25%, var(--paper) 25% 37.5%, var(--sand) 37.5% 50%, var(--red) 50% 62.5%, var(--teal) 62.5% 75%, var(--navy) 75% 87.5%, var(--slate) 87.5% 100%));
       background-size: cover;
       background-position: center;
       opacity: 0.9;
@@ -242,7 +205,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 0;
+      gap: 14px;
       margin-top: 32px;
     }
 
@@ -252,17 +215,13 @@
       justify-content: center;
       min-height: 50px;
       padding: 14px 19px;
+      border-radius: 999px;
       border: 1px solid var(--line);
       background: rgba(255, 255, 255, 0.74);
       color: var(--charcoal);
       font-weight: 950;
       cursor: pointer;
-      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
-      min-width: 214px;
-    }
-
-    .button + .button {
-      border-left: 0;
+      transition: transform 180ms ease, box-shadow 180ms ease;
     }
 
     .button:hover {
@@ -274,11 +233,338 @@
       background: var(--purple);
       color: white;
       border-color: transparent;
+      box-shadow: 0 20px 44px rgba(123, 44, 255, 0.22);
+    }
+
+
+    /* Lux update: connected hero buttons */
+    .hero-connected-actions {
+      gap: 0;
+    }
+
+    .hero-connected-actions .button {
+      border-radius: 0;
+      min-width: 214px;
+      border-color: rgba(21, 21, 21, 0.14);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-connected-actions .button + .button {
+      border-left: 0;
+    }
+
+    .hero-connected-actions .button-primary {
+      box-shadow: none;
     }
 
     .button-mission {
+      background: #EAF1FF;
+      color: var(--navy);
+      border-color: rgba(14, 55, 110, 0.22) !important;
+    }
+
+    .button-mission::after {
+      content: "";
+      position: absolute;
+      left: -40%;
+      top: 0;
+      width: 38%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(14,55,110,0.14), transparent);
+      transform: skewX(-18deg);
+      animation: missionSweep 3.4s ease-in-out infinite;
+    }
+
+    @keyframes missionSweep {
+      0%, 62% { left: -45%; }
+      100% { left: 110%; }
+    }
+
+    /* Lux update: book-spine shelf system */
+    .shelf-nav {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      min-height: 188px;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+      perspective: 1200px;
+    }
+
+    .shelf-tab {
+      flex: 1 1 0;
+      min-width: 86px;
+      height: 176px;
+      border-right: 1px solid rgba(255,255,255,0.22);
+      border-left: 1px solid rgba(0,0,0,0.08);
+      border-radius: 12px 12px 0 0;
+      box-shadow:
+        inset 12px 0 18px rgba(255,255,255,0.12),
+        inset -12px 0 18px rgba(0,0,0,0.12),
+        0 18px 28px rgba(21,21,21,0.10);
+      transform-origin: bottom center;
+      overflow: hidden;
+    }
+
+    .shelf-tab::before {
+      left: 14px;
+      right: 14px;
+      top: 16px;
+      background: rgba(255,255,255,0.28);
+    }
+
+    .shelf-tab::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 10px;
+      background: rgba(0,0,0,0.20);
+      opacity: 0.32;
+      filter: none;
+      border-radius: 0;
+    }
+
+    .shelf-tab:hover {
+      transform: translateY(-10px) rotateX(-3deg);
+    }
+
+    .shelf-tab.active {
+      flex: 1.45 1 0;
+      height: 196px;
+      transform: translateY(-18px) rotateX(-4deg);
+      box-shadow:
+        inset 14px 0 20px rgba(255,255,255,0.15),
+        inset -14px 0 22px rgba(0,0,0,0.15),
+        0 28px 52px rgba(21,21,21,0.22);
+      z-index: 5;
+    }
+
+    .tab-label {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 0.88rem;
+      line-height: 1;
+      letter-spacing: 0.12em;
+      align-self: flex-end;
+      margin: auto auto 4px auto;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.10);
+    }
+
+    .shelf-line {
+      display: none !important;
+    }
+
+    .shelf-content {
+      padding-top: 0;
+      margin-top: -8px;
+      min-height: 420px;
+    }
+
+    .shelf-panel {
+      border: 0;
+      border-radius: 0 0 28px 28px;
+      border-top: 12px solid var(--panel-color, var(--purple));
+      background: var(--panel-color, var(--paper));
+      color: white;
+      padding: 0;
+      box-shadow: 0 30px 70px rgba(21,21,21,0.14);
+      overflow: hidden;
+    }
+
+    .shelf-panel.active {
+      animation: bookOpen 360ms ease both;
+    }
+
+    @keyframes bookOpen {
+      from { opacity: 0; transform: rotateX(-8deg) translateY(-12px); }
+      to { opacity: 1; transform: rotateX(0deg) translateY(0); }
+    }
+
+    .shelf-panel > .panel-kicker,
+    .shelf-panel > h3,
+    .shelf-panel > p,
+    .shelf-panel > .panel-actions,
+    .shelf-panel > .guide-layer,
+    .shelf-panel > .route-preview-grid {
+      margin-left: 24px;
+      margin-right: 24px;
+    }
+
+    .shelf-panel > .panel-kicker {
+      margin-top: 24px;
+      color: rgba(255,255,255,0.76);
+    }
+
+    .shelf-panel h3 {
+      color: white;
+    }
+
+    .shelf-panel p {
+      color: rgba(255,255,255,0.78);
+    }
+
+    .shelf-panel[style*="var(--paper)"],
+    .shelf-panel[style*="var(--sand)"],
+    .shelf-panel[style*="var(--teal)"] {
+      color: var(--charcoal);
+    }
+
+    .shelf-panel[style*="var(--paper)"] h3,
+    .shelf-panel[style*="var(--sand)"] h3,
+    .shelf-panel[style*="var(--teal)"] h3 {
+      color: var(--charcoal);
+    }
+
+    .shelf-panel[style*="var(--paper)"] p,
+    .shelf-panel[style*="var(--sand)"] p,
+    .shelf-panel[style*="var(--teal)"] p,
+    .shelf-panel[style*="var(--paper)"] .panel-kicker,
+    .shelf-panel[style*="var(--sand)"] .panel-kicker,
+    .shelf-panel[style*="var(--teal)"] .panel-kicker {
+      color: rgba(21,21,21,0.66);
+    }
+
+    .guide-layer,
+    .route-preview-grid,
+    .panel-actions {
+      background: rgba(255,253,246,0.16);
+      padding: 24px;
+      border-top: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .shelf-panel[style*="var(--paper)"] .guide-layer,
+    .shelf-panel[style*="var(--sand)"] .guide-layer,
+    .shelf-panel[style*="var(--teal)"] .guide-layer,
+    .shelf-panel[style*="var(--paper)"] .route-preview-grid,
+    .shelf-panel[style*="var(--sand)"] .route-preview-grid,
+    .shelf-panel[style*="var(--teal)"] .route-preview-grid,
+    .shelf-panel[style*="var(--paper)"] .panel-actions,
+    .shelf-panel[style*="var(--sand)"] .panel-actions,
+    .shelf-panel[style*="var(--teal)"] .panel-actions {
+      background: rgba(255,255,255,0.44);
+      border-top: 1px solid rgba(21,21,21,0.08);
+    }
+
+    .guide-title {
+      color: inherit;
+      opacity: 0.72;
+    }
+
+    .chip-row {
+      gap: 0;
+    }
+
+    .guide-chip {
+      border-radius: 0;
+      border-left-width: 0;
+      border-top: 8px solid var(--chip-color, var(--navy));
+      background: rgba(255,255,255,0.86);
+    }
+
+    .guide-chip.active {
+      background: var(--chip-color, var(--navy));
+      color: white;
+      box-shadow: none;
+    }
+
+    .book-results {
+      display: block;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transform: translateY(-10px);
+      transition: max-height 520ms ease, opacity 260ms ease, transform 320ms ease;
+    }
+
+    .book-results.active {
+      max-height: 3400px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .book-results.active .treemap-group {
+      animation: foldShelfIn 420ms ease both;
+    }
+
+    .book-results.active .treemap-group:nth-child(2) { animation-delay: 50ms; }
+    .book-results.active .treemap-group:nth-child(3) { animation-delay: 100ms; }
+    .book-results.active .treemap-group:nth-child(4) { animation-delay: 150ms; }
+    .book-results.active .treemap-group:nth-child(5) { animation-delay: 200ms; }
+    .book-results.active .treemap-group:nth-child(6) { animation-delay: 250ms; }
+
+    @keyframes foldShelfIn {
+      from { opacity: 0; transform: rotateX(-8deg) translateY(-10px); }
+      to { opacity: 1; transform: rotateX(0deg) translateY(0); }
+    }
+
+    .treemap-group {
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.20);
+      background: rgba(255,253,246,0.92);
+      box-shadow: 0 14px 28px rgba(21,21,21,0.08);
+    }
+
+    .treemap-group:nth-child(1) { border-top: 8px solid var(--navy); }
+    .treemap-group:nth-child(2) { border-top: 8px solid var(--purple); }
+    .treemap-group:nth-child(3) { border-top: 8px solid var(--sand); }
+    .treemap-group:nth-child(4) { border-top: 8px solid var(--red); }
+    .treemap-group:nth-child(5) { border-top: 8px solid var(--teal); }
+    .treemap-group:nth-child(6) { border-top: 8px solid var(--slate); }
+
+    .group-explainer {
+      margin: -4px 0 14px !important;
+      color: var(--muted) !important;
+      font-size: 0.9rem !important;
+      line-height: 1.52 !important;
+    }
+
+    .book-tile {
+      border-radius: 4px;
+      box-shadow: inset 8px 0 0 var(--navy);
+    }
+
+    .book-tile::before,
+    .book-tile::after {
+      display: none;
+    }
+
+    .selected-book-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .selected-book-actions .button {
+      border-radius: 0;
+    }
+
+
+
+    /* Lux update: mission button, full-length book shelf animation */
+    .hero-connected-actions {
+      gap: 0;
+    }
+
+    .hero-connected-actions .button {
+      border-radius: 0;
+      min-width: 214px;
+      border-color: rgba(21, 21, 21, 0.14);
       position: relative;
       overflow: hidden;
+    }
+
+    .hero-connected-actions .button + .button {
+      border-left: 0;
+    }
+
+    .hero-connected-actions .button-primary {
+      box-shadow: none;
+    }
+
+    .button-mission {
       background: rgba(123, 44, 255, 0.12);
       color: var(--purple);
       border-color: rgba(123, 44, 255, 0.24) !important;
@@ -297,342 +583,325 @@
     }
 
     @keyframes missionSweep {
-      0%, 62% {
-        left: -45%;
-      }
-
-      100% {
-        left: 110%;
-      }
+      0%, 62% { left: -45%; }
+      100% { left: 110%; }
     }
 
-    /* INTRO */
-
-    .intro-section {
-      padding: 88px 0 42px;
-      background: var(--cloud);
-    }
-
-    .section-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.78rem;
-      font-weight: 950;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 18px;
-    }
-
-    .section-kicker::before {
-      content: "";
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--purple);
-      box-shadow: 0 0 0 8px rgba(123, 44, 255, 0.14);
-    }
-
-    .section-title {
-      max-width: 960px;
-      font-size: clamp(2.5rem, 5vw, 5.6rem);
-      margin-bottom: 18px;
-    }
-
-    .section-copy {
-      max-width: 770px;
-      color: var(--muted);
-      font-size: 1.08rem;
-      line-height: 1.72;
-    }
-
-    /* TESTAMENT EXPLORER */
-
-    .testament-section {
-      position: relative;
-      padding: 90px 0 105px;
+    .bookcase-section {
+      padding-top: 72px;
       background: var(--cloud);
       border-top: 1px solid rgba(21, 21, 21, 0.06);
-      overflow: hidden;
     }
 
-    .testament-section::before {
+    .bookcase {
+      width: 100%;
+      min-height: 680px;
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      perspective: 1200px;
+      border-bottom: 18px solid rgba(21,21,21,0.16);
+    }
+
+    .library-book {
+      flex: 0.62 1 0;
+      min-width: 72px;
+      display: flex;
+      align-items: stretch;
+      background: var(--book-color);
+      color: var(--book-text);
+      overflow: hidden;
+      transition: flex 460ms cubic-bezier(.2,.8,.2,1), transform 360ms ease, box-shadow 360ms ease;
+      box-shadow:
+        inset 14px 0 22px rgba(255,255,255,0.14),
+        inset -16px 0 24px rgba(0,0,0,0.14),
+        0 22px 42px rgba(21,21,21,0.12);
+      border-right: 1px solid rgba(255,255,255,0.18);
+      transform-origin: bottom center;
+      position: relative;
+    }
+
+    .library-book::after {
       content: "";
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(circle at 15% 10%, rgba(123,44,255,0.10), transparent 32%),
-        radial-gradient(circle at 85% 35%, rgba(14,55,110,0.10), transparent 34%);
       pointer-events: none;
-    }
-
-    .testament-header {
-      position: relative;
-      z-index: 2;
-      margin-bottom: 42px;
-    }
-
-    .testament-grid {
-      position: relative;
-      z-index: 2;
-      display: grid;
-      gap: 40px;
-    }
-
-    .testament-panel {
-      position: relative;
-      min-height: 540px;
-      border: 1px solid var(--line);
-      background: rgba(255, 253, 246, 0.78);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      isolation: isolate;
-    }
-
-    .testament-panel::before {
-      content: "";
-      position: absolute;
-      inset: 0;
       background:
-        repeating-linear-gradient(90deg, rgba(21,21,21,0.035) 0 1px, transparent 1px 56px),
-        repeating-linear-gradient(0deg, rgba(21,21,21,0.028) 0 1px, transparent 1px 56px);
-      opacity: 0.6;
-      pointer-events: none;
-      z-index: 0;
+        linear-gradient(90deg, rgba(255,255,255,0.12), transparent 24%, transparent 76%, rgba(0,0,0,0.16)),
+        linear-gradient(to bottom, rgba(255,255,255,0.10), transparent 18%, transparent 86%, rgba(0,0,0,0.12));
+      opacity: 0.84;
     }
 
-    .testament-panel-inner {
-      position: relative;
-      z-index: 2;
-      display: grid;
-      grid-template-columns: 0.95fr 1.25fr;
-      gap: 28px;
-      min-height: 540px;
-      padding: clamp(24px, 4vw, 44px);
+    .library-book:hover {
+      transform: translateY(-8px);
     }
 
-    .testament-copy {
-      align-self: center;
-      max-width: 430px;
+    .library-book.active {
+      flex: 6 1 0;
+      min-width: min(760px, 58vw);
+      transform: translateY(-16px);
+      box-shadow:
+        inset 16px 0 28px rgba(255,255,255,0.16),
+        inset -18px 0 30px rgba(0,0,0,0.18),
+        0 34px 70px rgba(21,21,21,0.20);
+      z-index: 5;
     }
 
-    .testament-label {
-      display: inline-flex;
-      align-items: center;
-      color: var(--muted);
-      font-size: 0.78rem;
-      font-weight: 950;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-
-    .testament-copy h3 {
-      font-size: clamp(2.4rem, 5vw, 5.4rem);
-      margin-bottom: 16px;
-    }
-
-    .testament-copy p {
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.7;
-    }
-
-    .arc-stage {
-      position: relative;
-      min-height: 460px;
-    }
-
-    .arc-card {
-      --x: 0px;
-      --y: 0px;
-      --r: 0deg;
-      --delay: 0ms;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: clamp(104px, 12vw, 148px);
-      aspect-ratio: 1 / 1;
-      transform:
-        translate(-50%, -50%)
-        translate(var(--x), calc(var(--y) + var(--scroll-y, 0px)))
-        rotate(var(--r));
-      border: 1px solid rgba(21, 21, 21, 0.12);
-      background: var(--card-color, var(--purple));
-      color: var(--card-text, white);
+    .book-spine {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      width: 100%;
+      min-width: 72px;
+      padding: 18px 10px;
+      cursor: pointer;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      padding: 14px;
-      box-shadow:
-        inset 10px 0 18px rgba(255,255,255,0.12),
-        inset -12px 0 20px rgba(0,0,0,0.12),
-        0 18px 36px rgba(21,21,21,0.13);
-      cursor: pointer;
-      transition:
-        transform 650ms cubic-bezier(.2,.8,.2,1),
-        box-shadow 220ms ease,
-        opacity 220ms ease,
-        filter 220ms ease;
-      transition-delay: var(--delay);
-      z-index: 3;
-    }
-
-    .arc-card:hover {
-      box-shadow:
-        inset 10px 0 18px rgba(255,255,255,0.14),
-        inset -12px 0 20px rgba(0,0,0,0.14),
-        0 28px 58px rgba(21,21,21,0.19);
-      filter: saturate(1.05);
-    }
-
-    .arc-card.is-active {
-      transform:
-        translate(-50%, -50%)
-        translate(var(--x), calc(var(--y) + var(--scroll-y, 0px) - 14px))
-        rotate(var(--r))
-        scale(1.06);
-      z-index: 8;
-    }
-
-    .arc-number {
-      font-size: 0.72rem;
-      font-weight: 950;
-      letter-spacing: 0.08em;
-      opacity: 0.72;
-    }
-
-    .arc-title {
-      font-size: clamp(1rem, 1.5vw, 1.28rem);
-      line-height: 0.95;
-      font-weight: 950;
-      letter-spacing: -0.03em;
-    }
-
-    .arc-note {
-      font-size: 0.72rem;
-      font-weight: 850;
-      opacity: 0.76;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-    }
-
-    .branch-drawer {
-      position: relative;
-      z-index: 4;
-      margin-top: 24px;
-      border-top: 1px solid var(--line);
-      padding-top: 24px;
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 22px;
-      opacity: 0;
-      max-height: 0;
-      transform: translateY(-14px);
-      overflow: hidden;
-      transition:
-        max-height 620ms ease,
-        opacity 280ms ease,
-        transform 420ms ease;
-    }
-
-    .testament-panel.has-open-drawer .branch-drawer {
-      opacity: 1;
-      max-height: 1200px;
-      transform: translateY(0);
-    }
-
-    .drawer-title {
-      font-size: clamp(1.6rem, 3vw, 3rem);
-      letter-spacing: -0.06em;
-      line-height: 0.96;
-    }
-
-    .drawer-copy {
-      color: var(--muted);
-      line-height: 1.65;
-      margin-top: 10px;
-      font-size: 0.96rem;
-    }
-
-    .book-branch {
-      position: relative;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(124px, 1fr));
-      gap: 10px;
-      padding-left: 30px;
-    }
-
-    .book-branch::before {
-      content: "";
-      position: absolute;
-      left: 9px;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: rgba(123,44,255,0.28);
-      transform-origin: top;
-      animation: branchGrow 520ms ease both;
-    }
-
-    @keyframes branchGrow {
-      from {
-        transform: scaleY(0);
-      }
-
-      to {
-        transform: scaleY(1);
-      }
-    }
-
-    .book-link {
-      position: relative;
-      display: flex;
       align-items: center;
-      min-height: 54px;
-      padding: 12px 12px 12px 15px;
-      background: white;
-      border: 1px solid rgba(21,21,21,0.10);
+      justify-content: space-between;
+      position: relative;
+      z-index: 2;
+    }
+
+    .library-book.active .book-spine {
+      width: 84px;
+      flex: 0 0 84px;
+      border-right: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .spine-number {
+      font-size: 0.7rem;
+      font-weight: 950;
+      opacity: 0.72;
+      letter-spacing: 0.08em;
+    }
+
+    .spine-title {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 0.88rem;
+      line-height: 1;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      font-weight: 950;
+    }
+
+    .book-open-page {
+      display: none;
+      flex: 1;
+      min-width: 0;
+      position: relative;
+      z-index: 3;
+      padding: 34px;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)),
+        var(--book-color);
+      overflow: auto;
+    }
+
+    .library-book.active .book-open-page {
+      display: block;
+      animation: openBookPage 420ms ease both;
+    }
+
+    @keyframes openBookPage {
+      from {
+        opacity: 0;
+        transform: translateX(-18px) rotateY(-5deg);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0) rotateY(0);
+      }
+    }
+
+    .book-open-page .panel-kicker {
+      color: rgba(255,255,255,0.78);
+    }
+
+    .library-book[style*="--book-text: var(--charcoal)"] .book-open-page .panel-kicker,
+    .library-book[style*="--book-text: var(--charcoal)"] .book-open-page p {
+      color: rgba(21,21,21,0.68);
+    }
+
+    .book-open-page h3 {
+      color: inherit;
+      font-size: clamp(2.2rem, 4.2vw, 4.6rem);
+      max-width: 900px;
+    }
+
+    .book-open-page p {
+      max-width: 900px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.7;
+      margin-top: 14px;
+      font-size: 1.02rem;
+    }
+
+    .testament-definitions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .definition-card {
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.12);
+      padding: 16px;
+      min-height: 150px;
+    }
+
+    .definition-card strong {
+      display: block;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .definition-card p {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .book-route-switch {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-top: 24px;
+    }
+
+    .route-chip {
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.10);
+      color: inherit;
+      padding: 12px 14px;
+      cursor: pointer;
+      font-weight: 950;
+    }
+
+    .route-chip.active {
+      background: rgba(255,255,255,0.88);
+      color: var(--navy);
+    }
+
+    .book-route {
+      display: block;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: max-height 560ms ease, opacity 300ms ease, transform 340ms ease;
+    }
+
+    .book-route.active {
+      max-height: 4000px;
+      opacity: 1;
+      transform: translateY(0);
+      margin-top: 22px;
+    }
+
+    .category-shelf {
+      background: rgba(255,255,255,0.90);
       color: var(--charcoal);
+      border: 1px solid rgba(255,255,255,0.24);
+      padding: 18px;
+      margin-top: 12px;
+      box-shadow: 0 14px 28px rgba(21,21,21,0.08);
+      animation: foldShelfDown 380ms ease both;
+    }
+
+    .book-route.active .category-shelf:nth-child(2) { animation-delay: 45ms; }
+    .book-route.active .category-shelf:nth-child(3) { animation-delay: 90ms; }
+    .book-route.active .category-shelf:nth-child(4) { animation-delay: 135ms; }
+    .book-route.active .category-shelf:nth-child(5) { animation-delay: 180ms; }
+
+    @keyframes foldShelfDown {
+      from {
+        opacity: 0;
+        transform: rotateX(-8deg) translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: rotateX(0deg) translateY(0);
+      }
+    }
+
+    .category-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .category-head h4 {
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 0.98rem;
+    }
+
+    .category-head span {
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .category-shelf p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .book-tile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+      gap: 8px;
+    }
+
+    .book-tile {
+      display: block;
+      min-height: 52px;
+      border: 1px solid rgba(21,21,21,0.10);
+      background: white;
+      color: var(--charcoal);
+      padding: 12px 12px 12px 18px;
       font-weight: 950;
       box-shadow: inset 7px 0 0 var(--navy);
-      opacity: 0;
-      transform: translateY(10px);
-      animation: bookRise 360ms ease forwards;
-      animation-delay: var(--book-delay, 0ms);
+      transition: transform 160ms ease, box-shadow 160ms ease;
     }
 
-    .book-link::before {
-      content: "";
-      position: absolute;
-      left: -30px;
-      top: 50%;
-      width: 30px;
-      height: 3px;
-      background: rgba(123,44,255,0.28);
-      transform: translateY(-50%) scaleX(0);
-      transform-origin: left;
-      animation: lineGrow 360ms ease forwards;
-      animation-delay: var(--book-delay, 0ms);
-    }
-
-    .book-link:hover {
+    .book-tile:hover {
       transform: translateY(-2px);
       box-shadow: inset 7px 0 0 var(--purple), 0 12px 24px rgba(21,21,21,0.10);
     }
 
-    .book-link.is-live {
-      border-color: rgba(123,44,255,0.32);
+    .route-preview-grid.compact {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .book-open-page .route-preview-card {
+      background: rgba(255,255,255,0.88);
+      color: var(--charcoal);
+    }
+
+
+    /* Lux update: Genesis live link */
+    .book-tile-live {
+      border-color: rgba(123, 44, 255, 0.32);
       box-shadow: inset 7px 0 0 var(--purple), 0 12px 28px rgba(123,44,255,0.10);
     }
 
-    .book-link.is-disabled {
-      opacity: 0.44;
-      cursor: not-allowed;
-    }
-
-    .live-label {
+    .book-tile-live .live-label {
       display: inline-flex;
       margin-left: 8px;
       padding: 3px 7px;
@@ -641,677 +910,2009 @@
       color: var(--purple);
       font-size: 0.68rem;
       font-weight: 950;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      vertical-align: middle;
     }
 
-    @keyframes bookRise {
+
+    section {
+      padding: 90px 0;
+    }
+
+    .section-header {
+      display: block;
+      text-align: center;
+      margin: 0 auto 34px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2.45rem, 5vw, 5.5rem);
+      white-space: nowrap;
+    }
+
+    .section-header p {
+      max-width: 790px;
+      margin: 18px auto 0;
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.68;
+    }
+
+    .shelf-section {
+      padding-top: 72px;
+      background: var(--cloud);
+      border-top: 1px solid rgba(21, 21, 21, 0.06);
+    }
+
+    .shelf-nav-wrap {
+      margin-top: 34px;
+    }
+
+    .shelf-nav {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      border: 1px solid rgba(21, 21, 21, 0.12);
+      background: var(--charcoal);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .shelf-tab {
+      appearance: none;
+      position: relative;
+      height: 138px;
+      padding: 18px 16px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      border: 0;
+      border-right: 1px solid rgba(255, 255, 255, 0.16);
+      background: var(--tab-color);
+      color: var(--tab-text);
+      cursor: pointer;
+      z-index: 1;
+      transition: transform 240ms ease, height 240ms ease, box-shadow 240ms ease;
+    }
+
+    .shelf-tab:last-child {
+      border-right: 0;
+    }
+
+    .shelf-tab::before {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      top: 12px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.32);
+      opacity: 0.65;
+    }
+
+    .tab-label {
+      font-size: 0.82rem;
+      font-weight: 950;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .shelf-tab:hover {
+      transform: translateY(-7px);
+    }
+
+    .shelf-tab.active {
+      height: 164px;
+      transform: translateY(-20px);
+      z-index: 4;
+      box-shadow: 0 24px 46px rgba(21, 21, 21, 0.18);
+    }
+
+    .shelf-tab.active::after {
+      content: "";
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: -15px;
+      height: 9px;
+      border-radius: 999px;
+      background: rgba(21, 21, 21, 0.18);
+      filter: blur(7px);
+      opacity: 0.55;
+    }
+
+    .shelf-line {
+      position: relative;
+      height: 3px;
+      background: rgba(21, 21, 21, 0.12);
+      overflow: hidden;
+    }
+
+    .shelf-line-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0;
+      background: var(--purple);
+      transition: width 260ms ease, transform 260ms ease, background 260ms ease;
+    }
+
+    .shelf-content {
+      padding-top: 30px;
+      min-height: 340px;
+    }
+
+    .shelf-panel {
+      display: none;
+      border: 1px solid rgba(21, 21, 21, 0.10);
+      border-top: 9px solid var(--panel-color, var(--purple));
+      background: var(--white);
+      padding: 34px;
+      box-shadow: 0 18px 38px rgba(21, 21, 21, 0.08);
+    }
+
+    .shelf-panel.active {
+      display: block;
+      animation: panelReveal 280ms ease;
+    }
+
+    @keyframes panelReveal {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
-    @keyframes lineGrow {
-      to {
-        transform: translateY(-50%) scaleX(1);
-      }
+    .panel-kicker {
+      display: inline-block;
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 0.74rem;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
-    /* FORMULA / LOWER SECTION */
+    .shelf-panel h3 {
+      font-size: clamp(2.15rem, 4vw, 3.8rem);
+    }
 
-    .standard-section {
-      padding: 84px 0;
+    .shelf-panel p {
+      max-width: 790px;
+      margin-top: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    .panel-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .guide-layer {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(21, 21, 21, 0.08);
+    }
+
+    .guide-title {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .guide-chip {
+      border: 1px solid rgba(21, 21, 21, 0.12);
+      border-left: 8px solid var(--chip-color, var(--navy));
+      background: white;
+      padding: 12px 14px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: 950;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .guide-chip:hover,
+    .guide-chip.active {
+      transform: translateY(-2px);
+      box-shadow: var(--soft-shadow);
       background: var(--paper);
-      border-top: 1px solid var(--line);
     }
 
-    .cards-grid {
+    .book-results {
+      display: none;
+      animation: panelReveal 260ms ease;
+    }
+
+    .book-results.active {
+      display: block;
+    }
+
+    .treemap-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+
+    .treemap-group {
+      grid-column: span 4;
+      border: 1px solid rgba(21, 21, 21, 0.10);
+      background: var(--paper);
+      border-radius: 20px;
+      padding: 18px;
+      min-height: 210px;
+    }
+
+    .treemap-group-large {
+      grid-column: span 6;
+    }
+
+    .treemap-group-wide {
+      grid-column: span 12;
+    }
+
+    .treemap-group-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .treemap-group-head h4 {
+      margin: 0;
+      font-size: 0.98rem;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .treemap-group-head span {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .treemap-books {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .book-tile {
+      min-height: 58px;
+      border: 1px solid rgba(21, 21, 21, 0.10);
+      background: white;
+      border-radius: 14px;
+      padding: 12px 12px 12px 22px;
+      text-align: left;
+      font-weight: 900;
+      line-height: 1.15;
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease, color 160ms ease;
+      position: relative;
+      overflow: hidden;
+      color: var(--charcoal);
+    }
+
+    .book-tile::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 10px;
+      background: var(--book-color, var(--navy));
+      opacity: 0.95;
+    }
+
+    .book-tile::after {
+      content: "";
+      position: absolute;
+      left: 14px;
+      top: 10px;
+      bottom: 10px;
+      width: 1px;
+      background: rgba(21, 21, 21, 0.08);
+    }
+
+    .book-tile.large {
+      grid-column: span 2;
+      min-height: 76px;
+      font-size: 1.02rem;
+    }
+
+    .book-tile:hover,
+    .book-tile.active {
+      transform: translateY(-2px);
+      border-color: var(--purple);
+      box-shadow: 0 12px 24px rgba(21, 21, 21, 0.08);
+      color: var(--purple);
+    }
+
+    .book-tile.active::before,
+    .book-tile:hover::before {
+      background: var(--purple);
+    }
+
+    .selected-book-panel {
+      display: none;
+      margin-top: 18px;
+      border: 1px solid rgba(21, 21, 21, 0.10);
+      border-left: 9px solid var(--navy);
+      padding: 20px;
+      background: white;
+      border-radius: 18px;
+      animation: panelReveal 240ms ease;
+    }
+
+    .selected-book-panel.active {
+      display: block;
+    }
+
+    .selected-book-panel h4 {
+      font-size: 1.8rem;
+      letter-spacing: -0.04em;
+    }
+
+    .linked-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .linked-box {
+      background: var(--cloud);
+      border: 1px solid rgba(21, 21, 21, 0.08);
+      border-radius: 15px;
+      padding: 14px;
+    }
+
+    .linked-box b {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .mini-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .mini-tag {
+      padding: 6px 8px;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid rgba(21, 21, 21, 0.08);
+      font-size: 0.8rem;
+      font-weight: 850;
+    }
+
+    .people-results {
+      display: none;
+      animation: panelReveal 260ms ease;
+    }
+
+    .people-results.active {
+      display: block;
+    }
+
+    .people-treemap-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+
+    .people-group {
+      grid-column: span 4;
+      border: 1px solid rgba(21, 21, 21, 0.10);
+      background: var(--paper);
+      border-radius: 20px;
+      padding: 18px;
+      min-height: 210px;
+    }
+
+    .people-group-large {
+      grid-column: span 6;
+    }
+
+    .people-group-wide {
+      grid-column: span 12;
+    }
+
+    .people-group-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .people-group-head h4 {
+      margin: 0;
+      font-size: 0.98rem;
+      color: var(--slate);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .people-group-head span {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .people-tiles {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .person-tile {
+      min-height: 58px;
+      border: 1px solid rgba(21, 21, 21, 0.10);
+      background: white;
+      border-radius: 14px;
+      padding: 12px 12px 12px 22px;
+      text-align: left;
+      font-weight: 900;
+      line-height: 1.15;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      color: var(--charcoal);
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease, color 160ms ease;
+    }
+
+    .person-tile::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 10px;
+      background: var(--slate);
+      opacity: 0.95;
+    }
+
+    .person-tile.large {
+      grid-column: span 2;
+      min-height: 76px;
+      font-size: 1.02rem;
+    }
+
+    .person-tile:hover,
+    .person-tile.active {
+      transform: translateY(-2px);
+      border-color: var(--purple);
+      box-shadow: 0 12px 24px rgba(21, 21, 21, 0.08);
+      color: var(--purple);
+    }
+
+    .person-tile:hover::before,
+    .person-tile.active::before {
+      background: var(--purple);
+    }
+
+    .genealogy-map {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 18px;
+      border: 1px solid rgba(21, 21, 21, 0.10);
+      border-radius: 20px;
+      background: var(--paper);
+    }
+
+    .gene-node {
+      flex: 0 0 auto;
+      border: 1px solid rgba(21, 21, 21, 0.12);
+      background: white;
+      border-radius: 999px;
+      padding: 12px 14px;
+      font-weight: 950;
+      cursor: pointer;
+      transition: transform 160ms ease, border-color 160ms ease, color 160ms ease;
+    }
+
+    .gene-node:hover,
+    .gene-node.active {
+      transform: translateY(-2px);
+      border-color: var(--purple);
+      color: var(--purple);
+    }
+
+    .gene-line {
+      flex: 0 0 44px;
+      height: 2px;
+      background: var(--purple);
+      opacity: 0.55;
+    }
+
+    .gene-note {
+      margin-top: 14px !important;
+      font-size: 0.95rem !important;
+    }
+
+    .selected-person-panel {
+      display: none;
+      margin-top: 18px;
+      border: 1px solid rgba(21, 21, 21, 0.10);
+      border-left: 9px solid var(--slate);
+      padding: 20px;
+      background: white;
+      border-radius: 18px;
+      animation: panelReveal 240ms ease;
+    }
+
+    .selected-person-panel.active {
+      display: block;
+    }
+
+    .selected-person-panel h4 {
+      font-size: 1.8rem;
+      letter-spacing: -0.04em;
+    }
+
+    .route-preview-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
       margin-top: 26px;
     }
 
-    .info-card {
-      background: white;
-      border: 1px solid var(--line);
-      padding: 22px;
-      box-shadow: var(--soft-shadow);
-      min-height: 190px;
+    .route-preview-card {
+      border: 1px solid rgba(21, 21, 21, 0.10);
+      border-top: 8px solid var(--route-color, var(--purple));
+      border-radius: 18px;
+      padding: 18px;
+      background: var(--paper);
     }
 
-    .info-card strong {
-      display: block;
-      color: var(--purple);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+    .route-preview-card h4 {
+      font-size: 1.2rem;
+      letter-spacing: -0.03em;
+    }
+
+    .route-preview-card p {
+      font-size: 0.94rem;
+      margin-top: 9px;
+      line-height: 1.55;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: rgba(255, 255, 255, 0.72);
       font-size: 0.78rem;
-      margin-bottom: 10px;
+      font-weight: 950;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
-    .info-card h3 {
-      font-size: clamp(1.5rem, 2.4vw, 2.5rem);
-      margin-bottom: 10px;
-    }
-
-    .info-card p {
-      color: var(--muted);
-      line-height: 1.6;
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--purple);
+      box-shadow: 0 0 0 7px rgba(123, 44, 255, 0.16);
     }
 
     footer {
-      background: var(--purple);
-      color: white;
-      padding: 42px 0 52px;
+      padding: 34px 0;
+      background: var(--cloud);
+      border-top: 1px solid rgba(21, 21, 21, 0.08);
+      color: var(--muted);
     }
 
-    .footer-wordmark {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.8rem, 3vw, 2.7rem);
-      letter-spacing: -0.06em;
-      font-weight: 800;
-      margin-bottom: 14px;
-    }
-
-    .footer-rule {
-      border-top: 1px dashed rgba(255, 255, 255, 0.55);
-      padding-top: 18px;
-      color: rgba(255, 255, 255, 0.78);
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
       font-size: 0.92rem;
     }
 
-    @media (max-width: 980px) {
-      .top-nav {
-        display: none;
+    @media (max-width: 960px) {
+      .shelf-nav {
+        grid-template-columns: repeat(4, 1fr);
       }
 
-      .testament-panel-inner {
+      .treemap-grid,
+      .people-treemap-grid,
+      .linked-row,
+      .build-panel,
+      .route-preview-grid {
         grid-template-columns: 1fr;
       }
 
-      .arc-stage {
-        min-height: 410px;
+      .treemap-group,
+      .treemap-group-large,
+      .treemap-group-wide,
+      .people-group,
+      .people-group-large,
+      .people-group-wide {
+        grid-column: span 1;
       }
 
-      .branch-drawer {
-        grid-template-columns: 1fr;
-      }
-
-      .cards-grid {
-        grid-template-columns: 1fr;
+      .section-header h2 {
+        white-space: normal;
       }
     }
 
-    @media (max-width: 760px) {
+    @media (max-width: 650px) {
       .container {
-        width: min(1180px, calc(100% - 24px));
+        width: min(100% - 26px, 1180px);
+      }
+
+      .brand-bar {
+        height: 62px;
       }
 
       .hero {
-        min-height: 92vh;
+        padding-top: 62px;
+      }
+
+      .hero-collage-layer {
+        inset: 62px 0 auto 0;
+        height: 46vh;
+      }
+
+      .hero-content {
+        padding-top: 20vh;
       }
 
       h1 {
-        font-size: clamp(3rem, 15vw, 5.2rem);
+        font-size: 3.45rem;
       }
 
-      .hero-actions {
-        flex-direction: column;
+      section {
+        padding: 68px 0;
       }
 
-      .button {
-        width: 100%;
+      .shelf-nav {
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      .button + .button {
-        border-left: 1px solid var(--line);
-        border-top: 0;
+      .shelf-tab {
+        height: 112px;
       }
 
-      .testament-panel {
-        min-height: auto;
+      .shelf-tab.active {
+        height: 130px;
+        transform: translateY(-10px);
       }
 
-      .arc-stage {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        min-height: auto;
+      .shelf-panel {
+        padding: 24px;
       }
 
-      .arc-card {
-        position: relative;
-        left: auto;
-        top: auto;
-        width: 100%;
-        transform: none !important;
-      }
-
-      .arc-card.is-active {
-        transform: translateY(-4px) scale(1.02) !important;
-      }
-
-      .book-branch {
+      .treemap-books,
+      .people-tiles {
         grid-template-columns: 1fr;
       }
+
+      .book-tile.large,
+      .person-tile.large {
+        grid-column: span 1;
+      }
+
+      .hero-pill {
+        max-width: 100%;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  
+    /* Lux final update: finished full-width shelf + cleaner spine words */
+    .bookcase-section {
+      padding-top: 72px;
+      background: var(--cloud);
+      border-top: 1px solid rgba(21, 21, 21, 0.06);
+    }
+
+    .bookcase {
+      width: 100%;
+      min-height: 680px;
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      perspective: 1200px;
+      position: relative;
+      padding-bottom: 42px;
+      overflow: visible;
+      border-bottom: 0 !important;
+    }
+
+    .bookcase::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 18px;
+      height: 18px;
+      background: #cfcac2;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.6),
+        inset 0 -1px 0 rgba(0,0,0,0.08);
+      z-index: 0;
+    }
+
+    .bookcase::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 18px;
+      background: #bdb8b0;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        0 8px 18px rgba(0,0,0,0.08);
+      z-index: 0;
+    }
+
+    .library-book {
+      position: relative;
+      z-index: 2;
+    }
+
+    .book-spine {
+      min-height: 100%;
+      padding: 20px 10px 24px;
+      gap: 14px;
+      text-align: center;
+    }
+
+    .spine-number {
+      font-size: 0.68rem;
+      font-weight: 950;
+      opacity: 0.72;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .spine-title {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 auto;
+      color: inherit !important;
+      text-align: center;
+      font-size: 0.96rem;
+      line-height: 1;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 950;
+      white-space: nowrap;
+      opacity: 0.98;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.14);
+    }
+
+    .library-book[style*="--book-text: var(--charcoal)"] .spine-title,
+    .library-book[style*="--book-text: var(--charcoal)"] .spine-number {
+      text-shadow: 0 1px 0 rgba(255,255,255,0.45);
+    }
+
+    @media (max-width: 960px) {
+      .bookcase {
+        min-height: 560px;
+        padding-bottom: 36px;
+      }
+
+      .library-book {
+        min-width: 62px;
+      }
+
+      .library-book.active {
+        min-width: min(520px, 72vw);
+      }
+
+      .library-book.active .book-spine {
+        width: 74px;
+        flex: 0 0 74px;
+      }
+
+      .spine-title {
+        font-size: 0.84rem;
+        letter-spacing: 0.17em;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .bookcase {
+        min-height: 470px;
+        padding-bottom: 32px;
+      }
+
+      .bookcase::before {
+        bottom: 14px;
+        height: 14px;
+      }
+
+      .bookcase::after {
+        height: 14px;
+      }
+
+      .library-book {
+        min-width: 54px;
+        flex: 0.56 1 0;
+      }
+
+      .library-book.active {
+        min-width: min(440px, 76vw);
+      }
+
+      .library-book.active .book-spine {
+        width: 64px;
+        flex: 0 0 64px;
+      }
+
+      .book-spine {
+        padding: 16px 8px 20px;
+      }
+
+      .spine-number {
+        font-size: 0.58rem;
+      }
+
+      .spine-title {
+        font-size: 0.75rem;
+        letter-spacing: 0.14em;
+      }
+
+      .book-open-page {
+        padding: 22px;
+      }
+    }
+
+  
+    /* Lux final update: huge readable book-spine labels */
+    .spine-title {
+      font-size: clamp(1.25rem, 1.7vw, 1.85rem) !important;
+      letter-spacing: 0.18em !important;
+      font-weight: 1000 !important;
+      line-height: 1 !important;
+    }
+
+    .library-book.active .spine-title {
+      font-size: clamp(1.35rem, 1.9vw, 2rem) !important;
+    }
+
+    .spine-number {
+      font-size: 0.82rem !important;
+      font-weight: 1000 !important;
+    }
+
+    .book-spine {
+      min-width: 88px !important;
+      padding-left: 14px !important;
+      padding-right: 14px !important;
+    }
+
+    .library-book.active .book-spine {
+      width: 104px !important;
+      flex: 0 0 104px !important;
+    }
+
+    @media (max-width: 960px) {
+      .spine-title {
+        font-size: 1.12rem !important;
+        letter-spacing: 0.16em !important;
+      }
+
+      .library-book.active .spine-title {
+        font-size: 1.25rem !important;
+      }
+
+      .book-spine {
+        min-width: 72px !important;
+      }
+
+      .library-book.active .book-spine {
+        width: 82px !important;
+        flex: 0 0 82px !important;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .spine-title {
+        font-size: 0.95rem !important;
+        letter-spacing: 0.13em !important;
+      }
+
+      .library-book.active .spine-title {
+        font-size: 1.04rem !important;
+      }
+
+      .spine-number {
+        font-size: 0.62rem !important;
+      }
+
+      .book-spine {
+        min-width: 58px !important;
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+      }
+
+      .library-book.active .book-spine {
+        width: 68px !important;
+        flex: 0 0 68px !important;
+      }
+    }
+
+  
+    /* Lux final update: extra-large, more spread-out spine labels */
+    .book-spine {
+      min-width: 110px !important;
+      padding-top: 22px !important;
+      padding-bottom: 28px !important;
+      padding-left: 16px !important;
+      padding-right: 16px !important;
+      gap: 18px !important;
+    }
+
+    .library-book.active .book-spine {
+      width: 130px !important;
+      flex: 0 0 130px !important;
+    }
+
+    .spine-title {
+      font-size: clamp(1.55rem, 2.2vw, 2.35rem) !important;
+      letter-spacing: 0.22em !important;
+      font-weight: 1000 !important;
+      line-height: 1 !important;
+      white-space: nowrap !important;
+    }
+
+    .library-book.active .spine-title {
+      font-size: clamp(1.7rem, 2.45vw, 2.55rem) !important;
+      letter-spacing: 0.23em !important;
+    }
+
+    .spine-number {
+      font-size: 0.88rem !important;
+      letter-spacing: 0.16em !important;
+      font-weight: 1000 !important;
+    }
+
+    @media (max-width: 1100px) {
+      .book-spine {
+        min-width: 94px !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+      }
+
+      .library-book.active .book-spine {
+        width: 108px !important;
+        flex: 0 0 108px !important;
+      }
+
+      .spine-title {
+        font-size: 1.28rem !important;
+        letter-spacing: 0.2em !important;
+      }
+
+      .library-book.active .spine-title {
+        font-size: 1.42rem !important;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .book-spine {
+        min-width: 66px !important;
+        padding-top: 16px !important;
+        padding-bottom: 20px !important;
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+        gap: 10px !important;
+      }
+
+      .library-book.active .book-spine {
+        width: 76px !important;
+        flex: 0 0 76px !important;
+      }
+
+      .spine-title {
+        font-size: 1.02rem !important;
+        letter-spacing: 0.16em !important;
+      }
+
+      .library-book.active .spine-title {
+        font-size: 1.12rem !important;
+        letter-spacing: 0.17em !important;
+      }
+
+      .spine-number {
+        font-size: 0.64rem !important;
+        letter-spacing: 0.12em !important;
+      }
+    }
+
+  
+    /* Lux final update: massively larger spine labels */
+    .book-spine {
+      min-width: 138px !important;
+      padding-top: 24px !important;
+      padding-bottom: 32px !important;
+      padding-left: 18px !important;
+      padding-right: 18px !important;
+      gap: 20px !important;
+    }
+
+    .library-book.active .book-spine {
+      width: 158px !important;
+      flex: 0 0 158px !important;
+    }
+
+    .spine-title {
+      font-size: clamp(2rem, 2.9vw, 3rem) !important;
+      letter-spacing: 0.22em !important;
+      font-weight: 1000 !important;
+      line-height: 1 !important;
+      white-space: nowrap !important;
+    }
+
+    .library-book.active .spine-title {
+      font-size: clamp(2.15rem, 3.15vw, 3.2rem) !important;
+      letter-spacing: 0.23em !important;
+    }
+
+    .spine-number {
+      font-size: 0.95rem !important;
+      letter-spacing: 0.16em !important;
+      font-weight: 1000 !important;
+    }
+
+    @media (max-width: 1100px) {
+      .book-spine {
+        min-width: 112px !important;
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+      }
+
+      .library-book.active .book-spine {
+        width: 126px !important;
+        flex: 0 0 126px !important;
+      }
+
+      .spine-title {
+        font-size: 1.55rem !important;
+        letter-spacing: 0.20em !important;
+      }
+
+      .library-book.active .spine-title {
+        font-size: 1.72rem !important;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .book-spine {
+        min-width: 76px !important;
+        padding-top: 16px !important;
+        padding-bottom: 20px !important;
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+        gap: 10px !important;
+      }
+
+      .library-book.active .book-spine {
+        width: 88px !important;
+        flex: 0 0 88px !important;
+      }
+
+      .spine-title {
+        font-size: 1.12rem !important;
+        letter-spacing: 0.16em !important;
+      }
+
+      .library-book.active .spine-title {
+        font-size: 1.22rem !important;
+        letter-spacing: 0.17em !important;
+      }
+
+      .spine-number {
+        font-size: 0.68rem !important;
+        letter-spacing: 0.12em !important;
+      }
+    }
+
+
+    /* Lux update: premium scroll pan-up text animation */
+    .scroll-pan {
+      opacity: 0;
+      transform: translateY(26px);
+      filter: blur(4px);
+      transition:
+        opacity 700ms ease,
+        transform 850ms cubic-bezier(.2,.8,.2,1),
+        filter 850ms ease;
+      transition-delay: var(--reveal-delay, 0ms);
+      will-change: opacity, transform, filter;
+    }
+
+    .scroll-pan.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation: none !important;
-        transition: none !important;
-        scroll-behavior: auto !important;
+      .scroll-pan,
+      .scroll-pan.is-visible {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        transition: none;
       }
     }
+
+  
+/* ===== Lux update: flat matte books + premium scroll animation + scroll map pan ===== */
+
+/* Scroll-reactive map/collage movement */
+.hero-collage-layer {
+  background-size: cover !important;
+  background-position: center !important;
+  transform: translate3d(0, var(--map-pan-y, 0px), 0) scale(var(--map-scale, 1.04)) !important;
+  transition: transform 80ms linear !important;
+  will-change: transform;
+}
+
+/* Main shelf books: flat matte color, no glossy gradient */
+.library-book {
+  background: var(--book-color) !important;
+  box-shadow: 0 16px 30px rgba(21, 21, 21, 0.10) !important;
+  border-right: 1px solid rgba(255,255,255,0.14) !important;
+}
+
+/* Remove glossy / gradient sheen */
+.library-book::after {
+  display: none !important;
+}
+
+/* Active/open book stays matte too */
+.library-book.active {
+  box-shadow: 0 24px 46px rgba(21, 21, 21, 0.14) !important;
+}
+
+/* Open panel background: flat solid color only */
+.book-open-page {
+  background: var(--book-color) !important;
+}
+
+/* Matte inside cards instead of glassy translucent look */
+.definition-card {
+  background: rgba(255,255,255,0.16) !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  box-shadow: none !important;
+}
+
+.route-chip {
+  background: rgba(255,255,255,0.12) !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+  box-shadow: none !important;
+}
+
+.route-chip.active {
+  background: rgba(255,255,255,0.9) !important;
+  color: var(--navy) !important;
+  box-shadow: none !important;
+}
+
+.category-shelf {
+  background: rgba(255,255,255,0.94) !important;
+  box-shadow: 0 10px 20px rgba(21,21,21,0.06) !important;
+}
+
+.route-preview-card {
+  background: rgba(255,255,255,0.94) !important;
+  box-shadow: 0 10px 20px rgba(21,21,21,0.06) !important;
+}
+
+/* Text/card scroll pan-up animation */
+.scroll-pan {
+  opacity: 0;
+  transform: translateY(26px);
+  filter: blur(4px);
+  transition:
+    opacity 700ms ease,
+    transform 850ms cubic-bezier(.2,.8,.2,1),
+    filter 850ms ease;
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform, filter;
+}
+
+.scroll-pan.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Optional premium helper section */
+.start-here-section {
+  background: var(--cloud);
+  padding-top: 70px;
+  border-top: 1px solid rgba(21, 21, 21, 0.06);
+}
+
+.start-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.start-card {
+  background: var(--paper);
+  border: 1px solid rgba(21,21,21,0.08);
+  border-top: 8px solid var(--card-color, var(--purple));
+  padding: 22px;
+  min-height: 190px;
+  box-shadow: 0 12px 24px rgba(21,21,21,0.055);
+}
+
+.start-card span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.start-card h3 {
+  font-size: 1.75rem;
+  letter-spacing: -0.04em;
+}
+
+.start-card p {
+  margin-top: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.search-preview {
+  margin-top: 28px;
+  border: 1px solid rgba(21,21,21,0.09);
+  background: var(--white);
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 12px 24px rgba(21,21,21,0.055);
+}
+
+.search-preview input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  font-size: 1rem;
+  color: var(--charcoal);
+  background: transparent;
+}
+
+.search-preview strong {
+  color: var(--purple);
+  white-space: nowrap;
+  font-size: 0.86rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* -------------------------------------------------------- */
+/* Bible Mapped update: Old Testament scroll animation
+   This section styles the Books panel to behave like an
+   unfurling scroll. When the Books spine is active, each
+   route expands from zero height into a parchment‑styled
+   container with book categories listed inside. */
+
+    .library-book[data-book-panel="books"] .book-route {
+      /* collapsed by default */
+      max-height: 0;
+      overflow: hidden;
+      /* parchment paper styling */
+      background: linear-gradient(#fdf9ef, #fffdf5 50%, #fdf9ef);
+      border: 2px solid #d2b48c;
+      border-radius: 12px;
+      margin-top: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      /* anchor transform for smooth scale */
+      transform-origin: top;
+      transform: scaleY(0.98);
+      opacity: 0;
+      padding: 0 24px;
+      transition: max-height 0.7s ease, padding 0.7s ease, opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .library-book[data-book-panel="books"] .book-route.active {
+      /* expanded scroll */
+      max-height: 5000px; /* large enough for all categories */
+      opacity: 1;
+      transform: scaleY(1);
+      padding: 24px;
+    }
+
+    /* Category styling inside the scroll */
+    .library-book[data-book-panel="books"] .book-route .category-shelf {
+      margin-top: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    }
+    .library-book[data-book-panel="books"] .book-route .category-shelf:first-of-type {
+      margin-top: 0;
+    }
+    .library-book[data-book-panel="books"] .book-route .category-head h4 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.3rem;
+      margin-bottom: 4px;
+    }
+    .library-book[data-book-panel="books"] .book-route .category-head span {
+      color: var(--muted);
+    }
+    .library-book[data-book-panel="books"] .book-route .book-tile-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .library-book[data-book-panel="books"] .book-route .book-tile {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: #f7f3e8;
+      color: inherit;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      transition: background 0.3s ease, transform 0.15s ease;
+    }
+    .library-book[data-book-panel="books"] .book-route .book-tile:hover {
+      background: #eae2cf;
+      transform: translateY(-2px);
+    }
+
+    /* Decorative edges for the scroll: subtle faded band at top and bottom */
+    .library-book[data-book-panel="books"] .book-route::before,
+    .library-book[data-book-panel="books"] .book-route::after {
+      content: "";
+      display: block;
+      height: 16px;
+      background: radial-gradient(circle at center, #e2cfa2 0%, #fdf9ef 70%);
+      border-left: 2px solid #d2b48c;
+      border-right: 2px solid #d2b48c;
+      margin-left: -2px;
+      margin-right: -2px;
+    }
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-pan,
+  .scroll-pan.is-visible {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+
+  .hero-collage-layer {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+@media (max-width: 960px) {
+  .start-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
   </style>
 </head>
 
 <body>
-  <header class="brand-bar">
+  <header class="brand-bar" aria-label="Bible Mapped brand header">
     <div class="brand-bar-inner">
-      <a class="brand-wordmark" href="./index.html">Bible Mapped</a>
-
-      <nav class="top-nav" aria-label="Main navigation">
-        <a href="#testaments">Books</a>
-        <a href="./about/index.html">About</a>
-        <a href="./books/genesis/index.html">Genesis</a>
-        <a href="./books/exodus/index.html">Exodus</a>
-      </nav>
+      <a href="#top" class="brand-wordmark">Bible Mapped</a>
     </div>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="hero-collage-layer" aria-hidden="true"></div>
+    <section class="hero" id="top">
+      <!-- Replace this placeholder with your uploaded collage: style="--collage-image: url('your-collage.jpg');" -->
+     <div class="hero-collage-layer" style="--collage-image: url('assets/bible-mapped-collage.png');"></div>
 
       <div class="container hero-content">
-        <a class="hero-pill" href="./about/index.html">
+        <a class="hero-pill" href="#topics">
           <span class="new-label">New</span>
-          <span>Understand the Bible through place, context, and meaning.</span>
-          <span class="pill-arrow">→</span>
+          <span>Explore Scripture through place, context, and meaning</span>
+          <span class="pill-arrow" aria-hidden="true">→</span>
         </a>
 
-        <h1>Scripture happened somewhere.</h1>
-
+        <h1>We help people understand the Bible through place.</h1>
         <p class="hero-subtitle">
-          Bible Mapped helps you follow the Bible through real places, real people,
-          real timelines, and real meaning — so the story becomes easier to see.
+          Bible Mapped is a visual Bible learning platform built around maps, context, word studies, people, themes, and the story that points to Jesus.
         </p>
 
-        <div class="hero-actions">
-          <a class="button button-primary" href="#testaments">Explore the Books</a>
-          <a class="button button-mission" href="./about/index.html">How Bible Mapped Works</a>
-          <a class="button" href="./books/genesis/index.html">Start with Genesis</a>
+        <div class="hero-actions hero-connected-actions">
+          <a class="button button-primary" href="#topics">Enter Bible Mapped →</a>
+          <a class="button button-mission" href="about/">Read the Mission</a>
         </div>
       </div>
     </section>
 
-    <section class="intro-section">
+
+    <section class="start-here-section" id="start-here">
       <div class="container">
-        <span class="section-kicker">The idea</span>
-
-        <h2 class="section-title">The Bible is a story you can trace.</h2>
-
-        <p class="section-copy">
-          Bible Mapped starts with the question people naturally ask when someone says they have proof:
-          where? Where did this happen? Who was involved? When did it happen? Why does it matter?
-          This page lets the books move, open, and branch so the structure becomes easier to see.
-        </p>
-      </div>
-    </section>
-
-    <section class="testament-section" id="testaments">
-      <div class="container">
-        <div class="testament-header">
-          <span class="section-kicker">Library</span>
-
-          <h2 class="section-title">Open the story by testament.</h2>
-
-          <p class="section-copy">
-            Scroll to feel the motion. Click a square to expand a category. Live books connect to their pages.
+        <div class="section-header">
+          <h2>Start with context.</h2>
+          <p>
+            Bible Mapped helps readers move from a flat reading of Scripture to a place-based, historically aware, Jesus-centered study path.
           </p>
         </div>
 
-        <div class="testament-grid">
-          <section class="testament-panel" data-testament-panel="old">
-            <div class="testament-panel-inner">
-              <div class="testament-copy">
-                <span class="testament-label">Old Testament</span>
+        <div class="search-preview">
+          <strong>Search</strong>
+          <input type="search" placeholder="Search Genesis, Exodus, Egypt, Moses, covenant..." aria-label="Search Bible Mapped" />
+        </div>
 
-                <h3>Promise, covenant, kingdom, exile, and hope.</h3>
+        <div class="start-grid">
+          <article class="start-card" style="--card-color: var(--purple);">
+            <span>01 / Books</span>
+            <h3>Choose a book.</h3>
+            <p>Start with Genesis or Exodus, then move through people, places, themes, and chapter context.</p>
+          </article>
 
-                <p>
-                  The Old Testament moves from creation to Israel’s story, from Eden to Abraham,
-                  from Egypt to Sinai, from the land to exile, and forward toward the Messiah.
-                </p>
+          <article class="start-card" style="--card-color: var(--navy);">
+            <span>02 / Maps</span>
+            <h3>Follow the place.</h3>
+            <p>See locations like Egypt, Sinai, Canaan, Jerusalem, Babylon, and Rome as part of the story.</p>
+          </article>
 
-                <div class="branch-drawer" data-drawer="old">
-                  <div>
-                    <h4 class="drawer-title" data-drawer-title="old">Torah</h4>
-                    <p class="drawer-copy" data-drawer-copy="old">
-                      The beginning of the story: creation, fall, covenant, Exodus, law, and wilderness.
-                    </p>
-                  </div>
-
-                  <div class="book-branch" data-book-branch="old"></div>
-                </div>
-              </div>
-
-              <div class="arc-stage" data-arc-stage>
-                <button
-                  class="arc-card is-active"
-                  type="button"
-                  data-testament="old"
-                  data-category="torah"
-                  style="--x:-250px; --y:30px; --r:-10deg; --delay:0ms; --card-color:var(--navy); --card-text:white;"
-                >
-                  <span class="arc-number">01</span>
-                  <span class="arc-title">Torah</span>
-                  <span class="arc-note">Origin</span>
-                </button>
-
-                <button
-                  class="arc-card"
-                  type="button"
-                  data-testament="old"
-                  data-category="history"
-                  style="--x:-112px; --y:-88px; --r:-4deg; --delay:40ms; --card-color:var(--purple); --card-text:white;"
-                >
-                  <span class="arc-number">02</span>
-                  <span class="arc-title">History</span>
-                  <span class="arc-note">Land</span>
-                </button>
-
-                <button
-                  class="arc-card"
-                  type="button"
-                  data-testament="old"
-                  data-category="wisdom"
-                  style="--x:42px; --y:-116px; --r:3deg; --delay:80ms; --card-color:var(--sand); --card-text:var(--charcoal);"
-                >
-                  <span class="arc-number">03</span>
-                  <span class="arc-title">Wisdom</span>
-                  <span class="arc-note">Life</span>
-                </button>
-
-                <button
-                  class="arc-card"
-                  type="button"
-                  data-testament="old"
-                  data-category="major-prophets"
-                  style="--x:184px; --y:-62px; --r:8deg; --delay:120ms; --card-color:var(--red); --card-text:white;"
-                >
-                  <span class="arc-number">04</span>
-                  <span class="arc-title">Major Prophets</span>
-                  <span class="arc-note">Warning</span>
-                </button>
-
-                <button
-                  class="arc-card"
-                  type="button"
-                  data-testament="old"
-                  data-category="minor-prophets"
-                  style="--x:278px; --y:82px; --r:13deg; --delay:160ms; --card-color:var(--slate); --card-text:white;"
-                >
-                  <span class="arc-number">05</span>
-                  <span class="arc-title">Minor Prophets</span>
-                  <span class="arc-note">Hope</span>
-                </button>
-              </div>
-            </div>
-          </section>
-
-          <section class="testament-panel" data-testament-panel="new">
-            <div class="testament-panel-inner">
-              <div class="testament-copy">
-                <span class="testament-label">New Testament</span>
-
-                <h3>Jesus Christ, the Gospel, the church, and new creation.</h3>
-
-                <p>
-                  The New Testament centers on Jesus: His life, death, resurrection, mission,
-                  the apostles’ teaching, and the hope of all things made new.
-                </p>
-
-                <div class="branch-drawer" data-drawer="new">
-                  <div>
-                    <h4 class="drawer-title" data-drawer-title="new">Gospels</h4>
-                    <p class="drawer-copy" data-drawer-copy="new">
-                      The life, teachings, death, and resurrection of Jesus Christ.
-                    </p>
-                  </div>
-
-                  <div class="book-branch" data-book-branch="new"></div>
-                </div>
-              </div>
-
-              <div class="arc-stage" data-arc-stage>
-                <button
-                  class="arc-card is-active"
-                  type="button"
-                  data-testament="new"
-                  data-category="gospels"
-                  style="--x:-238px; --y:86px; --r:10deg; --delay:0ms; --card-color:var(--purple); --card-text:white;"
-                >
-                  <span class="arc-number">01</span>
-                  <span class="arc-title">Gospels</span>
-                  <span class="arc-note">Jesus</span>
-                </button>
-
-                <button
-                  class="arc-card"
-                  type="button"
-                  data-testament="new"
-                  data-category="acts"
-                  style="--x:-104px; --y:-54px; --r:4deg; --delay:40ms; --card-color:var(--navy); --card-text:white;"
-                >
-                  <span class="arc-number">02</span>
-                  <span class="arc-title">Acts</span>
-                  <span class="arc-note">Mission</span>
-                </button>
-
-                <button
-                  class="arc-card"
-                  type="button"
-                  data-testament="new"
-                  data-category="paul"
-                  style="--x:44px; --y:-118px; --r:-3deg; --delay:80ms; --card-color:var(--red); --card-text:white;"
-                >
-                  <span class="arc-number">03</span>
-                  <span class="arc-title">Paul’s Letters</span>
-                  <span class="arc-note">Church</span>
-                </button>
-
-                <button
-                  class="arc-card"
-                  type="button"
-                  data-testament="new"
-                  data-category="general"
-                  style="--x:186px; --y:-50px; --r:-8deg; --delay:120ms; --card-color:var(--teal); --card-text:var(--charcoal);"
-                >
-                  <span class="arc-number">04</span>
-                  <span class="arc-title">General Letters</span>
-                  <span class="arc-note">Faith</span>
-                </button>
-
-                <button
-                  class="arc-card"
-                  type="button"
-                  data-testament="new"
-                  data-category="revelation"
-                  style="--x:282px; --y:92px; --r:-13deg; --delay:160ms; --card-color:var(--slate); --card-text:white;"
-                >
-                  <span class="arc-number">05</span>
-                  <span class="arc-title">Revelation</span>
-                  <span class="arc-note">Hope</span>
-                </button>
-              </div>
-            </div>
-          </section>
+          <article class="start-card" style="--card-color: var(--teal);">
+            <span>03 / Meaning</span>
+            <h3>Study the meaning.</h3>
+            <p>Connect geography, people, words, and themes so Scripture becomes easier to understand.</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="standard-section">
+    <section class="shelf-section bookcase-section" id="topics">
       <div class="container">
-        <span class="section-kicker">Formula</span>
+        <div class="section-header">
+          <h2>Browse the Bible like a shelf.</h2>
+          <p>
+            Choose a book-spine. The selected spine expands into a full color panel, while the other spines stay visible on the shelf.
+          </p>
+        </div>
 
-        <h2 class="section-title">The Bible Mapped method is simple.</h2>
+        <div class="bookcase" aria-label="Bible Mapped book shelf navigation">
+          <article class="library-book active" data-book-panel="overview" style="--book-color: var(--paper); --book-text: var(--charcoal); --book-soft: #f0ece2;">
+            <button class="book-spine" type="button" aria-expanded="true">
+              <span class="spine-number">01</span>
+              <span class="spine-title">Overview</span>
+            </button>
 
-        <p class="section-copy">
-          Every study begins with place, people, time, and meaning. That keeps the Bible
-          grounded inside history while pointing us to Jesus Christ.
-        </p>
+            <div class="book-open-page">
+              <span class="panel-kicker">Start here</span>
+              <h3>Start with the shelf.</h3>
+              <p>
+                Bible Mapped is built to keep the first page simple. Each spine opens into a focused route: books, maps, people, themes, videos, tools, and the mission behind it.
+              </p>
+              <div class="panel-actions">
+                <button class="button button-primary open-spine-button" type="button" data-open-book="books">Open Books →</button>
+                <a class="button" href="about/">Read the mission</a>
+              </div>
+            </div>
+          </article>
 
-        <div class="cards-grid">
-          <div class="info-card">
-            <strong>Where?</strong>
-            <h3>Place</h3>
-            <p>Where did this happen, and what does the location help us understand?</p>
-          </div>
+          <article class="library-book" data-book-panel="books" style="--book-color: var(--navy); --book-text: white; --book-soft: #1c548d;">
+            <button class="book-spine" type="button" aria-expanded="false">
+              <span class="spine-number">02</span>
+              <span class="spine-title">Books</span>
+            </button>
 
-          <div class="info-card">
-            <strong>Who?</strong>
-            <h3>People</h3>
-            <p>Who was involved, and how do their choices move the story forward?</p>
-          </div>
+            <div class="book-open-page">
+              <span class="panel-kicker">Canon / Books</span>
+              <h3>Open the Bible by section.</h3>
+              <p>
+                The Bible is easier to study when the books are grouped by function. Choose Old Testament, New Testament, or the books received differently across Christian traditions.
+              </p>
 
-          <div class="info-card">
-            <strong>Why?</strong>
-            <h3>Meaning</h3>
-            <p>Why does this matter, and how does it connect to Jesus Christ?</p>
-          </div>
+              <div class="testament-definitions">
+                <div class="definition-card">
+                  <strong>Old Testament</strong>
+                  <p>The covenant Scriptures before the coming of Christ. These books give the foundation: creation, promise, law, wisdom, prophecy, exile, and hope.</p>
+                </div>
+                <div class="definition-card">
+                  <strong>New Testament</strong>
+                  <p>The writings centered on Jesus Christ, His life, death, resurrection, the apostles, the church, and the hope of new creation.</p>
+                </div>
+                <div class="definition-card">
+                  <strong>Non-canonical / Deuterocanonical</strong>
+                  <p>Books received differently across Christian traditions. Bible Mapped labels them clearly so readers know how Protestant, Catholic, and Orthodox canons differ.</p>
+                </div>
+              </div>
+
+              <div class="book-route-switch" aria-label="Choose testament route">
+                <button class="route-chip active" type="button" data-route="old">Old Testament</button>
+                <button class="route-chip" type="button" data-route="new">New Testament</button>
+                <button class="route-chip" type="button" data-route="noncanonical">Non-canonical / Deuterocanonical</button>
+              </div>
+
+              <div class="book-route active" id="route-old">
+                <section class="category-shelf">
+                  <div class="category-head">
+                    <h4>Law / Torah</h4>
+                    <span>5 books</span>
+                  </div>
+                  <p>The foundation shelf: creation, covenant, deliverance, worship, law, wilderness, and Israel’s identity before God.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile book-tile-live" href="books/genesis/index.html">Genesis <span class="live-label">Live</span></a>
+                    <a class="book-tile book-tile-live" href="books/exodus/index.html">Exodus <span class="live-label">Live</span></a>
+                    <a class="book-tile" href="books/leviticus/">Leviticus</a>
+                    <a class="book-tile" href="books/numbers/">Numbers</a>
+                    <a class="book-tile" href="books/deuteronomy/">Deuteronomy</a>
+                  </div>
+                </section>
+
+                <section class="category-shelf">
+                  <div class="category-head">
+                    <h4>History</h4>
+                    <span>12 books</span>
+                  </div>
+                  <p>Israel in the land: conquest, judges, kings, division, exile, return, and covenant consequences.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/joshua/">Joshua</a>
+                    <a class="book-tile" href="books/judges/">Judges</a>
+                    <a class="book-tile" href="books/ruth/">Ruth</a>
+                    <a class="book-tile" href="books/1-samuel/">1 Samuel</a>
+                    <a class="book-tile" href="books/2-samuel/">2 Samuel</a>
+                    <a class="book-tile" href="books/1-kings/">1 Kings</a>
+                    <a class="book-tile" href="books/2-kings/">2 Kings</a>
+                    <a class="book-tile" href="books/1-chronicles/">1 Chronicles</a>
+                    <a class="book-tile" href="books/2-chronicles/">2 Chronicles</a>
+                    <a class="book-tile" href="books/ezra/">Ezra</a>
+                    <a class="book-tile" href="books/nehemiah/">Nehemiah</a>
+                    <a class="book-tile" href="books/esther/">Esther</a>
+                  </div>
+                </section>
+
+                <section class="category-shelf">
+                  <div class="category-head">
+                    <h4>Wisdom / Poetry</h4>
+                    <span>5 books</span>
+                  </div>
+                  <p>Prayer, suffering, worship, practical wisdom, meaning, and love through Hebrew reflection.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/job/">Job</a>
+                    <a class="book-tile" href="books/psalms/">Psalms</a>
+                    <a class="book-tile" href="books/proverbs/">Proverbs</a>
+                    <a class="book-tile" href="books/ecclesiastes/">Ecclesiastes</a>
+                    <a class="book-tile" href="books/song-of-songs/">Song of Songs</a>
+                  </div>
+                </section>
+
+                <section class="category-shelf">
+                  <div class="category-head">
+                    <h4>Major Prophets</h4>
+                    <span>5 books</span>
+                  </div>
+                  <p>Judgment, exile, hope, restoration, and the coming work of God on behalf of His people.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/isaiah/">Isaiah</a>
+                    <a class="book-tile" href="books/jeremiah/">Jeremiah</a>
+                    <a class="book-tile" href="books/lamentations/">Lamentations</a>
+                    <a class="book-tile" href="books/ezekiel/">Ezekiel</a>
+                    <a class="book-tile" href="books/daniel/">Daniel</a>
+                  </div>
+                </section>
+
+                <section class="category-shelf">
+                  <div class="category-head">
+                    <h4>Minor Prophets</h4>
+                    <span>12 books</span>
+                  </div>
+                  <p>Shorter books with major force: warning, repentance, justice, mercy, nations, and future hope.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/hosea/">Hosea</a>
+                    <a class="book-tile" href="books/joel/">Joel</a>
+                    <a class="book-tile" href="books/amos/">Amos</a>
+                    <a class="book-tile" href="books/obadiah/">Obadiah</a>
+                    <a class="book-tile" href="books/jonah/">Jonah</a>
+                    <a class="book-tile" href="books/micah/">Micah</a>
+                    <a class="book-tile" href="books/nahum/">Nahum</a>
+                    <a class="book-tile" href="books/habakkuk/">Habakkuk</a>
+                    <a class="book-tile" href="books/zephaniah/">Zephaniah</a>
+                    <a class="book-tile" href="books/haggai/">Haggai</a>
+                    <a class="book-tile" href="books/zechariah/">Zechariah</a>
+                    <a class="book-tile" href="books/malachi/">Malachi</a>
+                  </div>
+                </section>
+              </div>
+
+              <div class="book-route" id="route-new">
+                <section class="category-shelf">
+                  <div class="category-head"><h4>Gospels</h4><span>4 books</span></div>
+                  <p>The life, teaching, death, resurrection, and fulfillment work of Jesus Christ.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/matthew/">Matthew</a>
+                    <a class="book-tile" href="books/mark/">Mark</a>
+                    <a class="book-tile" href="books/luke/">Luke</a>
+                    <a class="book-tile" href="books/john/">John</a>
+                  </div>
+                </section>
+
+                <section class="category-shelf">
+                  <div class="category-head"><h4>History</h4><span>1 book</span></div>
+                  <p>Acts traces the risen Christ working through the Spirit, the apostles, and the spread of the Gospel.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/acts/">Acts</a>
+                  </div>
+                </section>
+
+                <section class="category-shelf">
+                  <div class="category-head"><h4>Pauline Letters</h4><span>13 books</span></div>
+                  <p>Doctrine, church life, grace, faith, holiness, suffering, mission, and life in Christ.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/romans/">Romans</a>
+                    <a class="book-tile" href="books/1-corinthians/">1 Corinthians</a>
+                    <a class="book-tile" href="books/2-corinthians/">2 Corinthians</a>
+                    <a class="book-tile" href="books/galatians/">Galatians</a>
+                    <a class="book-tile" href="books/ephesians/">Ephesians</a>
+                    <a class="book-tile" href="books/philippians/">Philippians</a>
+                    <a class="book-tile" href="books/colossians/">Colossians</a>
+                    <a class="book-tile" href="books/1-thessalonians/">1 Thessalonians</a>
+                    <a class="book-tile" href="books/2-thessalonians/">2 Thessalonians</a>
+                    <a class="book-tile" href="books/1-timothy/">1 Timothy</a>
+                    <a class="book-tile" href="books/2-timothy/">2 Timothy</a>
+                    <a class="book-tile" href="books/titus/">Titus</a>
+                    <a class="book-tile" href="books/philemon/">Philemon</a>
+                  </div>
+                </section>
+
+                <section class="category-shelf">
+                  <div class="category-head"><h4>General Letters</h4><span>8 books</span></div>
+                  <p>Faith, endurance, love, truth, warning, and faithful witness.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/hebrews/">Hebrews</a>
+                    <a class="book-tile" href="books/james/">James</a>
+                    <a class="book-tile" href="books/1-peter/">1 Peter</a>
+                    <a class="book-tile" href="books/2-peter/">2 Peter</a>
+                    <a class="book-tile" href="books/1-john/">1 John</a>
+                    <a class="book-tile" href="books/2-john/">2 John</a>
+                    <a class="book-tile" href="books/3-john/">3 John</a>
+                    <a class="book-tile" href="books/jude/">Jude</a>
+                  </div>
+                </section>
+
+                <section class="category-shelf">
+                  <div class="category-head"><h4>Apocalyptic</h4><span>1 book</span></div>
+                  <p>Revelation shows Jesus as victorious King and gives hope through judgment, worship, endurance, and new creation.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/revelation/">Revelation</a>
+                  </div>
+                </section>
+              </div>
+
+              <div class="book-route" id="route-noncanonical">
+                <section class="category-shelf">
+                  <div class="category-head"><h4>Received Differently</h4><span>Examples</span></div>
+                  <p>These books are handled differently across Christian traditions. This section helps label those differences clearly.</p>
+                  <div class="book-tile-grid">
+                    <a class="book-tile" href="books/tobit/">Tobit</a>
+                    <a class="book-tile" href="books/judith/">Judith</a>
+                    <a class="book-tile" href="books/wisdom/">Wisdom</a>
+                    <a class="book-tile" href="books/sirach/">Sirach</a>
+                    <a class="book-tile" href="books/baruch/">Baruch</a>
+                    <a class="book-tile" href="books/1-maccabees/">1 Maccabees</a>
+                    <a class="book-tile" href="books/2-maccabees/">2 Maccabees</a>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </article>
+
+          <article class="library-book" data-book-panel="maps" style="--book-color: var(--teal); --book-text: var(--charcoal); --book-soft: #b9d2ce;">
+            <button class="book-spine" type="button" aria-expanded="false">
+              <span class="spine-number">03</span>
+              <span class="spine-title">Maps</span>
+            </button>
+            <div class="book-open-page">
+              <span class="panel-kicker">Atlas / Places</span>
+              <h3>See the geography behind the story.</h3>
+              <p>Open regions, cities, empires, journeys, rivers, mountains, and story locations connected to the Bible.</p>
+              <div class="route-preview-grid compact">
+                <div class="route-preview-card"><h4>Regions</h4><p>Galilee, Judea, Egypt, Mesopotamia, Sinai.</p></div>
+                <div class="route-preview-card"><h4>Cities</h4><p>Jerusalem, Bethlehem, Rome, Babylon, Nineveh.</p></div>
+                <div class="route-preview-card"><h4>Journeys</h4><p>Exodus, exile, return, Jesus’ ministry, Paul’s journeys.</p></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="library-book" data-book-panel="people" style="--book-color: var(--slate); --book-text: white; --book-soft: #6b7680;">
+            <button class="book-spine" type="button" aria-expanded="false">
+              <span class="spine-number">04</span>
+              <span class="spine-title">People</span>
+            </button>
+            <div class="book-open-page">
+              <span class="panel-kicker">Lineage / People</span>
+              <h3>Find the people inside the biblical world.</h3>
+              <p>People belong to places, families, covenants, conflicts, and moments in the story.</p>
+              <div class="route-preview-grid compact">
+                <div class="route-preview-card"><h4>Genesis</h4><p>Adam, Eve, Noah, Abraham, Sarah, Joseph.</p></div>
+                <div class="route-preview-card"><h4>Kings</h4><p>Saul, David, Solomon, Judah’s line.</p></div>
+                <div class="route-preview-card"><h4>Gospels</h4><p>Jesus, Mary, disciples, Pharisees, Rome.</p></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="library-book" data-book-panel="themes" style="--book-color: var(--sand); --book-text: var(--charcoal); --book-soft: #f0d9a9;">
+            <button class="book-spine" type="button" aria-expanded="false">
+              <span class="spine-number">05</span>
+              <span class="spine-title">Themes</span>
+            </button>
+            <div class="book-open-page">
+              <span class="panel-kicker">Themes</span>
+              <h3>Trace ideas across the Bible.</h3>
+              <p>Covenant, kingdom, exile, temple, sacrifice, wisdom, Messiah, resurrection, and new creation unfold across many books.</p>
+            </div>
+          </article>
+
+          <article class="library-book" data-book-panel="videos" style="--book-color: var(--purple); --book-text: white; --book-soft: #9151ff;">
+            <button class="book-spine" type="button" aria-expanded="false">
+              <span class="spine-number">06</span>
+              <span class="spine-title">Videos</span>
+            </button>
+            <div class="book-open-page">
+              <span class="panel-kicker">Visual Explainers</span>
+              <h3>Watch Bible Mapped studies.</h3>
+              <p>Short and long-form visual explainers can connect books, maps, word studies, and themes.</p>
+              <div class="panel-actions"><a class="button button-primary" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noreferrer">Watch on YouTube →</a></div>
+            </div>
+          </article>
+
+          <article class="library-book" data-book-panel="tools" style="--book-color: var(--red); --book-text: white; --book-soft: #ff5060;">
+            <button class="book-spine" type="button" aria-expanded="false">
+              <span class="spine-number">07</span>
+              <span class="spine-title">Tools</span>
+            </button>
+            <div class="book-open-page">
+              <span class="panel-kicker">Study Tools</span>
+              <h3>Open concordance, dictionary, and context tools.</h3>
+              <p>Build study layers for KJV words, Webster-style definitions, places, people, timelines, and red flags.</p>
+            </div>
+          </article>
+
+          <article class="library-book" data-book-panel="about" style="--book-color: var(--charcoal); --book-text: white; --book-soft: #333033;">
+            <button class="book-spine" type="button" aria-expanded="false">
+              <span class="spine-number">08</span>
+              <span class="spine-title">About</span>
+            </button>
+            <div class="book-open-page">
+              <span class="panel-kicker">Mission</span>
+              <h3>Why Bible Mapped exists.</h3>
+              <p>Bible Mapped exists to help people see Scripture more clearly through place, context, language, history, and Jesus Christ.</p>
+              <div class="panel-actions"><a class="button button-primary" href="about/">Open About →</a></div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
-  </main>
+
+</main>
 
   <footer>
-    <div class="container">
-      <div class="footer-wordmark">Bible Mapped</div>
-      <div class="footer-rule">
-        Understanding Scripture through place, context, and meaning.
-      </div>
+    <div class="container footer-inner">
+      <strong>Bible Mapped</strong>
+      <span>Understand the Bible through place, context, and meaning.</span>
     </div>
   </footer>
 
   <script>
-    const bookData = {
-      old: {
-        torah: {
-          title: "Torah",
-          copy: "The beginning of the story: creation, fall, covenant, Exodus, law, and wilderness.",
-          books: [
-            { name: "Genesis", href: "./books/genesis/index.html", live: true },
-            { name: "Exodus", href: "./books/exodus/index.html", live: true },
-            { name: "Leviticus", href: "#", live: false },
-            { name: "Numbers", href: "#", live: false },
-            { name: "Deuteronomy", href: "#", live: false }
-          ]
-        },
-        history: {
-          title: "History",
-          copy: "Israel enters the land, becomes a kingdom, divides, and moves toward exile and return.",
-          books: [
-            { name: "Joshua", href: "#", live: false },
-            { name: "Judges", href: "#", live: false },
-            { name: "Ruth", href: "#", live: false },
-            { name: "1 Samuel", href: "#", live: false },
-            { name: "2 Samuel", href: "#", live: false },
-            { name: "1 Kings", href: "#", live: false },
-            { name: "2 Kings", href: "#", live: false },
-            { name: "Ezra", href: "#", live: false },
-            { name: "Nehemiah", href: "#", live: false },
-            { name: "Esther", href: "#", live: false }
-          ]
-        },
-        wisdom: {
-          title: "Wisdom",
-          copy: "Poetry, worship, suffering, wisdom, love, and the fear of the Lord.",
-          books: [
-            { name: "Job", href: "#", live: false },
-            { name: "Psalms", href: "#", live: false },
-            { name: "Proverbs", href: "#", live: false },
-            { name: "Ecclesiastes", href: "#", live: false },
-            { name: "Song of Solomon", href: "#", live: false }
-          ]
-        },
-        "major-prophets": {
-          title: "Major Prophets",
-          copy: "Large prophetic books calling Israel to repentance and pointing toward judgment, restoration, and Messiah.",
-          books: [
-            { name: "Isaiah", href: "#", live: false },
-            { name: "Jeremiah", href: "#", live: false },
-            { name: "Lamentations", href: "#", live: false },
-            { name: "Ezekiel", href: "#", live: false },
-            { name: "Daniel", href: "#", live: false }
-          ]
-        },
-        "minor-prophets": {
-          title: "Minor Prophets",
-          copy: "Shorter prophetic books carrying warning, justice, mercy, and hope.",
-          books: [
-            { name: "Hosea", href: "#", live: false },
-            { name: "Joel", href: "#", live: false },
-            { name: "Amos", href: "#", live: false },
-            { name: "Obadiah", href: "#", live: false },
-            { name: "Jonah", href: "#", live: false },
-            { name: "Micah", href: "#", live: false },
-            { name: "Nahum", href: "#", live: false },
-            { name: "Habakkuk", href: "#", live: false },
-            { name: "Zephaniah", href: "#", live: false },
-            { name: "Haggai", href: "#", live: false },
-            { name: "Zechariah", href: "#", live: false },
-            { name: "Malachi", href: "#", live: false }
-          ]
+    const libraryBooks = document.querySelectorAll('.library-book');
+
+    function openLibraryBook(targetBook) {
+      libraryBooks.forEach((book) => {
+        const isActive = book === targetBook;
+        book.classList.toggle('active', isActive);
+
+        const button = book.querySelector('.book-spine');
+        if (button) {
+          button.setAttribute('aria-expanded', isActive ? 'true' : 'false');
         }
-      },
-      new: {
-        gospels: {
-          title: "Gospels",
-          copy: "The life, teachings, death, and resurrection of Jesus Christ.",
-          books: [
-            { name: "Matthew", href: "#", live: false },
-            { name: "Mark", href: "#", live: false },
-            { name: "Luke", href: "#", live: false },
-            { name: "John", href: "#", live: false }
-          ]
-        },
-        acts: {
-          title: "Acts",
-          copy: "The risen Christ sends His witnesses from Jerusalem to the nations.",
-          books: [
-            { name: "Acts", href: "#", live: false }
-          ]
-        },
-        paul: {
-          title: "Paul’s Letters",
-          copy: "Letters explaining the Gospel, the church, Christian doctrine, and life in Christ.",
-          books: [
-            { name: "Romans", href: "#", live: false },
-            { name: "1 Corinthians", href: "#", live: false },
-            { name: "2 Corinthians", href: "#", live: false },
-            { name: "Galatians", href: "#", live: false },
-            { name: "Ephesians", href: "#", live: false },
-            { name: "Philippians", href: "#", live: false },
-            { name: "Colossians", href: "#", live: false },
-            { name: "1 Thessalonians", href: "#", live: false },
-            { name: "2 Thessalonians", href: "#", live: false },
-            { name: "1 Timothy", href: "#", live: false },
-            { name: "2 Timothy", href: "#", live: false },
-            { name: "Titus", href: "#", live: false },
-            { name: "Philemon", href: "#", live: false }
-          ]
-        },
-        general: {
-          title: "General Letters",
-          copy: "Letters to believers about endurance, faith, truth, suffering, love, and holiness.",
-          books: [
-            { name: "Hebrews", href: "#", live: false },
-            { name: "James", href: "#", live: false },
-            { name: "1 Peter", href: "#", live: false },
-            { name: "2 Peter", href: "#", live: false },
-            { name: "1 John", href: "#", live: false },
-            { name: "2 John", href: "#", live: false },
-            { name: "3 John", href: "#", live: false },
-            { name: "Jude", href: "#", live: false }
-          ]
-        },
-        revelation: {
-          title: "Revelation",
-          copy: "The Bible closes with worship, judgment, victory, and the hope of all things made new.",
-          books: [
-            { name: "Revelation", href: "#", live: false }
-          ]
-        }
-      }
-    };
-
-    const panels = document.querySelectorAll("[data-testament-panel]");
-    const arcCards = document.querySelectorAll(".arc-card");
-
-    function renderBooks(testament, category) {
-      const panel = document.querySelector(`[data-testament-panel="${testament}"]`);
-      const title = document.querySelector(`[data-drawer-title="${testament}"]`);
-      const copy = document.querySelector(`[data-drawer-copy="${testament}"]`);
-      const branch = document.querySelector(`[data-book-branch="${testament}"]`);
-
-      if (!panel || !title || !copy || !branch) return;
-
-      const data = bookData[testament][category];
-      if (!data) return;
-
-      title.textContent = data.title;
-      copy.textContent = data.copy;
-
-      branch.innerHTML = "";
-
-      data.books.forEach((book, index) => {
-        const link = document.createElement("a");
-        link.className = book.live ? "book-link is-live" : "book-link is-disabled";
-        link.href = book.href;
-        link.style.setProperty("--book-delay", `${index * 45}ms`);
-
-        link.innerHTML = book.live
-          ? `${book.name} <span class="live-label">Live</span>`
-          : book.name;
-
-        if (!book.live) {
-          link.setAttribute("aria-disabled", "true");
-          link.addEventListener("click", (event) => {
-            event.preventDefault();
-          });
-        }
-
-        branch.appendChild(link);
       });
 
-      panel.classList.add("has-open-drawer");
+      targetBook.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     }
 
-    arcCards.forEach((card) => {
-      card.addEventListener("click", () => {
-        const testament = card.dataset.testament;
-        const category = card.dataset.category;
+    libraryBooks.forEach((book) => {
+      const spine = book.querySelector('.book-spine');
+      if (spine) {
+        spine.addEventListener('click', () => openLibraryBook(book));
+      }
+    });
 
-        document
-          .querySelectorAll(`.arc-card[data-testament="${testament}"]`)
-          .forEach((item) => item.classList.remove("is-active"));
-
-        card.classList.add("is-active");
-        renderBooks(testament, category);
+    document.querySelectorAll('[data-open-book]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const panelName = button.dataset.openBook;
+        const target = document.querySelector(`.library-book[data-book-panel="${panelName}"]`);
+        if (target) openLibraryBook(target);
       });
     });
 
-    renderBooks("old", "torah");
-    renderBooks("new", "gospels");
+    const routeButtons = document.querySelectorAll('.route-chip');
+    const bookRoutes = document.querySelectorAll('.book-route');
 
-    function handleScrollMotion() {
-      const viewportHeight = window.innerHeight || 1;
+    routeButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        routeButtons.forEach((btn) => btn.classList.remove('active'));
+        button.classList.add('active');
 
-      panels.forEach((panel, panelIndex) => {
-        const rect = panel.getBoundingClientRect();
-        const center = rect.top + rect.height / 2;
-        const distance = (center - viewportHeight / 2) / viewportHeight;
-
-        const cards = panel.querySelectorAll(".arc-card");
-
-        cards.forEach((card, index) => {
-          const direction = panelIndex % 2 === 0 ? 1 : -1;
-          const strength = (index - 2) * 9;
-          const y = distance * strength * direction;
-
-          card.style.setProperty("--scroll-y", `${y}px`);
+        const routeName = button.dataset.route;
+        bookRoutes.forEach((route) => {
+          route.classList.toggle('active', route.id === `route-${routeName}`);
         });
       });
+    });
+
+    /* Lux update: premium scroll pan-up animation */
+    const scrollPanTargets = document.querySelectorAll(`
+      .hero-pill,
+      .hero-content h1,
+      .hero-subtitle,
+      .hero-actions,
+      .section-header h2,
+      .section-header p,
+      .book-open-page .panel-kicker,
+      .book-open-page h3,
+      .book-open-page p,
+      .definition-card,
+      .category-shelf,
+      .route-preview-card,
+      footer .footer-inner
+    `);
+
+    scrollPanTargets.forEach((element, index) => {
+      element.classList.add('scroll-pan');
+
+      const delay = Math.min((index % 5) * 70, 280);
+      element.style.setProperty('--reveal-delay', `${delay}ms`);
+    });
+
+    const scrollPanObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -8% 0px'
+      }
+    );
+
+    scrollPanTargets.forEach((element) => {
+      scrollPanObserver.observe(element);
+    });
+
+  
+    /* Lux update: premium scroll pan-up animation */
+    const scrollPanTargets = document.querySelectorAll(`
+      .hero-pill,
+      .hero-content h1,
+      .hero-subtitle,
+      .hero-actions,
+      .section-header h2,
+      .section-header p,
+      .search-preview,
+      .start-card,
+      .book-open-page .panel-kicker,
+      .book-open-page h3,
+      .book-open-page p,
+      .definition-card,
+      .category-shelf,
+      .route-preview-card,
+      footer .footer-inner
+    `);
+
+    scrollPanTargets.forEach((element, index) => {
+      element.classList.add('scroll-pan');
+      const delay = Math.min((index % 5) * 70, 280);
+      element.style.setProperty('--reveal-delay', `${delay}ms`);
+    });
+
+    const scrollPanObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          } else {
+            entry.target.classList.remove('is-visible');
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: '0px 0px -8% 0px'
+      }
+    );
+
+    scrollPanTargets.forEach((element) => {
+      scrollPanObserver.observe(element);
+    });
+
+    /* Lux update: scroll up/down map movement */
+    const heroMap = document.querySelector('.hero-collage-layer');
+    const heroSection = document.querySelector('.hero');
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    function updateMapPan() {
+      if (!heroMap || !heroSection) return;
+
+      const currentScrollY = window.scrollY;
+      const direction = currentScrollY > lastScrollY ? 1 : -1;
+      const heroHeight = Math.max(heroSection.offsetHeight, 1);
+      const progress = Math.min(Math.max(currentScrollY / heroHeight, 0), 1);
+
+      const panDistance = -34 * progress;
+      const directionalNudge = direction * -6;
+      const scale = 1.04 + progress * 0.025;
+
+      heroMap.style.setProperty('--map-pan-y', `${panDistance + directionalNudge}px`);
+      heroMap.style.setProperty('--map-scale', scale.toFixed(3));
+
+      lastScrollY = currentScrollY;
+      ticking = false;
     }
 
-    window.addEventListener("scroll", handleScrollMotion, { passive: true });
-    window.addEventListener("resize", handleScrollMotion);
-    handleScrollMotion();
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateMapPan);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    updateMapPan();
+
   </script>
 </body>
 </html>
