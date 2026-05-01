@@ -2052,6 +2052,36 @@
       }
     }
 
+
+    /* Lux update: premium scroll pan-up text animation */
+    .scroll-pan {
+      opacity: 0;
+      transform: translateY(26px);
+      filter: blur(4px);
+      transition:
+        opacity 700ms ease,
+        transform 850ms cubic-bezier(.2,.8,.2,1),
+        filter 850ms ease;
+      transition-delay: var(--reveal-delay, 0ms);
+      will-change: opacity, transform, filter;
+    }
+
+    .scroll-pan.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-pan,
+      .scroll-pan.is-visible {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        transition: none;
+      }
+    }
+
   </style>
 </head>
 
@@ -2464,6 +2494,49 @@
         });
       });
     });
+
+    /* Lux update: premium scroll pan-up animation */
+    const scrollPanTargets = document.querySelectorAll(`
+      .hero-pill,
+      .hero-content h1,
+      .hero-subtitle,
+      .hero-actions,
+      .section-header h2,
+      .section-header p,
+      .book-open-page .panel-kicker,
+      .book-open-page h3,
+      .book-open-page p,
+      .definition-card,
+      .category-shelf,
+      .route-preview-card,
+      footer .footer-inner
+    `);
+
+    scrollPanTargets.forEach((element, index) => {
+      element.classList.add('scroll-pan');
+
+      const delay = Math.min((index % 5) * 70, 280);
+      element.style.setProperty('--reveal-delay', `${delay}ms`);
+    });
+
+    const scrollPanObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -8% 0px'
+      }
+    );
+
+    scrollPanTargets.forEach((element) => {
+      scrollPanObserver.observe(element);
+    });
+
   </script>
 </body>
 </html>
