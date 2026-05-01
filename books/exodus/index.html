@@ -7155,6 +7155,58 @@
       { start: 34, end: 40, label: 'Exodus 34–40', src: 'https://www.archive.org/download/bible_kjv_complete_2001_librivox/bible_009_kjv_64kb.mp3' }
     ];
 
+    // Approximate start times (in seconds) of each Exodus chapter within the
+    // LibriVox audio files above.  These offsets were estimated using the
+    // relative lengths of each chapter (measured by the number of verses)
+    // against the total duration of the corresponding MP3 segment.  They are
+    // intended to help the player jump closer to the correct chapter when a
+    // LibriVox stream spans multiple chapters.  Times may not be exact,
+    // especially when one chapter is significantly longer or shorter than
+    // average, but they should provide a reasonable starting point.  If you
+    // have more accurate timings you can update these values.
+    const LIBRIVOX_OFFSETS = {
+      1:   0,
+      2: 289,
+      3: 617,
+      4: 906,
+      5: 1313,
+      6: 1615,
+      7: 2009,
+      8: 2337,
+      9: 2757,
+      10: 3216,
+      11: 0,
+      12: 113,
+      13: 687,
+      14: 935,
+      15: 1284,
+      16: 1588,
+      17: 1994,
+      18: 2174,
+      19: 2478,
+      20: 2760,
+      21: 3052,
+      22: 3458,
+      23: 0,
+      24: 378,
+      25: 585,
+      26: 1043,
+      27: 1467,
+      28: 1708,
+      29: 2201,
+      30: 2728,
+      31: 3164,
+      32: 3370,
+      33: 3771,
+      34: 0,
+      35: 369,
+      36: 739,
+      37: 1139,
+      38: 1445,
+      39: 1772,
+      40: 2226
+    };
+
     function getNaturalAudioSection(chapterNumber) {
       return LIBRIVOX_EXODUS_AUDIO.find(section => chapterNumber >= section.start && chapterNumber <= section.end) || LIBRIVOX_EXODUS_AUDIO[0];
     }
@@ -7228,7 +7280,10 @@
 
       updateAudioSource();
       chapterAudio.volume = audioLevel;
-      chapterAudio.currentTime = 0;
+      // Set the starting point for the selected chapter.  If an approximate
+      // offset exists for this chapter, seek to that position in seconds.
+      const offset = LIBRIVOX_OFFSETS[currentChapter.chapter] || 0;
+      chapterAudio.currentTime = offset;
 
       const section = getNaturalAudioSection(currentChapter.chapter);
 
