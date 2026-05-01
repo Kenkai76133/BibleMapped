@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Bible Mapped | Scripture Through Place, Context, and Meaning</title>
-  <meta name="description" content="Bible Mapped helps people understand Scripture through place, context, meaning, maps, word studies, people, themes, and visual explainers." />
+
+  <meta
+    name="description"
+    content="Bible Mapped helps people understand Scripture through place, context, meaning, maps, word studies, people, themes, and visual explainers."
+  />
 
   <style>
     :root {
@@ -77,11 +82,10 @@
 
     .brand-bar-inner {
       width: 100%;
-      max-width: none;
-      margin: 0;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: space-between;
+      gap: 20px;
     }
 
     .brand-wordmark {
@@ -91,8 +95,26 @@
       letter-spacing: -0.055em;
       color: white;
       line-height: 1;
-      margin: 0;
-      text-align: left;
+    }
+
+    .top-nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .top-nav a {
+      color: rgba(255,255,255,0.86);
+      font-size: 0.85rem;
+      font-weight: 850;
+      padding: 8px 10px;
+      border-radius: 999px;
+      transition: background 180ms ease, color 180ms ease;
+    }
+
+    .top-nav a:hover {
+      background: rgba(255,255,255,0.12);
+      color: white;
     }
 
     .hero {
@@ -111,7 +133,17 @@
       height: min(50vh, 500px);
       background:
         linear-gradient(rgba(248, 247, 242, 0.12), rgba(248, 247, 242, 0.12)),
-        var(--collage-image, linear-gradient(90deg, var(--purple) 0 12.5%, var(--charcoal) 12.5% 25%, var(--paper) 25% 37.5%, var(--sand) 37.5% 50%, var(--red) 50% 62.5%, var(--teal) 62.5% 75%, var(--navy) 75% 87.5%, var(--slate) 87.5% 100%));
+        linear-gradient(
+          90deg,
+          var(--purple) 0 12.5%,
+          var(--charcoal) 12.5% 25%,
+          var(--paper) 25% 37.5%,
+          var(--sand) 37.5% 50%,
+          var(--red) 50% 62.5%,
+          var(--teal) 62.5% 75%,
+          var(--navy) 75% 87.5%,
+          var(--slate) 87.5% 100%
+        );
       background-size: cover;
       background-position: center;
       opacity: 0.9;
@@ -167,12 +199,6 @@
       font-weight: 950;
     }
 
-    .hero-pill span:nth-child(2) {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
     .pill-arrow {
       margin-left: auto;
       color: var(--purple);
@@ -205,7 +231,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 14px;
+      gap: 0;
       margin-top: 32px;
     }
 
@@ -215,13 +241,18 @@
       justify-content: center;
       min-height: 50px;
       padding: 14px 19px;
-      border-radius: 999px;
+      border-radius: 0;
       border: 1px solid var(--line);
       background: rgba(255, 255, 255, 0.74);
       color: var(--charcoal);
       font-weight: 950;
       cursor: pointer;
-      transition: transform 180ms ease, box-shadow 180ms ease;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      min-width: 214px;
+    }
+
+    .button + .button {
+      border-left: 0;
     }
 
     .button:hover {
@@ -233,338 +264,11 @@
       background: var(--purple);
       color: white;
       border-color: transparent;
-      box-shadow: 0 20px 44px rgba(123, 44, 255, 0.22);
-    }
-
-
-    /* Lux update: connected hero buttons */
-    .hero-connected-actions {
-      gap: 0;
-    }
-
-    .hero-connected-actions .button {
-      border-radius: 0;
-      min-width: 214px;
-      border-color: rgba(21, 21, 21, 0.14);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-connected-actions .button + .button {
-      border-left: 0;
-    }
-
-    .hero-connected-actions .button-primary {
-      box-shadow: none;
     }
 
     .button-mission {
-      background: #EAF1FF;
-      color: var(--navy);
-      border-color: rgba(14, 55, 110, 0.22) !important;
-    }
-
-    .button-mission::after {
-      content: "";
-      position: absolute;
-      left: -40%;
-      top: 0;
-      width: 38%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(14,55,110,0.14), transparent);
-      transform: skewX(-18deg);
-      animation: missionSweep 3.4s ease-in-out infinite;
-    }
-
-    @keyframes missionSweep {
-      0%, 62% { left: -45%; }
-      100% { left: 110%; }
-    }
-
-    /* Lux update: book-spine shelf system */
-    .shelf-nav {
-      display: flex;
-      align-items: stretch;
-      gap: 0;
-      min-height: 188px;
-      border: 0;
-      background: transparent;
-      box-shadow: none;
-      perspective: 1200px;
-    }
-
-    .shelf-tab {
-      flex: 1 1 0;
-      min-width: 86px;
-      height: 176px;
-      border-right: 1px solid rgba(255,255,255,0.22);
-      border-left: 1px solid rgba(0,0,0,0.08);
-      border-radius: 12px 12px 0 0;
-      box-shadow:
-        inset 12px 0 18px rgba(255,255,255,0.12),
-        inset -12px 0 18px rgba(0,0,0,0.12),
-        0 18px 28px rgba(21,21,21,0.10);
-      transform-origin: bottom center;
-      overflow: hidden;
-    }
-
-    .shelf-tab::before {
-      left: 14px;
-      right: 14px;
-      top: 16px;
-      background: rgba(255,255,255,0.28);
-    }
-
-    .shelf-tab::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 0 0;
-      height: 10px;
-      background: rgba(0,0,0,0.20);
-      opacity: 0.32;
-      filter: none;
-      border-radius: 0;
-    }
-
-    .shelf-tab:hover {
-      transform: translateY(-10px) rotateX(-3deg);
-    }
-
-    .shelf-tab.active {
-      flex: 1.45 1 0;
-      height: 196px;
-      transform: translateY(-18px) rotateX(-4deg);
-      box-shadow:
-        inset 14px 0 20px rgba(255,255,255,0.15),
-        inset -14px 0 22px rgba(0,0,0,0.15),
-        0 28px 52px rgba(21,21,21,0.22);
-      z-index: 5;
-    }
-
-    .tab-label {
-      writing-mode: vertical-rl;
-      transform: rotate(180deg);
-      font-size: 0.88rem;
-      line-height: 1;
-      letter-spacing: 0.12em;
-      align-self: flex-end;
-      margin: auto auto 4px auto;
-      text-shadow: 0 1px 0 rgba(0,0,0,0.10);
-    }
-
-    .shelf-line {
-      display: none !important;
-    }
-
-    .shelf-content {
-      padding-top: 0;
-      margin-top: -8px;
-      min-height: 420px;
-    }
-
-    .shelf-panel {
-      border: 0;
-      border-radius: 0 0 28px 28px;
-      border-top: 12px solid var(--panel-color, var(--purple));
-      background: var(--panel-color, var(--paper));
-      color: white;
-      padding: 0;
-      box-shadow: 0 30px 70px rgba(21,21,21,0.14);
-      overflow: hidden;
-    }
-
-    .shelf-panel.active {
-      animation: bookOpen 360ms ease both;
-    }
-
-    @keyframes bookOpen {
-      from { opacity: 0; transform: rotateX(-8deg) translateY(-12px); }
-      to { opacity: 1; transform: rotateX(0deg) translateY(0); }
-    }
-
-    .shelf-panel > .panel-kicker,
-    .shelf-panel > h3,
-    .shelf-panel > p,
-    .shelf-panel > .panel-actions,
-    .shelf-panel > .guide-layer,
-    .shelf-panel > .route-preview-grid {
-      margin-left: 24px;
-      margin-right: 24px;
-    }
-
-    .shelf-panel > .panel-kicker {
-      margin-top: 24px;
-      color: rgba(255,255,255,0.76);
-    }
-
-    .shelf-panel h3 {
-      color: white;
-    }
-
-    .shelf-panel p {
-      color: rgba(255,255,255,0.78);
-    }
-
-    .shelf-panel[style*="var(--paper)"],
-    .shelf-panel[style*="var(--sand)"],
-    .shelf-panel[style*="var(--teal)"] {
-      color: var(--charcoal);
-    }
-
-    .shelf-panel[style*="var(--paper)"] h3,
-    .shelf-panel[style*="var(--sand)"] h3,
-    .shelf-panel[style*="var(--teal)"] h3 {
-      color: var(--charcoal);
-    }
-
-    .shelf-panel[style*="var(--paper)"] p,
-    .shelf-panel[style*="var(--sand)"] p,
-    .shelf-panel[style*="var(--teal)"] p,
-    .shelf-panel[style*="var(--paper)"] .panel-kicker,
-    .shelf-panel[style*="var(--sand)"] .panel-kicker,
-    .shelf-panel[style*="var(--teal)"] .panel-kicker {
-      color: rgba(21,21,21,0.66);
-    }
-
-    .guide-layer,
-    .route-preview-grid,
-    .panel-actions {
-      background: rgba(255,253,246,0.16);
-      padding: 24px;
-      border-top: 1px solid rgba(255,255,255,0.18);
-    }
-
-    .shelf-panel[style*="var(--paper)"] .guide-layer,
-    .shelf-panel[style*="var(--sand)"] .guide-layer,
-    .shelf-panel[style*="var(--teal)"] .guide-layer,
-    .shelf-panel[style*="var(--paper)"] .route-preview-grid,
-    .shelf-panel[style*="var(--sand)"] .route-preview-grid,
-    .shelf-panel[style*="var(--teal)"] .route-preview-grid,
-    .shelf-panel[style*="var(--paper)"] .panel-actions,
-    .shelf-panel[style*="var(--sand)"] .panel-actions,
-    .shelf-panel[style*="var(--teal)"] .panel-actions {
-      background: rgba(255,255,255,0.44);
-      border-top: 1px solid rgba(21,21,21,0.08);
-    }
-
-    .guide-title {
-      color: inherit;
-      opacity: 0.72;
-    }
-
-    .chip-row {
-      gap: 0;
-    }
-
-    .guide-chip {
-      border-radius: 0;
-      border-left-width: 0;
-      border-top: 8px solid var(--chip-color, var(--navy));
-      background: rgba(255,255,255,0.86);
-    }
-
-    .guide-chip.active {
-      background: var(--chip-color, var(--navy));
-      color: white;
-      box-shadow: none;
-    }
-
-    .book-results {
-      display: block;
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      transform: translateY(-10px);
-      transition: max-height 520ms ease, opacity 260ms ease, transform 320ms ease;
-    }
-
-    .book-results.active {
-      max-height: 3400px;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .book-results.active .treemap-group {
-      animation: foldShelfIn 420ms ease both;
-    }
-
-    .book-results.active .treemap-group:nth-child(2) { animation-delay: 50ms; }
-    .book-results.active .treemap-group:nth-child(3) { animation-delay: 100ms; }
-    .book-results.active .treemap-group:nth-child(4) { animation-delay: 150ms; }
-    .book-results.active .treemap-group:nth-child(5) { animation-delay: 200ms; }
-    .book-results.active .treemap-group:nth-child(6) { animation-delay: 250ms; }
-
-    @keyframes foldShelfIn {
-      from { opacity: 0; transform: rotateX(-8deg) translateY(-10px); }
-      to { opacity: 1; transform: rotateX(0deg) translateY(0); }
-    }
-
-    .treemap-group {
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.20);
-      background: rgba(255,253,246,0.92);
-      box-shadow: 0 14px 28px rgba(21,21,21,0.08);
-    }
-
-    .treemap-group:nth-child(1) { border-top: 8px solid var(--navy); }
-    .treemap-group:nth-child(2) { border-top: 8px solid var(--purple); }
-    .treemap-group:nth-child(3) { border-top: 8px solid var(--sand); }
-    .treemap-group:nth-child(4) { border-top: 8px solid var(--red); }
-    .treemap-group:nth-child(5) { border-top: 8px solid var(--teal); }
-    .treemap-group:nth-child(6) { border-top: 8px solid var(--slate); }
-
-    .group-explainer {
-      margin: -4px 0 14px !important;
-      color: var(--muted) !important;
-      font-size: 0.9rem !important;
-      line-height: 1.52 !important;
-    }
-
-    .book-tile {
-      border-radius: 4px;
-      box-shadow: inset 8px 0 0 var(--navy);
-    }
-
-    .book-tile::before,
-    .book-tile::after {
-      display: none;
-    }
-
-    .selected-book-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .selected-book-actions .button {
-      border-radius: 0;
-    }
-
-
-
-    /* Lux update: mission button, full-length book shelf animation */
-    .hero-connected-actions {
-      gap: 0;
-    }
-
-    .hero-connected-actions .button {
-      border-radius: 0;
-      min-width: 214px;
-      border-color: rgba(21, 21, 21, 0.14);
       position: relative;
       overflow: hidden;
-    }
-
-    .hero-connected-actions .button + .button {
-      border-left: 0;
-    }
-
-    .hero-connected-actions .button-primary {
-      box-shadow: none;
-    }
-
-    .button-mission {
       background: rgba(123, 44, 255, 0.12);
       color: var(--purple);
       border-color: rgba(123, 44, 255, 0.24) !important;
@@ -587,15 +291,58 @@
       100% { left: 110%; }
     }
 
+    .intro-section {
+      padding: 88px 0 52px;
+      background: var(--cloud);
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.78rem;
+      font-weight: 950;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .section-kicker::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--purple);
+      box-shadow: 0 0 0 8px rgba(123, 44, 255, 0.14);
+    }
+
+    .section-title {
+      max-width: 900px;
+      font-size: clamp(2.5rem, 5vw, 5.6rem);
+      margin-bottom: 18px;
+    }
+
+    .section-copy {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.72;
+    }
+
     .bookcase-section {
-      padding-top: 72px;
+      padding: 72px 0 90px;
       background: var(--cloud);
       border-top: 1px solid rgba(21, 21, 21, 0.06);
     }
 
+    .bookcase-header {
+      margin-bottom: 30px;
+    }
+
     .bookcase {
       width: 100%;
-      min-height: 680px;
+      min-height: 690px;
       display: flex;
       align-items: stretch;
       gap: 0;
@@ -611,7 +358,10 @@
       background: var(--book-color);
       color: var(--book-text);
       overflow: hidden;
-      transition: flex 460ms cubic-bezier(.2,.8,.2,1), transform 360ms ease, box-shadow 360ms ease;
+      transition:
+        flex 460ms cubic-bezier(.2,.8,.2,1),
+        transform 360ms ease,
+        box-shadow 360ms ease;
       box-shadow:
         inset 14px 0 22px rgba(255,255,255,0.14),
         inset -16px 0 24px rgba(0,0,0,0.14),
@@ -630,6 +380,7 @@
         linear-gradient(90deg, rgba(255,255,255,0.12), transparent 24%, transparent 76%, rgba(0,0,0,0.16)),
         linear-gradient(to bottom, rgba(255,255,255,0.10), transparent 18%, transparent 86%, rgba(0,0,0,0.12));
       opacity: 0.84;
+      z-index: 1;
     }
 
     .library-book:hover {
@@ -661,7 +412,7 @@
       align-items: center;
       justify-content: space-between;
       position: relative;
-      z-index: 2;
+      z-index: 4;
     }
 
     .library-book.active .book-spine {
@@ -710,6 +461,7 @@
         opacity: 0;
         transform: translateX(-18px) rotateY(-5deg);
       }
+
       to {
         opacity: 1;
         transform: translateX(0) rotateY(0);
@@ -718,17 +470,21 @@
 
     .book-open-page .panel-kicker {
       color: rgba(255,255,255,0.78);
-    }
-
-    .library-book[style*="--book-text: var(--charcoal)"] .book-open-page .panel-kicker,
-    .library-book[style*="--book-text: var(--charcoal)"] .book-open-page p {
-      color: rgba(21,21,21,0.68);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.76rem;
+      font-weight: 950;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 2;
     }
 
     .book-open-page h3 {
       color: inherit;
       font-size: clamp(2.2rem, 4.2vw, 4.6rem);
       max-width: 900px;
+      position: relative;
+      z-index: 2;
     }
 
     .book-open-page p {
@@ -737,34 +493,13 @@
       line-height: 1.7;
       margin-top: 14px;
       font-size: 1.02rem;
+      position: relative;
+      z-index: 2;
     }
 
-    .testament-definitions {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .definition-card {
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.12);
-      padding: 16px;
-      min-height: 150px;
-    }
-
-    .definition-card strong {
-      display: block;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 8px;
-    }
-
-    .definition-card p {
-      margin: 0;
-      font-size: 0.92rem;
-      line-height: 1.55;
+    .library-book.light-text .book-open-page .panel-kicker,
+    .library-book.light-text .book-open-page p {
+      color: rgba(21,21,21,0.68);
     }
 
     .book-route-switch {
@@ -772,6 +507,8 @@
       flex-wrap: wrap;
       gap: 0;
       margin-top: 24px;
+      position: relative;
+      z-index: 2;
     }
 
     .route-chip {
@@ -794,11 +531,16 @@
       overflow: hidden;
       opacity: 0;
       transform: translateY(-10px);
-      transition: max-height 560ms ease, opacity 300ms ease, transform 340ms ease;
+      transition:
+        max-height 560ms ease,
+        opacity 300ms ease,
+        transform 340ms ease;
+      position: relative;
+      z-index: 2;
     }
 
     .book-route.active {
-      max-height: 4000px;
+      max-height: 5000px;
       opacity: 1;
       transform: translateY(0);
       margin-top: 22px;
@@ -812,18 +554,22 @@
       margin-top: 12px;
       box-shadow: 0 14px 28px rgba(21,21,21,0.08);
       animation: foldShelfDown 380ms ease both;
+      position: relative;
+      transform-origin: left center;
     }
 
     .book-route.active .category-shelf:nth-child(2) { animation-delay: 45ms; }
     .book-route.active .category-shelf:nth-child(3) { animation-delay: 90ms; }
     .book-route.active .category-shelf:nth-child(4) { animation-delay: 135ms; }
     .book-route.active .category-shelf:nth-child(5) { animation-delay: 180ms; }
+    .book-route.active .category-shelf:nth-child(6) { animation-delay: 225ms; }
 
     @keyframes foldShelfDown {
       from {
         opacity: 0;
         transform: rotateX(-8deg) translateY(-10px);
       }
+
       to {
         opacity: 1;
         transform: rotateX(0deg) translateY(0);
@@ -874,7 +620,7 @@
       padding: 12px 12px 12px 18px;
       font-weight: 950;
       box-shadow: inset 7px 0 0 var(--navy);
-      transition: transform 160ms ease, box-shadow 160ms ease;
+      transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
     }
 
     .book-tile:hover {
@@ -882,1953 +628,863 @@
       box-shadow: inset 7px 0 0 var(--purple), 0 12px 24px rgba(21,21,21,0.10);
     }
 
-    .route-preview-grid.compact {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 22px;
-    }
-
-    .book-open-page .route-preview-card {
-      background: rgba(255,255,255,0.88);
-      color: var(--charcoal);
-    }
-
-
-    /* Lux update: Genesis live link */
     .book-tile-live {
       border-color: rgba(123, 44, 255, 0.32);
       box-shadow: inset 7px 0 0 var(--purple), 0 12px 28px rgba(123,44,255,0.10);
     }
 
-    .book-tile-live .live-label {
+    .live-label {
       display: inline-flex;
       margin-left: 8px;
       padding: 3px 7px;
       border-radius: 999px;
       background: rgba(123,44,255,0.10);
       color: var(--purple);
-      font-size: 0.68rem;
+      font-size: 0.7rem;
       font-weight: 950;
-      letter-spacing: 0.08em;
       text-transform: uppercase;
-      vertical-align: middle;
+      letter-spacing: 0.05em;
     }
 
-
-    section {
-      padding: 90px 0;
-    }
-
-    .section-header {
-      display: block;
-      text-align: center;
-      margin: 0 auto 34px;
-    }
-
-    .section-header h2 {
-      font-size: clamp(2.45rem, 5vw, 5.5rem);
-      white-space: nowrap;
-    }
-
-    .section-header p {
-      max-width: 790px;
-      margin: 18px auto 0;
-      color: var(--muted);
-      font-size: 1.06rem;
-      line-height: 1.68;
-    }
-
-    .shelf-section {
-      padding-top: 72px;
-      background: var(--cloud);
-      border-top: 1px solid rgba(21, 21, 21, 0.06);
-    }
-
-    .shelf-nav-wrap {
-      margin-top: 34px;
-    }
-
-    .shelf-nav {
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
-      border: 1px solid rgba(21, 21, 21, 0.12);
-      background: var(--charcoal);
-      box-shadow: var(--soft-shadow);
-    }
-
-    .shelf-tab {
-      appearance: none;
-      position: relative;
-      height: 138px;
-      padding: 18px 16px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: flex-start;
-      border: 0;
-      border-right: 1px solid rgba(255, 255, 255, 0.16);
-      background: var(--tab-color);
-      color: var(--tab-text);
-      cursor: pointer;
-      z-index: 1;
-      transition: transform 240ms ease, height 240ms ease, box-shadow 240ms ease;
-    }
-
-    .shelf-tab:last-child {
-      border-right: 0;
-    }
-
-    .shelf-tab::before {
-      content: "";
-      position: absolute;
-      left: 12px;
-      right: 12px;
-      top: 12px;
-      height: 1px;
-      background: rgba(255, 255, 255, 0.32);
-      opacity: 0.65;
-    }
-
-    .tab-label {
-      font-size: 0.82rem;
-      font-weight: 950;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-    }
-
-    .shelf-tab:hover {
-      transform: translateY(-7px);
-    }
-
-    .shelf-tab.active {
-      height: 164px;
-      transform: translateY(-20px);
-      z-index: 4;
-      box-shadow: 0 24px 46px rgba(21, 21, 21, 0.18);
-    }
-
-    .shelf-tab.active::after {
-      content: "";
-      position: absolute;
-      left: 14px;
-      right: 14px;
-      bottom: -15px;
-      height: 9px;
-      border-radius: 999px;
-      background: rgba(21, 21, 21, 0.18);
-      filter: blur(7px);
-      opacity: 0.55;
-    }
-
-    .shelf-line {
-      position: relative;
-      height: 3px;
-      background: rgba(21, 21, 21, 0.12);
-      overflow: hidden;
-    }
-
-    .shelf-line-fill {
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 0;
-      background: var(--purple);
-      transition: width 260ms ease, transform 260ms ease, background 260ms ease;
-    }
-
-    .shelf-content {
-      padding-top: 30px;
-      min-height: 340px;
-    }
-
-    .shelf-panel {
-      display: none;
-      border: 1px solid rgba(21, 21, 21, 0.10);
-      border-top: 9px solid var(--panel-color, var(--purple));
-      background: var(--white);
-      padding: 34px;
-      box-shadow: 0 18px 38px rgba(21, 21, 21, 0.08);
-    }
-
-    .shelf-panel.active {
-      display: block;
-      animation: panelReveal 280ms ease;
-    }
-
-    @keyframes panelReveal {
-      from {
-        opacity: 0;
-        transform: translateY(14px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .panel-kicker {
-      display: inline-block;
-      margin-bottom: 14px;
-      color: var(--muted);
-      font-size: 0.74rem;
-      font-weight: 950;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .shelf-panel h3 {
-      font-size: clamp(2.15rem, 4vw, 3.8rem);
-    }
-
-    .shelf-panel p {
-      max-width: 790px;
-      margin-top: 16px;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 1.05rem;
-    }
-
-    .panel-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .guide-layer {
-      margin-top: 28px;
-      padding-top: 24px;
-      border-top: 1px solid rgba(21, 21, 21, 0.08);
-    }
-
-    .guide-title {
-      color: var(--muted);
-      font-size: 0.78rem;
-      font-weight: 950;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .guide-chip {
-      border: 1px solid rgba(21, 21, 21, 0.12);
-      border-left: 8px solid var(--chip-color, var(--navy));
-      background: white;
-      padding: 12px 14px;
-      border-radius: 14px;
-      cursor: pointer;
-      font-weight: 950;
-      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
-    }
-
-    .guide-chip:hover,
-    .guide-chip.active {
-      transform: translateY(-2px);
-      box-shadow: var(--soft-shadow);
-      background: var(--paper);
-    }
-
-    .book-results {
-      display: none;
-      animation: panelReveal 260ms ease;
-    }
-
-    .book-results.active {
-      display: block;
-    }
-
-    .treemap-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 14px;
-    }
-
-    .treemap-group {
-      grid-column: span 4;
-      border: 1px solid rgba(21, 21, 21, 0.10);
-      background: var(--paper);
-      border-radius: 20px;
-      padding: 18px;
-      min-height: 210px;
-    }
-
-    .treemap-group-large {
-      grid-column: span 6;
-    }
-
-    .treemap-group-wide {
-      grid-column: span 12;
-    }
-
-    .treemap-group-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    .treemap-group-head h4 {
-      margin: 0;
-      font-size: 0.98rem;
-      color: var(--navy);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .treemap-group-head span {
-      font-size: 0.78rem;
-      color: var(--muted);
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .treemap-books {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-
-    .book-tile {
-      min-height: 58px;
-      border: 1px solid rgba(21, 21, 21, 0.10);
-      background: white;
-      border-radius: 14px;
-      padding: 12px 12px 12px 22px;
-      text-align: left;
-      font-weight: 900;
-      line-height: 1.15;
-      cursor: pointer;
-      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease, color 160ms ease;
-      position: relative;
-      overflow: hidden;
-      color: var(--charcoal);
-    }
-
-    .book-tile::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: 10px;
-      background: var(--book-color, var(--navy));
-      opacity: 0.95;
-    }
-
-    .book-tile::after {
-      content: "";
-      position: absolute;
-      left: 14px;
-      top: 10px;
-      bottom: 10px;
-      width: 1px;
-      background: rgba(21, 21, 21, 0.08);
-    }
-
-    .book-tile.large {
-      grid-column: span 2;
-      min-height: 76px;
-      font-size: 1.02rem;
-    }
-
-    .book-tile:hover,
-    .book-tile.active {
-      transform: translateY(-2px);
-      border-color: var(--purple);
-      box-shadow: 0 12px 24px rgba(21, 21, 21, 0.08);
-      color: var(--purple);
-    }
-
-    .book-tile.active::before,
-    .book-tile:hover::before {
-      background: var(--purple);
-    }
-
-    .selected-book-panel {
-      display: none;
-      margin-top: 18px;
-      border: 1px solid rgba(21, 21, 21, 0.10);
-      border-left: 9px solid var(--navy);
-      padding: 20px;
-      background: white;
-      border-radius: 18px;
-      animation: panelReveal 240ms ease;
-    }
-
-    .selected-book-panel.active {
-      display: block;
-    }
-
-    .selected-book-panel h4 {
-      font-size: 1.8rem;
-      letter-spacing: -0.04em;
-    }
-
-    .linked-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .linked-box {
-      background: var(--cloud);
-      border: 1px solid rgba(21, 21, 21, 0.08);
-      border-radius: 15px;
-      padding: 14px;
-    }
-
-    .linked-box b {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--muted);
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .mini-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-    }
-
-    .mini-tag {
-      padding: 6px 8px;
-      border-radius: 999px;
-      background: white;
-      border: 1px solid rgba(21, 21, 21, 0.08);
-      font-size: 0.8rem;
-      font-weight: 850;
-    }
-
-    .people-results {
-      display: none;
-      animation: panelReveal 260ms ease;
-    }
-
-    .people-results.active {
-      display: block;
-    }
-
-    .people-treemap-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 14px;
-    }
-
-    .people-group {
-      grid-column: span 4;
-      border: 1px solid rgba(21, 21, 21, 0.10);
-      background: var(--paper);
-      border-radius: 20px;
-      padding: 18px;
-      min-height: 210px;
-    }
-
-    .people-group-large {
-      grid-column: span 6;
-    }
-
-    .people-group-wide {
-      grid-column: span 12;
-    }
-
-    .people-group-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    .people-group-head h4 {
-      margin: 0;
-      font-size: 0.98rem;
-      color: var(--slate);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .people-group-head span {
-      font-size: 0.78rem;
-      color: var(--muted);
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .people-tiles {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-
-    .person-tile {
-      min-height: 58px;
-      border: 1px solid rgba(21, 21, 21, 0.10);
-      background: white;
-      border-radius: 14px;
-      padding: 12px 12px 12px 22px;
-      text-align: left;
-      font-weight: 900;
-      line-height: 1.15;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      color: var(--charcoal);
-      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease, color 160ms ease;
-    }
-
-    .person-tile::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: 10px;
-      background: var(--slate);
-      opacity: 0.95;
-    }
-
-    .person-tile.large {
-      grid-column: span 2;
-      min-height: 76px;
-      font-size: 1.02rem;
-    }
-
-    .person-tile:hover,
-    .person-tile.active {
-      transform: translateY(-2px);
-      border-color: var(--purple);
-      box-shadow: 0 12px 24px rgba(21, 21, 21, 0.08);
-      color: var(--purple);
-    }
-
-    .person-tile:hover::before,
-    .person-tile.active::before {
-      background: var(--purple);
-    }
-
-    .genealogy-map {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      overflow-x: auto;
-      padding: 18px;
-      border: 1px solid rgba(21, 21, 21, 0.10);
-      border-radius: 20px;
-      background: var(--paper);
-    }
-
-    .gene-node {
-      flex: 0 0 auto;
-      border: 1px solid rgba(21, 21, 21, 0.12);
-      background: white;
-      border-radius: 999px;
-      padding: 12px 14px;
-      font-weight: 950;
-      cursor: pointer;
-      transition: transform 160ms ease, border-color 160ms ease, color 160ms ease;
-    }
-
-    .gene-node:hover,
-    .gene-node.active {
-      transform: translateY(-2px);
-      border-color: var(--purple);
-      color: var(--purple);
-    }
-
-    .gene-line {
-      flex: 0 0 44px;
-      height: 2px;
-      background: var(--purple);
-      opacity: 0.55;
-    }
-
-    .gene-note {
-      margin-top: 14px !important;
-      font-size: 0.95rem !important;
-    }
-
-    .selected-person-panel {
-      display: none;
-      margin-top: 18px;
-      border: 1px solid rgba(21, 21, 21, 0.10);
-      border-left: 9px solid var(--slate);
-      padding: 20px;
-      background: white;
-      border-radius: 18px;
-      animation: panelReveal 240ms ease;
-    }
-
-    .selected-person-panel.active {
-      display: block;
+    .book-tile.disabled {
+      opacity: 0.48;
+      cursor: not-allowed;
     }
 
-    .selected-person-panel h4 {
-      font-size: 1.8rem;
-      letter-spacing: -0.04em;
+    .book-tile.disabled:hover {
+      transform: none;
+      box-shadow: inset 7px 0 0 var(--navy);
     }
 
     .route-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 22px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .route-preview-card {
+      background: rgba(255,255,255,0.88);
+      color: var(--charcoal);
+      padding: 18px;
+      min-height: 150px;
+      border: 1px solid rgba(21,21,21,0.10);
+    }
+
+    .route-preview-card strong {
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      font-size: 0.78rem;
+      color: var(--purple);
+      margin-bottom: 8px;
+    }
+
+    .route-preview-card p {
+      color: var(--muted) !important;
+      margin: 0;
+      font-size: 0.94rem;
+      line-height: 1.55;
+    }
+
+    /* Tree branch animation */
+    .book-open-page::before {
+      content: "";
+      position: absolute;
+      left: 34px;
+      top: 210px;
+      width: 3px;
+      height: 0;
+      background: rgba(255, 255, 255, 0.46);
+      transform-origin: top;
+      transition: height 520ms ease;
+      z-index: 1;
+    }
+
+    .library-book.light-text .book-open-page::before {
+      background: rgba(21, 21, 21, 0.22);
+    }
+
+    .library-book.tree-active .book-open-page::before {
+      height: calc(100% - 260px);
+    }
+
+    .category-shelf::before {
+      content: "";
+      position: absolute;
+      left: -34px;
+      top: 28px;
+      width: 0;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.46);
+      transition: width 420ms ease;
+    }
+
+    .library-book.light-text .category-shelf::before {
+      background: rgba(21, 21, 21, 0.22);
+    }
+
+    .library-book.tree-active .book-route.active .category-shelf::before {
+      width: 34px;
+    }
+
+    .library-book.tree-active .book-route.active .category-shelf:nth-child(1)::before {
+      transition-delay: 90ms;
+    }
+
+    .library-book.tree-active .book-route.active .category-shelf:nth-child(2)::before {
+      transition-delay: 160ms;
+    }
+
+    .library-book.tree-active .book-route.active .category-shelf:nth-child(3)::before {
+      transition-delay: 230ms;
+    }
+
+    .library-book.tree-active .book-route.active .category-shelf:nth-child(4)::before {
+      transition-delay: 300ms;
+    }
+
+    .library-book.tree-active .book-route.active .category-shelf:nth-child(5)::before {
+      transition-delay: 370ms;
+    }
+
+    .library-book.tree-active .book-route.active .category-shelf:nth-child(6)::before {
+      transition-delay: 440ms;
+    }
+
+    .standard-section {
+      padding: 84px 0;
+      background: var(--paper);
+      border-top: 1px solid var(--line);
+    }
+
+    .cards-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
       margin-top: 26px;
     }
 
-    .route-preview-card {
-      border: 1px solid rgba(21, 21, 21, 0.10);
-      border-top: 8px solid var(--route-color, var(--purple));
-      border-radius: 18px;
-      padding: 18px;
-      background: var(--paper);
+    .info-card {
+      background: white;
+      border: 1px solid var(--line);
+      padding: 22px;
+      box-shadow: var(--soft-shadow);
+      min-height: 190px;
     }
 
-    .route-preview-card h4 {
-      font-size: 1.2rem;
-      letter-spacing: -0.03em;
-    }
-
-    .route-preview-card p {
-      font-size: 0.94rem;
-      margin-top: 9px;
-      line-height: 1.55;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 13px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      color: rgba(255, 255, 255, 0.72);
-      font-size: 0.78rem;
-      font-weight: 950;
-      letter-spacing: 0.04em;
+    .info-card strong {
+      display: block;
+      color: var(--purple);
       text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+      margin-bottom: 10px;
     }
 
-    .dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
-      background: var(--purple);
-      box-shadow: 0 0 0 7px rgba(123, 44, 255, 0.16);
+    .info-card h3 {
+      font-size: clamp(1.5rem, 2.4vw, 2.5rem);
+      margin-bottom: 10px;
+    }
+
+    .info-card p {
+      color: var(--muted);
+      line-height: 1.6;
     }
 
     footer {
-      padding: 34px 0;
-      background: var(--cloud);
-      border-top: 1px solid rgba(21, 21, 21, 0.08);
-      color: var(--muted);
+      background: var(--purple);
+      color: white;
+      padding: 42px 0 52px;
     }
 
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      align-items: center;
+    .footer-wordmark {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 3vw, 2.7rem);
+      letter-spacing: -0.06em;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .footer-rule {
+      border-top: 1px dashed rgba(255, 255, 255, 0.55);
+      padding-top: 18px;
+      color: rgba(255, 255, 255, 0.78);
       font-size: 0.92rem;
     }
 
-    @media (max-width: 960px) {
-      .shelf-nav {
-        grid-template-columns: repeat(4, 1fr);
+    @media (max-width: 980px) {
+      .top-nav {
+        display: none;
       }
 
-      .treemap-grid,
-      .people-treemap-grid,
-      .linked-row,
-      .build-panel,
-      .route-preview-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .treemap-group,
-      .treemap-group-large,
-      .treemap-group-wide,
-      .people-group,
-      .people-group-large,
-      .people-group-wide {
-        grid-column: span 1;
-      }
-
-      .section-header h2 {
-        white-space: normal;
-      }
-    }
-
-    @media (max-width: 650px) {
-      .container {
-        width: min(100% - 26px, 1180px);
-      }
-
-      .brand-bar {
-        height: 62px;
-      }
-
-      .hero {
-        padding-top: 62px;
-      }
-
-      .hero-collage-layer {
-        inset: 62px 0 auto 0;
-        height: 46vh;
-      }
-
-      .hero-content {
-        padding-top: 20vh;
-      }
-
-      h1 {
-        font-size: 3.45rem;
-      }
-
-      section {
-        padding: 68px 0;
-      }
-
-      .shelf-nav {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .shelf-tab {
-        height: 112px;
-      }
-
-      .shelf-tab.active {
-        height: 130px;
-        transform: translateY(-10px);
-      }
-
-      .shelf-panel {
-        padding: 24px;
-      }
-
-      .treemap-books,
-      .people-tiles {
-        grid-template-columns: 1fr;
-      }
-
-      .book-tile.large,
-      .person-tile.large {
-        grid-column: span 1;
-      }
-
-      .hero-pill {
-        max-width: 100%;
-      }
-
-      .footer-inner {
+      .bookcase {
         flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-  
-    /* Lux final update: finished full-width shelf + cleaner spine words */
-    .bookcase-section {
-      padding-top: 72px;
-      background: var(--cloud);
-      border-top: 1px solid rgba(21, 21, 21, 0.06);
-    }
-
-    .bookcase {
-      width: 100%;
-      min-height: 680px;
-      display: flex;
-      align-items: stretch;
-      gap: 0;
-      perspective: 1200px;
-      position: relative;
-      padding-bottom: 42px;
-      overflow: visible;
-      border-bottom: 0 !important;
-    }
-
-    .bookcase::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 18px;
-      height: 18px;
-      background: #cfcac2;
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.6),
-        inset 0 -1px 0 rgba(0,0,0,0.08);
-      z-index: 0;
-    }
-
-    .bookcase::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 18px;
-      background: #bdb8b0;
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.35),
-        0 8px 18px rgba(0,0,0,0.08);
-      z-index: 0;
-    }
-
-    .library-book {
-      position: relative;
-      z-index: 2;
-    }
-
-    .book-spine {
-      min-height: 100%;
-      padding: 20px 10px 24px;
-      gap: 14px;
-      text-align: center;
-    }
-
-    .spine-number {
-      font-size: 0.68rem;
-      font-weight: 950;
-      opacity: 0.72;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      line-height: 1;
-    }
-
-    .spine-title {
-      writing-mode: vertical-rl;
-      transform: rotate(180deg);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: transparent !important;
-      border: 0 !important;
-      box-shadow: none !important;
-      padding: 0 !important;
-      margin: 0 auto;
-      color: inherit !important;
-      text-align: center;
-      font-size: 0.96rem;
-      line-height: 1;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      font-weight: 950;
-      white-space: nowrap;
-      opacity: 0.98;
-      text-shadow: 0 1px 0 rgba(0,0,0,0.14);
-    }
-
-    .library-book[style*="--book-text: var(--charcoal)"] .spine-title,
-    .library-book[style*="--book-text: var(--charcoal)"] .spine-number {
-      text-shadow: 0 1px 0 rgba(255,255,255,0.45);
-    }
-
-    @media (max-width: 960px) {
-      .bookcase {
-        min-height: 560px;
-        padding-bottom: 36px;
+        min-height: auto;
+        border-bottom: 0;
       }
 
-      .library-book {
-        min-width: 62px;
-      }
-
+      .library-book,
       .library-book.active {
-        min-width: min(520px, 72vw);
-      }
-
-      .library-book.active .book-spine {
-        width: 74px;
-        flex: 0 0 74px;
-      }
-
-      .spine-title {
-        font-size: 0.84rem;
-        letter-spacing: 0.17em;
-      }
-    }
-
-    @media (max-width: 650px) {
-      .bookcase {
-        min-height: 470px;
-        padding-bottom: 32px;
-      }
-
-      .bookcase::before {
-        bottom: 14px;
-        height: 14px;
-      }
-
-      .bookcase::after {
-        height: 14px;
-      }
-
-      .library-book {
-        min-width: 54px;
-        flex: 0.56 1 0;
-      }
-
-      .library-book.active {
-        min-width: min(440px, 76vw);
-      }
-
-      .library-book.active .book-spine {
-        width: 64px;
-        flex: 0 0 64px;
+        min-width: 0;
+        min-height: 76px;
+        flex: none;
+        width: 100%;
+        transform: none;
       }
 
       .book-spine {
-        padding: 16px 8px 20px;
+        min-width: 0;
+        width: 100%;
+        flex-direction: row;
+        min-height: 76px;
       }
 
-      .spine-number {
-        font-size: 0.58rem;
+      .library-book.active .book-spine {
+        width: 100%;
+        flex: none;
+        border-right: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.18);
       }
 
       .spine-title {
-        font-size: 0.75rem;
-        letter-spacing: 0.14em;
+        writing-mode: initial;
+        transform: none;
       }
 
       .book-open-page {
-        padding: 22px;
+        padding: 24px;
+      }
+
+      .book-open-page::before,
+      .category-shelf::before {
+        display: none;
+      }
+
+      .route-preview-grid,
+      .cards-grid {
+        grid-template-columns: 1fr;
       }
     }
 
-  
-    /* Lux final update: huge readable book-spine labels */
-    .spine-title {
-      font-size: clamp(1.25rem, 1.7vw, 1.85rem) !important;
-      letter-spacing: 0.18em !important;
-      font-weight: 1000 !important;
-      line-height: 1 !important;
-    }
-
-    .library-book.active .spine-title {
-      font-size: clamp(1.35rem, 1.9vw, 2rem) !important;
-    }
-
-    .spine-number {
-      font-size: 0.82rem !important;
-      font-weight: 1000 !important;
-    }
-
-    .book-spine {
-      min-width: 88px !important;
-      padding-left: 14px !important;
-      padding-right: 14px !important;
-    }
-
-    .library-book.active .book-spine {
-      width: 104px !important;
-      flex: 0 0 104px !important;
-    }
-
-    @media (max-width: 960px) {
-      .spine-title {
-        font-size: 1.12rem !important;
-        letter-spacing: 0.16em !important;
+    @media (max-width: 620px) {
+      .container {
+        width: min(1180px, calc(100% - 24px));
       }
 
-      .library-book.active .spine-title {
-        font-size: 1.25rem !important;
+      .hero {
+        min-height: 92vh;
       }
 
-      .book-spine {
-        min-width: 72px !important;
+      h1 {
+        font-size: clamp(3rem, 15vw, 5.2rem);
       }
 
-      .library-book.active .book-spine {
-        width: 82px !important;
-        flex: 0 0 82px !important;
-      }
-    }
-
-    @media (max-width: 650px) {
-      .spine-title {
-        font-size: 0.95rem !important;
-        letter-spacing: 0.13em !important;
+      .hero-actions {
+        flex-direction: column;
       }
 
-      .library-book.active .spine-title {
-        font-size: 1.04rem !important;
+      .button {
+        width: 100%;
       }
 
-      .spine-number {
-        font-size: 0.62rem !important;
+      .button + .button {
+        border-left: 1px solid var(--line);
+        border-top: 0;
       }
 
-      .book-spine {
-        min-width: 58px !important;
-        padding-left: 8px !important;
-        padding-right: 8px !important;
+      .testament-definitions,
+      .book-tile-grid {
+        grid-template-columns: 1fr;
       }
-
-      .library-book.active .book-spine {
-        width: 68px !important;
-        flex: 0 0 68px !important;
-      }
-    }
-
-  
-    /* Lux final update: extra-large, more spread-out spine labels */
-    .book-spine {
-      min-width: 110px !important;
-      padding-top: 22px !important;
-      padding-bottom: 28px !important;
-      padding-left: 16px !important;
-      padding-right: 16px !important;
-      gap: 18px !important;
-    }
-
-    .library-book.active .book-spine {
-      width: 130px !important;
-      flex: 0 0 130px !important;
-    }
-
-    .spine-title {
-      font-size: clamp(1.55rem, 2.2vw, 2.35rem) !important;
-      letter-spacing: 0.22em !important;
-      font-weight: 1000 !important;
-      line-height: 1 !important;
-      white-space: nowrap !important;
-    }
-
-    .library-book.active .spine-title {
-      font-size: clamp(1.7rem, 2.45vw, 2.55rem) !important;
-      letter-spacing: 0.23em !important;
-    }
-
-    .spine-number {
-      font-size: 0.88rem !important;
-      letter-spacing: 0.16em !important;
-      font-weight: 1000 !important;
-    }
-
-    @media (max-width: 1100px) {
-      .book-spine {
-        min-width: 94px !important;
-        padding-left: 12px !important;
-        padding-right: 12px !important;
-      }
-
-      .library-book.active .book-spine {
-        width: 108px !important;
-        flex: 0 0 108px !important;
-      }
-
-      .spine-title {
-        font-size: 1.28rem !important;
-        letter-spacing: 0.2em !important;
-      }
-
-      .library-book.active .spine-title {
-        font-size: 1.42rem !important;
-      }
-    }
-
-    @media (max-width: 650px) {
-      .book-spine {
-        min-width: 66px !important;
-        padding-top: 16px !important;
-        padding-bottom: 20px !important;
-        padding-left: 8px !important;
-        padding-right: 8px !important;
-        gap: 10px !important;
-      }
-
-      .library-book.active .book-spine {
-        width: 76px !important;
-        flex: 0 0 76px !important;
-      }
-
-      .spine-title {
-        font-size: 1.02rem !important;
-        letter-spacing: 0.16em !important;
-      }
-
-      .library-book.active .spine-title {
-        font-size: 1.12rem !important;
-        letter-spacing: 0.17em !important;
-      }
-
-      .spine-number {
-        font-size: 0.64rem !important;
-        letter-spacing: 0.12em !important;
-      }
-    }
-
-  
-    /* Lux final update: massively larger spine labels */
-    .book-spine {
-      min-width: 138px !important;
-      padding-top: 24px !important;
-      padding-bottom: 32px !important;
-      padding-left: 18px !important;
-      padding-right: 18px !important;
-      gap: 20px !important;
-    }
-
-    .library-book.active .book-spine {
-      width: 158px !important;
-      flex: 0 0 158px !important;
-    }
-
-    .spine-title {
-      font-size: clamp(2rem, 2.9vw, 3rem) !important;
-      letter-spacing: 0.22em !important;
-      font-weight: 1000 !important;
-      line-height: 1 !important;
-      white-space: nowrap !important;
-    }
-
-    .library-book.active .spine-title {
-      font-size: clamp(2.15rem, 3.15vw, 3.2rem) !important;
-      letter-spacing: 0.23em !important;
-    }
-
-    .spine-number {
-      font-size: 0.95rem !important;
-      letter-spacing: 0.16em !important;
-      font-weight: 1000 !important;
-    }
-
-    @media (max-width: 1100px) {
-      .book-spine {
-        min-width: 112px !important;
-        padding-left: 14px !important;
-        padding-right: 14px !important;
-      }
-
-      .library-book.active .book-spine {
-        width: 126px !important;
-        flex: 0 0 126px !important;
-      }
-
-      .spine-title {
-        font-size: 1.55rem !important;
-        letter-spacing: 0.20em !important;
-      }
-
-      .library-book.active .spine-title {
-        font-size: 1.72rem !important;
-      }
-    }
-
-    @media (max-width: 650px) {
-      .book-spine {
-        min-width: 76px !important;
-        padding-top: 16px !important;
-        padding-bottom: 20px !important;
-        padding-left: 8px !important;
-        padding-right: 8px !important;
-        gap: 10px !important;
-      }
-
-      .library-book.active .book-spine {
-        width: 88px !important;
-        flex: 0 0 88px !important;
-      }
-
-      .spine-title {
-        font-size: 1.12rem !important;
-        letter-spacing: 0.16em !important;
-      }
-
-      .library-book.active .spine-title {
-        font-size: 1.22rem !important;
-        letter-spacing: 0.17em !important;
-      }
-
-      .spine-number {
-        font-size: 0.68rem !important;
-        letter-spacing: 0.12em !important;
-      }
-    }
-
-
-    /* Lux update: premium scroll pan-up text animation */
-    .scroll-pan {
-      opacity: 0;
-      transform: translateY(26px);
-      filter: blur(4px);
-      transition:
-        opacity 700ms ease,
-        transform 850ms cubic-bezier(.2,.8,.2,1),
-        filter 850ms ease;
-      transition-delay: var(--reveal-delay, 0ms);
-      will-change: opacity, transform, filter;
-    }
-
-    .scroll-pan.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-      filter: blur(0);
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .scroll-pan,
-      .scroll-pan.is-visible {
-        opacity: 1;
-        transform: none;
-        filter: none;
-        transition: none;
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
       }
     }
-
-  
-/* ===== Lux update: flat matte books + premium scroll animation + scroll map pan ===== */
-
-/* Scroll-reactive map/collage movement */
-.hero-collage-layer {
-  background-size: cover !important;
-  background-position: center !important;
-  transform: translate3d(0, var(--map-pan-y, 0px), 0) scale(var(--map-scale, 1.04)) !important;
-  transition: transform 80ms linear !important;
-  will-change: transform;
-}
-
-/* Main shelf books: flat matte color, no glossy gradient */
-.library-book {
-  background: var(--book-color) !important;
-  box-shadow: 0 16px 30px rgba(21, 21, 21, 0.10) !important;
-  border-right: 1px solid rgba(255,255,255,0.14) !important;
-}
-
-/* Remove glossy / gradient sheen */
-.library-book::after {
-  display: none !important;
-}
-
-/* Active/open book stays matte too */
-.library-book.active {
-  box-shadow: 0 24px 46px rgba(21, 21, 21, 0.14) !important;
-}
-
-/* Open panel background: flat solid color only */
-.book-open-page {
-  background: var(--book-color) !important;
-}
-
-/* Matte inside cards instead of glassy translucent look */
-.definition-card {
-  background: rgba(255,255,255,0.16) !important;
-  border: 1px solid rgba(255,255,255,0.14) !important;
-  box-shadow: none !important;
-}
-
-.route-chip {
-  background: rgba(255,255,255,0.12) !important;
-  border: 1px solid rgba(255,255,255,0.18) !important;
-  box-shadow: none !important;
-}
-
-.route-chip.active {
-  background: rgba(255,255,255,0.9) !important;
-  color: var(--navy) !important;
-  box-shadow: none !important;
-}
-
-.category-shelf {
-  background: rgba(255,255,255,0.94) !important;
-  box-shadow: 0 10px 20px rgba(21,21,21,0.06) !important;
-}
-
-.route-preview-card {
-  background: rgba(255,255,255,0.94) !important;
-  box-shadow: 0 10px 20px rgba(21,21,21,0.06) !important;
-}
-
-/* Text/card scroll pan-up animation */
-.scroll-pan {
-  opacity: 0;
-  transform: translateY(26px);
-  filter: blur(4px);
-  transition:
-    opacity 700ms ease,
-    transform 850ms cubic-bezier(.2,.8,.2,1),
-    filter 850ms ease;
-  transition-delay: var(--reveal-delay, 0ms);
-  will-change: opacity, transform, filter;
-}
-
-.scroll-pan.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-  filter: blur(0);
-}
-
-/* Optional premium helper section */
-.start-here-section {
-  background: var(--cloud);
-  padding-top: 70px;
-  border-top: 1px solid rgba(21, 21, 21, 0.06);
-}
-
-.start-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin-top: 28px;
-}
-
-.start-card {
-  background: var(--paper);
-  border: 1px solid rgba(21,21,21,0.08);
-  border-top: 8px solid var(--card-color, var(--purple));
-  padding: 22px;
-  min-height: 190px;
-  box-shadow: 0 12px 24px rgba(21,21,21,0.055);
-}
-
-.start-card span {
-  display: block;
-  color: var(--muted);
-  font-size: 0.75rem;
-  font-weight: 950;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-
-.start-card h3 {
-  font-size: 1.75rem;
-  letter-spacing: -0.04em;
-}
-
-.start-card p {
-  margin-top: 12px;
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-.search-preview {
-  margin-top: 28px;
-  border: 1px solid rgba(21,21,21,0.09);
-  background: var(--white);
-  padding: 18px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  box-shadow: 0 12px 24px rgba(21,21,21,0.055);
-}
-
-.search-preview input {
-  width: 100%;
-  border: 0;
-  outline: 0;
-  font-size: 1rem;
-  color: var(--charcoal);
-  background: transparent;
-}
-
-.search-preview strong {
-  color: var(--purple);
-  white-space: nowrap;
-  font-size: 0.86rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .scroll-pan,
-  .scroll-pan.is-visible {
-    opacity: 1;
-    transform: none;
-    filter: none;
-    transition: none;
-  }
-
-  .hero-collage-layer {
-    transform: none !important;
-    transition: none !important;
-  }
-}
-
-@media (max-width: 960px) {
-  .start-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
   </style>
 </head>
 
 <body>
-  <header class="brand-bar" aria-label="Bible Mapped brand header">
+  <header class="brand-bar">
     <div class="brand-bar-inner">
-      <a href="#top" class="brand-wordmark">Bible Mapped</a>
+      <a class="brand-wordmark" href="./index.html">Bible Mapped</a>
+
+      <nav class="top-nav" aria-label="Main navigation">
+        <a href="#bookcase">Books</a>
+        <a href="./about/index.html">About</a>
+        <a href="./books/genesis/index.html">Genesis</a>
+        <a href="./books/exodus/index.html">Exodus</a>
+      </nav>
     </div>
   </header>
 
   <main>
-    <section class="hero" id="top">
-      <!-- Replace this placeholder with your uploaded collage: style="--collage-image: url('your-collage.jpg');" -->
-     <div class="hero-collage-layer" style="--collage-image: url('assets/bible-mapped-collage.png');"></div>
+    <section class="hero">
+      <div class="hero-collage-layer" aria-hidden="true"></div>
 
       <div class="container hero-content">
-        <a class="hero-pill" href="#topics">
+        <a class="hero-pill" href="./about/index.html">
           <span class="new-label">New</span>
-          <span>Explore Scripture through place, context, and meaning</span>
-          <span class="pill-arrow" aria-hidden="true">→</span>
+          <span>Understand the Bible through place, context, and meaning.</span>
+          <span class="pill-arrow">→</span>
         </a>
 
-        <h1>We help people understand the Bible through place.</h1>
+        <h1>Scripture happened somewhere.</h1>
+
         <p class="hero-subtitle">
-          Bible Mapped is a visual Bible learning platform built around maps, context, word studies, people, themes, and the story that points to Jesus.
+          Bible Mapped helps you follow the Bible through real places, real people,
+          real timelines, and real meaning — so the story becomes easier to see.
         </p>
 
-        <div class="hero-actions hero-connected-actions">
-          <a class="button button-primary" href="#topics">Enter Bible Mapped →</a>
-          <a class="button button-mission" href="about/">Read the Mission</a>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#bookcase">Explore the Books</a>
+          <a class="button button-mission" href="./about/index.html">How Bible Mapped Works</a>
+          <a class="button" href="./books/genesis/index.html">Start with Genesis</a>
         </div>
       </div>
     </section>
 
-
-    <section class="start-here-section" id="start-here">
+    <section class="intro-section">
       <div class="container">
-        <div class="section-header">
-          <h2>Start with context.</h2>
-          <p>
-            Bible Mapped helps readers move from a flat reading of Scripture to a place-based, historically aware, Jesus-centered study path.
-          </p>
-        </div>
+        <span class="section-kicker">The idea</span>
 
-        <div class="search-preview">
-          <strong>Search</strong>
-          <input type="search" placeholder="Search Genesis, Exodus, Egypt, Moses, covenant..." aria-label="Search Bible Mapped" />
-        </div>
+        <h2 class="section-title">Most people ask, “Where is the proof?”</h2>
 
-        <div class="start-grid">
-          <article class="start-card" style="--card-color: var(--purple);">
-            <span>01 / Books</span>
-            <h3>Choose a book.</h3>
-            <p>Start with Genesis or Exodus, then move through people, places, themes, and chapter context.</p>
-          </article>
-
-          <article class="start-card" style="--card-color: var(--navy);">
-            <span>02 / Maps</span>
-            <h3>Follow the place.</h3>
-            <p>See locations like Egypt, Sinai, Canaan, Jerusalem, Babylon, and Rome as part of the story.</p>
-          </article>
-
-          <article class="start-card" style="--card-color: var(--teal);">
-            <span>03 / Meaning</span>
-            <h3>Study the meaning.</h3>
-            <p>Connect geography, people, words, and themes so Scripture becomes easier to understand.</p>
-          </article>
-        </div>
+        <p class="section-copy">
+          Bible Mapped starts with that question. Where did this happen? Who was involved?
+          When did it happen? Why does it matter? This landing page opens like a library:
+          choose a section, open the book, and follow the trail.
+        </p>
       </div>
     </section>
 
-    <section class="shelf-section bookcase-section" id="topics">
+    <section class="bookcase-section" id="bookcase">
       <div class="container">
-        <div class="section-header">
-          <h2>Browse the Bible like a shelf.</h2>
-          <p>
-            Choose a book-spine. The selected spine expands into a full color panel, while the other spines stay visible on the shelf.
+        <div class="bookcase-header">
+          <span class="section-kicker">Library</span>
+          <h2 class="section-title">Open a section of the Bible.</h2>
+          <p class="section-copy">
+            Click a spine to open it. Then click a live book tile to go to that page.
           </p>
         </div>
 
-        <div class="bookcase" aria-label="Bible Mapped book shelf navigation">
-          <article class="library-book active" data-book-panel="overview" style="--book-color: var(--paper); --book-text: var(--charcoal); --book-soft: #f0ece2;">
-            <button class="book-spine" type="button" aria-expanded="true">
+        <div class="bookcase" aria-label="Bible Mapped bookcase">
+          <article
+            class="library-book active"
+            style="--book-color: var(--navy); --book-text: white;"
+          >
+            <button class="book-spine" type="button" aria-label="Open Bible overview">
               <span class="spine-number">01</span>
-              <span class="spine-title">Overview</span>
+              <span class="spine-title">Bible</span>
             </button>
 
             <div class="book-open-page">
-              <span class="panel-kicker">Start here</span>
-              <h3>Start with the shelf.</h3>
+              <div class="panel-kicker">Overview</div>
+              <h3>What is the Bible?</h3>
               <p>
-                Bible Mapped is built to keep the first page simple. Each spine opens into a focused route: books, maps, people, themes, videos, tools, and the mission behind it.
+                The Bible is not a random pile of religious ideas. It is a connected story
+                moving through creation, fall, promise, covenant, kingdom, exile, Messiah,
+                resurrection, and new creation.
               </p>
-              <div class="panel-actions">
-                <button class="button button-primary open-spine-button" type="button" data-open-book="books">Open Books →</button>
-                <a class="button" href="about/">Read the mission</a>
+
+              <div class="route-preview-grid">
+                <div class="route-preview-card">
+                  <strong>Place</strong>
+                  <p>Where did this happen, and why does geography matter?</p>
+                </div>
+
+                <div class="route-preview-card">
+                  <strong>People</strong>
+                  <p>Who was involved, and how do their choices move the story?</p>
+                </div>
+
+                <div class="route-preview-card">
+                  <strong>Meaning</strong>
+                  <p>How does the passage point us toward Jesus Christ?</p>
+                </div>
               </div>
             </div>
           </article>
 
-          <article class="library-book" data-book-panel="books" style="--book-color: var(--navy); --book-text: white; --book-soft: #1c548d;">
-            <button class="book-spine" type="button" aria-expanded="false">
+          <article
+            class="library-book"
+            style="--book-color: var(--purple); --book-text: white;"
+          >
+            <button class="book-spine" type="button" aria-label="Open Books">
               <span class="spine-number">02</span>
               <span class="spine-title">Books</span>
             </button>
 
             <div class="book-open-page">
-              <span class="panel-kicker">Canon / Books</span>
-              <h3>Open the Bible by section.</h3>
+              <div class="panel-kicker">Books of the Bible</div>
+              <h3>Follow the books as one connected story.</h3>
               <p>
-                The Bible is easier to study when the books are grouped by function. Choose Old Testament, New Testament, or the books received differently across Christian traditions.
+                Start with the books that are live. As more pages are built, each tile can
+                become a doorway into maps, timelines, people, themes, and word studies.
               </p>
 
-              <div class="testament-definitions">
-                <div class="definition-card">
-                  <strong>Old Testament</strong>
-                  <p>The covenant Scriptures before the coming of Christ. These books give the foundation: creation, promise, law, wisdom, prophecy, exile, and hope.</p>
-                </div>
-                <div class="definition-card">
-                  <strong>New Testament</strong>
-                  <p>The writings centered on Jesus Christ, His life, death, resurrection, the apostles, the church, and the hope of new creation.</p>
-                </div>
-                <div class="definition-card">
-                  <strong>Non-canonical / Deuterocanonical</strong>
-                  <p>Books received differently across Christian traditions. Bible Mapped labels them clearly so readers know how Protestant, Catholic, and Orthodox canons differ.</p>
-                </div>
+              <div class="book-route-switch" aria-label="Book routes">
+                <button class="route-chip active" type="button" data-route="old-testament">Old Testament</button>
+                <button class="route-chip" type="button" data-route="new-testament">New Testament</button>
               </div>
 
-              <div class="book-route-switch" aria-label="Choose testament route">
-                <button class="route-chip active" type="button" data-route="old">Old Testament</button>
-                <button class="route-chip" type="button" data-route="new">New Testament</button>
-                <button class="route-chip" type="button" data-route="noncanonical">Non-canonical / Deuterocanonical</button>
-              </div>
-
-              <div class="book-route active" id="route-old">
-                <section class="category-shelf">
+              <div class="book-route active" data-route="old-testament">
+                <div class="category-shelf">
                   <div class="category-head">
-                    <h4>Law / Torah</h4>
-                    <span>5 books</span>
+                    <h4>Torah / Pentateuch</h4>
+                    <span>Origin + Covenant</span>
                   </div>
-                  <p>The foundation shelf: creation, covenant, deliverance, worship, law, wilderness, and Israel’s identity before God.</p>
-                  <div class="book-tile-grid">
-                    <a class="book-tile book-tile-live" href="books/genesis/index.html">Genesis <span class="live-label">Live</span></a>
-                    <a class="book-tile book-tile-live" href="books/exodus/index.html">Exodus <span class="live-label">Live</span></a>
-                    <a class="book-tile" href="books/leviticus/">Leviticus</a>
-                    <a class="book-tile" href="books/numbers/">Numbers</a>
-                    <a class="book-tile" href="books/deuteronomy/">Deuteronomy</a>
-                  </div>
-                </section>
 
-                <section class="category-shelf">
+                  <p>
+                    Genesis through Deuteronomy introduces creation, the fall, covenant,
+                    Israel’s origin, the Exodus, and the wilderness journey.
+                  </p>
+
+                  <div class="book-tile-grid">
+                    <a class="book-tile book-tile-live" href="./books/genesis/index.html">
+                      Genesis <span class="live-label">Live</span>
+                    </a>
+
+                    <a class="book-tile book-tile-live" href="./books/exodus/index.html">
+                      Exodus <span class="live-label">Live</span>
+                    </a>
+
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Leviticus</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Numbers</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Deuteronomy</a>
+                  </div>
+                </div>
+
+                <div class="category-shelf">
                   <div class="category-head">
                     <h4>History</h4>
-                    <span>12 books</span>
+                    <span>Land + Kingdom</span>
                   </div>
-                  <p>Israel in the land: conquest, judges, kings, division, exile, return, and covenant consequences.</p>
-                  <div class="book-tile-grid">
-                    <a class="book-tile" href="books/joshua/">Joshua</a>
-                    <a class="book-tile" href="books/judges/">Judges</a>
-                    <a class="book-tile" href="books/ruth/">Ruth</a>
-                    <a class="book-tile" href="books/1-samuel/">1 Samuel</a>
-                    <a class="book-tile" href="books/2-samuel/">2 Samuel</a>
-                    <a class="book-tile" href="books/1-kings/">1 Kings</a>
-                    <a class="book-tile" href="books/2-kings/">2 Kings</a>
-                    <a class="book-tile" href="books/1-chronicles/">1 Chronicles</a>
-                    <a class="book-tile" href="books/2-chronicles/">2 Chronicles</a>
-                    <a class="book-tile" href="books/ezra/">Ezra</a>
-                    <a class="book-tile" href="books/nehemiah/">Nehemiah</a>
-                    <a class="book-tile" href="books/esther/">Esther</a>
-                  </div>
-                </section>
 
-                <section class="category-shelf">
-                  <div class="category-head">
-                    <h4>Wisdom / Poetry</h4>
-                    <span>5 books</span>
-                  </div>
-                  <p>Prayer, suffering, worship, practical wisdom, meaning, and love through Hebrew reflection.</p>
-                  <div class="book-tile-grid">
-                    <a class="book-tile" href="books/job/">Job</a>
-                    <a class="book-tile" href="books/psalms/">Psalms</a>
-                    <a class="book-tile" href="books/proverbs/">Proverbs</a>
-                    <a class="book-tile" href="books/ecclesiastes/">Ecclesiastes</a>
-                    <a class="book-tile" href="books/song-of-songs/">Song of Songs</a>
-                  </div>
-                </section>
+                  <p>
+                    Israel enters the land, forms a kingdom, divides, and eventually moves
+                    toward exile.
+                  </p>
 
-                <section class="category-shelf">
-                  <div class="category-head">
-                    <h4>Major Prophets</h4>
-                    <span>5 books</span>
-                  </div>
-                  <p>Judgment, exile, hope, restoration, and the coming work of God on behalf of His people.</p>
                   <div class="book-tile-grid">
-                    <a class="book-tile" href="books/isaiah/">Isaiah</a>
-                    <a class="book-tile" href="books/jeremiah/">Jeremiah</a>
-                    <a class="book-tile" href="books/lamentations/">Lamentations</a>
-                    <a class="book-tile" href="books/ezekiel/">Ezekiel</a>
-                    <a class="book-tile" href="books/daniel/">Daniel</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Joshua</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Judges</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Ruth</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">1 Samuel</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">2 Samuel</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">1 Kings</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">2 Kings</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Ezra</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Nehemiah</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Esther</a>
                   </div>
-                </section>
+                </div>
 
-                <section class="category-shelf">
+                <div class="category-shelf">
                   <div class="category-head">
-                    <h4>Minor Prophets</h4>
-                    <span>12 books</span>
+                    <h4>Wisdom + Poetry</h4>
+                    <span>Life + Worship</span>
                   </div>
-                  <p>Shorter books with major force: warning, repentance, justice, mercy, nations, and future hope.</p>
+
+                  <p>
+                    These books explore suffering, worship, wisdom, love, and the fear of the Lord.
+                  </p>
+
                   <div class="book-tile-grid">
-                    <a class="book-tile" href="books/hosea/">Hosea</a>
-                    <a class="book-tile" href="books/joel/">Joel</a>
-                    <a class="book-tile" href="books/amos/">Amos</a>
-                    <a class="book-tile" href="books/obadiah/">Obadiah</a>
-                    <a class="book-tile" href="books/jonah/">Jonah</a>
-                    <a class="book-tile" href="books/micah/">Micah</a>
-                    <a class="book-tile" href="books/nahum/">Nahum</a>
-                    <a class="book-tile" href="books/habakkuk/">Habakkuk</a>
-                    <a class="book-tile" href="books/zephaniah/">Zephaniah</a>
-                    <a class="book-tile" href="books/haggai/">Haggai</a>
-                    <a class="book-tile" href="books/zechariah/">Zechariah</a>
-                    <a class="book-tile" href="books/malachi/">Malachi</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Job</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Psalms</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Proverbs</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Ecclesiastes</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Song of Solomon</a>
                   </div>
-                </section>
+                </div>
+
+                <div class="category-shelf">
+                  <div class="category-head">
+                    <h4>Prophets</h4>
+                    <span>Warning + Hope</span>
+                  </div>
+
+                  <p>
+                    The prophets call Israel back to God and point forward to judgment,
+                    restoration, Messiah, and the kingdom.
+                  </p>
+
+                  <div class="book-tile-grid">
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Isaiah</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Jeremiah</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Ezekiel</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Daniel</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Hosea</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Joel</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Amos</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Jonah</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Micah</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Malachi</a>
+                  </div>
+                </div>
               </div>
 
-              <div class="book-route" id="route-new">
-                <section class="category-shelf">
-                  <div class="category-head"><h4>Gospels</h4><span>4 books</span></div>
-                  <p>The life, teaching, death, resurrection, and fulfillment work of Jesus Christ.</p>
-                  <div class="book-tile-grid">
-                    <a class="book-tile" href="books/matthew/">Matthew</a>
-                    <a class="book-tile" href="books/mark/">Mark</a>
-                    <a class="book-tile" href="books/luke/">Luke</a>
-                    <a class="book-tile" href="books/john/">John</a>
+              <div class="book-route" data-route="new-testament">
+                <div class="category-shelf">
+                  <div class="category-head">
+                    <h4>Gospels + Acts</h4>
+                    <span>Jesus + Mission</span>
                   </div>
-                </section>
 
-                <section class="category-shelf">
-                  <div class="category-head"><h4>History</h4><span>1 book</span></div>
-                  <p>Acts traces the risen Christ working through the Spirit, the apostles, and the spread of the Gospel.</p>
-                  <div class="book-tile-grid">
-                    <a class="book-tile" href="books/acts/">Acts</a>
-                  </div>
-                </section>
+                  <p>
+                    The life, teaching, death, resurrection, and mission of Jesus Christ.
+                  </p>
 
-                <section class="category-shelf">
-                  <div class="category-head"><h4>Pauline Letters</h4><span>13 books</span></div>
-                  <p>Doctrine, church life, grace, faith, holiness, suffering, mission, and life in Christ.</p>
                   <div class="book-tile-grid">
-                    <a class="book-tile" href="books/romans/">Romans</a>
-                    <a class="book-tile" href="books/1-corinthians/">1 Corinthians</a>
-                    <a class="book-tile" href="books/2-corinthians/">2 Corinthians</a>
-                    <a class="book-tile" href="books/galatians/">Galatians</a>
-                    <a class="book-tile" href="books/ephesians/">Ephesians</a>
-                    <a class="book-tile" href="books/philippians/">Philippians</a>
-                    <a class="book-tile" href="books/colossians/">Colossians</a>
-                    <a class="book-tile" href="books/1-thessalonians/">1 Thessalonians</a>
-                    <a class="book-tile" href="books/2-thessalonians/">2 Thessalonians</a>
-                    <a class="book-tile" href="books/1-timothy/">1 Timothy</a>
-                    <a class="book-tile" href="books/2-timothy/">2 Timothy</a>
-                    <a class="book-tile" href="books/titus/">Titus</a>
-                    <a class="book-tile" href="books/philemon/">Philemon</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Matthew</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Mark</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Luke</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">John</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Acts</a>
                   </div>
-                </section>
+                </div>
 
-                <section class="category-shelf">
-                  <div class="category-head"><h4>General Letters</h4><span>8 books</span></div>
-                  <p>Faith, endurance, love, truth, warning, and faithful witness.</p>
-                  <div class="book-tile-grid">
-                    <a class="book-tile" href="books/hebrews/">Hebrews</a>
-                    <a class="book-tile" href="books/james/">James</a>
-                    <a class="book-tile" href="books/1-peter/">1 Peter</a>
-                    <a class="book-tile" href="books/2-peter/">2 Peter</a>
-                    <a class="book-tile" href="books/1-john/">1 John</a>
-                    <a class="book-tile" href="books/2-john/">2 John</a>
-                    <a class="book-tile" href="books/3-john/">3 John</a>
-                    <a class="book-tile" href="books/jude/">Jude</a>
+                <div class="category-shelf">
+                  <div class="category-head">
+                    <h4>Letters</h4>
+                    <span>Church + Doctrine</span>
                   </div>
-                </section>
 
-                <section class="category-shelf">
-                  <div class="category-head"><h4>Apocalyptic</h4><span>1 book</span></div>
-                  <p>Revelation shows Jesus as victorious King and gives hope through judgment, worship, endurance, and new creation.</p>
-                  <div class="book-tile-grid">
-                    <a class="book-tile" href="books/revelation/">Revelation</a>
-                  </div>
-                </section>
-              </div>
+                  <p>
+                    The apostles teach churches how to understand the Gospel and live in Christ.
+                  </p>
 
-              <div class="book-route" id="route-noncanonical">
-                <section class="category-shelf">
-                  <div class="category-head"><h4>Received Differently</h4><span>Examples</span></div>
-                  <p>These books are handled differently across Christian traditions. This section helps label those differences clearly.</p>
                   <div class="book-tile-grid">
-                    <a class="book-tile" href="books/tobit/">Tobit</a>
-                    <a class="book-tile" href="books/judith/">Judith</a>
-                    <a class="book-tile" href="books/wisdom/">Wisdom</a>
-                    <a class="book-tile" href="books/sirach/">Sirach</a>
-                    <a class="book-tile" href="books/baruch/">Baruch</a>
-                    <a class="book-tile" href="books/1-maccabees/">1 Maccabees</a>
-                    <a class="book-tile" href="books/2-maccabees/">2 Maccabees</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Romans</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">1 Corinthians</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Galatians</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Ephesians</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Philippians</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Hebrews</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">James</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">1 Peter</a>
+                    <a class="book-tile disabled" href="#" aria-disabled="true">1 John</a>
                   </div>
-                </section>
+                </div>
+
+                <div class="category-shelf">
+                  <div class="category-head">
+                    <h4>Revelation</h4>
+                    <span>Hope + New Creation</span>
+                  </div>
+
+                  <p>
+                    The Bible ends with worship, judgment, victory, and the hope of all things made new.
+                  </p>
+
+                  <div class="book-tile-grid">
+                    <a class="book-tile disabled" href="#" aria-disabled="true">Revelation</a>
+                  </div>
+                </div>
               </div>
             </div>
           </article>
 
-          <article class="library-book" data-book-panel="maps" style="--book-color: var(--teal); --book-text: var(--charcoal); --book-soft: #b9d2ce;">
-            <button class="book-spine" type="button" aria-expanded="false">
+          <article
+            class="library-book light-text"
+            style="--book-color: var(--sand); --book-text: var(--charcoal);"
+          >
+            <button class="book-spine" type="button" aria-label="Open Maps">
               <span class="spine-number">03</span>
               <span class="spine-title">Maps</span>
             </button>
+
             <div class="book-open-page">
-              <span class="panel-kicker">Atlas / Places</span>
-              <h3>See the geography behind the story.</h3>
-              <p>Open regions, cities, empires, journeys, rivers, mountains, and story locations connected to the Bible.</p>
-              <div class="route-preview-grid compact">
-                <div class="route-preview-card"><h4>Regions</h4><p>Galilee, Judea, Egypt, Mesopotamia, Sinai.</p></div>
-                <div class="route-preview-card"><h4>Cities</h4><p>Jerusalem, Bethlehem, Rome, Babylon, Nineveh.</p></div>
-                <div class="route-preview-card"><h4>Journeys</h4><p>Exodus, exile, return, Jesus’ ministry, Paul’s journeys.</p></div>
+              <div class="panel-kicker">Maps</div>
+              <h3>See where Scripture happened.</h3>
+              <p>
+                Maps turn names into places. Eden, Egypt, Sinai, Canaan, Jerusalem,
+                Bethlehem, Galilee, and the Kidron Valley all become part of the story.
+              </p>
+
+              <div class="route-preview-grid">
+                <div class="route-preview-card">
+                  <strong>Eden</strong>
+                  <p>Where does the story begin, and what does the eastward movement mean?</p>
+                </div>
+
+                <div class="route-preview-card">
+                  <strong>Exodus</strong>
+                  <p>Egypt, wilderness, Sinai, and the road toward the promised land.</p>
+                </div>
+
+                <div class="route-preview-card">
+                  <strong>Jerusalem</strong>
+                  <p>The city where kings, prophets, temple, cross, and resurrection converge.</p>
+                </div>
               </div>
             </div>
           </article>
 
-          <article class="library-book" data-book-panel="people" style="--book-color: var(--slate); --book-text: white; --book-soft: #6b7680;">
-            <button class="book-spine" type="button" aria-expanded="false">
+          <article
+            class="library-book"
+            style="--book-color: var(--red); --book-text: white;"
+          >
+            <button class="book-spine" type="button" aria-label="Open People">
               <span class="spine-number">04</span>
               <span class="spine-title">People</span>
             </button>
+
             <div class="book-open-page">
-              <span class="panel-kicker">Lineage / People</span>
-              <h3>Find the people inside the biblical world.</h3>
-              <p>People belong to places, families, covenants, conflicts, and moments in the story.</p>
-              <div class="route-preview-grid compact">
-                <div class="route-preview-card"><h4>Genesis</h4><p>Adam, Eve, Noah, Abraham, Sarah, Joseph.</p></div>
-                <div class="route-preview-card"><h4>Kings</h4><p>Saul, David, Solomon, Judah’s line.</p></div>
-                <div class="route-preview-card"><h4>Gospels</h4><p>Jesus, Mary, disciples, Pharisees, Rome.</p></div>
+              <div class="panel-kicker">People</div>
+              <h3>Follow the people inside the story.</h3>
+              <p>
+                The Bible moves through real people: Adam, Eve, Noah, Abraham, Sarah,
+                Moses, David, Mary, Peter, Paul, and most importantly, Jesus Christ.
+              </p>
+
+              <div class="route-preview-grid">
+                <div class="route-preview-card">
+                  <strong>Abraham</strong>
+                  <p>Promise, covenant, land, faith, and the beginning of Israel’s family story.</p>
+                </div>
+
+                <div class="route-preview-card">
+                  <strong>Moses</strong>
+                  <p>Deliverance, law, wilderness, and the formation of Israel.</p>
+                </div>
+
+                <div class="route-preview-card">
+                  <strong>Jesus</strong>
+                  <p>The center of Scripture: His life, death, resurrection, and kingdom.</p>
+                </div>
               </div>
             </div>
           </article>
 
-          <article class="library-book" data-book-panel="themes" style="--book-color: var(--sand); --book-text: var(--charcoal); --book-soft: #f0d9a9;">
-            <button class="book-spine" type="button" aria-expanded="false">
+          <article
+            class="library-book light-text"
+            style="--book-color: var(--teal); --book-text: var(--charcoal);"
+          >
+            <button class="book-spine" type="button" aria-label="Open Words">
               <span class="spine-number">05</span>
+              <span class="spine-title">Words</span>
+            </button>
+
+            <div class="book-open-page">
+              <div class="panel-kicker">Words</div>
+              <h3>Study the words that carry meaning.</h3>
+              <p>
+                Biblical words carry history, context, language, and theology. Bible Mapped
+                will eventually connect word studies to places, people, and themes.
+              </p>
+
+              <div class="route-preview-grid">
+                <div class="route-preview-card">
+                  <strong>Covenant</strong>
+                  <p>How God binds Himself to His promises across the biblical story.</p>
+                </div>
+
+                <div class="route-preview-card">
+                  <strong>Kingdom</strong>
+                  <p>The reign of God, the throne of David, and the authority of Christ.</p>
+                </div>
+
+                <div class="route-preview-card">
+                  <strong>Gospel</strong>
+                  <p>The good news of Jesus Christ: His life, death, and resurrection.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article
+            class="library-book"
+            style="--book-color: var(--slate); --book-text: white;"
+          >
+            <button class="book-spine" type="button" aria-label="Open Themes">
+              <span class="spine-number">06</span>
               <span class="spine-title">Themes</span>
             </button>
-            <div class="book-open-page">
-              <span class="panel-kicker">Themes</span>
-              <h3>Trace ideas across the Bible.</h3>
-              <p>Covenant, kingdom, exile, temple, sacrifice, wisdom, Messiah, resurrection, and new creation unfold across many books.</p>
-            </div>
-          </article>
 
-          <article class="library-book" data-book-panel="videos" style="--book-color: var(--purple); --book-text: white; --book-soft: #9151ff;">
-            <button class="book-spine" type="button" aria-expanded="false">
-              <span class="spine-number">06</span>
-              <span class="spine-title">Videos</span>
-            </button>
             <div class="book-open-page">
-              <span class="panel-kicker">Visual Explainers</span>
-              <h3>Watch Bible Mapped studies.</h3>
-              <p>Short and long-form visual explainers can connect books, maps, word studies, and themes.</p>
-              <div class="panel-actions"><a class="button button-primary" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noreferrer">Watch on YouTube →</a></div>
-            </div>
-          </article>
+              <div class="panel-kicker">Themes</div>
+              <h3>Track the themes through the whole Bible.</h3>
+              <p>
+                Themes help the Bible feel connected: creation, exile, sacrifice,
+                temple, kingdom, wisdom, suffering, resurrection, and new creation.
+              </p>
 
-          <article class="library-book" data-book-panel="tools" style="--book-color: var(--red); --book-text: white; --book-soft: #ff5060;">
-            <button class="book-spine" type="button" aria-expanded="false">
-              <span class="spine-number">07</span>
-              <span class="spine-title">Tools</span>
-            </button>
-            <div class="book-open-page">
-              <span class="panel-kicker">Study Tools</span>
-              <h3>Open concordance, dictionary, and context tools.</h3>
-              <p>Build study layers for KJV words, Webster-style definitions, places, people, timelines, and red flags.</p>
-            </div>
-          </article>
+              <div class="route-preview-grid">
+                <div class="route-preview-card">
+                  <strong>Exile</strong>
+                  <p>From Eden to Babylon, exile explains the ache of being away from God.</p>
+                </div>
 
-          <article class="library-book" data-book-panel="about" style="--book-color: var(--charcoal); --book-text: white; --book-soft: #333033;">
-            <button class="book-spine" type="button" aria-expanded="false">
-              <span class="spine-number">08</span>
-              <span class="spine-title">About</span>
-            </button>
-            <div class="book-open-page">
-              <span class="panel-kicker">Mission</span>
-              <h3>Why Bible Mapped exists.</h3>
-              <p>Bible Mapped exists to help people see Scripture more clearly through place, context, language, history, and Jesus Christ.</p>
-              <div class="panel-actions"><a class="button button-primary" href="about/">Open About →</a></div>
+                <div class="route-preview-card">
+                  <strong>Temple</strong>
+                  <p>The place of God’s presence, fulfilled in Christ and His people.</p>
+                </div>
+
+                <div class="route-preview-card">
+                  <strong>New Creation</strong>
+                  <p>The biblical story ends with restoration, not escape.</p>
+                </div>
+              </div>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-</main>
+    <section class="standard-section">
+      <div class="container">
+        <span class="section-kicker">Formula</span>
+
+        <h2 class="section-title">The Bible Mapped method is simple.</h2>
+
+        <p class="section-copy">
+          Every study begins with place, people, time, and meaning. That keeps the Bible
+          grounded inside history while pointing us to Jesus Christ.
+        </p>
+
+        <div class="cards-grid">
+          <div class="info-card">
+            <strong>Where?</strong>
+            <h3>Place</h3>
+            <p>Where did this happen, and what does the location help us understand?</p>
+          </div>
+
+          <div class="info-card">
+            <strong>Who?</strong>
+            <h3>People</h3>
+            <p>Who was involved, and how do their choices move the story forward?</p>
+          </div>
+
+          <div class="info-card">
+            <strong>Why?</strong>
+            <h3>Meaning</h3>
+            <p>Why does this matter, and how does it connect to Jesus Christ?</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <div class="container footer-inner">
-      <strong>Bible Mapped</strong>
-      <span>Understand the Bible through place, context, and meaning.</span>
+    <div class="container">
+      <div class="footer-wordmark">Bible Mapped</div>
+      <div class="footer-rule">
+        Understanding Scripture through place, context, and meaning.
+      </div>
     </div>
   </footer>
 
   <script>
-    const libraryBooks = document.querySelectorAll('.library-book');
+    /*
+      Bible Mapped Landing Page Behavior
+      - Book spines open/extract the book panel.
+      - Route chips switch the visible category.
+      - Real book links still navigate to their pages.
+      - Tree animation runs after the book opens.
+    */
 
-    function openLibraryBook(targetBook) {
-      libraryBooks.forEach((book) => {
-        const isActive = book === targetBook;
-        book.classList.toggle('active', isActive);
+    const libraryBooks = document.querySelectorAll(".library-book");
+    const bookSpines = document.querySelectorAll(".book-spine");
+    const routeChips = document.querySelectorAll(".route-chip");
+    const bookTiles = document.querySelectorAll(".book-tile");
 
-        const button = book.querySelector('.book-spine');
-        if (button) {
-          button.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+    function openLibraryBook(book) {
+      if (!book) return;
+
+      libraryBooks.forEach((item) => {
+        item.classList.remove("active");
+        item.classList.remove("tree-active");
+      });
+
+      book.classList.add("active");
+
+      window.setTimeout(() => {
+        book.classList.add("tree-active");
+      }, 160);
+    }
+
+    bookSpines.forEach((spine) => {
+      spine.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        const book = spine.closest(".library-book");
+        openLibraryBook(book);
+      });
+    });
+
+    routeChips.forEach((chip) => {
+      chip.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        const page = chip.closest(".book-open-page");
+        if (!page) return;
+
+        const targetRoute = chip.dataset.route;
+
+        page.querySelectorAll(".route-chip").forEach((item) => {
+          item.classList.remove("active");
+        });
+
+        chip.classList.add("active");
+
+        page.querySelectorAll(".book-route").forEach((route) => {
+          route.classList.remove("active");
+
+          if (route.dataset.route === targetRoute) {
+            route.classList.add("active");
+          }
+        });
+
+        const book = chip.closest(".library-book");
+
+        if (book) {
+          book.classList.remove("tree-active");
+
+          window.setTimeout(() => {
+            book.classList.add("tree-active");
+          }, 80);
         }
       });
-
-      targetBook.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-    }
-
-    libraryBooks.forEach((book) => {
-      const spine = book.querySelector('.book-spine');
-      if (spine) {
-        spine.addEventListener('click', () => openLibraryBook(book));
-      }
     });
 
-    document.querySelectorAll('[data-open-book]').forEach((button) => {
-      button.addEventListener('click', () => {
-        const panelName = button.dataset.openBook;
-        const target = document.querySelector(`.library-book[data-book-panel="${panelName}"]`);
-        if (target) openLibraryBook(target);
+    bookTiles.forEach((tile) => {
+      tile.addEventListener("click", (event) => {
+        const href = tile.getAttribute("href");
+        const isDisabled = tile.classList.contains("disabled");
+
+        if (isDisabled || href === "#") {
+          event.preventDefault();
+          return;
+        }
+
+        /*
+          Real links are allowed to work normally.
+          This is what keeps Genesis and Exodus connected to their pages.
+        */
+        if (href && !href.startsWith("javascript:")) {
+          return;
+        }
+
+        event.preventDefault();
       });
     });
 
-    const routeButtons = document.querySelectorAll('.route-chip');
-    const bookRoutes = document.querySelectorAll('.book-route');
+    const firstBook = document.querySelector(".library-book.active") || document.querySelector(".library-book");
 
-    routeButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        routeButtons.forEach((btn) => btn.classList.remove('active'));
-        button.classList.add('active');
-
-        const routeName = button.dataset.route;
-        bookRoutes.forEach((route) => {
-          route.classList.toggle('active', route.id === `route-${routeName}`);
-        });
-      });
-    });
-
-    /* Lux update: premium scroll pan-up animation */
-    const scrollPanTargets = document.querySelectorAll(`
-      .hero-pill,
-      .hero-content h1,
-      .hero-subtitle,
-      .hero-actions,
-      .section-header h2,
-      .section-header p,
-      .book-open-page .panel-kicker,
-      .book-open-page h3,
-      .book-open-page p,
-      .definition-card,
-      .category-shelf,
-      .route-preview-card,
-      footer .footer-inner
-    `);
-
-    scrollPanTargets.forEach((element, index) => {
-      element.classList.add('scroll-pan');
-
-      const delay = Math.min((index % 5) * 70, 280);
-      element.style.setProperty('--reveal-delay', `${delay}ms`);
-    });
-
-    const scrollPanObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-          }
-        });
-      },
-      {
-        threshold: 0.15,
-        rootMargin: '0px 0px -8% 0px'
-      }
-    );
-
-    scrollPanTargets.forEach((element) => {
-      scrollPanObserver.observe(element);
-    });
-
-  
-    /* Lux update: premium scroll pan-up animation */
-    const scrollPanTargets = document.querySelectorAll(`
-      .hero-pill,
-      .hero-content h1,
-      .hero-subtitle,
-      .hero-actions,
-      .section-header h2,
-      .section-header p,
-      .search-preview,
-      .start-card,
-      .book-open-page .panel-kicker,
-      .book-open-page h3,
-      .book-open-page p,
-      .definition-card,
-      .category-shelf,
-      .route-preview-card,
-      footer .footer-inner
-    `);
-
-    scrollPanTargets.forEach((element, index) => {
-      element.classList.add('scroll-pan');
-      const delay = Math.min((index % 5) * 70, 280);
-      element.style.setProperty('--reveal-delay', `${delay}ms`);
-    });
-
-    const scrollPanObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-          } else {
-            entry.target.classList.remove('is-visible');
-          }
-        });
-      },
-      {
-        threshold: 0.12,
-        rootMargin: '0px 0px -8% 0px'
-      }
-    );
-
-    scrollPanTargets.forEach((element) => {
-      scrollPanObserver.observe(element);
-    });
-
-    /* Lux update: scroll up/down map movement */
-    const heroMap = document.querySelector('.hero-collage-layer');
-    const heroSection = document.querySelector('.hero');
-    let lastScrollY = window.scrollY;
-    let ticking = false;
-
-    function updateMapPan() {
-      if (!heroMap || !heroSection) return;
-
-      const currentScrollY = window.scrollY;
-      const direction = currentScrollY > lastScrollY ? 1 : -1;
-      const heroHeight = Math.max(heroSection.offsetHeight, 1);
-      const progress = Math.min(Math.max(currentScrollY / heroHeight, 0), 1);
-
-      const panDistance = -34 * progress;
-      const directionalNudge = direction * -6;
-      const scale = 1.04 + progress * 0.025;
-
-      heroMap.style.setProperty('--map-pan-y', `${panDistance + directionalNudge}px`);
-      heroMap.style.setProperty('--map-scale', scale.toFixed(3));
-
-      lastScrollY = currentScrollY;
-      ticking = false;
+    if (firstBook) {
+      openLibraryBook(firstBook);
     }
-
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateMapPan);
-        ticking = true;
-      }
-    }, { passive: true });
-
-    updateMapPan();
-
   </script>
 </body>
 </html>
