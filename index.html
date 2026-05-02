@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>BibleMapped</title>
+  <title>Bible Mapped</title>
 
   <style>
     :root {
@@ -20,6 +20,7 @@
       --white: #ffffff;
       --line: rgba(17, 19, 24, 0.12);
       --shadow: 0 24px 70px rgba(0, 0, 0, 0.12);
+      --deep-shadow: 0 40px 120px rgba(0, 0, 0, 0.35);
     }
 
     * {
@@ -112,7 +113,7 @@
 
     .hero {
       position: relative;
-      min-height: 850px;
+      min-height: 860px;
       padding: 110px 20px 0;
       overflow: hidden;
       background: var(--ink);
@@ -223,36 +224,62 @@
     }
 
     /* =========================
-       SCROLL-BASED IMAGE PARALLAX
+       OVERLAPPING SCROLL PARALLAX IMAGES
     ========================= */
 
     .hero-moving-gallery {
       width: 100vw;
       margin-left: calc(50% - 50vw);
-      margin-top: 70px;
+      margin-top: 78px;
       overflow: hidden;
       position: relative;
       z-index: 4;
-      padding: 0 0 48px;
+      padding: 36px 0 62px;
     }
 
     .hero-gallery-track {
       display: flex;
-      gap: 22px;
+      align-items: center;
       width: max-content;
-      transform: translate3d(-32%, 0, 0);
+      transform: translate3d(-34%, 0, 0);
       will-change: transform;
+      padding-left: 48px;
+      padding-right: 48px;
     }
 
     .ribbon-card {
-      width: 280px;
-      height: 178px;
+      width: 310px;
+      height: 198px;
       flex: 0 0 auto;
-      border-radius: 28px;
+      margin-left: -72px;
+      border-radius: 30px;
       overflow: hidden;
       background: var(--paper);
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: var(--deep-shadow);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      transform: rotate(-3deg);
+      transition: transform 0.35s ease;
+    }
+
+    .ribbon-card:first-child {
+      margin-left: 0;
+    }
+
+    .ribbon-card:nth-child(2n) {
+      transform: rotate(3deg) translateY(18px);
+    }
+
+    .ribbon-card:nth-child(3n) {
+      transform: rotate(-1deg) translateY(-14px);
+    }
+
+    .ribbon-card:nth-child(4n) {
+      transform: rotate(4deg) translateY(8px);
+    }
+
+    .ribbon-card:hover {
+      transform: rotate(0deg) translateY(-12px) scale(1.04);
+      z-index: 10;
     }
 
     .ribbon-card img {
@@ -524,65 +551,144 @@
     }
 
     /* =========================
-       STORY SECTION
+       WHY BIBLE MAPPED TRIGGER
     ========================= */
 
-    .story-section {
-      padding: 120px 20px;
+    .why-trigger-section {
+      padding: 115px 20px;
       background: var(--white);
       text-align: center;
     }
 
-    .story-inner {
-      width: min(980px, 100%);
-      margin: 0 auto;
+    .why-open-button {
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      font-size: clamp(3rem, 8vw, 7.5rem);
+      line-height: 0.9;
+      letter-spacing: -0.075em;
+      font-weight: 950;
+      text-align: center;
+      transition: color 0.25s ease, transform 0.25s ease;
     }
 
-    .story-inner h2 {
+    .why-open-button:hover {
+      color: var(--electric-purple);
+      transform: translateY(-6px);
+    }
+
+    .why-helper {
+      margin: 22px auto 0;
+      max-width: 620px;
+      color: var(--soft-ink);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    /* =========================
+       MODAL / RAISED WINDOW
+    ========================= */
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(17, 19, 24, 0.62);
+      backdrop-filter: blur(10px);
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-window {
+      width: min(900px, 100%);
+      max-height: min(760px, 90vh);
+      overflow: auto;
+      border-radius: 38px;
+      background: var(--cloud);
+      color: var(--ink);
+      box-shadow: var(--deep-shadow);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      transform: translateY(28px) scale(0.96);
+      opacity: 0;
+      transition: transform 0.28s ease, opacity 0.28s ease;
+    }
+
+    .modal-overlay.active .modal-window {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    .modal-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 28px 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .modal-top span {
+      font-weight: 950;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--electric-purple);
+      font-size: 0.78rem;
+    }
+
+    .modal-close {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--ink);
+      font-size: 1.4rem;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .modal-body {
+      padding: 36px 38px 42px;
+    }
+
+    .modal-body h2 {
       margin: 0;
-      font-size: clamp(3rem, 7vw, 6.7rem);
+      font-size: clamp(2.8rem, 6vw, 5.8rem);
       line-height: 0.92;
       letter-spacing: -0.07em;
       font-weight: 950;
     }
 
-    .story-inner p {
-      max-width: 760px;
-      margin: 28px auto 0;
-      font-size: 1.2rem;
+    .modal-body p {
+      margin: 24px 0 0;
+      font-size: 1.18rem;
+      line-height: 1.7;
       color: var(--soft-ink);
-      line-height: 1.65;
     }
 
-    .story-card {
-      margin: 58px auto 0;
-      width: min(820px, 100%);
-      border-radius: 38px;
-      overflow: hidden;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
+    .modal-callout {
+      margin-top: 34px;
+      padding: 28px;
+      border-radius: 28px;
+      background: var(--ink);
+      color: var(--white);
     }
 
-    .story-card img {
-      width: 100%;
-      height: 420px;
-      object-fit: cover;
-    }
-
-    .story-card-content {
-      padding: 34px;
-    }
-
-    .story-card-content h3 {
+    .modal-callout h3 {
       margin: 0;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      letter-spacing: -0.05em;
+      font-size: 1.8rem;
+      letter-spacing: -0.04em;
     }
 
-    .story-card-content p {
-      margin-top: 14px;
-      font-size: 1.08rem;
+    .modal-callout p {
+      color: rgba(255, 255, 255, 0.82);
     }
 
     /* =========================
@@ -602,10 +708,6 @@
       font-weight: 850;
       letter-spacing: -0.02em;
     }
-
-    /* =========================
-       PARALLAX
-    ========================= */
 
     .parallax-item {
       will-change: transform;
@@ -661,14 +763,15 @@
       }
 
       .ribbon-card {
-        width: 210px;
-        height: 138px;
-        border-radius: 22px;
+        width: 230px;
+        height: 148px;
+        margin-left: -58px;
+        border-radius: 24px;
       }
 
       .hero-moving-gallery {
-        margin-top: 52px;
-        padding-bottom: 36px;
+        margin-top: 54px;
+        padding-bottom: 42px;
       }
 
       .testament-explorer {
@@ -696,8 +799,16 @@
         bottom: 16px;
       }
 
-      .story-card img {
-        height: 280px;
+      .why-trigger-section {
+        padding: 85px 18px;
+      }
+
+      .modal-body {
+        padding: 30px 24px 34px;
+      }
+
+      .modal-top {
+        padding: 22px 24px;
       }
     }
   </style>
@@ -708,13 +819,13 @@
   <header class="site-header">
     <nav class="nav">
       <a href="index.html" class="brand">
-        <span>BibleMapped</span>
+        <span>Bible Mapped</span>
       </a>
 
       <div class="nav-links">
         <a href="#testaments">Books</a>
         <a href="#formula">Maps</a>
-        <a href="#story">About</a>
+        <a href="#why">About</a>
         <a href="#testaments">Explore</a>
       </div>
 
@@ -736,55 +847,31 @@
       <h1>Understand the Bible through place, context, and meaning.</h1>
 
       <p>
-        BibleMapped helps Christians and seekers follow Scripture through real places,
+        Bible Mapped helps Christians and seekers follow Scripture through real places,
         real people, real timelines, and real meaning — from Eden to Abraham,
         from Egypt to Sinai, from Jerusalem to the empty tomb.
       </p>
 
       <div class="hero-actions">
-        <a href="#testaments" class="btn btn-dark">Enter BibleMapped</a>
+        <a href="#testaments" class="btn btn-dark">Enter Bible Mapped</a>
         <a href="#formula" class="btn btn-light">See How It Works</a>
       </div>
 
       <div class="hero-moving-gallery">
         <div class="hero-gallery-track">
-          <div class="ribbon-card">
-            <img src="images/hero-1.jpg" alt="Bible map image slot" />
-          </div>
-          <div class="ribbon-card">
-            <img src="images/hero-2.jpg" alt="Bible art image slot" />
-          </div>
-          <div class="ribbon-card">
-            <img src="images/hero-3.jpg" alt="Scripture image slot" />
-          </div>
-          <div class="ribbon-card">
-            <img src="images/hero-4.jpg" alt="Ancient world image slot" />
-          </div>
-          <div class="ribbon-card">
-            <img src="images/hero-5.jpg" alt="Jerusalem image slot" />
-          </div>
-          <div class="ribbon-card">
-            <img src="images/hero-6.jpg" alt="Bible timeline image slot" />
-          </div>
+          <div class="ribbon-card"><img src="images/hero-1.jpg" alt="Bible map image slot" /></div>
+          <div class="ribbon-card"><img src="images/hero-2.jpg" alt="Bible art image slot" /></div>
+          <div class="ribbon-card"><img src="images/hero-3.jpg" alt="Scripture image slot" /></div>
+          <div class="ribbon-card"><img src="images/hero-4.jpg" alt="Ancient world image slot" /></div>
+          <div class="ribbon-card"><img src="images/hero-5.jpg" alt="Jerusalem image slot" /></div>
+          <div class="ribbon-card"><img src="images/hero-6.jpg" alt="Bible timeline image slot" /></div>
 
-          <div class="ribbon-card">
-            <img src="images/hero-1.jpg" alt="Bible map image slot" />
-          </div>
-          <div class="ribbon-card">
-            <img src="images/hero-2.jpg" alt="Bible art image slot" />
-          </div>
-          <div class="ribbon-card">
-            <img src="images/hero-3.jpg" alt="Scripture image slot" />
-          </div>
-          <div class="ribbon-card">
-            <img src="images/hero-4.jpg" alt="Ancient world image slot" />
-          </div>
-          <div class="ribbon-card">
-            <img src="images/hero-5.jpg" alt="Jerusalem image slot" />
-          </div>
-          <div class="ribbon-card">
-            <img src="images/hero-6.jpg" alt="Bible timeline image slot" />
-          </div>
+          <div class="ribbon-card"><img src="images/hero-1.jpg" alt="Bible map image slot" /></div>
+          <div class="ribbon-card"><img src="images/hero-2.jpg" alt="Bible art image slot" /></div>
+          <div class="ribbon-card"><img src="images/hero-3.jpg" alt="Scripture image slot" /></div>
+          <div class="ribbon-card"><img src="images/hero-4.jpg" alt="Ancient world image slot" /></div>
+          <div class="ribbon-card"><img src="images/hero-5.jpg" alt="Jerusalem image slot" /></div>
+          <div class="ribbon-card"><img src="images/hero-6.jpg" alt="Bible timeline image slot" /></div>
         </div>
       </div>
     </div>
@@ -804,7 +891,6 @@
     </div>
 
     <div class="testament-shell">
-      <!-- OLD TESTAMENT -->
       <article class="testament-card old-card parallax-item" data-speed="0.025">
         <button class="testament-cover" type="button" data-testament="old">
           <img src="images/old-testament.jpg" alt="Old Testament image slot" />
@@ -865,7 +951,6 @@
         </div>
       </article>
 
-      <!-- NEW TESTAMENT -->
       <article class="testament-card new-card parallax-item" data-speed="0.045">
         <button class="testament-cover" type="button" data-testament="new">
           <img src="images/new-testament.jpg" alt="New Testament image slot" />
@@ -919,12 +1004,12 @@
   <!-- FORMULA SECTION -->
   <section class="formula-section" id="formula">
     <div class="formula-inner">
-      <p class="eyebrow">The BibleMapped Formula</p>
+      <p class="eyebrow">The Bible Mapped Formula</p>
 
       <h2>Where did it happen?</h2>
 
       <p>
-        When someone says they have proof, most people ask: where? BibleMapped
+        When someone says they have proof, most people ask: where? Bible Mapped
         helps you ask that same question of Scripture — then follow the trail.
       </p>
 
@@ -954,38 +1039,54 @@
     </div>
   </section>
 
-  <!-- STORY -->
-  <section class="story-section" id="story">
-    <div class="story-inner">
-      <p class="eyebrow">Why BibleMapped Exists</p>
+  <!-- WHY TRIGGER ONLY -->
+  <section class="why-trigger-section" id="why">
+    <button class="why-open-button" type="button" id="openWhyModal">
+      Why Bible Mapped Exists
+    </button>
 
-      <h2>The Bible does not hang above history.</h2>
+    <p class="why-helper">
+      Click the title to open the story behind the mission.
+    </p>
+  </section>
 
-      <p>
-        It unfolds within history — through real places, real people, real
-        timelines, and real meaning. BibleMapped was created to help people see
-        the world of Scripture and how the whole story points to Jesus Christ.
-      </p>
+  <!-- RAISED WINDOW / MODAL -->
+  <div class="modal-overlay" id="whyModal" aria-hidden="true">
+    <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="whyModalTitle">
+      <div class="modal-top">
+        <span>Mission</span>
+        <button class="modal-close" type="button" id="closeWhyModal" aria-label="Close window">×</button>
+      </div>
 
-      <div class="story-card parallax-item" data-speed="0.035">
-        <img src="images/story-image.jpg" alt="BibleMapped story image slot" />
+      <div class="modal-body">
+        <h2 id="whyModalTitle">The Bible does not hang above history.</h2>
 
-        <div class="story-card-content">
+        <p>
+          It unfolds within history — through real places, real people, real timelines,
+          and real meaning. Bible Mapped was created to help people see the world of
+          Scripture and how the whole story points to Jesus Christ.
+        </p>
+
+        <p>
+          From Eden to Abraham, from Egypt to Sinai, from Jerusalem to the cross,
+          and from the empty tomb to the hope of all things — the Bible tells a story
+          grounded in place, context, and meaning.
+        </p>
+
+        <div class="modal-callout">
           <h3>Follow the trail of Scripture.</h3>
-
           <p>
-            From Eden to Abraham, from Egypt to Sinai, from Jerusalem to the
-            cross, and from the empty tomb to the hope of all things.
+            Bible Mapped helps Christians and seekers ask better questions:
+            Where did it happen? Who was involved? When did it happen?
+            And why does it still matter?
           </p>
-
-          <a href="#testaments" class="btn btn-dark">Start Mapping Scripture</a>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
   <footer class="footer">
-    <p>© BibleMapped — Understanding Scripture through place, context, and meaning.</p>
+    <p>© Bible Mapped — Understanding Scripture through place, context, and meaning.</p>
   </footer>
 
   <script>
@@ -1007,6 +1108,37 @@
           testamentShell.classList.remove("has-active");
         }
       });
+    });
+
+    const openWhyModal = document.getElementById("openWhyModal");
+    const closeWhyModal = document.getElementById("closeWhyModal");
+    const whyModal = document.getElementById("whyModal");
+
+    function openModal() {
+      whyModal.classList.add("active");
+      whyModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      whyModal.classList.remove("active");
+      whyModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    openWhyModal.addEventListener("click", openModal);
+    closeWhyModal.addEventListener("click", closeModal);
+
+    whyModal.addEventListener("click", (event) => {
+      if (event.target === whyModal) {
+        closeModal();
+      }
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && whyModal.classList.contains("active")) {
+        closeModal();
+      }
     });
 
     const parallaxItems = document.querySelectorAll(".parallax-item");
@@ -1052,11 +1184,7 @@
         const progress = (scrollY - heroTop) / heroHeight;
         const clamped = Math.max(0, Math.min(1, progress));
 
-        /*
-          Scroll movement:
-          starts pushed left, then glides right as the user scrolls.
-        */
-        const horizontalMove = -32 + clamped * 32;
+        const horizontalMove = -34 + clamped * 38;
 
         galleryTrack.style.transform = `translate3d(${horizontalMove}%, 0, 0)`;
       }
