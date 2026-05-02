@@ -14,9 +14,8 @@
       --soft-ink: #3f4147;
       --muted: #6d6d73;
       --electric-purple: #6d28ff;
-      --purple: #5c2d91;
+      --bright-red: #ff2a2a;
       --navy: #123c69;
-      --gold: #c9a24d;
       --white: #ffffff;
       --line: rgba(17, 19, 24, 0.12);
       --shadow: 0 24px 70px rgba(0, 0, 0, 0.12);
@@ -38,6 +37,10 @@
       background: var(--cloud);
       color: var(--ink);
       overflow-x: hidden;
+    }
+
+    body.modal-open {
+      overflow: hidden;
     }
 
     img {
@@ -108,7 +111,7 @@
     }
 
     /* =========================
-       HERO WITH BACKGROUND IMAGE
+       HERO
     ========================= */
 
     .hero {
@@ -224,7 +227,7 @@
     }
 
     /* =========================
-       OVERLAPPING SCROLL PARALLAX IMAGES
+       OVERLAPPING SCROLL IMAGES
     ========================= */
 
     .hero-moving-gallery {
@@ -349,6 +352,10 @@
       transition: transform 0.4s ease, opacity 0.4s ease;
     }
 
+    .testament-card:hover {
+      transform: translateY(-8px);
+    }
+
     .testament-cover {
       position: relative;
       width: 100%;
@@ -410,148 +417,46 @@
       font-weight: 800;
     }
 
-    .book-panel {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.7s ease;
-      background: var(--white);
-    }
-
-    .testament-card.active .book-panel {
-      max-height: 1400px;
-    }
-
-    .panel-heading {
-      padding: 36px 36px 10px;
-    }
-
-    .panel-heading h3 {
-      margin: 0;
-      font-size: clamp(1.9rem, 3vw, 3rem);
-      letter-spacing: -0.05em;
-      line-height: 1;
-    }
-
-    .panel-heading p {
-      margin: 10px 0 0;
-      color: var(--muted);
-      line-height: 1.45;
-    }
-
-    .book-grid {
-      padding: 24px 36px 40px;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .book-grid a {
-      display: block;
-      padding: 13px 14px;
-      border-radius: 999px;
-      background: var(--paper);
-      color: var(--ink);
-      text-decoration: none;
-      font-weight: 900;
-      font-size: 0.9rem;
-      text-align: center;
-      transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
-    }
-
-    .book-grid a:hover {
-      transform: translateY(-3px);
-      background: var(--ink);
-      color: var(--white);
-    }
-
-    .testament-shell.has-active .testament-card:not(.active) {
-      opacity: 0.55;
-      transform: scale(0.96);
-    }
-
     /* =========================
-       FORMULA SECTION
+       CLICKABLE FORMULA TITLE
     ========================= */
 
-    .formula-section {
+    .formula-trigger-section {
       position: relative;
       overflow: hidden;
-      padding: 115px 20px;
+      padding: 120px 20px;
       background: var(--cloud);
-    }
-
-    .formula-inner {
-      width: min(1160px, 100%);
-      margin: 0 auto;
       text-align: center;
     }
 
-    .formula-inner h2 {
-      margin: 0;
-      font-size: clamp(2.8rem, 6.5vw, 6.5rem);
-      line-height: 0.95;
-      letter-spacing: -0.065em;
+    .formula-open-button {
+      border: 0;
+      background: transparent;
+      color: var(--bright-red);
+      cursor: pointer;
+      font-size: clamp(3.1rem, 8.4vw, 8.2rem);
+      line-height: 0.88;
+      letter-spacing: -0.08em;
       font-weight: 950;
+      text-align: center;
+      transition: transform 0.25s ease, color 0.25s ease;
     }
 
-    .formula-inner p {
-      max-width: 760px;
+    .formula-open-button:hover {
+      color: var(--ink);
+      transform: translateY(-7px);
+    }
+
+    .formula-helper {
+      max-width: 680px;
       margin: 24px auto 0;
-      font-size: 1.15rem;
-      color: var(--soft-ink);
+      font-size: 1.1rem;
       line-height: 1.6;
-    }
-
-    .formula-track {
-      margin-top: 68px;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
-      gap: 16px;
-      align-items: center;
-    }
-
-    .formula-shape {
-      min-height: 180px;
-      border-radius: 34px;
-      background: var(--white);
-      border: 1px solid var(--line);
-      padding: 24px;
-      display: grid;
-      place-items: center;
-      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.08);
-    }
-
-    .formula-shape.circle {
-      border-radius: 999px;
-      aspect-ratio: 1 / 1;
-    }
-
-    .formula-shape.tall {
-      min-height: 240px;
-      border-radius: 34px;
-    }
-
-    .formula-shape.question {
-      font-size: 7rem;
-      font-weight: 950;
-      color: var(--electric-purple);
-      line-height: 1;
-    }
-
-    .formula-shape h3 {
-      margin: 0;
-      font-size: 1.35rem;
-      letter-spacing: -0.04em;
-    }
-
-    .formula-arrow {
-      font-size: 2rem;
-      font-weight: 950;
-      color: var(--electric-purple);
+      color: var(--soft-ink);
     }
 
     /* =========================
-       WHY BIBLE MAPPED TRIGGER
+       WHY TRIGGER
     ========================= */
 
     .why-trigger-section {
@@ -587,7 +492,7 @@
     }
 
     /* =========================
-       MODAL / RAISED WINDOW
+       MODAL SYSTEM
     ========================= */
 
     .modal-overlay {
@@ -607,8 +512,8 @@
     }
 
     .modal-window {
-      width: min(900px, 100%);
-      max-height: min(760px, 90vh);
+      width: min(980px, 100%);
+      max-height: min(800px, 90vh);
       overflow: auto;
       border-radius: 38px;
       background: var(--cloud);
@@ -632,6 +537,11 @@
       gap: 20px;
       padding: 28px 30px;
       border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.48);
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      backdrop-filter: blur(12px);
     }
 
     .modal-top span {
@@ -668,9 +578,136 @@
 
     .modal-body p {
       margin: 24px 0 0;
-      font-size: 1.18rem;
+      font-size: 1.15rem;
       line-height: 1.7;
       color: var(--soft-ink);
+    }
+
+    .formula-modal-title {
+      color: var(--bright-red);
+    }
+
+    .formula-modal-grid {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .formula-card {
+      min-height: 180px;
+      padding: 22px;
+      border-radius: 28px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.09);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .formula-card strong {
+      font-size: 1.25rem;
+      letter-spacing: -0.04em;
+    }
+
+    .formula-card small {
+      margin-top: 20px;
+      display: block;
+      color: var(--muted);
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .formula-arrow-small {
+      color: var(--bright-red);
+      font-size: 2rem;
+      font-weight: 950;
+      margin-top: 18px;
+    }
+
+    /* =========================
+       BOOK CATEGORY MODALS
+    ========================= */
+
+    .book-category-grid {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .book-category {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 24px;
+      overflow: hidden;
+      transform: translateY(18px);
+      opacity: 0;
+    }
+
+    .modal-overlay.active .book-category {
+      animation: retractOut 0.55s ease forwards;
+    }
+
+    .modal-overlay.active .book-category:nth-child(1) { animation-delay: 0.04s; }
+    .modal-overlay.active .book-category:nth-child(2) { animation-delay: 0.10s; }
+    .modal-overlay.active .book-category:nth-child(3) { animation-delay: 0.16s; }
+    .modal-overlay.active .book-category:nth-child(4) { animation-delay: 0.22s; }
+    .modal-overlay.active .book-category:nth-child(5) { animation-delay: 0.28s; }
+
+    @keyframes retractOut {
+      from {
+        transform: translateY(18px) scale(0.96);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .book-category h3 {
+      margin: 0;
+      font-size: 1.5rem;
+      letter-spacing: -0.05em;
+    }
+
+    .book-category p {
+      margin: 8px 0 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+
+    .book-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .book-list a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: var(--paper);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 900;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .book-list a:hover {
+      transform: translateY(-3px);
+      background: var(--ink);
+      color: var(--white);
     }
 
     .modal-callout {
@@ -692,7 +729,7 @@
     }
 
     /* =========================
-       ELECTRIC PURPLE FOOTER
+       FOOTER
     ========================= */
 
     .footer {
@@ -730,12 +767,12 @@
         height: 390px;
       }
 
-      .formula-track {
+      .book-category-grid {
         grid-template-columns: 1fr;
       }
 
-      .formula-arrow {
-        transform: rotate(90deg);
+      .formula-modal-grid {
+        grid-template-columns: 1fr 1fr;
       }
     }
 
@@ -782,25 +819,19 @@
         height: 330px;
       }
 
-      .book-grid {
-        grid-template-columns: 1fr;
-        padding-left: 22px;
-        padding-right: 22px;
-      }
-
-      .panel-heading {
-        padding-left: 22px;
-        padding-right: 22px;
-      }
-
       .testament-label {
         left: 16px;
         right: 16px;
         bottom: 16px;
       }
 
+      .formula-trigger-section,
       .why-trigger-section {
         padding: 85px 18px;
+      }
+
+      .formula-modal-grid {
+        grid-template-columns: 1fr;
       }
 
       .modal-body {
@@ -824,7 +855,7 @@
 
       <div class="nav-links">
         <a href="#testaments">Books</a>
-        <a href="#formula">Maps</a>
+        <a href="#formula">Formula</a>
         <a href="#why">About</a>
         <a href="#testaments">Explore</a>
       </div>
@@ -885,14 +916,14 @@
       <h2>Explore Scripture by Testament</h2>
 
       <p>
-        Open the Old or New Testament, choose a book, and land on that book’s
-        page for maps, people, context, themes, and meaning.
+        Click the Old or New Testament to open a clean library window.
+        The books are organized by category, so the structure feels simple.
       </p>
     </div>
 
     <div class="testament-shell">
       <article class="testament-card old-card parallax-item" data-speed="0.025">
-        <button class="testament-cover" type="button" data-testament="old">
+        <button class="testament-cover" type="button" data-modal-target="oldTestamentModal">
           <img src="images/old-testament.jpg" alt="Old Testament image slot" />
 
           <div class="testament-label">
@@ -900,59 +931,10 @@
             <small>Open the story before Christ</small>
           </div>
         </button>
-
-        <div class="book-panel" id="old-panel">
-          <div class="panel-heading">
-            <h3>Old Testament Books</h3>
-            <p>Law, history, poetry, wisdom, and prophets.</p>
-          </div>
-
-          <div class="book-grid">
-            <a href="books/genesis/index.html">Genesis</a>
-            <a href="books/exodus/index.html">Exodus</a>
-            <a href="books/leviticus/index.html">Leviticus</a>
-            <a href="books/numbers/index.html">Numbers</a>
-            <a href="books/deuteronomy/index.html">Deuteronomy</a>
-            <a href="books/joshua/index.html">Joshua</a>
-            <a href="books/judges/index.html">Judges</a>
-            <a href="books/ruth/index.html">Ruth</a>
-            <a href="books/1-samuel/index.html">1 Samuel</a>
-            <a href="books/2-samuel/index.html">2 Samuel</a>
-            <a href="books/1-kings/index.html">1 Kings</a>
-            <a href="books/2-kings/index.html">2 Kings</a>
-            <a href="books/1-chronicles/index.html">1 Chronicles</a>
-            <a href="books/2-chronicles/index.html">2 Chronicles</a>
-            <a href="books/ezra/index.html">Ezra</a>
-            <a href="books/nehemiah/index.html">Nehemiah</a>
-            <a href="books/esther/index.html">Esther</a>
-            <a href="books/job/index.html">Job</a>
-            <a href="books/psalms/index.html">Psalms</a>
-            <a href="books/proverbs/index.html">Proverbs</a>
-            <a href="books/ecclesiastes/index.html">Ecclesiastes</a>
-            <a href="books/song-of-solomon/index.html">Song of Solomon</a>
-            <a href="books/isaiah/index.html">Isaiah</a>
-            <a href="books/jeremiah/index.html">Jeremiah</a>
-            <a href="books/lamentations/index.html">Lamentations</a>
-            <a href="books/ezekiel/index.html">Ezekiel</a>
-            <a href="books/daniel/index.html">Daniel</a>
-            <a href="books/hosea/index.html">Hosea</a>
-            <a href="books/joel/index.html">Joel</a>
-            <a href="books/amos/index.html">Amos</a>
-            <a href="books/obadiah/index.html">Obadiah</a>
-            <a href="books/jonah/index.html">Jonah</a>
-            <a href="books/micah/index.html">Micah</a>
-            <a href="books/nahum/index.html">Nahum</a>
-            <a href="books/habakkuk/index.html">Habakkuk</a>
-            <a href="books/zephaniah/index.html">Zephaniah</a>
-            <a href="books/haggai/index.html">Haggai</a>
-            <a href="books/zechariah/index.html">Zechariah</a>
-            <a href="books/malachi/index.html">Malachi</a>
-          </div>
-        </div>
       </article>
 
       <article class="testament-card new-card parallax-item" data-speed="0.045">
-        <button class="testament-cover" type="button" data-testament="new">
+        <button class="testament-cover" type="button" data-modal-target="newTestamentModal">
           <img src="images/new-testament.jpg" alt="New Testament image slot" />
 
           <div class="testament-label">
@@ -960,88 +942,24 @@
             <small>Open the story of Christ and the Church</small>
           </div>
         </button>
-
-        <div class="book-panel" id="new-panel">
-          <div class="panel-heading">
-            <h3>New Testament Books</h3>
-            <p>Gospels, history, letters, and Revelation.</p>
-          </div>
-
-          <div class="book-grid">
-            <a href="books/matthew/index.html">Matthew</a>
-            <a href="books/mark/index.html">Mark</a>
-            <a href="books/luke/index.html">Luke</a>
-            <a href="books/john/index.html">John</a>
-            <a href="books/acts/index.html">Acts</a>
-            <a href="books/romans/index.html">Romans</a>
-            <a href="books/1-corinthians/index.html">1 Corinthians</a>
-            <a href="books/2-corinthians/index.html">2 Corinthians</a>
-            <a href="books/galatians/index.html">Galatians</a>
-            <a href="books/ephesians/index.html">Ephesians</a>
-            <a href="books/philippians/index.html">Philippians</a>
-            <a href="books/colossians/index.html">Colossians</a>
-            <a href="books/1-thessalonians/index.html">1 Thessalonians</a>
-            <a href="books/2-thessalonians/index.html">2 Thessalonians</a>
-            <a href="books/1-timothy/index.html">1 Timothy</a>
-            <a href="books/2-timothy/index.html">2 Timothy</a>
-            <a href="books/titus/index.html">Titus</a>
-            <a href="books/philemon/index.html">Philemon</a>
-            <a href="books/hebrews/index.html">Hebrews</a>
-            <a href="books/james/index.html">James</a>
-            <a href="books/1-peter/index.html">1 Peter</a>
-            <a href="books/2-peter/index.html">2 Peter</a>
-            <a href="books/1-john/index.html">1 John</a>
-            <a href="books/2-john/index.html">2 John</a>
-            <a href="books/3-john/index.html">3 John</a>
-            <a href="books/jude/index.html">Jude</a>
-            <a href="books/revelation/index.html">Revelation</a>
-          </div>
-        </div>
       </article>
     </div>
   </section>
 
-  <!-- FORMULA SECTION -->
-  <section class="formula-section" id="formula">
-    <div class="formula-inner">
-      <p class="eyebrow">The Bible Mapped Formula</p>
+  <!-- FORMULA TRIGGER -->
+  <section class="formula-trigger-section" id="formula">
+    <button class="formula-open-button" type="button" data-modal-target="formulaModal">
+      The Bible Mapped Formula
+    </button>
 
-      <h2>Where did it happen?</h2>
-
-      <p>
-        When someone says they have proof, most people ask: where? Bible Mapped
-        helps you ask that same question of Scripture — then follow the trail.
-      </p>
-
-      <div class="formula-track">
-        <div class="formula-shape circle parallax-item" data-speed="0.025">
-          <h3>Where did it happen?</h3>
-        </div>
-
-        <div class="formula-arrow">→</div>
-
-        <div class="formula-shape tall parallax-item" data-speed="0.04">
-          <h3>Who was involved?</h3>
-        </div>
-
-        <div class="formula-arrow">→</div>
-
-        <div class="formula-shape parallax-item" data-speed="0.03">
-          <h3>When did it happen?</h3>
-        </div>
-
-        <div class="formula-arrow">→</div>
-
-        <div class="formula-shape question parallax-item" data-speed="0.05">
-          ?
-        </div>
-      </div>
-    </div>
+    <p class="formula-helper">
+      Click the red title to open the framework: where, who, when, and why it matters.
+    </p>
   </section>
 
-  <!-- WHY TRIGGER ONLY -->
+  <!-- WHY TRIGGER -->
   <section class="why-trigger-section" id="why">
-    <button class="why-open-button" type="button" id="openWhyModal">
+    <button class="why-open-button" type="button" data-modal-target="whyModal">
       Why Bible Mapped Exists
     </button>
 
@@ -1050,12 +968,236 @@
     </p>
   </section>
 
-  <!-- RAISED WINDOW / MODAL -->
+  <!-- FORMULA MODAL -->
+  <div class="modal-overlay" id="formulaModal" aria-hidden="true">
+    <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="formulaModalTitle">
+      <div class="modal-top">
+        <span>Framework</span>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close window">×</button>
+      </div>
+
+      <div class="modal-body">
+        <h2 id="formulaModalTitle" class="formula-modal-title">The Bible Mapped Formula</h2>
+
+        <p>
+          When someone says they have proof, most people ask: where? Bible Mapped
+          uses that same instinct to help people follow Scripture through place,
+          context, and meaning.
+        </p>
+
+        <div class="formula-modal-grid">
+          <div class="formula-card">
+            <strong>Where did it happen?</strong>
+            <small>Identify the place, geography, route, city, region, or landscape.</small>
+            <div class="formula-arrow-small">→</div>
+          </div>
+
+          <div class="formula-card">
+            <strong>Who was involved?</strong>
+            <small>Find the people, nations, kings, prophets, families, or disciples.</small>
+            <div class="formula-arrow-small">→</div>
+          </div>
+
+          <div class="formula-card">
+            <strong>When did it happen?</strong>
+            <small>Place the moment in a timeline, era, covenant, empire, or journey.</small>
+            <div class="formula-arrow-small">→</div>
+          </div>
+
+          <div class="formula-card">
+            <strong>Why does it matter?</strong>
+            <small>Connect the event to meaning, theology, history, and Jesus Christ.</small>
+            <div class="formula-arrow-small">?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OLD TESTAMENT MODAL -->
+  <div class="modal-overlay" id="oldTestamentModal" aria-hidden="true">
+    <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="oldModalTitle">
+      <div class="modal-top">
+        <span>Old Testament Library</span>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close window">×</button>
+      </div>
+
+      <div class="modal-body">
+        <h2 id="oldModalTitle">Old Testament</h2>
+
+        <p>
+          The Old Testament tells the story before Christ through law, history,
+          poetry, wisdom, and prophecy.
+        </p>
+
+        <div class="book-category-grid">
+          <section class="book-category">
+            <h3>Law / Torah</h3>
+            <p>The foundation of creation, covenant, deliverance, and worship.</p>
+            <div class="book-list">
+              <a href="books/genesis/index.html">Genesis</a>
+              <a href="books/exodus/index.html">Exodus</a>
+              <a href="books/leviticus/index.html">Leviticus</a>
+              <a href="books/numbers/index.html">Numbers</a>
+              <a href="books/deuteronomy/index.html">Deuteronomy</a>
+            </div>
+          </section>
+
+          <section class="book-category">
+            <h3>History</h3>
+            <p>Israel’s land, kings, exile, return, and national story.</p>
+            <div class="book-list">
+              <a href="books/joshua/index.html">Joshua</a>
+              <a href="books/judges/index.html">Judges</a>
+              <a href="books/ruth/index.html">Ruth</a>
+              <a href="books/1-samuel/index.html">1 Samuel</a>
+              <a href="books/2-samuel/index.html">2 Samuel</a>
+              <a href="books/1-kings/index.html">1 Kings</a>
+              <a href="books/2-kings/index.html">2 Kings</a>
+              <a href="books/1-chronicles/index.html">1 Chronicles</a>
+              <a href="books/2-chronicles/index.html">2 Chronicles</a>
+              <a href="books/ezra/index.html">Ezra</a>
+              <a href="books/nehemiah/index.html">Nehemiah</a>
+              <a href="books/esther/index.html">Esther</a>
+            </div>
+          </section>
+
+          <section class="book-category">
+            <h3>Poetry & Wisdom</h3>
+            <p>Prayer, suffering, worship, wisdom, love, and the fear of God.</p>
+            <div class="book-list">
+              <a href="books/job/index.html">Job</a>
+              <a href="books/psalms/index.html">Psalms</a>
+              <a href="books/proverbs/index.html">Proverbs</a>
+              <a href="books/ecclesiastes/index.html">Ecclesiastes</a>
+              <a href="books/song-of-solomon/index.html">Song of Solomon</a>
+            </div>
+          </section>
+
+          <section class="book-category">
+            <h3>Major Prophets</h3>
+            <p>Judgment, hope, exile, restoration, and the coming Messiah.</p>
+            <div class="book-list">
+              <a href="books/isaiah/index.html">Isaiah</a>
+              <a href="books/jeremiah/index.html">Jeremiah</a>
+              <a href="books/lamentations/index.html">Lamentations</a>
+              <a href="books/ezekiel/index.html">Ezekiel</a>
+              <a href="books/daniel/index.html">Daniel</a>
+            </div>
+          </section>
+
+          <section class="book-category">
+            <h3>Minor Prophets</h3>
+            <p>Shorter prophetic books with major theological weight.</p>
+            <div class="book-list">
+              <a href="books/hosea/index.html">Hosea</a>
+              <a href="books/joel/index.html">Joel</a>
+              <a href="books/amos/index.html">Amos</a>
+              <a href="books/obadiah/index.html">Obadiah</a>
+              <a href="books/jonah/index.html">Jonah</a>
+              <a href="books/micah/index.html">Micah</a>
+              <a href="books/nahum/index.html">Nahum</a>
+              <a href="books/habakkuk/index.html">Habakkuk</a>
+              <a href="books/zephaniah/index.html">Zephaniah</a>
+              <a href="books/haggai/index.html">Haggai</a>
+              <a href="books/zechariah/index.html">Zechariah</a>
+              <a href="books/malachi/index.html">Malachi</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW TESTAMENT MODAL -->
+  <div class="modal-overlay" id="newTestamentModal" aria-hidden="true">
+    <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="newModalTitle">
+      <div class="modal-top">
+        <span>New Testament Library</span>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close window">×</button>
+      </div>
+
+      <div class="modal-body">
+        <h2 id="newModalTitle">New Testament</h2>
+
+        <p>
+          The New Testament tells the story of Jesus Christ, the Church,
+          apostolic teaching, and the hope of all things made new.
+        </p>
+
+        <div class="book-category-grid">
+          <section class="book-category">
+            <h3>Gospels</h3>
+            <p>The life, teaching, death, and resurrection of Jesus Christ.</p>
+            <div class="book-list">
+              <a href="books/matthew/index.html">Matthew</a>
+              <a href="books/mark/index.html">Mark</a>
+              <a href="books/luke/index.html">Luke</a>
+              <a href="books/john/index.html">John</a>
+            </div>
+          </section>
+
+          <section class="book-category">
+            <h3>Church History</h3>
+            <p>The spread of the gospel and the formation of the early Church.</p>
+            <div class="book-list">
+              <a href="books/acts/index.html">Acts</a>
+            </div>
+          </section>
+
+          <section class="book-category">
+            <h3>Paul’s Letters</h3>
+            <p>Doctrine, church life, salvation, unity, suffering, and discipleship.</p>
+            <div class="book-list">
+              <a href="books/romans/index.html">Romans</a>
+              <a href="books/1-corinthians/index.html">1 Corinthians</a>
+              <a href="books/2-corinthians/index.html">2 Corinthians</a>
+              <a href="books/galatians/index.html">Galatians</a>
+              <a href="books/ephesians/index.html">Ephesians</a>
+              <a href="books/philippians/index.html">Philippians</a>
+              <a href="books/colossians/index.html">Colossians</a>
+              <a href="books/1-thessalonians/index.html">1 Thessalonians</a>
+              <a href="books/2-thessalonians/index.html">2 Thessalonians</a>
+              <a href="books/1-timothy/index.html">1 Timothy</a>
+              <a href="books/2-timothy/index.html">2 Timothy</a>
+              <a href="books/titus/index.html">Titus</a>
+              <a href="books/philemon/index.html">Philemon</a>
+            </div>
+          </section>
+
+          <section class="book-category">
+            <h3>General Letters</h3>
+            <p>Faithfulness, endurance, truth, holiness, and love.</p>
+            <div class="book-list">
+              <a href="books/hebrews/index.html">Hebrews</a>
+              <a href="books/james/index.html">James</a>
+              <a href="books/1-peter/index.html">1 Peter</a>
+              <a href="books/2-peter/index.html">2 Peter</a>
+              <a href="books/1-john/index.html">1 John</a>
+              <a href="books/2-john/index.html">2 John</a>
+              <a href="books/3-john/index.html">3 John</a>
+              <a href="books/jude/index.html">Jude</a>
+            </div>
+          </section>
+
+          <section class="book-category">
+            <h3>Apocalypse</h3>
+            <p>The unveiling of Christ, final judgment, and the hope of new creation.</p>
+            <div class="book-list">
+              <a href="books/revelation/index.html">Revelation</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY MODAL -->
   <div class="modal-overlay" id="whyModal" aria-hidden="true">
     <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="whyModalTitle">
       <div class="modal-top">
         <span>Mission</span>
-        <button class="modal-close" type="button" id="closeWhyModal" aria-label="Close window">×</button>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close window">×</button>
       </div>
 
       <div class="modal-body">
@@ -1090,54 +1232,54 @@
   </footer>
 
   <script>
-    const testamentButtons = document.querySelectorAll(".testament-cover");
-    const testamentCards = document.querySelectorAll(".testament-card");
-    const testamentShell = document.querySelector(".testament-shell");
+    const modalTriggers = document.querySelectorAll("[data-modal-target]");
+    const modalCloseButtons = document.querySelectorAll("[data-modal-close]");
+    const modals = document.querySelectorAll(".modal-overlay");
 
-    testamentButtons.forEach((button) => {
+    function openModal(modalId) {
+      const modal = document.getElementById(modalId);
+
+      if (!modal) return;
+
+      modal.classList.add("active");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+    }
+
+    function closeModal(modal) {
+      modal.classList.remove("active");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    }
+
+    modalTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        openModal(trigger.dataset.modalTarget);
+      });
+    });
+
+    modalCloseButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        const card = button.closest(".testament-card");
-        const isAlreadyActive = card.classList.contains("active");
+        const modal = button.closest(".modal-overlay");
+        closeModal(modal);
+      });
+    });
 
-        testamentCards.forEach((item) => item.classList.remove("active"));
-
-        if (!isAlreadyActive) {
-          card.classList.add("active");
-          testamentShell.classList.add("has-active");
-        } else {
-          testamentShell.classList.remove("has-active");
+    modals.forEach((modal) => {
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          closeModal(modal);
         }
       });
     });
 
-    const openWhyModal = document.getElementById("openWhyModal");
-    const closeWhyModal = document.getElementById("closeWhyModal");
-    const whyModal = document.getElementById("whyModal");
-
-    function openModal() {
-      whyModal.classList.add("active");
-      whyModal.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeModal() {
-      whyModal.classList.remove("active");
-      whyModal.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-    }
-
-    openWhyModal.addEventListener("click", openModal);
-    closeWhyModal.addEventListener("click", closeModal);
-
-    whyModal.addEventListener("click", (event) => {
-      if (event.target === whyModal) {
-        closeModal();
-      }
-    });
-
     window.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && whyModal.classList.contains("active")) {
-        closeModal();
+      if (event.key === "Escape") {
+        modals.forEach((modal) => {
+          if (modal.classList.contains("active")) {
+            closeModal(modal);
+          }
+        });
       }
     });
 
