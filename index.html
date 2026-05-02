@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Bible Mapped</title>
 
   <style>
@@ -50,64 +49,56 @@
 
     a {
       color: inherit;
+      text-decoration: none;
     }
 
     /* =========================
-       NAV
+       HEADER
     ========================= */
 
     .site-header {
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 60;
       width: 100%;
-      background: rgba(248, 247, 242, 0.94);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(14px);
+      background: rgba(248, 247, 242, 0.96);
+      border-bottom: 1px solid rgba(17, 19, 24, 0.08);
+      backdrop-filter: blur(12px);
     }
 
     .nav {
-      width: min(1240px, calc(100% - 32px));
+      width: min(1240px, calc(100% - 48px));
+      height: 78px;
       margin: 0 auto;
-      height: 76px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 20px;
     }
 
     .brand {
-      text-decoration: none;
+      font-size: 1.95rem;
       font-weight: 950;
-      letter-spacing: -0.05em;
-      font-size: 1.5rem;
+      letter-spacing: -0.06em;
+      line-height: 1;
       color: var(--ink);
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 26px;
+      gap: 34px;
       font-weight: 850;
+      font-size: 1rem;
       color: var(--soft-ink);
     }
 
     .nav-links a {
-      text-decoration: none;
       transition: color 0.2s ease;
     }
 
     .nav-links a:hover {
       color: var(--electric-purple);
-    }
-
-    .nav-cta {
-      background: var(--ink);
-      color: var(--white);
-      border-radius: 999px;
-      padding: 12px 18px;
-      font-weight: 950;
-      text-decoration: none;
     }
 
     /* =========================
@@ -154,8 +145,8 @@
 
     .hero h1 {
       margin: 0 auto;
-      max-width: 900px;
-      font-size: clamp(2.7rem, 7.2vw, 6.2rem);
+      max-width: 920px;
+      font-size: clamp(2.7rem, 7.2vw, 6.1rem);
       line-height: 0.92;
       letter-spacing: -0.075em;
       font-weight: 950;
@@ -167,7 +158,7 @@
       margin: 26px auto 0;
       font-size: clamp(1rem, 1.9vw, 1.22rem);
       line-height: 1.6;
-      color: rgba(255, 255, 255, 0.85);
+      color: rgba(255, 255, 255, 0.86);
       font-weight: 520;
     }
 
@@ -190,6 +181,11 @@
       font-weight: 950;
       border: 1px solid currentColor;
       cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
     }
 
     .btn-dark {
@@ -205,8 +201,7 @@
     }
 
     /* =========================
-       HERO GALLERY - 2 OVERLAPPING ROWS
-       WITH EDGE FADE + SHADOW
+       HERO GALLERY - CONNECTED BLOCKS
     ========================= */
 
     .hero-moving-gallery {
@@ -226,10 +221,10 @@
       bottom: 10px;
       transform: translateX(-50%);
       width: min(94%, 1400px);
-      height: 42px;
+      height: 46px;
       border-radius: 999px;
-      background: rgba(0, 0, 0, 0.24);
-      filter: blur(28px);
+      background: rgba(0, 0, 0, 0.28);
+      filter: blur(30px);
       pointer-events: none;
       z-index: 1;
     }
@@ -260,12 +255,8 @@
       z-index: 3;
     }
 
-    .hero-gallery-row:first-child {
-      z-index: 3;
-    }
-
     .hero-gallery-row:last-child {
-      margin-top: -68px;
+      margin-top: -86px;
       z-index: 4;
     }
 
@@ -274,8 +265,8 @@
       align-items: center;
       width: max-content;
       will-change: transform;
-      padding-left: 40px;
-      padding-right: 40px;
+      padding-left: 24px;
+      padding-right: 24px;
       position: relative;
       z-index: 3;
     }
@@ -289,16 +280,16 @@
     }
 
     .ribbon-card {
-      width: 260px;
-      height: 152px;
+      width: 270px;
+      height: 158px;
       flex: 0 0 auto;
-      margin-left: -58px;
-      border-radius: 28px;
+      margin-left: -18px;
+      border-radius: 18px;
       overflow: hidden;
       background: #d8d5cf;
-      box-shadow: var(--deep-shadow);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      transition: transform 0.35s ease;
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.26);
+      border: 3px solid rgba(248, 247, 242, 0.88);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
       position: relative;
       z-index: 3;
     }
@@ -308,31 +299,32 @@
     }
 
     .row-one .ribbon-card:nth-child(2n) {
-      transform: rotate(3deg) translateY(12px);
+      transform: translateY(10px);
     }
 
     .row-one .ribbon-card:nth-child(3n) {
-      transform: rotate(-3deg) translateY(-8px);
+      transform: translateY(-8px);
     }
 
     .row-one .ribbon-card:nth-child(4n) {
-      transform: rotate(1.5deg) translateY(6px);
+      transform: translateY(4px);
     }
 
     .row-two .ribbon-card:nth-child(2n) {
-      transform: rotate(-3deg) translateY(-18px);
+      transform: translateY(-12px);
     }
 
     .row-two .ribbon-card:nth-child(3n) {
-      transform: rotate(3deg) translateY(-10px);
+      transform: translateY(8px);
     }
 
     .row-two .ribbon-card:nth-child(4n) {
-      transform: rotate(-1.5deg) translateY(-14px);
+      transform: translateY(-6px);
     }
 
     .ribbon-card:hover {
-      transform: rotate(0deg) translateY(-10px) scale(1.04);
+      transform: translateY(-12px) scale(1.035);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.34);
       z-index: 10;
     }
 
@@ -343,92 +335,181 @@
     }
 
     /* =========================
-       TESTAMENT EXPLORER
+       SECTION BAR SYSTEM
     ========================= */
 
-    .testament-explorer {
-      position: relative;
-      overflow: hidden;
-      padding: 110px 22px 125px;
+    .statement-section {
+      padding: 110px 20px 0;
       background: var(--paper);
-      color: var(--ink);
+      position: relative;
     }
 
-    .testament-intro {
-      max-width: 950px;
-      margin: 0 auto 34px;
+    .statement-section.cloud {
+      background: var(--cloud);
+    }
+
+    .statement-section.white {
+      background: var(--white);
+    }
+
+    .section-rail {
+      width: min(1120px, 100%);
+      margin: 0 auto;
       text-align: center;
+      padding: 0 8px;
     }
 
-    .eyebrow {
-      margin: 0 0 14px;
-      font-size: 0.78rem;
+    .rail-eyebrow {
+      margin: 0 0 18px;
+      font-size: 0.82rem;
       font-weight: 950;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--electric-purple);
     }
 
-    .testament-trigger {
+    .section-display {
+      width: 100%;
       border: 0;
       background: transparent;
-      color: var(--ink);
       cursor: pointer;
-      font-size: clamp(3rem, 7.4vw, 7rem);
-      line-height: 0.92;
-      letter-spacing: -0.07em;
       font-weight: 950;
+      letter-spacing: -0.075em;
+      line-height: 0.92;
+      font-size: clamp(3.2rem, 8vw, 7rem);
+      color: var(--ink);
       transition: transform 0.25s ease, color 0.25s ease;
+      padding: 0;
+      margin: 0;
     }
 
-    .testament-trigger:hover {
+    .section-display:hover {
       transform: translateY(-6px);
+    }
+
+    .formula-display {
+      color: var(--bright-red);
+    }
+
+    .formula-display:hover {
+      color: var(--ink);
+    }
+
+    .why-display:hover,
+    .explore-display:hover {
       color: var(--electric-purple);
     }
 
-    .testament-shell {
-      width: min(1180px, 100%);
-      margin: 0 auto;
+    /* =========================
+       TESTAMENT PANEL
+    ========================= */
+
+    .testament-panel-shell {
+      width: min(1120px, 100%);
+      margin: 18px auto 0;
+      position: relative;
+      padding-bottom: 110px;
+    }
+
+    .testament-panel {
+      position: relative;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(17, 19, 24, 0.08);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.12);
+      border-radius: 40px;
+      padding: 28px;
+      opacity: 0;
+      transform: translateY(42px);
+      max-height: 0;
+      overflow: hidden;
+      pointer-events: none;
+      transition:
+        opacity 0.42s ease,
+        transform 0.42s ease,
+        max-height 0.55s ease,
+        padding 0.42s ease;
+    }
+
+    .testament-panel.active {
+      opacity: 1;
+      transform: translateY(0);
+      max-height: 1100px;
+      pointer-events: auto;
+    }
+
+    .testament-panel::before {
+      content: "";
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 18px;
+      background: rgba(17, 19, 24, 0.12);
+    }
+
+    .testament-panel::after {
+      content: "";
+      position: absolute;
+      top: -9px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 42px;
+      height: 18px;
+      background: var(--white);
+      border: 1px solid rgba(17, 19, 24, 0.08);
+      border-bottom: 0;
+      border-radius: 18px 18px 0 0;
+    }
+
+    .panel-note {
+      margin: 0 0 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
+      font-weight: 700;
+    }
+
+    .testament-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 28px;
-      align-items: start;
+      gap: 24px;
     }
 
     .testament-card {
       position: relative;
-      border-radius: 36px;
+      border-radius: 34px;
       overflow: hidden;
       background: var(--white);
-      box-shadow: var(--shadow);
-      transition: transform 0.5s ease, opacity 0.5s ease;
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.11);
       opacity: 0;
-      transform: translateY(60px);
-      pointer-events: none;
+      transform: translateY(38px);
+      transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.35s ease;
     }
 
-    .testament-shell.active .testament-card {
+    .testament-panel.active .testament-card {
       opacity: 1;
       transform: translateY(0);
-      pointer-events: auto;
     }
 
-    .testament-shell.active .testament-card:nth-child(1) {
-      transition-delay: 0.05s;
+    .testament-panel.active .testament-card:nth-child(1) {
+      transition-delay: 0.08s;
     }
 
-    .testament-shell.active .testament-card:nth-child(2) {
-      transition-delay: 0.14s;
+    .testament-panel.active .testament-card:nth-child(2) {
+      transition-delay: 0.16s;
     }
 
     .testament-card:hover {
       transform: translateY(-8px);
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.14);
     }
 
     .testament-cover {
       position: relative;
       width: 100%;
-      height: 460px;
+      height: 440px;
       padding: 0;
       border: 0;
       cursor: pointer;
@@ -457,7 +538,7 @@
       bottom: 24px;
       padding: 24px;
       border-radius: 26px;
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.95);
       color: var(--ink);
       border: 1px solid rgba(17, 19, 24, 0.1);
     }
@@ -472,7 +553,7 @@
 
     .testament-label span {
       display: block;
-      font-size: clamp(2rem, 3.4vw, 3.4rem);
+      font-size: clamp(2rem, 3.4vw, 3.3rem);
       font-weight: 950;
       letter-spacing: -0.06em;
       line-height: 0.95;
@@ -487,65 +568,7 @@
     }
 
     /* =========================
-       FORMULA TRIGGER
-    ========================= */
-
-    .formula-trigger-section {
-      position: relative;
-      overflow: hidden;
-      padding: 110px 20px;
-      background: var(--cloud);
-      text-align: center;
-    }
-
-    .formula-open-button {
-      border: 0;
-      background: transparent;
-      color: var(--bright-red);
-      cursor: pointer;
-      font-size: clamp(3rem, 8vw, 8rem);
-      line-height: 0.9;
-      letter-spacing: -0.08em;
-      font-weight: 950;
-      text-align: center;
-      transition: transform 0.25s ease, color 0.25s ease;
-    }
-
-    .formula-open-button:hover {
-      color: var(--ink);
-      transform: translateY(-7px);
-    }
-
-    /* =========================
-       WHY TRIGGER
-    ========================= */
-
-    .why-trigger-section {
-      padding: 110px 20px;
-      background: var(--white);
-      text-align: center;
-    }
-
-    .why-open-button {
-      border: 0;
-      background: transparent;
-      color: var(--ink);
-      cursor: pointer;
-      font-size: clamp(3rem, 8vw, 7.5rem);
-      line-height: 0.9;
-      letter-spacing: -0.075em;
-      font-weight: 950;
-      text-align: center;
-      transition: color 0.25s ease, transform 0.25s ease;
-    }
-
-    .why-open-button:hover {
-      color: var(--electric-purple);
-      transform: translateY(-6px);
-    }
-
-    /* =========================
-       MODAL SYSTEM
+       MODALS
     ========================= */
 
     .modal-overlay {
@@ -573,9 +596,10 @@
       color: var(--ink);
       box-shadow: 0 40px 120px rgba(0, 0, 0, 0.35);
       border: 1px solid rgba(255, 255, 255, 0.4);
-      transform: translateY(28px) scale(0.96);
+      transform: translateY(54px) scale(0.98);
+      transform-origin: center bottom;
       opacity: 0;
-      transition: transform 0.28s ease, opacity 0.28s ease;
+      transition: transform 0.34s ease, opacity 0.34s ease;
     }
 
     .modal-overlay.active .modal-window {
@@ -746,7 +770,6 @@
       border-radius: 999px;
       background: var(--paper);
       color: var(--ink);
-      text-decoration: none;
       font-size: 0.88rem;
       font-weight: 900;
       transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
@@ -804,10 +827,11 @@
 
     @media (max-width: 980px) {
       .nav-links {
-        display: none;
+        gap: 22px;
+        font-size: 0.95rem;
       }
 
-      .testament-shell {
+      .testament-grid {
         grid-template-columns: 1fr;
       }
 
@@ -824,13 +848,18 @@
       }
     }
 
-    @media (max-width: 620px) {
+    @media (max-width: 720px) {
       .nav {
         width: min(100% - 24px, 1240px);
+        height: 72px;
       }
 
       .brand {
-        font-size: 1.28rem;
+        font-size: 1.45rem;
+      }
+
+      .nav-links {
+        display: none;
       }
 
       .hero {
@@ -847,22 +876,26 @@
       }
 
       .ribbon-card {
-        width: 210px;
-        height: 126px;
-        margin-left: -46px;
-        border-radius: 24px;
+        width: 220px;
+        height: 130px;
+        margin-left: -14px;
+        border-radius: 16px;
       }
 
       .hero-gallery-row:last-child {
-        margin-top: -56px;
+        margin-top: -72px;
       }
 
       .hero-moving-gallery {
         padding-bottom: 46px;
       }
 
-      .testament-explorer {
-        padding: 80px 16px 95px;
+      .statement-section {
+        padding: 82px 16px 0;
+      }
+
+      .testament-panel-shell {
+        padding-bottom: 84px;
       }
 
       .testament-cover {
@@ -873,11 +906,6 @@
         left: 16px;
         right: 16px;
         bottom: 16px;
-      }
-
-      .formula-trigger-section,
-      .why-trigger-section {
-        padding: 85px 18px;
       }
 
       .formula-modal-grid {
@@ -898,9 +926,7 @@
 <body>
   <header class="site-header">
     <nav class="nav">
-      <a href="index.html" class="brand">
-        <span>Bible Mapped</span>
-      </a>
+      <a href="index.html" class="brand">Bible Mapped</a>
 
       <div class="nav-links">
         <a href="#testaments">Books</a>
@@ -908,8 +934,6 @@
         <a href="#why">About</a>
         <a href="#testaments">Explore</a>
       </div>
-
-      <a class="nav-cta" href="#testaments">Start</a>
     </nav>
   </header>
 
@@ -971,47 +995,60 @@
     </div>
   </section>
 
-  <section class="testament-explorer" id="testaments">
-    <div class="testament-intro parallax-item" data-speed="0.03">
-      <p class="eyebrow">Begin the Journey</p>
-      <button class="testament-trigger" id="testamentTrigger" type="button">
+  <section class="statement-section" id="testaments">
+    <div class="section-rail">
+      <p class="rail-eyebrow">Begin the Journey</p>
+      <button class="section-display explore-display" id="testamentTrigger" type="button">
         Explore Scripture by Testament
       </button>
     </div>
 
-    <div class="testament-shell" id="testamentShell">
-      <article class="testament-card old-card">
-        <button class="testament-cover" type="button" data-modal-target="oldTestamentModal">
-          <img src="images/old-testament.jpg" alt="Old Testament image slot" />
-          <div class="testament-label">
-            <span>Old Testament</span>
-            <small>Open the story before Christ</small>
-          </div>
-        </button>
-      </article>
+    <div class="testament-panel-shell">
+      <div class="testament-panel" id="testamentPanel">
+        <p class="panel-note">
+          Click the Old or New Testament to open a clean library window. The books are
+          organized by category, so the structure feels simple.
+        </p>
 
-      <article class="testament-card new-card">
-        <button class="testament-cover" type="button" data-modal-target="newTestamentModal">
-          <img src="images/new-testament.jpg" alt="New Testament image slot" />
-          <div class="testament-label">
-            <span>New Testament</span>
-            <small>Open the story of Christ and the Church</small>
-          </div>
-        </button>
-      </article>
+        <div class="testament-grid">
+          <article class="testament-card old-card">
+            <button class="testament-cover" type="button" data-modal-target="oldTestamentModal">
+              <img src="images/old-testament.jpg" alt="Old Testament image slot" />
+              <div class="testament-label">
+                <span>Old Testament</span>
+                <small>Open the story before Christ</small>
+              </div>
+            </button>
+          </article>
+
+          <article class="testament-card new-card">
+            <button class="testament-cover" type="button" data-modal-target="newTestamentModal">
+              <img src="images/new-testament.jpg" alt="New Testament image slot" />
+              <div class="testament-label">
+                <span>New Testament</span>
+                <small>Open the story of Christ and the Church</small>
+              </div>
+            </button>
+          </article>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="formula-trigger-section" id="formula">
-    <button class="formula-open-button" type="button" data-modal-target="formulaModal">
-      The Bible Mapped Formula
-    </button>
+  <section class="statement-section cloud" id="formula">
+    <div class="section-rail">
+      <button class="section-display formula-display" type="button" data-modal-target="formulaModal">
+        The Bible Mapped Formula
+      </button>
+    </div>
   </section>
 
-  <section class="why-trigger-section" id="why">
-    <button class="why-open-button" type="button" data-modal-target="whyModal">
-      Why Bible Mapped Exists
-    </button>
+  <section class="statement-section white" id="why" style="padding-bottom:110px;">
+    <div class="section-rail">
+      <button class="section-display why-display" type="button" data-modal-target="whyModal">
+        Why Bible Mapped Exists
+      </button>
+    </div>
   </section>
 
   <div class="modal-overlay" id="formulaModal" aria-hidden="true">
@@ -1277,8 +1314,6 @@
     const modalTriggers = document.querySelectorAll("[data-modal-target]");
     const modalCloseButtons = document.querySelectorAll("[data-modal-close]");
     const modals = document.querySelectorAll(".modal-overlay");
-    const testamentTrigger = document.getElementById("testamentTrigger");
-    const testamentShell = document.getElementById("testamentShell");
 
     function openModal(modalId) {
       const modal = document.getElementById(modalId);
@@ -1327,12 +1362,17 @@
       }
     });
 
-    if (testamentTrigger && testamentShell) {
+    /* Testament connected panel */
+    const testamentTrigger = document.getElementById("testamentTrigger");
+    const testamentPanel = document.getElementById("testamentPanel");
+
+    if (testamentTrigger && testamentPanel) {
       testamentTrigger.addEventListener("click", () => {
-        testamentShell.classList.toggle("active");
+        testamentPanel.classList.toggle("active");
       });
     }
 
+    /* Parallax */
     const parallaxItems = document.querySelectorAll(".parallax-item");
     const hero = document.querySelector(".hero");
     const heroBg = document.querySelector(".hero-bg");
