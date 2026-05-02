@@ -421,10 +421,10 @@
     ========================= */
 
     .testament-panel-shell {
-      width: min(1280px, 100%);
+      width: min(1460px, 100%);
       margin: 76px auto 0;
       position: relative;
-      padding-bottom: 120px;
+      padding: 0 24px 120px;
     }
 
     .testament-panel {
@@ -448,7 +448,7 @@
     .testament-panel.active {
       opacity: 1;
       transform: translateY(0);
-      max-height: 1200px;
+      max-height: 1400px;
       pointer-events: auto;
     }
 
@@ -459,13 +459,13 @@
     .testament-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: clamp(34px, 5vw, 72px);
-      align-items: center;
+      gap: clamp(28px, 3.5vw, 58px);
+      align-items: stretch;
     }
 
     .testament-card {
       position: relative;
-      border-radius: 36px;
+      border-radius: 38px;
       overflow: hidden;
       background: transparent;
       box-shadow: 0 34px 100px rgba(0, 0, 0, 0.18);
@@ -476,32 +476,7 @@
 
     .testament-card::before,
     .testament-card::after {
-      content: "";
-      position: absolute;
-      top: 28px;
-      bottom: 28px;
-      width: 9px;
-      border-radius: 999px;
-      z-index: 8;
-      pointer-events: none;
-    }
-
-    .testament-card::before {
-      left: 22px;
-    }
-
-    .testament-card::after {
-      right: 22px;
-    }
-
-    .old-card::before,
-    .old-card::after {
-      background: var(--electric-purple);
-    }
-
-    .new-card::before,
-    .new-card::after {
-      background: var(--navy);
+      display: none;
     }
 
     .testament-panel.active .testament-card {
@@ -526,7 +501,7 @@
       position: relative;
       width: 100%;
       aspect-ratio: 16 / 9;
-      min-height: 320px;
+      min-height: 390px;
       padding: 0;
       border: 0;
       cursor: pointer;
@@ -534,7 +509,7 @@
       background: var(--ink);
       display: block;
       text-align: left;
-      border-radius: 36px;
+      border-radius: 38px;
     }
 
     .testament-cover img {
@@ -551,11 +526,11 @@
 
     .testament-label {
       position: absolute;
-      left: 48px;
-      right: 48px;
-      bottom: 28px;
-      padding: 24px;
-      border-radius: 24px;
+      left: 34px;
+      right: 34px;
+      bottom: 30px;
+      padding: 28px;
+      border-radius: 26px;
       background: rgba(248, 247, 242, 0.94);
       color: var(--ink);
       border: 0;
@@ -563,14 +538,9 @@
       z-index: 7;
     }
 
-    .old-card .testament-label,
-    .new-card .testament-label {
-      border-left: 0;
-    }
-
     .testament-label span {
       display: block;
-      font-size: clamp(2rem, 3.2vw, 3.25rem);
+      font-size: clamp(2.2rem, 3.4vw, 3.55rem);
       font-weight: 950;
       letter-spacing: -0.06em;
       line-height: 0.95;
@@ -579,7 +549,7 @@
     .testament-label small {
       display: block;
       margin-top: 10px;
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: var(--soft-ink);
       font-weight: 800;
     }
@@ -923,7 +893,7 @@
 
       .testament-panel-shell {
         margin-top: 48px;
-        padding-bottom: 84px;
+        padding: 0 12px 84px;
       }
 
       .testament-grid {
@@ -933,7 +903,7 @@
 
       .testament-cover {
         aspect-ratio: 16 / 9;
-        min-height: 230px;
+        min-height: 250px;
         border-radius: 28px;
       }
 
@@ -943,24 +913,14 @@
 
       .testament-card::before,
       .testament-card::after {
-        top: 18px;
-        bottom: 18px;
-        width: 7px;
-      }
-
-      .testament-card::before {
-        left: 14px;
-      }
-
-      .testament-card::after {
-        right: 14px;
+        display: none;
       }
 
       .testament-label {
-        left: 32px;
-        right: 32px;
+        left: 18px;
+        right: 18px;
         bottom: 16px;
-        padding: 18px;
+        padding: 20px;
         border-radius: 20px;
       }
 
@@ -989,7 +949,7 @@
         <a href="#people">People</a>
         <a href="#map">Map</a>
         <a href="#art">Art</a>
-        <a href="#why">About</a>
+        <a href="#about">About</a>
       </div>
     </nav>
   </header>
@@ -1095,10 +1055,10 @@
     </div>
   </section>
 
-  <section class="statement-section white" id="why" style="padding-bottom:110px;">
+  <section class="statement-section white" id="about" style="padding-bottom:110px;">
     <div class="section-rail">
-      <button class="section-display why-display" type="button" data-modal-target="whyModal">
-        Why Bible Mapped Exists
+      <button class="section-display why-display" type="button" data-modal-target="aboutModal">
+        About Bible Mapped
       </button>
     </div>
   </section>
@@ -1324,34 +1284,33 @@
     </div>
   </div>
 
-  <div class="modal-overlay" id="whyModal" aria-hidden="true">
-    <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="whyModalTitle">
+  <div class="modal-overlay" id="aboutModal" aria-hidden="true">
+    <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="aboutModalTitle">
       <div class="modal-top">
-        <span>Mission</span>
+        <span>About</span>
         <button class="modal-close" type="button" data-modal-close aria-label="Close window">×</button>
       </div>
 
       <div class="modal-body">
-        <h2 id="whyModalTitle">The Bible does not hang above history.</h2>
+        <h2 id="aboutModalTitle">About Bible Mapped</h2>
 
         <p>
-          It unfolds within history — through real places, real people, real timelines,
-          and real meaning. Bible Mapped was created to help people see the world of
-          Scripture and how the whole story points to Jesus Christ.
+          Bible Mapped was created to help Christians and seekers understand Scripture
+          through real places, real people, real timelines, and real meaning.
         </p>
 
         <p>
-          From Eden to Abraham, from Egypt to Sinai, from Jerusalem to the cross,
-          and from the empty tomb to the hope of all things — the Bible tells a story
-          grounded in place, context, and meaning.
+          The goal is not to overwhelm people with religious information. The goal is
+          to help people follow the trail of Scripture — from Eden to Abraham, from
+          Egypt to Sinai, from Jerusalem to the empty tomb — and see how the whole
+          story points to Jesus Christ.
         </p>
 
         <div class="modal-callout">
-          <h3>Follow the trail of Scripture.</h3>
+          <h3>Created by Calvin Strickland</h3>
           <p>
-            Bible Mapped helps Christians and seekers ask better questions:
-            Where did it happen? Who was involved? When did it happen?
-            And why does it still matter?
+            Calvin is a Christian creator focused on helping people understand the Bible
+            through maps, context, history, language, and visual storytelling.
           </p>
         </div>
       </div>
