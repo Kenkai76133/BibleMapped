@@ -13,6 +13,7 @@
       --ink: #111318;
       --soft-ink: #3f4147;
       --muted: #6d6d73;
+      --electric-purple: #6d28ff;
       --purple: #5c2d91;
       --navy: #123c69;
       --gold: #c9a24d;
@@ -72,8 +73,6 @@
     }
 
     .brand {
-      display: flex;
-      align-items: center;
       text-decoration: none;
       font-weight: 950;
       letter-spacing: -0.05em;
@@ -95,30 +94,50 @@
     }
 
     .nav-links a:hover {
-      color: var(--purple);
+      color: var(--electric-purple);
     }
 
     .nav-cta {
-      border: 0;
       background: var(--ink);
       color: var(--white);
       border-radius: 999px;
       padding: 12px 18px;
       font-weight: 950;
-      cursor: pointer;
       text-decoration: none;
     }
 
     /* =========================
-       HERO
+       HERO RESTORED
     ========================= */
 
     .hero {
       position: relative;
-      min-height: 760px;
-      padding: 92px 20px 90px;
+      min-height: 820px;
+      padding: 110px 20px 0;
       overflow: hidden;
-      background: var(--cloud);
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("images/hero-1.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.42;
+      transform: scale(1.05);
+      z-index: 0;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(17, 19, 24, 0.42);
+      z-index: 1;
     }
 
     .hero-inner {
@@ -126,39 +145,40 @@
       margin: 0 auto;
       text-align: center;
       position: relative;
-      z-index: 2;
+      z-index: 3;
     }
 
     .announcement {
       width: fit-content;
       max-width: 100%;
-      margin: 0 auto 56px;
+      margin: 0 auto 44px;
       display: inline-flex;
       align-items: center;
       gap: 12px;
       padding: 12px 18px;
       border-radius: 16px;
-      background: var(--paper);
-      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       font-weight: 900;
-      color: var(--soft-ink);
+      color: var(--ink);
     }
 
     .announcement span {
       padding: 7px 10px;
       border-radius: 10px;
-      background: var(--white);
-      color: var(--ink);
+      background: var(--electric-purple);
+      color: var(--white);
       font-size: 0.85rem;
     }
 
     .hero h1 {
       margin: 0 auto;
       max-width: 1050px;
-      font-size: clamp(3.4rem, 9.4vw, 8.6rem);
-      line-height: 0.9;
+      font-size: clamp(3.4rem, 9.4vw, 8.8rem);
+      line-height: 0.88;
       letter-spacing: -0.075em;
       font-weight: 950;
+      color: var(--white);
     }
 
     .hero p {
@@ -166,7 +186,7 @@
       margin: 30px auto 0;
       font-size: clamp(1.05rem, 2vw, 1.35rem);
       line-height: 1.6;
-      color: var(--soft-ink);
+      color: rgba(255, 255, 255, 0.88);
       font-weight: 520;
     }
 
@@ -187,34 +207,43 @@
       border-radius: 999px;
       text-decoration: none;
       font-weight: 950;
-      border: 1px solid var(--ink);
+      border: 1px solid currentColor;
       cursor: pointer;
     }
 
     .btn-dark {
-      background: var(--ink);
-      color: var(--white);
+      background: var(--white);
+      color: var(--ink);
+      border-color: var(--white);
     }
 
     .btn-light {
       background: transparent;
-      color: var(--ink);
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.85);
     }
 
-    /* Moving images under Enter BibleMapped */
+    /* =========================
+       FULL-WIDTH MOVING IMAGE WALL
+       Left side to right side
+    ========================= */
 
     .hero-moving-gallery {
-      width: min(1120px, 100%);
-      margin: 58px auto 0;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-top: 70px;
       overflow: hidden;
       position: relative;
+      z-index: 4;
+      padding: 0 0 44px;
     }
 
     .hero-gallery-track {
       display: flex;
       gap: 22px;
       width: max-content;
-      animation: bibleMappedGalleryMove 38s linear infinite;
+      animation: bibleMappedGalleryMoveRight 42s linear infinite;
+      will-change: transform;
     }
 
     .hero-moving-gallery:hover .hero-gallery-track {
@@ -222,14 +251,14 @@
     }
 
     .ribbon-card {
-      width: 250px;
-      height: 165px;
+      width: 280px;
+      height: 178px;
       flex: 0 0 auto;
       border-radius: 28px;
       overflow: hidden;
       background: var(--paper);
       box-shadow: var(--shadow);
-      border: 1px solid var(--line);
+      border: 1px solid rgba(255, 255, 255, 0.22);
     }
 
     .ribbon-card img {
@@ -238,85 +267,14 @@
       object-fit: cover;
     }
 
-    @keyframes bibleMappedGalleryMove {
+    @keyframes bibleMappedGalleryMoveRight {
       from {
-        transform: translateX(0);
+        transform: translateX(-50%);
       }
 
       to {
-        transform: translateX(-50%);
+        transform: translateX(0);
       }
-    }
-
-    /* =========================
-       VALUE SECTION
-    ========================= */
-
-    .value-section {
-      position: relative;
-      padding: 130px 20px 100px;
-      background: var(--white);
-      overflow: hidden;
-    }
-
-    .value-inner {
-      width: min(1120px, 100%);
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .value-inner h2 {
-      margin: 0;
-      font-size: clamp(2.8rem, 7vw, 6rem);
-      line-height: 0.95;
-      letter-spacing: -0.065em;
-      font-weight: 950;
-    }
-
-    .value-grid {
-      margin-top: 68px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 26px;
-    }
-
-    .value-card {
-      text-align: center;
-      padding: 24px 18px;
-      border-radius: 28px;
-      background: var(--cloud);
-      border: 1px solid var(--line);
-      transition: transform 0.3s ease;
-    }
-
-    .value-card:hover {
-      transform: translateY(-8px);
-    }
-
-    .icon-box {
-      width: 82px;
-      height: 82px;
-      margin: 0 auto 18px;
-      border-radius: 24px;
-      border: 4px solid var(--ink);
-      display: grid;
-      place-items: center;
-      font-size: 2rem;
-      font-weight: 950;
-      background: var(--white);
-    }
-
-    .value-card h3 {
-      margin: 0;
-      font-size: 1.4rem;
-      letter-spacing: -0.04em;
-    }
-
-    .value-card p {
-      margin: 10px 0 0;
-      color: var(--soft-ink);
-      line-height: 1.45;
-      font-size: 1rem;
     }
 
     /* =========================
@@ -343,7 +301,7 @@
       font-weight: 950;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--purple);
+      color: var(--electric-purple);
     }
 
     .testament-intro h2 {
@@ -418,7 +376,7 @@
     }
 
     .old-card .testament-label {
-      border-left: 9px solid var(--purple);
+      border-left: 9px solid var(--electric-purple);
     }
 
     .new-card .testament-label {
@@ -565,7 +523,7 @@
     .formula-shape.question {
       font-size: 7rem;
       font-weight: 950;
-      color: var(--purple);
+      color: var(--electric-purple);
       line-height: 1;
     }
 
@@ -578,7 +536,7 @@
     .formula-arrow {
       font-size: 2rem;
       font-weight: 950;
-      color: var(--purple);
+      color: var(--electric-purple);
     }
 
     /* =========================
@@ -644,20 +602,21 @@
     }
 
     /* =========================
-       FOOTER
+       ELECTRIC PURPLE FOOTER / BANNER
     ========================= */
 
     .footer {
-      padding: 50px 20px;
-      background: var(--ink);
+      padding: 58px 20px;
+      background: var(--electric-purple);
       color: var(--white);
       text-align: center;
     }
 
     .footer p {
       margin: 0;
-      color: rgba(255, 255, 255, 0.72);
-      font-weight: 700;
+      color: var(--white);
+      font-weight: 850;
+      letter-spacing: -0.02em;
     }
 
     /* =========================
@@ -675,10 +634,6 @@
     @media (max-width: 980px) {
       .nav-links {
         display: none;
-      }
-
-      .value-grid {
-        grid-template-columns: repeat(2, 1fr);
       }
 
       .testament-shell {
@@ -709,8 +664,7 @@
 
       .hero {
         min-height: auto;
-        padding-top: 70px;
-        padding-bottom: 70px;
+        padding-top: 78px;
       }
 
       .announcement {
@@ -723,17 +677,14 @@
       }
 
       .ribbon-card {
-        width: 190px;
-        height: 128px;
+        width: 210px;
+        height: 138px;
         border-radius: 22px;
       }
 
       .hero-moving-gallery {
-        margin-top: 42px;
-      }
-
-      .value-grid {
-        grid-template-columns: 1fr;
+        margin-top: 52px;
+        padding-bottom: 36px;
       }
 
       .testament-explorer {
@@ -813,85 +764,42 @@
           <div class="ribbon-card">
             <img src="images/hero-1.jpg" alt="Bible map image slot" />
           </div>
-
           <div class="ribbon-card">
             <img src="images/hero-2.jpg" alt="Bible art image slot" />
           </div>
-
           <div class="ribbon-card">
             <img src="images/hero-3.jpg" alt="Scripture image slot" />
           </div>
-
           <div class="ribbon-card">
             <img src="images/hero-4.jpg" alt="Ancient world image slot" />
           </div>
-
           <div class="ribbon-card">
             <img src="images/hero-5.jpg" alt="Jerusalem image slot" />
           </div>
-
           <div class="ribbon-card">
             <img src="images/hero-6.jpg" alt="Bible timeline image slot" />
           </div>
 
-          <!-- duplicated for smooth movement -->
+          <!-- duplicate set for seamless wall-to-wall movement -->
           <div class="ribbon-card">
             <img src="images/hero-1.jpg" alt="Bible map image slot" />
           </div>
-
           <div class="ribbon-card">
             <img src="images/hero-2.jpg" alt="Bible art image slot" />
           </div>
-
           <div class="ribbon-card">
             <img src="images/hero-3.jpg" alt="Scripture image slot" />
           </div>
-
           <div class="ribbon-card">
             <img src="images/hero-4.jpg" alt="Ancient world image slot" />
           </div>
-
           <div class="ribbon-card">
             <img src="images/hero-5.jpg" alt="Jerusalem image slot" />
           </div>
-
           <div class="ribbon-card">
             <img src="images/hero-6.jpg" alt="Bible timeline image slot" />
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- VALUE SECTION -->
-  <section class="value-section">
-    <div class="value-inner">
-      <h2>Watch. Study. Map. Explore.</h2>
-
-      <div class="value-grid">
-        <article class="value-card parallax-item" data-speed="0.025">
-          <div class="icon-box">▶</div>
-          <h3>Videos →</h3>
-          <p>Watch short Bible explainers built around context and clarity.</p>
-        </article>
-
-        <article class="value-card parallax-item" data-speed="0.04">
-          <div class="icon-box">B</div>
-          <h3>Books →</h3>
-          <p>Explore each book of the Bible with location, theme, and meaning.</p>
-        </article>
-
-        <article class="value-card parallax-item" data-speed="0.03">
-          <div class="icon-box">⌖</div>
-          <h3>Maps →</h3>
-          <p>See where Scripture happened and why the location matters.</p>
-        </article>
-
-        <article class="value-card parallax-item" data-speed="0.05">
-          <div class="icon-box">?</div>
-          <h3>Words →</h3>
-          <p>Study names, key terms, meaning, and biblical connections.</p>
-        </article>
       </div>
     </div>
   </section>
