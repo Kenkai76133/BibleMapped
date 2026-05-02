@@ -1,6 +1,3 @@
-Here you go, Cal — **full updated code** with the **Old/New Testament blocks coming together and revealing “TESTAMENT”** when someone clicks **Explore Scripture by Testament**.
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -422,258 +419,200 @@ Here you go, Cal — **full updated code** with the **Old/New Testament blocks c
     }
 
     /* =========================
-       TESTAMENT PANEL - HISTORICAL JOIN
+       TESTAMENT FRACTURE REVEAL
     ========================= */
 
-    .testament-panel-shell {
-      width: min(1460px, 100%);
-      margin: 76px auto 0;
-      position: relative;
-      padding: 0 24px 120px;
-    }
-
-    .testament-panel {
-      position: relative;
-      background: transparent;
-      border: 0;
-      box-shadow: none;
-      border-radius: 0;
-      padding: 0;
-      opacity: 0;
-      transform: translateY(42px);
-      max-height: 0;
+    .testament-fracture-section {
+      padding-bottom: 130px;
       overflow: hidden;
-      pointer-events: none;
-      transition:
-        opacity 0.42s ease,
-        transform 0.42s ease,
-        max-height 0.7s ease;
     }
 
-    .testament-panel.active {
-      opacity: 1;
-      transform: translateY(0);
-      max-height: 1450px;
-      pointer-events: auto;
+    .testament-fracture-stage {
+      position: relative;
+      width: min(1180px, 100%);
+      height: clamp(520px, 62vw, 760px);
+      margin: 64px auto 0;
+      isolation: isolate;
     }
 
-    .testament-seal {
+    .testament-center-word {
       position: absolute;
       left: 50%;
-      top: 48%;
-      transform: translate(-50%, -50%) scale(0.86);
-      z-index: 12;
-      pointer-events: none;
-      font-size: clamp(2.4rem, 7vw, 7rem);
-      line-height: 0.9;
+      top: 50%;
+      z-index: 3;
+      transform: translate(-50%, -50%) scale(0.88);
+      font-size: clamp(3.5rem, 10vw, 11rem);
+      line-height: 0.84;
+      letter-spacing: -0.09em;
       font-weight: 950;
-      letter-spacing: -0.08em;
-      color: rgba(248, 247, 242, 0);
+      color: rgba(11, 15, 25, 0);
       text-transform: uppercase;
-      text-shadow: none;
-    }
-
-    .testament-panel.active .testament-seal {
-      animation: testamentSealReveal 1.25s ease forwards;
-    }
-
-    @keyframes testamentSealReveal {
-      0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.82);
-        color: rgba(248, 247, 242, 0);
-        text-shadow: none;
-      }
-
-      32% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.88);
-        color: rgba(248, 247, 242, 0);
-      }
-
-      52% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-        color: rgba(248, 247, 242, 0.94);
-        text-shadow: 0 18px 55px rgba(0, 0, 0, 0.5);
-      }
-
-      72% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.04);
-        color: rgba(248, 247, 242, 0.94);
-        text-shadow: 0 18px 55px rgba(0, 0, 0, 0.48);
-      }
-
-      100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(1.08);
-        color: rgba(248, 247, 242, 0);
-        text-shadow: none;
-      }
-    }
-
-    .panel-note {
-      display: none;
-    }
-
-    .testament-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(28px, 3.5vw, 58px);
-      align-items: stretch;
-      position: relative;
-    }
-
-    .testament-card {
-      position: relative;
-      border-radius: 38px;
-      overflow: hidden;
-      background: transparent;
-      box-shadow: 0 34px 100px rgba(0, 0, 0, 0.18);
+      pointer-events: none;
+      transition:
+        color 0.8s ease,
+        transform 0.8s ease,
+        opacity 0.8s ease;
       opacity: 0;
-      transform: translateY(42px);
-      transition: box-shadow 0.35s ease;
     }
 
-    .testament-card::before,
-    .testament-card::after {
-      display: none;
+    .testament-fracture-stage.in-view .testament-center-word {
+      color: rgba(11, 15, 25, 0.96);
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
     }
 
-    .testament-panel.active .old-card {
-      animation: oldTestamentJoin 1.25s cubic-bezier(0.18, 0.88, 0.28, 1) forwards;
-    }
-
-    .testament-panel.active .new-card {
-      animation: newTestamentJoin 1.25s cubic-bezier(0.18, 0.88, 0.28, 1) forwards;
-    }
-
-    @keyframes oldTestamentJoin {
-      0% {
-        opacity: 0;
-        transform: translateX(-28%) translateY(70px) scale(0.94);
-        filter: saturate(0.78) contrast(0.95);
-      }
-
-      38% {
-        opacity: 1;
-        transform: translateX(16%) translateY(0) scale(1.01);
-        filter: saturate(0.82) contrast(1);
-      }
-
-      58% {
-        opacity: 1;
-        transform: translateX(22%) translateY(0) scale(1.02);
-        filter: saturate(0.85) contrast(1.02);
-      }
-
-      100% {
-        opacity: 1;
-        transform: translateX(0) translateY(0) scale(1);
-        filter: none;
-      }
-    }
-
-    @keyframes newTestamentJoin {
-      0% {
-        opacity: 0;
-        transform: translateX(28%) translateY(70px) scale(0.94);
-        filter: saturate(0.78) contrast(0.95);
-      }
-
-      38% {
-        opacity: 1;
-        transform: translateX(-16%) translateY(0) scale(1.01);
-        filter: saturate(0.82) contrast(1);
-      }
-
-      58% {
-        opacity: 1;
-        transform: translateX(-22%) translateY(0) scale(1.02);
-        filter: saturate(0.85) contrast(1.02);
-      }
-
-      100% {
-        opacity: 1;
-        transform: translateX(0) translateY(0) scale(1);
-        filter: none;
-      }
-    }
-
-    .testament-card:hover {
-      box-shadow: 0 42px 120px rgba(0, 0, 0, 0.22);
-    }
-
-    .testament-cover {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      min-height: 390px;
+    .fracture-piece {
+      position: absolute;
+      display: block;
       padding: 0;
       border: 0;
-      cursor: pointer;
       overflow: hidden;
-      background: var(--ink);
-      display: block;
-      text-align: left;
-      border-radius: 38px;
+      background: #d8d5cf;
+      cursor: pointer;
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.18);
+      transition:
+        transform 1.1s cubic-bezier(0.16, 0.9, 0.22, 1),
+        opacity 0.8s ease,
+        box-shadow 0.35s ease,
+        filter 0.8s ease;
+      opacity: 0;
+      filter: saturate(0.82) contrast(0.96);
     }
 
-    .testament-cover::after {
+    .fracture-piece:hover {
+      box-shadow: 0 42px 120px rgba(0, 0, 0, 0.26);
+      filter: saturate(1.04) contrast(1.04);
+      z-index: 7;
+    }
+
+    .fracture-piece img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* LEFT SIDE: Old Testament — 3 fragments */
+    .old-piece-one {
+      width: 38%;
+      height: 33%;
+      left: 2%;
+      top: 8%;
+      z-index: 2;
+      border-radius: 34px 12px 18px 34px;
+      clip-path: polygon(0 0, 95% 0, 82% 100%, 0 86%);
+      transform: translateX(-180px) translateY(36px) rotate(-5deg);
+    }
+
+    .old-piece-two {
+      width: 32%;
+      height: 38%;
+      left: 6%;
+      top: 32%;
+      z-index: 4;
+      border-radius: 24px 10px 24px 30px;
+      clip-path: polygon(0 8%, 100% 0, 82% 88%, 0 100%);
+      transform: translateX(-230px) translateY(18px) rotate(4deg);
+    }
+
+    .old-piece-three {
+      width: 39%;
+      height: 27%;
+      left: 0%;
+      bottom: 8%;
+      z-index: 2;
+      border-radius: 22px 14px 34px 34px;
+      clip-path: polygon(0 0, 92% 18%, 100% 100%, 0 100%);
+      transform: translateX(-190px) translateY(50px) rotate(-3deg);
+    }
+
+    /* RIGHT SIDE: New Testament — 2 fragments */
+    .new-piece-one {
+      width: 39%;
+      height: 42%;
+      right: 3%;
+      top: 10%;
+      z-index: 2;
+      border-radius: 14px 34px 18px 12px;
+      clip-path: polygon(12% 0, 100% 0, 100% 88%, 0 100%);
+      transform: translateX(210px) translateY(34px) rotate(4deg);
+    }
+
+    .new-piece-two {
+      width: 43%;
+      height: 34%;
+      right: 0%;
+      bottom: 10%;
+      z-index: 4;
+      border-radius: 14px 24px 34px 16px;
+      clip-path: polygon(0 8%, 100% 0, 100% 100%, 14% 92%);
+      transform: translateX(240px) translateY(46px) rotate(-4deg);
+    }
+
+    .testament-fracture-stage.in-view .fracture-piece {
+      opacity: 1;
+    }
+
+    .testament-fracture-stage.in-view .old-piece-one {
+      transform: translateX(34px) translateY(0) rotate(-1deg);
+    }
+
+    .testament-fracture-stage.in-view .old-piece-two {
+      transform: translateX(64px) translateY(0) rotate(1deg);
+    }
+
+    .testament-fracture-stage.in-view .old-piece-three {
+      transform: translateX(46px) translateY(-8px) rotate(-1deg);
+    }
+
+    .testament-fracture-stage.in-view .new-piece-one {
+      transform: translateX(-42px) translateY(0) rotate(1deg);
+    }
+
+    .testament-fracture-stage.in-view .new-piece-two {
+      transform: translateX(-62px) translateY(-6px) rotate(-1deg);
+    }
+
+    .fracture-piece::after {
       content: "";
       position: absolute;
       inset: 0;
       background:
         linear-gradient(
           to bottom,
-          rgba(11, 15, 25, 0.05),
-          rgba(11, 15, 25, 0.28)
+          rgba(11, 15, 25, 0.03),
+          rgba(11, 15, 25, 0.18)
         );
       pointer-events: none;
-      z-index: 2;
     }
 
-    .testament-cover img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1.02);
-      transition: transform 0.7s ease;
-    }
-
-    .testament-cover:hover img {
-      transform: scale(1.08);
-    }
-
-    .testament-label {
+    .fracture-piece::before {
       position: absolute;
-      left: 34px;
-      right: 34px;
-      bottom: 30px;
-      padding: 28px;
-      border-radius: 26px;
-      background: rgba(248, 247, 242, 0.94);
+      left: 18px;
+      bottom: 18px;
+      z-index: 3;
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: rgba(248, 247, 242, 0.92);
       color: var(--ink);
-      border: 0;
-      backdrop-filter: blur(10px);
-      z-index: 7;
-    }
-
-    .testament-label span {
-      display: block;
-      font-size: clamp(2.2rem, 3.4vw, 3.55rem);
+      font-size: 0.78rem;
       font-weight: 950;
-      letter-spacing: -0.06em;
-      line-height: 0.95;
+      letter-spacing: 0.02em;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
     }
 
-    .testament-label small {
-      display: block;
-      margin-top: 10px;
-      font-size: 1rem;
-      color: var(--soft-ink);
-      font-weight: 800;
+    .old-piece::before {
+      content: "Open Old Testament";
+    }
+
+    .new-piece::before {
+      content: "Open New Testament";
+    }
+
+    .fracture-piece:hover::before {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* =========================
@@ -941,10 +880,6 @@ Here you go, Cal — **full updated code** with the **Old/New Testament blocks c
         font-size: 0.95rem;
       }
 
-      .testament-grid {
-        grid-template-columns: 1fr;
-      }
-
       .book-category-grid {
         grid-template-columns: 1fr;
       }
@@ -1013,62 +948,71 @@ Here you go, Cal — **full updated code** with the **Old/New Testament blocks c
         padding-bottom: 90px;
       }
 
-      .testament-panel-shell {
-        margin-top: 48px;
-        padding: 0 12px 84px;
+      .testament-fracture-section {
+        padding-bottom: 90px;
       }
 
-      .testament-grid {
-        grid-template-columns: 1fr;
-        gap: 28px;
+      .testament-fracture-stage {
+        height: 650px;
+        margin-top: 44px;
       }
 
-      .testament-seal {
-        display: none;
+      .testament-center-word {
+        font-size: clamp(3rem, 17vw, 5.8rem);
+        top: 48%;
       }
 
-      .testament-panel.active .old-card,
-      .testament-panel.active .new-card {
-        animation: mobileTestamentRise 0.75s ease forwards;
+      .old-piece-one,
+      .old-piece-two,
+      .old-piece-three,
+      .new-piece-one,
+      .new-piece-two {
+        width: 74%;
+        height: 150px;
+        left: 13%;
+        right: auto;
+        clip-path: none;
+        border-radius: 26px;
       }
 
-      .testament-panel.active .new-card {
-        animation-delay: 0.12s;
+      .old-piece-one {
+        top: 0;
+        transform: translateX(-120px) translateY(20px) rotate(-3deg);
       }
 
-      @keyframes mobileTestamentRise {
-        from {
-          opacity: 0;
-          transform: translateY(42px) scale(0.96);
-        }
-
-        to {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
+      .old-piece-two {
+        top: 105px;
+        transform: translateX(-140px) translateY(20px) rotate(2deg);
       }
 
-      .testament-cover {
-        aspect-ratio: 16 / 9;
-        min-height: 250px;
-        border-radius: 28px;
+      .old-piece-three {
+        top: 210px;
+        bottom: auto;
+        transform: translateX(-120px) translateY(20px) rotate(-2deg);
       }
 
-      .testament-card {
-        border-radius: 28px;
+      .new-piece-one {
+        top: 365px;
+        transform: translateX(120px) translateY(20px) rotate(2deg);
       }
 
-      .testament-card::before,
-      .testament-card::after {
-        display: none;
+      .new-piece-two {
+        top: 470px;
+        bottom: auto;
+        transform: translateX(140px) translateY(20px) rotate(-2deg);
       }
 
-      .testament-label {
-        left: 18px;
-        right: 18px;
-        bottom: 16px;
-        padding: 20px;
-        border-radius: 20px;
+      .testament-fracture-stage.in-view .old-piece-one,
+      .testament-fracture-stage.in-view .old-piece-two,
+      .testament-fracture-stage.in-view .old-piece-three,
+      .testament-fracture-stage.in-view .new-piece-one,
+      .testament-fracture-stage.in-view .new-piece-two {
+        transform: translateX(0) translateY(0) rotate(0deg);
+      }
+
+      .fracture-piece::before {
+        opacity: 1;
+        transform: translateY(0);
       }
 
       .formula-modal-grid {
@@ -1159,40 +1103,36 @@ Here you go, Cal — **full updated code** with the **Old/New Testament blocks c
     </div>
   </section>
 
-  <section class="statement-section" id="testaments">
+  <section class="statement-section testament-fracture-section" id="testaments">
     <div class="section-rail">
       <p class="rail-eyebrow">Begin the Journey</p>
-      <button class="section-display explore-display" id="testamentTrigger" type="button">
+      <div class="section-display explore-display">
         Explore Scripture by Testament
-      </button>
+      </div>
     </div>
 
-    <div class="testament-panel-shell">
-      <div class="testament-panel" id="testamentPanel">
-        <div class="testament-seal" aria-hidden="true">TESTAMENT</div>
+    <div class="testament-fracture-stage" id="testamentFractureStage">
+      <div class="testament-center-word" aria-hidden="true">TESTAMENT</div>
 
-        <div class="testament-grid">
-          <article class="testament-card old-card">
-            <button class="testament-cover" type="button" data-modal-target="oldTestamentModal">
-              <img src="images/old-testament.jpg" alt="Old Testament image slot" />
-              <div class="testament-label">
-                <span>Old Testament</span>
-                <small>Open the story before Christ</small>
-              </div>
-            </button>
-          </article>
+      <button class="fracture-piece old-piece old-piece-one" type="button" data-modal-target="oldTestamentModal">
+        <img src="images/old-fracture-1.jpg" alt="Old Testament image slot" />
+      </button>
 
-          <article class="testament-card new-card">
-            <button class="testament-cover" type="button" data-modal-target="newTestamentModal">
-              <img src="images/new-testament.jpg" alt="New Testament image slot" />
-              <div class="testament-label">
-                <span>New Testament</span>
-                <small>Open the story of Christ and the Church</small>
-              </div>
-            </button>
-          </article>
-        </div>
-      </div>
+      <button class="fracture-piece old-piece old-piece-two" type="button" data-modal-target="oldTestamentModal">
+        <img src="images/old-fracture-2.jpg" alt="Old Testament image slot" />
+      </button>
+
+      <button class="fracture-piece old-piece old-piece-three" type="button" data-modal-target="oldTestamentModal">
+        <img src="images/old-fracture-3.jpg" alt="Old Testament image slot" />
+      </button>
+
+      <button class="fracture-piece new-piece new-piece-one" type="button" data-modal-target="newTestamentModal">
+        <img src="images/new-fracture-1.jpg" alt="New Testament image slot" />
+      </button>
+
+      <button class="fracture-piece new-piece new-piece-two" type="button" data-modal-target="newTestamentModal">
+        <img src="images/new-fracture-2.jpg" alt="New Testament image slot" />
+      </button>
     </div>
   </section>
 
@@ -1489,15 +1429,23 @@ Here you go, Cal — **full updated code** with the **Old/New Testament blocks c
       }
     });
 
-    const testamentTrigger = document.getElementById("testamentTrigger");
-    const testamentPanel = document.getElementById("testamentPanel");
+    const testamentFractureStage = document.getElementById("testamentFractureStage");
 
-    if (testamentTrigger && testamentPanel) {
-      testamentTrigger.addEventListener("click", () => {
-        testamentPanel.classList.remove("active");
-        void testamentPanel.offsetWidth;
-        testamentPanel.classList.add("active");
-      });
+    if (testamentFractureStage) {
+      const testamentObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              testamentFractureStage.classList.add("in-view");
+            }
+          });
+        },
+        {
+          threshold: 0.35
+        }
+      );
+
+      testamentObserver.observe(testamentFractureStage);
     }
 
     const parallaxItems = document.querySelectorAll(".parallax-item");
@@ -1565,4 +1513,3 @@ Here you go, Cal — **full updated code** with the **Old/New Testament blocks c
   </script>
 </body>
 </html>
-```
