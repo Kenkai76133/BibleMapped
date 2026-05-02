@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Bible Mapped</title>
 
   <style>
@@ -61,48 +62,53 @@
       top: 0;
       z-index: 60;
       width: 100%;
-      background: rgba(248, 247, 242, 0.96);
-      border-bottom: 1px solid rgba(17, 19, 24, 0.08);
+      background: rgba(248, 247, 242, 0.98);
+      border-bottom: 1px solid rgba(17, 19, 24, 0.1);
       backdrop-filter: blur(12px);
     }
 
     .nav {
-      width: min(1240px, calc(100% - 48px));
+      width: 100%;
       height: 78px;
-      margin: 0 auto;
+      padding: 0 clamp(22px, 4vw, 72px);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 36px;
     }
 
     .brand {
-      font-size: 1.95rem;
+      font-size: clamp(1.55rem, 2vw, 2.05rem);
       font-weight: 950;
       letter-spacing: -0.06em;
       line-height: 1;
       color: var(--ink);
+      white-space: nowrap;
     }
 
     .nav-links {
+      flex: 1;
       display: flex;
       align-items: center;
-      gap: 34px;
-      font-weight: 850;
-      font-size: 1rem;
+      justify-content: flex-end;
+      gap: clamp(30px, 5vw, 86px);
+      font-weight: 900;
+      font-size: 0.96rem;
       color: var(--soft-ink);
     }
 
     .nav-links a {
-      transition: color 0.2s ease;
+      transition: color 0.2s ease, transform 0.2s ease;
     }
 
     .nav-links a:hover {
       color: var(--electric-purple);
+      transform: translateY(-1px);
     }
 
     /* =========================
        HERO
+       FIXED: no black line at bottom
     ========================= */
 
     .hero {
@@ -110,13 +116,16 @@
       min-height: 710px;
       padding: 72px 20px 0;
       overflow: hidden;
-      background: var(--ink);
+      background: var(--paper);
       color: var(--white);
     }
 
     .hero-bg {
       position: absolute;
-      inset: -70px 0;
+      top: -70px;
+      left: 0;
+      right: 0;
+      bottom: 120px;
       background-image: url("assets/bible-mapped-collage.png");
       background-size: cover;
       background-position: center;
@@ -130,7 +139,10 @@
 
     .hero-overlay {
       position: absolute;
-      inset: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 120px;
       background: rgba(11, 15, 25, 0.68);
       z-index: 1;
     }
@@ -405,19 +417,19 @@
     ========================= */
 
     .testament-panel-shell {
-      width: min(1120px, 100%);
-      margin: 18px auto 0;
+      width: min(1180px, 100%);
+      margin: 34px auto 0;
       position: relative;
       padding-bottom: 110px;
     }
 
     .testament-panel {
       position: relative;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(17, 19, 24, 0.08);
-      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.12);
-      border-radius: 40px;
-      padding: 28px;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      border-radius: 0;
+      padding: 0;
       opacity: 0;
       transform: translateY(42px);
       max-height: 0;
@@ -426,8 +438,7 @@
       transition:
         opacity 0.42s ease,
         transform 0.42s ease,
-        max-height 0.55s ease,
-        padding 0.42s ease;
+        max-height 0.55s ease;
     }
 
     .testament-panel.active {
@@ -437,52 +448,23 @@
       pointer-events: auto;
     }
 
-    .testament-panel::before {
-      content: "";
-      position: absolute;
-      top: -18px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 2px;
-      height: 18px;
-      background: rgba(17, 19, 24, 0.12);
-    }
-
-    .testament-panel::after {
-      content: "";
-      position: absolute;
-      top: -9px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 42px;
-      height: 18px;
-      background: var(--white);
-      border: 1px solid rgba(17, 19, 24, 0.08);
-      border-bottom: 0;
-      border-radius: 18px 18px 0 0;
-    }
-
     .panel-note {
-      margin: 0 0 24px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.6;
-      font-weight: 700;
+      display: none;
     }
 
     .testament-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      gap: clamp(22px, 3vw, 42px);
+      align-items: center;
     }
 
     .testament-card {
       position: relative;
       border-radius: 34px;
       overflow: hidden;
-      background: var(--white);
-      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.11);
+      background: transparent;
+      box-shadow: 0 30px 95px rgba(0, 0, 0, 0.16);
       opacity: 0;
       transform: translateY(38px);
       transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.35s ease;
@@ -503,13 +485,14 @@
 
     .testament-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.14);
+      box-shadow: 0 38px 110px rgba(0, 0, 0, 0.2);
     }
 
     .testament-cover {
       position: relative;
       width: 100%;
-      height: 440px;
+      aspect-ratio: 16 / 9;
+      height: auto;
       padding: 0;
       border: 0;
       cursor: pointer;
@@ -517,6 +500,7 @@
       background: var(--ink);
       display: block;
       text-align: left;
+      border-radius: 34px;
     }
 
     .testament-cover img {
@@ -533,27 +517,28 @@
 
     .testament-label {
       position: absolute;
-      left: 24px;
-      right: 24px;
-      bottom: 24px;
-      padding: 24px;
-      border-radius: 26px;
-      background: rgba(255, 255, 255, 0.95);
+      left: 22px;
+      right: 22px;
+      bottom: 22px;
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(248, 247, 242, 0.92);
       color: var(--ink);
-      border: 1px solid rgba(17, 19, 24, 0.1);
+      border: 0;
+      backdrop-filter: blur(10px);
     }
 
     .old-card .testament-label {
-      border-left: 9px solid var(--electric-purple);
+      border-left: 8px solid var(--electric-purple);
     }
 
     .new-card .testament-label {
-      border-left: 9px solid var(--navy);
+      border-left: 8px solid var(--navy);
     }
 
     .testament-label span {
       display: block;
-      font-size: clamp(2rem, 3.4vw, 3.3rem);
+      font-size: clamp(1.8rem, 3.1vw, 3rem);
       font-weight: 950;
       letter-spacing: -0.06em;
       line-height: 0.95;
@@ -562,7 +547,7 @@
     .testament-label small {
       display: block;
       margin-top: 10px;
-      font-size: 0.98rem;
+      font-size: 0.95rem;
       color: var(--soft-ink);
       font-weight: 800;
     }
@@ -736,6 +721,7 @@
         transform: translateY(18px) scale(0.96);
         opacity: 0;
       }
+
       to {
         transform: translateY(0) scale(1);
         opacity: 1;
@@ -835,10 +821,6 @@
         grid-template-columns: 1fr;
       }
 
-      .testament-cover {
-        height: 390px;
-      }
-
       .book-category-grid {
         grid-template-columns: 1fr;
       }
@@ -850,8 +832,8 @@
 
     @media (max-width: 720px) {
       .nav {
-        width: min(100% - 24px, 1240px);
         height: 72px;
+        padding: 0 18px;
       }
 
       .brand {
@@ -859,7 +841,10 @@
       }
 
       .nav-links {
-        display: none;
+        gap: 18px;
+        font-size: 0.88rem;
+        overflow-x: auto;
+        justify-content: flex-end;
       }
 
       .hero {
@@ -873,6 +858,11 @@
 
       .hero p {
         font-size: 1rem;
+      }
+
+      .hero-bg,
+      .hero-overlay {
+        bottom: 100px;
       }
 
       .ribbon-card {
@@ -898,14 +888,26 @@
         padding-bottom: 84px;
       }
 
+      .testament-grid {
+        grid-template-columns: 1fr;
+      }
+
       .testament-cover {
-        height: 330px;
+        aspect-ratio: 16 / 9;
+        height: auto;
+        border-radius: 28px;
+      }
+
+      .testament-card {
+        border-radius: 28px;
       }
 
       .testament-label {
-        left: 16px;
-        right: 16px;
-        bottom: 16px;
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+        padding: 18px;
+        border-radius: 20px;
       }
 
       .formula-modal-grid {
@@ -930,9 +932,10 @@
 
       <div class="nav-links">
         <a href="#testaments">Books</a>
-        <a href="#formula">Formula</a>
+        <a href="#people">People</a>
+        <a href="#map">Map</a>
+        <a href="#art">Art</a>
         <a href="#why">About</a>
-        <a href="#testaments">Explore</a>
       </div>
     </nav>
   </header>
@@ -1362,7 +1365,6 @@
       }
     });
 
-    /* Testament connected panel */
     const testamentTrigger = document.getElementById("testamentTrigger");
     const testamentPanel = document.getElementById("testamentPanel");
 
@@ -1372,7 +1374,6 @@
       });
     }
 
-    /* Parallax */
     const parallaxItems = document.querySelectorAll(".parallax-item");
     const hero = document.querySelector(".hero");
     const heroBg = document.querySelector(".hero-bg");
@@ -1391,6 +1392,7 @@
         const itemTop = rect.top + scrollY;
         const distanceFromCenter = scrollY + viewportHeight / 2 - itemTop;
         const movement = distanceFromCenter * speed;
+
         item.style.transform = `translate3d(0, ${movement}px, 0)`;
       });
 
