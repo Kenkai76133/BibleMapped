@@ -117,7 +117,7 @@
     .hero {
       position: relative;
       min-height: 710px;
-      padding: 84px 20px 0;
+      padding: 72px 20px 0;
       overflow: hidden;
       background: var(--ink);
       color: var(--white);
@@ -130,7 +130,8 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      opacity: 0.56;
+      opacity: 0.38;
+      filter: blur(1.5px) saturate(0.85);
       transform: scale(1.08);
       z-index: 0;
       will-change: transform;
@@ -139,7 +140,7 @@
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(11, 15, 25, 0.56);
+      background: rgba(11, 15, 25, 0.68);
       z-index: 1;
     }
 
@@ -151,35 +152,12 @@
       z-index: 3;
     }
 
-    .announcement {
-      width: fit-content;
-      max-width: 100%;
-      margin: 0 auto 30px;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 11px 16px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      font-weight: 900;
-      color: var(--ink);
-    }
-
-    .announcement span {
-      padding: 6px 10px;
-      border-radius: 10px;
-      background: var(--electric-purple);
-      color: var(--white);
-      font-size: 0.83rem;
-    }
-
     .hero h1 {
       margin: 0 auto;
-      max-width: 980px;
-      font-size: clamp(2.8rem, 8.2vw, 7rem);
-      line-height: 0.9;
-      letter-spacing: -0.08em;
+      max-width: 900px;
+      font-size: clamp(2.7rem, 7.2vw, 6.2rem);
+      line-height: 0.92;
+      letter-spacing: -0.075em;
       font-weight: 950;
       color: var(--white);
     }
@@ -227,7 +205,7 @@
     }
 
     /* =========================
-       HERO GALLERY - 2 OVERLAPPING ROWS
+       HERO GALLERY
     ========================= */
 
     .hero-moving-gallery {
@@ -338,8 +316,8 @@
     }
 
     .testament-intro {
-      max-width: 900px;
-      margin: 0 auto 64px;
+      max-width: 950px;
+      margin: 0 auto 34px;
       text-align: center;
     }
 
@@ -352,20 +330,21 @@
       color: var(--electric-purple);
     }
 
-    .testament-intro h2 {
-      margin: 0;
+    .testament-trigger {
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
       font-size: clamp(3rem, 7.4vw, 7rem);
       line-height: 0.92;
       letter-spacing: -0.07em;
       font-weight: 950;
+      transition: transform 0.25s ease, color 0.25s ease;
     }
 
-    .testament-intro p {
-      max-width: 720px;
-      margin: 26px auto 0;
-      font-size: clamp(1rem, 1.7vw, 1.22rem);
-      line-height: 1.6;
-      color: var(--soft-ink);
+    .testament-trigger:hover {
+      transform: translateY(-6px);
+      color: var(--electric-purple);
     }
 
     .testament-shell {
@@ -383,7 +362,24 @@
       overflow: hidden;
       background: var(--white);
       box-shadow: var(--shadow);
-      transition: transform 0.4s ease;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      opacity: 0;
+      transform: translateY(60px);
+      pointer-events: none;
+    }
+
+    .testament-shell.active .testament-card {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .testament-shell.active .testament-card:nth-child(1) {
+      transition-delay: 0.05s;
+    }
+
+    .testament-shell.active .testament-card:nth-child(2) {
+      transition-delay: 0.14s;
     }
 
     .testament-card:hover {
@@ -481,14 +477,6 @@
       transform: translateY(-7px);
     }
 
-    .formula-helper {
-      max-width: 680px;
-      margin: 24px auto 0;
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: var(--soft-ink);
-    }
-
     /* =========================
        WHY TRIGGER
     ========================= */
@@ -515,14 +503,6 @@
     .why-open-button:hover {
       color: var(--electric-purple);
       transform: translateY(-6px);
-    }
-
-    .why-helper {
-      margin: 22px auto 0;
-      max-width: 620px;
-      color: var(--soft-ink);
-      font-size: 1.05rem;
-      line-height: 1.6;
     }
 
     /* =========================
@@ -819,11 +799,6 @@
         padding: 70px 16px 18px;
       }
 
-      .announcement {
-        margin-bottom: 24px;
-        font-size: 0.83rem;
-      }
-
       .hero h1 {
         font-size: clamp(2.7rem, 15vw, 4.9rem);
       }
@@ -878,7 +853,6 @@
 </head>
 
 <body>
-  <!-- NAV -->
   <header class="site-header">
     <nav class="nav">
       <a href="index.html" class="brand">
@@ -896,17 +870,11 @@
     </nav>
   </header>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="hero-overlay" aria-hidden="true"></div>
 
     <div class="hero-inner parallax-item" data-speed="0.012">
-      <div class="announcement">
-        <span>New</span>
-        Explore Scripture through place, context, and meaning →
-      </div>
-
       <h1>Understand the Bible through place, context, and meaning.</h1>
 
       <p>
@@ -921,7 +889,6 @@
       </div>
 
       <div class="hero-moving-gallery">
-        <!-- ROW 1 -->
         <div class="hero-gallery-row">
           <div class="hero-gallery-track row-one" id="galleryRowOne">
             <div class="ribbon-card"><img src="images/hero-1.jpg" alt="Bible map image slot" /></div>
@@ -940,7 +907,6 @@
           </div>
         </div>
 
-        <!-- ROW 2 -->
         <div class="hero-gallery-row">
           <div class="hero-gallery-track row-two" id="galleryRowTwo">
             <div class="ribbon-card"><img src="images/hero-6.jpg" alt="Bible timeline image slot" /></div>
@@ -962,24 +928,18 @@
     </div>
   </section>
 
-  <!-- TESTAMENT EXPLORER -->
   <section class="testament-explorer" id="testaments">
     <div class="testament-intro parallax-item" data-speed="0.03">
       <p class="eyebrow">Begin the Journey</p>
-
-      <h2>Explore Scripture by Testament</h2>
-
-      <p>
-        Click the Old or New Testament to open a clean library window.
-        The books are organized by category, so the structure feels simple.
-      </p>
+      <button class="testament-trigger" id="testamentTrigger" type="button">
+        Explore Scripture by Testament
+      </button>
     </div>
 
-    <div class="testament-shell">
+    <div class="testament-shell" id="testamentShell">
       <article class="testament-card old-card parallax-item" data-speed="0.02">
         <button class="testament-cover" type="button" data-modal-target="oldTestamentModal">
           <img src="images/old-testament.jpg" alt="Old Testament image slot" />
-
           <div class="testament-label">
             <span>Old Testament</span>
             <small>Open the story before Christ</small>
@@ -990,7 +950,6 @@
       <article class="testament-card new-card parallax-item" data-speed="0.035">
         <button class="testament-cover" type="button" data-modal-target="newTestamentModal">
           <img src="images/new-testament.jpg" alt="New Testament image slot" />
-
           <div class="testament-label">
             <span>New Testament</span>
             <small>Open the story of Christ and the Church</small>
@@ -1000,29 +959,18 @@
     </div>
   </section>
 
-  <!-- FORMULA TRIGGER -->
   <section class="formula-trigger-section" id="formula">
     <button class="formula-open-button" type="button" data-modal-target="formulaModal">
       The Bible Mapped Formula
     </button>
-
-    <p class="formula-helper">
-      Click the red title to open the framework: where, who, when, and why it matters.
-    </p>
   </section>
 
-  <!-- WHY TRIGGER -->
   <section class="why-trigger-section" id="why">
     <button class="why-open-button" type="button" data-modal-target="whyModal">
       Why Bible Mapped Exists
     </button>
-
-    <p class="why-helper">
-      Click the title to open the story behind the mission.
-    </p>
   </section>
 
-  <!-- FORMULA MODAL -->
   <div class="modal-overlay" id="formulaModal" aria-hidden="true">
     <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="formulaModalTitle">
       <div class="modal-top">
@@ -1068,7 +1016,6 @@
     </div>
   </div>
 
-  <!-- OLD TESTAMENT MODAL -->
   <div class="modal-overlay" id="oldTestamentModal" aria-hidden="true">
     <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="oldModalTitle">
       <div class="modal-top">
@@ -1163,7 +1110,6 @@
     </div>
   </div>
 
-  <!-- NEW TESTAMENT MODAL -->
   <div class="modal-overlay" id="newTestamentModal" aria-hidden="true">
     <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="newModalTitle">
       <div class="modal-top">
@@ -1246,7 +1192,6 @@
     </div>
   </div>
 
-  <!-- WHY MODAL -->
   <div class="modal-overlay" id="whyModal" aria-hidden="true">
     <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="whyModalTitle">
       <div class="modal-top">
@@ -1289,6 +1234,8 @@
     const modalTriggers = document.querySelectorAll("[data-modal-target]");
     const modalCloseButtons = document.querySelectorAll("[data-modal-close]");
     const modals = document.querySelectorAll(".modal-overlay");
+    const testamentTrigger = document.getElementById("testamentTrigger");
+    const testamentShell = document.getElementById("testamentShell");
 
     function openModal(modalId) {
       const modal = document.getElementById(modalId);
@@ -1337,6 +1284,12 @@
       }
     });
 
+    if (testamentTrigger && testamentShell) {
+      testamentTrigger.addEventListener("click", () => {
+        testamentShell.classList.toggle("active");
+      });
+    }
+
     const parallaxItems = document.querySelectorAll(".parallax-item");
     const hero = document.querySelector(".hero");
     const heroBg = document.querySelector(".hero-bg");
@@ -1355,7 +1308,6 @@
         const itemTop = rect.top + scrollY;
         const distanceFromCenter = scrollY + viewportHeight / 2 - itemTop;
         const movement = distanceFromCenter * speed;
-
         item.style.transform = `translate3d(0, ${movement}px, 0)`;
       });
 
