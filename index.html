@@ -10,7 +10,7 @@
     :root {
       --cloud: #f8f7f2;
       --paper: #f1eee7;
-      --ink: #111318;
+      --ink: #0b0f19;
       --soft-ink: #3f4147;
       --muted: #6d6d73;
       --electric-purple: #6d28ff;
@@ -19,7 +19,7 @@
       --white: #ffffff;
       --line: rgba(17, 19, 24, 0.12);
       --shadow: 0 24px 70px rgba(0, 0, 0, 0.12);
-      --deep-shadow: 0 40px 120px rgba(0, 0, 0, 0.35);
+      --deep-shadow: 0 28px 90px rgba(0, 0, 0, 0.28);
     }
 
     * {
@@ -116,8 +116,8 @@
 
     .hero {
       position: relative;
-      min-height: 860px;
-      padding: 110px 20px 0;
+      min-height: 710px;
+      padding: 84px 20px 0;
       overflow: hidden;
       background: var(--ink);
       color: var(--white);
@@ -125,12 +125,12 @@
 
     .hero-bg {
       position: absolute;
-      inset: -80px 0;
-      background-image: url("images/hero-background.jpg");
+      inset: -70px 0;
+      background-image: url("assets/bible-mapped-collage.png");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      opacity: 0.58;
+      opacity: 0.56;
       transform: scale(1.08);
       z-index: 0;
       will-change: transform;
@@ -139,7 +139,7 @@
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(17, 19, 24, 0.48);
+      background: rgba(11, 15, 25, 0.56);
       z-index: 1;
     }
 
@@ -154,11 +154,11 @@
     .announcement {
       width: fit-content;
       max-width: 100%;
-      margin: 0 auto 44px;
+      margin: 0 auto 30px;
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      padding: 12px 18px;
+      padding: 11px 16px;
       border-radius: 16px;
       background: rgba(255, 255, 255, 0.9);
       border: 1px solid rgba(255, 255, 255, 0.2);
@@ -167,34 +167,34 @@
     }
 
     .announcement span {
-      padding: 7px 10px;
+      padding: 6px 10px;
       border-radius: 10px;
       background: var(--electric-purple);
       color: var(--white);
-      font-size: 0.85rem;
+      font-size: 0.83rem;
     }
 
     .hero h1 {
       margin: 0 auto;
-      max-width: 1050px;
-      font-size: clamp(3.4rem, 9.4vw, 8.8rem);
-      line-height: 0.88;
-      letter-spacing: -0.075em;
+      max-width: 980px;
+      font-size: clamp(2.8rem, 8.2vw, 7rem);
+      line-height: 0.9;
+      letter-spacing: -0.08em;
       font-weight: 950;
       color: var(--white);
     }
 
     .hero p {
-      max-width: 760px;
-      margin: 30px auto 0;
-      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      max-width: 780px;
+      margin: 26px auto 0;
+      font-size: clamp(1rem, 1.9vw, 1.22rem);
       line-height: 1.6;
-      color: rgba(255, 255, 255, 0.88);
+      color: rgba(255, 255, 255, 0.85);
       font-weight: 520;
     }
 
     .hero-actions {
-      margin-top: 38px;
+      margin-top: 32px;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -223,65 +223,99 @@
     .btn-light {
       background: transparent;
       color: var(--white);
-      border-color: rgba(255, 255, 255, 0.85);
+      border-color: rgba(255, 255, 255, 0.8);
     }
 
     /* =========================
-       OVERLAPPING SCROLL IMAGES
+       HERO GALLERY - 2 OVERLAPPING ROWS
     ========================= */
 
     .hero-moving-gallery {
       width: 100vw;
       margin-left: calc(50% - 50vw);
-      margin-top: 78px;
+      margin-top: 38px;
       overflow: hidden;
       position: relative;
       z-index: 4;
-      padding: 36px 0 62px;
+      padding: 8px 0 0;
+    }
+
+    .hero-gallery-row {
+      width: 100%;
+      position: relative;
+      overflow: visible;
+    }
+
+    .hero-gallery-row:first-child {
+      z-index: 1;
+    }
+
+    .hero-gallery-row:last-child {
+      margin-top: -68px;
+      z-index: 2;
     }
 
     .hero-gallery-track {
       display: flex;
       align-items: center;
       width: max-content;
-      transform: translate3d(-34%, 0, 0);
       will-change: transform;
-      padding-left: 48px;
-      padding-right: 48px;
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+
+    .hero-gallery-track.row-one {
+      transform: translate3d(-20%, 0, 0);
+    }
+
+    .hero-gallery-track.row-two {
+      transform: translate3d(-6%, 0, 0);
     }
 
     .ribbon-card {
-      width: 310px;
-      height: 198px;
+      width: 260px;
+      height: 152px;
       flex: 0 0 auto;
-      margin-left: -72px;
-      border-radius: 30px;
+      margin-left: -58px;
+      border-radius: 28px;
       overflow: hidden;
-      background: var(--paper);
+      background: #d8d5cf;
       box-shadow: var(--deep-shadow);
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      transform: rotate(-3deg);
+      border: 1px solid rgba(255, 255, 255, 0.22);
       transition: transform 0.35s ease;
+      position: relative;
     }
 
     .ribbon-card:first-child {
       margin-left: 0;
     }
 
-    .ribbon-card:nth-child(2n) {
-      transform: rotate(3deg) translateY(18px);
+    .row-one .ribbon-card:nth-child(2n) {
+      transform: rotate(3deg) translateY(12px);
     }
 
-    .ribbon-card:nth-child(3n) {
-      transform: rotate(-1deg) translateY(-14px);
+    .row-one .ribbon-card:nth-child(3n) {
+      transform: rotate(-3deg) translateY(-8px);
     }
 
-    .ribbon-card:nth-child(4n) {
-      transform: rotate(4deg) translateY(8px);
+    .row-one .ribbon-card:nth-child(4n) {
+      transform: rotate(1.5deg) translateY(6px);
+    }
+
+    .row-two .ribbon-card:nth-child(2n) {
+      transform: rotate(-3deg) translateY(-18px);
+    }
+
+    .row-two .ribbon-card:nth-child(3n) {
+      transform: rotate(3deg) translateY(-10px);
+    }
+
+    .row-two .ribbon-card:nth-child(4n) {
+      transform: rotate(-1.5deg) translateY(-14px);
     }
 
     .ribbon-card:hover {
-      transform: rotate(0deg) translateY(-12px) scale(1.04);
+      transform: rotate(0deg) translateY(-10px) scale(1.04);
       z-index: 10;
     }
 
@@ -298,7 +332,7 @@
     .testament-explorer {
       position: relative;
       overflow: hidden;
-      padding: 120px 22px 135px;
+      padding: 110px 22px 125px;
       background: var(--paper);
       color: var(--ink);
     }
@@ -349,7 +383,7 @@
       overflow: hidden;
       background: var(--white);
       box-shadow: var(--shadow);
-      transition: transform 0.4s ease, opacity 0.4s ease;
+      transition: transform 0.4s ease;
     }
 
     .testament-card:hover {
@@ -418,13 +452,13 @@
     }
 
     /* =========================
-       CLICKABLE FORMULA TITLE
+       FORMULA TRIGGER
     ========================= */
 
     .formula-trigger-section {
       position: relative;
       overflow: hidden;
-      padding: 120px 20px;
+      padding: 110px 20px;
       background: var(--cloud);
       text-align: center;
     }
@@ -434,8 +468,8 @@
       background: transparent;
       color: var(--bright-red);
       cursor: pointer;
-      font-size: clamp(3.1rem, 8.4vw, 8.2rem);
-      line-height: 0.88;
+      font-size: clamp(3rem, 8vw, 8rem);
+      line-height: 0.9;
       letter-spacing: -0.08em;
       font-weight: 950;
       text-align: center;
@@ -460,7 +494,7 @@
     ========================= */
 
     .why-trigger-section {
-      padding: 115px 20px;
+      padding: 110px 20px;
       background: var(--white);
       text-align: center;
     }
@@ -518,7 +552,7 @@
       border-radius: 38px;
       background: var(--cloud);
       color: var(--ink);
-      box-shadow: var(--deep-shadow);
+      box-shadow: 0 40px 120px rgba(0, 0, 0, 0.35);
       border: 1px solid rgba(255, 255, 255, 0.4);
       transform: translateY(28px) scale(0.96);
       opacity: 0;
@@ -627,10 +661,6 @@
       margin-top: 18px;
     }
 
-    /* =========================
-       BOOK CATEGORY MODALS
-    ========================= */
-
     .book-category-grid {
       margin-top: 40px;
       display: grid;
@@ -663,7 +693,6 @@
         transform: translateY(18px) scale(0.96);
         opacity: 0;
       }
-
       to {
         transform: translateY(0) scale(1);
         opacity: 1;
@@ -787,32 +816,35 @@
 
       .hero {
         min-height: auto;
-        padding-top: 78px;
+        padding: 70px 16px 18px;
       }
 
       .announcement {
-        margin-bottom: 38px;
-        font-size: 0.85rem;
+        margin-bottom: 24px;
+        font-size: 0.83rem;
       }
 
       .hero h1 {
-        font-size: clamp(3rem, 17vw, 5.3rem);
+        font-size: clamp(2.7rem, 15vw, 4.9rem);
+      }
+
+      .hero p {
+        font-size: 1rem;
       }
 
       .ribbon-card {
-        width: 230px;
-        height: 148px;
-        margin-left: -58px;
+        width: 210px;
+        height: 126px;
+        margin-left: -46px;
         border-radius: 24px;
       }
 
-      .hero-moving-gallery {
-        margin-top: 54px;
-        padding-bottom: 42px;
+      .hero-gallery-row:last-child {
+        margin-top: -56px;
       }
 
       .testament-explorer {
-        padding: 85px 16px 100px;
+        padding: 80px 16px 95px;
       }
 
       .testament-cover {
@@ -869,7 +901,7 @@
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="hero-overlay" aria-hidden="true"></div>
 
-    <div class="hero-inner parallax-item" data-speed="0.015">
+    <div class="hero-inner parallax-item" data-speed="0.012">
       <div class="announcement">
         <span>New</span>
         Explore Scripture through place, context, and meaning →
@@ -889,20 +921,42 @@
       </div>
 
       <div class="hero-moving-gallery">
-        <div class="hero-gallery-track">
-          <div class="ribbon-card"><img src="images/hero-1.jpg" alt="Bible map image slot" /></div>
-          <div class="ribbon-card"><img src="images/hero-2.jpg" alt="Bible art image slot" /></div>
-          <div class="ribbon-card"><img src="images/hero-3.jpg" alt="Scripture image slot" /></div>
-          <div class="ribbon-card"><img src="images/hero-4.jpg" alt="Ancient world image slot" /></div>
-          <div class="ribbon-card"><img src="images/hero-5.jpg" alt="Jerusalem image slot" /></div>
-          <div class="ribbon-card"><img src="images/hero-6.jpg" alt="Bible timeline image slot" /></div>
+        <!-- ROW 1 -->
+        <div class="hero-gallery-row">
+          <div class="hero-gallery-track row-one" id="galleryRowOne">
+            <div class="ribbon-card"><img src="images/hero-1.jpg" alt="Bible map image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-2.jpg" alt="Bible art image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-3.jpg" alt="Scripture image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-4.jpg" alt="Ancient world image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-5.jpg" alt="Jerusalem image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-6.jpg" alt="Bible timeline image slot" /></div>
 
-          <div class="ribbon-card"><img src="images/hero-1.jpg" alt="Bible map image slot" /></div>
-          <div class="ribbon-card"><img src="images/hero-2.jpg" alt="Bible art image slot" /></div>
-          <div class="ribbon-card"><img src="images/hero-3.jpg" alt="Scripture image slot" /></div>
-          <div class="ribbon-card"><img src="images/hero-4.jpg" alt="Ancient world image slot" /></div>
-          <div class="ribbon-card"><img src="images/hero-5.jpg" alt="Jerusalem image slot" /></div>
-          <div class="ribbon-card"><img src="images/hero-6.jpg" alt="Bible timeline image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-1.jpg" alt="Bible map image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-2.jpg" alt="Bible art image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-3.jpg" alt="Scripture image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-4.jpg" alt="Ancient world image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-5.jpg" alt="Jerusalem image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-6.jpg" alt="Bible timeline image slot" /></div>
+          </div>
+        </div>
+
+        <!-- ROW 2 -->
+        <div class="hero-gallery-row">
+          <div class="hero-gallery-track row-two" id="galleryRowTwo">
+            <div class="ribbon-card"><img src="images/hero-6.jpg" alt="Bible timeline image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-5.jpg" alt="Jerusalem image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-4.jpg" alt="Ancient world image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-3.jpg" alt="Scripture image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-2.jpg" alt="Bible art image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-1.jpg" alt="Bible map image slot" /></div>
+
+            <div class="ribbon-card"><img src="images/hero-6.jpg" alt="Bible timeline image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-5.jpg" alt="Jerusalem image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-4.jpg" alt="Ancient world image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-3.jpg" alt="Scripture image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-2.jpg" alt="Bible art image slot" /></div>
+            <div class="ribbon-card"><img src="images/hero-1.jpg" alt="Bible map image slot" /></div>
+          </div>
         </div>
       </div>
     </div>
@@ -910,7 +964,7 @@
 
   <!-- TESTAMENT EXPLORER -->
   <section class="testament-explorer" id="testaments">
-    <div class="testament-intro parallax-item" data-speed="0.035">
+    <div class="testament-intro parallax-item" data-speed="0.03">
       <p class="eyebrow">Begin the Journey</p>
 
       <h2>Explore Scripture by Testament</h2>
@@ -922,7 +976,7 @@
     </div>
 
     <div class="testament-shell">
-      <article class="testament-card old-card parallax-item" data-speed="0.025">
+      <article class="testament-card old-card parallax-item" data-speed="0.02">
         <button class="testament-cover" type="button" data-modal-target="oldTestamentModal">
           <img src="images/old-testament.jpg" alt="Old Testament image slot" />
 
@@ -933,7 +987,7 @@
         </button>
       </article>
 
-      <article class="testament-card new-card parallax-item" data-speed="0.045">
+      <article class="testament-card new-card parallax-item" data-speed="0.035">
         <button class="testament-cover" type="button" data-modal-target="newTestamentModal">
           <img src="images/new-testament.jpg" alt="New Testament image slot" />
 
@@ -1238,7 +1292,6 @@
 
     function openModal(modalId) {
       const modal = document.getElementById(modalId);
-
       if (!modal) return;
 
       modal.classList.add("active");
@@ -1247,6 +1300,8 @@
     }
 
     function closeModal(modal) {
+      if (!modal) return;
+
       modal.classList.remove("active");
       modal.setAttribute("aria-hidden", "true");
       document.body.classList.remove("modal-open");
@@ -1260,8 +1315,7 @@
 
     modalCloseButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        const modal = button.closest(".modal-overlay");
-        closeModal(modal);
+        closeModal(button.closest(".modal-overlay"));
       });
     });
 
@@ -1286,7 +1340,8 @@
     const parallaxItems = document.querySelectorAll(".parallax-item");
     const hero = document.querySelector(".hero");
     const heroBg = document.querySelector(".hero-bg");
-    const galleryTrack = document.querySelector(".hero-gallery-track");
+    const galleryRowOne = document.getElementById("galleryRowOne");
+    const galleryRowTwo = document.getElementById("galleryRowTwo");
 
     let ticking = false;
 
@@ -1298,7 +1353,6 @@
         const speed = Number(item.dataset.speed || 0.03);
         const rect = item.getBoundingClientRect();
         const itemTop = rect.top + scrollY;
-
         const distanceFromCenter = scrollY + viewportHeight / 2 - itemTop;
         const movement = distanceFromCenter * speed;
 
@@ -1312,13 +1366,12 @@
 
         const progress = (scrollY - heroTop) / heroHeight;
         const clamped = Math.max(0, Math.min(1, progress));
-
-        const bgMove = clamped * 70;
+        const bgMove = clamped * 55;
 
         heroBg.style.transform = `translate3d(0, ${bgMove}px, 0) scale(1.08)`;
       }
 
-      if (hero && galleryTrack) {
+      if (hero && galleryRowOne && galleryRowTwo) {
         const heroRect = hero.getBoundingClientRect();
         const heroTop = heroRect.top + scrollY;
         const heroHeight = hero.offsetHeight;
@@ -1326,9 +1379,11 @@
         const progress = (scrollY - heroTop) / heroHeight;
         const clamped = Math.max(0, Math.min(1, progress));
 
-        const horizontalMove = -34 + clamped * 38;
+        const rowOneMove = -20 + clamped * 24;
+        const rowTwoMove = -6 - clamped * 24;
 
-        galleryTrack.style.transform = `translate3d(${horizontalMove}%, 0, 0)`;
+        galleryRowOne.style.transform = `translate3d(${rowOneMove}%, 0, 0)`;
+        galleryRowTwo.style.transform = `translate3d(${rowTwoMove}%, 0, 0)`;
       }
 
       ticking = false;
