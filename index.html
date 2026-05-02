@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>BibleMapped</title>
 
   <style>
@@ -73,31 +74,18 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
       text-decoration: none;
       font-weight: 950;
-      letter-spacing: -0.04em;
-      font-size: 1.35rem;
-    }
-
-    .brand-mark {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      background: var(--purple);
-      color: var(--white);
-      display: grid;
-      place-items: center;
-      font-family: Georgia, serif;
+      letter-spacing: -0.05em;
       font-size: 1.5rem;
-      font-weight: 900;
+      color: var(--ink);
     }
 
     .nav-links {
       display: flex;
       align-items: center;
       gap: 26px;
-      font-weight: 800;
+      font-weight: 850;
       color: var(--soft-ink);
     }
 
@@ -116,7 +104,7 @@
       color: var(--white);
       border-radius: 999px;
       padding: 12px 18px;
-      font-weight: 900;
+      font-weight: 950;
       cursor: pointer;
       text-decoration: none;
     }
@@ -128,7 +116,7 @@
     .hero {
       position: relative;
       min-height: 760px;
-      padding: 92px 20px 130px;
+      padding: 92px 20px 90px;
       overflow: hidden;
       background: var(--cloud);
     }
@@ -213,28 +201,35 @@
       color: var(--ink);
     }
 
-    .hero-image-ribbon {
-      position: absolute;
-      left: 50%;
-      bottom: -76px;
-      width: 1500px;
-      height: 250px;
-      transform: translateX(-50%) rotate(-3deg);
+    /* Moving images under Enter BibleMapped */
+
+    .hero-moving-gallery {
+      width: min(1120px, 100%);
+      margin: 58px auto 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-gallery-track {
       display: flex;
       gap: 22px;
-      align-items: center;
-      pointer-events: none;
-      z-index: 1;
+      width: max-content;
+      animation: bibleMappedGalleryMove 38s linear infinite;
+    }
+
+    .hero-moving-gallery:hover .hero-gallery-track {
+      animation-play-state: paused;
     }
 
     .ribbon-card {
-      width: 240px;
-      height: 160px;
+      width: 250px;
+      height: 165px;
       flex: 0 0 auto;
       border-radius: 28px;
       overflow: hidden;
       background: var(--paper);
       box-shadow: var(--shadow);
+      border: 1px solid var(--line);
     }
 
     .ribbon-card img {
@@ -243,8 +238,18 @@
       object-fit: cover;
     }
 
+    @keyframes bibleMappedGalleryMove {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
     /* =========================
-       VALUE STRIP
+       VALUE SECTION
     ========================= */
 
     .value-section {
@@ -444,7 +449,7 @@
     }
 
     .testament-card.active .book-panel {
-      max-height: 1350px;
+      max-height: 1400px;
     }
 
     .panel-heading {
@@ -694,19 +699,37 @@
     }
 
     @media (max-width: 620px) {
-      .hero {
-        min-height: 720px;
-        padding-top: 70px;
+      .nav {
+        width: min(100% - 24px, 1240px);
       }
 
-      .hero-image-ribbon {
-        width: 1000px;
-        bottom: -45px;
+      .brand {
+        font-size: 1.28rem;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 70px;
+        padding-bottom: 70px;
+      }
+
+      .announcement {
+        margin-bottom: 38px;
+        font-size: 0.85rem;
+      }
+
+      .hero h1 {
+        font-size: clamp(3rem, 17vw, 5.3rem);
       }
 
       .ribbon-card {
-        width: 180px;
-        height: 125px;
+        width: 190px;
+        height: 128px;
+        border-radius: 22px;
+      }
+
+      .hero-moving-gallery {
+        margin-top: 42px;
       }
 
       .value-grid {
@@ -750,7 +773,6 @@
   <header class="site-header">
     <nav class="nav">
       <a href="index.html" class="brand">
-        <span class="brand-mark">B</span>
         <span>BibleMapped</span>
       </a>
 
@@ -767,7 +789,7 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-inner parallax-item" data-speed="0.04">
+    <div class="hero-inner parallax-item" data-speed="0.025">
       <div class="announcement">
         <span>New</span>
         Explore Scripture through place, context, and meaning →
@@ -785,31 +807,63 @@
         <a href="#testaments" class="btn btn-dark">Enter BibleMapped</a>
         <a href="#formula" class="btn btn-light">See How It Works</a>
       </div>
-    </div>
 
-    <div class="hero-image-ribbon parallax-item" data-speed="-0.03">
-      <div class="ribbon-card">
-        <img src="images/hero-1.jpg" alt="Bible map image slot" />
-      </div>
-      <div class="ribbon-card">
-        <img src="images/hero-2.jpg" alt="Bible art image slot" />
-      </div>
-      <div class="ribbon-card">
-        <img src="images/hero-3.jpg" alt="Scripture image slot" />
-      </div>
-      <div class="ribbon-card">
-        <img src="images/hero-4.jpg" alt="Ancient world image slot" />
-      </div>
-      <div class="ribbon-card">
-        <img src="images/hero-5.jpg" alt="Jerusalem image slot" />
-      </div>
-      <div class="ribbon-card">
-        <img src="images/hero-6.jpg" alt="Bible timeline image slot" />
+      <div class="hero-moving-gallery">
+        <div class="hero-gallery-track">
+          <div class="ribbon-card">
+            <img src="images/hero-1.jpg" alt="Bible map image slot" />
+          </div>
+
+          <div class="ribbon-card">
+            <img src="images/hero-2.jpg" alt="Bible art image slot" />
+          </div>
+
+          <div class="ribbon-card">
+            <img src="images/hero-3.jpg" alt="Scripture image slot" />
+          </div>
+
+          <div class="ribbon-card">
+            <img src="images/hero-4.jpg" alt="Ancient world image slot" />
+          </div>
+
+          <div class="ribbon-card">
+            <img src="images/hero-5.jpg" alt="Jerusalem image slot" />
+          </div>
+
+          <div class="ribbon-card">
+            <img src="images/hero-6.jpg" alt="Bible timeline image slot" />
+          </div>
+
+          <!-- duplicated for smooth movement -->
+          <div class="ribbon-card">
+            <img src="images/hero-1.jpg" alt="Bible map image slot" />
+          </div>
+
+          <div class="ribbon-card">
+            <img src="images/hero-2.jpg" alt="Bible art image slot" />
+          </div>
+
+          <div class="ribbon-card">
+            <img src="images/hero-3.jpg" alt="Scripture image slot" />
+          </div>
+
+          <div class="ribbon-card">
+            <img src="images/hero-4.jpg" alt="Ancient world image slot" />
+          </div>
+
+          <div class="ribbon-card">
+            <img src="images/hero-5.jpg" alt="Jerusalem image slot" />
+          </div>
+
+          <div class="ribbon-card">
+            <img src="images/hero-6.jpg" alt="Bible timeline image slot" />
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- VALUE -->
+  <!-- VALUE SECTION -->
   <section class="value-section">
     <div class="value-inner">
       <h2>Watch. Study. Map. Explore.</h2>
@@ -846,7 +900,9 @@
   <section class="testament-explorer" id="testaments">
     <div class="testament-intro parallax-item" data-speed="0.035">
       <p class="eyebrow">Begin the Journey</p>
+
       <h2>Explore Scripture by Testament</h2>
+
       <p>
         Open the Old or New Testament, choose a book, and land on that book’s
         page for maps, people, context, themes, and meaning.
@@ -858,6 +914,7 @@
       <article class="testament-card old-card parallax-item" data-speed="0.025">
         <button class="testament-cover" type="button" data-testament="old">
           <img src="images/old-testament.jpg" alt="Old Testament image slot" />
+
           <div class="testament-label">
             <span>Old Testament</span>
             <small>Open the story before Christ</small>
@@ -918,6 +975,7 @@
       <article class="testament-card new-card parallax-item" data-speed="0.045">
         <button class="testament-cover" type="button" data-testament="new">
           <img src="images/new-testament.jpg" alt="New Testament image slot" />
+
           <div class="testament-label">
             <span>New Testament</span>
             <small>Open the story of Christ and the Church</small>
@@ -968,7 +1026,9 @@
   <section class="formula-section" id="formula">
     <div class="formula-inner">
       <p class="eyebrow">The BibleMapped Formula</p>
+
       <h2>Where did it happen?</h2>
+
       <p>
         When someone says they have proof, most people ask: where? BibleMapped
         helps you ask that same question of Scripture — then follow the trail.
@@ -1004,7 +1064,9 @@
   <section class="story-section" id="story">
     <div class="story-inner">
       <p class="eyebrow">Why BibleMapped Exists</p>
+
       <h2>The Bible does not hang above history.</h2>
+
       <p>
         It unfolds within history — through real places, real people, real
         timelines, and real meaning. BibleMapped was created to help people see
@@ -1013,12 +1075,15 @@
 
       <div class="story-card parallax-item" data-speed="0.035">
         <img src="images/story-image.jpg" alt="BibleMapped story image slot" />
+
         <div class="story-card-content">
           <h3>Follow the trail of Scripture.</h3>
+
           <p>
             From Eden to Abraham, from Egypt to Sinai, from Jerusalem to the
             cross, and from the empty tomb to the hope of all things.
           </p>
+
           <a href="#testaments" class="btn btn-dark">Start Mapping Scripture</a>
         </div>
       </div>
@@ -1062,9 +1127,7 @@
         const itemTop = rect.top + scrollY;
         const viewportHeight = window.innerHeight;
 
-        const distanceFromCenter =
-          scrollY + viewportHeight / 2 - itemTop;
-
+        const distanceFromCenter = scrollY + viewportHeight / 2 - itemTop;
         const movement = distanceFromCenter * speed;
 
         item.style.transform = `translate3d(0, ${movement}px, 0)`;
