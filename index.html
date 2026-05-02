@@ -419,177 +419,104 @@
     }
 
     /* =========================
-       TESTAMENT FRACTURE REVEAL
+       TESTAMENT PUZZLE REVEAL
     ========================= */
 
-    .testament-fracture-section {
-      padding-bottom: 130px;
+    .testament-puzzle-section {
+      padding-bottom: 140px;
       overflow: hidden;
     }
 
-    .testament-fracture-stage {
+    .testament-puzzle-stage {
+      width: min(1240px, 100%);
+      margin: 72px auto 0;
+      padding: 0 20px;
       position: relative;
-      width: min(1180px, 100%);
-      height: clamp(520px, 62vw, 760px);
-      margin: 64px auto 0;
+    }
+
+    .testament-puzzle-frame {
+      position: relative;
+      width: 100%;
+      height: clamp(420px, 42vw, 560px);
+      border-radius: 38px;
+      overflow: visible;
       isolation: isolate;
     }
 
-    .testament-center-word {
+    .testament-puzzle-shadow {
       position: absolute;
-      left: 50%;
-      top: 50%;
-      z-index: 3;
-      transform: translate(-50%, -50%) scale(0.88);
-      font-size: clamp(3.5rem, 10vw, 11rem);
-      line-height: 0.84;
-      letter-spacing: -0.09em;
-      font-weight: 950;
-      color: rgba(11, 15, 25, 0);
-      text-transform: uppercase;
-      pointer-events: none;
-      transition:
-        color 0.8s ease,
-        transform 0.8s ease,
-        opacity 0.8s ease;
+      left: 4%;
+      right: 4%;
+      bottom: -28px;
+      height: 70px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.24);
+      filter: blur(34px);
+      z-index: 0;
       opacity: 0;
+      transition: opacity 0.7s ease 0.45s;
+      pointer-events: none;
     }
 
-    .testament-fracture-stage.in-view .testament-center-word {
-      color: rgba(11, 15, 25, 0.96);
+    .testament-puzzle-frame.in-view .testament-puzzle-shadow {
       opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
     }
 
-    .fracture-piece {
+    .puzzle-piece {
       position: absolute;
-      display: block;
       padding: 0;
       border: 0;
       overflow: hidden;
       background: #d8d5cf;
       cursor: pointer;
-      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.18);
-      transition:
-        transform 1.1s cubic-bezier(0.16, 0.9, 0.22, 1),
-        opacity 0.8s ease,
-        box-shadow 0.35s ease,
-        filter 0.8s ease;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.2);
       opacity: 0;
-      filter: saturate(0.82) contrast(0.96);
+      filter: saturate(0.82) contrast(0.95);
+      transition:
+        transform 1.15s cubic-bezier(0.16, 0.9, 0.22, 1),
+        opacity 0.65s ease,
+        filter 0.8s ease,
+        box-shadow 0.35s ease;
+      z-index: 2;
     }
 
-    .fracture-piece:hover {
-      box-shadow: 0 42px 120px rgba(0, 0, 0, 0.26);
-      filter: saturate(1.04) contrast(1.04);
-      z-index: 7;
-    }
-
-    .fracture-piece img {
+    .puzzle-piece img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transform: scale(1.04);
+      transition: transform 0.7s ease;
     }
 
-    /* LEFT SIDE: Old Testament — 3 fragments */
-    .old-piece-one {
-      width: 38%;
-      height: 33%;
-      left: 2%;
-      top: 8%;
-      z-index: 2;
-      border-radius: 34px 12px 18px 34px;
-      clip-path: polygon(0 0, 95% 0, 82% 100%, 0 86%);
-      transform: translateX(-180px) translateY(36px) rotate(-5deg);
+    .puzzle-piece:hover {
+      filter: saturate(1.04) contrast(1.04);
+      box-shadow: 0 40px 110px rgba(0, 0, 0, 0.28);
+      z-index: 8;
     }
 
-    .old-piece-two {
-      width: 32%;
-      height: 38%;
-      left: 6%;
-      top: 32%;
-      z-index: 4;
-      border-radius: 24px 10px 24px 30px;
-      clip-path: polygon(0 8%, 100% 0, 82% 88%, 0 100%);
-      transform: translateX(-230px) translateY(18px) rotate(4deg);
+    .puzzle-piece:hover img {
+      transform: scale(1.1);
     }
 
-    .old-piece-three {
-      width: 39%;
-      height: 27%;
-      left: 0%;
-      bottom: 8%;
-      z-index: 2;
-      border-radius: 22px 14px 34px 34px;
-      clip-path: polygon(0 0, 92% 18%, 100% 100%, 0 100%);
-      transform: translateX(-190px) translateY(50px) rotate(-3deg);
-    }
-
-    /* RIGHT SIDE: New Testament — 2 fragments */
-    .new-piece-one {
-      width: 39%;
-      height: 42%;
-      right: 3%;
-      top: 10%;
-      z-index: 2;
-      border-radius: 14px 34px 18px 12px;
-      clip-path: polygon(12% 0, 100% 0, 100% 88%, 0 100%);
-      transform: translateX(210px) translateY(34px) rotate(4deg);
-    }
-
-    .new-piece-two {
-      width: 43%;
-      height: 34%;
-      right: 0%;
-      bottom: 10%;
-      z-index: 4;
-      border-radius: 14px 24px 34px 16px;
-      clip-path: polygon(0 8%, 100% 0, 100% 100%, 14% 92%);
-      transform: translateX(240px) translateY(46px) rotate(-4deg);
-    }
-
-    .testament-fracture-stage.in-view .fracture-piece {
-      opacity: 1;
-    }
-
-    .testament-fracture-stage.in-view .old-piece-one {
-      transform: translateX(34px) translateY(0) rotate(-1deg);
-    }
-
-    .testament-fracture-stage.in-view .old-piece-two {
-      transform: translateX(64px) translateY(0) rotate(1deg);
-    }
-
-    .testament-fracture-stage.in-view .old-piece-three {
-      transform: translateX(46px) translateY(-8px) rotate(-1deg);
-    }
-
-    .testament-fracture-stage.in-view .new-piece-one {
-      transform: translateX(-42px) translateY(0) rotate(1deg);
-    }
-
-    .testament-fracture-stage.in-view .new-piece-two {
-      transform: translateX(-62px) translateY(-6px) rotate(-1deg);
-    }
-
-    .fracture-piece::after {
+    .puzzle-piece::after {
       content: "";
       position: absolute;
       inset: 0;
       background:
         linear-gradient(
           to bottom,
-          rgba(11, 15, 25, 0.03),
-          rgba(11, 15, 25, 0.18)
+          rgba(11, 15, 25, 0.08),
+          rgba(11, 15, 25, 0.44)
         );
       pointer-events: none;
+      z-index: 2;
     }
 
-    .fracture-piece::before {
+    .puzzle-piece::before {
       position: absolute;
       left: 18px;
       bottom: 18px;
-      z-index: 3;
+      z-index: 6;
       padding: 9px 13px;
       border-radius: 999px;
       background: rgba(248, 247, 242, 0.92);
@@ -610,9 +537,127 @@
       content: "Open New Testament";
     }
 
-    .fracture-piece:hover::before {
+    .puzzle-piece:hover::before {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    /* Final puzzle layout: all five pieces form one rectangle */
+    .old-puzzle-one {
+      left: 0;
+      top: 0;
+      width: 29%;
+      height: 50%;
+      border-radius: 34px 0 0 0;
+      clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
+      transform: translate(-130px, -46px) rotate(-4deg);
+    }
+
+    .old-puzzle-two {
+      left: 0;
+      top: 50%;
+      width: 29%;
+      height: 50%;
+      border-radius: 0 0 0 34px;
+      clip-path: polygon(0 0, 88% 0, 100% 100%, 0 100%);
+      transform: translate(-150px, 46px) rotate(4deg);
+    }
+
+    .old-puzzle-three {
+      left: 25%;
+      top: 0;
+      width: 27%;
+      height: 100%;
+      clip-path: polygon(13% 0, 100% 0, 86% 100%, 0 100%);
+      transform: translate(-70px, 0) rotate(-3deg);
+    }
+
+    .new-puzzle-one {
+      left: 49%;
+      top: 0;
+      width: 28%;
+      height: 100%;
+      clip-path: polygon(11% 0, 100% 0, 86% 100%, 0 100%);
+      transform: translate(75px, 0) rotate(3deg);
+    }
+
+    .new-puzzle-two {
+      left: 74%;
+      top: 0;
+      width: 26%;
+      height: 100%;
+      border-radius: 0 34px 34px 0;
+      clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%);
+      transform: translate(140px, 0) rotate(-4deg);
+    }
+
+    .testament-puzzle-frame.in-view .puzzle-piece {
+      opacity: 1;
+      filter: saturate(0.95) contrast(1);
+      transform: translate(0, 0) rotate(0deg);
+    }
+
+    .testament-puzzle-frame.in-view .old-puzzle-one {
+      transition-delay: 0.04s;
+    }
+
+    .testament-puzzle-frame.in-view .old-puzzle-two {
+      transition-delay: 0.12s;
+    }
+
+    .testament-puzzle-frame.in-view .old-puzzle-three {
+      transition-delay: 0.2s;
+    }
+
+    .testament-puzzle-frame.in-view .new-puzzle-one {
+      transition-delay: 0.28s;
+    }
+
+    .testament-puzzle-frame.in-view .new-puzzle-two {
+      transition-delay: 0.36s;
+    }
+
+    .testament-word {
+      position: absolute;
+      inset: 0;
+      z-index: 6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(0.92);
+      transition:
+        opacity 0.9s ease 0.8s,
+        transform 0.9s ease 0.8s;
+    }
+
+    .testament-word span {
+      font-size: clamp(3.2rem, 10vw, 10.8rem);
+      line-height: 0.82;
+      font-weight: 950;
+      letter-spacing: -0.09em;
+      color: rgba(255, 255, 255, 0.96);
+      text-transform: uppercase;
+      text-shadow:
+        0 14px 50px rgba(0, 0, 0, 0.55),
+        0 2px 1px rgba(0, 0, 0, 0.22);
+      mix-blend-mode: normal;
+    }
+
+    .testament-puzzle-frame.in-view .testament-word {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .puzzle-hint {
+      margin: 42px auto 0;
+      max-width: 760px;
+      text-align: center;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--muted);
+      font-weight: 700;
     }
 
     /* =========================
@@ -948,69 +993,66 @@
         padding-bottom: 90px;
       }
 
-      .testament-fracture-section {
+      .testament-puzzle-section {
         padding-bottom: 90px;
       }
 
-      .testament-fracture-stage {
-        height: 650px;
+      .testament-puzzle-stage {
         margin-top: 44px;
+        padding: 0 10px;
       }
 
-      .testament-center-word {
-        font-size: clamp(3rem, 17vw, 5.8rem);
-        top: 48%;
+      .testament-puzzle-frame {
+        height: 620px;
+        border-radius: 28px;
       }
 
-      .old-piece-one,
-      .old-piece-two,
-      .old-piece-three,
-      .new-piece-one,
-      .new-piece-two {
-        width: 74%;
-        height: 150px;
-        left: 13%;
-        right: auto;
+      .old-puzzle-one,
+      .old-puzzle-two,
+      .old-puzzle-three,
+      .new-puzzle-one,
+      .new-puzzle-two {
+        left: 8%;
+        width: 84%;
+        height: 130px;
         clip-path: none;
         border-radius: 26px;
       }
 
-      .old-piece-one {
+      .old-puzzle-one {
         top: 0;
-        transform: translateX(-120px) translateY(20px) rotate(-3deg);
+        transform: translate(-90px, 0) rotate(-3deg);
       }
 
-      .old-piece-two {
-        top: 105px;
-        transform: translateX(-140px) translateY(20px) rotate(2deg);
+      .old-puzzle-two {
+        top: 96px;
+        transform: translate(-105px, 0) rotate(2deg);
       }
 
-      .old-piece-three {
-        top: 210px;
-        bottom: auto;
-        transform: translateX(-120px) translateY(20px) rotate(-2deg);
+      .old-puzzle-three {
+        top: 192px;
+        transform: translate(-90px, 0) rotate(-2deg);
       }
 
-      .new-piece-one {
-        top: 365px;
-        transform: translateX(120px) translateY(20px) rotate(2deg);
+      .new-puzzle-one {
+        top: 360px;
+        transform: translate(90px, 0) rotate(2deg);
       }
 
-      .new-piece-two {
-        top: 470px;
-        bottom: auto;
-        transform: translateX(140px) translateY(20px) rotate(-2deg);
+      .new-puzzle-two {
+        top: 456px;
+        transform: translate(105px, 0) rotate(-2deg);
       }
 
-      .testament-fracture-stage.in-view .old-piece-one,
-      .testament-fracture-stage.in-view .old-piece-two,
-      .testament-fracture-stage.in-view .old-piece-three,
-      .testament-fracture-stage.in-view .new-piece-one,
-      .testament-fracture-stage.in-view .new-piece-two {
-        transform: translateX(0) translateY(0) rotate(0deg);
+      .testament-word {
+        align-items: center;
       }
 
-      .fracture-piece::before {
+      .testament-word span {
+        font-size: clamp(3rem, 17vw, 5.7rem);
+      }
+
+      .puzzle-piece::before {
         opacity: 1;
         transform: translateY(0);
       }
@@ -1103,7 +1145,7 @@
     </div>
   </section>
 
-  <section class="statement-section testament-fracture-section" id="testaments">
+  <section class="statement-section testament-puzzle-section" id="testaments">
     <div class="section-rail">
       <p class="rail-eyebrow">Begin the Journey</p>
       <div class="section-display explore-display">
@@ -1111,28 +1153,38 @@
       </div>
     </div>
 
-    <div class="testament-fracture-stage" id="testamentFractureStage">
-      <div class="testament-center-word" aria-hidden="true">TESTAMENT</div>
+    <div class="testament-puzzle-stage">
+      <div class="testament-puzzle-frame" id="testamentPuzzleFrame">
+        <div class="testament-puzzle-shadow" aria-hidden="true"></div>
 
-      <button class="fracture-piece old-piece old-piece-one" type="button" data-modal-target="oldTestamentModal">
-        <img src="images/old-fracture-1.jpg" alt="Old Testament image slot" />
-      </button>
+        <button class="puzzle-piece old-piece old-puzzle-one" type="button" data-modal-target="oldTestamentModal">
+          <img src="images/old-puzzle-1.jpg" alt="Old Testament puzzle image slot" />
+        </button>
 
-      <button class="fracture-piece old-piece old-piece-two" type="button" data-modal-target="oldTestamentModal">
-        <img src="images/old-fracture-2.jpg" alt="Old Testament image slot" />
-      </button>
+        <button class="puzzle-piece old-piece old-puzzle-two" type="button" data-modal-target="oldTestamentModal">
+          <img src="images/old-puzzle-2.jpg" alt="Old Testament puzzle image slot" />
+        </button>
 
-      <button class="fracture-piece old-piece old-piece-three" type="button" data-modal-target="oldTestamentModal">
-        <img src="images/old-fracture-3.jpg" alt="Old Testament image slot" />
-      </button>
+        <button class="puzzle-piece old-piece old-puzzle-three" type="button" data-modal-target="oldTestamentModal">
+          <img src="images/old-puzzle-3.jpg" alt="Old Testament puzzle image slot" />
+        </button>
 
-      <button class="fracture-piece new-piece new-piece-one" type="button" data-modal-target="newTestamentModal">
-        <img src="images/new-fracture-1.jpg" alt="New Testament image slot" />
-      </button>
+        <button class="puzzle-piece new-piece new-puzzle-one" type="button" data-modal-target="newTestamentModal">
+          <img src="images/new-puzzle-1.jpg" alt="New Testament puzzle image slot" />
+        </button>
 
-      <button class="fracture-piece new-piece new-piece-two" type="button" data-modal-target="newTestamentModal">
-        <img src="images/new-fracture-2.jpg" alt="New Testament image slot" />
-      </button>
+        <button class="puzzle-piece new-piece new-puzzle-two" type="button" data-modal-target="newTestamentModal">
+          <img src="images/new-puzzle-2.jpg" alt="New Testament puzzle image slot" />
+        </button>
+
+        <div class="testament-word" aria-hidden="true">
+          <span>TESTAMENT</span>
+        </div>
+      </div>
+
+      <p class="puzzle-hint">
+        The Old and New Testament pieces come together as one story. Click the left side for the Old Testament or the right side for the New Testament.
+      </p>
     </div>
   </section>
 
@@ -1429,14 +1481,14 @@
       }
     });
 
-    const testamentFractureStage = document.getElementById("testamentFractureStage");
+    const testamentPuzzleFrame = document.getElementById("testamentPuzzleFrame");
 
-    if (testamentFractureStage) {
+    if (testamentPuzzleFrame) {
       const testamentObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              testamentFractureStage.classList.add("in-view");
+              testamentPuzzleFrame.classList.add("in-view");
             }
           });
         },
@@ -1445,7 +1497,7 @@
         }
       );
 
-      testamentObserver.observe(testamentFractureStage);
+      testamentObserver.observe(testamentPuzzleFrame);
     }
 
     const parallaxItems = document.querySelectorAll(".parallax-item");
