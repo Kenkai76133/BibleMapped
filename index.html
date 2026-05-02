@@ -205,32 +205,68 @@
     }
 
     /* =========================
-       HERO GALLERY
+       HERO GALLERY - 2 OVERLAPPING ROWS
+       WITH EDGE FADE + SHADOW
     ========================= */
 
     .hero-moving-gallery {
       width: 100vw;
       margin-left: calc(50% - 50vw);
       margin-top: 38px;
-      overflow: hidden;
+      overflow: visible;
       position: relative;
       z-index: 4;
-      padding: 8px 0 0;
+      padding: 8px 0 56px;
+    }
+
+    .hero-moving-gallery::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 10px;
+      transform: translateX(-50%);
+      width: min(94%, 1400px);
+      height: 42px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.24);
+      filter: blur(28px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-moving-gallery::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 120px;
+      pointer-events: none;
+      z-index: 6;
+      background: linear-gradient(
+        to bottom,
+        rgba(241, 238, 231, 0) 0%,
+        rgba(241, 238, 231, 0.16) 26%,
+        rgba(241, 238, 231, 0.46) 54%,
+        rgba(241, 238, 231, 0.78) 78%,
+        var(--paper) 100%
+      );
     }
 
     .hero-gallery-row {
       width: 100%;
       position: relative;
       overflow: visible;
+      z-index: 3;
     }
 
     .hero-gallery-row:first-child {
-      z-index: 1;
+      z-index: 3;
     }
 
     .hero-gallery-row:last-child {
       margin-top: -68px;
-      z-index: 2;
+      z-index: 4;
     }
 
     .hero-gallery-track {
@@ -240,6 +276,8 @@
       will-change: transform;
       padding-left: 40px;
       padding-right: 40px;
+      position: relative;
+      z-index: 3;
     }
 
     .hero-gallery-track.row-one {
@@ -262,6 +300,7 @@
       border: 1px solid rgba(255, 255, 255, 0.22);
       transition: transform 0.35s ease;
       position: relative;
+      z-index: 3;
     }
 
     .ribbon-card:first-child {
@@ -818,6 +857,10 @@
         margin-top: -56px;
       }
 
+      .hero-moving-gallery {
+        padding-bottom: 46px;
+      }
+
       .testament-explorer {
         padding: 80px 16px 95px;
       }
@@ -937,7 +980,7 @@
     </div>
 
     <div class="testament-shell" id="testamentShell">
-      <article class="testament-card old-card parallax-item" data-speed="0.02">
+      <article class="testament-card old-card">
         <button class="testament-cover" type="button" data-modal-target="oldTestamentModal">
           <img src="images/old-testament.jpg" alt="Old Testament image slot" />
           <div class="testament-label">
@@ -947,7 +990,7 @@
         </button>
       </article>
 
-      <article class="testament-card new-card parallax-item" data-speed="0.035">
+      <article class="testament-card new-card">
         <button class="testament-cover" type="button" data-modal-target="newTestamentModal">
           <img src="images/new-testament.jpg" alt="New Testament image slot" />
           <div class="testament-label">
