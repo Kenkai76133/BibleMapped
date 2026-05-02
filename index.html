@@ -107,36 +107,35 @@
     }
 
     /* =========================
-       HERO RESTORED
+       HERO WITH BACKGROUND IMAGE
     ========================= */
 
     .hero {
       position: relative;
-      min-height: 820px;
+      min-height: 850px;
       padding: 110px 20px 0;
       overflow: hidden;
       background: var(--ink);
       color: var(--white);
     }
 
-    .hero::before {
-      content: "";
+    .hero-bg {
       position: absolute;
-      inset: 0;
-      background-image: url("images/hero-1.jpg");
+      inset: -80px 0;
+      background-image: url("images/hero-background.jpg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      opacity: 0.42;
-      transform: scale(1.05);
+      opacity: 0.58;
+      transform: scale(1.08);
       z-index: 0;
+      will-change: transform;
     }
 
-    .hero::after {
-      content: "";
+    .hero-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(17, 19, 24, 0.42);
+      background: rgba(17, 19, 24, 0.48);
       z-index: 1;
     }
 
@@ -224,8 +223,7 @@
     }
 
     /* =========================
-       FULL-WIDTH MOVING IMAGE WALL
-       Left side to right side
+       SCROLL-BASED IMAGE PARALLAX
     ========================= */
 
     .hero-moving-gallery {
@@ -235,19 +233,15 @@
       overflow: hidden;
       position: relative;
       z-index: 4;
-      padding: 0 0 44px;
+      padding: 0 0 48px;
     }
 
     .hero-gallery-track {
       display: flex;
       gap: 22px;
       width: max-content;
-      animation: bibleMappedGalleryMoveRight 42s linear infinite;
+      transform: translate3d(-32%, 0, 0);
       will-change: transform;
-    }
-
-    .hero-moving-gallery:hover .hero-gallery-track {
-      animation-play-state: paused;
     }
 
     .ribbon-card {
@@ -265,16 +259,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-    }
-
-    @keyframes bibleMappedGalleryMoveRight {
-      from {
-        transform: translateX(-50%);
-      }
-
-      to {
-        transform: translateX(0);
-      }
     }
 
     /* =========================
@@ -602,7 +586,7 @@
     }
 
     /* =========================
-       ELECTRIC PURPLE FOOTER / BANNER
+       ELECTRIC PURPLE FOOTER
     ========================= */
 
     .footer {
@@ -740,7 +724,10 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-inner parallax-item" data-speed="0.025">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="hero-inner parallax-item" data-speed="0.015">
       <div class="announcement">
         <span>New</span>
         Explore Scripture through place, context, and meaning →
@@ -780,7 +767,6 @@
             <img src="images/hero-6.jpg" alt="Bible timeline image slot" />
           </div>
 
-          <!-- duplicate set for seamless wall-to-wall movement -->
           <div class="ribbon-card">
             <img src="images/hero-1.jpg" alt="Bible map image slot" />
           </div>
@@ -1024,22 +1010,56 @@
     });
 
     const parallaxItems = document.querySelectorAll(".parallax-item");
+    const hero = document.querySelector(".hero");
+    const heroBg = document.querySelector(".hero-bg");
+    const galleryTrack = document.querySelector(".hero-gallery-track");
+
     let ticking = false;
 
     function updateParallax() {
       const scrollY = window.scrollY;
+      const viewportHeight = window.innerHeight;
 
       parallaxItems.forEach((item) => {
         const speed = Number(item.dataset.speed || 0.03);
         const rect = item.getBoundingClientRect();
         const itemTop = rect.top + scrollY;
-        const viewportHeight = window.innerHeight;
 
         const distanceFromCenter = scrollY + viewportHeight / 2 - itemTop;
         const movement = distanceFromCenter * speed;
 
         item.style.transform = `translate3d(0, ${movement}px, 0)`;
       });
+
+      if (hero && heroBg) {
+        const heroRect = hero.getBoundingClientRect();
+        const heroTop = heroRect.top + scrollY;
+        const heroHeight = hero.offsetHeight;
+
+        const progress = (scrollY - heroTop) / heroHeight;
+        const clamped = Math.max(0, Math.min(1, progress));
+
+        const bgMove = clamped * 70;
+
+        heroBg.style.transform = `translate3d(0, ${bgMove}px, 0) scale(1.08)`;
+      }
+
+      if (hero && galleryTrack) {
+        const heroRect = hero.getBoundingClientRect();
+        const heroTop = heroRect.top + scrollY;
+        const heroHeight = hero.offsetHeight;
+
+        const progress = (scrollY - heroTop) / heroHeight;
+        const clamped = Math.max(0, Math.min(1, progress));
+
+        /*
+          Scroll movement:
+          starts pushed left, then glides right as the user scrolls.
+        */
+        const horizontalMove = -32 + clamped * 32;
+
+        galleryTrack.style.transform = `translate3d(${horizontalMove}%, 0, 0)`;
+      }
 
       ticking = false;
     }
