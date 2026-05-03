@@ -1,8 +1,22 @@
+Yes, Cal — paste this whole thing into your **`index.html`**.
+
+This version uses the updated PNG puzzle files:
+
+```text
+images/old-puzzle-1.png
+images/old-puzzle-2.png
+images/old-puzzle-3.png
+images/new-puzzle-1.png
+images/new-puzzle-2.png
+```
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Bible Mapped</title>
 
   <style>
@@ -209,7 +223,7 @@
     }
 
     /* =========================
-       HERO GALLERY
+       HERO IMAGE STRIP
     ========================= */
 
     .hero-moving-gallery {
@@ -494,10 +508,10 @@
       font-size: 122px;
       font-weight: 950;
       letter-spacing: -0.09em;
-      fill: rgba(255,255,255,0.96);
+      fill: rgba(255, 255, 255, 0.96);
       text-transform: uppercase;
       paint-order: stroke;
-      stroke: rgba(0,0,0,0.18);
+      stroke: rgba(0, 0, 0, 0.18);
       stroke-width: 1.5px;
       vector-effect: non-scaling-stroke;
     }
@@ -712,6 +726,7 @@
         transform: translateY(18px) scale(0.96);
         opacity: 0;
       }
+
       to {
         transform: translateY(0) scale(1);
         opacity: 1;
@@ -758,7 +773,7 @@
     }
 
     /* =========================
-       SIMPLE PLACEHOLDER SECTIONS
+       SIMPLE PLACEHOLDER PANELS
     ========================= */
 
     .simple-panel {
@@ -1051,7 +1066,6 @@
             </clipPath>
           </defs>
 
-          <!-- PIECE 1 -->
           <g class="svg-piece old-piece piece-1" data-modal-target="oldTestamentModal">
             <g clip-path="url(#piece-old-1)">
               <image href="images/old-puzzle-1.png" x="0" y="0" width="1200" height="430" preserveAspectRatio="xMidYMid slice"></image>
@@ -1061,7 +1075,6 @@
             <path class="piece-stroke" d="M0,0 H275 L245,205 H0 Z"></path>
           </g>
 
-          <!-- PIECE 2 -->
           <g class="svg-piece old-piece piece-2" data-modal-target="oldTestamentModal">
             <g clip-path="url(#piece-old-2)">
               <image href="images/old-puzzle-2.png" x="0" y="0" width="1200" height="430" preserveAspectRatio="xMidYMid slice"></image>
@@ -1071,7 +1084,6 @@
             <path class="piece-stroke" d="M0,205 H245 L275,430 H0 Z"></path>
           </g>
 
-          <!-- PIECE 3 -->
           <g class="svg-piece old-piece piece-3" data-modal-target="oldTestamentModal">
             <g clip-path="url(#piece-old-3)">
               <image href="images/old-puzzle-3.png" x="0" y="0" width="1200" height="430" preserveAspectRatio="xMidYMid slice"></image>
@@ -1081,7 +1093,6 @@
             <path class="piece-stroke" d="M245,0 H585 L555,430 H275 Z"></path>
           </g>
 
-          <!-- PIECE 4 -->
           <g class="svg-piece new-piece piece-4" data-modal-target="newTestamentModal">
             <g clip-path="url(#piece-new-1)">
               <image href="images/new-puzzle-1.png" x="0" y="0" width="1200" height="430" preserveAspectRatio="xMidYMid slice"></image>
@@ -1091,7 +1102,6 @@
             <path class="piece-stroke" d="M585,0 H905 L875,430 H555 Z"></path>
           </g>
 
-          <!-- PIECE 5 -->
           <g class="svg-piece new-piece piece-5" data-modal-target="newTestamentModal">
             <g clip-path="url(#piece-new-2)">
               <image href="images/new-puzzle-2.png" x="0" y="0" width="1200" height="430" preserveAspectRatio="xMidYMid slice"></image>
@@ -1159,7 +1169,6 @@
     </div>
   </section>
 
-  <!-- FORMULA MODAL -->
   <div class="modal-overlay" id="formulaModal" aria-hidden="true">
     <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="formulaModalTitle">
       <div class="modal-top">
@@ -1205,7 +1214,6 @@
     </div>
   </div>
 
-  <!-- OLD TESTAMENT MODAL -->
   <div class="modal-overlay" id="oldTestamentModal" aria-hidden="true">
     <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="oldModalTitle">
       <div class="modal-top">
@@ -1300,7 +1308,6 @@
     </div>
   </div>
 
-  <!-- NEW TESTAMENT MODAL -->
   <div class="modal-overlay" id="newTestamentModal" aria-hidden="true">
     <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="newModalTitle">
       <div class="modal-top">
@@ -1456,17 +1463,6 @@
       testamentObserver.observe(testamentWrap);
     }
 
-    const svgPieces = document.querySelectorAll(".svg-piece");
-
-    svgPieces.forEach((piece) => {
-      piece.addEventListener("click", () => {
-        const modalTarget = piece.getAttribute("data-modal-target");
-        if (modalTarget) {
-          openModal(modalTarget);
-        }
-      });
-    });
-
     const parallaxItems = document.querySelectorAll(".parallax-item");
     const hero = document.querySelector(".hero");
     const heroBg = document.querySelector(".hero-bg");
@@ -1528,3 +1524,4 @@
   </script>
 </body>
 </html>
+```
