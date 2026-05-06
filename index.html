@@ -76,12 +76,18 @@
     }
 
     .brand {
-      font-size: clamp(1.55rem, 2vw, 2.05rem);
-      font-weight: 950;
-      letter-spacing: -0.06em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
       line-height: 1;
-      color: var(--ink);
-      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .brand-logo {
+      height: 46px;
+      width: auto;
+      display: block;
+      object-fit: contain;
     }
 
     .nav-links {
@@ -860,8 +866,8 @@
         padding: 0 18px;
       }
 
-      .brand {
-        font-size: 1.45rem;
+      .brand-logo {
+        height: 38px;
       }
 
       .nav-links {
@@ -938,6 +944,10 @@
       .svg-piece-word {
         font-size: 58px;
       }
+
+      .brand-logo {
+        height: 34px;
+      }
     }
   </style>
 </head>
@@ -945,7 +955,9 @@
 <body>
   <header class="site-header">
     <nav class="nav">
-      <a href="index.html" class="brand">Bible Mapped</a>
+      <a href="index.html" class="brand" aria-label="Bible Mapped Home">
+        <img src="assets/bible-mapped-logo.png" alt="Bible Mapped" class="brand-logo" />
+      </a>
 
       <div class="nav-links">
         <a href="#testaments">Books</a>
@@ -1511,3 +1523,4 @@
   </script>
 </body>
 </html>
+```
