@@ -60,7 +60,7 @@
       top: 0;
       z-index: 60;
       width: 100%;
-      background: rgba(248, 247, 242, 0.98);
+      background: var(--white);
       border-bottom: 1px solid rgba(17, 19, 24, 0.1);
       backdrop-filter: blur(12px);
     }
@@ -95,14 +95,63 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: clamp(24px, 4vw, 70px);
+      gap: 0;
       font-weight: 900;
       font-size: 0.96rem;
       color: var(--soft-ink);
     }
 
     .nav-links a {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 62px;
+      padding: 0 clamp(14px, 2vw, 22px);
+      text-align: center;
       transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-links a::before {
+      content: "";
+      font-size: 0.95rem;
+      line-height: 1;
+      color: var(--electric-purple);
+      opacity: 0.95;
+    }
+
+    .nav-links a.nav-books::before {
+      content: "📖";
+    }
+
+    .nav-links a.nav-people::before {
+      content: "👤";
+    }
+
+    .nav-links a.nav-maps::before {
+      content: "🗺";
+    }
+
+    .nav-links a.nav-case-studies::before {
+      content: "🗂";
+    }
+
+    .nav-links a.nav-about::before {
+      content: "ⓘ";
+      font-size: 0.9rem;
+    }
+
+    .nav-links a + a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 34px;
+      background: rgba(17, 19, 24, 0.14);
     }
 
     .nav-links a:hover {
@@ -644,8 +693,11 @@
 
     @media (max-width: 980px) {
       .nav-links {
-        gap: 22px;
-        font-size: 0.95rem;
+        font-size: 0.92rem;
+      }
+
+      .nav-links a {
+        padding: 0 14px;
       }
 
       .book-category-grid {
@@ -699,10 +751,11 @@
       }
 
       .nav-links {
-        gap: 18px;
-        font-size: 0.88rem;
+        gap: 16px;
+        font-size: 0.84rem;
         overflow-x: auto;
         justify-content: flex-end;
+        white-space: nowrap;
       }
 
       .hero {
@@ -764,8 +817,11 @@
       </a>
 
       <div class="nav-links">
-        <a href="#testaments">Books</a>
-        <a href="https://biblemapped.com/about/">About</a>
+        <a href="#testaments" class="nav-books">Books</a>
+        <a href="people/index.html" class="nav-people">People</a>
+        <a href="maps/index.html" class="nav-maps">Maps</a>
+        <a href="case-studies/index.html" class="nav-case-studies">Case Studies</a>
+        <a href="https://biblemapped.com/about/" class="nav-about">About</a>
       </div>
     </nav>
   </header>
