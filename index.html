@@ -116,38 +116,18 @@
 
     .hero {
       position: relative;
-      min-height: 710px;
-      padding: 72px 20px 0;
+      min-height: 600px;
+      padding: 96px 20px 104px;
       overflow: hidden;
-      background: var(--paper);
-      color: var(--white);
+      background: var(--white);
+      color: var(--ink);
+      display: flex;
+      align-items: center;
     }
 
-    .hero-bg {
-      position: absolute;
-      top: -70px;
-      left: 0;
-      right: 0;
-      bottom: 120px;
-      background-image: url("assets/bible-mapped-collage.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      opacity: 0.38;
-      filter: blur(1.5px) saturate(0.85);
-      transform: scale(1.08);
-      z-index: 0;
+
+    .hero-copy {
       will-change: transform;
-    }
-
-    .hero-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 120px;
-      background: rgba(11, 15, 25, 0.68);
-      z-index: 1;
     }
 
     .hero-inner {
@@ -165,7 +145,7 @@
       line-height: 0.92;
       letter-spacing: -0.075em;
       font-weight: 950;
-      color: var(--white);
+      color: var(--ink);
     }
 
     .hero p {
@@ -173,7 +153,7 @@
       margin: 26px auto 0;
       font-size: clamp(1rem, 1.9vw, 1.22rem);
       line-height: 1.6;
-      color: rgba(255, 255, 255, 0.86);
+      color: var(--soft-ink);
       font-weight: 520;
     }
 
@@ -204,149 +184,20 @@
     }
 
     .btn-dark {
-      background: var(--white);
-      color: var(--ink);
-      border-color: var(--white);
+      background: var(--ink);
+      color: var(--white);
+      border-color: var(--ink);
     }
 
     .btn-light {
       background: transparent;
-      color: var(--white);
-      border-color: rgba(255, 255, 255, 0.8);
+      color: var(--ink);
+      border-color: rgba(17, 19, 24, 0.24);
     }
 
-    /* =========================
-       HERO IMAGE STRIP
-    ========================= */
-
-    .hero-moving-gallery {
-      width: 100vw;
-      margin-left: calc(50% - 50vw);
-      margin-top: 38px;
-      overflow: visible;
-      position: relative;
-      z-index: 4;
-      padding: 8px 0 56px;
-    }
-
-    .hero-moving-gallery::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: 10px;
-      transform: translateX(-50%);
-      width: min(94%, 1400px);
-      height: 46px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.28);
-      filter: blur(30px);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .hero-moving-gallery::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 120px;
-      pointer-events: none;
-      z-index: 6;
-      background: linear-gradient(
-        to bottom,
-        rgba(241, 238, 231, 0) 0%,
-        rgba(241, 238, 231, 0.16) 26%,
-        rgba(241, 238, 231, 0.46) 54%,
-        rgba(241, 238, 231, 0.78) 78%,
-        var(--paper) 100%
-      );
-    }
-
-    .hero-gallery-row {
-      width: 100%;
-      position: relative;
-      overflow: visible;
-      z-index: 3;
-    }
-
-    .hero-gallery-row:last-child {
-      margin-top: -86px;
-      z-index: 4;
-    }
-
-    .hero-gallery-track {
-      display: flex;
-      align-items: center;
-      width: max-content;
-      will-change: transform;
-      padding-left: 24px;
-      padding-right: 24px;
-      position: relative;
-      z-index: 3;
-    }
-
-    .hero-gallery-track.row-one {
-      transform: translate3d(-20%, 0, 0);
-    }
-
-    .hero-gallery-track.row-two {
-      transform: translate3d(-6%, 0, 0);
-    }
-
-    .ribbon-card {
-      width: 270px;
-      height: 158px;
-      flex: 0 0 auto;
-      margin-left: -18px;
-      border-radius: 18px;
-      overflow: hidden;
-      background: #d8d5cf;
-      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.26);
-      border: 3px solid rgba(248, 247, 242, 0.88);
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
-      position: relative;
-      z-index: 3;
-    }
-
-    .ribbon-card:first-child {
-      margin-left: 0;
-    }
-
-    .row-one .ribbon-card:nth-child(2n) {
-      transform: translateY(10px);
-    }
-
-    .row-one .ribbon-card:nth-child(3n) {
-      transform: translateY(-8px);
-    }
-
-    .row-one .ribbon-card:nth-child(4n) {
-      transform: translateY(4px);
-    }
-
-    .row-two .ribbon-card:nth-child(2n) {
-      transform: translateY(-12px);
-    }
-
-    .row-two .ribbon-card:nth-child(3n) {
-      transform: translateY(8px);
-    }
-
-    .row-two .ribbon-card:nth-child(4n) {
-      transform: translateY(-6px);
-    }
-
-    .ribbon-card:hover {
-      transform: translateY(-12px) scale(1.035);
-      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.34);
-      z-index: 10;
-    }
-
-    .ribbon-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .btn-light:hover {
+      color: var(--electric-purple);
+      border-color: rgba(109, 40, 255, 0.45);
     }
 
     /* =========================
@@ -856,7 +707,7 @@
 
       .hero {
         min-height: auto;
-        padding: 70px 16px 18px;
+        padding: 86px 16px 92px;
       }
 
       .hero h1 {
@@ -865,26 +716,6 @@
 
       .hero p {
         font-size: 1rem;
-      }
-
-      .hero-bg,
-      .hero-overlay {
-        bottom: 100px;
-      }
-
-      .ribbon-card {
-        width: 220px;
-        height: 130px;
-        margin-left: -14px;
-        border-radius: 16px;
-      }
-
-      .hero-gallery-row:last-child {
-        margin-top: -72px;
-      }
-
-      .hero-moving-gallery {
-        padding-bottom: 46px;
       }
 
       .statement-section {
@@ -940,60 +771,23 @@
   </header>
 
   <section class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="hero-overlay" aria-hidden="true"></div>
 
-    <div class="hero-inner parallax-item" data-speed="0.012">
-      <h1>Understand the Bible through place, context, and meaning.</h1>
+    <div class="hero-inner">
+      <div class="hero-copy parallax-item" data-speed="-0.012">
+        <h1>Understand the Bible through place, context, and meaning.</h1>
 
-      <p>
-        Bible Mapped helps Christians and seekers follow Scripture through real places,
-        real people, real timelines, and real meaning — from Eden to Abraham,
-        from Egypt to Sinai, from Jerusalem to the empty tomb.
-      </p>
+        <p>
+          Bible Mapped helps Christians and seekers follow Scripture through real places,
+          real people, real timelines, and real meaning — from Eden to Abraham,
+          from Egypt to Sinai, from Jerusalem to the empty tomb.
+        </p>
 
-      <div class="hero-actions">
-        <a href="#testaments" class="btn btn-dark">Enter Bible Mapped</a>
-        <a href="#formula" class="btn btn-light">See How It Works</a>
-      </div>
-
-      <div class="hero-moving-gallery">
-        <div class="hero-gallery-row">
-          <div class="hero-gallery-track row-one" id="galleryRowOne">
-            <div class="ribbon-card"><img src="assets/hero-1.jpg" alt="Bible map image slot" /></div>
-            <div class="ribbon-card"><img src="assets/hero-2.jpg" alt="Bible art image slot" /></div>
-            <div class="ribbon-card"><img src="assets/hero-3.jpg" alt="Scripture image slot" /></div>
-            <div class="ribbon-card"><img src="assets/hero-4.jpg" alt="Ancient world image slot" /></div>
-            <div class="ribbon-card"><img src="assets/hero-5.jpg" alt="Jerusalem image slot" /></div>
-            <div class="ribbon-card"><img src="assets/hero-6.jpg" alt="Bible timeline image slot" /></div>
-
-            <div class="ribbon-card"><img src="assets/hero-1.jpg" alt="Bible map image slot" /></div>
-            <div class="ribbon-card"><img src="assets/hero-2.jpg" alt="Bible art image slot" /></div>
-            <div class="ribbon-card"><img src="assets/hero-3.jpg" alt="Scripture image slot" /></div>
-            <div class="ribbon-card"><img src="assets/hero-4.jpg" alt="Ancient world image slot" /></div>
-            <div class="ribbon-card"><img src="assets/hero-5.jpg" alt="Jerusalem image slot" /></div>
-            <div class="ribbon-card"><img src="assets/hero-6.jpg" alt="Bible timeline image slot" /></div>
-          </div>
-        </div>
-
-        <div class="hero-gallery-row">
-          <div class="hero-gallery-track row-two" id="galleryRowTwo">
-            <div class="ribbon-card"><img src="assets/hero-6.jpg" alt="Bible timeline image slot" /></div>
-            <div class="ribbon-card"><img src="assets/hero-5.jpg" alt="Jerusalem image slot" /></div>
-            <div class="ribbon-card"><img src="assets/hero-4.jpg" alt="Ancient world image slot" /></div>
-            <div class="ribbon-card"><img src="assets/hero-3.jpg" alt="Scripture image slot" /></div>
-            <div class="ribbon-card"><img src="assets/hero-2.jpg" alt="Bible art image slot" /></div>
-            <div class="ribbon-card"><img src="assets/hero-1.jpg" alt="Bible map image slot" /></div>
-
-            <div class="ribbon-card"><img src="assets/hero-6.jpg" alt="Bible timeline image slot" /></div>
-            <div class="ribbon-card"><img src="assets/hero-5.jpg" alt="Jerusalem image slot" /></div>
-            <div class="ribbon-card"><img src="assets/hero-4.jpg" alt="Ancient world image slot" /></div>
-            <div class="ribbon-card"><img src="assets/hero-3.jpg" alt="Scripture image slot" /></div>
-            <div class="ribbon-card"><img src="assets/hero-2.jpg" alt="Bible art image slot" /></div>
-            <div class="ribbon-card"><img src="assets/hero-1.jpg" alt="Bible map image slot" /></div>
-          </div>
+        <div class="hero-actions">
+          <a href="#testaments" class="btn btn-dark">Enter Bible Mapped</a>
+          <a href="#formula" class="btn btn-light">See How It Works</a>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -1400,11 +1194,6 @@
     }
 
     const parallaxItems = document.querySelectorAll(".parallax-item");
-    const hero = document.querySelector(".hero");
-    const heroBg = document.querySelector(".hero-bg");
-    const galleryRowOne = document.getElementById("galleryRowOne");
-    const galleryRowTwo = document.getElementById("galleryRowTwo");
-
     let ticking = false;
 
     function updateParallax() {
@@ -1416,33 +1205,10 @@
         const rect = item.getBoundingClientRect();
         const itemTop = rect.top + scrollY;
         const distanceFromCenter = scrollY + viewportHeight / 2 - itemTop;
-        const movement = distanceFromCenter * speed;
+        const rawMovement = distanceFromCenter * speed;
+        const movement = Math.max(-24, Math.min(24, rawMovement));
         item.style.transform = `translate3d(0, ${movement}px, 0)`;
       });
-
-      if (hero && heroBg) {
-        const heroRect = hero.getBoundingClientRect();
-        const heroTop = heroRect.top + scrollY;
-        const heroHeight = hero.offsetHeight;
-        const progress = (scrollY - heroTop) / heroHeight;
-        const clamped = Math.max(0, Math.min(1, progress));
-        const bgMove = clamped * 55;
-        heroBg.style.transform = `translate3d(0, ${bgMove}px, 0) scale(1.08)`;
-      }
-
-      if (hero && galleryRowOne && galleryRowTwo) {
-        const heroRect = hero.getBoundingClientRect();
-        const heroTop = heroRect.top + scrollY;
-        const heroHeight = hero.offsetHeight;
-        const progress = (scrollY - heroTop) / heroHeight;
-        const clamped = Math.max(0, Math.min(1, progress));
-
-        const rowOneMove = -20 + clamped * 24;
-        const rowTwoMove = -6 - clamped * 24;
-
-        galleryRowOne.style.transform = `translate3d(${rowOneMove}%, 0, 0)`;
-        galleryRowTwo.style.transform = `translate3d(${rowTwoMove}%, 0, 0)`;
-      }
 
       ticking = false;
     }
