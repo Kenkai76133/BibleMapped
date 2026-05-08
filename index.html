@@ -84,7 +84,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: flex-start;
-      gap: 8px;
+      gap: 0;
       line-height: 1;
       flex-shrink: 0;
       color: var(--ink);
@@ -98,6 +98,7 @@
       flex-shrink: 0;
     }
 
+    /* Purple symbol pulled close to the d in mapped */
     .brand-icon-slot {
       width: clamp(38px, 3.6vw, 54px);
       height: clamp(38px, 3.6vw, 54px);
@@ -110,12 +111,13 @@
       border: none;
       border-radius: 0;
       padding: 0;
-      margin-left: -2px;
+      margin-left: -22px;
+      transform: translateY(-5px);
     }
 
     .brand-icon {
-      width: 100%;
-      height: 100%;
+      width: 94%;
+      height: 94%;
       object-fit: contain;
       display: block;
     }
@@ -727,7 +729,8 @@
       .brand-icon-slot {
         width: 42px;
         height: 42px;
-        margin-left: -2px;
+        margin-left: -18px;
+        transform: translateY(-4px);
       }
 
       .book-category-grid {
@@ -778,7 +781,7 @@
       }
 
       .brand {
-        gap: 6px;
+        gap: 0;
       }
 
       .brand-logo {
@@ -788,7 +791,8 @@
       .brand-icon-slot {
         width: 34px;
         height: 34px;
-        margin-left: -2px;
+        margin-left: -14px;
+        transform: translateY(-4px);
       }
 
       .nav-links {
@@ -859,7 +863,8 @@
       .brand-icon-slot {
         width: 30px;
         height: 30px;
-        margin-left: -2px;
+        margin-left: -12px;
+        transform: translateY(-3px);
       }
     }
   </style>
@@ -1058,7 +1063,6 @@
             <path class="piece-stroke" d="M585,0 H905 L875,430 H555 Z"></path>
           </g>
 
-          <!-- Black-and-white image pulled to show Jesus Christ better -->
           <g class="svg-piece new-piece piece-5" data-modal-target="newTestamentModal">
             <g clip-path="url(#piece-new-2)">
               <image
