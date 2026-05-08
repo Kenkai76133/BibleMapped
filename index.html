@@ -990,7 +990,18 @@
 
           <g class="svg-piece old-piece piece-1" data-modal-target="oldTestamentModal">
             <g clip-path="url(#piece-old-1)">
-              <image href="assets/old-puzzle-1.png" x="0" y="0" width="1200" height="430" preserveAspectRatio="xMidYMid slice"></image>
+              <rect x="0" y="0" width="1200" height="430" fill="#0b0f19"></rect>
+
+              <!-- Top-left image pulled back to show more of the artwork -->
+              <image
+                href="assets/old-puzzle-1.png"
+                x="-18"
+                y="-10"
+                width="315"
+                height="230"
+                preserveAspectRatio="xMidYMid meet">
+              </image>
+
               <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
               <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
             </g>
