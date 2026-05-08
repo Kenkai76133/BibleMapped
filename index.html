@@ -67,27 +67,52 @@
 
     .nav {
       width: 100%;
-      height: 78px;
-      padding: 0 clamp(22px, 4vw, 72px) 0 clamp(8px, 1.5vw, 24px);
+      height: 86px;
+      padding: 0 clamp(22px, 4vw, 72px) 0 clamp(18px, 2vw, 34px);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 36px;
+      gap: clamp(28px, 4vw, 60px);
     }
 
     .brand {
       display: inline-flex;
       align-items: center;
       justify-content: flex-start;
+      gap: 16px;
       line-height: 1;
+      flex-shrink: 0;
+      color: var(--ink);
+    }
+
+    .brand-wordmark {
+      font-size: clamp(1.85rem, 2.7vw, 2.65rem);
+      font-weight: 950;
+      letter-spacing: -0.055em;
+      white-space: nowrap;
+    }
+
+    .brand-icon-slot {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(17, 19, 24, 0.22);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
       flex-shrink: 0;
     }
 
-    .brand-logo {
-      height: 64px;
-      width: auto;
-      display: block;
+    .brand-icon {
+      width: 100%;
+      height: 100%;
       object-fit: contain;
+      display: block;
+    }
+
+    .brand-icon-slot.is-empty {
+      background: transparent;
     }
 
     .nav-links {
@@ -107,40 +132,31 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      min-height: 62px;
-      padding: 0 clamp(14px, 2vw, 22px);
+      gap: 7px;
+      min-height: 68px;
+      padding: 0 clamp(14px, 2vw, 24px);
       text-align: center;
       transition: color 0.2s ease, transform 0.2s ease;
     }
 
-    .nav-links a::before {
-      content: "";
-      font-size: 0.95rem;
-      line-height: 1;
+    .nav-icon {
+      width: 24px;
+      height: 24px;
       color: var(--electric-purple);
-      opacity: 0.95;
+      display: block;
     }
 
-    .nav-links a.nav-books::before {
-      content: "📖";
+    .nav-links a svg {
+      stroke: currentColor;
+      fill: none;
     }
 
-    .nav-links a.nav-people::before {
-      content: "👤";
+    .nav-links a.nav-active {
+      color: var(--electric-purple);
     }
 
-    .nav-links a.nav-maps::before {
-      content: "🗺";
-    }
-
-    .nav-links a.nav-case-studies::before {
-      content: "🗂";
-    }
-
-    .nav-links a.nav-about::before {
-      content: "ⓘ";
-      font-size: 0.9rem;
+    .nav-links a.nav-active .nav-icon {
+      color: var(--electric-purple);
     }
 
     .nav-links a + a::after {
@@ -150,7 +166,7 @@
       top: 50%;
       transform: translateY(-50%);
       width: 1px;
-      height: 34px;
+      height: 42px;
       background: rgba(17, 19, 24, 0.14);
     }
 
@@ -173,7 +189,6 @@
       display: flex;
       align-items: center;
     }
-
 
     .hero-copy {
       will-change: transform;
@@ -692,6 +707,20 @@
     ========================= */
 
     @media (max-width: 980px) {
+      .nav {
+        gap: 22px;
+      }
+
+      .brand-wordmark {
+        font-size: 1.75rem;
+      }
+
+      .brand-icon-slot {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+      }
+
       .nav-links {
         font-size: 0.92rem;
       }
@@ -742,20 +771,40 @@
 
     @media (max-width: 720px) {
       .nav {
-        height: 72px;
-        padding: 0 18px 0 8px;
+        height: 78px;
+        padding: 0 18px 0 12px;
+        gap: 16px;
       }
 
-      .brand-logo {
-        height: 48px;
+      .brand {
+        gap: 10px;
+      }
+
+      .brand-wordmark {
+        font-size: 1.35rem;
+      }
+
+      .brand-icon-slot {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
       }
 
       .nav-links {
-        gap: 16px;
+        gap: 0;
         font-size: 0.84rem;
         overflow-x: auto;
         justify-content: flex-end;
         white-space: nowrap;
+      }
+
+      .nav-links a {
+        min-height: 58px;
+      }
+
+      .nav-icon {
+        width: 21px;
+        height: 21px;
       }
 
       .hero {
@@ -802,8 +851,13 @@
         font-size: 58px;
       }
 
-      .brand-logo {
-        height: 42px;
+      .brand-wordmark {
+        font-size: 1.1rem;
+      }
+
+      .brand-icon-slot {
+        width: 34px;
+        height: 34px;
       }
     }
   </style>
@@ -813,21 +867,65 @@
   <header class="site-header">
     <nav class="nav">
       <a href="index.html" class="brand" aria-label="Bible Mapped Home">
-        <img src="assets/bible-mapped-logo.png" alt="Bible Mapped" class="brand-logo" />
+        <span class="brand-wordmark">Bible Mapped</span>
+
+        <span class="brand-icon-slot">
+          <img
+            src="assets/bible-mapped-icon.png"
+            alt=""
+            class="brand-icon"
+            onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"
+          />
+        </span>
       </a>
 
       <div class="nav-links">
-        <a href="#testaments" class="nav-books">Books</a>
-        <a href="people/index.html" class="nav-people">People</a>
-        <a href="maps/index.html" class="nav-maps">Maps</a>
-        <a href="case-studies/index.html" class="nav-case-studies">Case Studies</a>
-        <a href="https://biblemapped.com/about/" class="nav-about">About</a>
+        <a href="#testaments" class="nav-books">
+          <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 5.5C4 4.7 4.7 4 5.5 4H10c1.1 0 2 .9 2 2v14c0-1.1-.9-2-2-2H5.5C4.7 18 4 17.3 4 16.5v-11Z" stroke-width="2" />
+            <path d="M20 5.5C20 4.7 19.3 4 18.5 4H14c-1.1 0-2 .9-2 2v14c0-1.1.9-2 2-2h4.5c.8 0 1.5-.7 1.5-1.5v-11Z" stroke-width="2" />
+          </svg>
+          Books
+        </a>
+
+        <a href="people/index.html" class="nav-people">
+          <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="8" r="4" fill="currentColor" stroke="none" />
+            <path d="M4 21c.8-4.2 3.8-6.5 8-6.5s7.2 2.3 8 6.5" fill="currentColor" stroke="none" />
+          </svg>
+          People
+        </a>
+
+        <a href="maps/index.html" class="nav-maps nav-active">
+          <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 22s7-6.4 7-13A7 7 0 0 0 5 9c0 6.6 7 13 7 13Z" fill="currentColor" stroke="none" />
+            <circle cx="12" cy="9" r="2.4" fill="white" stroke="none" />
+          </svg>
+          Maps
+        </a>
+
+        <a href="case-studies/index.html" class="nav-case-studies">
+          <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 3h8l4 4v14H6V3Z" fill="currentColor" stroke="none" />
+            <path d="M14 3v5h5" fill="rgba(255,255,255,0.35)" stroke="none" />
+            <path d="M9 11h6M9 15h6M9 19h4" stroke="white" stroke-width="1.7" stroke-linecap="round" />
+          </svg>
+          Case Studies
+        </a>
+
+        <a href="https://biblemapped.com/about/" class="nav-about">
+          <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" stroke-width="2.2" />
+            <path d="M12 10v7" stroke-width="2.2" stroke-linecap="round" />
+            <circle cx="12" cy="7" r="1.3" fill="currentColor" stroke="none" />
+          </svg>
+          About
+        </a>
       </div>
     </nav>
   </header>
 
   <section class="hero">
-
     <div class="hero-inner">
       <div class="hero-copy parallax-item" data-speed="-0.012">
         <h1>Understand the Bible through place, context, and meaning.</h1>
@@ -843,7 +941,6 @@
           <a href="#formula" class="btn btn-light">See How It Works</a>
         </div>
       </div>
-
     </div>
   </section>
 
