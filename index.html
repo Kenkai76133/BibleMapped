@@ -6,7 +6,6 @@
 
   <title>Bible Mapped</title>
 
-  <!-- Google/browser favicon icon -->
   <link rel="icon" href="/assets/bible-mapped-icon.png" type="image/png" />
   <link rel="shortcut icon" href="/assets/bible-mapped-icon.png" type="image/png" />
   <link rel="apple-touch-icon" href="/assets/bible-mapped-icon.png" />
@@ -66,7 +65,7 @@
       z-index: 60;
       width: 100%;
       background: var(--white);
-      border-bottom: 1px solid rgba(17, 19, 24, 0.1);
+      border-bottom: none;
       backdrop-filter: blur(12px);
     }
 
@@ -98,7 +97,6 @@
       flex-shrink: 0;
     }
 
-    /* Purple icon: close to the d, but not covering it */
     .brand-icon-slot {
       width: clamp(38px, 3.6vw, 54px);
       height: clamp(38px, 3.6vw, 54px);
@@ -162,15 +160,9 @@
       color: var(--electric-purple);
     }
 
+    /* Divider lines removed */
     .nav-links a + a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 1px;
-      height: 42px;
-      background: rgba(17, 19, 24, 0.14);
+      display: none;
     }
 
     .nav-links a:hover {
