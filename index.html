@@ -522,7 +522,7 @@
     }
 
     .formula-inline-window.open {
-      max-height: 1200px;
+      max-height: 5200px;
       opacity: 1;
       transform: translateY(0);
     }
@@ -593,7 +593,7 @@
     .formula-word {
       position: absolute;
       z-index: 4;
-      bottom: 120px;
+      bottom: 68px;
       font-size: clamp(2.1rem, 5.2vw, 5.4rem);
       line-height: 0.9;
       letter-spacing: -0.08em;
@@ -603,81 +603,241 @@
       white-space: nowrap;
       color: var(--cloud);
       text-shadow: 0 18px 50px rgba(0, 0, 0, 0.65);
+      transition:
+        opacity 0.85s ease,
+        transform 1s cubic-bezier(0.16, 0.9, 0.22, 1);
+      will-change: opacity, transform;
     }
 
     .formula-word.where {
       left: 8%;
-      transform: translateX(-90px);
+      transform: translateY(58px);
+      transition-delay: 0.08s;
     }
 
-    .formula-word.when {
+    .formula-word.who {
       left: 50%;
-      transform: translateX(-50%) translateY(35px) scale(0.82);
+      transform: translateX(-50%) translateY(58px);
+      transition-delay: 0.28s;
     }
 
     .formula-word.why {
-      right: 14%;
-      transform: translateX(90px);
+      right: 13%;
+      transform: translateY(58px);
+      transition-delay: 0.48s;
     }
 
-    .formula-research-note {
-      position: absolute;
-      left: 50%;
-      bottom: 36px;
-      z-index: 4;
-      width: min(820px, calc(100% - 42px));
-      transform: translateX(-50%) translateY(18px);
-      opacity: 0;
+    .formula-art-frame.words-in-view .formula-word.where {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .formula-art-frame.words-in-view .formula-word.who {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .formula-art-frame.words-in-view .formula-word.why {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================
+       FORMULA EXAMPLE CONTENT
+    ========================= */
+
+    .formula-explainer {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 86px 0 105px;
+      text-align: left;
+    }
+
+    .formula-kicker {
+      margin: 0 0 16px;
+      font-size: 0.82rem;
+      font-weight: 950;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--electric-purple);
+    }
+
+    .formula-explainer h2 {
       margin: 0;
-      color: var(--cloud);
-      font-size: clamp(0.92rem, 1.4vw, 1.08rem);
-      line-height: 1.55;
-      font-weight: 750;
-      text-align: center;
-      text-shadow: 0 12px 34px rgba(0, 0, 0, 0.72);
+      max-width: 920px;
+      font-size: clamp(2.7rem, 6vw, 5.7rem);
+      line-height: 0.94;
+      letter-spacing: -0.075em;
+      font-weight: 950;
+      color: var(--ink);
     }
 
-    .formula-inline-window.open .formula-word.where {
-      animation: formulaWhereIn 0.9s cubic-bezier(0.16, 0.9, 0.22, 1) 0.22s forwards;
+    .formula-question-stack {
+      margin: 34px 0 0;
+      padding: 26px 28px;
+      background: var(--white);
+      border-left: 8px solid var(--bright-red);
+      box-shadow: 0 22px 55px rgba(17, 19, 24, 0.08);
     }
 
-    .formula-inline-window.open .formula-word.when {
-      animation: formulaWhenIn 0.85s cubic-bezier(0.16, 0.9, 0.22, 1) 0.75s forwards;
+    .formula-question-stack h3 {
+      margin: 0 0 14px;
+      font-size: clamp(2.2rem, 4.4vw, 4.6rem);
+      line-height: 0.9;
+      letter-spacing: -0.07em;
+      color: var(--bright-red);
     }
 
-    .formula-inline-window.open .formula-word.why {
-      animation: formulaWhyIn 0.85s cubic-bezier(0.16, 0.9, 0.22, 1) 1.18s forwards;
+    .formula-question-stack p {
+      margin: 0;
+      color: var(--soft-ink);
+      font-weight: 850;
+      line-height: 1.75;
     }
 
-    .formula-inline-window.open .formula-research-note {
-      animation: formulaNoteIn 0.75s ease 1.55s forwards;
+    .context-block {
+      margin-top: 42px;
+      max-width: 930px;
     }
 
-    @keyframes formulaWhereIn {
-      to {
-        opacity: 1;
-        transform: translateX(0);
+    .context-block h3 {
+      margin: 0 0 12px;
+      font-size: clamp(1.9rem, 3.5vw, 3.4rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+      color: var(--ink);
+    }
+
+    .context-block p {
+      margin: 0;
+      color: var(--soft-ink);
+      font-size: 1.05rem;
+      line-height: 1.75;
+      font-weight: 650;
+    }
+
+    .example-panel {
+      margin-top: 56px;
+      padding: clamp(28px, 4vw, 46px);
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    .example-panel h3 {
+      margin: 0;
+      font-size: clamp(2.2rem, 5vw, 5rem);
+      line-height: 0.92;
+      letter-spacing: -0.075em;
+    }
+
+    .example-panel > p {
+      max-width: 820px;
+      margin: 22px 0 0;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 1.04rem;
+      line-height: 1.7;
+      font-weight: 650;
+    }
+
+    .formula-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 34px;
+    }
+
+    .formula-info-card {
+      background: var(--cloud);
+      color: var(--ink);
+      padding: 26px;
+      min-height: 280px;
+      border-top: 8px solid var(--electric-purple);
+    }
+
+    .formula-info-card h4 {
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 4vw, 3.8rem);
+      line-height: 0.9;
+      letter-spacing: -0.075em;
+      color: var(--electric-purple);
+    }
+
+    .formula-info-card p {
+      margin: 0;
+      color: var(--soft-ink);
+      font-size: 0.98rem;
+      line-height: 1.65;
+      font-weight: 650;
+    }
+
+    .formula-info-card p + p {
+      margin-top: 12px;
+    }
+
+    .formula-at-work {
+      margin-top: 46px;
+      padding: 32px;
+      background: var(--white);
+      color: var(--ink);
+    }
+
+    .formula-at-work h3 {
+      margin: 0 0 22px;
+      font-size: clamp(2rem, 4.2vw, 4rem);
+      line-height: 0.94;
+      letter-spacing: -0.07em;
+    }
+
+    .context-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .compare-box {
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: var(--cloud);
+    }
+
+    .compare-box strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--bright-red);
+      font-size: 0.82rem;
+      font-weight: 950;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .compare-box p {
+      margin: 0;
+      color: var(--soft-ink);
+      line-height: 1.65;
+      font-weight: 700;
+    }
+
+    .formula-closing {
+      margin: 34px 0 0;
+      color: var(--soft-ink);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      font-weight: 680;
+    }
+
+    .formula-closing strong {
+      color: var(--ink);
+    }
+
+    @media (max-width: 820px) {
+      .formula-card-grid,
+      .context-compare {
+        grid-template-columns: 1fr;
       }
-    }
 
-    @keyframes formulaWhenIn {
-      to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0) scale(1);
-      }
-    }
-
-    @keyframes formulaWhyIn {
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes formulaNoteIn {
-      to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
+      .formula-explainer {
+        width: min(100% - 28px, 1120px);
+        padding: 62px 0 78px;
       }
     }
 
@@ -1008,7 +1168,7 @@
       }
 
       .formula-word {
-        bottom: 112px;
+        bottom: 54px;
       }
 
       .formula-word.where {
@@ -1017,11 +1177,6 @@
 
       .formula-word.why {
         right: 11%;
-      }
-
-      .formula-research-note {
-        bottom: 28px;
-        width: calc(100% - 34px);
       }
 
       .modal-body {
@@ -1057,17 +1212,12 @@
       }
 
       .formula-word {
-        bottom: 104px;
+        bottom: 46px;
         font-size: clamp(1.55rem, 8vw, 3rem);
       }
 
       .formula-word.why {
         right: 10%;
-      }
-
-      .formula-research-note {
-        font-size: 0.82rem;
-        bottom: 24px;
       }
     }
   </style>
@@ -1329,12 +1479,130 @@
             </div>
 
             <span class="formula-word where">Where</span>
-            <span class="formula-word when">When</span>
+            <span class="formula-word who">Who</span>
             <span class="formula-word why">Why</span>
 
-            <p class="formula-research-note">
-              To research Scripture is to trace the place, the time, and the meaning behind the text — asking where it happened, when it happened, and why it matters.
-            </p>
+          </div>
+
+          <div class="formula-explainer">
+            <p class="formula-kicker">The Question Behind the Evidence</p>
+
+            <h2>When someone says they have proof, most people ask the same question.</h2>
+
+            <div class="formula-question-stack">
+              <h3>Where?</h3>
+
+              <p>
+                Where is the proof?<br />
+                Where did this happen?<br />
+                Where is Eden?<br />
+                Where did Abraham walk?<br />
+                Where was Jerusalem?<br />
+                Where was the Kidron Valley?<br />
+                Where did Jesus teach, suffer, die, and rise again?
+              </p>
+            </div>
+
+            <div class="context-block">
+              <h3>Why Context Matters</h3>
+
+              <p>
+                Understanding where Scripture happened is foundational to understanding its truth.
+                The Bible was preserved for us, but it was written within real history — through real people,
+                real places, real cultures, and real moments. Bible Mapped follows the where, who, and why
+                of Scripture so we can see the meaning of the text with greater clarity, context, and integrity —
+                and follow the whole story as it points to Jesus Christ.
+              </p>
+            </div>
+
+            <div class="example-panel">
+              <h3>Example: Jesus and the Samaritan Woman</h3>
+
+              <p>
+                Most people read John 4 and see a conversation at a well. But Bible Mapped asks:
+                Where did this happen? Who was there? Why did it matter?
+              </p>
+
+              <div class="formula-card-grid">
+                <article class="formula-info-card">
+                  <h4>Where?</h4>
+
+                  <p>
+                    Jesus is in Samaria, at Jacob’s well.
+                  </p>
+
+                  <p>
+                    That matters because Samaria was not just a random stop on the journey.
+                    It was a place marked by history, division, and religious tension.
+                  </p>
+
+                  <p>
+                    The location is not background scenery. The where tells us this moment is happening
+                    in a place many Jews avoided, among people many Jews rejected.
+                  </p>
+                </article>
+
+                <article class="formula-info-card">
+                  <h4>Who?</h4>
+
+                  <p>
+                    Jesus is a Jewish teacher. The woman is a Samaritan.
+                  </p>
+
+                  <p>
+                    That matters because Jews and Samaritans carried deep hostility toward one another.
+                    And this woman comes to the well alone, which suggests personal isolation as well.
+                  </p>
+
+                  <p>
+                    So this is not just “Jesus talks to a woman.” It is Jesus crossing religious,
+                    cultural, ethnic, and personal barriers.
+                  </p>
+                </article>
+
+                <article class="formula-info-card">
+                  <h4>Why?</h4>
+
+                  <p>
+                    Because Jesus is revealing that the good news is not limited by geography,
+                    ethnicity, reputation, or religious division.
+                  </p>
+
+                  <p>
+                    When He says true worship will not be centered only on a mountain or a temple,
+                    He is showing that God’s kingdom is moving beyond old boundaries.
+                  </p>
+                </article>
+              </div>
+
+              <div class="formula-at-work">
+                <h3>The Formula at Work</h3>
+
+                <div class="context-compare">
+                  <div class="compare-box">
+                    <strong>Without context</strong>
+                    <p>
+                      Jesus has a meaningful conversation with a woman at a well.
+                    </p>
+                  </div>
+
+                  <div class="compare-box">
+                    <strong>With context</strong>
+                    <p>
+                      Jesus enters a divided land, speaks to a rejected person, challenges centuries
+                      of hostility, and reveals that salvation is coming through Him for more than one people group.
+                    </p>
+                  </div>
+                </div>
+
+                <p class="formula-closing">
+                  That is why <strong>where</strong> matters. The location gives weight to the meaning.
+                  The history gives depth to the conversation. The context protects the integrity of the passage.
+                  And the story points us to Jesus — not as a distant religious idea, but as the Savior who steps
+                  into real places, real wounds, and real human divisions.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1598,9 +1866,37 @@
               block: "center"
             });
           }, 180);
+        } else {
+          const formulaArtFrame = formulaInlineWindow.querySelector(".formula-art-frame");
+          if (formulaArtFrame) {
+            formulaArtFrame.classList.remove("words-in-view");
+          }
         }
       });
     }
+
+    const formulaArtFrame = document.querySelector(".formula-art-frame");
+
+    function checkFormulaWordsPanUp() {
+      if (!formulaArtFrame || !formulaInlineWindow) return;
+      if (!formulaInlineWindow.classList.contains("open")) return;
+
+      const rect = formulaArtFrame.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      const isVisible =
+        rect.top < windowHeight * 0.78 &&
+        rect.bottom > windowHeight * 0.18;
+
+      if (isVisible) {
+        formulaArtFrame.classList.add("words-in-view");
+      }
+    }
+
+    window.addEventListener("scroll", checkFormulaWordsPanUp);
+    window.addEventListener("resize", checkFormulaWordsPanUp);
+    window.addEventListener("load", checkFormulaWordsPanUp);
+    requestAnimationFrame(checkFormulaWordsPanUp);
 
     const testamentWrap = document.getElementById("testamentPuzzleWrap");
 
