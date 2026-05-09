@@ -8,7 +8,7 @@
 
   <meta
     name="description"
-    content="About Bible Mapped, the Gospel message, and the mission behind helping people understand Scripture through place, context, and meaning."
+    content="About Bible Mapped and the mission behind helping people understand Scripture through place, context, and meaning."
   />
 
   <style>
@@ -21,10 +21,7 @@
       --paper: #FFFDF6;
       --white: #FFFFFF;
       --navy: #0E376E;
-      --teal: #75A9A3;
-      --sand: #E7C891;
       --red: #FF1F2D;
-      --slate: #46515D;
       --line: rgba(21, 21, 21, 0.14);
       --soft-line: rgba(21, 21, 21, 0.08);
       --shadow: 0 18px 42px rgba(21, 21, 21, 0.08);
@@ -59,14 +56,14 @@
       max-width: 100%;
     }
 
-    button {
-      font: inherit;
-    }
-
     .container {
       width: min(var(--max), calc(100% - 42px));
       margin: 0 auto;
     }
+
+    /* =========================
+       TOP BAR
+    ========================= */
 
     .brand-bar {
       background: var(--purple);
@@ -79,18 +76,8 @@
       min-height: 70px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
       gap: 18px;
-    }
-
-    .brand-wordmark {
-      font-family: Georgia, "Times New Roman", serif;
-      color: white;
-      font-size: clamp(1.55rem, 2.2vw, 2.15rem);
-      font-weight: 800;
-      letter-spacing: -0.065em;
-      white-space: nowrap;
-      line-height: 1;
     }
 
     .back-home-link {
@@ -112,6 +99,10 @@
       background: rgba(255, 255, 255, 0.12);
       transform: translateY(-1px);
     }
+
+    /* =========================
+       HERO
+    ========================= */
 
     .hero {
       background: var(--cloud);
@@ -362,19 +353,23 @@
       z-index: 2;
     }
 
+    /* =========================
+       ABOUT LETTER
+    ========================= */
+
     .profile-band {
-      padding: 0 0 44px;
+      padding: 28px 0 78px;
       background: var(--cloud);
     }
 
     .profile-inner {
       display: grid;
       grid-template-columns: 220px 1fr;
-      gap: 24px;
-      align-items: center;
+      gap: 28px;
+      align-items: start;
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
-      padding: 22px 0;
+      padding: 30px 0 34px;
     }
 
     .profile-photo {
@@ -384,6 +379,8 @@
       border: 1px solid var(--line);
       overflow: hidden;
       box-shadow: var(--shadow);
+      position: sticky;
+      top: 24px;
     }
 
     .profile-photo img {
@@ -393,28 +390,95 @@
     }
 
     .profile-meta h2 {
-      font-size: clamp(1.8rem, 3.6vw, 3.5rem);
-      line-height: 0.96;
-      letter-spacing: -0.06em;
+      font-size: clamp(2.4rem, 5vw, 5.2rem);
+      line-height: 0.94;
+      letter-spacing: -0.07em;
       font-weight: 950;
-      margin-bottom: 10px;
+      margin-bottom: 22px;
     }
 
-    .profile-meta p {
-      max-width: 720px;
-      color: var(--muted);
-      font-size: 1rem;
+    .about-letter {
+      max-width: 880px;
     }
 
-    .profile-meta p + p {
-      margin-top: 12px;
+    .about-letter p {
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.02rem, 1.35vw, 1.12rem);
+      line-height: 1.78;
+      margin: 0;
+    }
+
+    .about-letter p + p {
+      margin-top: 17px;
+    }
+
+    .about-letter strong {
+      color: var(--charcoal);
+      font-weight: 950;
+    }
+
+    .conviction-block {
+      margin: 26px 0;
+      padding: 22px 0 24px;
+      border-top: 4px solid var(--purple);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .conviction-block blockquote {
+      font-size: clamp(1.55rem, 3.4vw, 2.7rem);
+      line-height: 1.12;
+      letter-spacing: -0.05em;
+      font-weight: 950;
+      color: var(--charcoal);
+    }
+
+    .letter-emphasis {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+      font-size: clamp(2.2rem, 5.5vw, 5.2rem) !important;
+      line-height: 0.95 !important;
+      letter-spacing: -0.075em;
+      color: var(--purple) !important;
+      font-weight: 950;
+      margin-top: 30px !important;
+      margin-bottom: 22px !important;
+    }
+
+    .belief-panel {
+      margin: 28px 0;
+      padding: 26px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .belief-panel p + p {
+      margin-top: 15px;
+    }
+
+    .closing-lines {
+      margin-top: 26px;
+      padding-left: 18px;
+      border-left: 5px solid var(--purple);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+      font-size: clamp(1.2rem, 2.2vw, 1.8rem) !important;
+      line-height: 1.22 !important;
+      letter-spacing: -0.035em;
+      font-weight: 950;
+    }
+
+    .signature {
+      margin-top: 30px !important;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+      font-weight: 950;
+      color: var(--charcoal) !important;
     }
 
     .social-row {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 18px;
+      margin-top: 26px;
       align-items: center;
     }
 
@@ -448,426 +512,6 @@
       border: 1px solid rgba(21, 21, 21, 0.08);
     }
 
-    .gospel-section {
-      background: var(--purple);
-      color: white;
-      padding: 56px 0 64px;
-    }
-
-    .gospel-header {
-      display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: 36px;
-      align-items: end;
-      margin-bottom: 32px;
-    }
-
-    .section-title {
-      font-size: clamp(2.4rem, 5.4vw, 5.6rem);
-      line-height: 0.96;
-      letter-spacing: -0.07em;
-      font-weight: 950;
-    }
-
-    .section-copy {
-      color: rgba(255, 255, 255, 0.82);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.06rem;
-      line-height: 1.72;
-      border-top: 2px solid rgba(255, 255, 255, 0.82);
-      padding-top: 18px;
-    }
-
-    .salvation-rail {
-      background: var(--cloud);
-      color: var(--charcoal);
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      box-shadow: 0 18px 48px rgba(21, 21, 21, 0.18);
-    }
-
-    .rail-top {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .rail-progress-item {
-      min-height: 14px;
-      background: rgba(21, 21, 21, 0.12);
-      border-right: 1px solid rgba(21, 21, 21, 0.12);
-      transition: background 220ms ease;
-    }
-
-    .rail-progress-item:last-child {
-      border-right: 0;
-    }
-
-    .rail-progress-item.active {
-      background: var(--charcoal);
-    }
-
-    .rail-window {
-      position: relative;
-      min-height: 310px;
-      overflow: hidden;
-    }
-
-    .rail-step {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 28px;
-      align-content: center;
-      padding: clamp(24px, 4vw, 42px);
-      transform: translateX(110%);
-      opacity: 0;
-      transition: transform 360ms ease, opacity 250ms ease;
-    }
-
-    .rail-step.active {
-      position: relative;
-      transform: translateX(0);
-      opacity: 1;
-      z-index: 2;
-    }
-
-    .rail-step.exit-left {
-      transform: translateX(-30%);
-      opacity: 0;
-    }
-
-    .rail-label {
-      align-self: start;
-      width: fit-content;
-      display: inline-flex;
-      color: var(--charcoal);
-      font-size: 0.78rem;
-      font-weight: 950;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border-bottom: 4px solid var(--purple);
-      padding-bottom: 8px;
-    }
-
-    .rail-content h3 {
-      max-width: 820px;
-      font-size: clamp(2rem, 4.6vw, 4.4rem);
-      line-height: 0.98;
-      letter-spacing: -0.065em;
-      font-weight: 950;
-      margin-bottom: 16px;
-    }
-
-    .rail-content p {
-      max-width: 760px;
-      color: var(--ink);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.04rem;
-      line-height: 1.7;
-    }
-
-    .verse-pill {
-      display: inline-flex;
-      width: fit-content;
-      margin-top: 16px;
-      padding: 8px 11px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: var(--white);
-      font-size: 0.88rem;
-      font-weight: 900;
-    }
-
-    .rail-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .rail-btn {
-      appearance: none;
-      border: 1px solid var(--line);
-      background: var(--white);
-      color: var(--charcoal);
-      min-height: 42px;
-      padding: 10px 15px;
-      border-radius: 999px;
-      font-size: 0.94rem;
-      font-weight: 900;
-      cursor: pointer;
-      transition: transform 180ms ease, box-shadow 180ms ease;
-    }
-
-    .rail-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-    }
-
-    .rail-btn.primary {
-      background: var(--charcoal);
-      color: white;
-      border-color: var(--charcoal);
-    }
-
-    .prayer-line {
-      max-width: 800px;
-      border-left: 5px solid var(--purple);
-      padding-left: 16px;
-    }
-
-    .prayer-note {
-      margin-top: 18px;
-      max-width: 780px;
-      color: var(--muted) !important;
-      font-size: 0.97rem !important;
-    }
-
-    .mission-section {
-      background: var(--cloud);
-      padding: 64px 0 78px;
-    }
-
-    .mission-copy-wide {
-      max-width: 100%;
-    }
-
-    .mission-copy h2 {
-      font-size: clamp(2rem, 4vw, 3.7rem);
-      line-height: 0.98;
-      letter-spacing: -0.06em;
-      margin-bottom: 18px;
-    }
-
-    .mission-copy p {
-      font-family: Georgia, "Times New Roman", serif;
-      color: var(--ink);
-      font-size: 1.06rem;
-      line-height: 1.72;
-      margin-bottom: 18px;
-      max-width: 920px;
-    }
-
-    .quote-block {
-      margin: 24px 0 24px;
-      border-top: 4px solid var(--purple);
-      border-bottom: 1px solid var(--line);
-      padding: 22px 0;
-    }
-
-    .quote-block blockquote {
-      font-size: clamp(1.6rem, 3.6vw, 2.7rem);
-      line-height: 1.12;
-      letter-spacing: -0.05em;
-      font-weight: 950;
-    }
-
-    .where-word {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-      font-size: clamp(2.8rem, 7vw, 6.2rem) !important;
-      line-height: 0.95 !important;
-      letter-spacing: -0.075em;
-      color: var(--purple) !important;
-      margin: 8px 0 18px !important;
-    }
-
-    .question-stack {
-      max-width: 760px !important;
-      padding-left: 18px;
-      border-left: 5px solid var(--purple);
-      font-size: clamp(1.08rem, 1.6vw, 1.28rem) !important;
-      line-height: 1.85 !important;
-    }
-
-    .mission-bold-line {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-      max-width: 900px !important;
-      font-size: clamp(1.3rem, 2.4vw, 2rem) !important;
-      line-height: 1.18 !important;
-      letter-spacing: -0.035em;
-      color: var(--charcoal) !important;
-      margin-top: 30px !important;
-    }
-
-    .mission-diagram-note {
-      max-width: 980px !important;
-      margin-top: 28px !important;
-      padding: 18px 20px;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-      color: var(--charcoal) !important;
-    }
-
-    .framework-block {
-      margin-top: 42px;
-      border-top: 1px solid var(--line);
-      padding-top: 34px;
-      width: 100%;
-    }
-
-    .framework-block h3 {
-      font-size: clamp(2rem, 4vw, 3.8rem);
-      line-height: 1;
-      letter-spacing: -0.06em;
-      margin-bottom: 12px;
-    }
-
-    .formula-intro {
-      max-width: 860px;
-      color: var(--muted) !important;
-      margin-bottom: 34px !important;
-      font-size: 1rem !important;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-    }
-
-    .formula-row {
-      display: grid;
-      grid-template-columns: minmax(160px, 1fr) auto minmax(160px, 1fr) auto minmax(160px, 1fr) auto minmax(160px, 1fr);
-      align-items: center;
-      justify-items: center;
-      gap: clamp(18px, 3vw, 34px);
-      width: 100%;
-      padding-top: 10px;
-    }
-
-    .formula-card {
-      width: 100%;
-      background: transparent;
-      border: 0;
-      box-shadow: none;
-      min-height: auto;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 14px;
-      opacity: 0;
-      transform: translateY(26px);
-      transition:
-        opacity 700ms ease,
-        transform 850ms cubic-bezier(.2,.8,.2,1);
-      transition-delay: var(--pan-delay, 0ms);
-    }
-
-    .formula-card.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .formula-card h4 {
-      font-size: 0.92rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--purple);
-      margin: 0;
-    }
-
-    .formula-question {
-      margin: 0 !important;
-      font-size: 1rem !important;
-      font-weight: 900;
-      line-height: 1.35 !important;
-      color: var(--charcoal) !important;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-    }
-
-    .formula-arrow {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: clamp(1.4rem, 2.4vw, 2rem);
-      font-weight: 950;
-      color: var(--purple);
-      opacity: 0;
-      transform: translateY(20px);
-      transition:
-        opacity 700ms ease,
-        transform 850ms cubic-bezier(.2,.8,.2,1);
-      transition-delay: var(--pan-delay, 0ms);
-    }
-
-    .formula-arrow.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .slot-shape {
-      position: relative;
-      background: var(--cloud);
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      font-size: 0.78rem;
-      font-weight: 950;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-
-    .slot-shape::before {
-      content: attr(data-label);
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      background: var(--paper);
-      text-align: center;
-      padding: 12px;
-    }
-
-    .slot-shape.has-image::before {
-      display: none;
-    }
-
-    .slot-circle {
-      width: min(220px, 100%);
-      aspect-ratio: 1 / 1;
-      border-radius: 50%;
-      overflow: hidden;
-      background-size: 128%;
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-color: #000;
-      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.18);
-    }
-
-    .slot-circle::before {
-      border-radius: 50%;
-    }
-
-    .slot-portrait {
-      width: min(220px, 100%);
-      aspect-ratio: 3 / 4;
-      border-radius: 18px;
-    }
-
-    .slot-landscape {
-      width: min(260px, 100%);
-      aspect-ratio: 4 / 3;
-      border-radius: 18px;
-    }
-
-    .slot-question-shape {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: min(220px, 100%);
-      height: 220px;
-      background: transparent;
-      color: var(--purple);
-      font-size: clamp(6rem, 10vw, 9rem);
-      font-weight: 950;
-      line-height: 1;
-      font-family: Georgia, "Times New Roman", serif;
-    }
-
     .scroll-pan-up {
       opacity: 0;
       transform: translateY(24px);
@@ -882,6 +526,10 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
       background: var(--purple);
@@ -904,42 +552,19 @@
       font-size: 0.92rem;
     }
 
-    @media (max-width: 1040px) {
-      .formula-row {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-
-      .formula-arrow {
-        transform: rotate(90deg) translateY(20px);
-      }
-
-      .formula-arrow.is-visible {
-        transform: rotate(90deg) translateY(0);
-      }
-    }
-
     @media (max-width: 900px) {
-      .gospel-header,
-      .profile-inner,
-      .rail-step {
+      .profile-inner {
         grid-template-columns: 1fr;
       }
 
       .profile-photo {
         width: 180px;
-      }
-
-      .rail-window {
-        min-height: 420px;
+        position: relative;
+        top: auto;
       }
     }
 
     @media (max-width: 620px) {
-      .back-home-link {
-        display: none;
-      }
-
       .container {
         width: min(var(--max), calc(100% - 24px));
       }
@@ -965,33 +590,12 @@
         min-height: 180px;
       }
 
-      .rail-window {
-        min-height: 500px;
+      .profile-band {
+        padding-bottom: 58px;
       }
 
-      .rail-step {
-        padding: 24px;
-      }
-
-      .rail-content h3 {
-        font-size: clamp(1.8rem, 11vw, 3rem);
-      }
-
-      .slot-circle,
-      .slot-question-shape {
-        width: min(150px, 100%);
-      }
-
-      .slot-question-shape {
-        height: 150px;
-      }
-
-      .slot-portrait {
-        width: min(150px, 100%);
-      }
-
-      .slot-landscape {
-        width: min(190px, 100%);
+      .belief-panel {
+        padding: 20px;
       }
     }
 
@@ -999,11 +603,7 @@
       .title-line,
       .title-line::after,
       .scroll-pan-up,
-      .scroll-pan-up.is-visible,
-      .formula-card,
-      .formula-card.is-visible,
-      .formula-arrow,
-      .formula-arrow.is-visible {
+      .scroll-pan-up.is-visible {
         animation: none !important;
         transition: none !important;
         transform: none !important;
@@ -1014,9 +614,8 @@
 </head>
 
 <body>
-  <header class="brand-bar" aria-label="Bible Mapped brand header">
+  <header class="brand-bar" aria-label="Bible Mapped page header">
     <div class="container brand-bar-inner">
-      <a class="brand-wordmark" href="../index.html">Bible Mapped</a>
       <a class="back-home-link" href="../index.html">Back Home →</a>
     </div>
   </header>
@@ -1040,177 +639,141 @@
       </div>
     </section>
 
-    <section class="gospel-section" aria-label="Gospel guide">
-      <div class="container">
-        <div class="gospel-header">
-          <h2 class="section-title">The Gospel comes first.</h2>
-
-          <p class="section-copy">
-            None of this matters if Jesus did not rise from the dead. And He did.
-            This guide walks you through the question of salvation with Scripture and clear steps.
-          </p>
-        </div>
-
-        <div class="salvation-rail">
-          <div class="rail-top" aria-hidden="true">
-            <span class="rail-progress-item active"></span>
-            <span class="rail-progress-item"></span>
-            <span class="rail-progress-item"></span>
-            <span class="rail-progress-item"></span>
-            <span class="rail-progress-item"></span>
-            <span class="rail-progress-item"></span>
-            <span class="rail-progress-item"></span>
-          </div>
-
-          <div class="rail-window">
-            <article class="rail-step active" data-step="0">
-              <span class="rail-label">Question 1</span>
-
-              <div class="rail-content">
-                <h3>If you died tonight, would you know for sure that you are going to heaven?</h3>
-                <p>This is not meant to scare you. It is meant to bring the most important question into focus.</p>
-
-                <div class="rail-actions">
-                  <button class="rail-btn" data-next="1">Yes</button>
-                  <button class="rail-btn" data-next="1">No</button>
-                  <button class="rail-btn" data-next="1">I’m not sure</button>
-                </div>
-              </div>
-            </article>
-
-            <article class="rail-step" data-step="1">
-              <span class="rail-label">Question 2</span>
-
-              <div class="rail-content">
-                <h3>If God asked why He should let you into heaven, what would your answer be?</h3>
-                <p>Many people answer with good works, religion, sincerity, or trying hard. But the Bible starts with our need for grace.</p>
-
-                <div class="rail-actions">
-                  <button class="rail-btn" data-next="2">I tried to be good</button>
-                  <button class="rail-btn" data-next="2">I believe in Jesus</button>
-                  <button class="rail-btn" data-next="2">I don’t know</button>
-                </div>
-              </div>
-            </article>
-
-            <article class="rail-step" data-step="2">
-              <span class="rail-label">Step 1</span>
-
-              <div class="rail-content">
-                <h3>All have sinned.</h3>
-                <p>The Bible says every person has sinned before a holy God. We do not start with self-improvement. We start with truth.</p>
-                <span class="verse-pill">Romans 3:23</span>
-
-                <div class="rail-actions">
-                  <button class="rail-btn primary" data-next="3">Continue</button>
-                  <button class="rail-btn" data-next="1">Back</button>
-                </div>
-              </div>
-            </article>
-
-            <article class="rail-step" data-step="3">
-              <span class="rail-label">Step 2</span>
-
-              <div class="rail-content">
-                <h3>Sin brings death, but God offers life.</h3>
-                <p>Sin separates us from God, and the wages of sin is death. But the gift of God is eternal life through Jesus Christ our Lord.</p>
-                <span class="verse-pill">Romans 6:23</span>
-
-                <div class="rail-actions">
-                  <button class="rail-btn primary" data-next="4">Continue</button>
-                  <button class="rail-btn" data-next="2">Back</button>
-                </div>
-              </div>
-            </article>
-
-            <article class="rail-step" data-step="4">
-              <span class="rail-label">Step 3</span>
-
-              <div class="rail-content">
-                <h3>Christ died for us.</h3>
-                <p>God showed His love toward us in that while we were still sinners, Christ died for us. The center of salvation is what Jesus did.</p>
-                <span class="verse-pill">Romans 5:8</span>
-
-                <div class="rail-actions">
-                  <button class="rail-btn primary" data-next="5">Continue</button>
-                  <button class="rail-btn" data-next="3">Back</button>
-                </div>
-              </div>
-            </article>
-
-            <article class="rail-step" data-step="5">
-              <span class="rail-label">Step 4</span>
-
-              <div class="rail-content">
-                <h3>Believe and call on the Lord.</h3>
-                <p>The Bible connects salvation to faith in Christ, confession, and calling on the Lord from the heart.</p>
-                <span class="verse-pill">Romans 10:9–10, 13</span>
-
-                <div class="rail-actions">
-                  <button class="rail-btn primary" data-next="6">Show the prayer</button>
-                  <button class="rail-btn" data-next="4">Back</button>
-                </div>
-              </div>
-            </article>
-
-            <article class="rail-step" data-step="6">
-              <span class="rail-label">Prayer</span>
-
-              <div class="rail-content">
-                <h3>A prayer of confession and faith.</h3>
-
-                <div class="prayer-line">
-                  <p>
-                    Lord Jesus, I know that I have sinned. I believe You died for my sins and rose again.
-                    I turn to You, trust You, and ask You to save me. Thank You for Your grace and forgiveness. Amen.
-                  </p>
-                </div>
-
-                <p class="prayer-note">
-                  <strong>The prayer is not magic.</strong> These words do not save by themselves.
-                  What matters is true faith in Jesus Christ — trusting Him from the heart.
-                </p>
-
-                <div class="rail-actions">
-                  <button class="rail-btn" data-next="0">Start over</button>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="profile-band">
+    <section class="profile-band" id="about-bible-mapped">
       <div class="container profile-inner">
         <div class="profile-photo">
           <img src="../assets/calvin-photo.jpg.png" alt="Calvin in front of a map" />
         </div>
 
-        <div class="profile-meta">
-          <h2>Meet Calvin</h2>
+        <article class="profile-meta about-letter">
+          <h2>About Bible Mapped</h2>
+
+          <p><strong>Hi everyone,</strong></p>
 
           <p>
-            I am a Christian, a husband, a father, and the heart behind Bible Mapped.
+            My name is <strong>Calvin S.</strong> I am a Christian, a husband, a father, and the heart behind
+            <strong>Bible Mapped</strong>.
           </p>
 
           <p>
-            I was saved in 2008, and since then, I have loved telling people about Jesus Christ.
-            Over the years, I’ve walked through faith, doubt, Bible college, church hurt, and questions about God.
-            But through it all, I keep coming back to this conviction:
+            I was saved in 2008, and since then, I have loved telling people about Jesus Christ. Over the years,
+            my journey has taken me through faith, doubt, Bible college, church hurt, hard questions, and seasons
+            where I had to examine what I really believed.
           </p>
 
           <p>
-            <strong>God’s Word is true, even when man fails.</strong>
+            And through all of it, I keep coming back to one conviction:
+          </p>
+
+          <div class="conviction-block">
+            <blockquote>Let God be true, and every man a liar — including me.</blockquote>
+          </div>
+
+          <p>
+            People fail. Leaders fail. Churches can wound. Culture changes. Opinions shift. Even my own understanding
+            can be wrong.
+          </p>
+
+          <p><strong>But God’s Word remains true.</strong></p>
+
+          <p>
+            That is the foundation of Bible Mapped.
           </p>
 
           <p>
-            Bible Mapped was born from that journey.
+            Bible Mapped exists because the Bible did not happen in a vacuum. It happened somewhere.
           </p>
 
           <p>
-            It exists to help people slow down, look closer, and see the Bible as a real story grounded in real places,
-            real people, real history, language, and meaning — all pointing to Jesus Christ.
+            It happened in gardens, deserts, mountains, rivers, cities, temples, roads, prisons, battlefields,
+            fishing villages, and empty tombs.
+          </p>
+
+          <p class="letter-emphasis">The where matters.</p>
+
+          <p>
+            Because when you understand where something happened, you begin to see the story more clearly. A mountain
+            is not just a mountain. A wilderness is not just empty space. A road is not just a path between two cities.
+          </p>
+
+          <p>
+            In Scripture, places carry meaning. Geography creates context. Context brings clarity.
+          </p>
+
+          <p>
+            That is what Bible Mapped is about.
+          </p>
+
+          <p>
+            It is about helping people slow down, look closer, and see the Bible as a real story grounded in real places,
+            real people, real history, real language, and real meaning.
+          </p>
+
+          <p><strong>But the goal is not just maps.</strong></p>
+
+          <p><strong>The goal is Jesus.</strong></p>
+
+          <p>
+            Because without Jesus, none of this means anything.
+          </p>
+
+          <p>
+            The maps matter. The timelines matter. The history matters. The geography, archaeology, culture, and original
+            languages all matter. But they only matter because they help us see the greater story God is telling: the story
+            of redemption through His Son.
+          </p>
+
+          <div class="belief-panel">
+            <p>
+              <strong>I believe Jesus Christ is God in the flesh.</strong> He is not merely a teacher, a prophet, or a religious
+              example. He is the eternal Son of God who came into the world, lived without sin, died for sinners, rose again,
+              and is coming again.
+            </p>
+
+            <p>
+              <strong>I believe the Trinity is biblical.</strong> There is one God, eternally existing as Father, Son, and Holy Spirit.
+              We see this clearly at the baptism of Jesus: the Son is baptized, the Spirit descends, and the Father speaks from heaven.
+            </p>
+
+            <p>
+              <strong>I believe baptism is obedience, but it does not save.</strong> Salvation is by grace through faith in Jesus Christ.
+              Baptism is a public declaration of faith, not the source of it.
+            </p>
+
+            <p>
+              <strong>I believe the Bible is the inerrant Word of God.</strong> It is true, trustworthy, preserved, and cannot be broken.
+              When I disagree with Scripture, I am wrong.
+            </p>
+
+            <p>
+              <strong>And I believe Satan is a liar.</strong> He has lied from the beginning, but his end is already written.
+              Christ has conquered, and one day every enemy of God will be judged.
+            </p>
+          </div>
+
+          <p>
+            Bible Mapped was created to help people see that the Bible is not myth, not motivational material, and not a
+            collection of disconnected religious stories.
+          </p>
+
+          <p>
+            It is the true Word of the living God.
+          </p>
+
+          <p class="closing-lines">
+            It happened in real places.<br />
+            It was given through real history.<br />
+            It reveals the real Savior.
+          </p>
+
+          <p>
+            And every road, every region, every city, every wilderness, every promise, and every page ultimately points
+            to Jesus Christ.
+          </p>
+
+          <p class="signature">
+            Sincerely,<br />
+            Calvin S.
           </p>
 
           <div class="social-row" aria-label="Follow Bible Mapped">
@@ -1229,132 +792,7 @@
               <span>Instagram</span>
             </a>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="mission-section">
-      <div class="container">
-        <div class="mission-copy mission-copy-wide">
-          <h2>How Bible Mapped Works</h2>
-
-          <div class="quote-block">
-            <blockquote>“The Bible does not hang above history. It is inside history.”</blockquote>
-          </div>
-
-          <p>
-            When someone says they have proof, most people ask the same question:
-          </p>
-
-          <p class="where-word">
-            <strong>Where?</strong>
-          </p>
-
-          <p class="question-stack">
-            Where is the proof?<br />
-            Where did this happen?<br />
-            Where is Eden?<br />
-            Where did Abraham walk?<br />
-            Where was Jerusalem?<br />
-            Where was the Kidron Valley?<br />
-            Where did Jesus teach, suffer, die, and rise again?
-          </p>
-
-          <p class="mission-bold-line">
-            <strong>Bible Mapped was created to help Christians see the “where” of Scripture.</strong>
-          </p>
-
-          <p>
-            The Bible does not hang above history as a set of distant religious ideas.
-            It unfolds within history — through real people, real places, real timelines, and real meaning.
-          </p>
-
-          <p>
-            From Eden to Abraham, from Egypt to Sinai, from the wilderness to the promised land,
-            from Jerusalem to exile, from Bethlehem to the cross, and from the empty tomb to the hope
-            of all things made new, Scripture moves as one connected story.
-          </p>
-
-          <p>
-            And the evidence is not only found in ancient locations. It is also seen in the impact of
-            Christianity itself — in the way the teachings of Jesus have shaped how the world understands
-            mercy, forgiveness, human dignity, sacrifice, love, and how we should see one another.
-          </p>
-
-          <p>
-            Bible Mapped is not about moving people into a denomination. It is about helping people follow
-            the trail of Scripture and see how the whole story points to
-            <strong>Jesus Christ — His life, His death, and His resurrection.</strong>
-          </p>
-
-          <p>
-            The Bible is a story about real people, in real places, in real time — with real meaning that
-            still reaches us today.
-          </p>
-
-          <p class="mission-diagram-note">
-            <strong>
-              Below is a visual diagram of that flow — a simple way to see how the Bible unfolds as one
-              connected story within history.
-            </strong>
-          </p>
-
-          <div class="framework-block" aria-label="Bible Mapped formula">
-            <h3>The Formula</h3>
-
-            <p class="formula-intro">
-              This is the simple Bible Mapped flow: place, people, time, and meaning.
-            </p>
-
-            <div class="formula-row">
-              <div class="formula-card">
-                <div
-                  class="slot-shape slot-circle"
-                  data-label="Add place image"
-                  data-image-src="../assets/formula-place.png"
-                ></div>
-
-                <h4>Places</h4>
-                <p class="formula-question">Where did it happen?</p>
-              </div>
-
-              <div class="formula-arrow" aria-hidden="true">→</div>
-
-              <div class="formula-card">
-                <div
-                  class="slot-shape slot-portrait"
-                  data-label="Add people image"
-                  data-image-src="../assets/formula-people.png"
-                ></div>
-
-                <h4>People</h4>
-                <p class="formula-question">Who was involved?</p>
-              </div>
-
-              <div class="formula-arrow" aria-hidden="true">→</div>
-
-              <div class="formula-card">
-                <div
-                  class="slot-shape slot-landscape"
-                  data-label="Add time image"
-                  data-image-src="../assets/formula-time.png"
-                ></div>
-
-                <h4>Time</h4>
-                <p class="formula-question">When did it happen?</p>
-              </div>
-
-              <div class="formula-arrow" aria-hidden="true">→</div>
-
-              <div class="formula-card">
-                <div class="slot-question-shape" aria-label="Meaning">?</div>
-
-                <h4>Meaning</h4>
-                <p class="formula-question">Why does it matter?</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        </article>
       </div>
     </section>
   </main>
@@ -1367,35 +805,6 @@
   </footer>
 
   <script>
-    const railSteps = document.querySelectorAll(".rail-step");
-    const railProgress = document.querySelectorAll(".rail-progress-item");
-
-    function showRailStep(index) {
-      railSteps.forEach((step) => {
-        const current = Number(step.dataset.step);
-        step.classList.remove("active", "exit-left");
-
-        if (current < index) {
-          step.classList.add("exit-left");
-        }
-
-        if (current === index) {
-          step.classList.add("active");
-        }
-      });
-
-      railProgress.forEach((dot, i) => {
-        dot.classList.toggle("active", i <= index);
-      });
-    }
-
-    document.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-next]");
-      if (!button) return;
-
-      showRailStep(Number(button.dataset.next));
-    });
-
     const featureImageFrame = document.querySelector(".feature-image-frame");
 
     if (featureImageFrame) {
@@ -1408,40 +817,20 @@
       testImage.src = "../assets/about-feature-image.png";
     }
 
-    const formulaSlots = document.querySelectorAll(".slot-shape[data-image-src]");
-
-    formulaSlots.forEach((slot) => {
-      const src = slot.dataset.imageSrc;
-
-      if (!src) return;
-
-      const testImage = new Image();
-
-      testImage.onload = () => {
-        slot.classList.add("has-image");
-        slot.style.backgroundImage = `url("${src}")`;
-      };
-
-      testImage.src = src;
-    });
-
     const panTargets = document.querySelectorAll(`
       .title-line,
       .feature-image-wrap,
-      .gospel-header,
-      .salvation-rail,
       .profile-inner,
-      .quote-block,
-      .mission-copy > p,
-      .framework-block h3,
-      .formula-intro,
-      .formula-card,
-      .formula-arrow
+      .about-letter h2,
+      .about-letter p,
+      .conviction-block,
+      .belief-panel,
+      .social-row
     `);
 
     panTargets.forEach((item, index) => {
       item.classList.add("scroll-pan-up");
-      item.style.setProperty("--pan-delay", `${(index % 5) * 90}ms`);
+      item.style.setProperty("--pan-delay", `${(index % 5) * 70}ms`);
     });
 
     const panObserver = new IntersectionObserver(
