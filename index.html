@@ -95,8 +95,10 @@
       display: block;
       object-fit: contain;
       flex-shrink: 0;
+      order: 1;
     }
 
+    /* Emblem stays on the RIGHT side of the Bible Mapped logo */
     .brand-icon-slot {
       width: clamp(38px, 3.6vw, 54px);
       height: clamp(38px, 3.6vw, 54px);
@@ -109,8 +111,9 @@
       border: none;
       border-radius: 0;
       padding: 0;
-      margin-left: -12px;
+      margin-left: -10px;
       transform: translateY(-5px);
+      order: 2;
     }
 
     .brand-icon {
@@ -170,7 +173,7 @@
     }
 
     /* =========================
-       HERO WITH VIDEO BACKGROUND
+       HERO VIDEO BACKGROUND
     ========================= */
 
     .hero {
@@ -212,16 +215,16 @@
       pointer-events: none;
     }
 
-    .hero-copy {
-      will-change: transform;
-    }
-
     .hero-inner {
       width: min(1120px, 100%);
       margin: 0 auto;
       text-align: center;
       position: relative;
       z-index: 3;
+    }
+
+    .hero-copy {
+      will-change: transform;
     }
 
     .hero h1 {
@@ -264,7 +267,11 @@
       font-weight: 950;
       border: 1px solid currentColor;
       cursor: pointer;
-      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
     }
 
     .btn:hover {
@@ -752,7 +759,7 @@
       .brand-icon-slot {
         width: 42px;
         height: 42px;
-        margin-left: -10px;
+        margin-left: -8px;
         transform: translateY(-4px);
       }
 
@@ -814,7 +821,7 @@
       .brand-icon-slot {
         width: 34px;
         height: 34px;
-        margin-left: -8px;
+        margin-left: -6px;
         transform: translateY(-4px);
       }
 
@@ -886,7 +893,7 @@
       .brand-icon-slot {
         width: 30px;
         height: 30px;
-        margin-left: -6px;
+        margin-left: -5px;
         transform: translateY(-3px);
       }
     }
@@ -995,6 +1002,7 @@
   <section class="statement-section testament-puzzle-section" id="testaments">
     <div class="section-rail">
       <p class="rail-eyebrow">Begin the Journey</p>
+
       <div class="section-display explore-display">
         Explore Scripture by Testament
       </div>
@@ -1046,6 +1054,7 @@
               <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
               <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
             </g>
+
             <path class="piece-stroke" d="M0,0 H275 L245,205 H0 Z"></path>
           </g>
 
@@ -1063,6 +1072,7 @@
               <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
               <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
             </g>
+
             <path class="piece-stroke" d="M0,205 H245 L275,430 H0 Z"></path>
           </g>
 
@@ -1080,6 +1090,7 @@
               <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
               <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
             </g>
+
             <path class="piece-stroke" d="M245,0 H585 L555,430 H275 Z"></path>
           </g>
 
@@ -1097,6 +1108,7 @@
               <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
               <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
             </g>
+
             <path class="piece-stroke" d="M585,0 H905 L875,430 H555 Z"></path>
           </g>
 
@@ -1114,6 +1126,7 @@
               <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
               <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
             </g>
+
             <path class="piece-stroke" d="M905,0 H1200 V430 H875 Z"></path>
           </g>
         </svg>
@@ -1368,6 +1381,10 @@
   </footer>
 
   <script>
+    /* =========================
+       MODALS
+    ========================= */
+
     const modalTriggers = document.querySelectorAll("[data-modal-target]");
     const modalCloseButtons = document.querySelectorAll("[data-modal-close]");
     const modals = document.querySelectorAll(".modal-overlay");
@@ -1419,22 +1436,38 @@
       }
     });
 
+    /* =========================
+       FIXED SHARD ANIMATION
+    ========================= */
+
     const testamentWrap = document.getElementById("testamentPuzzleWrap");
 
-    if (testamentWrap) {
-      const testamentObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              testamentWrap.classList.add("in-view");
-            }
-          });
-        },
-        { threshold: 0.35 }
-      );
+    function checkTestamentPuzzleAnimation() {
+      if (!testamentWrap) return;
 
-      testamentObserver.observe(testamentWrap);
+      const rect = testamentWrap.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      const isVisible =
+        rect.top < windowHeight * 0.82 &&
+        rect.bottom > windowHeight * 0.15;
+
+      if (isVisible) {
+        testamentWrap.classList.add("in-view");
+      }
     }
+
+    window.addEventListener("scroll", checkTestamentPuzzleAnimation);
+    window.addEventListener("resize", checkTestamentPuzzleAnimation);
+    window.addEventListener("load", checkTestamentPuzzleAnimation);
+
+    requestAnimationFrame(checkTestamentPuzzleAnimation);
+    setTimeout(checkTestamentPuzzleAnimation, 300);
+    setTimeout(checkTestamentPuzzleAnimation, 900);
+
+    /* =========================
+       HERO VIDEO PLAYLIST
+    ========================= */
 
     const heroVideoPlaylist = [
       "assets/videos/video-1.mp4",
@@ -1463,8 +1496,8 @@
       if (playPromise !== undefined) {
         playPromise.catch(() => {
           /*
-            Some browsers may wait for user interaction.
             Muted autoplay usually works.
+            Some browsers may wait for user interaction.
           */
         });
       }
@@ -1485,6 +1518,10 @@
         playHeroVideoByIndex(nextVideoIndex);
       });
     }
+
+    /* =========================
+       SOFT PARALLAX
+    ========================= */
 
     const parallaxItems = document.querySelectorAll(".parallax-item");
     let ticking = false;
