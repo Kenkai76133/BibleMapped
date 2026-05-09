@@ -71,7 +71,7 @@
 
     .nav {
       width: 100%;
-      height: 128px;
+      height: 104px;
       padding: 0 clamp(22px, 4vw, 72px) 0 0;
       display: flex;
       align-items: center;
@@ -83,20 +83,31 @@
       display: inline-flex;
       align-items: center;
       justify-content: flex-start;
-      line-height: 1;
       flex-shrink: 0;
-      color: var(--ink);
+      line-height: 1;
       margin-left: 0;
       padding-left: 0;
+      color: var(--ink);
+    }
+
+    /* Crop window keeps header clean while logo feels bigger */
+    .brand-crop {
+      width: 360px;
+      height: 92px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
     }
 
     .brand-logo {
-      height: clamp(88px, 7.2vw, 138px);
+      height: 118px;
       width: auto;
-      display: block;
+      max-width: none;
       object-fit: contain;
+      display: block;
+      transform: translateX(-24px);
       flex-shrink: 0;
-      transform: translateX(-4px);
     }
 
     .nav-links {
@@ -717,13 +728,19 @@
 
     @media (max-width: 980px) {
       .nav {
-        height: 104px;
+        height: 92px;
         gap: 20px;
         padding: 0 16px 0 0;
       }
 
+      .brand-crop {
+        width: 300px;
+        height: 82px;
+      }
+
       .brand-logo {
-        height: 92px;
+        height: 104px;
+        transform: translateX(-22px);
       }
 
       .nav-links {
@@ -776,13 +793,19 @@
 
     @media (max-width: 720px) {
       .nav {
-        height: 86px;
+        height: 82px;
         padding: 0 12px 0 0;
         gap: 16px;
       }
 
-      .brand-logo {
+      .brand-crop {
+        width: 220px;
         height: 72px;
+      }
+
+      .brand-logo {
+        height: 88px;
+        transform: translateX(-18px);
       }
 
       .nav-links {
@@ -846,8 +869,14 @@
         font-size: 58px;
       }
 
+      .brand-crop {
+        width: 165px;
+        height: 62px;
+      }
+
       .brand-logo {
-        height: 58px;
+        height: 74px;
+        transform: translateX(-14px);
       }
     }
   </style>
@@ -857,11 +886,13 @@
   <header class="site-header">
     <nav class="nav">
       <a href="index.html" class="brand" aria-label="Bible Mapped Home">
-        <img
-          src="assets/bible-mapped-logo.png"
-          alt="Bible Mapped"
-          class="brand-logo"
-        />
+        <span class="brand-crop">
+          <img
+            src="assets/bible-mapped-logo.png"
+            alt="Bible Mapped"
+            class="brand-logo"
+          />
+        </span>
       </a>
 
       <div class="nav-links">
@@ -1376,10 +1407,6 @@
       }
     });
 
-    /* =========================
-       FIXED SHARD ANIMATION
-    ========================= */
-
     const testamentWrap = document.getElementById("testamentPuzzleWrap");
 
     function checkTestamentPuzzleAnimation() {
@@ -1404,10 +1431,6 @@
     requestAnimationFrame(checkTestamentPuzzleAnimation);
     setTimeout(checkTestamentPuzzleAnimation, 300);
     setTimeout(checkTestamentPuzzleAnimation, 900);
-
-    /* =========================
-       HERO VIDEO PLAYLIST
-    ========================= */
 
     const heroVideoPlaylist = [
       "assets/videos/video-1.mp4",
@@ -1458,10 +1481,6 @@
         playHeroVideoByIndex(nextVideoIndex);
       });
     }
-
-    /* =========================
-       SOFT PARALLAX
-    ========================= */
 
     const parallaxItems = document.querySelectorAll(".parallax-item");
     let ticking = false;
