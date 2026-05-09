@@ -106,7 +106,7 @@
 
     .hero {
       background: var(--cloud);
-      padding: 0 0 46px;
+      padding: 34px 0 24px;
     }
 
     .hero-visual {
@@ -167,7 +167,7 @@
 
     .hero-grid {
       display: block;
-      margin-top: -12px;
+      margin-top: 0;
       position: relative;
       z-index: 5;
     }
@@ -574,7 +574,7 @@
       }
 
       .hero {
-        padding-bottom: 40px;
+        padding: 28px 0 18px;
       }
 
       .hero-visual {
@@ -621,21 +621,9 @@
   </header>
 
   <main>
-    <section class="hero">
-      <div class="hero-visual" aria-label="Bible Mapped editorial illustration"></div>
-
+    <section class="hero hero-clean">
       <div class="container hero-grid">
         <span class="eyebrow">About</span>
-
-        <h1 class="hero-title">
-          <span class="title-line title-purple">Bible Mapped helps you</span>
-          <span class="title-line title-red">understand where</span>
-          <span class="title-line title-navy">Scripture happened.</span>
-        </h1>
-
-        <div class="feature-image-wrap">
-          <div class="feature-image-frame" aria-label="Bible Mapped featured image"></div>
-        </div>
       </div>
     </section>
 
@@ -805,21 +793,7 @@
   </footer>
 
   <script>
-    const featureImageFrame = document.querySelector(".feature-image-frame");
-
-    if (featureImageFrame) {
-      const testImage = new Image();
-
-      testImage.onload = () => {
-        featureImageFrame.classList.add("has-image");
-      };
-
-      testImage.src = "../assets/about-feature-image.png";
-    }
-
     const panTargets = document.querySelectorAll(`
-      .title-line,
-      .feature-image-wrap,
       .profile-inner,
       .about-letter h2,
       .about-letter p,
