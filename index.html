@@ -1,3 +1,8 @@
+Yes — I removed the **right-side emblem** and made the **Bible Mapped logo image larger** in the header. Your original header had the logo image plus a separate icon image after it, so this version removes that second icon and keeps only `assets/bible-mapped-logo.png`. 
+
+Paste this over your current **`index.html`**:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,7 +76,7 @@
 
     .nav {
       width: 100%;
-      height: 86px;
+      height: 104px;
       padding: 0 clamp(22px, 4vw, 72px) 0 clamp(18px, 2vw, 34px);
       display: flex;
       align-items: center;
@@ -83,44 +88,17 @@
       display: inline-flex;
       align-items: center;
       justify-content: flex-start;
-      gap: 0;
       line-height: 1;
       flex-shrink: 0;
       color: var(--ink);
     }
 
     .brand-logo {
-      height: clamp(42px, 4vw, 64px);
+      height: clamp(58px, 5.3vw, 92px);
       width: auto;
       display: block;
       object-fit: contain;
       flex-shrink: 0;
-      order: 1;
-    }
-
-    /* Emblem stays on the RIGHT side of the Bible Mapped logo */
-    .brand-icon-slot {
-      width: clamp(38px, 3.6vw, 54px);
-      height: clamp(38px, 3.6vw, 54px);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      overflow: visible;
-      flex-shrink: 0;
-      background: transparent;
-      border: none;
-      border-radius: 0;
-      padding: 0;
-      margin-left: -10px;
-      transform: translateY(-5px);
-      order: 2;
-    }
-
-    .brand-icon {
-      width: 90%;
-      height: 90%;
-      object-fit: contain;
-      display: block;
     }
 
     .nav-links {
@@ -741,6 +719,7 @@
 
     @media (max-width: 980px) {
       .nav {
+        height: 92px;
         gap: 22px;
       }
 
@@ -753,14 +732,7 @@
       }
 
       .brand-logo {
-        height: 50px;
-      }
-
-      .brand-icon-slot {
-        width: 42px;
-        height: 42px;
-        margin-left: -8px;
-        transform: translateY(-4px);
+        height: 68px;
       }
 
       .book-category-grid {
@@ -805,24 +777,13 @@
 
     @media (max-width: 720px) {
       .nav {
-        height: 78px;
+        height: 82px;
         padding: 0 18px 0 12px;
         gap: 16px;
       }
 
-      .brand {
-        gap: 0;
-      }
-
       .brand-logo {
-        height: 42px;
-      }
-
-      .brand-icon-slot {
-        width: 34px;
-        height: 34px;
-        margin-left: -6px;
-        transform: translateY(-4px);
+        height: 56px;
       }
 
       .nav-links {
@@ -887,14 +848,7 @@
       }
 
       .brand-logo {
-        height: 36px;
-      }
-
-      .brand-icon-slot {
-        width: 30px;
-        height: 30px;
-        margin-left: -5px;
-        transform: translateY(-3px);
+        height: 46px;
       }
     }
   </style>
@@ -909,15 +863,6 @@
           alt="Bible Mapped"
           class="brand-logo"
         />
-
-        <span class="brand-icon-slot">
-          <img
-            src="assets/bible-mapped-icon.png"
-            alt=""
-            class="brand-icon"
-            onerror="this.parentElement.style.display='none';"
-          />
-        </span>
       </a>
 
       <div class="nav-links">
@@ -1381,10 +1326,6 @@
   </footer>
 
   <script>
-    /* =========================
-       MODALS
-    ========================= */
-
     const modalTriggers = document.querySelectorAll("[data-modal-target]");
     const modalCloseButtons = document.querySelectorAll("[data-modal-close]");
     const modals = document.querySelectorAll(".modal-overlay");
@@ -1556,3 +1497,4 @@
   </script>
 </body>
 </html>
+```
