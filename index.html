@@ -149,10 +149,6 @@
       color: var(--electric-purple);
     }
 
-    .nav-links a + a::after {
-      display: none;
-    }
-
     .nav-links a:hover {
       color: var(--electric-purple);
       transform: translateY(-1px);
@@ -532,7 +528,7 @@
       background: transparent;
       border: none;
       box-shadow: none;
-      padding: 0;
+      padding: 0 0 100px;
       overflow: visible;
     }
 
@@ -590,6 +586,25 @@
       pointer-events: none;
     }
 
+    .formula-art-frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background:
+        linear-gradient(
+          rgba(11, 15, 25, 0.28),
+          rgba(11, 15, 25, 0.62)
+        );
+      opacity: 0;
+      transition: opacity 700ms ease;
+      pointer-events: none;
+    }
+
+    .formula-art-frame.tour-active::before {
+      opacity: 1;
+    }
+
     .formula-word {
       position: absolute;
       z-index: 4;
@@ -643,339 +658,201 @@
     }
 
     /* =========================
-       FORMULA EXAMPLE CONTENT
+       FORMULA GUIDED OVERLAY TOUR
     ========================= */
 
-    .formula-explainer {
-      width: min(1120px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 86px 0 105px;
-      text-align: left;
-    }
-
-    .formula-kicker {
-      margin: 0 0 16px;
-      font-size: 0.82rem;
-      font-weight: 950;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--electric-purple);
-    }
-
-    .formula-explainer h2 {
-      margin: 0;
-      max-width: 920px;
-      font-size: clamp(2.7rem, 6vw, 5.7rem);
-      line-height: 0.94;
-      letter-spacing: -0.075em;
-      font-weight: 950;
+    .formula-tour-panel {
+      position: absolute;
+      z-index: 8;
+      width: min(390px, calc(100% - 32px));
+      background: rgba(248, 247, 242, 0.96);
       color: var(--ink);
+      border-top: 8px solid var(--electric-purple);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.34);
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(28px) scale(0.96);
+      transition:
+        opacity 420ms ease,
+        transform 520ms cubic-bezier(0.16, 0.9, 0.22, 1);
     }
 
-    .formula-question-stack {
-      margin: 34px 0 0;
-      padding: 26px 28px;
-      background: var(--white);
-      border-left: 8px solid var(--bright-red);
-      box-shadow: 0 22px 55px rgba(17, 19, 24, 0.08);
+    .formula-tour-panel.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
     }
 
-    .formula-question-stack h3 {
-      margin: 0 0 14px;
-      font-size: clamp(2.2rem, 4.4vw, 4.6rem);
+    .formula-tour-panel.where-panel {
+      left: 7%;
+      bottom: 150px;
+    }
+
+    .formula-tour-panel.who-panel {
+      left: 50%;
+      bottom: 150px;
+      transform: translateX(-50%) translateY(28px) scale(0.96);
+    }
+
+    .formula-tour-panel.who-panel.active {
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+
+    .formula-tour-panel.why-panel {
+      right: 7%;
+      bottom: 150px;
+    }
+
+    .formula-tour-kicker {
+      margin: 0 0 8px;
+      color: var(--bright-red);
+      font-size: 0.74rem;
+      font-weight: 950;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .formula-tour-panel h3 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.2rem);
       line-height: 0.9;
       letter-spacing: -0.07em;
-      color: var(--bright-red);
-    }
-
-    .formula-question-stack p {
-      margin: 0;
-      color: var(--soft-ink);
-      font-weight: 850;
-      line-height: 1.75;
-    }
-
-    .context-block {
-      margin-top: 42px;
-      max-width: 930px;
-    }
-
-    .context-block h3 {
-      margin: 0 0 12px;
-      font-size: clamp(1.9rem, 3.5vw, 3.4rem);
-      line-height: 0.98;
-      letter-spacing: -0.06em;
+      font-weight: 950;
       color: var(--ink);
     }
 
-    .context-block p {
-      margin: 0;
+    .formula-tour-panel p {
+      margin: 12px 0 0;
       color: var(--soft-ink);
-      font-size: 1.05rem;
-      line-height: 1.75;
-      font-weight: 650;
+      font-size: 0.96rem;
+      line-height: 1.55;
+      font-weight: 680;
     }
 
-    .example-panel {
-      margin-top: 56px;
-      padding: clamp(28px, 4vw, 46px);
-      background: var(--ink);
-      color: var(--white);
-    }
-
-    .example-panel h3 {
-      margin: 0;
-      font-size: clamp(2.2rem, 5vw, 5rem);
-      line-height: 0.92;
-      letter-spacing: -0.075em;
-    }
-
-    .example-panel > p {
-      max-width: 820px;
-      margin: 22px 0 0;
-      color: rgba(255, 255, 255, 0.82);
-      font-size: 1.04rem;
-      line-height: 1.7;
-      font-weight: 650;
-    }
-
-    .formula-step-shell {
-      margin-top: 34px;
-    }
-
-    .formula-step-caption {
-      margin: 0 0 18px;
-      color: rgba(255, 255, 255, 0.82);
-      font-size: 0.94rem;
-      line-height: 1.65;
-      font-weight: 750;
-      letter-spacing: 0.01em;
-    }
-
-    .formula-step-stage {
-      --visible-cards: 1;
+    .formula-tour-image {
+      margin: 16px 0 0;
       width: 100%;
+      aspect-ratio: 16 / 9;
+      background: var(--paper);
+      overflow: hidden;
+      border: 1px solid var(--line);
     }
 
-    .formula-step-stage.stage-1 {
-      --visible-cards: 1;
-    }
-
-    .formula-step-stage.stage-2 {
-      --visible-cards: 2;
-    }
-
-    .formula-step-stage.stage-3 {
-      --visible-cards: 3;
-    }
-
-    .formula-step-track {
-      display: grid;
-      grid-template-columns: repeat(var(--visible-cards), minmax(0, 1fr));
-      gap: 16px;
+    .formula-tour-image img {
       width: 100%;
-      max-width: 480px;
-      margin: 0 auto;
-      align-items: stretch;
-      transition:
-        max-width 520ms cubic-bezier(0.16, 0.9, 0.22, 1),
-        grid-template-columns 520ms cubic-bezier(0.16, 0.9, 0.22, 1);
+      height: 100%;
+      min-height: 0;
+      object-fit: cover;
+      object-position: center;
     }
 
-    .formula-step-stage.stage-2 .formula-step-track {
-      max-width: 820px;
+    .formula-tour-actions {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    .formula-step-stage.stage-3 .formula-step-track {
-      max-width: 100%;
-    }
-
-    .formula-reveal-card {
-      display: none;
-      background: var(--cloud);
-      color: var(--ink);
-      padding: 26px;
-      min-height: 300px;
-      border-top: 8px solid var(--electric-purple);
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.14);
-      opacity: 0;
-      transform: translateX(90px) scale(0.96);
-      will-change: transform, opacity;
-    }
-
-    .formula-step-stage.stage-1 .card-where,
-    .formula-step-stage.stage-2 .card-where,
-    .formula-step-stage.stage-2 .card-who,
-    .formula-step-stage.stage-3 .card-where,
-    .formula-step-stage.stage-3 .card-who,
-    .formula-step-stage.stage-3 .card-why {
-      display: block;
-      opacity: 1;
-      transform: translateX(0) scale(1);
-    }
-
-    .formula-step-stage.stage-2 .card-where {
-      animation: formulaBoxSlideLeft 520ms cubic-bezier(0.16, 0.9, 0.22, 1);
-    }
-
-    .formula-step-stage.stage-3 .card-where,
-    .formula-step-stage.stage-3 .card-who {
-      animation: formulaBoxSlideLeft 520ms cubic-bezier(0.16, 0.9, 0.22, 1);
-    }
-
-    .formula-reveal-card.newly-revealed {
-      animation: formulaBoxShootOut 620ms cubic-bezier(0.16, 0.9, 0.22, 1);
-    }
-
-    @keyframes formulaBoxShootOut {
-      0% {
-        opacity: 0;
-        transform: translateX(120px) scale(0.9);
-      }
-
-      72% {
-        opacity: 1;
-        transform: translateX(-8px) scale(1.015);
-      }
-
-      100% {
-        opacity: 1;
-        transform: translateX(0) scale(1);
-      }
-    }
-
-    @keyframes formulaBoxSlideLeft {
-      0% {
-        transform: translateX(36px) scale(1.02);
-      }
-
-      100% {
-        transform: translateX(0) scale(1);
-      }
-    }
-
-    .formula-reveal-card h4 {
-      margin: 0 0 14px;
-      font-size: clamp(2rem, 4vw, 3.8rem);
-      line-height: 0.9;
-      letter-spacing: -0.075em;
-      color: var(--electric-purple);
-    }
-
-    .formula-reveal-card p {
-      margin: 0;
-      color: var(--soft-ink);
-      font-size: 0.98rem;
-      line-height: 1.65;
-      font-weight: 650;
-    }
-
-    .formula-reveal-card p + p {
-      margin-top: 12px;
-    }
-
-    .formula-reveal-btn {
+    .formula-tour-btn,
+    .formula-tour-link {
       appearance: none;
       border: 1px solid var(--ink);
       background: var(--ink);
       color: var(--white);
       min-height: 42px;
-      margin-top: 20px;
       padding: 10px 16px;
       border-radius: 999px;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 950;
       cursor: pointer;
       transition:
         transform 180ms ease,
         background 180ms ease,
-        color 180ms ease;
+        color 180ms ease,
+        border-color 180ms ease;
     }
 
-    .formula-reveal-btn:hover {
+    .formula-tour-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .formula-tour-btn:hover,
+    .formula-tour-link:hover {
       transform: translateY(-2px);
       background: var(--electric-purple);
       border-color: var(--electric-purple);
       color: var(--white);
     }
 
-    .formula-step-stage.stage-2 .card-where .formula-reveal-btn,
-    .formula-step-stage.stage-3 .card-where .formula-reveal-btn,
-    .formula-step-stage.stage-3 .card-who .formula-reveal-btn {
-      display: none;
+    .formula-tour-btn.secondary {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--line);
     }
 
-    .formula-at-work {
-      margin-top: 46px;
-      padding: 32px;
+    .formula-tour-btn.secondary:hover {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--white);
+    }
+
+    .formula-tour-progress {
+      position: absolute;
+      left: 50%;
+      bottom: 24px;
+      z-index: 9;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      opacity: 0;
+      transition: opacity 400ms ease;
+    }
+
+    .formula-art-frame.tour-active .formula-tour-progress {
+      opacity: 1;
+    }
+
+    .formula-tour-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: rgba(248, 247, 242, 0.45);
+      border: 1px solid rgba(248, 247, 242, 0.7);
+    }
+
+    .formula-tour-dot.active {
+      background: var(--bright-red);
+      border-color: var(--bright-red);
+    }
+
+    .formula-tour-note {
+      width: min(900px, calc(100% - 40px));
+      margin: 34px auto 0;
+      padding: 28px;
       background: var(--white);
-      color: var(--ink);
+      border-left: 8px solid var(--bright-red);
+      box-shadow: 0 22px 55px rgba(17, 19, 24, 0.08);
+      text-align: left;
     }
 
-    .formula-at-work h3 {
-      margin: 0 0 22px;
-      font-size: clamp(2rem, 4.2vw, 4rem);
-      line-height: 0.94;
-      letter-spacing: -0.07em;
-    }
-
-    .context-compare {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .compare-box {
-      padding: 24px;
-      border: 1px solid var(--line);
-      background: var(--cloud);
-    }
-
-    .compare-box strong {
-      display: block;
-      margin-bottom: 10px;
-      color: var(--bright-red);
-      font-size: 0.82rem;
-      font-weight: 950;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .compare-box p {
+    .formula-tour-note h3 {
       margin: 0;
-      color: var(--soft-ink);
-      line-height: 1.65;
-      font-weight: 700;
-    }
-
-    .formula-closing {
-      margin: 34px 0 0;
-      color: var(--soft-ink);
-      font-size: 1.05rem;
-      line-height: 1.8;
-      font-weight: 680;
-    }
-
-    .formula-closing strong {
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: 0.95;
+      letter-spacing: -0.07em;
       color: var(--ink);
     }
 
-    @media (max-width: 820px) {
-      .formula-step-track,
-      .context-compare {
-        grid-template-columns: 1fr !important;
-      }
-
-      .formula-step-stage.stage-1 .formula-step-track,
-      .formula-step-stage.stage-2 .formula-step-track,
-      .formula-step-stage.stage-3 .formula-step-track {
-        max-width: 100%;
-      }
-
-      .formula-explainer {
-        width: min(100% - 28px, 1120px);
-        padding: 62px 0 78px;
-      }
+    .formula-tour-note p {
+      margin: 16px 0 0;
+      color: var(--soft-ink);
+      font-size: 1.02rem;
+      line-height: 1.7;
+      font-weight: 680;
     }
 
     /* =========================
@@ -1205,6 +1082,23 @@
       }
     }
 
+    @media (max-width: 900px) {
+      .formula-tour-panel.where-panel,
+      .formula-tour-panel.who-panel,
+      .formula-tour-panel.why-panel {
+        left: 50%;
+        right: auto;
+        bottom: 110px;
+        transform: translateX(-50%) translateY(28px) scale(0.96);
+      }
+
+      .formula-tour-panel.where-panel.active,
+      .formula-tour-panel.who-panel.active,
+      .formula-tour-panel.why-panel.active {
+        transform: translateX(-50%) translateY(0) scale(1);
+      }
+    }
+
     @media (max-width: 820px) {
       .testament-puzzle-stage {
         padding: 0 12px;
@@ -1341,11 +1235,11 @@
       }
 
       .formula-art-frame {
-        min-height: 360px;
+        min-height: 390px;
       }
 
       .formula-art-frame img {
-        min-height: 360px;
+        min-height: 390px;
       }
 
       .formula-word {
@@ -1355,6 +1249,24 @@
 
       .formula-word.why {
         right: 10%;
+      }
+
+      .formula-tour-panel {
+        padding: 16px;
+        bottom: 82px !important;
+      }
+
+      .formula-tour-panel p {
+        font-size: 0.88rem;
+      }
+
+      .formula-tour-image {
+        aspect-ratio: 4 / 3;
+      }
+
+      .formula-tour-note {
+        width: min(100% - 28px, 900px);
+        padding: 22px;
       }
     }
   </style>
@@ -1603,7 +1515,7 @@
 
       <div class="formula-inline-window" id="formulaInlineWindow" aria-hidden="true">
         <div class="formula-window-inner">
-          <div class="formula-art-frame">
+          <div class="formula-art-frame" id="formulaArtFrame">
             <img
               src="assets/formula-design.png"
               alt="Bible Mapped Formula Design"
@@ -1611,161 +1523,129 @@
             />
 
             <div class="formula-image-placeholder">
-              Upload your design image as:<br />
-              assets/formula-design.png
+              Formula image missing.
             </div>
 
             <span class="formula-word where">Where</span>
             <span class="formula-word who">Who</span>
             <span class="formula-word why">Why</span>
 
-          </div>
-
-          <div class="formula-explainer">
-            <p class="formula-kicker">The Question Behind the Evidence</p>
-
-            <h2>When someone says they have proof, most people ask the same question.</h2>
-
-            <div class="formula-question-stack">
+            <article class="formula-tour-panel where-panel active" data-formula-tour-panel="1">
+              <p class="formula-tour-kicker">John 4 Case Study</p>
               <h3>Where?</h3>
 
-              <p>
-                Where is the proof?<br />
-                Where did this happen?<br />
-                Where is Eden?<br />
-                Where did Abraham walk?<br />
-                Where was Jerusalem?<br />
-                Where was the Kidron Valley?<br />
-                Where did Jesus teach, suffer, die, and rise again?
-              </p>
-            </div>
-
-            <div class="context-block">
-              <h3>Why Context Matters</h3>
-
-              <p>
-                Understanding where Scripture happened is foundational to understanding its truth.
-                The Bible was preserved for us, but it was written within real history — through real people,
-                real places, real cultures, and real moments. Bible Mapped follows the where, who, and why
-                of Scripture so we can see the meaning of the text with greater clarity, context, and integrity —
-                and follow the whole story as it points to Jesus Christ.
-              </p>
-            </div>
-
-            <div class="example-panel">
-              <h3>Example: Jesus and the Samaritan Woman</h3>
-
-              <p>
-                Most people read John 4 and see a conversation at a well. But Bible Mapped asks:
-                Where did this happen? Who was there? Why did it matter?
-              </p>
-
-              <div class="formula-step-shell">
-                <p class="formula-step-caption">
-                  Start with one box. Read it, then click to let the next part of the formula shoot out.
-                </p>
-
-                <div class="formula-step-stage stage-1" id="formulaStepStage" aria-label="Interactive Bible Mapped Formula example">
-                  <div class="formula-step-track">
-                    <article class="formula-reveal-card card-where" data-step-card="where" aria-hidden="false">
-                      <h4>Where?</h4>
-
-                      <p>
-                        Jesus is in Samaria, at Jacob’s well.
-                      </p>
-
-                      <p>
-                        That matters because Samaria was not just a random stop on the journey.
-                        It was a place marked by history, division, and religious tension.
-                      </p>
-
-                      <p>
-                        The location is not background scenery. The where tells us this moment is happening
-                        in a place many Jews avoided, among people many Jews rejected.
-                      </p>
-
-                      <button class="formula-reveal-btn" type="button" data-reveal-step="2">
-                        Reveal Who →
-                      </button>
-                    </article>
-
-                    <article class="formula-reveal-card card-who" data-step-card="who" aria-hidden="true">
-                      <h4>Who?</h4>
-
-                      <p>
-                        Jesus is a Jewish teacher. The woman is a Samaritan.
-                      </p>
-
-                      <p>
-                        That matters because Jews and Samaritans carried deep hostility toward one another.
-                        And this woman comes to the well alone, which suggests personal isolation as well.
-                      </p>
-
-                      <p>
-                        So this is not just “Jesus talks to a woman.” It is Jesus crossing religious,
-                        cultural, ethnic, and personal barriers.
-                      </p>
-
-                      <button class="formula-reveal-btn" type="button" data-reveal-step="3">
-                        Reveal Why →
-                      </button>
-                    </article>
-
-                    <article class="formula-reveal-card card-why" data-step-card="why" aria-hidden="true">
-                      <h4>Why?</h4>
-
-                      <p>
-                        Because Jesus is revealing that the good news is not limited by geography,
-                        ethnicity, reputation, or religious division.
-                      </p>
-
-                      <p>
-                        When He says true worship will not be centered only on a mountain or a temple,
-                        He is showing that God’s kingdom is moving beyond old boundaries.
-                      </p>
-                    </article>
-                  </div>
-                </div>
+              <div class="formula-tour-image">
+                <img
+                  src="assets/john4-where.jpg"
+                  alt="Map or visual of Samaria and Jacob’s well"
+                  onerror="this.style.display='none';"
+                />
               </div>
 
-              <div class="formula-at-work">
-                <h3>The Formula at Work</h3>
+              <p>
+                John 4 happens in Samaria, near Jacob’s well. That location matters
+                because Samaria carried centuries of tension between Jews and Samaritans.
+              </p>
 
-                <div class="context-compare">
-                  <div class="compare-box">
-                    <strong>Without context</strong>
-                    <p>
-                      Jesus has a meaningful conversation with a woman at a well.
-                    </p>
-                  </div>
-
-                  <div class="compare-box">
-                    <strong>With context</strong>
-                    <p>
-                      Jesus enters a divided land, speaks to a rejected person, challenges centuries
-                      of hostility, and reveals that salvation is coming through Him for more than one people group.
-                    </p>
-                  </div>
-                </div>
-
-                <p class="formula-closing">
-                  That is why <strong>where</strong> matters. The location gives weight to the meaning.
-                  The history gives depth to the conversation. The context protects the integrity of the passage.
-                  And the story points us to Jesus — not as a distant religious idea, but as the Savior who steps
-                  into real places, real wounds, and real human divisions.
-                </p>
+              <div class="formula-tour-actions">
+                <button class="formula-tour-btn" type="button" data-formula-tour-next="2">
+                  Next: Who →
+                </button>
               </div>
+            </article>
+
+            <article class="formula-tour-panel who-panel" data-formula-tour-panel="2">
+              <p class="formula-tour-kicker">John 4 Case Study</p>
+              <h3>Who?</h3>
+
+              <div class="formula-tour-image">
+                <img
+                  src="assets/john4-who.jpg"
+                  alt="Visual of Jesus and the Samaritan woman"
+                  onerror="this.style.display='none';"
+                />
+              </div>
+
+              <p>
+                Jesus is a Jewish teacher. The woman is a Samaritan. This is not just
+                a conversation at a well — it is Jesus crossing religious, ethnic,
+                cultural, and personal boundaries.
+              </p>
+
+              <div class="formula-tour-actions">
+                <button class="formula-tour-btn secondary" type="button" data-formula-tour-next="1">
+                  ← Back
+                </button>
+
+                <button class="formula-tour-btn" type="button" data-formula-tour-next="3">
+                  Next: Why →
+                </button>
+              </div>
+            </article>
+
+            <article class="formula-tour-panel why-panel" data-formula-tour-panel="3">
+              <p class="formula-tour-kicker">John 4 Case Study</p>
+              <h3>Why?</h3>
+
+              <div class="formula-tour-image">
+                <img
+                  src="assets/john4-why.jpg"
+                  alt="Visual showing the meaning of John 4"
+                  onerror="this.style.display='none';"
+                />
+              </div>
+
+              <p>
+                The location reveals the meaning. Jesus brings living water into a divided
+                place and reveals that true worship is not limited by mountain, temple,
+                ethnicity, or reputation.
+              </p>
+
+              <div class="formula-tour-actions">
+                <button class="formula-tour-btn secondary" type="button" data-formula-tour-next="2">
+                  ← Back
+                </button>
+
+                <a class="formula-tour-link" href="case-studies/index.html">
+                  View Case Studies →
+                </a>
+              </div>
+            </article>
+
+            <div class="formula-tour-progress" aria-hidden="true">
+              <span class="formula-tour-dot active" data-formula-tour-dot="1"></span>
+              <span class="formula-tour-dot" data-formula-tour-dot="2"></span>
+              <span class="formula-tour-dot" data-formula-tour-dot="3"></span>
             </div>
+          </div>
+
+          <div class="formula-tour-note">
+            <h3>The BibleMapped Method</h3>
+
+            <p>
+              Bible Mapped studies Scripture by asking where it happened, who was involved,
+              and why the location, people, and history matter — so the meaning of the passage
+              comes into clearer focus and points us to Jesus Christ.
+            </p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="statement-section white" id="about" style="padding-bottom:110px;">
+  <section class="statement-section white" id="about" style="padding-bottom:90px;">
     <div class="section-rail">
       <a class="section-display why-display" href="https://biblemapped.com/about/">
         About Bible Mapped
+      </a>
+    </div>
+  </section>
+
+  <section class="statement-section white" style="padding-top:0;padding-bottom:110px;">
+    <div class="section-rail">
+      <p class="rail-eyebrow">Start Here</p>
+      <a class="section-display why-display" href="books/genesis/index.html">
+        Begin with Genesis
       </a>
     </div>
   </section>
@@ -2004,6 +1884,33 @@
 
     const formulaToggle = document.getElementById("formulaToggle");
     const formulaInlineWindow = document.getElementById("formulaInlineWindow");
+    const formulaArtFrame = document.getElementById("formulaArtFrame");
+    const formulaTourPanels = document.querySelectorAll("[data-formula-tour-panel]");
+    const formulaTourDots = document.querySelectorAll("[data-formula-tour-dot]");
+    const formulaTourButtons = document.querySelectorAll("[data-formula-tour-next]");
+
+    function setFormulaTourStep(step) {
+      const safeStep = Math.min(Math.max(Number(step) || 1, 1), 3);
+
+      formulaTourPanels.forEach((panel) => {
+        const panelStep = Number(panel.dataset.formulaTourPanel);
+        const isActive = panelStep === safeStep;
+
+        panel.classList.toggle("active", isActive);
+        panel.setAttribute("aria-hidden", String(!isActive));
+      });
+
+      formulaTourDots.forEach((dot) => {
+        const dotStep = Number(dot.dataset.formulaTourDot);
+        dot.classList.toggle("active", dotStep === safeStep);
+      });
+    }
+
+    formulaTourButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        setFormulaTourStep(button.dataset.formulaTourNext);
+      });
+    });
 
     if (formulaToggle && formulaInlineWindow) {
       formulaToggle.addEventListener("click", () => {
@@ -2013,7 +1920,11 @@
         formulaInlineWindow.setAttribute("aria-hidden", String(!isOpen));
 
         if (isOpen) {
-          setFormulaStep(1);
+          setFormulaTourStep(1);
+
+          if (formulaArtFrame) {
+            formulaArtFrame.classList.remove("tour-active");
+          }
 
           setTimeout(() => {
             formulaInlineWindow.scrollIntoView({
@@ -2022,53 +1933,23 @@
             });
           }, 180);
 
+          setTimeout(() => {
+            if (formulaArtFrame) {
+              formulaArtFrame.classList.add("tour-active");
+            }
+          }, 700);
+
           setTimeout(checkFormulaWordsPanUp, 520);
         } else {
-          const formulaArtFrame = formulaInlineWindow.querySelector(".formula-art-frame");
           if (formulaArtFrame) {
             formulaArtFrame.classList.remove("words-in-view");
+            formulaArtFrame.classList.remove("tour-active");
           }
 
-          setFormulaStep(1);
+          setFormulaTourStep(1);
         }
       });
     }
-
-    const formulaStepStage = document.getElementById("formulaStepStage");
-    const formulaRevealButtons = document.querySelectorAll("[data-reveal-step]");
-
-    function setFormulaStep(step) {
-      if (!formulaStepStage) return;
-
-      const safeStep = Math.min(Math.max(Number(step) || 1, 1), 3);
-      const cards = formulaStepStage.querySelectorAll("[data-step-card]");
-
-      formulaStepStage.classList.remove("stage-1", "stage-2", "stage-3");
-      formulaStepStage.classList.add(`stage-${safeStep}`);
-
-      cards.forEach((card, index) => {
-        const cardStep = index + 1;
-        const isVisible = cardStep <= safeStep;
-
-        card.setAttribute("aria-hidden", String(!isVisible));
-        card.classList.remove("newly-revealed");
-
-        if (cardStep === safeStep && safeStep > 1) {
-          requestAnimationFrame(() => {
-            card.classList.add("newly-revealed");
-          });
-        }
-      });
-    }
-
-    formulaRevealButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const nextStep = button.getAttribute("data-reveal-step");
-        setFormulaStep(nextStep);
-      });
-    });
-
-    const formulaArtFrame = document.querySelector(".formula-art-frame");
 
     function checkFormulaWordsPanUp() {
       if (!formulaArtFrame || !formulaInlineWindow) return;
