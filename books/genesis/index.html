@@ -884,7 +884,53 @@
     }
 
 
+    /* =========================
+       GENESIS AT A GLANCE
+    ========================= */
+
+    .glance-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 1120px;
+      margin-top: 22px;
+    }
+
+    .glance-card {
+      background: rgba(255,255,255,.72);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .glance-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--purple);
+      font-size: .72rem;
+      font-weight: 950;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .glance-card span {
+      display: block;
+      color: #2f2b26;
+      line-height: 1.45;
+      font-weight: 750;
+    }
+
+    .guide-image-slot span {
+      background: rgba(255,253,248,.94);
+      color: #27231f;
+    }
+
+
     @media (max-width: 900px){
+
+      .glance-grid {
+        grid-template-columns: 1fr;
+      }
 
       .guide-grid{
         grid-template-columns:1fr;
@@ -979,24 +1025,69 @@
         </div>
 
         <div class="summary-body" id="summaryBody">
-          <p><strong>Genesis is the Bible’s origin story.</strong> It explains where the world comes from, why humanity is broken, and how God begins His plan to restore everything.</p>
+          <p>
+            <strong>Genesis is where the Bible’s world begins.</strong>
+            It explains where creation comes from, why humanity is broken, and how God begins His plan to restore what was lost.
+          </p>
 
-<p>The first three chapters are especially important because they introduce the foundation of the whole Bible: God creates a good world, gives humans a sacred role, and places them in relationship with Him. But when humans cross the boundary God gives them, sin enters the story, and exile begins.</p>
+          <p>
+            The first three chapters introduce the foundation of the whole Bible: God creates a good world, gives humanity a sacred role, and places them in relationship with Him. But when humans cross the boundary God gives them, sin enters the story, and exile begins.
+          </p>
 
-<p>From there, Genesis shows the problem spreading. Cain kills Abel. Violence grows. The flood resets the world, but it does not remove the corruption in the human heart. At Babel, humanity tries to build its own name and power, and the nations are scattered.</p>
+          <p>
+            From there, Genesis shows the problem spreading. Cain kills Abel. Violence grows. The flood resets the world, but it does not remove the corruption in the human heart. At Babel, humanity gathers to make its own name, and the nations are scattered.
+          </p>
 
-<p>Then the story narrows to one family: Abraham’s. God promises him land, descendants, and blessing. But the family chosen to carry this promise is deeply flawed. Abraham doubts, Jacob deceives, Joseph is betrayed, and the family ends up in Egypt, outside the promised land.</p>
+          <p>
+            Then the story narrows to one family: Abraham’s. God promises him land, descendants, and blessing. But the family chosen to carry this promise is deeply flawed. Abraham doubts, Jacob deceives, Joseph is betrayed, and the family ends up in Egypt, outside the promised land.
+          </p>
 
-<p>So Genesis ends with tension. God’s promise is alive, but not yet fulfilled. Humanity is still broken, the world is still divided, and God’s chosen family is still waiting.</p>
+          <p>
+            So Genesis ends with tension. God’s promise is alive, but not yet fulfilled. Humanity is still broken, the world is still divided, and God’s chosen family is still waiting.
+          </p>
 
-<p>Genesis sets up the entire Bible: creation, rebellion, exile, promise, and the hope that God will restore what was lost.</p>
+          <p>
+            Genesis sets up the entire Bible: creation, rebellion, exile, promise, and the hope that God will restore what was lost.
+          </p>
+
+          <div class="glance-grid">
+            <div class="glance-card">
+              <strong>Book Meaning</strong>
+              <span>Beginning, origin, source, foundation.</span>
+            </div>
+
+            <div class="glance-card">
+              <strong>Main Movement</strong>
+              <span>Creation → Fall → Flood → Nations → Abraham’s family.</span>
+            </div>
+
+            <div class="glance-card">
+              <strong>Key Places</strong>
+              <span>Eden, Ararat, Babel, Canaan, Bethel, Hebron, Egypt.</span>
+            </div>
+
+            <div class="glance-card">
+              <strong>Key People</strong>
+              <span>Adam, Eve, Noah, Abraham, Sarah, Isaac, Jacob, Joseph.</span>
+            </div>
+
+            <div class="glance-card">
+              <strong>Major Themes</strong>
+              <span>Image of God, sin, exile, covenant, blessing, promise, land.</span>
+            </div>
+
+            <div class="glance-card">
+              <strong>Points Forward</strong>
+              <span>The promised seed, blessing to the nations, and restoration through Christ.</span>
+            </div>
+          </div>
         </div>
 
         <div class="idea-row r2 guide-toggle" data-panel="structureBody">
           <div class="idea-label">02</div>
           <div class="idea-content">
             <h3>Structure</h3>
-            <p>Genesis 1–11, 12–25, 26–36, and 37–50 as the major story movements.</p>
+            <p>Genesis moves from the whole world to one family carrying God’s promise.</p>
           </div>
           <div class="idea-arrow">+</div>
         </div>
@@ -1004,11 +1095,22 @@
         <div class="summary-body guide-body" id="structureBody">
           <div class="guide-grid">
             <div>
-              <p><strong>Genesis moves like a camera lens.</strong> It starts with the whole world, then narrows into one family through Abraham, Isaac, Jacob, and Joseph.</p>
-              <p>Use this section for your chapter movement diagram, timeline, or “four-part Genesis” study guide.</p>
+              <p>
+                <strong>Genesis moves like a camera lens.</strong>
+                It starts wide with creation, humanity, sin, judgment, and the nations. Then it narrows into one family through Abraham, Isaac, Jacob, and Joseph.
+              </p>
+
+              <p>
+                The book can be read in four major movements: Genesis 1–11 shows the world and the nations. Genesis 12–25 follows Abraham and the promise. Genesis 26–36 follows Isaac and Jacob. Genesis 37–50 follows Joseph and the family’s move into Egypt.
+              </p>
+
+              <p>
+                That movement matters because Genesis is not random history. It is setting up the Bible’s central question: how will God restore a broken world through the family He has chosen?
+              </p>
             </div>
+
             <div class="guide-image-slot" style="--slot-image:url('genesis-structure.png')">
-              <span>Image slot: genesis-structure.png</span>
+              <span>Genesis story movement</span>
             </div>
           </div>
         </div>
@@ -1017,7 +1119,7 @@
           <div class="idea-label">03</div>
           <div class="idea-content">
             <h3>People</h3>
-            <p>Adam, Eve, Noah, Abraham, Sarah, Isaac, Jacob, Joseph, and Pharaoh.</p>
+            <p>Genesis follows chosen, flawed people inside God’s promise.</p>
           </div>
           <div class="idea-arrow">+</div>
         </div>
@@ -1025,11 +1127,22 @@
         <div class="summary-body guide-body" id="peopleBody">
           <div class="guide-grid">
             <div>
-              <p><strong>Genesis is filled with real human tension.</strong> The people are chosen, flawed, faithful, fearful, deceptive, wounded, and still used inside God’s promise.</p>
-              <p>Use this section for character cards, family trees, portraits, or “hero/villain/context” notes.</p>
+              <p>
+                <strong>Genesis is filled with real human tension.</strong>
+                Adam fails in the garden. Cain murders his brother. Noah survives judgment but still shows human weakness. Abraham believes God, but also wrestles with fear and doubt.
+              </p>
+
+              <p>
+                The chosen family is not presented as perfect. Sarah laughs. Jacob deceives. Joseph is betrayed. Judah fails and later changes. Genesis shows that God’s promise moves through real people, not polished heroes.
+              </p>
+
+              <p>
+                That is one reason Genesis matters. It teaches that God’s plan is not built on human perfection, but on His faithfulness.
+              </p>
             </div>
+
             <div class="guide-image-slot" style="--slot-image:url('genesis-people.png')">
-              <span>Image slot: genesis-people.png</span>
+              <span>Genesis people and family lines</span>
             </div>
           </div>
         </div>
@@ -1038,7 +1151,7 @@
           <div class="idea-label">04</div>
           <div class="idea-content">
             <h3>Places</h3>
-            <p>Eden, Ararat, Babel, Canaan, Bethel, Hebron, Beersheba, and Egypt.</p>
+            <p>Eden, Babel, Canaan, and Egypt shape the story’s meaning.</p>
           </div>
           <div class="idea-arrow">+</div>
         </div>
@@ -1046,11 +1159,22 @@
         <div class="summary-body guide-body" id="placesBody">
           <div class="guide-grid">
             <div>
-              <p><strong>Genesis is geography-heavy.</strong> Eden, Babel, Canaan, Egypt, and the patriarchal travel routes all shape how the story unfolds.</p>
-              <p>Use this section for a static overview map, location list, or “known / traditional / uncertain” geography notes.</p>
+              <p>
+                <strong>Genesis is geography-heavy.</strong>
+                The story does not float above history. It moves through places: Eden, the land east of Eden, Ararat, Babel, Canaan, Bethel, Hebron, Beersheba, and Egypt.
+              </p>
+
+              <p>
+                These places are not background scenery. Eden becomes the place of creation and exile. Babel becomes a symbol of human pride and scattered nations. Canaan becomes the land of promise. Egypt becomes both refuge and future bondage.
+              </p>
+
+              <p>
+                BibleMapped reads Genesis by paying attention to the ground under the story.
+              </p>
             </div>
+
             <div class="guide-image-slot" style="--slot-image:url('genesis-places.png')">
-              <span>Image slot: genesis-places.png</span>
+              <span>Genesis geography overview</span>
             </div>
           </div>
         </div>
@@ -1067,11 +1191,22 @@
         <div class="summary-body guide-body" id="themesBody">
           <div class="guide-grid">
             <div>
-              <p><strong>Genesis introduces the Bible’s major themes.</strong> Creation, image-bearing, sin, exile, covenant, land, blessing, and the promised seed all begin here.</p>
-              <p>Use this section for symbols, theme cards, or visual theology notes.</p>
+              <p>
+                <strong>Genesis introduces the Bible’s major themes.</strong>
+                Creation, image-bearing, sin, exile, covenant, land, blessing, sacrifice, family, and the promised seed all begin here.
+              </p>
+
+              <p>
+                Genesis shows what humanity was made for, what went wrong, and why God’s covenant promise matters. The book keeps returning to the same tension: humans fail, but God keeps speaking, judging, preserving, and promising.
+              </p>
+
+              <p>
+                The rest of Scripture builds on these themes. Genesis is not just the first book. It is the foundation.
+              </p>
             </div>
+
             <div class="guide-image-slot" style="--slot-image:url('genesis-themes.png')">
-              <span>Image slot: genesis-themes.png</span>
+              <span>Genesis themes and symbols</span>
             </div>
           </div>
         </div>
@@ -1080,7 +1215,7 @@
           <div class="idea-label">06</div>
           <div class="idea-content">
             <h3>Red Flags</h3>
-            <p>What Genesis does not say, common assumptions, and careful reading notes.</p>
+            <p>Careful reading notes, common assumptions, and claims Genesis does not actually make.</p>
           </div>
           <div class="idea-arrow">+</div>
         </div>
@@ -1088,11 +1223,22 @@
         <div class="summary-body guide-body" id="redFlagsBody">
           <div class="guide-grid">
             <div>
-              <p><strong>Careful study protects the reader.</strong> Genesis should not be reduced to modern debates or stretched beyond what the text actually says.</p>
-              <p>Use this section for common misconceptions, disputed claims, and honest reading notes.</p>
+              <p>
+                <strong>Careful study protects the reader.</strong>
+                Genesis should not be flattened into a modern debate, forced into claims the text does not make, or read without attention to language, structure, genealogy, geography, and covenant.
+              </p>
+
+              <p>
+                A few red flags to watch for: treating Eden as easy to locate with certainty, ignoring the literary structure of Genesis, reading the patriarchs as moral superheroes, or turning every passage into a modern argument before asking what the text is doing.
+              </p>
+
+              <p>
+                BibleMapped does not avoid hard questions. It slows them down, separates fact from interpretation, and asks what Scripture actually says.
+              </p>
             </div>
+
             <div class="guide-image-slot" style="--slot-image:url('genesis-red-flags.png')">
-              <span>Image slot: genesis-red-flags.png</span>
+              <span>Careful reading notes</span>
             </div>
           </div>
         </div>
