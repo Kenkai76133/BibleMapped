@@ -6643,7 +6643,40 @@
 
     const NOTES = {
       beginning: { label:'Beginning', category:'Origin', simple:'The start, first point, or origin of something.', webster:'The point of time or space at which anything begins.', original:'Hebrew bereshith, often rendered “in the beginning.”', grammar:'This phrase frames the story before the first divine action is described.', redFlag:'Do not treat this as a throwaway opening. It frames creation as purposeful.' },
-      god: { label:'God', category:'Divine subject', simple:'The Creator and supreme ruler over heaven and earth.', webster:'The Supreme Being; Jehovah.', original:'Hebrew Elohim appears in Genesis 1.', grammar:'God is the subject of the first major verb in the Bible.', redFlag:'Genesis begins with God, not humanity.' },
+      god: {
+        label:'God',
+        category:'Divine subject',
+        simple:'The eternal Creator, ruler, and sustainer of all things. In Genesis, God creates, speaks, commands, judges, preserves, blesses, and promises.',
+        webster:'The Supreme Being; Jehovah; the eternal and infinite spirit, the creator and sovereign of the universe.',
+        original:'Hebrew Elohim appears in Genesis 1. It is the main divine title used in the opening creation account.',
+        grammar:'God is the subject of the first major verb in the Bible. Genesis begins with divine action before human action.',
+        redFlag:'Genesis begins with God, not humanity. Do not make man the center of the opening sentence.',
+        concordance:{
+          hebrew:'אֱלֹהִים',
+          transliteration:'Elohim',
+          strongs:'H430',
+          gloss:'God, gods, divine one, ruler, judge',
+          refs:['Genesis 1:1','Genesis 1:26','Genesis 3:8','Genesis 6:5','Genesis 12:1']
+        },
+        keyRefs:['Genesis 1:1','Genesis 1:26','Genesis 3:8','Genesis 6:5','Genesis 12:1']
+      },
+      lord: {
+        label:'LORD',
+        category:'Divine Name',
+        simple:'In many English Bibles, LORD in all capital letters represents the covenant name of God, commonly connected with the Hebrew divine name YHWH.',
+        webster:'A master; ruler; governor; a title applied to God, the Supreme Being.',
+        original:'Hebrew YHWH is represented in many English translations as LORD in small caps or all capitals.',
+        grammar:'In Genesis, LORD often appears with God as LORD God, especially in Genesis 2–3, emphasizing the personal covenant God who creates, commands, judges, and covers.',
+        redFlag:'Do not confuse capital LORD with a lower-case human lord. In this page, only capital LORD is treated as the divine name.',
+        concordance:{
+          hebrew:'יְהוָה',
+          transliteration:'YHWH / Yahweh',
+          strongs:'H3068',
+          gloss:'The LORD, the covenant name of God',
+          refs:['Genesis 2:4','Genesis 2:7','Genesis 3:8','Genesis 4:1','Genesis 12:1']
+        },
+        keyRefs:['Genesis 2:4','Genesis 2:7','Genesis 3:8','Genesis 4:1','Genesis 12:1']
+      },
       created: { label:'Created', category:'Action', simple:'Brought into being by divine will and power.', webster:'Formed; made; produced.', original:'Hebrew bara is used with God as subject in Genesis 1:1.', grammar:'The verb connects God directly to heaven and earth as Creator.', redFlag:'The text presents creation as ordered, not accidental.' },
       heaven: { label:'Heaven', category:'Creation place', simple:'The sky, heavens, or upper created realm.', webster:'The expanse above; the sky; the place of God’s presence.', original:'Hebrew shamayim.', grammar:'Heaven and earth together describe the whole created order.', redFlag:'Do not reduce this only to modern outer space.' },
       earth: { label:'Earth', category:'Creation place', simple:'The land, ground, world, or lower created realm.', webster:'The globe; the world; the ground.', original:'Hebrew erets can mean land, earth, or territory depending on context.', grammar:'Meaning depends on whether the passage is local land or whole world.', redFlag:'Watch context before deciding if it means land, earth, or territory.' },
@@ -7512,7 +7545,8 @@ const PLACES = {
       return escapeHtml(text).replace(/([A-Za-z][A-Za-z'’\-]*)/g, m => {
         const key = normalize(m);
         const placeKey = PLACES[key] ? key : PLACE_ALIASES[key];
-        const note = NOTES[key];
+        const isDivineLord = key === 'lord' && m === 'LORD';
+        const note = (key === 'lord' && !isDivineLord) ? null : NOTES[key];
         const renderedWord = highlight(m);
 
         if (placeKey) {
@@ -7552,12 +7586,14 @@ const PLACES = {
       const key = normalize(raw);
       const refs = [];
       let count = 0;
+      const divineLordOnly = raw === 'LORD';
 
       DATA.chapters.forEach(ch => ch.verses.forEach(v => {
         const words = (v.text.match(/[A-Za-z][A-Za-z'’\-]*/g) || []);
         let hit = false;
         words.forEach(w => {
-          if(normalize(w) === key) {
+          const matches = divineLordOnly ? w === 'LORD' : normalize(w) === key;
+          if(matches) {
             count++;
             hit = true;
           }
