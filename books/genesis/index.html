@@ -399,6 +399,87 @@
       outline:1px solid rgba(124,60,255,.22);
     }
 
+
+    /* BIBLEMAPPED KEY WORD + PLACE HIGHLIGHTS */
+    .word.study-word{
+      color:inherit;
+      text-decoration-color:rgba(124,60,255,.42);
+      text-decoration-thickness:2px;
+    }
+
+    .word.study-word:hover,
+    .word.study-word.active{
+      color:var(--purple);
+      background:rgba(124,60,255,.13);
+      outline:1px solid rgba(124,60,255,.22);
+    }
+
+    .word.place-word{
+      color:#116b3b;
+      font-weight:900;
+      background:rgba(17,107,59,.08);
+      text-decoration-color:rgba(17,107,59,.44);
+      text-decoration-thickness:2px;
+    }
+
+    .word.place-word:hover,
+    .word.place-word.active{
+      color:#0b5a31;
+      background:rgba(17,107,59,.16);
+      outline:1px solid rgba(17,107,59,.26);
+    }
+
+    .pill.place-pill{
+      background:rgba(17,107,59,.12);
+      color:#116b3b;
+    }
+
+    .concordance-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+      margin-top:8px;
+    }
+
+    .concordance-item{
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:9px 10px;
+      background:#fff;
+    }
+
+    .concordance-item b{
+      display:block;
+      color:var(--muted);
+      font-size:.68rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:3px;
+    }
+
+    .concordance-item span{
+      font-weight:850;
+      color:#2d2923;
+    }
+
+    @media (max-width:560px){
+      .concordance-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+
+    .ref-static{
+      display:inline-flex;
+      border:0;
+      background:var(--c10);
+      color:#fff;
+      border-radius:999px;
+      padding:5px 8px;
+      font-size:.76rem;
+      font-weight:850;
+    }
+
     mark{
       background:#efe7ff;
       border-radius:4px;
@@ -884,53 +965,7 @@
     }
 
 
-    /* =========================
-       GENESIS AT A GLANCE
-    ========================= */
-
-    .glance-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      max-width: 1120px;
-      margin-top: 22px;
-    }
-
-    .glance-card {
-      background: rgba(255,255,255,.72);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 16px;
-    }
-
-    .glance-card strong {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--purple);
-      font-size: .72rem;
-      font-weight: 950;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    .glance-card span {
-      display: block;
-      color: #2f2b26;
-      line-height: 1.45;
-      font-weight: 750;
-    }
-
-    .guide-image-slot span {
-      background: rgba(255,253,248,.94);
-      color: #27231f;
-    }
-
-
     @media (max-width: 900px){
-
-      .glance-grid {
-        grid-template-columns: 1fr;
-      }
 
       .guide-grid{
         grid-template-columns:1fr;
@@ -1025,69 +1060,24 @@
         </div>
 
         <div class="summary-body" id="summaryBody">
-          <p>
-            <strong>Genesis is where the Bible’s world begins.</strong>
-            It explains where creation comes from, why humanity is broken, and how God begins His plan to restore what was lost.
-          </p>
+          <p><strong>Genesis is the Bible’s origin story.</strong> It explains where the world comes from, why humanity is broken, and how God begins His plan to restore everything.</p>
 
-          <p>
-            The first three chapters introduce the foundation of the whole Bible: God creates a good world, gives humanity a sacred role, and places them in relationship with Him. But when humans cross the boundary God gives them, sin enters the story, and exile begins.
-          </p>
+<p>The first three chapters are especially important because they introduce the foundation of the whole Bible: God creates a good world, gives humans a sacred role, and places them in relationship with Him. But when humans cross the boundary God gives them, sin enters the story, and exile begins.</p>
 
-          <p>
-            From there, Genesis shows the problem spreading. Cain kills Abel. Violence grows. The flood resets the world, but it does not remove the corruption in the human heart. At Babel, humanity gathers to make its own name, and the nations are scattered.
-          </p>
+<p>From there, Genesis shows the problem spreading. Cain kills Abel. Violence grows. The flood resets the world, but it does not remove the corruption in the human heart. At Babel, humanity tries to build its own name and power, and the nations are scattered.</p>
 
-          <p>
-            Then the story narrows to one family: Abraham’s. God promises him land, descendants, and blessing. But the family chosen to carry this promise is deeply flawed. Abraham doubts, Jacob deceives, Joseph is betrayed, and the family ends up in Egypt, outside the promised land.
-          </p>
+<p>Then the story narrows to one family: Abraham’s. God promises him land, descendants, and blessing. But the family chosen to carry this promise is deeply flawed. Abraham doubts, Jacob deceives, Joseph is betrayed, and the family ends up in Egypt, outside the promised land.</p>
 
-          <p>
-            So Genesis ends with tension. God’s promise is alive, but not yet fulfilled. Humanity is still broken, the world is still divided, and God’s chosen family is still waiting.
-          </p>
+<p>So Genesis ends with tension. God’s promise is alive, but not yet fulfilled. Humanity is still broken, the world is still divided, and God’s chosen family is still waiting.</p>
 
-          <p>
-            Genesis sets up the entire Bible: creation, rebellion, exile, promise, and the hope that God will restore what was lost.
-          </p>
-
-          <div class="glance-grid">
-            <div class="glance-card">
-              <strong>Book Meaning</strong>
-              <span>Beginning, origin, source, foundation.</span>
-            </div>
-
-            <div class="glance-card">
-              <strong>Main Movement</strong>
-              <span>Creation → Fall → Flood → Nations → Abraham’s family.</span>
-            </div>
-
-            <div class="glance-card">
-              <strong>Key Places</strong>
-              <span>Eden, Ararat, Babel, Canaan, Bethel, Hebron, Egypt.</span>
-            </div>
-
-            <div class="glance-card">
-              <strong>Key People</strong>
-              <span>Adam, Eve, Noah, Abraham, Sarah, Isaac, Jacob, Joseph.</span>
-            </div>
-
-            <div class="glance-card">
-              <strong>Major Themes</strong>
-              <span>Image of God, sin, exile, covenant, blessing, promise, land.</span>
-            </div>
-
-            <div class="glance-card">
-              <strong>Points Forward</strong>
-              <span>The promised seed, blessing to the nations, and restoration through Christ.</span>
-            </div>
-          </div>
+<p>Genesis sets up the entire Bible: creation, rebellion, exile, promise, and the hope that God will restore what was lost.</p>
         </div>
 
         <div class="idea-row r2 guide-toggle" data-panel="structureBody">
           <div class="idea-label">02</div>
           <div class="idea-content">
             <h3>Structure</h3>
-            <p>Genesis moves from the whole world to one family carrying God’s promise.</p>
+            <p>Genesis 1–11, 12–25, 26–36, and 37–50 as the major story movements.</p>
           </div>
           <div class="idea-arrow">+</div>
         </div>
@@ -1095,22 +1085,11 @@
         <div class="summary-body guide-body" id="structureBody">
           <div class="guide-grid">
             <div>
-              <p>
-                <strong>Genesis moves like a camera lens.</strong>
-                It starts wide with creation, humanity, sin, judgment, and the nations. Then it narrows into one family through Abraham, Isaac, Jacob, and Joseph.
-              </p>
-
-              <p>
-                The book can be read in four major movements: Genesis 1–11 shows the world and the nations. Genesis 12–25 follows Abraham and the promise. Genesis 26–36 follows Isaac and Jacob. Genesis 37–50 follows Joseph and the family’s move into Egypt.
-              </p>
-
-              <p>
-                That movement matters because Genesis is not random history. It is setting up the Bible’s central question: how will God restore a broken world through the family He has chosen?
-              </p>
+              <p><strong>Genesis moves like a camera lens.</strong> It starts with the whole world, then narrows into one family through Abraham, Isaac, Jacob, and Joseph.</p>
+              <p>Use this section for your chapter movement diagram, timeline, or “four-part Genesis” study guide.</p>
             </div>
-
             <div class="guide-image-slot" style="--slot-image:url('genesis-structure.png')">
-              <span>Genesis story movement</span>
+              <span>Image slot: genesis-structure.png</span>
             </div>
           </div>
         </div>
@@ -1119,7 +1098,7 @@
           <div class="idea-label">03</div>
           <div class="idea-content">
             <h3>People</h3>
-            <p>Genesis follows chosen, flawed people inside God’s promise.</p>
+            <p>Adam, Eve, Noah, Abraham, Sarah, Isaac, Jacob, Joseph, and Pharaoh.</p>
           </div>
           <div class="idea-arrow">+</div>
         </div>
@@ -1127,22 +1106,11 @@
         <div class="summary-body guide-body" id="peopleBody">
           <div class="guide-grid">
             <div>
-              <p>
-                <strong>Genesis is filled with real human tension.</strong>
-                Adam fails in the garden. Cain murders his brother. Noah survives judgment but still shows human weakness. Abraham believes God, but also wrestles with fear and doubt.
-              </p>
-
-              <p>
-                The chosen family is not presented as perfect. Sarah laughs. Jacob deceives. Joseph is betrayed. Judah fails and later changes. Genesis shows that God’s promise moves through real people, not polished heroes.
-              </p>
-
-              <p>
-                That is one reason Genesis matters. It teaches that God’s plan is not built on human perfection, but on His faithfulness.
-              </p>
+              <p><strong>Genesis is filled with real human tension.</strong> The people are chosen, flawed, faithful, fearful, deceptive, wounded, and still used inside God’s promise.</p>
+              <p>Use this section for character cards, family trees, portraits, or “hero/villain/context” notes.</p>
             </div>
-
             <div class="guide-image-slot" style="--slot-image:url('genesis-people.png')">
-              <span>Genesis people and family lines</span>
+              <span>Image slot: genesis-people.png</span>
             </div>
           </div>
         </div>
@@ -1151,7 +1119,7 @@
           <div class="idea-label">04</div>
           <div class="idea-content">
             <h3>Places</h3>
-            <p>Eden, Babel, Canaan, and Egypt shape the story’s meaning.</p>
+            <p>Eden, Ararat, Babel, Canaan, Bethel, Hebron, Beersheba, and Egypt.</p>
           </div>
           <div class="idea-arrow">+</div>
         </div>
@@ -1159,22 +1127,11 @@
         <div class="summary-body guide-body" id="placesBody">
           <div class="guide-grid">
             <div>
-              <p>
-                <strong>Genesis is geography-heavy.</strong>
-                The story does not float above history. It moves through places: Eden, the land east of Eden, Ararat, Babel, Canaan, Bethel, Hebron, Beersheba, and Egypt.
-              </p>
-
-              <p>
-                These places are not background scenery. Eden becomes the place of creation and exile. Babel becomes a symbol of human pride and scattered nations. Canaan becomes the land of promise. Egypt becomes both refuge and future bondage.
-              </p>
-
-              <p>
-                BibleMapped reads Genesis by paying attention to the ground under the story.
-              </p>
+              <p><strong>Genesis is geography-heavy.</strong> Eden, Babel, Canaan, Egypt, and the patriarchal travel routes all shape how the story unfolds.</p>
+              <p>Use this section for a static overview map, location list, or “known / traditional / uncertain” geography notes.</p>
             </div>
-
             <div class="guide-image-slot" style="--slot-image:url('genesis-places.png')">
-              <span>Genesis geography overview</span>
+              <span>Image slot: genesis-places.png</span>
             </div>
           </div>
         </div>
@@ -1191,22 +1148,11 @@
         <div class="summary-body guide-body" id="themesBody">
           <div class="guide-grid">
             <div>
-              <p>
-                <strong>Genesis introduces the Bible’s major themes.</strong>
-                Creation, image-bearing, sin, exile, covenant, land, blessing, sacrifice, family, and the promised seed all begin here.
-              </p>
-
-              <p>
-                Genesis shows what humanity was made for, what went wrong, and why God’s covenant promise matters. The book keeps returning to the same tension: humans fail, but God keeps speaking, judging, preserving, and promising.
-              </p>
-
-              <p>
-                The rest of Scripture builds on these themes. Genesis is not just the first book. It is the foundation.
-              </p>
+              <p><strong>Genesis introduces the Bible’s major themes.</strong> Creation, image-bearing, sin, exile, covenant, land, blessing, and the promised seed all begin here.</p>
+              <p>Use this section for symbols, theme cards, or visual theology notes.</p>
             </div>
-
             <div class="guide-image-slot" style="--slot-image:url('genesis-themes.png')">
-              <span>Genesis themes and symbols</span>
+              <span>Image slot: genesis-themes.png</span>
             </div>
           </div>
         </div>
@@ -1215,7 +1161,7 @@
           <div class="idea-label">06</div>
           <div class="idea-content">
             <h3>Red Flags</h3>
-            <p>Careful reading notes, common assumptions, and claims Genesis does not actually make.</p>
+            <p>What Genesis does not say, common assumptions, and careful reading notes.</p>
           </div>
           <div class="idea-arrow">+</div>
         </div>
@@ -1223,22 +1169,11 @@
         <div class="summary-body guide-body" id="redFlagsBody">
           <div class="guide-grid">
             <div>
-              <p>
-                <strong>Careful study protects the reader.</strong>
-                Genesis should not be flattened into a modern debate, forced into claims the text does not make, or read without attention to language, structure, genealogy, geography, and covenant.
-              </p>
-
-              <p>
-                A few red flags to watch for: treating Eden as easy to locate with certainty, ignoring the literary structure of Genesis, reading the patriarchs as moral superheroes, or turning every passage into a modern argument before asking what the text is doing.
-              </p>
-
-              <p>
-                BibleMapped does not avoid hard questions. It slows them down, separates fact from interpretation, and asks what Scripture actually says.
-              </p>
+              <p><strong>Careful study protects the reader.</strong> Genesis should not be reduced to modern debates or stretched beyond what the text actually says.</p>
+              <p>Use this section for common misconceptions, disputed claims, and honest reading notes.</p>
             </div>
-
             <div class="guide-image-slot" style="--slot-image:url('genesis-red-flags.png')">
-              <span>Careful reading notes</span>
+              <span>Image slot: genesis-red-flags.png</span>
             </div>
           </div>
         </div>
@@ -7022,7 +6957,70 @@
     });
 
 
-    const PLACES = {
+    
+
+    // BibleMapped enhanced concordance notes.
+    // This is a curated Genesis starter layer: key words receive definitions,
+    // Hebrew anchors, Strong's-style numbers, and Genesis references.
+    const BM_CONCORDANCE = {
+      beginning:{hebrew:'בְּרֵאשִׁית', transliteration:'bereshith', strongs:'H7225', gloss:'beginning, first, chief', refs:['Genesis 1:1']},
+      god:{hebrew:'אֱלֹהִים', transliteration:'Elohim', strongs:'H430', gloss:'God, gods, divine being', refs:['Genesis 1:1','Genesis 1:26','Genesis 3:15']},
+      created:{hebrew:'בָּרָא', transliteration:'bara', strongs:'H1254', gloss:'to create', refs:['Genesis 1:1','Genesis 1:21','Genesis 1:27']},
+      heaven:{hebrew:'שָׁמַיִם', transliteration:'shamayim', strongs:'H8064', gloss:'heaven, heavens, sky', refs:['Genesis 1:1','Genesis 1:8']},
+      earth:{hebrew:'אֶרֶץ', transliteration:'erets', strongs:'H776', gloss:'earth, land, territory', refs:['Genesis 1:1','Genesis 1:10','Genesis 12:1']},
+      light:{hebrew:'אוֹר', transliteration:'or', strongs:'H216', gloss:'light', refs:['Genesis 1:3','Genesis 1:4','Genesis 1:5']},
+      darkness:{hebrew:'חֹשֶׁךְ', transliteration:'choshek', strongs:'H2822', gloss:'darkness, obscurity', refs:['Genesis 1:2','Genesis 1:4','Genesis 1:5']},
+      day:{hebrew:'יוֹם', transliteration:'yom', strongs:'H3117', gloss:'day, time, period', refs:['Genesis 1:5','Genesis 1:14','Genesis 2:4']},
+      night:{hebrew:'לַיְלָה', transliteration:'laylah', strongs:'H3915', gloss:'night', refs:['Genesis 1:5','Genesis 1:14']},
+      evening:{hebrew:'עֶרֶב', transliteration:'ereb', strongs:'H6153', gloss:'evening', refs:['Genesis 1:5','Genesis 1:8','Genesis 1:13']},
+      morning:{hebrew:'בֹּקֶר', transliteration:'boqer', strongs:'H1242', gloss:'morning', refs:['Genesis 1:5','Genesis 1:8','Genesis 1:13']},
+      good:{hebrew:'טוֹב', transliteration:'tov', strongs:'H2896', gloss:'good, pleasant, beneficial', refs:['Genesis 1:4','Genesis 1:10','Genesis 1:31']},
+      firmament:{hebrew:'רָקִיעַ', transliteration:'raqia', strongs:'H7549', gloss:'expanse, firmament', refs:['Genesis 1:6','Genesis 1:7','Genesis 1:8']},
+      waters:{hebrew:'מַיִם', transliteration:'mayim', strongs:'H4325', gloss:'water, waters', refs:['Genesis 1:2','Genesis 1:6','Genesis 1:9']},
+      image:{hebrew:'צֶלֶם', transliteration:'tselem', strongs:'H6754', gloss:'image, likeness, representation', refs:['Genesis 1:26','Genesis 1:27']},
+      likeness:{hebrew:'דְּמוּת', transliteration:'demuth', strongs:'H1823', gloss:'likeness, form, resemblance', refs:['Genesis 1:26']},
+      dominion:{hebrew:'רָדָה', transliteration:'radah', strongs:'H7287', gloss:'to rule, have dominion', refs:['Genesis 1:26','Genesis 1:28']},
+      fruitful:{hebrew:'פָּרָה', transliteration:'parah', strongs:'H6509', gloss:'to be fruitful, bear fruit', refs:['Genesis 1:22','Genesis 1:28','Genesis 9:1']},
+      multiply:{hebrew:'רָבָה', transliteration:'rabah', strongs:'H7235', gloss:'to become many, multiply', refs:['Genesis 1:22','Genesis 1:28','Genesis 9:1']},
+      tree:{hebrew:'עֵץ', transliteration:'ets', strongs:'H6086', gloss:'tree, wood', refs:['Genesis 2:9','Genesis 2:17','Genesis 3:6']},
+      knowledge:{hebrew:'דַּעַת', transliteration:'daath', strongs:'H1847', gloss:'knowledge', refs:['Genesis 2:9','Genesis 2:17']},
+      evil:{hebrew:'רַע', transliteration:'ra', strongs:'H7451', gloss:'evil, bad, harmful', refs:['Genesis 2:9','Genesis 2:17','Genesis 3:5']},
+      naked:{hebrew:'עָרוֹם', transliteration:'arom', strongs:'H6174', gloss:'naked, bare', refs:['Genesis 2:25','Genesis 3:7','Genesis 3:10']},
+      serpent:{hebrew:'נָחָשׁ', transliteration:'nachash', strongs:'H5175', gloss:'serpent', refs:['Genesis 3:1','Genesis 3:14','Genesis 3:15']},
+      seed:{hebrew:'זֶרַע', transliteration:'zera', strongs:'H2233', gloss:'seed, offspring, descendants', refs:['Genesis 3:15','Genesis 12:7','Genesis 22:18']},
+      curse:{hebrew:'אָרַר', transliteration:'arar', strongs:'H779', gloss:'to curse', refs:['Genesis 3:14','Genesis 3:17','Genesis 12:3']},
+      ground:{hebrew:'אֲדָמָה', transliteration:'adamah', strongs:'H127', gloss:'ground, soil, land', refs:['Genesis 2:7','Genesis 3:17','Genesis 4:10']},
+      dust:{hebrew:'עָפָר', transliteration:'aphar', strongs:'H6083', gloss:'dust, dry earth', refs:['Genesis 2:7','Genesis 3:19']},
+      covenant:{hebrew:'בְּרִית', transliteration:'berith', strongs:'H1285', gloss:'covenant, solemn agreement', refs:['Genesis 6:18','Genesis 9:9','Genesis 15:18','Genesis 17:7']},
+      altar:{hebrew:'מִזְבֵּחַ', transliteration:'mizbeach', strongs:'H4196', gloss:'altar, place of sacrifice', refs:['Genesis 8:20','Genesis 12:7','Genesis 22:9']},
+      blessing:{hebrew:'בְּרָכָה', transliteration:'berakhah', strongs:'H1293', gloss:'blessing, gift, benefit', refs:['Genesis 12:2','Genesis 12:3','Genesis 28:4']},
+      land:{hebrew:'אֶרֶץ', transliteration:'erets', strongs:'H776', gloss:'land, earth, territory', refs:['Genesis 12:1','Genesis 13:15','Genesis 15:18']},
+      famine:{hebrew:'רָעָב', transliteration:'raab', strongs:'H7458', gloss:'famine, hunger', refs:['Genesis 12:10','Genesis 26:1','Genesis 41:56']},
+      name:{hebrew:'שֵׁם', transliteration:'shem', strongs:'H8034', gloss:'name, reputation, memorial', refs:['Genesis 2:19','Genesis 11:4','Genesis 12:2']},
+      father:{hebrew:'אָב', transliteration:'av', strongs:'H1', gloss:'father, ancestor, head', refs:['Genesis 2:24','Genesis 17:4','Genesis 22:7']},
+      son:{hebrew:'בֵּן', transliteration:'ben', strongs:'H1121', gloss:'son, descendant', refs:['Genesis 4:25','Genesis 21:3','Genesis 22:2']},
+      wife:{hebrew:'אִשָּׁה', transliteration:'ishshah', strongs:'H802', gloss:'woman, wife', refs:['Genesis 2:24','Genesis 3:20','Genesis 12:5']},
+      brother:{hebrew:'אָח', transliteration:'ach', strongs:'H251', gloss:'brother, kin, relative', refs:['Genesis 4:9','Genesis 27:6','Genesis 37:26']}
+    };
+
+    Object.entries(BM_CONCORDANCE).forEach(([key, data]) => {
+      if (!NOTES[key]) {
+        NOTES[key] = {
+          label: key.charAt(0).toUpperCase() + key.slice(1),
+          category: 'Study word',
+          simple: 'A key Genesis word selected for BibleMapped study.',
+          webster: 'Definition being refined.',
+          original: `${data.hebrew} / ${data.transliteration}`,
+          grammar: 'Study the word in context before building doctrine from one occurrence.',
+          redFlag: 'Do not force one meaning into every verse. Context matters.'
+        };
+      }
+
+      NOTES[key].concordance = data;
+      NOTES[key].keyRefs = data.refs;
+    });
+
+const PLACES = {
       eden: {
         name:'Eden',
         modern:'Exact location unknown',
@@ -7511,7 +7509,22 @@
     }
 
     function tokenize(text) {
-      return escapeHtml(text).replace(/([A-Za-z][A-Za-z'’\-]*)/g, m => `<button class="word" data-word="${escapeHtml(m)}">${highlight(m)}</button>`);
+      return escapeHtml(text).replace(/([A-Za-z][A-Za-z'’\-]*)/g, m => {
+        const key = normalize(m);
+        const placeKey = PLACES[key] ? key : PLACE_ALIASES[key];
+        const note = NOTES[key];
+        const renderedWord = highlight(m);
+
+        if (placeKey) {
+          return `<button class="word place-word" data-word="${escapeHtml(m)}" title="Open BibleMapped map">${renderedWord}</button>`;
+        }
+
+        if (note) {
+          return `<button class="word study-word" data-word="${escapeHtml(m)}" title="Open BibleMapped word study">${renderedWord}</button>`;
+        }
+
+        return renderedWord;
+      });
     }
 
     function chapterText(ch) {
@@ -7564,24 +7577,86 @@
       const placeKey = PLACES[key] ? key : PLACE_ALIASES[key];
       const place = placeKey ? PLACES[placeKey] : null;
       const occ = occurrences(raw);
-      const refs = occ.refs.slice(0, 12).map(r => `<button class="ref" data-ref="${r.chapter}:${r.verse}">Gen ${r.chapter}:${r.verse}</button>`).join('');
+      const refs = occ.refs.slice(0, 16).map(r => `<button class="ref" data-ref="${r.chapter}:${r.verse}">Gen ${r.chapter}:${r.verse}</button>`).join('');
 
       const title = place ? place.name : (note?.label || raw);
       const category = place ? 'Place' : (note?.category || 'Word');
+      const concordance = note?.concordance;
+      const keyRefs = note?.keyRefs || concordance?.refs || [];
 
       popover.innerHTML = `
         <div class="pop-head">
           <h3>${escapeHtml(title)}</h3>
-          <span class="pill">${escapeHtml(category)}</span>
+          <span class="pill ${place ? 'place-pill' : ''}">${escapeHtml(category)}</span>
         </div>
 
-        ${place ? `<div class="pop-block"><strong>Modern location</strong><p>${escapeHtml(place.modern)} — ${escapeHtml(place.region)}. Confidence: ${escapeHtml(place.confidence)}.</p></div><div class="pop-block"><strong>Map note</strong><p>${escapeHtml(place.note)}</p></div>` : ''}
+        ${place ? `
+          <div class="pop-block">
+            <strong>Modern location</strong>
+            <p>${escapeHtml(place.modern)} — ${escapeHtml(place.region)}. Confidence: ${escapeHtml(place.confidence)}.</p>
+          </div>
 
-        <div class="pop-block"><strong>Meaning</strong><p>${escapeHtml(note?.simple || 'This word is clickable and searchable. Add a custom Bible Mapped definition or Webster entry for deeper study.')}</p></div>
+          <div class="pop-block">
+            <strong>Map note</strong>
+            <p>${escapeHtml(place.note)}</p>
+          </div>
 
-        ${note ? `<div class="pop-block"><strong>Webster-style definition</strong><p>${escapeHtml(note.webster || 'No Webster entry added yet.')}</p></div><div class="pop-block"><strong>Original language</strong><p>${escapeHtml(note.original || '')}</p></div><div class="pop-block"><strong>Grammar / translator note</strong><p>${escapeHtml(note.grammar || '')}</p></div><div class="pop-block"><strong>Red flag</strong><p>${escapeHtml(note.redFlag || '')}</p></div>` : ''}
+          <div class="pop-block">
+            <strong>BibleMapped action</strong>
+            <p>The map drawer opens automatically so the place can be studied visually.</p>
+          </div>
+        ` : ''}
 
-        <div class="pop-block"><strong>Concordance in Genesis (${occ.count})</strong><div class="refs">${refs || '<span>No matches.</span>'}</div></div>
+        <div class="pop-block">
+          <strong>Definition</strong>
+          <p>${escapeHtml(note?.simple || 'This word is clickable and searchable. Add a custom BibleMapped definition for deeper study.')}</p>
+        </div>
+
+        ${note ? `
+          <div class="pop-block">
+            <strong>Webster-style definition</strong>
+            <p>${escapeHtml(note.webster || 'No Webster-style entry added yet.')}</p>
+          </div>
+
+          ${concordance ? `
+            <div class="pop-block">
+              <strong>Concordance anchor</strong>
+              <div class="concordance-grid">
+                <div class="concordance-item"><b>Hebrew</b><span>${escapeHtml(concordance.hebrew)}</span></div>
+                <div class="concordance-item"><b>Transliteration</b><span>${escapeHtml(concordance.transliteration)}</span></div>
+                <div class="concordance-item"><b>Strong’s</b><span>${escapeHtml(concordance.strongs)}</span></div>
+                <div class="concordance-item"><b>Gloss</b><span>${escapeHtml(concordance.gloss)}</span></div>
+              </div>
+            </div>
+          ` : `
+            <div class="pop-block">
+              <strong>Original language</strong>
+              <p>${escapeHtml(note.original || 'No original-language note added yet.')}</p>
+            </div>
+          `}
+
+          <div class="pop-block">
+            <strong>Grammar / translator note</strong>
+            <p>${escapeHtml(note.grammar || 'Read the word in context before building a conclusion.')}</p>
+          </div>
+
+          <div class="pop-block">
+            <strong>Red flag</strong>
+            <p>${escapeHtml(note.redFlag || 'Do not force one meaning into every occurrence. Context matters.')}</p>
+          </div>
+
+          ${keyRefs.length ? `
+            <div class="pop-block">
+              <strong>Key references</strong>
+              <div class="refs">${keyRefs.map(ref => `<span class="ref-static">${escapeHtml(ref)}</span>`).join('')}</div>
+            </div>
+          ` : ''}
+        ` : ''}
+
+        <div class="pop-block">
+          <strong>Concordance in Genesis (${occ.count})</strong>
+          <div class="refs">${refs || '<span>No matches.</span>'}</div>
+        </div>
       `;
 
       const rect = target.getBoundingClientRect();
