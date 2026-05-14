@@ -1,1 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Books | BibleMapped</title>
+  <meta
+    name="description"
+    content="Explore Bible books by testament and open concise book case studies without leaving the Books page."
+  />
+  <link rel="stylesheet" href="../src/styles.css" />
+  <style>
+    :root {
+      --books-ink: #0b1020;
+      --books-text: #1f2933;
+      --books-muted: #667085;
+      --books-paper: #fcfbf8;
+      --books-cloud: #f7f6f2;
+      --books-line: #ddd8d0;
+      --books-purple: #7c3aed;
+      --books-gold: #c89b3c;
+    }
 
+    body {
+      background: var(--books-cloud);
+    }
+
+    .books-shell {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .books-hero {
+      padding: 78px 0 34px;
+    }
+
+    .books-eyebrow {
+      margin: 0 0 14px;
+      color: var(--books-gold);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .books-hero h1 {
+      max-width: 760px;
+      margin: 0;
+      color: var(--books-ink);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      line-height: 0.98;
+    }
+
+    .testament-definition,
+    .testament-card,
+    .category-panel,
+    .case-study-card {
+      background: #fff;
+      border: 1px solid var(--books-line);
+      border-radius: 8px;
+      box-shadow: 0 18px 50px rgba(11, 16, 32, 0.06);
+    }
+
+    .testament-definition {
+      padding: clamp(22px, 4vw, 34px);
+      margin-bottom: 24px;
+    }
+
+    .testament-definition h2,
+    .section-title {
+      margin: 0 0 10px;
+      color: var(--books-ink);
+      font-size: clamp(1.55rem, 3vw, 2.15rem);
+      line-height: 1.05;
+    }
+
+    .testament-definition p {
+      max-width: 920px;
+      margin: 0;
+      color: var(--books-text);
+      font-size: 1.08rem;
+      line-height: 1.8;
+    }
+
+    .testament-options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin: 24px 0;
+    }
+
+    .testament-card {
+      appearance: none;
+      display: grid;
+      gap: 12px;
+      min-height: 190px;
+      padding: clamp(22px, 4vw, 32px);
+      text-align: left;
+      color: var(--books-text);
+      cursor: pointer;
+      transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+    }
+
+    .testament-card:hover,
+    .testament-card[aria-expanded="true"] {
+      border-color: rgba(124, 58, 237, 0.45);
+      box-shadow: 0 24px 70px rgba(11, 16, 32, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .testament-card span {
+      color: var(--books-purple);
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .testament-card strong {
+      color: var(--books-ink);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1;
+    }
+
+    .testament-card p {
+      margin: 0;
+      max-width: 48ch;
+      line-height: 1.7;
+      font-weight: 600;
+    }
+
+    .books-panel {
+      display: none;
+      padding: 10px 0 70px;
+    }
+
+    .books-panel.open {
+      display: block;
+      animation: revealBooks 280ms ease both;
+    }
+
+    @keyframes revealBooks {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .panel-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin: 24px 0 18px;
+    }
+
+    .panel-head p {
+      margin: 0;
+      color: var(--books-muted);
+      line-height: 1.7;
+    }
+
+    .category-stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .category-panel {
+      padding: clamp(18px, 3vw, 26px);
+    }
+
+    .category-panel h3 {
+      margin: 0 0 16px;
+      color: var(--books-ink);
+      font-size: 1.18rem;
+      letter-spacing: 0;
+    }
+
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .book-card {
+      appearance: none;
+      min-height: 86px;
+      padding: 14px;
+      border: 1px solid var(--books-line);
+      border-radius: 8px;
+      background: var(--books-paper);
+      color: var(--books-ink);
+      text-align: left;
+      font: inherit;
+      font-weight: 850;
+      cursor: pointer;
+      transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+    }
+
+    .book-card:hover {
+      background: #fff;
+      border-color: rgba(124, 58, 237, 0.42);
+      transform: translateY(-2px);
+    }
+
+    .book-card small {
+      display: block;
+      margin-top: 8px;
+      color: var(--books-muted);
+      font-size: 0.75rem;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
+    .case-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: none;
+      align-items: stretch;
+      justify-content: end;
+      background: rgba(11, 16, 32, 0.58);
+      padding: 18px;
+    }
+
+    .case-overlay.open {
+      display: flex;
+    }
+
+    .case-study-card {
+      width: min(880px, 100%);
+      overflow: auto;
+      background: var(--books-paper);
+    }
+
+    .case-top {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--books-line);
+      background: rgba(252, 251, 248, 0.96);
+      backdrop-filter: blur(12px);
+    }
+
+    .case-top span {
+      color: var(--books-purple);
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .case-close {
+      appearance: none;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--books-line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--books-ink);
+      font-size: 1.3rem;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .case-body {
+      padding: clamp(24px, 4vw, 38px);
+    }
+
+    .case-body h2 {
+      margin: 0;
+      color: var(--books-ink);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(2.6rem, 5vw, 5rem);
+      line-height: 0.98;
+    }
+
+    .case-subtitle {
+      margin: 12px 0 0;
+      max-width: 680px;
+      color: var(--books-text);
+      font-size: 1.08rem;
+      line-height: 1.7;
+      font-weight: 650;
+    }
+
+    .case-section-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .case-section {
+      padding: 18px;
+      border: 1px solid var(--books-line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .case-section.full {
+      grid-column: 1 / -1;
+    }
+
+    .case-section h3 {
+      margin: 0 0 10px;
+      color: var(--books-ink);
+      font-size: 1rem;
+    }
+
+    .case-section p {
+      margin: 0;
+      color: var(--books-text);
+      line-height: 1.7;
+    }
+
+    .chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .chip-list li,
+    .source-list li {
+      border: 1px solid var(--books-line);
+      border-radius: 999px;
+      background: var(--books-paper);
+      padding: 7px 10px;
+      color: var(--books-text);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .source-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .image-slot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .image-slot {
+      min-height: 132px;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      border: 1px dashed rgba(31, 41, 51, 0.28);
+      border-radius: 8px;
+      background: #f1eee7;
+      color: var(--books-muted);
+      text-align: center;
+      font-size: 0.86rem;
+      font-weight: 850;
+      line-height: 1.35;
+    }
+
+    @media (max-width: 980px) {
+      .testament-options,
+      .case-section-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .book-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .image-slot-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .books-shell {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .books-hero {
+        padding-top: 54px;
+      }
+
+      .book-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .case-overlay {
+        padding: 0;
+      }
+
+      .case-study-card {
+        min-height: 100%;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="../index.html">BibleMapped</a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../books/index.html" aria-current="page">Books</a>
+        <a href="../characters/index.html">Characters</a>
+        <a href="../places/index.html">Places</a>
+        <a href="../themes/index.html">Themes</a>
+        <a href="../case-studies/index.html">Case Studies</a>
+        <a href="../traditions/index.html">Bible Traditions</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="books-hero">
+      <div class="books-shell">
+        <p class="books-eyebrow">Books</p>
+        <h1>Explore Scripture by Testament</h1>
+      </div>
+    </section>
+
+    <section class="books-shell" aria-labelledby="testamentDefinitionTitle">
+      <div class="testament-definition">
+        <h2 id="testamentDefinitionTitle">What does Testament mean?</h2>
+        <p>
+          &ldquo;Testament&rdquo; comes from the idea of a covenant, agreement, or witness.
+          In the Bible, the Old Testament tells the story of God&rsquo;s covenant work
+          through Israel, while the New Testament reveals the fulfillment of God&rsquo;s
+          promises through Jesus Christ.
+        </p>
+      </div>
+
+      <div class="testament-options" aria-label="Choose a Testament">
+        <button class="testament-card" type="button" aria-expanded="true" aria-controls="oldPanel" data-testament="Old Testament">
+          <span>Old Testament</span>
+          <strong>Old Testament</strong>
+          <p>The Hebrew Scriptures: creation, covenant, law, kings, prophets, exile, and hope.</p>
+        </button>
+
+        <button class="testament-card" type="button" aria-expanded="false" aria-controls="newPanel" data-testament="New Testament">
+          <span>New Testament</span>
+          <strong>New Testament</strong>
+          <p>The fulfillment of the promises: Jesus, the apostles, the church, and the kingdom of God.</p>
+        </button>
+      </div>
+
+      <section class="books-panel open" id="oldPanel" aria-labelledby="oldPanelTitle">
+        <div class="panel-head">
+          <div>
+            <p class="books-eyebrow">Old Testament</p>
+            <h2 class="section-title" id="oldPanelTitle">The Hebrew Scriptures</h2>
+          </div>
+          <p>Choose a book to open its case study here on the Books page.</p>
+        </div>
+        <div class="category-stack" id="oldCategories"></div>
+      </section>
+
+      <section class="books-panel" id="newPanel" aria-labelledby="newPanelTitle">
+        <div class="panel-head">
+          <div>
+            <p class="books-eyebrow">New Testament</p>
+            <h2 class="section-title" id="newPanelTitle">The Fulfillment of the Promises</h2>
+          </div>
+          <p>Placeholder case studies are ready to expand as New Testament research is added.</p>
+        </div>
+        <div class="category-stack" id="newCategories"></div>
+      </section>
+    </section>
+  </main>
+
+  <div class="case-overlay" id="caseOverlay" role="dialog" aria-modal="true" aria-labelledby="caseTitle" aria-hidden="true">
+    <article class="case-study-card">
+      <div class="case-top">
+        <span id="caseMeta">Book Case Study</span>
+        <button class="case-close" type="button" id="caseClose" aria-label="Close case study">x</button>
+      </div>
+      <div class="case-body" id="caseBody"></div>
+    </article>
+  </div>
+
+  <script>
+    const imageSlots = [
+      "Map / Location Image",
+      "Artifact / Historical Context Image",
+      "Timeline / Visual Summary Image"
+    ];
+
+    const categories = {
+      "Old Testament": [
+        "Torah / Law",
+        "Historical Books",
+        "Wisdom & Poetry",
+        "Major Prophets",
+        "Minor Prophets"
+      ],
+      "New Testament": [
+        "Gospels",
+        "Church History",
+        "Pauline Letters",
+        "General Letters",
+        "Prophecy / Apocalypse"
+      ]
+    };
+
+    function book(entry) {
+      return {
+        ...entry,
+        imageSlots,
+        sources: ["Canonical biblical text", "BibleMapped book-study framework", ...(entry.sources || [])],
+      };
+    }
+
+    const books = [
+      book({
+        testament: "Old Testament",
+        category: "Torah / Law",
+        title: "Genesis",
+        subtitle: "Origins, promise, exile, and the beginning of covenant hope.",
+        whatIsThisBook: "Genesis is the Bible's beginning story. It moves from creation and human rebellion to Abraham's family and the promise of blessing.",
+        whyItMatters: "Genesis explains the world Scripture assumes: creation, image-bearing, sin, covenant, land, family, and the need for restoration.",
+        historicalContext: "The book is set across primeval history and the patriarchal world of Mesopotamia, Canaan, and Egypt.",
+        majorThemes: ["Creation", "Image of God", "Fall", "Covenant", "Promise", "Blessing", "Exile"],
+        keyPeople: ["Adam", "Eve", "Noah", "Abraham", "Sarah", "Isaac", "Jacob", "Joseph"],
+        keyPlaces: ["Eden", "Ararat", "Babel", "Canaan", "Bethel", "Hebron", "Egypt"],
+        pointsToJesus: "Genesis begins the promise of the seed who will overcome evil and bless the nations.",
+        evidenceNotes: "Track repeated covenant promises, genealogies, land movement, and how Genesis ends with hope still waiting.",
+        sources: ["Genesis 1-50", "Genesis 3:15", "Genesis 12:1-3", "Genesis 50:20"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Torah / Law",
+        title: "Exodus",
+        subtitle: "Deliverance from bondage into covenant worship and God's presence.",
+        whatIsThisBook: "Exodus tells how the LORD rescues Israel from Egypt, forms them at Sinai, and dwells among them through the tabernacle.",
+        whyItMatters: "It gives the Bible its core language of redemption: blood, deliverance, covenant, priesthood, holiness, and presence.",
+        historicalContext: "The story moves from Egyptian oppression to wilderness travel and Sinai covenant formation.",
+        majorThemes: ["Redemption", "Passover", "Covenant", "Law", "Priesthood", "Presence", "Worship"],
+        keyPeople: ["Moses", "Aaron", "Miriam", "Pharaoh", "Jethro"],
+        keyPlaces: ["Egypt", "Goshen", "Red Sea", "Sinai", "Wilderness"],
+        pointsToJesus: "Passover, mediator, sacrifice, and tabernacle presence all prepare readers for Christ's saving work.",
+        evidenceNotes: "Notice the conflict between Pharaoh's power and the LORD's name, then the turn from rescue to worship.",
+        sources: ["Exodus 1-40", "Exodus 12", "Exodus 19-20", "Exodus 40"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Torah / Law",
+        title: "Leviticus",
+        subtitle: "Holiness, sacrifice, priesthood, and life near God's presence.",
+        whatIsThisBook: "Leviticus teaches how a redeemed people live before a holy God.",
+        whyItMatters: "It explains atonement, clean and unclean boundaries, priestly mediation, and holy living.",
+        historicalContext: "Leviticus belongs at Sinai after the tabernacle is established and before Israel continues toward the land.",
+        majorThemes: ["Holiness", "Atonement", "Sacrifice", "Priesthood", "Purity", "Worship"],
+        keyPeople: ["Moses", "Aaron", "Priests", "Israel"],
+        keyPlaces: ["Sinai", "Tabernacle", "Camp of Israel"],
+        pointsToJesus: "Its sacrifices and priesthood anticipate the perfect priest and final atoning sacrifice.",
+        evidenceNotes: "Read the laws as worship formation for a people living with God in their midst.",
+        sources: ["Leviticus 1-27", "Leviticus 16", "Leviticus 19"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Torah / Law",
+        title: "Numbers",
+        subtitle: "Wilderness testing between promise and inheritance.",
+        whatIsThisBook: "Numbers follows Israel from Sinai through wilderness failure toward the edge of the promised land.",
+        whyItMatters: "It shows the cost of unbelief and the faithfulness of God despite a rebellious generation.",
+        historicalContext: "The book is set in the wilderness between Sinai and Moab, with census lists framing Israel's journey.",
+        majorThemes: ["Wilderness", "Testing", "Priestly order", "Judgment", "Mercy", "Promise"],
+        keyPeople: ["Moses", "Aaron", "Miriam", "Joshua", "Caleb", "Balaam"],
+        keyPlaces: ["Sinai", "Kadesh", "Moab", "Wilderness"],
+        pointsToJesus: "The lifted serpent and the hope of a coming ruler point beyond wilderness judgment to salvation.",
+        evidenceNotes: "Compare the first and second census to see generational transition.",
+        sources: ["Numbers 1-36", "Numbers 14", "Numbers 21", "Numbers 24"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Torah / Law",
+        title: "Deuteronomy",
+        subtitle: "Covenant renewal before entering the land.",
+        whatIsThisBook: "Deuteronomy presents Moses' covenant sermons to Israel on the plains of Moab.",
+        whyItMatters: "It calls Israel to love, remember, obey, and choose life with the LORD.",
+        historicalContext: "A new generation stands across from Canaan after forty years in the wilderness.",
+        majorThemes: ["Covenant renewal", "Memory", "Love", "Law", "Blessing and curse", "Land"],
+        keyPeople: ["Moses", "Joshua", "Israel"],
+        keyPlaces: ["Moab", "Jordan", "Canaan"],
+        pointsToJesus: "It promises a prophet like Moses and frames covenant obedience fulfilled by Christ.",
+        evidenceNotes: "Watch for repeated calls to remember Egypt and teach the next generation.",
+        sources: ["Deuteronomy 1-34", "Deuteronomy 6", "Deuteronomy 18", "Deuteronomy 30"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Historical Books",
+        title: "Joshua",
+        subtitle: "Inheritance, conquest, and covenant faithfulness in the land.",
+        whatIsThisBook: "Joshua tells how Israel enters Canaan and receives allotted inheritance.",
+        whyItMatters: "It tests whether Israel will trust the LORD's promise and live as a covenant people.",
+        historicalContext: "The action centers on the Jordan crossing, Canaanite city-states, tribal allotments, and covenant renewal.",
+        majorThemes: ["Land", "Courage", "Promise fulfilled", "Covenant", "Worship"],
+        keyPeople: ["Joshua", "Rahab", "Caleb", "Eleazar"],
+        keyPlaces: ["Jordan", "Jericho", "Ai", "Shiloh", "Shechem"],
+        pointsToJesus: "Joshua's name and role anticipate the greater deliverer who brings God's people into lasting rest.",
+        evidenceNotes: "Notice the movement from battle narratives to inheritance boundaries and covenant appeal.",
+        sources: ["Joshua 1-24", "Joshua 2", "Joshua 24"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Historical Books",
+        title: "Judges",
+        subtitle: "Cycles of compromise, oppression, crying out, and rescue.",
+        whatIsThisBook: "Judges describes Israel's spiritual decline after Joshua through a series of regional deliverers.",
+        whyItMatters: "It shows what happens when everyone does what is right in their own eyes.",
+        historicalContext: "The period is tribal, decentralized, and marked by pressure from surrounding peoples.",
+        majorThemes: ["Apostasy", "Mercy", "Leadership failure", "Idolatry", "Need for a king"],
+        keyPeople: ["Deborah", "Gideon", "Jephthah", "Samson", "Barak"],
+        keyPlaces: ["Canaan", "Ephraim", "Gilead", "Philistine territory"],
+        pointsToJesus: "The broken deliverers expose the need for a righteous king and perfect savior.",
+        evidenceNotes: "The repeated cycle grows darker, so read the book as a downward spiral.",
+        sources: ["Judges 2", "Judges 4-5", "Judges 13-16", "Judges 21:25"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Historical Books",
+        title: "Ruth",
+        subtitle: "Loyal love, providence, and the line of David.",
+        whatIsThisBook: "Ruth is a short narrative of famine, loss, loyalty, redemption, and unexpected lineage.",
+        whyItMatters: "It shows God's covenant kindness working through ordinary faithfulness.",
+        historicalContext: "Set in the days of the judges, the story moves from Moab to Bethlehem.",
+        majorThemes: ["Loyal love", "Providence", "Redemption", "Family line", "Inclusion"],
+        keyPeople: ["Ruth", "Naomi", "Boaz", "Obed"],
+        keyPlaces: ["Moab", "Bethlehem"],
+        pointsToJesus: "Ruth joins the family line that leads to David and ultimately to Christ.",
+        evidenceNotes: "The genealogy at the end is the key that widens the story beyond one household.",
+        sources: ["Ruth 1-4", "Matthew 1:5"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Historical Books",
+        title: "1 Samuel",
+        subtitle: "Prophet, king, and the rise of David.",
+        whatIsThisBook: "1 Samuel moves from Samuel's birth to Saul's failure and David's anointing.",
+        whyItMatters: "It explains Israel's monarchy and the difference between outward power and a heart after God.",
+        historicalContext: "Israel faces Philistine pressure while shifting from judges to kings.",
+        majorThemes: ["Kingship", "Prophetic word", "Obedience", "Anointing", "God's choice"],
+        keyPeople: ["Samuel", "Saul", "David", "Hannah", "Jonathan", "Eli"],
+        keyPlaces: ["Shiloh", "Ramah", "Gibeah", "Bethlehem", "Valley of Elah"],
+        pointsToJesus: "David's anointing begins the royal line through which the Messiah is expected.",
+        evidenceNotes: "Track how Saul's public image contrasts with David's covenant trust.",
+        sources: ["1 Samuel 1-31", "1 Samuel 8", "1 Samuel 16-17"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Historical Books",
+        title: "2 Samuel",
+        subtitle: "David's kingdom, covenant, sin, and consequences.",
+        whatIsThisBook: "2 Samuel records David's reign from triumph to family and national fracture.",
+        whyItMatters: "It gives the Davidic covenant and also refuses to hide David's moral failure.",
+        historicalContext: "The monarchy centers in Jerusalem while tribal loyalties and royal succession tensions remain.",
+        majorThemes: ["Davidic covenant", "Jerusalem", "Mercy", "Sin", "Judgment", "Kingdom"],
+        keyPeople: ["David", "Nathan", "Bathsheba", "Uriah", "Absalom", "Joab"],
+        keyPlaces: ["Hebron", "Jerusalem", "Zion", "Wilderness"],
+        pointsToJesus: "The promise of an enduring Davidic throne points toward the Messiah-King.",
+        evidenceNotes: "Read 2 Samuel 7 as the theological center of the book.",
+        sources: ["2 Samuel 1-24", "2 Samuel 7", "2 Samuel 11-12"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Historical Books",
+        title: "1 Kings",
+        subtitle: "Solomon, temple glory, division, and prophetic confrontation.",
+        whatIsThisBook: "1 Kings traces the kingdom from Solomon's wisdom to division and idolatry.",
+        whyItMatters: "It shows that even temple glory cannot replace covenant faithfulness.",
+        historicalContext: "The united monarchy divides into Israel in the north and Judah in the south.",
+        majorThemes: ["Temple", "Wisdom", "Idolatry", "Divided kingdom", "Prophetic warning"],
+        keyPeople: ["Solomon", "Rehoboam", "Jeroboam", "Elijah", "Ahab", "Jezebel"],
+        keyPlaces: ["Jerusalem", "Samaria", "Bethel", "Carmel"],
+        pointsToJesus: "Solomon's wisdom and temple point forward, but his failure shows the need for a greater king.",
+        evidenceNotes: "Evaluate each king by covenant worship, especially the issue of rival shrines.",
+        sources: ["1 Kings 1-22", "1 Kings 8", "1 Kings 12", "1 Kings 18"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Historical Books",
+        title: "2 Kings",
+        subtitle: "Prophets, decline, exile, and the collapse of the kingdoms.",
+        whatIsThisBook: "2 Kings continues the divided kingdom story through the fall of Israel and Judah.",
+        whyItMatters: "It explains exile as covenant consequence, not divine forgetfulness.",
+        historicalContext: "Assyria and Babylon become major imperial powers over Israel and Judah.",
+        majorThemes: ["Exile", "Judgment", "Prophets", "Covenant failure", "Remnant hope"],
+        keyPeople: ["Elisha", "Hezekiah", "Josiah", "Manasseh", "Zedekiah"],
+        keyPlaces: ["Samaria", "Jerusalem", "Assyria", "Babylon"],
+        pointsToJesus: "The fall of the kings intensifies hope for a faithful Davidic ruler.",
+        evidenceNotes: "Notice the theological explanation of Samaria's fall in 2 Kings 17.",
+        sources: ["2 Kings 1-25", "2 Kings 17", "2 Kings 22-25"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Historical Books",
+        title: "1 Chronicles",
+        subtitle: "Genealogy, David, worship, and restored identity.",
+        whatIsThisBook: "1 Chronicles retells Israel's story with focus on David, temple preparation, and worship order.",
+        whyItMatters: "It helps a post-exile people remember who they are before God.",
+        historicalContext: "Written from a later perspective, it gathers genealogy and royal memory for restoration.",
+        majorThemes: ["Identity", "David", "Worship", "Temple preparation", "Priestly order"],
+        keyPeople: ["David", "Levites", "Priests", "Solomon"],
+        keyPlaces: ["Jerusalem", "Zion", "Temple site"],
+        pointsToJesus: "The focus on David's line and ordered worship sustains messianic expectation.",
+        evidenceNotes: "The genealogies are theological memory, not filler.",
+        sources: ["1 Chronicles 1-29", "1 Chronicles 17", "1 Chronicles 22-29"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Historical Books",
+        title: "2 Chronicles",
+        subtitle: "Temple, kings of Judah, exile, and a door back home.",
+        whatIsThisBook: "2 Chronicles follows Solomon and Judah's kings with special attention to temple faithfulness.",
+        whyItMatters: "It calls God's people to humble return, prayer, and covenant worship.",
+        historicalContext: "The narrative moves from temple dedication to Babylonian exile and Cyrus's decree.",
+        majorThemes: ["Temple", "Prayer", "Reform", "Judah", "Exile", "Return"],
+        keyPeople: ["Solomon", "Asa", "Jehoshaphat", "Hezekiah", "Josiah", "Cyrus"],
+        keyPlaces: ["Jerusalem", "Temple", "Babylon", "Persia"],
+        pointsToJesus: "The failed kings and interrupted temple hope point toward the true king and final dwelling of God.",
+        evidenceNotes: "Watch the repeated pattern of seeking the LORD, reform, and consequences.",
+        sources: ["2 Chronicles 1-36", "2 Chronicles 7:14", "2 Chronicles 36"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Historical Books",
+        title: "Ezra",
+        subtitle: "Return, rebuilding, and renewed devotion to the law.",
+        whatIsThisBook: "Ezra tells of return from exile, temple rebuilding, and renewed commitment to Scripture.",
+        whyItMatters: "It shows restoration as a gift that still requires holiness and covenant seriousness.",
+        historicalContext: "The story unfolds under Persian rule after Cyrus allows exiles to return.",
+        majorThemes: ["Return", "Temple rebuilding", "Law", "Holiness", "Restoration"],
+        keyPeople: ["Cyrus", "Zerubbabel", "Joshua the priest", "Ezra"],
+        keyPlaces: ["Babylon", "Persia", "Jerusalem"],
+        pointsToJesus: "The rebuilt temple renews hope but also leaves readers waiting for greater restoration.",
+        evidenceNotes: "Persian decrees and opposition letters shape the book's historical texture.",
+        sources: ["Ezra 1-10", "Ezra 1", "Ezra 7"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Historical Books",
+        title: "Nehemiah",
+        subtitle: "Walls rebuilt, community restored, covenant renewed.",
+        whatIsThisBook: "Nehemiah records the rebuilding of Jerusalem's walls and the renewal of the returned community.",
+        whyItMatters: "It joins practical leadership with prayer, Scripture, repentance, and reform.",
+        historicalContext: "Jerusalem remains vulnerable under Persian rule, requiring both permission and perseverance.",
+        majorThemes: ["Leadership", "Prayer", "Wall rebuilding", "Scripture", "Repentance", "Community"],
+        keyPeople: ["Nehemiah", "Ezra", "Sanballat", "Tobiah"],
+        keyPlaces: ["Susa", "Jerusalem", "City gates"],
+        pointsToJesus: "The rebuilt city anticipates the deeper restoration God brings through Christ.",
+        evidenceNotes: "The wall project matters because it protects worship, identity, and covenant life.",
+        sources: ["Nehemiah 1-13", "Nehemiah 8", "Nehemiah 9"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Historical Books",
+        title: "Esther",
+        subtitle: "Hidden providence and preservation in exile.",
+        whatIsThisBook: "Esther tells how Jewish people in Persia are preserved from destruction through Esther's courage.",
+        whyItMatters: "It shows God's providence even when His name is not explicitly stated.",
+        historicalContext: "The story is set in the Persian court among Jews living outside the land.",
+        majorThemes: ["Providence", "Courage", "Reversal", "Preservation", "Exile"],
+        keyPeople: ["Esther", "Mordecai", "Haman", "Ahasuerus"],
+        keyPlaces: ["Susa", "Persia"],
+        pointsToJesus: "The threatened seed is preserved, keeping alive the line of promise.",
+        evidenceNotes: "Pay attention to reversals: gallows, decrees, honor, mourning, and feasting.",
+        sources: ["Esther 1-10", "Esther 4:14", "Esther 9"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Wisdom & Poetry",
+        title: "Job",
+        subtitle: "Suffering, wisdom, and the fear of God.",
+        whatIsThisBook: "Job is a wisdom book that wrestles with righteous suffering and limited human understanding.",
+        whyItMatters: "It resists easy answers and calls readers to trust God beyond visible circumstances.",
+        historicalContext: "The setting is outside Israel's national story, using poetic dialogue and divine speeches.",
+        majorThemes: ["Suffering", "Wisdom", "Integrity", "Creation", "Humility", "Trust"],
+        keyPeople: ["Job", "Eliphaz", "Bildad", "Zophar", "Elihu"],
+        keyPlaces: ["Uz"],
+        pointsToJesus: "Job's longing for a mediator and redeemer points toward the one who suffers righteously and vindicates His people.",
+        evidenceNotes: "Do not treat the friends' speeches as automatically correct; the book critiques them.",
+        sources: ["Job 1-42", "Job 19:25", "Job 38-42"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Wisdom & Poetry",
+        title: "Psalms",
+        subtitle: "Israel's prayerbook of worship, lament, wisdom, and hope.",
+        whatIsThisBook: "Psalms gathers songs and prayers for every season of covenant life.",
+        whyItMatters: "It teaches God's people how to speak to Him with truth, reverence, grief, and praise.",
+        historicalContext: "The collection spans Davidic, temple, exile, and restoration settings.",
+        majorThemes: ["Worship", "Lament", "Kingship", "Trust", "Torah", "Praise"],
+        keyPeople: ["David", "Asaph", "Sons of Korah", "Solomon"],
+        keyPlaces: ["Zion", "Temple", "Nations", "Wilderness"],
+        pointsToJesus: "Royal, suffering, and victory psalms become central language for understanding Christ.",
+        evidenceNotes: "Read individual psalms within the five-book shape of the Psalter.",
+        sources: ["Psalm 1", "Psalm 2", "Psalm 22", "Psalm 110"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Wisdom & Poetry",
+        title: "Proverbs",
+        subtitle: "Wisdom for ordered life under the fear of the LORD.",
+        whatIsThisBook: "Proverbs collects wisdom sayings that train discernment, character, speech, work, and relationships.",
+        whyItMatters: "It shows that daily life belongs under God's wise order.",
+        historicalContext: "Associated with Solomon and Israel's wisdom tradition, it teaches through compact sayings and contrasts.",
+        majorThemes: ["Wisdom", "Fear of the LORD", "Discipline", "Speech", "Work", "Justice"],
+        keyPeople: ["Solomon", "The wise", "The fool", "Wisdom personified"],
+        keyPlaces: ["Household", "Gate", "Path", "Marketplace"],
+        pointsToJesus: "Christ embodies the wisdom of God and forms a people who walk wisely.",
+        evidenceNotes: "Proverbs are wisdom principles, not mechanical guarantees detached from the whole Bible.",
+        sources: ["Proverbs 1-31", "Proverbs 1:7", "Proverbs 8"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Wisdom & Poetry",
+        title: "Ecclesiastes",
+        subtitle: "Life under the sun and the search for lasting meaning.",
+        whatIsThisBook: "Ecclesiastes examines pleasure, work, wisdom, time, death, and human limitation.",
+        whyItMatters: "It exposes the emptiness of life treated as ultimate apart from God.",
+        historicalContext: "The book speaks in wisdom reflection, often from the perspective of life under the sun.",
+        majorThemes: ["Vanity", "Time", "Death", "Work", "Wisdom", "Fear God"],
+        keyPeople: ["The Teacher", "The wise", "The fool"],
+        keyPlaces: ["Under the sun", "Jerusalem"],
+        pointsToJesus: "Its ache for meaning finds answer in resurrection hope and life beyond vanity.",
+        evidenceNotes: "Let the final call to fear God frame the searching observations.",
+        sources: ["Ecclesiastes 1-12", "Ecclesiastes 3", "Ecclesiastes 12:13-14"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Wisdom & Poetry",
+        title: "Song of Solomon",
+        subtitle: "Love, longing, beauty, and covenant delight.",
+        whatIsThisBook: "Song of Solomon is poetic celebration of love, desire, beauty, and faithful delight.",
+        whyItMatters: "It honors embodied love while showing that desire needs covenant order and wisdom.",
+        historicalContext: "The book belongs to Israel's poetic wisdom tradition and uses rich garden and royal imagery.",
+        majorThemes: ["Love", "Desire", "Beauty", "Faithfulness", "Garden imagery"],
+        keyPeople: ["The woman", "The beloved", "Daughters of Jerusalem"],
+        keyPlaces: ["Garden", "Vineyard", "Jerusalem", "Countryside"],
+        pointsToJesus: "Christian readers have also heard echoes of covenant love fulfilled in Christ and His people.",
+        evidenceNotes: "Read first as love poetry before making broader theological connections.",
+        sources: ["Song of Solomon 1-8"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Major Prophets",
+        title: "Isaiah",
+        subtitle: "Judgment, holiness, servant hope, and new creation.",
+        whatIsThisBook: "Isaiah announces judgment against sin and sweeping hope through the LORD's coming salvation.",
+        whyItMatters: "It gives some of the clearest Old Testament language for Messiah, servant, kingdom, and new creation.",
+        historicalContext: "Isaiah speaks into Judah's crisis amid Assyrian pressure and future exile hope.",
+        majorThemes: ["Holiness", "Judgment", "Remnant", "Servant", "Messiah", "New creation"],
+        keyPeople: ["Isaiah", "Uzziah", "Ahaz", "Hezekiah", "The Servant"],
+        keyPlaces: ["Jerusalem", "Zion", "Assyria", "Babylon", "Nations"],
+        pointsToJesus: "The promised child, servant, and suffering redeemer are central to Christian reading of Isaiah.",
+        evidenceNotes: "Notice movement from immediate Judah crisis to global restoration.",
+        sources: ["Isaiah 6", "Isaiah 7", "Isaiah 9", "Isaiah 53", "Isaiah 65"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Major Prophets",
+        title: "Jeremiah",
+        subtitle: "A prophet of warning, tears, exile, and new covenant hope.",
+        whatIsThisBook: "Jeremiah warns Judah before Jerusalem's fall and promises future covenant renewal.",
+        whyItMatters: "It explains why exile came and why hope depends on God's heart-changing work.",
+        historicalContext: "Jeremiah ministers during Judah's final decades before Babylon destroys Jerusalem.",
+        majorThemes: ["Covenant breach", "Exile", "False security", "New covenant", "Restoration"],
+        keyPeople: ["Jeremiah", "Josiah", "Jehoiakim", "Zedekiah", "Baruch"],
+        keyPlaces: ["Jerusalem", "Anathoth", "Babylon", "Egypt"],
+        pointsToJesus: "The promised new covenant is fulfilled through Christ's blood and Spirit-given renewal.",
+        evidenceNotes: "Temple presence is not treated as protection when covenant faithfulness is absent.",
+        sources: ["Jeremiah 1", "Jeremiah 7", "Jeremiah 31", "Jeremiah 52"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Major Prophets",
+        title: "Lamentations",
+        subtitle: "Grief over Jerusalem and hope in God's steadfast mercy.",
+        whatIsThisBook: "Lamentations is poetic mourning over the destruction of Jerusalem.",
+        whyItMatters: "It gives faithful language for grief, judgment, confession, and hope.",
+        historicalContext: "The poems reflect the aftermath of Babylon's destruction of Jerusalem in 586 BC.",
+        majorThemes: ["Lament", "Judgment", "Grief", "Mercy", "Hope"],
+        keyPeople: ["Daughter Zion", "The suffering city", "The speaker"],
+        keyPlaces: ["Jerusalem", "Zion"],
+        pointsToJesus: "The suffering of the city deepens the Bible's longing for a redeemer who bears judgment and restores hope.",
+        evidenceNotes: "The center of the book holds one of Scripture's strongest statements of mercy amid sorrow.",
+        sources: ["Lamentations 1-5", "Lamentations 3:21-24"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Major Prophets",
+        title: "Ezekiel",
+        subtitle: "Glory departing, judgment falling, and restoration promised.",
+        whatIsThisBook: "Ezekiel prophesies among exiles, explaining judgment and envisioning renewal.",
+        whyItMatters: "It shows that God's glory is not trapped by geography and that restoration requires a new heart.",
+        historicalContext: "Ezekiel ministers in Babylon before and after Jerusalem's fall.",
+        majorThemes: ["Glory", "Exile", "New heart", "Watchman", "Temple vision", "Restoration"],
+        keyPeople: ["Ezekiel", "Exiles", "Shepherds of Israel"],
+        keyPlaces: ["Babylon", "Chebar canal", "Jerusalem", "Temple"],
+        pointsToJesus: "The good shepherd, new heart, and restored presence find fulfillment in Christ and the Spirit.",
+        evidenceNotes: "Track the movement of God's glory from departure to promised return.",
+        sources: ["Ezekiel 1", "Ezekiel 10", "Ezekiel 34", "Ezekiel 36-37", "Ezekiel 40-48"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Major Prophets",
+        title: "Daniel",
+        subtitle: "Faithfulness in exile and God's kingdom over empires.",
+        whatIsThisBook: "Daniel combines court narratives and visions showing God's rule over world kingdoms.",
+        whyItMatters: "It teaches faithful witness under pressure and confidence in God's everlasting kingdom.",
+        historicalContext: "The setting is Babylonian and Persian exile, with visions reaching beyond Daniel's lifetime.",
+        majorThemes: ["Exile faithfulness", "Kingdom", "Wisdom", "Empires", "Resurrection hope"],
+        keyPeople: ["Daniel", "Nebuchadnezzar", "Belshazzar", "Darius", "Daniel's friends"],
+        keyPlaces: ["Babylon", "Persia", "Lion's den", "Fiery furnace"],
+        pointsToJesus: "The Son of Man vision becomes a major title and kingdom framework for Jesus.",
+        evidenceNotes: "Read the visions as comfort that beastly empires do not have final authority.",
+        sources: ["Daniel 1-12", "Daniel 3", "Daniel 6", "Daniel 7", "Daniel 12"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Minor Prophets",
+        title: "Hosea",
+        subtitle: "Covenant love toward an unfaithful people.",
+        whatIsThisBook: "Hosea uses marriage imagery to expose Israel's unfaithfulness and God's steadfast love.",
+        whyItMatters: "It reveals sin as covenant betrayal and restoration as mercy.",
+        historicalContext: "Hosea prophesies to the northern kingdom before Assyrian conquest.",
+        majorThemes: ["Covenant love", "Idolatry", "Mercy", "Judgment", "Restoration"],
+        keyPeople: ["Hosea", "Gomer", "Israel"],
+        keyPlaces: ["Israel", "Samaria", "Jezreel"],
+        pointsToJesus: "God's pursuing love and restoration hope prepare for grace revealed in Christ.",
+        evidenceNotes: "Marriage and family names function as enacted prophecy.",
+        sources: ["Hosea 1-14", "Hosea 11", "Hosea 14"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Minor Prophets",
+        title: "Joel",
+        subtitle: "Locust judgment, repentance, and the day of the LORD.",
+        whatIsThisBook: "Joel turns a devastating crisis into a call to repentance and hope.",
+        whyItMatters: "It gives key language for the day of the LORD and the promised outpouring of the Spirit.",
+        historicalContext: "The exact date is debated, but the book centers on national crisis and temple-centered repentance.",
+        majorThemes: ["Day of the LORD", "Repentance", "Spirit", "Judgment", "Restoration"],
+        keyPeople: ["Joel", "Priests", "Judah"],
+        keyPlaces: ["Zion", "Jerusalem", "Temple"],
+        pointsToJesus: "Joel's Spirit promise is cited at Pentecost as fulfilled through the risen Christ.",
+        evidenceNotes: "Watch how disaster becomes a lens for final judgment and renewal.",
+        sources: ["Joel 1-3", "Joel 2:28-32", "Acts 2"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Minor Prophets",
+        title: "Amos",
+        subtitle: "Justice, worship integrity, and judgment on complacency.",
+        whatIsThisBook: "Amos confronts Israel's injustice, empty worship, and false security.",
+        whyItMatters: "It insists that worship cannot be separated from righteousness and justice.",
+        historicalContext: "Amos prophesies during prosperity in the northern kingdom before Assyria's rise.",
+        majorThemes: ["Justice", "Judgment", "False security", "Worship", "Restoration"],
+        keyPeople: ["Amos", "Amaziah", "Israel"],
+        keyPlaces: ["Tekoa", "Bethel", "Samaria"],
+        pointsToJesus: "The promised restoration of David's fallen booth points toward kingdom renewal in Christ.",
+        evidenceNotes: "The opening oracles widen judgment to nations before focusing on Israel.",
+        sources: ["Amos 1-9", "Amos 5:24", "Amos 9:11-15"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Minor Prophets",
+        title: "Obadiah",
+        subtitle: "Edom's pride and the LORD's justice.",
+        whatIsThisBook: "Obadiah is a short prophecy against Edom for pride and violence against Judah.",
+        whyItMatters: "It shows that God sees how nations treat His people and will judge arrogance.",
+        historicalContext: "The book reflects hostility between Edom and Judah, likely around Jerusalem's crisis.",
+        majorThemes: ["Pride", "Brotherly violence", "Justice", "Day of the LORD", "Kingdom"],
+        keyPeople: ["Obadiah", "Edom", "Jacob"],
+        keyPlaces: ["Edom", "Mount Esau", "Zion"],
+        pointsToJesus: "The final kingdom belongs to the LORD, a hope fulfilled in Christ's reign.",
+        evidenceNotes: "The conflict between Jacob and Esau is historical memory behind the prophecy.",
+        sources: ["Obadiah 1-21"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Minor Prophets",
+        title: "Jonah",
+        subtitle: "Mercy for enemies and a prophet exposed.",
+        whatIsThisBook: "Jonah tells of a reluctant prophet sent to Nineveh and confronted by God's compassion.",
+        whyItMatters: "It challenges narrow mercy and reveals God's concern for the nations.",
+        historicalContext: "Nineveh was an Assyrian city, representing a feared enemy power.",
+        majorThemes: ["Mercy", "Repentance", "Nations", "Prophetic reluctance", "Compassion"],
+        keyPeople: ["Jonah", "Sailors", "Ninevites", "King of Nineveh"],
+        keyPlaces: ["Joppa", "Sea", "Nineveh"],
+        pointsToJesus: "Jesus uses Jonah's three days as a sign pointing to His death and resurrection.",
+        evidenceNotes: "The book's final question leaves the reader to examine their view of mercy.",
+        sources: ["Jonah 1-4", "Matthew 12:40"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Minor Prophets",
+        title: "Micah",
+        subtitle: "Judgment, justice, Bethlehem hope, and shepherd-king promise.",
+        whatIsThisBook: "Micah condemns corruption while promising future rule from Bethlehem.",
+        whyItMatters: "It joins justice, mercy, humility, and messianic hope.",
+        historicalContext: "Micah prophesies in Judah during Assyrian-era pressure.",
+        majorThemes: ["Justice", "Mercy", "Humility", "Judgment", "Bethlehem", "Remnant"],
+        keyPeople: ["Micah", "Rulers", "Prophets", "Remnant"],
+        keyPlaces: ["Moresheth", "Jerusalem", "Samaria", "Bethlehem"],
+        pointsToJesus: "Micah names Bethlehem as the origin of the coming ruler.",
+        evidenceNotes: "Micah 6:8 summarizes covenant ethics without replacing covenant worship.",
+        sources: ["Micah 1-7", "Micah 5:2", "Micah 6:8"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Minor Prophets",
+        title: "Nahum",
+        subtitle: "The fall of Nineveh and comfort for the oppressed.",
+        whatIsThisBook: "Nahum announces judgment against Nineveh and Assyria's violence.",
+        whyItMatters: "It comforts victims by declaring that brutal power is accountable to God.",
+        historicalContext: "The prophecy looks toward Nineveh's fall after Assyria's period of dominance.",
+        majorThemes: ["Justice", "Judgment", "Oppression", "Divine patience", "Comfort"],
+        keyPeople: ["Nahum", "Nineveh", "Judah"],
+        keyPlaces: ["Nineveh", "Assyria", "Judah"],
+        pointsToJesus: "God's final justice and refuge for His people are completed in Christ's kingdom.",
+        evidenceNotes: "Nahum should be read with Jonah to see mercy refused and judgment announced.",
+        sources: ["Nahum 1-3", "Nahum 1:7"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Minor Prophets",
+        title: "Habakkuk",
+        subtitle: "Questions, waiting, faith, and God's justice.",
+        whatIsThisBook: "Habakkuk is a dialogue with God about evil, judgment, and faith.",
+        whyItMatters: "It teaches believers to bring hard questions to God and live by faith while waiting.",
+        historicalContext: "The book anticipates Babylonian judgment against Judah.",
+        majorThemes: ["Faith", "Justice", "Waiting", "Prayer", "Judgment"],
+        keyPeople: ["Habakkuk", "Babylonians", "Judah"],
+        keyPlaces: ["Judah", "Babylon"],
+        pointsToJesus: "The righteous living by faith becomes central to New Testament gospel teaching.",
+        evidenceNotes: "The book moves from complaint to watchfulness to worship.",
+        sources: ["Habakkuk 1-3", "Habakkuk 2:4", "Romans 1:17"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Minor Prophets",
+        title: "Zephaniah",
+        subtitle: "The day of the LORD and purified worship.",
+        whatIsThisBook: "Zephaniah warns of sweeping judgment while promising a humble remnant.",
+        whyItMatters: "It shows judgment and restoration as part of God's cleansing work.",
+        historicalContext: "Zephaniah prophesies in Judah, likely during Josiah's era.",
+        majorThemes: ["Day of the LORD", "Remnant", "Purification", "Joy", "Nations"],
+        keyPeople: ["Zephaniah", "Judah", "Remnant"],
+        keyPlaces: ["Jerusalem", "Judah", "Nations"],
+        pointsToJesus: "The rejoicing God who saves points toward restored fellowship through Christ.",
+        evidenceNotes: "The final poem turns judgment language into salvation joy.",
+        sources: ["Zephaniah 1-3", "Zephaniah 3:14-20"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Minor Prophets",
+        title: "Haggai",
+        subtitle: "Rebuild the temple and reorder priorities.",
+        whatIsThisBook: "Haggai calls the returned exiles to rebuild the temple.",
+        whyItMatters: "It shows that restoration requires worship-centered priorities, not only survival.",
+        historicalContext: "The book is set after exile during the Persian period and temple rebuilding delays.",
+        majorThemes: ["Temple", "Priorities", "Obedience", "Glory", "Restoration"],
+        keyPeople: ["Haggai", "Zerubbabel", "Joshua the priest"],
+        keyPlaces: ["Jerusalem", "Temple"],
+        pointsToJesus: "The promise of greater glory points beyond the second temple to God's presence in Christ.",
+        evidenceNotes: "The dated messages make the book unusually anchored in post-exile history.",
+        sources: ["Haggai 1-2", "Haggai 2:6-9"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Minor Prophets",
+        title: "Zechariah",
+        subtitle: "Visions of restoration, priest-king hope, and coming peace.",
+        whatIsThisBook: "Zechariah encourages returned exiles through visions, symbolic actions, and future hope.",
+        whyItMatters: "It ties temple restoration to a larger messianic and kingdom expectation.",
+        historicalContext: "Zechariah ministers after exile alongside Haggai during temple rebuilding.",
+        majorThemes: ["Restoration", "Temple", "Priest-king", "Shepherd", "Jerusalem", "Nations"],
+        keyPeople: ["Zechariah", "Joshua the priest", "Zerubbabel", "The Branch"],
+        keyPlaces: ["Jerusalem", "Zion", "Temple"],
+        pointsToJesus: "The Branch, humble king, pierced one, and shepherd imagery are key messianic threads.",
+        evidenceNotes: "The night visions address discouraged builders with cosmic-scale reassurance.",
+        sources: ["Zechariah 1-14", "Zechariah 3", "Zechariah 9:9", "Zechariah 12:10"]
+      }),
+      book({
+        testament: "Old Testament",
+        category: "Minor Prophets",
+        title: "Malachi",
+        subtitle: "Covenant weariness and the promise of a coming messenger.",
+        whatIsThisBook: "Malachi confronts post-exile spiritual apathy and points to future purification.",
+        whyItMatters: "It closes the Old Testament with unresolved longing for the LORD's coming.",
+        historicalContext: "The book addresses post-exile Judah after temple worship has resumed but grown compromised.",
+        majorThemes: ["Covenant faithfulness", "Worship", "Priesthood", "Messenger", "Day of the LORD"],
+        keyPeople: ["Malachi", "Priests", "Judah", "Coming messenger"],
+        keyPlaces: ["Judah", "Temple"],
+        pointsToJesus: "The coming messenger prepares the way for the Lord, fulfilled in John the Baptist and Christ.",
+        evidenceNotes: "Malachi uses dispute-style questions that expose the people's spiritual dullness.",
+        sources: ["Malachi 1-4", "Malachi 3:1", "Malachi 4:5-6"]
+      })
+    ];
+
+    function makeNewTestamentBook(title, category, subtitle) {
+      return book({
+        testament: "New Testament",
+        category,
+        title,
+        subtitle,
+        whatIsThisBook: `${title} is a New Testament book. This case study is structured now and ready for expanded research.`,
+        whyItMatters: "This placeholder keeps the same study pattern so future content can be added without redesigning the page.",
+        historicalContext: "Add date, audience, setting, authorship notes, and first-century background here.",
+        majorThemes: ["Jesus Christ", "Kingdom of God", "Church", "Fulfillment"],
+        keyPeople: ["To be expanded"],
+        keyPlaces: ["To be mapped"],
+        pointsToJesus: "This book belongs to the New Testament witness to Jesus Christ and the fulfillment of God's promises.",
+        evidenceNotes: "Add manuscript, historical, literary, and canonical notes as the New Testament report is developed.",
+        sources: [`${title}`, "New Testament case study placeholder"]
+      });
+    }
+
+    [
+      ["Matthew", "Gospels", "Jesus the Messiah presented in relation to Israel's story."],
+      ["Mark", "Gospels", "The urgent announcement of Jesus the suffering Son of God."],
+      ["Luke", "Gospels", "A careful account of Jesus' mission, mercy, and salvation."],
+      ["John", "Gospels", "Signs, glory, belief, and the identity of the Son."],
+      ["Acts", "Church History", "The risen Christ advances the gospel through the Spirit and the apostles."],
+      ["Romans", "Pauline Letters", "The gospel of God's righteousness for Jew and Gentile."],
+      ["1 Corinthians", "Pauline Letters", "A church corrected by the cross, resurrection, and holy love."],
+      ["2 Corinthians", "Pauline Letters", "Apostolic weakness, comfort, generosity, and new covenant ministry."],
+      ["Galatians", "Pauline Letters", "Freedom in Christ against a distorted gospel."],
+      ["Ephesians", "Pauline Letters", "Union with Christ and the formation of one new people."],
+      ["Philippians", "Pauline Letters", "Joy, humility, partnership, and Christlike perseverance."],
+      ["Colossians", "Pauline Letters", "The supremacy of Christ over creation, powers, and the church."],
+      ["1 Thessalonians", "Pauline Letters", "Faithful endurance, holiness, and hope in Christ's return."],
+      ["2 Thessalonians", "Pauline Letters", "Steadiness, correction, and hope under pressure."],
+      ["1 Timothy", "Pauline Letters", "Church order, sound teaching, and faithful leadership."],
+      ["2 Timothy", "Pauline Letters", "Perseverance in ministry and confidence in Scripture."],
+      ["Titus", "Pauline Letters", "Sound doctrine, good works, and ordered church life."],
+      ["Philemon", "Pauline Letters", "Reconciliation and brotherhood in Christ."],
+      ["Hebrews", "General Letters", "Christ as the final priest, sacrifice, and mediator."],
+      ["James", "General Letters", "Living faith shown through wisdom, speech, endurance, and works."],
+      ["1 Peter", "General Letters", "Hopeful holiness for believers living as exiles."],
+      ["2 Peter", "General Letters", "Faithful growth, true knowledge, and warning against false teachers."],
+      ["1 John", "General Letters", "Assurance through truth, love, obedience, and confession of the Son."],
+      ["2 John", "General Letters", "Truth and love guarded against deceptive teaching."],
+      ["3 John", "General Letters", "Hospitality, truth, and faithful partnership."],
+      ["Jude", "General Letters", "Contending for the faith amid corruption."],
+      ["Revelation", "Prophecy / Apocalypse", "The unveiling of Jesus Christ, judgment, endurance, and new creation."]
+    ].forEach(([title, category, subtitle]) => {
+      books.push(makeNewTestamentBook(title, category, subtitle));
+    });
+
+    const oldCategories = document.getElementById("oldCategories");
+    const newCategories = document.getElementById("newCategories");
+    const testamentButtons = document.querySelectorAll("[data-testament]");
+    const panels = {
+      "Old Testament": document.getElementById("oldPanel"),
+      "New Testament": document.getElementById("newPanel")
+    };
+    const overlay = document.getElementById("caseOverlay");
+    const caseBody = document.getElementById("caseBody");
+    const caseMeta = document.getElementById("caseMeta");
+    const caseClose = document.getElementById("caseClose");
+    let lastFocusedBookButton = null;
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function listMarkup(items) {
+      return `<ul class="chip-list">${items.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+    }
+
+    function renderCategories(testament, mountNode) {
+      mountNode.innerHTML = categories[testament].map(category => {
+        const categoryBooks = books.filter(item => item.testament === testament && item.category === category);
+        return `
+          <section class="category-panel">
+            <h3>${escapeHtml(category)}</h3>
+            <div class="book-grid">
+              ${categoryBooks.map(item => `
+                <button class="book-card" type="button" data-book="${escapeHtml(item.title)}">
+                  ${escapeHtml(item.title)}
+                  <small>${escapeHtml(item.subtitle)}</small>
+                </button>
+              `).join("")}
+            </div>
+          </section>
+        `;
+      }).join("");
+    }
+
+    function openTestament(testament) {
+      testamentButtons.forEach(button => {
+        const isActive = button.dataset.testament === testament;
+        button.setAttribute("aria-expanded", String(isActive));
+      });
+
+      Object.entries(panels).forEach(([panelTestament, panel]) => {
+        panel.classList.toggle("open", panelTestament === testament);
+      });
+    }
+
+    function renderCaseStudy(bookData) {
+      caseMeta.textContent = `${bookData.testament} / ${bookData.category}`;
+      caseBody.innerHTML = `
+        <h2 id="caseTitle">${escapeHtml(bookData.title)}</h2>
+        <p class="case-subtitle">${escapeHtml(bookData.subtitle)}</p>
+        <div class="case-section-grid">
+          <section class="case-section">
+            <h3>What is this book?</h3>
+            <p>${escapeHtml(bookData.whatIsThisBook)}</p>
+          </section>
+          <section class="case-section">
+            <h3>Why does it matter?</h3>
+            <p>${escapeHtml(bookData.whyItMatters)}</p>
+          </section>
+          <section class="case-section full">
+            <h3>Historical and cultural context</h3>
+            <p>${escapeHtml(bookData.historicalContext)}</p>
+          </section>
+          <section class="case-section">
+            <h3>Major themes</h3>
+            ${listMarkup(bookData.majorThemes)}
+          </section>
+          <section class="case-section">
+            <h3>Key people</h3>
+            ${listMarkup(bookData.keyPeople)}
+          </section>
+          <section class="case-section">
+            <h3>Key places</h3>
+            ${listMarkup(bookData.keyPlaces)}
+          </section>
+          <section class="case-section">
+            <h3>How it points to Jesus</h3>
+            <p>${escapeHtml(bookData.pointsToJesus)}</p>
+          </section>
+          <section class="case-section full">
+            <h3>Evidence and study notes</h3>
+            <p>${escapeHtml(bookData.evidenceNotes)}</p>
+          </section>
+          <section class="case-section full">
+            <h3>Sources / references</h3>
+            <ul class="source-list">${bookData.sources.map(source => `<li>${escapeHtml(source)}</li>`).join("")}</ul>
+          </section>
+          <section class="case-section full">
+            <h3>Image support slots</h3>
+            <div class="image-slot-grid">
+              ${bookData.imageSlots.map(slot => `<div class="image-slot">${escapeHtml(slot)}</div>`).join("")}
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    function slugify(value) {
+      return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    }
+
+    function openCaseStudy(title, trigger) {
+      const bookData = books.find(item => item.title === title);
+      if (!bookData) return;
+
+      lastFocusedBookButton = trigger;
+      renderCaseStudy(bookData);
+      overlay.classList.add("open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      caseClose.focus();
+    }
+
+    function openBookFromHash() {
+      const hashBook = decodeURIComponent(window.location.hash.replace("#", ""));
+      if (!hashBook) return;
+
+      const bookData = books.find(item => slugify(item.title) === slugify(hashBook));
+      if (!bookData) return;
+
+      openTestament(bookData.testament);
+      openCaseStudy(bookData.title, null);
+    }
+
+    function closeCaseStudy() {
+      overlay.classList.remove("open");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      if (lastFocusedBookButton) {
+        lastFocusedBookButton.focus();
+      }
+    }
+
+    renderCategories("Old Testament", oldCategories);
+    renderCategories("New Testament", newCategories);
+    openBookFromHash();
+
+    testamentButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        openTestament(button.dataset.testament);
+      });
+    });
+
+    document.addEventListener("click", event => {
+      const bookButton = event.target.closest("[data-book]");
+      if (bookButton) {
+        openCaseStudy(bookButton.dataset.book, bookButton);
+      }
+
+      if (event.target === overlay) {
+        closeCaseStudy();
+      }
+    });
+
+    caseClose.addEventListener("click", closeCaseStudy);
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && overlay.classList.contains("open")) {
+        closeCaseStudy();
+      }
+    });
+
+    window.addEventListener("hashchange", openBookFromHash);
+  </script>
+</body>
+</html>
