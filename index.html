@@ -6,9 +6,14 @@
 
   <title>Bible Mapped</title>
 
-  <link rel="icon" href="/assets/bible-mapped-icon.png" type="image/png" />
-  <link rel="shortcut icon" href="/assets/bible-mapped-icon.png" type="image/png" />
-  <link rel="apple-touch-icon" href="/assets/bible-mapped-icon.png" />
+  <meta
+    name="description"
+    content="Bible Mapped helps readers understand Scripture through real places, people, timelines, and context."
+  />
+
+  <link rel="icon" href="/assets/bible-mapped-logo.png" type="image/png" />
+  <link rel="shortcut icon" href="/assets/bible-mapped-logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/assets/bible-mapped-logo.png" />
 
   <style>
     :root {
@@ -22,6 +27,9 @@
       --navy: #123c69;
       --white: #ffffff;
       --line: rgba(17, 19, 24, 0.12);
+      --gold: #c89b3c;
+      --header-bg: rgba(255, 255, 255, 0.9);
+      --shadow-soft: 0 24px 80px rgba(11, 15, 25, 0.14);
     }
 
     * {
@@ -39,6 +47,8 @@
       background: var(--cloud);
       color: var(--ink);
       overflow-x: hidden;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
     }
 
     body.modal-open {
@@ -55,6 +65,12 @@
       text-decoration: none;
     }
 
+    :focus-visible {
+      outline: 3px solid rgba(109, 40, 255, 0.42);
+      outline-offset: 4px;
+      border-radius: 10px;
+    }
+
     /* =========================
        HEADER
     ========================= */
@@ -64,14 +80,15 @@
       top: 0;
       z-index: 60;
       width: 100%;
-      background: var(--white);
-      border-bottom: none;
-      backdrop-filter: blur(12px);
+      background: var(--header-bg);
+      border-bottom: 1px solid rgba(17, 19, 24, 0.08);
+      box-shadow: 0 14px 34px rgba(11, 15, 25, 0.06);
+      backdrop-filter: blur(18px);
     }
 
     .nav {
       width: 100%;
-      height: 104px;
+      height: 92px;
       padding: 0 clamp(22px, 4vw, 72px) 0 12px;
       display: flex;
       align-items: center;
@@ -91,8 +108,8 @@
     }
 
     .brand-crop {
-      width: 390px;
-      height: 92px;
+      width: 330px;
+      height: 82px;
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -100,7 +117,7 @@
     }
 
     .brand-logo {
-      height: 118px;
+      height: 104px;
       width: auto;
       max-width: none;
       object-fit: contain;
@@ -116,7 +133,7 @@
       justify-content: flex-end;
       gap: 0;
       font-weight: 900;
-      font-size: 0.96rem;
+      font-size: 0.9rem;
       color: var(--soft-ink);
     }
 
@@ -127,8 +144,8 @@
       align-items: center;
       justify-content: center;
       gap: 7px;
-      min-height: 68px;
-      padding: 0 clamp(14px, 2vw, 24px);
+      min-height: 62px;
+      padding: 0 clamp(10px, 1.5vw, 18px);
       text-align: center;
       transition: color 0.2s ease, transform 0.2s ease;
     }
@@ -160,8 +177,8 @@
 
     .hero {
       position: relative;
-      min-height: 680px;
-      padding: 96px 20px 104px;
+      min-height: 720px;
+      padding: 108px 20px 116px;
       overflow: hidden;
       background: var(--ink);
       color: var(--white);
@@ -182,7 +199,7 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      filter: saturate(1.04) contrast(1.05);
+      filter: saturate(0.94) contrast(1.08);
     }
 
     .hero-video-tint {
@@ -190,9 +207,10 @@
       inset: 0;
       z-index: 1;
       background:
+        radial-gradient(circle at 50% 42%, rgba(200, 155, 60, 0.2), transparent 34%),
         linear-gradient(
-          rgba(11, 15, 25, 0.64),
-          rgba(11, 15, 25, 0.76)
+          rgba(11, 15, 25, 0.46),
+          rgba(11, 15, 25, 0.82)
         );
       pointer-events: none;
     }
@@ -213,8 +231,8 @@
       margin: 0 auto;
       max-width: 920px;
       font-size: clamp(2.7rem, 7.2vw, 6.1rem);
-      line-height: 0.92;
-      letter-spacing: -0.075em;
+      line-height: 0.98;
+      letter-spacing: 0;
       font-weight: 950;
       color: var(--white);
       text-shadow: 0 18px 60px rgba(0, 0, 0, 0.46);
@@ -251,6 +269,7 @@
       cursor: pointer;
       transition:
         transform 0.2s ease,
+        box-shadow 0.2s ease,
         background 0.2s ease,
         color 0.2s ease,
         border-color 0.2s ease;
@@ -258,6 +277,7 @@
 
     .btn:hover {
       transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
     }
 
     .btn-dark {
@@ -326,8 +346,8 @@
       background: transparent;
       cursor: pointer;
       font-weight: 950;
-      letter-spacing: -0.075em;
-      line-height: 0.92;
+      letter-spacing: 0;
+      line-height: 1;
       font-size: clamp(3.2rem, 8vw, 7rem);
       color: var(--ink);
       transition: transform 0.25s ease, color 0.25s ease;
@@ -372,7 +392,7 @@
       width: 100%;
       max-width: 1200px;
       margin: 0 auto;
-      filter: drop-shadow(0 30px 70px rgba(0, 0, 0, 0.18));
+      filter: drop-shadow(0 34px 80px rgba(0, 0, 0, 0.22));
     }
 
     .testament-svg-wrap::after {
@@ -430,7 +450,7 @@
       font-family: Inter, Arial, Helvetica, sans-serif;
       font-size: 122px;
       font-weight: 950;
-      letter-spacing: -0.09em;
+      letter-spacing: 0;
       fill: rgba(255, 255, 255, 0.96);
       text-transform: uppercase;
       paint-order: stroke;
@@ -478,7 +498,7 @@
       line-height: 1.7;
       color: var(--muted);
       font-weight: 900;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
     }
 
@@ -610,8 +630,8 @@
       z-index: 4;
       bottom: 68px;
       font-size: clamp(2.1rem, 5.2vw, 5.4rem);
-      line-height: 0.9;
-      letter-spacing: -0.08em;
+      line-height: 1;
+      letter-spacing: 0;
       font-weight: 950;
       opacity: 0;
       pointer-events: none;
@@ -668,7 +688,7 @@
       background: rgba(248, 247, 242, 0.96);
       color: var(--ink);
       border-top: 8px solid var(--electric-purple);
-      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.34);
+      box-shadow: var(--shadow-soft);
       padding: 20px;
       opacity: 0;
       pointer-events: none;
@@ -716,8 +736,8 @@
     .formula-tour-panel h3 {
       margin: 0;
       font-size: clamp(2rem, 4vw, 3.2rem);
-      line-height: 0.9;
-      letter-spacing: -0.07em;
+      line-height: 1;
+      letter-spacing: 0;
       font-weight: 950;
       color: var(--ink);
     }
@@ -737,6 +757,7 @@
       background: var(--paper);
       overflow: hidden;
       border: 1px solid var(--line);
+      border-radius: 8px;
     }
 
     .formula-tour-image img {
@@ -842,8 +863,8 @@
     .formula-tour-note h3 {
       margin: 0;
       font-size: clamp(2rem, 4vw, 4rem);
-      line-height: 0.95;
-      letter-spacing: -0.07em;
+      line-height: 1;
+      letter-spacing: 0;
       color: var(--ink);
     }
 
@@ -936,8 +957,8 @@
     .modal-body h2 {
       margin: 0;
       font-size: clamp(2.8rem, 6vw, 5.8rem);
-      line-height: 0.92;
-      letter-spacing: -0.07em;
+      line-height: 1;
+      letter-spacing: 0;
       font-weight: 950;
     }
 
@@ -958,7 +979,7 @@
     .book-category {
       background: var(--white);
       border: 1px solid var(--line);
-      border-radius: 28px;
+      border-radius: 8px;
       padding: 24px;
       overflow: hidden;
       transform: translateY(18px);
@@ -990,7 +1011,7 @@
     .book-category h3 {
       margin: 0;
       font-size: 1.5rem;
-      letter-spacing: -0.05em;
+      letter-spacing: 0;
     }
 
     .book-category p {
@@ -1041,7 +1062,7 @@
       margin: 0;
       color: var(--white);
       font-weight: 850;
-      letter-spacing: -0.02em;
+      letter-spacing: 0;
     }
 
     .parallax-item {
@@ -1294,7 +1315,7 @@
           Books
         </a>
 
-        <a href="people/index.html" class="nav-people">
+        <a href="characters/index.html" class="nav-people">
           <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="12" cy="8" r="4" fill="currentColor" stroke="none" />
             <path d="M4 21c.8-4.2 3.8-6.5 8-6.5s7.2 2.3 8 6.5" fill="currentColor" stroke="none" />
@@ -1302,7 +1323,7 @@
           People
         </a>
 
-        <a href="maps/index.html" class="nav-maps nav-active">
+        <a href="maps/index.html" class="nav-maps">
           <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 22s7-6.4 7-13A7 7 0 0 0 5 9c0 6.6 7 13 7 13Z" fill="currentColor" stroke="none" />
             <circle cx="12" cy="9" r="2.4" fill="white" stroke="none" />
@@ -1536,7 +1557,7 @@
 
               <div class="formula-tour-image">
                 <img
-                  src="assets/john4-where.jpg"
+                  src="assets/formula-place.png"
                   alt="Map or visual of Samaria and Jacob’s well"
                   onerror="this.style.display='none';"
                 />
@@ -1560,7 +1581,7 @@
 
               <div class="formula-tour-image">
                 <img
-                  src="assets/john4-who.jpg"
+                  src="assets/formula-people.png"
                   alt="Visual of Jesus and the Samaritan woman"
                   onerror="this.style.display='none';"
                 />
@@ -1589,7 +1610,7 @@
 
               <div class="formula-tour-image">
                 <img
-                  src="assets/john4-why.jpg"
+                  src="assets/formula-time.png"
                   alt="Visual showing the meaning of John 4"
                   onerror="this.style.display='none';"
                 />
@@ -1672,9 +1693,9 @@
             <div class="book-list">
               <a href="books/genesis/index.html">Genesis</a>
               <a href="books/exodus/index.html">Exodus</a>
-              <a href="books/leviticus/index.html">Leviticus</a>
-              <a href="books/numbers/index.html">Numbers</a>
-              <a href="books/deuteronomy/index.html">Deuteronomy</a>
+              <a href="books/index.html">Leviticus</a>
+              <a href="books/index.html">Numbers</a>
+              <a href="books/index.html">Deuteronomy</a>
             </div>
           </section>
 
@@ -1682,18 +1703,18 @@
             <h3>History</h3>
             <p>Israel’s land, kings, exile, return, and national story.</p>
             <div class="book-list">
-              <a href="books/joshua/index.html">Joshua</a>
-              <a href="books/judges/index.html">Judges</a>
-              <a href="books/ruth/index.html">Ruth</a>
-              <a href="books/1-samuel/index.html">1 Samuel</a>
-              <a href="books/2-samuel/index.html">2 Samuel</a>
-              <a href="books/1-kings/index.html">1 Kings</a>
-              <a href="books/2-kings/index.html">2 Kings</a>
-              <a href="books/1-chronicles/index.html">1 Chronicles</a>
-              <a href="books/2-chronicles/index.html">2 Chronicles</a>
-              <a href="books/ezra/index.html">Ezra</a>
-              <a href="books/nehemiah/index.html">Nehemiah</a>
-              <a href="books/esther/index.html">Esther</a>
+              <a href="books/index.html">Joshua</a>
+              <a href="books/index.html">Judges</a>
+              <a href="books/index.html">Ruth</a>
+              <a href="books/index.html">1 Samuel</a>
+              <a href="books/index.html">2 Samuel</a>
+              <a href="books/index.html">1 Kings</a>
+              <a href="books/index.html">2 Kings</a>
+              <a href="books/index.html">1 Chronicles</a>
+              <a href="books/index.html">2 Chronicles</a>
+              <a href="books/index.html">Ezra</a>
+              <a href="books/index.html">Nehemiah</a>
+              <a href="books/index.html">Esther</a>
             </div>
           </section>
 
@@ -1701,11 +1722,11 @@
             <h3>Poetry & Wisdom</h3>
             <p>Prayer, suffering, worship, wisdom, love, and the fear of God.</p>
             <div class="book-list">
-              <a href="books/job/index.html">Job</a>
-              <a href="books/psalms/index.html">Psalms</a>
-              <a href="books/proverbs/index.html">Proverbs</a>
-              <a href="books/ecclesiastes/index.html">Ecclesiastes</a>
-              <a href="books/song-of-solomon/index.html">Song of Solomon</a>
+              <a href="books/index.html">Job</a>
+              <a href="books/index.html">Psalms</a>
+              <a href="books/index.html">Proverbs</a>
+              <a href="books/index.html">Ecclesiastes</a>
+              <a href="books/index.html">Song of Solomon</a>
             </div>
           </section>
 
@@ -1713,11 +1734,11 @@
             <h3>Major Prophets</h3>
             <p>Judgment, hope, exile, restoration, and the coming Messiah.</p>
             <div class="book-list">
-              <a href="books/isaiah/index.html">Isaiah</a>
-              <a href="books/jeremiah/index.html">Jeremiah</a>
-              <a href="books/lamentations/index.html">Lamentations</a>
-              <a href="books/ezekiel/index.html">Ezekiel</a>
-              <a href="books/daniel/index.html">Daniel</a>
+              <a href="books/index.html">Isaiah</a>
+              <a href="books/index.html">Jeremiah</a>
+              <a href="books/index.html">Lamentations</a>
+              <a href="books/index.html">Ezekiel</a>
+              <a href="books/index.html">Daniel</a>
             </div>
           </section>
 
@@ -1725,18 +1746,18 @@
             <h3>Minor Prophets</h3>
             <p>Shorter prophetic books with major theological weight.</p>
             <div class="book-list">
-              <a href="books/hosea/index.html">Hosea</a>
-              <a href="books/joel/index.html">Joel</a>
-              <a href="books/amos/index.html">Amos</a>
-              <a href="books/obadiah/index.html">Obadiah</a>
-              <a href="books/jonah/index.html">Jonah</a>
-              <a href="books/micah/index.html">Micah</a>
-              <a href="books/nahum/index.html">Nahum</a>
-              <a href="books/habakkuk/index.html">Habakkuk</a>
-              <a href="books/zephaniah/index.html">Zephaniah</a>
-              <a href="books/haggai/index.html">Haggai</a>
-              <a href="books/zechariah/index.html">Zechariah</a>
-              <a href="books/malachi/index.html">Malachi</a>
+              <a href="books/index.html">Hosea</a>
+              <a href="books/index.html">Joel</a>
+              <a href="books/index.html">Amos</a>
+              <a href="books/index.html">Obadiah</a>
+              <a href="books/index.html">Jonah</a>
+              <a href="books/index.html">Micah</a>
+              <a href="books/index.html">Nahum</a>
+              <a href="books/index.html">Habakkuk</a>
+              <a href="books/index.html">Zephaniah</a>
+              <a href="books/index.html">Haggai</a>
+              <a href="books/index.html">Zechariah</a>
+              <a href="books/index.html">Malachi</a>
             </div>
           </section>
         </div>
@@ -1764,10 +1785,10 @@
             <h3>Gospels</h3>
             <p>The life, teaching, death, and resurrection of Jesus Christ.</p>
             <div class="book-list">
-              <a href="books/matthew/index.html">Matthew</a>
-              <a href="books/mark/index.html">Mark</a>
-              <a href="books/luke/index.html">Luke</a>
-              <a href="books/john/index.html">John</a>
+              <a href="books/index.html">Matthew</a>
+              <a href="books/index.html">Mark</a>
+              <a href="books/index.html">Luke</a>
+              <a href="books/index.html">John</a>
             </div>
           </section>
 
@@ -1775,7 +1796,7 @@
             <h3>Church History</h3>
             <p>The spread of the gospel and the formation of the early Church.</p>
             <div class="book-list">
-              <a href="books/acts/index.html">Acts</a>
+              <a href="books/index.html">Acts</a>
             </div>
           </section>
 
@@ -1783,19 +1804,19 @@
             <h3>Paul’s Letters</h3>
             <p>Doctrine, church life, salvation, unity, suffering, and discipleship.</p>
             <div class="book-list">
-              <a href="books/romans/index.html">Romans</a>
-              <a href="books/1-corinthians/index.html">1 Corinthians</a>
-              <a href="books/2-corinthians/index.html">2 Corinthians</a>
-              <a href="books/galatians/index.html">Galatians</a>
-              <a href="books/ephesians/index.html">Ephesians</a>
-              <a href="books/philippians/index.html">Philippians</a>
-              <a href="books/colossians/index.html">Colossians</a>
-              <a href="books/1-thessalonians/index.html">1 Thessalonians</a>
-              <a href="books/2-thessalonians/index.html">2 Thessalonians</a>
-              <a href="books/1-timothy/index.html">1 Timothy</a>
-              <a href="books/2-timothy/index.html">2 Timothy</a>
-              <a href="books/titus/index.html">Titus</a>
-              <a href="books/philemon/index.html">Philemon</a>
+              <a href="books/index.html">Romans</a>
+              <a href="books/index.html">1 Corinthians</a>
+              <a href="books/index.html">2 Corinthians</a>
+              <a href="books/index.html">Galatians</a>
+              <a href="books/index.html">Ephesians</a>
+              <a href="books/index.html">Philippians</a>
+              <a href="books/index.html">Colossians</a>
+              <a href="books/index.html">1 Thessalonians</a>
+              <a href="books/index.html">2 Thessalonians</a>
+              <a href="books/index.html">1 Timothy</a>
+              <a href="books/index.html">2 Timothy</a>
+              <a href="books/index.html">Titus</a>
+              <a href="books/index.html">Philemon</a>
             </div>
           </section>
 
@@ -1803,14 +1824,14 @@
             <h3>General Letters</h3>
             <p>Faithfulness, endurance, truth, holiness, and love.</p>
             <div class="book-list">
-              <a href="books/hebrews/index.html">Hebrews</a>
-              <a href="books/james/index.html">James</a>
-              <a href="books/1-peter/index.html">1 Peter</a>
-              <a href="books/2-peter/index.html">2 Peter</a>
-              <a href="books/1-john/index.html">1 John</a>
-              <a href="books/2-john/index.html">2 John</a>
-              <a href="books/3-john/index.html">3 John</a>
-              <a href="books/jude/index.html">Jude</a>
+              <a href="books/index.html">Hebrews</a>
+              <a href="books/index.html">James</a>
+              <a href="books/index.html">1 Peter</a>
+              <a href="books/index.html">2 Peter</a>
+              <a href="books/index.html">1 John</a>
+              <a href="books/index.html">2 John</a>
+              <a href="books/index.html">3 John</a>
+              <a href="books/index.html">Jude</a>
             </div>
           </section>
 
@@ -1818,7 +1839,7 @@
             <h3>Apocalypse</h3>
             <p>The unveiling of Christ, final judgment, and the hope of new creation.</p>
             <div class="book-list">
-              <a href="books/revelation/index.html">Revelation</a>
+              <a href="books/index.html">Revelation</a>
             </div>
           </section>
         </div>
@@ -2003,11 +2024,7 @@
       "assets/videos/video-3.mp4",
       "assets/videos/video-4.mp4",
       "assets/videos/video-5.mp4",
-      "assets/videos/video-6.mp4",
-      "assets/videos/video-7.mp4",
-      "assets/videos/video-8.mp4",
-      "assets/videos/video-9.mp4",
-      "assets/videos/video-10.mp4"
+      "assets/videos/video-6.mp4"
     ];
 
     const heroBackgroundVideo = document.getElementById("heroBackgroundVideo");
