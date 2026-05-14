@@ -259,13 +259,10 @@
 
     .testament-stage.is-old-open .testament-panel--new .testament-label-stack,
     .testament-stage.is-new-open .testament-panel--old .testament-label-stack {
-      transform: rotate(90deg) scale(0.62);
-      opacity: 0.95;
-      white-space: nowrap;
-    }
-
-    .testament-stage.is-new-open .testament-panel--old .testament-label-stack {
-      transform: rotate(-90deg) scale(0.62);
+      transform: scale(0.35);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
     }
 
     .retracted-hint {
@@ -279,10 +276,11 @@
       writing-mode: vertical-rl;
       transform: translateX(12px);
       color: var(--books-ink);
-      font-family: var(--editorial);
-      font-size: clamp(1.4rem, 2vw, 2.3rem);
+      font-family: var(--blackletter);
+      font-size: clamp(2.4rem, 5vw, 4.4rem);
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.02em;
+      line-height: 0.9;
       transition: opacity 320ms ease, transform 320ms ease;
     }
 
@@ -753,30 +751,26 @@
         --header-height: 66px;
       }
 
-      .testament-stage,
-      .testament-stage.is-old-open,
+      .testament-stage {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .testament-stage.is-old-open {
+        grid-template-columns: minmax(0, 1fr) 58px;
+      }
+
       .testament-stage.is-new-open {
-        grid-template-columns: 1fr;
+        grid-template-columns: 58px minmax(0, 1fr);
       }
 
       .testament-panel {
-        min-height: 50vh;
-        border-right: 0;
-        border-bottom: 1px solid var(--books-soft-line);
+        min-height: calc(100vh - var(--header-height));
+        border-right: 1px solid var(--books-soft-line);
+        border-bottom: 0;
       }
 
       .testament-trigger {
-        min-height: 50vh;
-      }
-
-      .testament-stage.is-old-open .testament-panel--new,
-      .testament-stage.is-new-open .testament-panel--old {
-        min-height: 86px;
-      }
-
-      .testament-stage.is-old-open .testament-panel--old,
-      .testament-stage.is-new-open .testament-panel--new {
-        min-height: calc(100vh - var(--header-height) - 86px);
+        min-height: calc(100vh - var(--header-height));
       }
 
       .testament-stage.is-old-open .testament-panel--old .testament-trigger,
@@ -784,19 +778,13 @@
         pointer-events: none;
       }
 
-      .testament-stage.is-old-open .testament-panel--new .testament-label-stack,
-      .testament-stage.is-new-open .testament-panel--old .testament-label-stack {
-        transform: scale(0.65);
-      }
-
       .retracted-hint {
-        writing-mode: horizontal-tb;
-        font-size: 1.4rem;
+        writing-mode: vertical-rl;
+        font-size: clamp(2rem, 12vw, 3.4rem);
       }
 
       .testament-panel-content {
-        height: auto;
-        min-height: calc(100vh - var(--header-height) - 86px);
+        height: calc(100vh - var(--header-height));
       }
 
       .category-inner,
@@ -874,7 +862,7 @@
             <span class="testament-image-note">Click to open the Hebrew Scriptures</span>
           </span>
         </button>
-        <div class="retracted-hint">New Testament</div>
+        <div class="retracted-hint">New</div>
         <div class="testament-panel-content" id="oldContent" aria-hidden="true"></div>
       </article>
 
@@ -887,7 +875,7 @@
             <span class="testament-image-note">Click to open the fulfillment story</span>
           </span>
         </button>
-        <div class="retracted-hint">Old Testament</div>
+        <div class="retracted-hint">Old</div>
         <div class="testament-panel-content" id="newContent" aria-hidden="true"></div>
       </article>
     </section>
