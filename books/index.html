@@ -412,6 +412,581 @@
         border-radius: 0;
       }
     }
+    /* Books-only map/tree experience. These overrides stay scoped to this page. */
+    .books-hero {
+      padding: 72px 0 26px;
+    }
+
+    .books-hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.75fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .books-hero-copy {
+      align-self: center;
+      padding: 18px 0;
+    }
+
+    .books-definition-copy {
+      max-width: 760px;
+      margin: 18px 0 0;
+      color: var(--books-text);
+      font-size: clamp(1rem, 1.8vw, 1.14rem);
+      font-weight: 600;
+      line-height: 1.75;
+    }
+
+    .hero-media-slot,
+    .book-card-image-slot,
+    .evidence-slot {
+      border: 1px dashed rgba(31, 41, 51, 0.32);
+      border-radius: 8px;
+      background: #f1eee7;
+      color: var(--books-muted);
+      text-align: center;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .hero-media-slot {
+      min-height: 285px;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-media-slot:hover,
+    .book-card:hover .book-card-image-slot,
+    .evidence-slot:hover {
+      transform: translateY(-3px);
+      border-color: rgba(124, 58, 237, 0.42);
+      background: #f8f7f2;
+    }
+
+    .testament-options {
+      margin: 22px 0 0;
+    }
+
+    .testament-card {
+      border-color: var(--books-line);
+      background: #fff;
+    }
+
+    .testament-card::after {
+      content: "Open map";
+      width: max-content;
+      margin-top: 12px;
+      padding: 9px 13px;
+      border: 1px solid var(--books-line);
+      border-radius: 999px;
+      color: var(--books-ink);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .testament-card[aria-expanded="true"]::after {
+      border-color: rgba(124, 58, 237, 0.42);
+      color: var(--books-purple);
+    }
+
+    .books-panel {
+      display: block;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      padding: 0;
+      transform: translateY(12px);
+      transition: max-height 520ms ease, opacity 260ms ease, transform 260ms ease, padding 260ms ease;
+    }
+
+    .books-panel.open {
+      max-height: 9000px;
+      opacity: 1;
+      padding: 26px 0 76px;
+      transform: translateY(0);
+      animation: none;
+    }
+
+    .panel-head {
+      max-width: 900px;
+      margin: 0 auto 24px;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .panel-head p {
+      max-width: 680px;
+    }
+
+    .category-stack {
+      position: relative;
+      width: min(1080px, 100%);
+      margin: 0 auto;
+      gap: 28px;
+      padding-top: 56px;
+    }
+
+    .category-stack::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: rgba(31, 41, 51, 0.22);
+      transform: translateX(-50%) scaleY(0);
+      transform-origin: top;
+    }
+
+    .books-panel.open .category-stack::before {
+      animation: drawTreeLine 680ms ease forwards;
+    }
+
+    @keyframes drawTreeLine {
+      to {
+        transform: translateX(-50%) scaleY(1);
+      }
+    }
+
+    .category-panel {
+      position: relative;
+      width: min(820px, 100%);
+      margin: 0 auto;
+      padding: clamp(18px, 3vw, 24px);
+      overflow: visible;
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .category-panel::before {
+      content: "";
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      width: 1px;
+      height: 28px;
+      background: rgba(124, 58, 237, 0.5);
+      transform: translateX(-50%);
+    }
+
+    .category-panel:hover {
+      transform: translateY(-3px);
+      border-color: rgba(124, 58, 237, 0.35);
+      box-shadow: 0 24px 70px rgba(11, 16, 32, 0.08);
+    }
+
+    .category-panel h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .category-panel h3::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--category-accent, var(--books-purple));
+      box-shadow: 0 0 0 5px rgba(124, 58, 237, 0.08);
+    }
+
+    .book-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .book-card {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 74px;
+      gap: 12px;
+      align-items: stretch;
+      padding: 12px;
+      font-weight: 700;
+    }
+
+    .book-card-title {
+      display: block;
+      color: var(--books-ink);
+      font-size: 1rem;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .book-card-language,
+    .book-card-meaning {
+      display: block;
+      margin-top: 8px;
+      color: var(--books-muted);
+      font-size: 0.76rem;
+      line-height: 1.35;
+    }
+
+    .book-card-language b,
+    .book-card-meaning b {
+      color: var(--books-text);
+    }
+
+    .book-card-image-slot {
+      aspect-ratio: 9 / 16;
+      min-height: 116px;
+      display: grid;
+      place-items: center;
+      padding: 8px;
+      font-size: 0.68rem;
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .case-study-card {
+      width: min(980px, 100%);
+    }
+
+    .case-original-panel {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .case-original-item {
+      padding: 14px;
+      border: 1px solid var(--books-line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .case-original-item span {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--books-muted);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .original-script {
+      color: var(--books-ink);
+      font-size: 1.45rem;
+      font-weight: 850;
+      line-height: 1.25;
+    }
+
+    .evidence-slot-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .evidence-slot {
+      min-height: 118px;
+      display: grid;
+      place-items: center;
+      padding: 14px;
+      font-size: 0.76rem;
+      font-weight: 850;
+      line-height: 1.35;
+    }
+
+    @media (max-width: 980px) {
+      .books-hero-grid,
+      .case-original-panel,
+      .evidence-slot-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-media-slot {
+        min-height: 220px;
+      }
+
+      .book-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .category-stack::before,
+      .category-panel::before {
+        left: 18px;
+      }
+
+      .category-panel {
+        padding-left: 28px;
+      }
+
+      .book-grid,
+      .book-card {
+        grid-template-columns: 1fr;
+      }
+
+      .book-card-image-slot {
+        width: min(100%, 150px);
+        min-height: 190px;
+      }
+    }
+
+    /* Minimal Books entry view. The earlier rules remain for the overlay/data surface. */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .books-entry-main {
+      min-height: calc(100vh - 78px);
+    }
+
+    .books-entry-stage {
+      padding: clamp(44px, 7vw, 84px) 0 0;
+    }
+
+    .books-entry-stage .testament-options {
+      width: min(780px, 100%);
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(18px, 3vw, 32px);
+      align-items: start;
+      margin: 0 auto;
+    }
+
+    .testament-column {
+      display: grid;
+      align-content: start;
+      gap: 0;
+    }
+
+    .testament-slot {
+      position: relative;
+      isolation: isolate;
+      aspect-ratio: 9 / 16;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      padding: clamp(22px, 4vw, 34px);
+      border: 1px solid rgba(31, 41, 51, 0.16);
+      background: #fcfbf8;
+      text-align: center;
+      box-shadow: 0 18px 52px rgba(11, 16, 32, 0.08);
+      transform: translateY(0);
+      transition: transform 190ms ease, border-color 190ms ease, box-shadow 190ms ease, background 190ms ease;
+    }
+
+    .testament-slot::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      z-index: 0;
+      border: 1px dashed rgba(31, 41, 51, 0.24);
+      border-radius: 6px;
+      background: #f1eee7;
+    }
+
+    .testament-slot::after {
+      display: none;
+    }
+
+    .testament-slot:hover,
+    .testament-slot:focus-visible,
+    .testament-slot[aria-expanded="true"],
+    .testament-slot.is-intent {
+      border-color: rgba(124, 58, 237, 0.42);
+      background: #fff;
+      box-shadow: 0 26px 70px rgba(11, 16, 32, 0.12);
+      transform: translateY(-4px);
+    }
+
+    .testament-slot-kicker,
+    .testament-slot-label,
+    .testament-slot-placeholder {
+      position: relative;
+      z-index: 1;
+      display: block;
+      color: var(--books-muted);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .testament-slot-word {
+      position: relative;
+      display: block;
+      margin: 18px 0 10px;
+      color: var(--books-ink);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(4rem, 9vw, 7.2rem);
+      font-weight: 700;
+      line-height: 0.86;
+    }
+
+    .testament-slot-label {
+      color: var(--books-purple);
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      letter-spacing: 0.08em;
+    }
+
+    .testament-slot-placeholder {
+      position: absolute;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%);
+      width: max-content;
+      max-width: calc(100% - 48px);
+      color: rgba(31, 41, 51, 0.5);
+      font-size: 0.64rem;
+    }
+
+    .books-entry-stage .books-panel {
+      position: relative;
+      display: block;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      padding: 0;
+      transform: translateY(-24px);
+      transition: max-height 620ms ease, opacity 260ms ease, transform 360ms ease, padding 260ms ease;
+    }
+
+    .books-entry-stage .books-panel.open {
+      max-height: 12000px;
+      opacity: 1;
+      padding: 54px 0 82px;
+      transform: translateY(0);
+    }
+
+    .books-entry-stage .books-panel.open::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 1px;
+      height: 46px;
+      background: rgba(124, 58, 237, 0.44);
+      transform: translateX(-50%) scaleY(0);
+      transform-origin: top;
+      animation: pullLine 440ms ease forwards;
+    }
+
+    @keyframes pullLine {
+      to {
+        transform: translateX(-50%) scaleY(1);
+      }
+    }
+
+    .books-entry-stage .panel-head {
+      display: none;
+    }
+
+    .books-entry-stage .category-stack {
+      width: min(1060px, 100%);
+      gap: 18px;
+      padding-top: 0;
+    }
+
+    .books-entry-stage .category-stack::before {
+      display: none;
+    }
+
+    .books-entry-stage .category-panel {
+      width: 100%;
+      opacity: 0;
+      transform: translateY(-18px);
+    }
+
+    .books-entry-stage .books-panel.open .category-panel {
+      animation: booksPullOut 420ms ease both;
+      animation-delay: calc(var(--category-index, 0) * 70ms);
+    }
+
+    @keyframes booksPullOut {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .books-entry-stage .category-panel::before {
+      display: none;
+    }
+
+    .books-entry-stage .category-panel h3 {
+      margin-bottom: 14px;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .books-entry-stage .book-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .books-entry-stage .book-card {
+      grid-template-columns: minmax(0, 1fr) 54px;
+      min-height: 92px;
+      padding: 10px;
+      background: #fcfbf8;
+    }
+
+    .books-entry-stage .book-card-title {
+      font-size: 0.96rem;
+    }
+
+    .book-card-meta {
+      display: block;
+      margin-top: 7px;
+      color: var(--books-muted);
+      font-size: 0.72rem;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    .books-entry-stage .book-card-image-slot {
+      min-height: 84px;
+      font-size: 0.58rem;
+    }
+
+    @media (max-width: 980px) {
+      .books-entry-stage .testament-options {
+        width: min(680px, 100%);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .books-entry-stage .testament-options {
+        width: min(390px, 100%);
+        grid-template-columns: 1fr;
+      }
+
+      .books-entry-stage .book-grid,
+      .books-entry-stage .book-card {
+        grid-template-columns: 1fr;
+      }
+
+      .books-entry-stage .book-card-image-slot {
+        width: min(84px, 100%);
+        min-height: 130px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -429,60 +1004,53 @@
     </div>
   </header>
 
-  <main>
-    <section class="books-hero">
-      <div class="books-shell">
-        <p class="books-eyebrow">Books</p>
-        <h1>Explore Scripture by Testament</h1>
-      </div>
-    </section>
+  <main class="books-entry-main">
+    <h1 class="sr-only">Explore Scripture by Testament</h1>
 
-    <section class="books-shell" aria-labelledby="testamentDefinitionTitle">
-      <div class="testament-definition">
-        <h2 id="testamentDefinitionTitle">What does Testament mean?</h2>
-        <p>
-          &ldquo;Testament&rdquo; comes from the idea of a covenant, agreement, or witness.
-          In the Bible, the Old Testament tells the story of God&rsquo;s covenant work
-          through Israel, while the New Testament reveals the fulfillment of God&rsquo;s
-          promises through Jesus Christ.
-        </p>
-      </div>
+    <section class="books-shell books-entry-stage" aria-labelledby="testamentEntryTitle">
+      <h2 class="sr-only" id="testamentEntryTitle">Choose a Testament</h2>
 
       <div class="testament-options" aria-label="Choose a Testament">
-        <button class="testament-card" type="button" aria-expanded="true" aria-controls="oldPanel" data-testament="Old Testament">
-          <span>Old Testament</span>
-          <strong>Old Testament</strong>
-          <p>The Hebrew Scriptures: creation, covenant, law, kings, prophets, exile, and hope.</p>
-        </button>
+        <div class="testament-column">
+          <button class="testament-card testament-slot" type="button" aria-label="Open Old Testament books" aria-expanded="false" aria-controls="oldPanel" data-testament="Old Testament">
+            <span class="testament-slot-kicker">9:16 Image Slot</span>
+            <strong class="testament-slot-word">Old</strong>
+            <span class="testament-slot-label">Testament</span>
+            <span class="testament-slot-placeholder">Future image placeholder</span>
+          </button>
 
-        <button class="testament-card" type="button" aria-expanded="false" aria-controls="newPanel" data-testament="New Testament">
-          <span>New Testament</span>
-          <strong>New Testament</strong>
-          <p>The fulfillment of the promises: Jesus, the apostles, the church, and the kingdom of God.</p>
-        </button>
+          <section class="books-panel" id="oldPanel" aria-labelledby="oldPanelTitle" aria-hidden="true">
+            <div class="panel-head">
+              <div>
+                <p class="books-eyebrow">Old Testament</p>
+                <h2 class="section-title" id="oldPanelTitle">The Hebrew Scriptures</h2>
+              </div>
+              <p>Choose a book to open its case study here on the Books page.</p>
+            </div>
+            <div class="category-stack" id="oldCategories"></div>
+          </section>
+        </div>
+
+        <div class="testament-column">
+          <button class="testament-card testament-slot" type="button" aria-label="Open New Testament books" aria-expanded="false" aria-controls="newPanel" data-testament="New Testament">
+            <span class="testament-slot-kicker">9:16 Image Slot</span>
+            <strong class="testament-slot-word">New</strong>
+            <span class="testament-slot-label">Testament</span>
+            <span class="testament-slot-placeholder">Future image placeholder</span>
+          </button>
+
+          <section class="books-panel" id="newPanel" aria-labelledby="newPanelTitle" aria-hidden="true">
+            <div class="panel-head">
+              <div>
+                <p class="books-eyebrow">New Testament</p>
+                <h2 class="section-title" id="newPanelTitle">The Fulfillment of the Promises</h2>
+              </div>
+              <p>Placeholder case studies are ready to expand as New Testament research is added.</p>
+            </div>
+            <div class="category-stack" id="newCategories"></div>
+          </section>
+        </div>
       </div>
-
-      <section class="books-panel open" id="oldPanel" aria-labelledby="oldPanelTitle">
-        <div class="panel-head">
-          <div>
-            <p class="books-eyebrow">Old Testament</p>
-            <h2 class="section-title" id="oldPanelTitle">The Hebrew Scriptures</h2>
-          </div>
-          <p>Choose a book to open its case study here on the Books page.</p>
-        </div>
-        <div class="category-stack" id="oldCategories"></div>
-      </section>
-
-      <section class="books-panel" id="newPanel" aria-labelledby="newPanelTitle">
-        <div class="panel-head">
-          <div>
-            <p class="books-eyebrow">New Testament</p>
-            <h2 class="section-title" id="newPanelTitle">The Fulfillment of the Promises</h2>
-          </div>
-          <p>Placeholder case studies are ready to expand as New Testament research is added.</p>
-        </div>
-        <div class="category-stack" id="newCategories"></div>
-      </section>
     </section>
   </main>
 
@@ -497,15 +1065,17 @@
   </div>
 
   <script>
-    const imageSlots = [
-      "Map / Location Image",
-      "Artifact / Historical Context Image",
-      "Timeline / Visual Summary Image"
+    const overlayImageSlots = [
+      "Map / Location Slot",
+      "Artifact / Archaeology Slot",
+      "Manuscript / Textual Evidence Slot",
+      "Timeline Slot",
+      "Visual Summary Slot"
     ];
 
     const categories = {
       "Old Testament": [
-        "Torah / Law",
+        "Torah / Pentateuch",
         "Historical Books",
         "Wisdom & Poetry",
         "Major Prophets",
@@ -520,10 +1090,90 @@
       ]
     };
 
+    const bookLanguageMeta = {
+      "Genesis": { originalLanguage: "Hebrew", originalTitle: "בְּרֵאשִׁית", transliteration: "Bereshit", nameMeaning: "Beginning or origin" },
+      "Exodus": { originalLanguage: "Hebrew", originalTitle: "שְׁמוֹת", transliteration: "Shemot", nameMeaning: "Names" },
+      "Leviticus": { originalLanguage: "Hebrew", originalTitle: "וַיִּקְרָא", transliteration: "Vayikra", nameMeaning: "And He called" },
+      "Numbers": { originalLanguage: "Hebrew", originalTitle: "בְּמִדְבַּר", transliteration: "Bemidbar", nameMeaning: "In the wilderness" },
+      "Deuteronomy": { originalLanguage: "Hebrew", originalTitle: "דְּבָרִים", transliteration: "Devarim", nameMeaning: "Words" },
+      "Joshua": { originalLanguage: "Hebrew", originalTitle: "יְהוֹשֻׁעַ", transliteration: "Yehoshua", nameMeaning: "The LORD saves" },
+      "Judges": { originalLanguage: "Hebrew", originalTitle: "שֹׁפְטִים", transliteration: "Shoftim", nameMeaning: "Judges" },
+      "Ruth": { originalLanguage: "Hebrew", originalTitle: "רוּת", transliteration: "Rut", nameMeaning: "Ruth; traditionally associated with friendship or companionship" },
+      "1 Samuel": { originalLanguage: "Hebrew", originalTitle: "שְׁמוּאֵל א׳", transliteration: "Shemuel Aleph", nameMeaning: "Samuel, first book; Samuel is associated with God hearing" },
+      "2 Samuel": { originalLanguage: "Hebrew", originalTitle: "שְׁמוּאֵל ב׳", transliteration: "Shemuel Bet", nameMeaning: "Samuel, second book; continuation of the Samuel narrative" },
+      "1 Kings": { originalLanguage: "Hebrew", originalTitle: "מְלָכִים א׳", transliteration: "Melakhim Aleph", nameMeaning: "Kings, first book" },
+      "2 Kings": { originalLanguage: "Hebrew", originalTitle: "מְלָכִים ב׳", transliteration: "Melakhim Bet", nameMeaning: "Kings, second book" },
+      "1 Chronicles": { originalLanguage: "Hebrew", originalTitle: "דִּבְרֵי הַיָּמִים א׳", transliteration: "Divrei Hayamim Aleph", nameMeaning: "Events or words of the days, first book" },
+      "2 Chronicles": { originalLanguage: "Hebrew", originalTitle: "דִּבְרֵי הַיָּמִים ב׳", transliteration: "Divrei Hayamim Bet", nameMeaning: "Events or words of the days, second book" },
+      "Ezra": { originalLanguage: "Hebrew", originalTitle: "עֶזְרָא", transliteration: "Ezra", nameMeaning: "Help" },
+      "Nehemiah": { originalLanguage: "Hebrew", originalTitle: "נְחֶמְיָה", transliteration: "Nechemyah", nameMeaning: "The LORD comforts" },
+      "Esther": { originalLanguage: "Hebrew", originalTitle: "אֶסְתֵּר", transliteration: "Ester", nameMeaning: "Esther; often associated with hiddenness or star by tradition" },
+      "Job": { originalLanguage: "Hebrew", originalTitle: "אִיּוֹב", transliteration: "Iyov", nameMeaning: "Job; meaning uncertain" },
+      "Psalms": { originalLanguage: "Hebrew", originalTitle: "תְּהִלִּים", transliteration: "Tehillim", nameMeaning: "Praises" },
+      "Proverbs": { originalLanguage: "Hebrew", originalTitle: "מִשְׁלֵי", transliteration: "Mishlei", nameMeaning: "Proverbs or sayings" },
+      "Ecclesiastes": { originalLanguage: "Hebrew", originalTitle: "קֹהֶלֶת", transliteration: "Qohelet", nameMeaning: "Teacher, preacher, or assembler" },
+      "Song of Solomon": { originalLanguage: "Hebrew", originalTitle: "שִׁיר הַשִּׁירִים", transliteration: "Shir HaShirim", nameMeaning: "Song of Songs" },
+      "Isaiah": { originalLanguage: "Hebrew", originalTitle: "יְשַׁעְיָהוּ", transliteration: "Yeshayahu", nameMeaning: "The LORD saves" },
+      "Jeremiah": { originalLanguage: "Hebrew", originalTitle: "יִרְמְיָהוּ", transliteration: "Yirmeyahu", nameMeaning: "The LORD appoints or exalts" },
+      "Lamentations": { originalLanguage: "Hebrew", originalTitle: "אֵיכָה", transliteration: "Eikhah", nameMeaning: "How" },
+      "Ezekiel": { originalLanguage: "Hebrew", originalTitle: "יְחֶזְקֵאל", transliteration: "Yechezkel", nameMeaning: "God strengthens" },
+      "Daniel": { originalLanguage: "Hebrew", originalTitle: "דָּנִיֵּאל", transliteration: "Daniyyel", nameMeaning: "God is my judge" },
+      "Hosea": { originalLanguage: "Hebrew", originalTitle: "הוֹשֵׁעַ", transliteration: "Hoshea", nameMeaning: "Salvation" },
+      "Joel": { originalLanguage: "Hebrew", originalTitle: "יוֹאֵל", transliteration: "Yoel", nameMeaning: "The LORD is God" },
+      "Amos": { originalLanguage: "Hebrew", originalTitle: "עָמוֹס", transliteration: "Amos", nameMeaning: "Burden-bearer" },
+      "Obadiah": { originalLanguage: "Hebrew", originalTitle: "עֹבַדְיָה", transliteration: "Ovadyah", nameMeaning: "Servant or worshiper of the LORD" },
+      "Jonah": { originalLanguage: "Hebrew", originalTitle: "יוֹנָה", transliteration: "Yonah", nameMeaning: "Dove" },
+      "Micah": { originalLanguage: "Hebrew", originalTitle: "מִיכָה", transliteration: "Mikhah", nameMeaning: "Who is like the LORD?" },
+      "Nahum": { originalLanguage: "Hebrew", originalTitle: "נַחוּם", transliteration: "Nachum", nameMeaning: "Comfort" },
+      "Habakkuk": { originalLanguage: "Hebrew", originalTitle: "חֲבַקּוּק", transliteration: "Chavakuk", nameMeaning: "Embrace" },
+      "Zephaniah": { originalLanguage: "Hebrew", originalTitle: "צְפַנְיָה", transliteration: "Tsefanyah", nameMeaning: "The LORD has hidden or treasured" },
+      "Haggai": { originalLanguage: "Hebrew", originalTitle: "חַגַּי", transliteration: "Chaggai", nameMeaning: "Festal or my feast" },
+      "Zechariah": { originalLanguage: "Hebrew", originalTitle: "זְכַרְיָה", transliteration: "Zekharyah", nameMeaning: "The LORD remembers" },
+      "Malachi": { originalLanguage: "Hebrew", originalTitle: "מַלְאָכִי", transliteration: "Malakhi", nameMeaning: "My messenger" },
+      "Matthew": { originalLanguage: "Greek", originalTitle: "Κατὰ Μαθθαῖον", transliteration: "Kata Matthaion", nameMeaning: "According to Matthew" },
+      "Mark": { originalLanguage: "Greek", originalTitle: "Κατὰ Μᾶρκον", transliteration: "Kata Markon", nameMeaning: "According to Mark" },
+      "Luke": { originalLanguage: "Greek", originalTitle: "Κατὰ Λουκᾶν", transliteration: "Kata Loukan", nameMeaning: "According to Luke" },
+      "John": { originalLanguage: "Greek", originalTitle: "Κατὰ Ἰωάννην", transliteration: "Kata Ioannen", nameMeaning: "According to John" },
+      "Acts": { originalLanguage: "Greek", originalTitle: "Πράξεις Ἀποστόλων", transliteration: "Praxeis Apostolon", nameMeaning: "Acts of the apostles" },
+      "Romans": { originalLanguage: "Greek", originalTitle: "Πρὸς Ῥωμαίους", transliteration: "Pros Romaious", nameMeaning: "To the Romans" },
+      "1 Corinthians": { originalLanguage: "Greek", originalTitle: "Πρὸς Κορινθίους Αʹ", transliteration: "Pros Korinthious A", nameMeaning: "To the Corinthians, first letter" },
+      "2 Corinthians": { originalLanguage: "Greek", originalTitle: "Πρὸς Κορινθίους Βʹ", transliteration: "Pros Korinthious B", nameMeaning: "To the Corinthians, second letter" },
+      "Galatians": { originalLanguage: "Greek", originalTitle: "Πρὸς Γαλάτας", transliteration: "Pros Galatas", nameMeaning: "To the Galatians" },
+      "Ephesians": { originalLanguage: "Greek", originalTitle: "Πρὸς Ἐφεσίους", transliteration: "Pros Ephesious", nameMeaning: "To the Ephesians" },
+      "Philippians": { originalLanguage: "Greek", originalTitle: "Πρὸς Φιλιππησίους", transliteration: "Pros Philippesious", nameMeaning: "To the Philippians" },
+      "Colossians": { originalLanguage: "Greek", originalTitle: "Πρὸς Κολοσσαεῖς", transliteration: "Pros Kolossaeis", nameMeaning: "To the Colossians" },
+      "1 Thessalonians": { originalLanguage: "Greek", originalTitle: "Πρὸς Θεσσαλονικεῖς Αʹ", transliteration: "Pros Thessalonikeis A", nameMeaning: "To the Thessalonians, first letter" },
+      "2 Thessalonians": { originalLanguage: "Greek", originalTitle: "Πρὸς Θεσσαλονικεῖς Βʹ", transliteration: "Pros Thessalonikeis B", nameMeaning: "To the Thessalonians, second letter" },
+      "1 Timothy": { originalLanguage: "Greek", originalTitle: "Πρὸς Τιμόθεον Αʹ", transliteration: "Pros Timotheon A", nameMeaning: "To Timothy, first letter" },
+      "2 Timothy": { originalLanguage: "Greek", originalTitle: "Πρὸς Τιμόθεον Βʹ", transliteration: "Pros Timotheon B", nameMeaning: "To Timothy, second letter" },
+      "Titus": { originalLanguage: "Greek", originalTitle: "Πρὸς Τίτον", transliteration: "Pros Titon", nameMeaning: "To Titus" },
+      "Philemon": { originalLanguage: "Greek", originalTitle: "Πρὸς Φιλήμονα", transliteration: "Pros Philemona", nameMeaning: "To Philemon" },
+      "Hebrews": { originalLanguage: "Greek", originalTitle: "Πρὸς Ἑβραίους", transliteration: "Pros Hebraious", nameMeaning: "To the Hebrews" },
+      "James": { originalLanguage: "Greek", originalTitle: "Ἰακώβου", transliteration: "Iakobou", nameMeaning: "Of James" },
+      "1 Peter": { originalLanguage: "Greek", originalTitle: "Πέτρου Αʹ", transliteration: "Petrou A", nameMeaning: "Peter, first letter" },
+      "2 Peter": { originalLanguage: "Greek", originalTitle: "Πέτρου Βʹ", transliteration: "Petrou B", nameMeaning: "Peter, second letter" },
+      "1 John": { originalLanguage: "Greek", originalTitle: "Ἰωάννου Αʹ", transliteration: "Ioannou A", nameMeaning: "John, first letter" },
+      "2 John": { originalLanguage: "Greek", originalTitle: "Ἰωάννου Βʹ", transliteration: "Ioannou B", nameMeaning: "John, second letter" },
+      "3 John": { originalLanguage: "Greek", originalTitle: "Ἰωάννου Γʹ", transliteration: "Ioannou G", nameMeaning: "John, third letter" },
+      "Jude": { originalLanguage: "Greek", originalTitle: "Ἰούδα", transliteration: "Iouda", nameMeaning: "Of Jude" },
+      "Revelation": { originalLanguage: "Greek", originalTitle: "Ἀποκάλυψις Ἰωάννου", transliteration: "Apokalypsis Ioannou", nameMeaning: "Revelation or unveiling of John" }
+    };
+
     function book(entry) {
+      const meta = bookLanguageMeta[entry.title] || {};
+      const historicalBackground = entry.historicalBackground || entry.historicalContext || "";
       return {
         ...entry,
-        imageSlots,
+        ...meta,
+        originalLanguage: entry.originalLanguage || meta.originalLanguage || (entry.testament === "Old Testament" ? "Hebrew" : "Greek"),
+        originalTitle: entry.originalTitle || meta.originalTitle || "To be expanded",
+        transliteration: entry.transliteration || meta.transliteration || "To be expanded",
+        nameMeaning: entry.nameMeaning || meta.nameMeaning || "Name meaning to be expanded.",
+        historicalBackground,
+        historicalContext: historicalBackground,
+        cardImageSlot: "9x16 Image Slot",
+        overlayImageSlots,
+        imageSlots: overlayImageSlots,
         sources: ["Canonical biblical text", "BibleMapped book-study framework", ...(entry.sources || [])],
       };
     }
@@ -531,7 +1181,7 @@
     const books = [
       book({
         testament: "Old Testament",
-        category: "Torah / Law",
+        category: "Torah / Pentateuch",
         title: "Genesis",
         subtitle: "Origins, promise, exile, and the beginning of covenant hope.",
         whatIsThisBook: "Genesis is the Bible's beginning story. It moves from creation and human rebellion to Abraham's family and the promise of blessing.",
@@ -546,7 +1196,7 @@
       }),
       book({
         testament: "Old Testament",
-        category: "Torah / Law",
+        category: "Torah / Pentateuch",
         title: "Exodus",
         subtitle: "Deliverance from bondage into covenant worship and God's presence.",
         whatIsThisBook: "Exodus tells how the LORD rescues Israel from Egypt, forms them at Sinai, and dwells among them through the tabernacle.",
@@ -561,7 +1211,7 @@
       }),
       book({
         testament: "Old Testament",
-        category: "Torah / Law",
+        category: "Torah / Pentateuch",
         title: "Leviticus",
         subtitle: "Holiness, sacrifice, priesthood, and life near God's presence.",
         whatIsThisBook: "Leviticus teaches how a redeemed people live before a holy God.",
@@ -576,7 +1226,7 @@
       }),
       book({
         testament: "Old Testament",
-        category: "Torah / Law",
+        category: "Torah / Pentateuch",
         title: "Numbers",
         subtitle: "Wilderness testing between promise and inheritance.",
         whatIsThisBook: "Numbers follows Israel from Sinai through wilderness failure toward the edge of the promised land.",
@@ -591,7 +1241,7 @@
       }),
       book({
         testament: "Old Testament",
-        category: "Torah / Law",
+        category: "Torah / Pentateuch",
         title: "Deuteronomy",
         subtitle: "Covenant renewal before entering the land.",
         whatIsThisBook: "Deuteronomy presents Moses' covenant sermons to Israel on the plains of Moab.",
@@ -1193,16 +1843,20 @@
     }
 
     function renderCategories(testament, mountNode) {
-      mountNode.innerHTML = categories[testament].map(category => {
+      mountNode.innerHTML = categories[testament].map((category, categoryIndex) => {
         const categoryBooks = books.filter(item => item.testament === testament && item.category === category);
+        const accent = categoryAccent(category);
         return `
-          <section class="category-panel">
+          <section class="category-panel" style="--category-accent:${accent}; --category-index:${categoryIndex}">
             <h3>${escapeHtml(category)}</h3>
             <div class="book-grid">
               ${categoryBooks.map(item => `
-                <button class="book-card" type="button" data-book="${escapeHtml(item.title)}">
-                  ${escapeHtml(item.title)}
-                  <small>${escapeHtml(item.subtitle)}</small>
+                <button class="book-card" type="button" data-book="${escapeHtml(item.title)}" aria-label="Open ${escapeHtml(item.title)} case study">
+                  <span>
+                    <span class="book-card-title">${escapeHtml(item.title)}</span>
+                    <span class="book-card-meta">${escapeHtml(item.originalLanguage)} / ${escapeHtml(item.transliteration)}</span>
+                  </span>
+                  <span class="book-card-image-slot">${escapeHtml(item.cardImageSlot)}</span>
                 </button>
               `).join("")}
             </div>
@@ -1211,14 +1865,51 @@
       }).join("");
     }
 
-    function openTestament(testament) {
+    function categoryAccent(category) {
+      const accents = {
+        "Torah / Pentateuch": "#7c3aed",
+        "Historical Books": "#16213e",
+        "Wisdom & Poetry": "#c89b3c",
+        "Major Prophets": "#d64545",
+        "Minor Prophets": "#1f2933",
+        "Gospels": "#7c3aed",
+        "Church History": "#16213e",
+        "Pauline Letters": "#d64545",
+        "General Letters": "#1f2933",
+        "Prophecy / Apocalypse": "#c89b3c"
+      };
+      return accents[category] || "#7c3aed";
+    }
+
+    function closeTestaments() {
+      testamentButtons.forEach(button => {
+        button.setAttribute("aria-expanded", "false");
+        button.classList.remove("is-intent");
+      });
+
+      Object.values(panels).forEach(panel => {
+        panel.classList.remove("open");
+        panel.setAttribute("aria-hidden", "true");
+      });
+    }
+
+    function openTestament(testament, shouldToggle = true) {
+      const selectedPanel = panels[testament];
+      const isAlreadyOpen = selectedPanel?.classList.contains("open");
+
+      closeTestaments();
+
+      if (shouldToggle && isAlreadyOpen) return;
+
       testamentButtons.forEach(button => {
         const isActive = button.dataset.testament === testament;
         button.setAttribute("aria-expanded", String(isActive));
       });
 
       Object.entries(panels).forEach(([panelTestament, panel]) => {
-        panel.classList.toggle("open", panelTestament === testament);
+        const isActive = panelTestament === testament;
+        panel.classList.toggle("open", isActive);
+        panel.setAttribute("aria-hidden", String(!isActive));
       });
     }
 
@@ -1227,18 +1918,40 @@
       caseBody.innerHTML = `
         <h2 id="caseTitle">${escapeHtml(bookData.title)}</h2>
         <p class="case-subtitle">${escapeHtml(bookData.subtitle)}</p>
+        <div class="case-original-panel">
+          <div class="case-original-item">
+            <span>Original language</span>
+            <strong>${escapeHtml(bookData.originalLanguage)}</strong>
+          </div>
+          <div class="case-original-item">
+            <span>Original title</span>
+            <strong class="original-script" dir="auto">${escapeHtml(bookData.originalTitle)}</strong>
+          </div>
+          <div class="case-original-item">
+            <span>Transliteration</span>
+            <strong>${escapeHtml(bookData.transliteration)}</strong>
+          </div>
+        </div>
         <div class="case-section-grid">
           <section class="case-section">
             <h3>What is this book?</h3>
             <p>${escapeHtml(bookData.whatIsThisBook)}</p>
           </section>
           <section class="case-section">
-            <h3>Why does it matter?</h3>
+            <h3>What does the name mean?</h3>
+            <p>${escapeHtml(bookData.nameMeaning)}</p>
+          </section>
+          <section class="case-section">
+            <h3>Original language title</h3>
+            <p><strong dir="auto">${escapeHtml(bookData.originalTitle)}</strong><br />${escapeHtml(bookData.transliteration)}</p>
+          </section>
+          <section class="case-section">
+            <h3>Why this book matters</h3>
             <p>${escapeHtml(bookData.whyItMatters)}</p>
           </section>
           <section class="case-section full">
-            <h3>Historical and cultural context</h3>
-            <p>${escapeHtml(bookData.historicalContext)}</p>
+            <h3>Historical and cultural background</h3>
+            <p>${escapeHtml(bookData.historicalBackground || bookData.historicalContext)}</p>
           </section>
           <section class="case-section">
             <h3>Major themes</h3>
@@ -1265,9 +1978,9 @@
             <ul class="source-list">${bookData.sources.map(source => `<li>${escapeHtml(source)}</li>`).join("")}</ul>
           </section>
           <section class="case-section full">
-            <h3>Image support slots</h3>
-            <div class="image-slot-grid">
-              ${bookData.imageSlots.map(slot => `<div class="image-slot">${escapeHtml(slot)}</div>`).join("")}
+            <h3>Historical evidence image slots</h3>
+            <div class="evidence-slot-grid">
+              ${bookData.overlayImageSlots.map(slot => `<div class="evidence-slot">${escapeHtml(slot)}</div>`).join("")}
             </div>
           </section>
         </div>
@@ -1294,10 +2007,31 @@
       const hashBook = decodeURIComponent(window.location.hash.replace("#", ""));
       if (!hashBook) return;
 
+      const normalizedHash = slugify(hashBook);
+      const testamentHashMap = {
+        old: "Old Testament",
+        "old-testament": "Old Testament",
+        new: "New Testament",
+        "new-testament": "New Testament"
+      };
+      const focusedTestament = testamentHashMap[normalizedHash];
+
+      if (focusedTestament) {
+        closeTestaments();
+
+        const targetButton = Array.from(testamentButtons).find(button => button.dataset.testament === focusedTestament);
+        if (targetButton) {
+          targetButton.classList.add("is-intent");
+          window.setTimeout(() => targetButton.focus({ preventScroll: true }), 80);
+        }
+
+        return;
+      }
+
       const bookData = books.find(item => slugify(item.title) === slugify(hashBook));
       if (!bookData) return;
 
-      openTestament(bookData.testament);
+      openTestament(bookData.testament, false);
       openCaseStudy(bookData.title, null);
     }
 
