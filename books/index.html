@@ -79,6 +79,10 @@
       gap: 18px;
     }
 
+    .nav-wrap--simple {
+      justify-content: flex-end;
+    }
+
     .brand {
       color: var(--books-ink);
       font-size: clamp(1.15rem, 2vw, 1.55rem);
@@ -216,7 +220,17 @@
       justify-items: center;
       gap: 12px;
       width: min(520px, 90%);
-      transition: transform 720ms cubic-bezier(0.2, 0.9, 0.18, 1), opacity 440ms ease;
+      transition: transform 720ms cubic-bezier(0.2, 0.9, 0.18, 1), opacity 440ms ease, visibility 440ms ease;
+    }
+
+    .testament-panel:not(.is-retracted) .testament-trigger:hover .testament-label-stack,
+    .testament-panel:not(.is-retracted) .testament-trigger:focus-visible .testament-label-stack {
+      transform: translateY(-14px);
+    }
+
+    .testament-panel:not(.is-retracted):hover::before {
+      inset: 10px;
+      border-color: rgba(124, 58, 237, 0.32);
     }
 
     .testament-kicker,
@@ -276,12 +290,24 @@
       writing-mode: vertical-rl;
       transform: translateX(12px);
       color: var(--books-ink);
-      font-family: var(--blackletter);
-      font-size: clamp(2.4rem, 5vw, 4.4rem);
+      font-family: var(--editorial);
+      font-size: clamp(1rem, 1.65vw, 1.65rem);
       font-weight: 700;
-      letter-spacing: 0.02em;
-      line-height: 0.9;
+      letter-spacing: 0.04em;
+      line-height: 0.95;
+      text-transform: uppercase;
+      white-space: nowrap;
       transition: opacity 320ms ease, transform 320ms ease;
+    }
+
+    .retracted-hint strong {
+      display: block;
+      margin-bottom: 8px;
+      font-family: var(--blackletter);
+      font-size: clamp(2.2rem, 4.4vw, 4rem);
+      font-weight: 700;
+      line-height: 0.9;
+      text-transform: none;
     }
 
     .testament-stage.is-old-open .testament-panel--new .retracted-hint,
@@ -352,6 +378,18 @@
       font-size: clamp(1rem, 1.45vw, 1.18rem);
       font-weight: 650;
       line-height: 1.72;
+    }
+
+    .covenant-note {
+      max-width: 720px;
+      margin-top: 6px;
+      color: var(--books-muted);
+      font-size: clamp(0.9rem, 1.2vw, 1.02rem);
+    }
+
+    .covenant-note strong {
+      color: var(--books-ink);
+      font-weight: 900;
     }
 
     .category-list {
@@ -841,10 +879,10 @@
 </head>
 <body>
   <header class="site-header">
-    <div class="nav-wrap">
-      <a class="brand" href="../index.html">BibleMapped</a>
+    <div class="nav-wrap nav-wrap--simple">
       <nav class="main-nav" aria-label="Primary">
         <a href="../index.html">Home</a>
+        <a href="../characters/index.html">People</a>
       </nav>
     </div>
   </header>
@@ -862,7 +900,7 @@
             <span class="testament-image-note">Click to open the Hebrew Scriptures</span>
           </span>
         </button>
-        <div class="retracted-hint">New</div>
+        <div class="retracted-hint"><strong>New</strong>Testament</div>
         <div class="testament-panel-content" id="oldContent" aria-hidden="true"></div>
       </article>
 
@@ -875,7 +913,7 @@
             <span class="testament-image-note">Click to open the fulfillment story</span>
           </span>
         </button>
-        <div class="retracted-hint">Old</div>
+        <div class="retracted-hint"><strong>Old</strong>Testament</div>
         <div class="testament-panel-content" id="newContent" aria-hidden="true"></div>
       </article>
     </section>
@@ -909,12 +947,14 @@
       "Old Testament": {
         eyebrow: "Old Testament",
         title: "The Hebrew Scriptures",
-        copy: "Creation, covenant, law, kings, prophets, exile, and hope. Open a category to see its definition, image slot, and the books inside it."
+        copy: "Creation, covenant, law, kings, prophets, exile, and hope. Open a category to see its definition, image slot, and the books inside it.",
+        note: "Testament means covenant. The Old Testament is the Scripture collection tied to God’s earlier covenant story with Israel, preparing the way for Christ."
       },
       "New Testament": {
         eyebrow: "New Testament",
         title: "The Fulfillment Story",
-        copy: "Jesus, the apostles, the church, letters, endurance, judgment, worship, and final restoration. Open a category to see how the books are grouped."
+        copy: "Jesus, the apostles, the church, letters, endurance, judgment, worship, and final restoration. Open a category to see how the books are grouped.",
+        note: "Testament means covenant. The New Testament reveals the new covenant fulfilled through Jesus Christ."
       }
     };
 
@@ -1052,6 +1092,7 @@
           <span class="eyebrow">${escapeHtml(info.eyebrow)}</span>
           <h2 class="content-title">${escapeHtml(info.title)}</h2>
           <p class="content-copy">${escapeHtml(info.copy)}</p>
+          <p class="content-copy covenant-note">${escapeHtml(info.note)}</p>
         </div>
         <div class="category-list">
           ${categories.map((category, index) => {
@@ -1092,9 +1133,14 @@
     function openTestament(testament) {
       const oldButton = document.querySelector('[data-testament="Old Testament"]');
       const newButton = document.querySelector('[data-testament="New Testament"]');
+      const oldPanel = document.querySelector('.testament-panel--old');
+      const newPanel = document.querySelector('.testament-panel--new');
 
       stage.classList.toggle("is-old-open", testament === "Old Testament");
       stage.classList.toggle("is-new-open", testament === "New Testament");
+
+      oldPanel.classList.toggle("is-retracted", testament === "New Testament");
+      newPanel.classList.toggle("is-retracted", testament === "Old Testament");
 
       oldButton.setAttribute("aria-expanded", String(testament === "Old Testament"));
       newButton.setAttribute("aria-expanded", String(testament === "New Testament"));
