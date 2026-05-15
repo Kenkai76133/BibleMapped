@@ -504,7 +504,8 @@
     }
 
     .svg-piece:hover {
-      filter: brightness(1.06) saturate(1.05);
+      filter: brightness(1.08) saturate(1.06) drop-shadow(0 18px 26px rgba(11, 15, 25, 0.22));
+      transform: translateY(-8px) scale(1.015);
     }
 
     .svg-piece .piece-stroke {
@@ -557,6 +558,10 @@
     .testament-svg-wrap.in-view .piece-3 { transition-delay: 0.18s; }
     .testament-svg-wrap.in-view .piece-4 { transition-delay: 0.26s; }
     .testament-svg-wrap.in-view .piece-5 { transition-delay: 0.34s; }
+
+    .testament-svg-wrap.in-view .svg-piece:hover {
+      transform: translateY(-8px) scale(1.015);
+    }
 
     .puzzle-hint {
       margin: 42px auto 0;
@@ -1430,6 +1435,8 @@
           Case Studies
         </a>
 
+        <a href="qa/index.html" class="nav-qa">Q&A</a>
+
         <a href="https://biblemapped.com/about/" class="nav-about">
           <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="12" cy="12" r="9" stroke-width="2.2" />
@@ -1608,7 +1615,6 @@
         </svg>
       </div>
 
-      <p class="puzzle-hint">Click</p>
     </div>
   </section>
 
@@ -1732,6 +1738,10 @@
 
           <div class="formula-tour-note">
             <h3>The BibleMapped Method</h3>
+            <p class="formula-quote">
+              “The Bible was not written above history. It was written inside it.
+              BibleMapped connects the where, the who, and the why so the what becomes clear.”
+            </p>
 
             <p>
               Bible Mapped studies Scripture by asking where it happened, who was involved,
@@ -1745,6 +1755,34 @@
   </section>
 
   <section class="statement-section white" id="about" style="padding-bottom:90px;">
+    <div class="section-rail" style="margin-bottom:70px;">
+      <p class="rail-eyebrow">People</p>
+      <a class="section-display why-display" href="characters/index.html">
+        Who Are These People?
+      </a>
+    </div>
+
+    <div class="section-rail" style="margin-bottom:70px;">
+      <p class="rail-eyebrow">Maps</p>
+      <a class="section-display why-display" href="maps/index.html">
+        Where Is This Happening?
+      </a>
+    </div>
+
+    <div class="section-rail" style="margin-bottom:70px;">
+      <p class="rail-eyebrow">Case Studies</p>
+      <a class="section-display why-display" href="case-studies/index.html">
+        Investigate the Story
+      </a>
+    </div>
+
+    <div class="section-rail" style="margin-bottom:70px;">
+      <p class="rail-eyebrow">Q&amp;A</p>
+      <a class="section-display why-display" href="qa/index.html">
+        Questions &amp; Answers
+      </a>
+    </div>
+
     <div class="section-rail">
       <a class="section-display why-display" href="https://biblemapped.com/about/">
         About Bible Mapped
@@ -1938,7 +1976,17 @@
   </div>
 
   <footer class="footer">
-    <p>© Bible Mapped — Understanding Scripture through place, context, and meaning.</p>
+    <div style="width:min(1120px,100%);margin:0 auto;display:grid;gap:18px;">
+      <h2 style="margin:0;color:white;">Watch BibleMapped on YouTube</h2>
+      <p>Short visual explainers that connect Scripture to place, context, culture, and meaning.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;">
+        <a href="https://www.youtube.com/" style="color:white;font-weight:900;">View YouTube Page</a>
+        <a href="#" style="color:white;font-weight:900;">TikTok</a>
+        <a href="#" style="color:white;font-weight:900;">Instagram</a>
+        <a href="mailto:contact@biblemapped.com" style="color:white;font-weight:900;">Contact</a>
+      </div>
+      <p>© Bible Mapped — Understanding Scripture through place, context, and meaning.</p>
+    </div>
   </footer>
 
   <script>

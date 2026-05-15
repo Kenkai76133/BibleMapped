@@ -3,61 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Characters | BibleMapped</title>
+  <title>People | BibleMapped</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Cormorant+Garamond:wght@600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../src/styles.css" />
 </head>
 <body>
+  <!-- Global navigation -->
   <header class="site-header">
     <div class="container nav-wrap">
       <a class="brand" href="../index.html">BibleMapped</a>
-      <nav class="main-nav">
-        <a href="../index.html#start-here">Start Here</a>
+      <nav class="main-nav" aria-label="Primary">
         <a href="../books/index.html">Books</a>
-        <a href="index.html">Characters</a>
-        <a href="../places/index.html">Places</a>
-        <a href="../themes/index.html">Themes</a>
+        <a href="../characters/index.html">People</a>
+        <a href="../maps/index.html">Maps</a>
         <a href="../case-studies/index.html">Case Studies</a>
-        <a href="../traditions/index.html">Bible Traditions</a>
+        <a href="../qa/index.html">Q&amp;A</a>
       </nav>
+      <div class="header-actions">
+        <a class="see-all" href="../about/index.html">About</a>
+      </div>
     </div>
   </header>
 
   <main>
+    <!-- People hero -->
     <section class="hero">
       <div class="container">
-        <p class="eyebrow">Characters</p>
-        <h1>Follow the people who move the biblical story.</h1>
+        <p class="eyebrow">People</p>
+        <h1>Who Are These People?</h1>
         <p class="hero-copy">
-          Character pages connect people to books, places, themes, and the larger arc of Scripture.
+          The Bible is filled with real people living inside God’s larger story — kings,
+          prophets, families, enemies, disciples, doubters, failures, and witnesses.
         </p>
       </div>
     </section>
 
+    <!-- Person placeholder cards -->
     <section class="section">
       <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Old Testament</p>
-          <h2>Patriarchs, prophets, kings, and exiles.</h2>
-        </div>
-
-        <div class="card-grid three">
-          <a class="info-card" href="../books/genesis/index.html">
-            <h3>Abraham</h3>
-            <p>The covenant patriarch called out of Mesopotamia into promise.</p>
-          </a>
-
-          <a class="info-card" href="#">
+        <div class="card-grid four">
+          <article class="info-card">
+            <div class="image-slot">Image Slot</div>
             <h3>Moses</h3>
-            <p>Coming soon.</p>
-          </a>
-
-          <a class="info-card" href="#">
+            <p>Deliverer, prophet, and mediator of the covenant.</p>
+            <p class="meta-line">Egypt → Sinai → Wilderness</p>
+            <span class="placeholder-btn">Open Study</span>
+          </article>
+          <article class="info-card">
+            <div class="image-slot">Image Slot</div>
             <h3>David</h3>
-            <p>Coming soon.</p>
-          </a>
+            <p>Shepherd, king, psalmist, and flawed covenant ruler.</p>
+            <p class="meta-line">Bethlehem → Jerusalem</p>
+            <span class="placeholder-btn">Open Study</span>
+          </article>
+          <article class="info-card">
+            <div class="image-slot">Image Slot</div>
+            <h3>Esther</h3>
+            <p>Queen in exile whose courage preserved her people.</p>
+            <p class="meta-line">Persia / Susa</p>
+            <span class="placeholder-btn">Open Study</span>
+          </article>
+          <article class="info-card">
+            <div class="image-slot">Image Slot</div>
+            <h3>Daniel</h3>
+            <p>Exile, interpreter, and faithful witness under empire.</p>
+            <p class="meta-line">Jerusalem → Babylon</p>
+            <span class="placeholder-btn">Open Study</span>
+          </article>
+          <article class="info-card">
+            <div class="image-slot">Image Slot</div>
+            <h3>Mary</h3>
+            <p>Mother of Jesus and witness to God’s promise.</p>
+            <p class="meta-line">Nazareth → Bethlehem</p>
+            <span class="placeholder-btn">Open Study</span>
+          </article>
+          <article class="info-card">
+            <div class="image-slot">Image Slot</div>
+            <h3>Peter</h3>
+            <p>Disciple, denier, restored witness, and apostle.</p>
+            <p class="meta-line">Galilee → Jerusalem</p>
+            <span class="placeholder-btn">Open Study</span>
+          </article>
+          <article class="info-card">
+            <div class="image-slot">Image Slot</div>
+            <h3>Paul</h3>
+            <p>Former persecutor sent to preach Christ among the nations.</p>
+            <p class="meta-line">Tarsus → Damascus → Rome</p>
+            <span class="placeholder-btn">Open Study</span>
+          </article>
+          <article class="info-card">
+            <div class="image-slot">Image Slot</div>
+            <h3>Woman at the Well</h3>
+            <p>Samaritan witness who met Jesus at Jacob’s well.</p>
+            <p class="meta-line">Samaria / Sychar</p>
+            <span class="placeholder-btn">Open Study</span>
+          </article>
         </div>
       </div>
     </section>
@@ -67,11 +109,13 @@
     <div class="container footer-wrap">
       <div>
         <strong>BibleMapped</strong>
-        <p>Understand the Bible through place, context, and story.</p>
+        <p>Understand the Bible through place, context, and Christ.</p>
       </div>
       <div class="footer-links">
-        <a href="../books/index.html">Books</a>
         <a href="../index.html">Home</a>
+        <a href="../books/index.html">Books</a>
+        <a href="../maps/index.html">Maps</a>
+        <a href="../qa/index.html">Q&amp;A</a>
       </div>
     </div>
   </footer>

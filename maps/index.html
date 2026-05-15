@@ -7,67 +7,67 @@
     <link rel="stylesheet" href="../src/styles.css" />
   </head>
   <body>
-    <div class="top-strip" aria-hidden="true"></div>
-
+    <!-- Global navigation -->
     <header class="header">
       <div class="container header-inner">
         <a class="brand" href="/" aria-label="BibleMapped Home">BibleMapped</a>
-
         <nav class="nav" aria-label="Primary">
-          <a href="/case-studies/">Case Studies</a>
+          <a href="/books/">Books</a>
+          <a href="/characters/">People</a>
           <a href="/maps/">Maps</a>
-          <a href="/history/">History</a>
-          <a href="/characters/">Characters</a>
+          <a href="/case-studies/">Case Studies</a>
+          <a href="/qa/">Q&amp;A</a>
         </nav>
-
         <div class="header-actions">
-          <a class="see-all" href="/">Home</a>
+          <a class="see-all" href="/about/">About</a>
         </div>
       </div>
     </header>
 
     <main class="container">
+      <!-- Maps hero -->
       <section class="hero">
-        <h1>Maps</h1>
-        <p>Places, routes, borders, and terrain — so the story stays grounded.</p>
+        <p class="eyebrow">Maps</p>
+        <h1>Where Is This Happening?</h1>
+        <p class="hero-copy">
+          Before a story becomes clear, you need to know where you are. BibleMapped follows
+          the cities, rivers, roads, wildernesses, and empires that shaped the world of Scripture.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/places/">Open Map Navigator</a>
+        </div>
       </section>
-<p style="margin-top:14px;">
-  <a href="/places/" style="
-    display:inline-block;
-    padding:12px 16px;
-    border-radius:12px;
-    border:1px solid #223142;
-    text-decoration:none;
-    font-weight:700;
-  ">
-    Open Map Navigator →
-  </a>
-</p>
 
+      <!-- Map framework -->
+      <section class="section">
+        <div class="hero-panel">
+          <div class="hero-card" id="bible-map">
+            <span class="tag">Existing Map System</span>
+            <h2>Map Navigator</h2>
+            <p>
+              The existing interactive map lives at the Map Navigator. This panel keeps the Maps
+              page ready for a future embedded map without adding new dependencies tonight.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Place cards -->
       <section class="section">
         <div class="section-head">
-          <h2>Latest</h2>
-          <span class="see-all">Updated manually for now</span>
+          <h2>Major Bible Locations</h2>
+          <span class="see-all">Place cards are placeholders</span>
         </div>
-
         <div class="grid">
-          <article class="card">
-            <div class="kicker">MAP</div>
-            <h3>Judea under Rome</h3>
-            <p>Borders, roads, and political pressure points.</p>
-          </article>
-
-          <article class="card">
-            <div class="kicker">MAP</div>
-            <h3>Nazareth → Bethlehem</h3>
-            <p>Distance, terrain, and the most likely routes.</p>
-          </article>
-
-          <article class="card">
-            <div class="kicker">MAP</div>
-            <h3>Herodian kingdoms</h3>
-            <p>Who ruled what — and when.</p>
-          </article>
+          <article class="card"><div class="kicker">Place</div><h3>Eden</h3><p>The garden setting of creation, humanity, and exile.</p></article>
+          <article class="card"><div class="kicker">Place</div><h3>Babel</h3><p>The city of pride, language, and scattering.</p></article>
+          <article class="card"><div class="kicker">Place</div><h3>Ur</h3><p>Abraham’s world before the call of promise.</p></article>
+          <article class="card"><div class="kicker">Place</div><h3>Canaan</h3><p>The land of promise, conflict, covenant, and hope.</p></article>
+          <article class="card"><div class="kicker">Place</div><h3>Egypt</h3><p>Refuge, oppression, deliverance, and empire.</p></article>
+          <article class="card"><div class="kicker">Place</div><h3>Sinai</h3><p>Mountain, covenant, law, worship, and formation.</p></article>
+          <article class="card"><div class="kicker">Place</div><h3>Jerusalem</h3><p>Kingdom, temple, exile, return, cross, and hope.</p></article>
+          <article class="card"><div class="kicker">Place</div><h3>Babylon</h3><p>Empire, exile, judgment, and longing for return.</p></article>
+          <article class="card"><div class="kicker">Place</div><h3>Rome</h3><p>Imperial power in the world of the New Testament.</p></article>
         </div>
       </section>
     </main>
@@ -77,7 +77,9 @@
         <p>© <span id="year"></span> BibleMapped</p>
         <div class="footer-links">
           <a href="/">Home</a>
-          <a href="/maps/">Maps</a>
+          <a href="/books/">Books</a>
+          <a href="/case-studies/">Case Studies</a>
+          <a href="/qa/">Q&amp;A</a>
         </div>
       </div>
     </footer>
