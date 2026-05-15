@@ -227,6 +227,37 @@
       box-shadow: none;
     }
 
+    .about-letter-panel {
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+    }
+
+    .about-letter-panel h3 {
+      margin: 0 0 14px;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      line-height: 1;
+      letter-spacing: -0.035em;
+    }
+
+    .about-letter-panel p {
+      max-width: 82ch;
+      margin-top: 14px;
+      color: var(--muted);
+      font-weight: 650;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      margin-bottom: 12px;
+      color: var(--purple);
+      font-size: 0.76rem;
+      font-weight: 950;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
     /* =========================
        TOP BAR
     ========================= */
@@ -965,259 +996,177 @@
       <details class="about-accordion" open>
         <summary>About BibleMapped</summary>
         <div class="about-accordion-body">
-        <p>BibleMapped exists to help people see Scripture through place, people, history, and meaning.</p>
-        <p>But the center of BibleMapped is not maps. It is not design. It is not even Bible facts.</p>
-        <p><strong>The center is Jesus Christ.</strong></p>
-        <p>The Bible’s story leads us to the gospel: that Jesus Christ came to save sinners, died for our sins, rose again, and gives eternal life to all who trust in Him.</p>
+          <article class="about-letter-panel">
+            <span class="section-kicker">Mission</span>
+            <h3>Why BibleMapped Exists</h3>
+            <p>BibleMapped exists because the Bible did not happen in a vacuum. It happened somewhere.</p>
+            <p>It happened in gardens, deserts, mountains, rivers, cities, temples, roads, prisons, battlefields, fishing villages, and empty tombs.</p>
+            <p>It is about helping people slow down, look closer, and see the Bible as a real story grounded in real places, real people, real history, real language, and real meaning.</p>
+            <p>Bible Mapped was created to help people see that the Bible is not myth, not motivational material, and not a collection of disconnected religious stories.</p>
+            <p><strong>It is the true Word of the living God.</strong></p>
+            <p class="closing-lines">
+              It happened in real places.<br />
+              It was given through real history.<br />
+              It reveals the real Savior.
+            </p>
+          </article>
         </div>
       </details>
 
       <details class="about-accordion">
         <summary>Are You Going to Heaven?</summary>
         <div class="about-accordion-body">
-      <article class="gospel-section" aria-labelledby="heavenQuestionTitle">
-        <h2 id="heavenQuestionTitle">Are You Going to Heaven?</h2>
-        <p><strong>If you died tonight, would you know for sure you would go to heaven?</strong></p>
-        <p>Not based on guessing. Not based on being good enough. The Bible gives a clear answer.</p>
+          <article class="gospel-section" aria-labelledby="heavenQuestionTitle">
+            <h2 id="heavenQuestionTitle">Are You Going to Heaven?</h2>
+            <p><strong>If you died tonight, would you know for sure you would go to heaven?</strong></p>
+            <p>Not based on guessing. Not based on being good enough. The Bible gives a clear answer.</p>
 
-        <div class="gospel-options" aria-label="Gospel reflection options">
-          <button class="gospel-option" type="button">I know</button>
-          <button class="gospel-option" type="button">I’m not sure</button>
-          <button class="gospel-option" type="button">I want to understand</button>
-        </div>
+            <div class="gospel-options" aria-label="Gospel reflection options">
+              <button class="gospel-option" type="button">I know</button>
+              <button class="gospel-option" type="button">I&rsquo;m not sure</button>
+              <button class="gospel-option" type="button">I want to understand</button>
+            </div>
 
-        <h3 style="margin-top:32px;">The Gospel Explained Simply</h3>
-        <div class="gospel-map-grid">
-          <div class="gospel-step"><span>1</span><strong>God is holy</strong></div>
-          <div class="gospel-step"><span>2</span><strong>We have sinned</strong></div>
-          <div class="gospel-step"><span>3</span><strong>Sin separates us from God</strong></div>
-          <div class="gospel-step"><span>4</span><strong>Jesus Christ died for our sins and rose again</strong></div>
-          <div class="gospel-step"><span>5</span><strong>Salvation is a gift received by faith, not earned by works</strong></div>
-          <div class="gospel-step"><span>6</span><strong>The biblical response is repentance and faith in Jesus Christ</strong></div>
-        </div>
+            <h3 style="margin-top:32px;">The Gospel Explained Simply</h3>
+            <div class="gospel-map-grid">
+              <div class="gospel-step"><span>1</span><strong>God is holy</strong></div>
+              <div class="gospel-step"><span>2</span><strong>We have sinned</strong></div>
+              <div class="gospel-step"><span>3</span><strong>Sin separates us from God</strong></div>
+              <div class="gospel-step"><span>4</span><strong>Jesus Christ died for our sins and rose again</strong></div>
+              <div class="gospel-step"><span>5</span><strong>Salvation is a gift received by faith, not earned by works</strong></div>
+              <div class="gospel-step"><span>6</span><strong>The biblical response is repentance and faith in Jesus Christ</strong></div>
+            </div>
 
-        <div class="reference-grid" aria-label="KJV references">
-          <span class="reference-chip">Romans 3:23</span>
-          <span class="reference-chip">Romans 6:23</span>
-          <span class="reference-chip">John 3:16</span>
-          <span class="reference-chip">John 14:6</span>
-          <span class="reference-chip">Ephesians 2:8-9</span>
-          <span class="reference-chip">Romans 10:9-13</span>
-          <span class="reference-chip">1 Corinthians 15:3-4</span>
-        </div>
+            <div class="belief-panel">
+              <p><strong>I believe Jesus Christ is God in the flesh.</strong> He is not merely a teacher, a prophet, or a religious example. He is the eternal Son of God who came into the world, lived without sin, died for sinners, rose again, and is coming again.</p>
+              <p><strong>I believe the Trinity is biblical.</strong> There is one God, eternally existing as Father, Son, and Holy Spirit. We see this clearly at the baptism of Jesus: the Son is baptized, the Spirit descends, and the Father speaks from heaven.</p>
+              <p><strong>I believe baptism is obedience, but it does not save.</strong> Salvation is by grace through faith in Jesus Christ. Baptism is a public declaration of faith, not the source of it.</p>
+            </div>
 
-        <div class="gospel-final">
-          <p>The question is not, “Are you religious?”</p>
-          <p>The question is, “Have you trusted Jesus Christ?”</p>
-          <p>The Bible teaches that all have sinned and come short of the glory of God. Sin separates us from God, and no amount of good works can erase our guilt.</p>
-          <p>But God loved the world and gave His Son. Jesus Christ died for our sins, was buried, and rose again. Salvation is not earned by being good enough. It is received by grace through faith in Christ.</p>
-          <p><strong>That is the good news.</strong></p>
-          <a class="gospel-cta" href="../qa/index.html">Learn What the Bible Says</a>
-        </div>
-      </article>
+            <div class="reference-grid" aria-label="KJV references">
+              <span class="reference-chip">Romans 3:23</span>
+              <span class="reference-chip">Romans 6:23</span>
+              <span class="reference-chip">John 3:16</span>
+              <span class="reference-chip">John 14:6</span>
+              <span class="reference-chip">Ephesians 2:8-9</span>
+              <span class="reference-chip">Romans 10:9-13</span>
+              <span class="reference-chip">1 Corinthians 15:3-4</span>
+            </div>
+
+            <div class="gospel-final">
+              <p>The question is not, &ldquo;Are you religious?&rdquo;</p>
+              <p>The question is, &ldquo;Have you trusted Jesus Christ?&rdquo;</p>
+              <p>The Bible teaches that all have sinned and come short of the glory of God. Sin separates us from God, and no amount of good works can erase our guilt.</p>
+              <p>But God loved the world and gave His Son. Jesus Christ died for our sins, was buried, and rose again. Salvation is not earned by being good enough. It is received by grace through faith in Christ.</p>
+              <p><strong>That is the good news.</strong></p>
+              <a class="gospel-cta" href="../qa/index.html">Learn What the Bible Says</a>
+            </div>
+          </article>
         </div>
       </details>
 
       <details class="about-accordion">
         <summary>The BibleMapped Method</summary>
         <div class="about-accordion-body">
-          <p>BibleMapped studies Scripture through structure, setting, people, movement, language, and meaning so the larger story becomes easier to see.</p>
-          <div class="method-grid">
-            <div class="method-card">
-              <strong>Books</strong>
-              <p>Books show the structure of Scripture and how each part fits into the whole story.</p>
+          <article class="about-letter-panel">
+            <span class="section-kicker">Method</span>
+            <h3>The Where Matters</h3>
+            <p class="letter-emphasis">The where matters.</p>
+            <p>Because when you understand where something happened, you begin to see the story more clearly. A mountain is not just a mountain. A wilderness is not just empty space. A road is not just a path between two cities.</p>
+            <p>In Scripture, places carry meaning. Geography creates context. Context brings clarity.</p>
+            <p>The maps matter. The timelines matter. The history matters. The geography, archaeology, culture, and original languages all matter. But they only matter because they help us see the greater story God is telling: the story of redemption through His Son.</p>
+            <div class="method-grid">
+              <div class="method-card">
+                <strong>Books</strong>
+                <p>Books show the structure of Scripture and how each part fits into the whole story.</p>
+              </div>
+              <div class="method-card">
+                <strong>People</strong>
+                <p>People show the story unfolding through real lives, real choices, real failures, and real faith.</p>
+              </div>
+              <div class="method-card">
+                <strong>Maps</strong>
+                <p>Maps show the setting: cities, wildernesses, rivers, roads, empires, and the movement of the text.</p>
+              </div>
+              <div class="method-card">
+                <strong>Christ</strong>
+                <p>The method matters because Scripture ultimately points to Jesus Christ.</p>
+              </div>
             </div>
-            <div class="method-card">
-              <strong>People</strong>
-              <p>People show the story unfolding through real lives, real choices, real failures, and real faith.</p>
-            </div>
-            <div class="method-card">
-              <strong>Maps</strong>
-              <p>Maps show the setting: cities, wildernesses, rivers, roads, empires, and the movement of the text.</p>
-            </div>
-            <div class="method-card">
-              <strong>Christ</strong>
-              <p>The method matters because Scripture ultimately points to Jesus Christ.</p>
-            </div>
-          </div>
+          </article>
         </div>
       </details>
 
       <details class="about-accordion" id="about-calvin">
         <summary>About Calvin</summary>
         <div class="about-accordion-body">
-      <div class="profile-inner">
-        <div class="profile-photo">
-          <img src="../assets/calvin-photo.jpg.png" alt="Calvin in front of a map" />
-        </div>
+          <div class="profile-inner">
+            <div class="profile-photo">
+              <img src="../assets/calvin-photo.jpg.png" alt="Calvin in front of a map" />
+            </div>
 
-        <article class="profile-meta about-letter">
-          <h2>About Bible Mapped</h2>
+            <article class="profile-meta about-letter">
+              <h2>About Calvin</h2>
+              <p><strong>Hi everyone,</strong></p>
+              <p>My name is <strong>Calvin S.</strong> I am a Christian, a husband, a father, and the heart behind <strong>Bible Mapped</strong>.</p>
+              <p>I was saved in 2008, and since then, I have loved telling people about Jesus Christ. Over the years, my journey has taken me through faith, doubt, Bible college, church hurt, hard questions, and seasons where I had to examine what I really believed.</p>
+              <p>And through all of it, I keep coming back to one conviction:</p>
+              <div class="conviction-block">
+                <blockquote>Let God be true, and every man a liar &mdash; including me.</blockquote>
+              </div>
+              <p>People fail. Leaders fail. Churches can wound. Culture changes. Opinions shift. Even my own understanding can be wrong.</p>
+              <p><strong>But God&rsquo;s Word remains true.</strong></p>
+              <p>That is the foundation of Bible Mapped.</p>
+              <p><strong>But the goal is not just maps.</strong></p>
+              <p><strong>The goal is Jesus.</strong></p>
+              <p>Because without Jesus, none of this means anything.</p>
+              <p>And every road, every region, every city, every wilderness, every promise, and every page ultimately points to Jesus Christ.</p>
+              <p class="signature">
+                Sincerely,<br />
+                Calvin S.
+              </p>
+              <div class="social-row" aria-label="Follow Bible Mapped">
+                <a class="social-link" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noreferrer">
+                  <img src="../assets/youtube-logo.png" alt="YouTube" />
+                  <span>YouTube</span>
+                </a>
 
-          <p><strong>Hi everyone,</strong></p>
+                <a class="social-link" href="https://www.tiktok.com/@biblemapped?is_from_webapp=1&amp;sender_device=pc" target="_blank" rel="noreferrer">
+                  <img src="../assets/tiktok-logo.png" alt="TikTok" />
+                  <span>TikTok</span>
+                </a>
 
-          <p>
-            My name is <strong>Calvin S.</strong> I am a Christian, a husband, a father, and the heart behind
-            <strong>Bible Mapped</strong>.
-          </p>
-
-          <p>
-            I was saved in 2008, and since then, I have loved telling people about Jesus Christ. Over the years,
-            my journey has taken me through faith, doubt, Bible college, church hurt, hard questions, and seasons
-            where I had to examine what I really believed.
-          </p>
-
-          <p>
-            And through all of it, I keep coming back to one conviction:
-          </p>
-
-          <div class="conviction-block">
-            <blockquote>Let God be true, and every man a liar — including me.</blockquote>
+                <a class="social-link" href="https://www.instagram.com/biblemapped/" target="_blank" rel="noreferrer">
+                  <img src="../assets/instagram-logo.png" alt="Instagram" />
+                  <span>Instagram</span>
+                </a>
+              </div>
+            </article>
           </div>
-
-          <p>
-            People fail. Leaders fail. Churches can wound. Culture changes. Opinions shift. Even my own understanding
-            can be wrong.
-          </p>
-
-          <p><strong>But God’s Word remains true.</strong></p>
-
-          <p>
-            That is the foundation of Bible Mapped.
-          </p>
-
-          <p>
-            Bible Mapped exists because the Bible did not happen in a vacuum. It happened somewhere.
-          </p>
-
-          <p>
-            It happened in gardens, deserts, mountains, rivers, cities, temples, roads, prisons, battlefields,
-            fishing villages, and empty tombs.
-          </p>
-
-          <p class="letter-emphasis">The where matters.</p>
-
-          <p>
-            Because when you understand where something happened, you begin to see the story more clearly. A mountain
-            is not just a mountain. A wilderness is not just empty space. A road is not just a path between two cities.
-          </p>
-
-          <p>
-            In Scripture, places carry meaning. Geography creates context. Context brings clarity.
-          </p>
-
-          <p>
-            That is what Bible Mapped is about.
-          </p>
-
-          <p>
-            It is about helping people slow down, look closer, and see the Bible as a real story grounded in real places,
-            real people, real history, real language, and real meaning.
-          </p>
-
-          <p><strong>But the goal is not just maps.</strong></p>
-
-          <p><strong>The goal is Jesus.</strong></p>
-
-          <p>
-            Because without Jesus, none of this means anything.
-          </p>
-
-          <p>
-            The maps matter. The timelines matter. The history matters. The geography, archaeology, culture, and original
-            languages all matter. But they only matter because they help us see the greater story God is telling: the story
-            of redemption through His Son.
-          </p>
-
-          <div class="belief-panel">
-            <p>
-              <strong>I believe Jesus Christ is God in the flesh.</strong> He is not merely a teacher, a prophet, or a religious
-              example. He is the eternal Son of God who came into the world, lived without sin, died for sinners, rose again,
-              and is coming again.
-            </p>
-
-            <p>
-              <strong>I believe the Trinity is biblical.</strong> There is one God, eternally existing as Father, Son, and Holy Spirit.
-              We see this clearly at the baptism of Jesus: the Son is baptized, the Spirit descends, and the Father speaks from heaven.
-            </p>
-
-            <p>
-              <strong>I believe baptism is obedience, but it does not save.</strong> Salvation is by grace through faith in Jesus Christ.
-              Baptism is a public declaration of faith, not the source of it.
-            </p>
-
-            <p>
-              <strong>I believe the Bible is the inerrant Word of God.</strong> It is true, trustworthy, preserved, and cannot be broken.
-              When I disagree with Scripture, I am wrong.
-            </p>
-
-            <p>
-              <strong>And I believe Satan is a liar.</strong> He has lied from the beginning, but his end is already written.
-              Christ has conquered, and one day every enemy of God will be judged.
-            </p>
-          </div>
-
-          <p>
-            Bible Mapped was created to help people see that the Bible is not myth, not motivational material, and not a
-            collection of disconnected religious stories.
-          </p>
-
-          <p>
-            It is the true Word of the living God.
-          </p>
-
-          <p class="closing-lines">
-            It happened in real places.<br />
-            It was given through real history.<br />
-            It reveals the real Savior.
-          </p>
-
-          <p>
-            And every road, every region, every city, every wilderness, every promise, and every page ultimately points
-            to Jesus Christ.
-          </p>
-
-          <p class="signature">
-            Sincerely,<br />
-            Calvin S.
-          </p>
-
-          <div class="social-row" aria-label="Follow Bible Mapped">
-            <a class="social-link" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noreferrer">
-              <img src="../assets/youtube-logo.png" alt="YouTube" />
-              <span>YouTube</span>
-            </a>
-
-            <a class="social-link" href="https://www.tiktok.com/@biblemapped?is_from_webapp=1&amp;sender_device=pc" target="_blank" rel="noreferrer">
-              <img src="../assets/tiktok-logo.png" alt="TikTok" />
-              <span>TikTok</span>
-            </a>
-
-            <a class="social-link" href="https://www.instagram.com/biblemapped/" target="_blank" rel="noreferrer">
-              <img src="../assets/instagram-logo.png" alt="Instagram" />
-              <span>Instagram</span>
-            </a>
-          </div>
-        </article>
-      </div>
         </div>
       </details>
 
       <details class="about-accordion" id="qa-blog">
         <summary>Q&amp;A / Blog</summary>
         <div class="about-accordion-body">
-          <p>Q&amp;A is the place for direct Bible questions, cultural claims, objections, and short sourced answers that point back to Scripture.</p>
-          <div class="qa-blog-grid">
-            <div class="qa-blog-card">
-              <strong>Common Questions</strong>
-              <p>Clear answers to questions about the gospel, Jesus Christ, the Bible, history, and hard passages.</p>
+          <article class="about-letter-panel">
+            <span class="section-kicker">Questions</span>
+            <h3>Why Q&amp;A Belongs Here</h3>
+            <p><strong>I believe the Bible is the inerrant Word of God.</strong> It is true, trustworthy, preserved, and cannot be broken. When I disagree with Scripture, I am wrong.</p>
+            <p><strong>And I believe Satan is a liar.</strong> He has lied from the beginning, but his end is already written. Christ has conquered, and one day every enemy of God will be judged.</p>
+            <p>Q&amp;A is the place for direct Bible questions, cultural claims, objections, and short sourced answers that point back to Scripture.</p>
+            <div class="qa-blog-grid">
+              <div class="qa-blog-card">
+                <strong>Common Questions</strong>
+                <p>Clear answers to questions about the gospel, Jesus Christ, the Bible, history, and hard passages.</p>
+              </div>
+              <div class="qa-blog-card">
+                <strong>Response Hub</strong>
+                <p>Short explainers for things people are asking, claiming, or misunderstanding about Scripture.</p>
+              </div>
             </div>
-            <div class="qa-blog-card">
-              <strong>Response Hub</strong>
-              <p>Short explainers for things people are asking, claiming, or misunderstanding about Scripture.</p>
-            </div>
-          </div>
-          <a class="gospel-cta" href="../qa/index.html">Open Q&amp;A</a>
+            <a class="gospel-cta" href="../qa/index.html">Open Q&amp;A</a>
+          </article>
         </div>
       </details>
     </section>
