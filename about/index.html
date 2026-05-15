@@ -62,6 +62,172 @@
     }
 
     /* =========================
+       ABOUT PAGE HERO
+    ========================= */
+
+    .about-page .brand-bar {
+      display: none;
+    }
+
+    .about-hero {
+      padding: clamp(74px, 12vw, 148px) 0 clamp(44px, 7vw, 84px);
+      border-bottom: 1px solid var(--line);
+      background: var(--cloud);
+    }
+
+    .about-hero-inner {
+      max-width: 980px;
+      padding-left: clamp(18px, 3vw, 30px);
+      border-left: 2px solid rgba(123, 44, 255, 0.72);
+    }
+
+    .about-hero h1 {
+      margin: 0;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(4.2rem, 13vw, 10.5rem);
+      font-weight: 950;
+      letter-spacing: -0.07em;
+      line-height: 0.82;
+      text-transform: none;
+    }
+
+    .about-hero-copy {
+      max-width: 760px;
+      margin-top: clamp(28px, 4vw, 44px);
+      color: var(--ink);
+      font-size: clamp(1.2rem, 2.2vw, 1.75rem);
+      font-weight: 850;
+      line-height: 1.22;
+    }
+
+    .about-hero-line {
+      max-width: 680px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-family: "Courier New", Courier, monospace;
+      font-size: clamp(0.92rem, 1.6vw, 1.08rem);
+      letter-spacing: 0.01em;
+    }
+
+    .about-section-stack {
+      padding: 42px 0 70px;
+    }
+
+    .about-accordion {
+      border-top: 1px solid var(--line);
+      background: transparent;
+    }
+
+    .about-accordion:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .about-accordion summary {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--ink);
+      cursor: pointer;
+      list-style: none;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.45rem, 3.2vw, 2.35rem);
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      line-height: 1;
+    }
+
+    .about-accordion summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .about-accordion summary::after {
+      content: "+";
+      flex: 0 0 auto;
+      color: var(--purple);
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      font-size: 1.25rem;
+      font-weight: 950;
+      line-height: 1;
+    }
+
+    .about-accordion[open] summary::after {
+      content: "-";
+    }
+
+    .about-accordion-body {
+      padding: 0 0 32px;
+    }
+
+    .about-accordion-body > p,
+    .about-accordion-body .method-grid p,
+    .about-accordion-body .qa-blog-card p {
+      max-width: 78ch;
+      margin-top: 12px;
+      color: var(--muted);
+      font-weight: 650;
+    }
+
+    .method-grid,
+    .qa-blog-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .method-card,
+    .qa-blog-card {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 20px;
+    }
+
+    .method-card strong,
+    .qa-blog-card strong {
+      display: block;
+      color: var(--ink);
+      font-size: 0.92rem;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .about-accordion .gospel-section {
+      margin-bottom: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .about-accordion .gospel-section h2 {
+      display: none;
+    }
+
+    .about-accordion .gospel-option,
+    .about-accordion .gospel-step,
+    .about-accordion .reference-chip {
+      border-radius: 0;
+    }
+
+    .about-accordion .profile-inner {
+      grid-template-columns: 190px 1fr;
+      border: 0;
+      padding: 4px 0 0;
+    }
+
+    .about-accordion .profile-photo {
+      position: relative;
+      top: auto;
+      width: 190px;
+      box-shadow: none;
+    }
+
+    /* =========================
        TOP BAR
     ========================= */
 
@@ -739,8 +905,18 @@
       }
 
       .gospel-options,
-      .gospel-map-grid {
+      .gospel-map-grid,
+      .method-grid,
+      .qa-blog-grid {
         grid-template-columns: 1fr;
+      }
+
+      .about-accordion .profile-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .about-accordion .profile-photo {
+        width: min(220px, 100%);
       }
     }
 
@@ -758,7 +934,7 @@
   </style>
 </head>
 
-<body>
+<body class="about-page">
   <header class="brand-bar" aria-label="Bible Mapped page header">
     <div class="container brand-bar-inner">
       <a class="about-brand" href="../index.html">BibleMapped</a>
@@ -774,25 +950,32 @@
   </header>
 
   <main>
-    <section class="hero hero-clean">
-      <div class="container hero-grid">
+    <!-- About hero -->
+    <section class="about-hero" aria-labelledby="aboutHeroTitle">
+      <div class="container about-hero-inner">
         <span class="eyebrow">About</span>
+        <h1 id="aboutHeroTitle">Bible Mapped</h1>
+        <p class="about-hero-copy">BibleMapped exists to help people understand Scripture through place, people, history, and meaning &mdash; and to point people clearly to Jesus Christ.</p>
+        <p class="about-hero-line">The Bible happened in real places, among real people, inside real history.</p>
       </div>
     </section>
 
-    <!-- About intro and gospel presentation -->
-    <section class="container" aria-labelledby="aboutIntroTitle">
-      <article class="about-intro-panel">
-        <span class="eyebrow">About</span>
-        <h1 id="aboutIntroTitle">Bible Mapped</h1>
+    <!-- About accordion sections -->
+    <section class="container about-section-stack" aria-label="About page sections">
+      <details class="about-accordion" open>
+        <summary>About BibleMapped</summary>
+        <div class="about-accordion-body">
         <p>BibleMapped exists to help people see Scripture through place, people, history, and meaning.</p>
         <p>But the center of BibleMapped is not maps. It is not design. It is not even Bible facts.</p>
         <p><strong>The center is Jesus Christ.</strong></p>
         <p>The Bible’s story leads us to the gospel: that Jesus Christ came to save sinners, died for our sins, rose again, and gives eternal life to all who trust in Him.</p>
-      </article>
+        </div>
+      </details>
 
+      <details class="about-accordion">
+        <summary>Are You Going to Heaven?</summary>
+        <div class="about-accordion-body">
       <article class="gospel-section" aria-labelledby="heavenQuestionTitle">
-        <span class="eyebrow">Gospel</span>
         <h2 id="heavenQuestionTitle">Are You Going to Heaven?</h2>
         <p><strong>If you died tonight, would you know for sure you would go to heaven?</strong></p>
         <p>Not based on guessing. Not based on being good enough. The Bible gives a clear answer.</p>
@@ -832,10 +1015,38 @@
           <a class="gospel-cta" href="../qa/index.html">Learn What the Bible Says</a>
         </div>
       </article>
-    </section>
+        </div>
+      </details>
 
-    <section class="profile-band" id="about-bible-mapped">
-      <div class="container profile-inner">
+      <details class="about-accordion">
+        <summary>The BibleMapped Method</summary>
+        <div class="about-accordion-body">
+          <p>BibleMapped studies Scripture through structure, setting, people, movement, language, and meaning so the larger story becomes easier to see.</p>
+          <div class="method-grid">
+            <div class="method-card">
+              <strong>Books</strong>
+              <p>Books show the structure of Scripture and how each part fits into the whole story.</p>
+            </div>
+            <div class="method-card">
+              <strong>People</strong>
+              <p>People show the story unfolding through real lives, real choices, real failures, and real faith.</p>
+            </div>
+            <div class="method-card">
+              <strong>Maps</strong>
+              <p>Maps show the setting: cities, wildernesses, rivers, roads, empires, and the movement of the text.</p>
+            </div>
+            <div class="method-card">
+              <strong>Christ</strong>
+              <p>The method matters because Scripture ultimately points to Jesus Christ.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="about-accordion" id="about-calvin">
+        <summary>About Calvin</summary>
+        <div class="about-accordion-body">
+      <div class="profile-inner">
         <div class="profile-photo">
           <img src="../assets/calvin-photo.jpg.png" alt="Calvin in front of a map" />
         </div>
@@ -989,6 +1200,26 @@
           </div>
         </article>
       </div>
+        </div>
+      </details>
+
+      <details class="about-accordion" id="qa-blog">
+        <summary>Q&amp;A / Blog</summary>
+        <div class="about-accordion-body">
+          <p>Q&amp;A is the place for direct Bible questions, cultural claims, objections, and short sourced answers that point back to Scripture.</p>
+          <div class="qa-blog-grid">
+            <div class="qa-blog-card">
+              <strong>Common Questions</strong>
+              <p>Clear answers to questions about the gospel, Jesus Christ, the Bible, history, and hard passages.</p>
+            </div>
+            <div class="qa-blog-card">
+              <strong>Response Hub</strong>
+              <p>Short explainers for things people are asking, claiming, or misunderstanding about Scripture.</p>
+            </div>
+          </div>
+          <a class="gospel-cta" href="../qa/index.html">Open Q&amp;A</a>
+        </div>
+      </details>
     </section>
   </main>
 
@@ -1000,6 +1231,20 @@
   </footer>
 
   <script>
+    const aboutAccordions = document.querySelectorAll(".about-accordion");
+
+    aboutAccordions.forEach((accordion) => {
+      accordion.addEventListener("toggle", () => {
+        if (!accordion.open) return;
+
+        aboutAccordions.forEach((otherAccordion) => {
+          if (otherAccordion !== accordion) {
+            otherAccordion.open = false;
+          }
+        });
+      });
+    });
+
     const panTargets = document.querySelectorAll(`
       .profile-inner,
       .about-letter h2,
