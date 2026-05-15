@@ -1374,375 +1374,10 @@
         padding: 22px;
       }
     }
-    /* =========================
-       HOMEPAGE FRAMEWORK
-    ========================= */
-
-    .site-header {
-      position: fixed;
-      top: 16px;
-      left: 50%;
-      width: min(1120px, calc(100% - 32px));
-      margin: 0;
-      transform: translateX(-50%);
-      border: 1px solid rgba(17, 19, 24, 0.12);
-      border-radius: 18px;
-      background: rgba(248, 247, 242, 0.92);
-      box-shadow: 0 14px 34px rgba(11, 15, 25, 0.08);
-    }
-
-    .nav {
-      height: 68px;
-      padding: 0 18px;
-      gap: 22px;
-    }
-
-    .brand-crop {
-      width: 210px;
-      height: 58px;
-    }
-
-    .brand-logo {
-      height: 78px;
-      transform: translateX(0);
-    }
-
-    .nav-links {
-      gap: 2px;
-      font-size: 0.78rem;
-      letter-spacing: 0.02em;
-    }
-
-    .nav-links a,
-    .nav-dropdown-toggle {
-      min-height: 48px;
-      padding: 0 10px;
-      flex-direction: row;
-      gap: 7px;
-    }
-
-    .nav-icon {
-      width: 18px;
-      height: 18px;
-    }
-
-    .hero {
-      min-height: 680px;
-      padding: 132px 20px 92px;
-    }
-
-    .hero-video-tint {
-      background: rgba(11, 15, 25, 0.62);
-    }
-
-    .hero h1 {
-      max-width: 820px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(3rem, 7vw, 6.2rem);
-      font-weight: 800;
-    }
-
-    .home-section,
-    .mission-strip-section {
-      background: var(--cloud);
-      padding: 72px 20px 0;
-    }
-
-    .home-section.paper {
-      background: var(--paper);
-    }
-
-    .home-section.white {
-      background: var(--white);
-    }
-
-    .home-shell {
-      width: min(1120px, 100%);
-      margin: 0 auto;
-    }
-
-    .section-label {
-      margin: 0 0 12px;
-      color: var(--electric-purple);
-      font-size: 0.72rem;
-      font-weight: 950;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    .framework-heading {
-      margin: 0;
-      max-width: 820px;
-      color: var(--ink);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2.2rem, 5vw, 4.8rem);
-      font-weight: 800;
-      line-height: 1.02;
-    }
-
-    .framework-copy {
-      max-width: 760px;
-      margin: 16px 0 0;
-      color: var(--soft-ink);
-      font-size: 1.04rem;
-      font-weight: 650;
-      line-height: 1.75;
-    }
-
-    .mission-strip {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 18px 20px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: var(--white);
-      color: var(--ink);
-      font-size: clamp(0.92rem, 2vw, 1.05rem);
-      font-weight: 900;
-      text-align: center;
-    }
-
-    .mission-strip span {
-      color: var(--electric-purple);
-    }
-
-    .archive-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 28px;
-    }
-
-    .archive-grid.three {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .archive-card,
-    .archive-panel,
-    .letter-card {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.78);
-      color: var(--ink);
-      box-shadow: 0 18px 44px rgba(11, 15, 25, 0.05);
-    }
-
-    .archive-card {
-      display: grid;
-      gap: 14px;
-      min-height: 210px;
-      padding: 24px;
-      text-decoration: none;
-      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
-    }
-
-    .archive-card:hover,
-    .archive-pill:hover {
-      transform: translateY(-3px);
-      border-color: rgba(109, 40, 255, 0.38);
-      background: var(--white);
-    }
-
-    .archive-card h3,
-    .archive-panel h3,
-    .letter-card h3 {
-      margin: 0;
-      color: var(--ink);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.45rem, 3vw, 2rem);
-      line-height: 1.08;
-    }
-
-    .archive-card p,
-    .archive-panel p,
-    .letter-card p {
-      margin: 0;
-      color: var(--soft-ink);
-      font-size: 0.96rem;
-      font-weight: 650;
-      line-height: 1.65;
-    }
-
-    .archive-kicker {
-      color: var(--electric-purple);
-      font-size: 0.72rem;
-      font-weight: 950;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .archive-pill-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-top: 18px;
-    }
-
-    .archive-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 34px;
-      padding: 7px 11px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--cloud);
-      color: var(--ink);
-      font-size: 0.82rem;
-      font-weight: 850;
-      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
-    }
-
-    .archive-panel {
-      padding: 22px;
-    }
-
-    .map-panel {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.8fr);
-      gap: 16px;
-      margin-top: 28px;
-    }
-
-    #bible-map {
-      min-height: 380px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--paper);
-      display: grid;
-      place-items: center;
-      padding: 28px;
-      color: var(--soft-ink);
-      text-align: center;
-      font-weight: 850;
-    }
-
-    .video-frame {
-      aspect-ratio: 16 / 9;
-      border: 1px dashed rgba(17, 19, 24, 0.24);
-      border-radius: 8px;
-      background: var(--paper);
-      display: grid;
-      place-items: center;
-      color: var(--muted);
-      font-weight: 900;
-    }
-
-    .letter-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
-      gap: 16px;
-      margin-top: 28px;
-    }
-
-    .letter-card {
-      padding: clamp(24px, 4vw, 38px);
-    }
-
-    .letter-card p + p {
-      margin-top: 16px;
-    }
-
-    .footer {
-      background: var(--ink);
-      color: var(--cloud);
-      text-align: left;
-    }
-
-    .footer-shell {
-      width: min(1120px, 100%);
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 24px;
-      align-items: center;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      font-weight: 850;
-    }
-
-    .footer-links a {
-      color: var(--cloud);
-    }
-
-    @media (max-width: 900px) {
-      .archive-grid,
-      .archive-grid.three,
-      .map-panel,
-      .letter-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .site-header {
-        top: 8px;
-        width: min(100% - 16px, 1120px);
-      }
-
-      .nav {
-        height: auto;
-        min-height: 70px;
-      }
-    }
-
-    @media (max-width: 720px) {
-      .site-header {
-        border-radius: 14px;
-      }
-
-      .nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 4px 10px;
-        padding: 10px;
-      }
-
-      .brand-crop {
-        width: 170px;
-        height: 46px;
-      }
-
-      .brand-logo {
-        height: 62px;
-      }
-
-      .nav-links {
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-        overflow-x: visible;
-        font-size: 0.72rem;
-      }
-
-      .nav-links a,
-      .nav-dropdown-toggle {
-        min-height: 34px;
-        padding: 0 7px;
-      }
-
-      .hero {
-        padding-top: 178px;
-      }
-    }
-
-    .home-framework #testaments,
-    .home-framework #formula,
-    .home-framework #about,
-    .home-framework .legacy-start,
-    .home-framework .modal-overlay {
-      display: none;
-    }
   </style>
 </head>
 
-<body class="home-framework">
+<body>
   <header class="site-header">
     <nav class="nav">
       <a href="index.html" class="brand" aria-label="Bible Mapped Home">
@@ -1756,8 +1391,6 @@
       </a>
 
       <div class="nav-links">
-        <a href="index.html" class="nav-active">Home</a>
-
         <details class="nav-dropdown" data-books-dropdown>
           <summary class="nav-books nav-dropdown-toggle" aria-controls="booksDropdown">
             <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -1772,7 +1405,7 @@
           </div>
         </details>
 
-        <a href="#people" class="nav-people">
+        <a href="characters/index.html" class="nav-people">
           <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="12" cy="8" r="4" fill="currentColor" stroke="none" />
             <path d="M4 21c.8-4.2 3.8-6.5 8-6.5s7.2 2.3 8 6.5" fill="currentColor" stroke="none" />
@@ -1780,7 +1413,7 @@
           People
         </a>
 
-        <a href="#maps" class="nav-maps">
+        <a href="maps/index.html" class="nav-maps">
           <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 22s7-6.4 7-13A7 7 0 0 0 5 9c0 6.6 7 13 7 13Z" fill="currentColor" stroke="none" />
             <circle cx="12" cy="9" r="2.4" fill="white" stroke="none" />
@@ -1788,7 +1421,7 @@
           Maps
         </a>
 
-        <a href="#case-studies" class="nav-case-studies">
+        <a href="case-studies/index.html" class="nav-case-studies">
           <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M6 3h8l4 4v14H6V3Z" fill="currentColor" stroke="none" />
             <path d="M14 3v5h5" fill="rgba(255,255,255,0.35)" stroke="none" />
@@ -1797,12 +1430,18 @@
           Case Studies
         </a>
 
-        <a href="#videos">Videos</a>
+        <a href="https://biblemapped.com/about/" class="nav-about">
+          <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" stroke-width="2.2" />
+            <path d="M12 10v7" stroke-width="2.2" stroke-linecap="round" />
+            <circle cx="12" cy="7" r="1.3" fill="currentColor" stroke="none" />
+          </svg>
+          About
+        </a>
       </div>
     </nav>
   </header>
 
-  <!-- Section 1: Hero / Featured Video -->
   <section class="hero">
     <div class="hero-video-bg" aria-hidden="true">
       <video
@@ -1820,259 +1459,18 @@
 
     <div class="hero-inner">
       <div class="hero-copy parallax-item" data-speed="-0.012">
-        <h1>The Bible does not float above history. It is inside history.</h1>
+        <h1>Understand the Bible through place, context, and meaning.</h1>
 
         <p>
-          BibleMapped helps you understand Scripture through books, people, places,
-          history, words, and meaning — so the story becomes easier to see, remember,
-          and explain.
+          Bible Mapped helps Christians and seekers follow Scripture through real places,
+          real people, real timelines, and real meaning — from Eden to Abraham,
+          from Egypt to Sinai, from Jerusalem to the empty tomb.
         </p>
 
         <div class="hero-actions">
-          <a href="https://www.youtube.com/" class="btn btn-dark">Watch on YouTube</a>
-          <a href="#books" class="btn btn-light">Explore the Bible</a>
+          <a href="#testaments" class="btn btn-dark">Enter Bible Mapped</a>
+          <a href="#formula" class="btn btn-light">See How It Works</a>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 2: Mission Strip -->
-  <section class="mission-strip-section" aria-label="BibleMapped method">
-    <div class="home-shell">
-      <div class="mission-strip">
-        Map the story through: <span>Books</span> → <span>People</span> → <span>Places</span> → <span>Meaning</span> → <span>Christ</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 3: Books -->
-  <section class="home-section paper" id="books">
-    <div class="home-shell">
-      <p class="section-label">Books</p>
-      <h2 class="framework-heading">Explore the Bible by Book</h2>
-      <p class="framework-copy">
-        Start with the structure. See how each book fits into the larger story of Scripture.
-      </p>
-
-      <div class="archive-grid">
-        <a class="archive-card" href="books/index.html#old">
-          <span class="archive-kicker">Old Testament</span>
-          <h3>Old Testament</h3>
-          <p>The Hebrew Scriptures: creation, covenant, law, kings, prophets, exile, and hope.</p>
-          <div class="archive-pill-grid" aria-label="Old Testament categories">
-            <span class="archive-pill">Torah</span>
-            <span class="archive-pill">Historical Books</span>
-            <span class="archive-pill">Wisdom Books</span>
-            <span class="archive-pill">Major Prophets</span>
-            <span class="archive-pill">Minor Prophets</span>
-          </div>
-        </a>
-
-        <a class="archive-card" href="books/index.html#new">
-          <span class="archive-kicker">New Testament</span>
-          <h3>New Testament</h3>
-          <p>The fulfillment of the promises: Jesus, the apostles, the church, and the kingdom of God.</p>
-          <div class="archive-pill-grid" aria-label="New Testament categories">
-            <span class="archive-pill">Gospels</span>
-            <span class="archive-pill">Acts</span>
-            <span class="archive-pill">Pauline Letters</span>
-            <span class="archive-pill">General Letters</span>
-            <span class="archive-pill">Revelation</span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 4: People -->
-  <section class="home-section white" id="people">
-    <div class="home-shell">
-      <p class="section-label">People</p>
-      <h2 class="framework-heading">Who Are These People?</h2>
-      <p class="framework-copy">
-        The Bible is filled with kings, prophets, families, enemies, disciples, and ordinary people living inside God’s larger story.
-      </p>
-
-      <div class="archive-grid">
-        <article class="archive-panel">
-          <span class="archive-kicker">Old Testament</span>
-          <h3>Old Testament People</h3>
-          <div class="archive-pill-grid">
-            <span class="archive-pill">Adam</span>
-            <span class="archive-pill">Eve</span>
-            <span class="archive-pill">Noah</span>
-            <span class="archive-pill">Abraham</span>
-            <span class="archive-pill">Sarah</span>
-            <span class="archive-pill">Isaac</span>
-            <span class="archive-pill">Jacob</span>
-            <span class="archive-pill">Joseph</span>
-            <span class="archive-pill">Moses</span>
-            <span class="archive-pill">Aaron</span>
-            <span class="archive-pill">Miriam</span>
-            <span class="archive-pill">Pharaoh</span>
-            <span class="archive-pill">Joshua</span>
-            <span class="archive-pill">Samuel</span>
-            <span class="archive-pill">Saul</span>
-            <span class="archive-pill">David</span>
-            <span class="archive-pill">Solomon</span>
-            <span class="archive-pill">Elijah</span>
-            <span class="archive-pill">Elisha</span>
-            <span class="archive-pill">Isaiah</span>
-            <span class="archive-pill">Jeremiah</span>
-            <span class="archive-pill">Daniel</span>
-            <span class="archive-pill">Jonah</span>
-          </div>
-        </article>
-
-        <article class="archive-panel">
-          <span class="archive-kicker">New Testament</span>
-          <h3>New Testament People</h3>
-          <div class="archive-pill-grid">
-            <span class="archive-pill">Jesus</span>
-            <span class="archive-pill">Mary</span>
-            <span class="archive-pill">Joseph</span>
-            <span class="archive-pill">John the Baptist</span>
-            <span class="archive-pill">Peter</span>
-            <span class="archive-pill">John</span>
-            <span class="archive-pill">Judas</span>
-            <span class="archive-pill">Stephen</span>
-            <span class="archive-pill">Philip</span>
-            <span class="archive-pill">Paul</span>
-            <span class="archive-pill">Barnabas</span>
-            <span class="archive-pill">James</span>
-            <span class="archive-pill">Timothy</span>
-            <span class="archive-pill">Herod</span>
-            <span class="archive-pill">Pilate</span>
-            <span class="archive-pill">Caiaphas</span>
-            <span class="archive-pill">Nero</span>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 5: Maps -->
-  <section class="home-section paper" id="maps">
-    <div class="home-shell">
-      <p class="section-label">Maps</p>
-      <h2 class="framework-heading">Where Is This Happening?</h2>
-      <p class="framework-copy">
-        Before a story becomes clear, you need to know where you are. BibleMapped follows the cities, rivers, roads, wildernesses, and empires that shaped the world of Scripture.
-      </p>
-
-      <div class="map-panel">
-        <div id="bible-map">Map Navigator placeholder. Ready to connect to the existing BibleMapped map system.</div>
-        <article class="archive-panel">
-          <h3>Major Bible Locations</h3>
-          <div class="archive-pill-grid">
-            <span class="archive-pill">Eden</span>
-            <span class="archive-pill">Babel</span>
-            <span class="archive-pill">Ur</span>
-            <span class="archive-pill">Canaan</span>
-            <span class="archive-pill">Egypt</span>
-            <span class="archive-pill">Sinai</span>
-            <span class="archive-pill">Jerusalem</span>
-            <span class="archive-pill">Babylon</span>
-            <span class="archive-pill">Rome</span>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 6: Case Studies -->
-  <section class="home-section white" id="case-studies">
-    <div class="home-shell">
-      <p class="section-label">Case Studies</p>
-      <h2 class="framework-heading">Case Studies</h2>
-      <p class="framework-copy">
-        Bible stories, people, places, and words investigated through history, geography, culture, and Scripture.
-      </p>
-
-      <div class="archive-grid three">
-        <article class="archive-card">
-          <span class="archive-kicker">Case Study</span>
-          <h3>Genesis: The Beginning of Place</h3>
-          <p>Creation, land, exile, promise, and the first geography of Scripture.</p>
-          <a class="archive-pill" href="case-studies/index.html">Open Case Study</a>
-        </article>
-        <article class="archive-card">
-          <span class="archive-kicker">Case Study</span>
-          <h3>Exodus: A Nation on the Move</h3>
-          <p>Deliverance, wilderness, covenant, and the road toward worship.</p>
-          <a class="archive-pill" href="case-studies/index.html">Open Case Study</a>
-        </article>
-        <article class="archive-card">
-          <span class="archive-kicker">Case Study</span>
-          <h3>Babel: The City That Reached Up</h3>
-          <p>A city, a tower, language, scattering, and human pride.</p>
-          <a class="archive-pill" href="case-studies/index.html">Open Case Study</a>
-        </article>
-        <article class="archive-card">
-          <span class="archive-kicker">Case Study</span>
-          <h3>Abraham: Promise, Land, and Covenant</h3>
-          <p>The family line, the land promise, and blessing for the nations.</p>
-          <a class="archive-pill" href="case-studies/index.html">Open Case Study</a>
-        </article>
-        <article class="archive-card">
-          <span class="archive-kicker">Case Study</span>
-          <h3>Jerusalem: The City at the Center</h3>
-          <p>Kings, temple, exile, return, conflict, worship, and hope.</p>
-          <a class="archive-pill" href="case-studies/index.html">Open Case Study</a>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 7: Videos -->
-  <section class="home-section paper" id="videos">
-    <div class="home-shell">
-      <p class="section-label">Videos</p>
-      <h2 class="framework-heading">Watch BibleMapped</h2>
-      <p class="framework-copy">
-        Short visual explainers and deeper studies that connect Scripture to place, context, and meaning.
-      </p>
-
-      <div class="archive-grid three">
-        <article class="archive-panel">
-          <div class="video-frame">Featured video</div>
-          <h3>Featured Video</h3>
-          <p>A future lead video slot for the homepage.</p>
-        </article>
-        <article class="archive-panel">
-          <div class="video-frame">Latest video</div>
-          <h3>Latest Video</h3>
-          <p>A future upload slot for the most recent BibleMapped explainer.</p>
-        </article>
-        <article class="archive-panel">
-          <div class="video-frame">YouTube</div>
-          <h3>YouTube Channel</h3>
-          <p>Connect this card to the BibleMapped YouTube channel when ready.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 8: Dear Reader / About Letter -->
-  <section class="home-section white" id="dear-reader" style="padding-bottom:90px;">
-    <div class="home-shell">
-      <p class="section-label">About</p>
-      <h2 class="framework-heading">Dear Reader</h2>
-
-      <div class="letter-layout">
-        <article class="letter-card">
-          <p>I built BibleMapped because I believe Scripture is not boring, vague, or disconnected from real life.</p>
-          <p>The Bible happened in real places, among real people, inside real history.</p>
-          <p>When we understand the world behind the text — the geography, culture, words, conflicts, and promises — the story becomes easier to see.</p>
-          <p>BibleMapped exists to help people connect those dots.</p>
-          <p>Not just to learn more facts, but to see Scripture with clarity, wonder, and confidence.</p>
-          <p>— Calvin</p>
-        </article>
-
-        <aside class="letter-card">
-          <h3>Why the Past Still Matters</h3>
-          <p>The present is built on memory. The Bible shaped the world through places, people, words, laws, art, ethics, calendars, empires, and ideas. BibleMapped looks backward so we can see Scripture — and the world — with greater clarity.</p>
-        </aside>
       </div>
     </div>
   </section>
@@ -2354,7 +1752,7 @@
     </div>
   </section>
 
-  <section class="statement-section white legacy-start" style="padding-top:0;padding-bottom:110px;">
+  <section class="statement-section white" style="padding-top:0;padding-bottom:110px;">
     <div class="section-rail">
       <p class="rail-eyebrow">Start Here</p>
       <a class="section-display why-display" href="books/index.html#genesis">
@@ -2539,20 +1937,8 @@
     </div>
   </div>
 
-  <!-- Section 9: Footer -->
   <footer class="footer">
-    <div class="footer-shell">
-      <p>© BibleMapped — Understanding Scripture through place, context, and meaning.</p>
-      <nav class="footer-links" aria-label="Footer">
-        <a href="index.html">Home</a>
-        <a href="books/index.html">Books</a>
-        <a href="characters/index.html">People</a>
-        <a href="maps/index.html">Maps</a>
-        <a href="case-studies/index.html">Case Studies</a>
-        <a href="#videos">Videos</a>
-        <a href="https://www.youtube.com/">YouTube</a>
-      </nav>
-    </div>
+    <p>© Bible Mapped — Understanding Scripture through place, context, and meaning.</p>
   </footer>
 
   <script>
