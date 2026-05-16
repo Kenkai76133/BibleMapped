@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -66,6 +66,10 @@
       text-decoration: none;
     }
 
+    button {
+      font: inherit;
+    }
+
     :focus-visible {
       outline: 3px solid rgba(109, 40, 255, 0.42);
       outline-offset: 4px;
@@ -85,7 +89,7 @@
       border-bottom: 1px solid rgba(17, 19, 24, 0.05);
       box-shadow: none;
       transition: opacity 320ms ease, transform 320ms ease;
-      overflow: hidden;
+      overflow: visible;
     }
 
     .landing-start .site-header {
@@ -172,14 +176,6 @@
       font-weight: 900;
       font-size: 0.9rem;
       color: var(--soft-ink);
-    }
-
-    .nav-about {
-      margin-left: 0;
-    }
-
-    .nav-right .nav-icon {
-      display: none;
     }
 
     .nav-links a,
@@ -292,7 +288,7 @@
     }
 
     /* =========================
-       HERO VIDEO BACKGROUND
+       HERO
     ========================= */
 
     .hero {
@@ -336,11 +332,7 @@
       position: absolute;
       inset: 0;
       z-index: 1;
-      background:
-        linear-gradient(
-          rgba(11, 15, 25, 0.52),
-          rgba(11, 15, 25, 0.76)
-        );
+      background: linear-gradient(rgba(11, 15, 25, 0.52), rgba(11, 15, 25, 0.76));
       pointer-events: none;
     }
 
@@ -401,36 +393,12 @@
       font-weight: 950;
       border: 1px solid currentColor;
       cursor: pointer;
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease,
-        color 0.2s ease,
-        border-color 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
     }
 
     .btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
-    }
-
-    .btn-dark {
-      background: var(--white);
-      color: var(--ink);
-      border-color: var(--white);
-    }
-
-    .btn-light {
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--white);
-      border-color: rgba(255, 255, 255, 0.52);
-      backdrop-filter: blur(8px);
-    }
-
-    .btn-light:hover {
-      color: var(--white);
-      border-color: rgba(255, 255, 255, 0.9);
-      background: rgba(255, 255, 255, 0.14);
     }
 
     .btn-start {
@@ -455,26 +423,13 @@
     }
 
     /* =========================
-       SHARED SECTION STYLES
+       SHARED SECTIONS
     ========================= */
 
     .statement-section {
       padding: 110px 20px 0;
       background: var(--paper);
       position: relative;
-    }
-
-    .statement-section.cloud {
-      background: var(--cloud);
-    }
-
-    .statement-section.white {
-      background: var(--white);
-    }
-
-    .formula-section {
-      padding-top: 70px;
-      padding-bottom: 0;
     }
 
     .landing-panel-section,
@@ -486,6 +441,47 @@
 
     .landing-panel-section {
       padding-top: clamp(52px, 7vw, 88px);
+    }
+
+    .section-rail {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 8px;
+    }
+
+    .rail-eyebrow {
+      margin: 0 0 18px;
+      font-size: 0.82rem;
+      font-weight: 950;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--electric-purple);
+    }
+
+    .section-display {
+      display: block;
+      text-align: center;
+      width: 100%;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1;
+      font-size: clamp(3.2rem, 8vw, 7rem);
+      color: var(--ink);
+      transition: transform 0.25s ease, color 0.25s ease;
+      padding: 0;
+      margin: 0;
+    }
+
+    .section-display:hover {
+      transform: translateY(-6px);
+    }
+
+    .explore-display:hover {
+      color: var(--electric-purple);
     }
 
     .minimal-bar {
@@ -526,44 +522,43 @@
     }
 
     .minimal-bar-toggle:hover,
-    .minimal-bar-toggle:focus-visible {
+    .minimal-bar-toggle:focus-visible,
+    .minimal-bar-toggle[aria-expanded="true"] {
       background: #ece8de;
       transform: translateY(-4px);
     }
 
-    .minimal-bar-toggle::after {
-      content: none;
-    }
-
-    .minimal-bar-toggle[aria-expanded="true"]::after {
-      content: none;
+    .about-mapped-toggle,
+    .formula-inside-toggle {
+      color: var(--bright-red);
     }
 
     .about-mapped-toggle {
-      min-height: clamp(74px, 7vw, 96px);
-      justify-content: flex-start;
-      color: var(--bright-red);
-      font-family: Inter, Arial, Helvetica, sans-serif;
-      font-size: clamp(1.15rem, 2.1vw, 1.85rem);
+      min-height: clamp(150px, 20vw, 260px);
+      justify-content: center;
+      text-align: center;
+      padding: clamp(34px, 6vw, 86px) 20px;
+      font-size: clamp(3.2rem, 8vw, 7rem) !important;
       font-weight: 950;
-      letter-spacing: -0.015em;
       line-height: 1;
-      text-align: left;
-      text-transform: none;
-      overflow: hidden;
-      overflow-wrap: anywhere;
-    }
-
-    .about-mapped-toggle::after {
-      content: none;
+      letter-spacing: 0;
+      overflow-wrap: normal;
+      will-change: transform;
     }
 
     .about-mapped-toggle:hover,
     .about-mapped-toggle:focus-visible,
     .about-mapped-toggle[aria-expanded="true"] {
-      background: #ece8de;
+      transform: translateY(-8px);
+    }
+
+    .about-mapped-toggle:hover,
+    .about-mapped-toggle:focus-visible,
+    .about-mapped-toggle[aria-expanded="true"],
+    .formula-inside-toggle:hover,
+    .formula-inside-toggle:focus-visible,
+    .formula-inside-toggle[aria-expanded="true"] {
       color: var(--bright-red);
-      transform: translateY(-4px);
     }
 
     .about-mapped-shell {
@@ -586,7 +581,7 @@
     }
 
     .minimal-panel.open {
-      max-height: 3600px;
+      max-height: 7200px;
       opacity: 1;
     }
 
@@ -605,44 +600,6 @@
       width: 100%;
       min-width: 0;
       overflow: hidden;
-    }
-
-    .formula-collage {
-      grid-column: 1 / -1;
-    }
-
-    .about-mapped-grid > * {
-      min-width: 0;
-    }
-
-    .about-formula-feature {
-      grid-column: 1 / -1;
-      margin-top: clamp(22px, 4vw, 44px);
-    }
-
-    .about-formula-feature .formula-art-frame {
-      min-height: clamp(360px, 48vw, 640px);
-    }
-
-    .about-formula-feature .formula-art-frame img {
-      min-height: clamp(360px, 48vw, 640px);
-      padding: 0;
-    }
-
-    .formula-word.when {
-      left: 68%;
-      transform: translateX(-50%) translateY(58px);
-      transition-delay: 0.42s;
-    }
-
-    .about-formula-feature .formula-word.why {
-      right: 6%;
-      transition-delay: 0.58s;
-    }
-
-    .formula-art-frame.words-in-view .formula-word.when {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
     }
 
     .landing-panel-copy {
@@ -664,242 +621,6 @@
       font-weight: 760;
       line-height: 1.18;
       overflow-wrap: anywhere;
-    }
-
-    .formula-collage {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0;
-      margin-top: clamp(14px, 2vw, 22px);
-    }
-
-    .formula-collage-item {
-      position: relative;
-      min-height: clamp(150px, 16vw, 230px);
-      overflow: hidden;
-      background: #e9e4d9;
-      isolation: isolate;
-      margin: 0;
-    }
-
-    .formula-collage-item img {
-      width: 100%;
-      height: 100%;
-      min-height: inherit;
-      object-fit: cover;
-      display: block;
-      filter: saturate(0.92) contrast(1.02);
-      transition: transform 500ms ease;
-    }
-
-    .formula-collage-item:hover img {
-      transform: scale(1.025);
-    }
-
-    .formula-collage-item::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      background: linear-gradient(180deg, rgba(11, 15, 25, 0.08), rgba(11, 15, 25, 0.58));
-      pointer-events: none;
-    }
-
-    .formula-collage-label {
-      position: absolute;
-      left: 18px;
-      bottom: 16px;
-      z-index: 2;
-      color: var(--white);
-      font-size: clamp(1.8rem, 4vw, 3.5rem);
-      font-weight: 950;
-      line-height: 0.9;
-      letter-spacing: -0.04em;
-    }
-
-    .method-grid,
-    .gospel-choice-grid,
-    .gospel-answer-grid,
-    .visual-slot-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 24px;
-    }
-
-    .method-card,
-    .gospel-choice,
-    .gospel-answer,
-    .visual-slot,
-    .about-calvin-image-slot {
-      min-height: 104px;
-      border: 1px solid rgba(17, 19, 24, 0.07);
-      background: rgba(255, 255, 255, 0.72);
-      color: var(--ink);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-      font-weight: 820;
-      text-align: center;
-    }
-
-    .method-card p {
-      margin: 10px 0 0;
-      color: var(--muted);
-      font-weight: 540;
-      line-height: 1.45;
-    }
-
-    .gospel-choice,
-    .gospel-answer {
-      cursor: pointer;
-      transition: transform 180ms ease, background 180ms ease;
-    }
-
-    .gospel-choice:hover,
-    .gospel-answer:hover,
-    .gospel-choice.active,
-    .gospel-answer.active {
-      background: var(--electric-purple);
-      color: var(--white);
-      transform: translateY(-3px);
-    }
-
-    .gospel-response {
-      display: none;
-      margin-top: 28px;
-    }
-
-    .gospel-response.active {
-      display: block;
-    }
-
-    .about-calvin-split {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: clamp(18px, 3vw, 34px);
-      align-items: stretch;
-    }
-
-    .about-calvin-image-slot {
-      min-height: 340px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-size: 0.82rem;
-    }
-
-    .about-calvin-letter {
-      background: var(--white);
-      padding: clamp(24px, 4vw, 42px);
-      color: var(--muted);
-      font-weight: 650;
-      line-height: 1.7;
-    }
-
-    .about-calvin-letter h3 {
-      margin: 0 0 18px;
-      color: var(--ink);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2rem, 4vw, 3.6rem);
-      line-height: 0.95;
-      letter-spacing: -0.045em;
-    }
-
-    .youtube-contact-strip {
-      padding: 34px 20px 38px;
-      background: var(--electric-purple);
-      color: var(--white);
-    }
-
-    .youtube-contact-inner {
-      width: min(1120px, 100%);
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 24px;
-    }
-
-    .youtube-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      color: var(--white);
-      font-family: Inter, Arial, Helvetica, sans-serif;
-      font-size: clamp(1.5rem, 3.5vw, 3.4rem);
-      font-weight: 950;
-      letter-spacing: -0.04em;
-    }
-
-    .youtube-play {
-      width: 54px;
-      height: 38px;
-      display: inline-grid;
-      place-items: center;
-      background: #ff0000;
-      color: var(--white);
-      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-      font-size: 1rem;
-      font-weight: 950;
-    }
-
-    .contact-link {
-      color: rgba(255, 255, 255, 0.82);
-      font-weight: 850;
-    }
-
-    .section-rail {
-      width: min(1120px, 100%);
-      margin: 0 auto;
-      text-align: center;
-      padding: 0 8px;
-    }
-
-    .rail-eyebrow {
-      margin: 0 0 18px;
-      font-size: 0.82rem;
-      font-weight: 950;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--electric-purple);
-    }
-
-    .section-display {
-      display: block;
-      text-align: center;
-      width: 100%;
-      border: 0;
-      background: transparent;
-      cursor: pointer;
-      font-weight: 950;
-      letter-spacing: 0;
-      line-height: 1;
-      font-size: clamp(3.2rem, 8vw, 7rem);
-      color: var(--ink);
-      transition: transform 0.25s ease, color 0.25s ease;
-      padding: 0;
-      margin: 0;
-    }
-
-    .section-display:hover {
-      transform: translateY(-6px);
-    }
-
-    .formula-display {
-      color: var(--bright-red);
-    }
-
-    .formula-display:hover {
-      color: var(--ink);
-    }
-
-    .why-display:hover,
-    .explore-display:hover {
-      color: var(--electric-purple);
     }
 
     /* =========================
@@ -972,10 +693,7 @@
     .svg-piece {
       cursor: pointer;
       opacity: 0;
-      transition:
-        transform 1.15s cubic-bezier(0.16, 0.9, 0.22, 1),
-        opacity 0.65s ease,
-        filter 0.35s ease;
+      transition: transform 1.15s cubic-bezier(0.16, 0.9, 0.22, 1), opacity 0.65s ease, filter 0.35s ease;
       transform-box: fill-box;
       transform-origin: center center;
     }
@@ -1005,25 +723,11 @@
       vector-effect: non-scaling-stroke;
     }
 
-    .piece-1 {
-      transform: translate(-130px, -38px) rotate(-5deg);
-    }
-
-    .piece-2 {
-      transform: translate(-155px, 46px) rotate(4deg);
-    }
-
-    .piece-3 {
-      transform: translate(-75px, 0px) rotate(-2.8deg);
-    }
-
-    .piece-4 {
-      transform: translate(76px, 0px) rotate(2.8deg);
-    }
-
-    .piece-5 {
-      transform: translate(142px, 8px) rotate(-4deg);
-    }
+    .piece-1 { transform: translate(-130px, -38px) rotate(-5deg); }
+    .piece-2 { transform: translate(-155px, 46px) rotate(4deg); }
+    .piece-3 { transform: translate(-75px, 0px) rotate(-2.8deg); }
+    .piece-4 { transform: translate(76px, 0px) rotate(2.8deg); }
+    .piece-5 { transform: translate(142px, 8px) rotate(-4deg); }
 
     .testament-svg-wrap.in-view .svg-piece {
       opacity: 1;
@@ -1053,38 +757,57 @@
     }
 
     /* =========================
-       FORMULA FULL-WIDTH SECTION
+       FORMULA INSIDE ABOUT
     ========================= */
 
-    #formula {
+    .about-panel-formula {
+      grid-column: 1 / -1;
+      margin-top: clamp(28px, 4vw, 52px);
+      width: 100%;
+    }
+
+    .about-sub-bars {
+      grid-column: 1 / -1;
+      width: 100%;
+      margin-top: clamp(24px, 4vw, 48px);
+      display: grid;
+      gap: 14px;
+    }
+
+    .about-sub-bars .minimal-bar {
+      background: transparent;
+    }
+
+    .about-sub-bars .minimal-bar-toggle {
+      background: #f1eee7;
+      border-top: 1px solid rgba(17, 19, 24, 0.07);
+      border-bottom: 1px solid rgba(17, 19, 24, 0.07);
+    }
+
+    .about-sub-bars .minimal-panel {
+      background: rgba(255, 253, 246, 0.62);
+    }
+
+    .about-sub-bars .minimal-panel-inner {
+      width: 100%;
       padding-left: 0;
       padding-right: 0;
-      padding-bottom: 0;
     }
 
-    #formula .section-rail {
-      width: 100%;
-      max-width: none;
-      padding: 0;
-    }
-
-    #formula .formula-display {
-      width: min(1120px, 100%);
-      margin: 0 auto;
-      padding: 0 20px;
+    .formula-inside-toggle {
+      margin-top: 10px;
+      border-top: 1px solid rgba(17, 19, 24, 0.08);
+      border-bottom: 1px solid rgba(17, 19, 24, 0.08);
     }
 
     .formula-inline-window {
       width: 100%;
-      margin: 34px auto 0;
+      margin: 0 auto;
       max-height: 0;
       opacity: 0;
       overflow: hidden;
       transform: translateY(28px);
-      transition:
-        max-height 0.75s cubic-bezier(0.16, 0.9, 0.22, 1),
-        opacity 0.45s ease,
-        transform 0.65s ease;
+      transition: max-height 0.75s cubic-bezier(0.16, 0.9, 0.22, 1), opacity 0.45s ease, transform 0.65s ease;
     }
 
     .formula-inline-window.open {
@@ -1098,14 +821,14 @@
       background: transparent;
       border: none;
       box-shadow: none;
-      padding: 0 0 100px;
+      padding: 0 0 46px;
       overflow: visible;
     }
 
     .formula-art-frame {
       position: relative;
       width: 100%;
-      min-height: 640px;
+      min-height: clamp(420px, 52vw, 680px);
       overflow: hidden;
       background: var(--white);
       border: none;
@@ -1116,7 +839,7 @@
     .formula-art-frame img {
       width: 100%;
       height: 100%;
-      min-height: 640px;
+      min-height: clamp(420px, 52vw, 680px);
       object-fit: cover;
       object-position: center;
       display: block;
@@ -1147,12 +870,7 @@
       bottom: 0;
       height: 46%;
       z-index: 2;
-      background: linear-gradient(
-        to top,
-        rgba(11, 15, 25, 0.62),
-        rgba(11, 15, 25, 0.24),
-        transparent
-      );
+      background: linear-gradient(to top, rgba(11, 15, 25, 0.62), rgba(11, 15, 25, 0.24), transparent);
       pointer-events: none;
     }
 
@@ -1161,11 +879,7 @@
       position: absolute;
       inset: 0;
       z-index: 3;
-      background:
-        linear-gradient(
-          rgba(11, 15, 25, 0.28),
-          rgba(11, 15, 25, 0.62)
-        );
+      background: linear-gradient(rgba(11, 15, 25, 0.28), rgba(11, 15, 25, 0.62));
       opacity: 0;
       transition: opacity 700ms ease;
       pointer-events: none;
@@ -1188,9 +902,7 @@
       white-space: nowrap;
       color: var(--cloud);
       text-shadow: 0 18px 50px rgba(0, 0, 0, 0.65);
-      transition:
-        opacity 0.85s ease,
-        transform 1s cubic-bezier(0.16, 0.9, 0.22, 1);
+      transition: opacity 0.85s ease, transform 1s cubic-bezier(0.16, 0.9, 0.22, 1);
       will-change: opacity, transform;
     }
 
@@ -1227,10 +939,6 @@
       transform: translateY(0);
     }
 
-    /* =========================
-       FORMULA GUIDED OVERLAY TOUR
-    ========================= */
-
     .formula-tour-panel {
       position: absolute;
       z-index: 8;
@@ -1243,9 +951,7 @@
       opacity: 0;
       pointer-events: none;
       transform: translateY(28px) scale(0.96);
-      transition:
-        opacity 420ms ease,
-        transform 520ms cubic-bezier(0.16, 0.9, 0.22, 1);
+      transition: opacity 420ms ease, transform 520ms cubic-bezier(0.16, 0.9, 0.22, 1);
     }
 
     .formula-tour-panel.active {
@@ -1337,11 +1043,7 @@
       font-size: 0.88rem;
       font-weight: 950;
       cursor: pointer;
-      transition:
-        transform 180ms ease,
-        background 180ms ease,
-        color 180ms ease,
-        border-color 180ms ease;
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease, border-color 180ms ease;
     }
 
     .formula-tour-link {
@@ -1427,7 +1129,95 @@
     }
 
     /* =========================
-       MODALS FOR TESTAMENTS
+       GOSPEL / ABOUT CALVIN
+    ========================= */
+
+    .method-grid,
+    .gospel-choice-grid,
+    .gospel-answer-grid,
+    .visual-slot-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .method-card,
+    .gospel-choice,
+    .gospel-answer,
+    .visual-slot,
+    .about-calvin-image-slot {
+      min-height: 104px;
+      border: 1px solid rgba(17, 19, 24, 0.07);
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      font-weight: 820;
+      text-align: center;
+    }
+
+    .gospel-choice,
+    .gospel-answer {
+      cursor: pointer;
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .gospel-choice:hover,
+    .gospel-answer:hover,
+    .gospel-choice.active,
+    .gospel-answer.active {
+      background: var(--electric-purple);
+      color: var(--white);
+      transform: translateY(-3px);
+    }
+
+    .gospel-response {
+      display: none;
+      margin-top: 28px;
+    }
+
+    .gospel-response.active {
+      display: block;
+    }
+
+    .about-calvin-split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(18px, 3vw, 34px);
+      align-items: stretch;
+    }
+
+    .about-calvin-image-slot {
+      min-height: 340px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.82rem;
+    }
+
+    .about-calvin-letter {
+      background: var(--white);
+      padding: clamp(24px, 4vw, 42px);
+      color: var(--muted);
+      font-weight: 650;
+      line-height: 1.7;
+    }
+
+    .about-calvin-letter h3 {
+      margin: 0 0 18px;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+    }
+
+    /* =========================
+       MODALS
     ========================= */
 
     .modal-overlay {
@@ -1601,18 +1391,43 @@
        FOOTER
     ========================= */
 
-    .footer {
-      padding: 58px 20px;
+    .youtube-contact-strip {
+      padding: 34px 20px 38px;
       background: var(--electric-purple);
       color: var(--white);
-      text-align: center;
     }
 
-    .footer p {
-      margin: 0;
+    .youtube-contact-inner {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 24px;
+    }
+
+    .youtube-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
       color: var(--white);
-      font-weight: 850;
-      letter-spacing: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-size: clamp(1.5rem, 3.5vw, 3.4rem);
+      font-weight: 950;
+      letter-spacing: -0.04em;
+    }
+
+    .youtube-play {
+      width: 54px;
+      height: 38px;
+      display: inline-grid;
+      place-items: center;
+      background: #ff0000;
+      color: var(--white);
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      font-size: 1rem;
+      font-weight: 950;
     }
 
     .parallax-item {
@@ -1683,25 +1498,11 @@
         font-size: 84px;
       }
 
-      .piece-1 {
-        transform: translate(-78px, -26px) rotate(-4deg);
-      }
-
-      .piece-2 {
-        transform: translate(-88px, 32px) rotate(4deg);
-      }
-
-      .piece-3 {
-        transform: translate(-46px, 0px) rotate(-2deg);
-      }
-
-      .piece-4 {
-        transform: translate(48px, 0px) rotate(2deg);
-      }
-
-      .piece-5 {
-        transform: translate(82px, 10px) rotate(-3deg);
-      }
+      .piece-1 { transform: translate(-78px, -26px) rotate(-4deg); }
+      .piece-2 { transform: translate(-88px, 32px) rotate(4deg); }
+      .piece-3 { transform: translate(-46px, 0px) rotate(-2deg); }
+      .piece-4 { transform: translate(48px, 0px) rotate(2deg); }
+      .piece-5 { transform: translate(82px, 10px) rotate(-3deg); }
     }
 
     @media (max-width: 720px) {
@@ -1781,11 +1582,6 @@
         padding: 82px 16px 0;
       }
 
-      .formula-section {
-        padding-top: 54px;
-        padding-bottom: 0;
-      }
-
       .testament-puzzle-section {
         padding-bottom: 90px;
       }
@@ -1800,13 +1596,12 @@
       }
 
       .about-mapped-toggle {
-        font-size: clamp(1rem, 5vw, 1.35rem);
+        min-height: clamp(128px, 32vw, 190px);
+        font-size: clamp(2.85rem, 13vw, 4.8rem) !important;
       }
 
-      .formula-collage {
-        grid-column: auto;
-        grid-row: auto;
-        grid-template-columns: 1fr;
+      .formula-inside-toggle {
+        font-size: clamp(1rem, 5vw, 1.35rem);
       }
 
       .about-calvin-image-slot {
@@ -1850,6 +1645,7 @@
 
       .brand-logo {
         height: 74px;
+        width: auto;
         transform: translateX(2px);
       }
 
@@ -2042,318 +1838,290 @@
           <g class="svg-piece old-piece piece-1" data-modal-target="oldTestamentModal">
             <g clip-path="url(#piece-old-1)">
               <rect x="0" y="0" width="1200" height="430" fill="#0b0f19"></rect>
-
-              <image
-                href="assets/old-puzzle-1.png"
-                x="0"
-                y="0"
-                width="275"
-                height="205"
-                preserveAspectRatio="xMidYMid slice">
-              </image>
-
+              <image href="assets/old-puzzle-1.png" x="0" y="0" width="275" height="205" preserveAspectRatio="xMidYMid slice"></image>
               <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
               <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
             </g>
-
             <path class="piece-stroke" d="M0,0 H275 L245,205 H0 Z"></path>
           </g>
 
           <g class="svg-piece old-piece piece-2" data-modal-target="oldTestamentModal">
             <g clip-path="url(#piece-old-2)">
-              <image
-                href="assets/old-puzzle-2.png"
-                x="0"
-                y="205"
-                width="275"
-                height="225"
-                preserveAspectRatio="xMidYMid slice">
-              </image>
-
+              <image href="assets/old-puzzle-2.png" x="0" y="205" width="275" height="225" preserveAspectRatio="xMidYMid slice"></image>
               <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
               <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
             </g>
-
             <path class="piece-stroke" d="M0,205 H245 L275,430 H0 Z"></path>
           </g>
 
           <g class="svg-piece old-piece piece-3" data-modal-target="oldTestamentModal">
             <g clip-path="url(#piece-old-3)">
-              <image
-                href="assets/old-puzzle-3.png"
-                x="0"
-                y="0"
-                width="1450"
-                height="430"
-                preserveAspectRatio="xMinYMid slice">
-              </image>
-
+              <image href="assets/old-puzzle-3.png" x="0" y="0" width="1450" height="430" preserveAspectRatio="xMinYMid slice"></image>
               <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
               <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
             </g>
-
             <path class="piece-stroke" d="M245,0 H585 L555,430 H275 Z"></path>
           </g>
 
           <g class="svg-piece new-piece piece-4" data-modal-target="newTestamentModal">
             <g clip-path="url(#piece-new-1)">
-              <image
-                href="assets/new-puzzle-1.png"
-                x="555"
-                y="0"
-                width="350"
-                height="430"
-                preserveAspectRatio="xMidYMid slice">
-              </image>
-
+              <image href="assets/new-puzzle-1.png" x="555" y="0" width="350" height="430" preserveAspectRatio="xMidYMid slice"></image>
               <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
               <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
             </g>
-
             <path class="piece-stroke" d="M585,0 H905 L875,430 H555 Z"></path>
           </g>
 
           <g class="svg-piece new-piece piece-5" data-modal-target="newTestamentModal">
             <g clip-path="url(#piece-new-2)">
-              <image
-                href="assets/new-puzzle-2.png"
-                x="880"
-                y="0"
-                width="355"
-                height="430"
-                preserveAspectRatio="xMidYMin slice">
-              </image>
-
+              <image href="assets/new-puzzle-2.png" x="880" y="0" width="355" height="430" preserveAspectRatio="xMidYMin slice"></image>
               <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
               <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
             </g>
-
             <path class="piece-stroke" d="M905,0 H1200 V430 H875 Z"></path>
           </g>
         </svg>
       </div>
 
+      <p class="puzzle-hint">Click a shard to explore the Testament libraries</p>
     </div>
   </section>
-<section class="landing-panel-section" id="about-biblemapped">
-  <div class="minimal-bar about-mapped-shell" id="aboutMappedShell">
-    <button
-      class="minimal-bar-toggle about-mapped-toggle"
-      type="button"
-      id="aboutMappedToggle"
-      aria-expanded="false"
-      aria-controls="aboutMappedPanel"
-    >
-      About Bible Mapped
-    </button>
 
-    <div class="minimal-panel" id="aboutMappedPanel" aria-hidden="true">
-      <div class="minimal-panel-inner">
-        <div class="about-mapped-grid">
-          <div>
-            <p class="landing-panel-copy">
-              BibleMapped helps people understand Scripture by mapping where it happened,
-              who was involved, and why those details matter.
-            </p>
-
-            <p class="landing-panel-copy">
-              The Bible did not float above history. It happened somewhere — in real places,
-              among real people, inside real cultures, empires, roads, deserts, temples,
-              wells, mountains, and cities.
-            </p>
-          </div>
-
-          <p class="landing-quote">
-            “The Bible was not written above history. It was written inside it.
-            BibleMapped connects the where, the who, and the why so the what becomes clear.”
-          </p>
-        </div>
-
-        <div class="about-panel-formula">
-          <button
-            class="minimal-bar-toggle formula-inside-toggle"
-            type="button"
-            id="formulaToggle"
-            aria-expanded="false"
-            aria-controls="formulaInlineWindow"
-          >
-            The Bible Mapped Formula
-          </button>
-
-          <div class="formula-inline-window" id="formulaInlineWindow" aria-hidden="true">
-            <div class="formula-window-inner">
-              <div class="formula-art-frame" id="formulaArtFrame">
-                <img
-                  src="assets/formula-design.png"
-                  alt="Bible Mapped Formula Design"
-                  onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
-                />
-
-                <div class="formula-image-placeholder">
-                  Formula image missing.
-                </div>
-
-                <span class="formula-word where">Where</span>
-                <span class="formula-word who">Who</span>
-                <span class="formula-word why">Why</span>
-
-                <article class="formula-tour-panel where-panel active" data-formula-tour-panel="1">
-                  <p class="formula-tour-kicker">John 4 Case Study</p>
-                  <h3>Where?</h3>
-
-                  <div class="formula-tour-image">
-                    <img
-                      src="assets/john4-where.jpg"
-                      alt="Map or visual of Samaria and Jacob’s well"
-                      onerror="this.style.display='none';"
-                    />
-                  </div>
-
-                  <p>
-                    John 4 happens in Samaria, near Jacob’s well. That location matters
-                    because Samaria carried centuries of tension between Jews and Samaritans.
-                  </p>
-
-                  <div class="formula-tour-actions">
-                    <button class="formula-tour-btn" type="button" data-formula-tour-next="2">
-                      Next: Who →
-                    </button>
-                  </div>
-                </article>
-
-                <article class="formula-tour-panel who-panel" data-formula-tour-panel="2">
-                  <p class="formula-tour-kicker">John 4 Case Study</p>
-                  <h3>Who?</h3>
-
-                  <div class="formula-tour-image">
-                    <img
-                      src="assets/john4-who.jpg"
-                      alt="Visual of Jesus and the Samaritan woman"
-                      onerror="this.style.display='none';"
-                    />
-                  </div>
-
-                  <p>
-                    Jesus is a Jewish teacher. The woman is a Samaritan. This is not just
-                    a conversation at a well — it is Jesus crossing religious, ethnic,
-                    cultural, and personal boundaries.
-                  </p>
-
-                  <div class="formula-tour-actions">
-                    <button class="formula-tour-btn secondary" type="button" data-formula-tour-next="1">
-                      ← Back
-                    </button>
-
-                    <button class="formula-tour-btn" type="button" data-formula-tour-next="3">
-                      Next: Why →
-                    </button>
-                  </div>
-                </article>
-
-                <article class="formula-tour-panel why-panel" data-formula-tour-panel="3">
-                  <p class="formula-tour-kicker">John 4 Case Study</p>
-                  <h3>Why?</h3>
-
-                  <div class="formula-tour-image">
-                    <img
-                      src="assets/john4-why.jpg"
-                      alt="Visual showing the meaning of John 4"
-                      onerror="this.style.display='none';"
-                    />
-                  </div>
-
-                  <p>
-                    The location reveals the meaning. Jesus brings living water into a divided
-                    place and reveals that true worship is not limited by mountain, temple,
-                    ethnicity, or reputation.
-                  </p>
-
-                  <div class="formula-tour-actions">
-                    <button class="formula-tour-btn secondary" type="button" data-formula-tour-next="2">
-                      ← Back
-                    </button>
-
-                    <a class="formula-tour-link" href="case-studies/index.html">
-                      View Case Studies →
-                    </a>
-                  </div>
-                </article>
-
-                <div class="formula-tour-progress" aria-hidden="true">
-                  <span class="formula-tour-dot active" data-formula-tour-dot="1"></span>
-                  <span class="formula-tour-dot" data-formula-tour-dot="2"></span>
-                  <span class="formula-tour-dot" data-formula-tour-dot="3"></span>
-                </div>
-              </div>
-
-              <div class="formula-tour-note">
-                <h3>The BibleMapped Method</h3>
-
-                <p>
-                  BibleMapped studies Scripture by asking where it happened, who was involved,
-                  and why the location, people, and history matter — so the meaning of the passage
-                  comes into clearer focus and points us to Jesus Christ.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-    <div class="minimal-bar">
-      <button class="minimal-bar-toggle" type="button" id="gospelToggle" aria-expanded="false" aria-controls="gospelPanel">
-        Is Heaven Your Casa?
+  <section class="landing-panel-section" id="about-biblemapped">
+    <div class="minimal-bar about-mapped-shell" id="aboutMappedShell">
+      <button
+        class="minimal-bar-toggle about-mapped-toggle parallax-item"
+        data-speed="-0.018"
+        type="button"
+        id="aboutMappedToggle"
+        aria-expanded="false"
+        aria-controls="aboutMappedPanel"
+      >
+        About Bible Mapped
       </button>
-      <div class="minimal-panel" id="gospelPanel" aria-hidden="true">
+
+      <div class="minimal-panel" id="aboutMappedPanel" aria-hidden="true">
         <div class="minimal-panel-inner">
-          <p class="landing-panel-copy"><strong>If you died tonight, would you know for sure you&rsquo;re going to heaven?</strong></p>
-          <div class="gospel-choice-grid" aria-label="Initial gospel question">
-            <button class="gospel-choice" type="button" data-gospel-choice>YES</button>
-            <button class="gospel-choice" type="button" data-gospel-choice>NO</button>
-          </div>
-          <div class="gospel-response" id="gospelResponse">
-            <p class="landing-panel-copy"><strong>If God asked you, “Why should I let you into heaven?” what would you say?</strong></p>
-            <div class="gospel-answer-grid">
-              <button class="gospel-answer" type="button">I tried to be a good person</button>
-              <button class="gospel-answer" type="button">I have not hurt anybody</button>
-              <button class="gospel-answer" type="button">I went to church</button>
-              <button class="gospel-answer" type="button">I believe in God</button>
-              <button class="gospel-answer" type="button">I trusted in Jesus Christ</button>
-              <button class="gospel-answer" type="button">I am not sure</button>
-              <button class="gospel-answer" type="button">None of the above</button>
+          <div class="about-mapped-grid">
+            <div>
+              <p class="landing-panel-copy">
+                BibleMapped helps people understand Scripture by mapping where it happened,
+                who was involved, and why those details matter.
+              </p>
+
+              <p class="landing-panel-copy">
+                The Bible did not float above history. It happened somewhere — in real places,
+                among real people, inside real cultures, empires, roads, deserts, temples,
+                wells, mountains, and cities.
+              </p>
             </div>
-            <p class="landing-panel-copy">The Bible says all have sinned (Romans 3:23), that sin earns death (Romans 6:23), and that good works cannot save us (Ephesians 2:8-9). The good news is that Jesus died for our sins, rose again, and salvation is received by grace through faith in Him (John 3:16; Romans 10:9-13).</p>
-            <div class="visual-slot-grid">
-              <div class="visual-slot">Gospel Visual Slot</div>
-              <div class="visual-slot">Scripture Path Image Slot</div>
+
+            <p class="landing-quote">
+              “The Bible was not written above history. It was written inside it.
+              BibleMapped connects the where, the who, and the why so the what becomes clear.”
+            </p>
+          </div>
+
+          <div class="about-panel-formula">
+            <button
+              class="minimal-bar-toggle formula-inside-toggle"
+              type="button"
+              id="formulaToggle"
+              aria-expanded="false"
+              aria-controls="formulaInlineWindow"
+            >
+              The Bible Mapped Formula
+            </button>
+
+            <div class="formula-inline-window" id="formulaInlineWindow" aria-hidden="true">
+              <div class="formula-window-inner">
+                <div class="formula-art-frame" id="formulaArtFrame">
+                  <img
+                    src="assets/formula-design.png"
+                    alt="Bible Mapped Formula Design"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+                  />
+
+                  <div class="formula-image-placeholder">
+                    Formula image missing. Add assets/formula-design.png
+                  </div>
+
+                  <span class="formula-word where">Where</span>
+                  <span class="formula-word who">Who</span>
+                  <span class="formula-word why">Why</span>
+
+                  <article class="formula-tour-panel where-panel active" data-formula-tour-panel="1">
+                    <p class="formula-tour-kicker">John 4 Case Study</p>
+                    <h3>Where?</h3>
+
+                    <div class="formula-tour-image">
+                      <img
+                        src="assets/john4-where.jpg"
+                        alt="Map or visual of Samaria and Jacob’s well"
+                        onerror="this.style.display='none';"
+                      />
+                    </div>
+
+                    <p>
+                      John 4 happens in Samaria, near Jacob’s well. That location matters
+                      because Samaria carried centuries of tension between Jews and Samaritans.
+                    </p>
+
+                    <div class="formula-tour-actions">
+                      <button class="formula-tour-btn" type="button" data-formula-tour-next="2">
+                        Next: Who →
+                      </button>
+                    </div>
+                  </article>
+
+                  <article class="formula-tour-panel who-panel" data-formula-tour-panel="2">
+                    <p class="formula-tour-kicker">John 4 Case Study</p>
+                    <h3>Who?</h3>
+
+                    <div class="formula-tour-image">
+                      <img
+                        src="assets/john4-who.jpg"
+                        alt="Visual of Jesus and the Samaritan woman"
+                        onerror="this.style.display='none';"
+                      />
+                    </div>
+
+                    <p>
+                      Jesus is a Jewish teacher. The woman is a Samaritan. This is not just
+                      a conversation at a well — it is Jesus crossing religious, ethnic,
+                      cultural, and personal boundaries.
+                    </p>
+
+                    <div class="formula-tour-actions">
+                      <button class="formula-tour-btn secondary" type="button" data-formula-tour-next="1">
+                        ← Back
+                      </button>
+
+                      <button class="formula-tour-btn" type="button" data-formula-tour-next="3">
+                        Next: Why →
+                      </button>
+                    </div>
+                  </article>
+
+                  <article class="formula-tour-panel why-panel" data-formula-tour-panel="3">
+                    <p class="formula-tour-kicker">John 4 Case Study</p>
+                    <h3>Why?</h3>
+
+                    <div class="formula-tour-image">
+                      <img
+                        src="assets/john4-why.jpg"
+                        alt="Visual showing the meaning of John 4"
+                        onerror="this.style.display='none';"
+                      />
+                    </div>
+
+                    <p>
+                      The location reveals the meaning. Jesus brings living water into a divided
+                      place and reveals that true worship is not limited by mountain, temple,
+                      ethnicity, or reputation.
+                    </p>
+
+                    <div class="formula-tour-actions">
+                      <button class="formula-tour-btn secondary" type="button" data-formula-tour-next="2">
+                        ← Back
+                      </button>
+
+                      <a class="formula-tour-link" href="case-studies/index.html">
+                        View Case Studies →
+                      </a>
+                    </div>
+                  </article>
+
+                  <div class="formula-tour-progress" aria-hidden="true">
+                    <span class="formula-tour-dot active" data-formula-tour-dot="1"></span>
+                    <span class="formula-tour-dot" data-formula-tour-dot="2"></span>
+                    <span class="formula-tour-dot" data-formula-tour-dot="3"></span>
+                  </div>
+                </div>
+
+                <div class="formula-tour-note">
+                  <h3>The BibleMapped Method</h3>
+
+                  <p>
+                    BibleMapped studies Scripture by asking where it happened, who was involved,
+                    and why the location, people, and history matter — so the meaning of the passage
+                    comes into clearer focus and points us to Jesus Christ.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
+
+          <div class="about-sub-bars">
+            <div class="minimal-bar" id="salvation">
+              <button class="minimal-bar-toggle" type="button" id="gospelToggle" aria-expanded="false" aria-controls="gospelPanel">
+                Is Heaven Your Casa?
+              </button>
+              <div class="minimal-panel" id="gospelPanel" aria-hidden="true">
+                <div class="minimal-panel-inner">
+                  <p class="landing-panel-copy">
+                    <strong>If you died tonight, would you know for sure you&rsquo;re going to heaven?</strong>
+                  </p>
+
+                  <div class="gospel-choice-grid" aria-label="Initial gospel question">
+                    <button class="gospel-choice" type="button" data-gospel-choice>YES</button>
+                    <button class="gospel-choice" type="button" data-gospel-choice>NO</button>
+                  </div>
+
+                  <div class="gospel-response" id="gospelResponse">
+                    <p class="landing-panel-copy">
+                      <strong>If God asked you, “Why should I let you into heaven?” what would you say?</strong>
+                    </p>
+
+                    <div class="gospel-answer-grid">
+                      <button class="gospel-answer" type="button">I tried to be a good person</button>
+                      <button class="gospel-answer" type="button">I have not hurt anybody</button>
+                      <button class="gospel-answer" type="button">I went to church</button>
+                      <button class="gospel-answer" type="button">I believe in God</button>
+                      <button class="gospel-answer" type="button">I trusted in Jesus Christ</button>
+                      <button class="gospel-answer" type="button">I am not sure</button>
+                      <button class="gospel-answer" type="button">None of the above</button>
+                    </div>
+
+                    <p class="landing-panel-copy">
+                      The Bible says all have sinned (Romans 3:23), that sin earns death (Romans 6:23),
+                      and that good works cannot save us (Ephesians 2:8-9). The good news is that Jesus
+                      died for our sins, rose again, and salvation is received by grace through faith in Him
+                      (John 3:16; Romans 10:9-13).
+                    </p>
+
+                    <div class="visual-slot-grid">
+                      <div class="visual-slot">Gospel Visual Slot</div>
+                      <div class="visual-slot">Scripture Path Image Slot</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="minimal-bar" id="about-calvin">
+              <button class="minimal-bar-toggle" type="button" id="calvinToggle" aria-expanded="false" aria-controls="calvinPanel">
+                About Calvin
+              </button>
+              <div class="minimal-panel" id="calvinPanel" aria-hidden="true">
+                <div class="minimal-panel-inner about-calvin-split">
+                  <div class="about-calvin-image-slot">Calvin Image Slot</div>
+                  <article class="about-calvin-letter">
+                    <h3>Dear Reader</h3>
+                    <p>My name is Calvin S. I am a Christian, a husband, a father, and the heart behind BibleMapped.</p>
+                    <p>I built BibleMapped because I believe Scripture is not vague or disconnected from real life. The Bible happened in real places, among real people, inside real history.</p>
+                    <p>The goal is not just maps. The goal is Jesus Christ.</p>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
   </section>
 
-  <section class="minimal-bar-section" id="about-calvin">
-    <div class="minimal-bar">
-      <button class="minimal-bar-toggle" type="button" id="calvinToggle" aria-expanded="false" aria-controls="calvinPanel">
-        About Calvin
-      </button>
-      <div class="minimal-panel" id="calvinPanel" aria-hidden="true">
-        <div class="minimal-panel-inner about-calvin-split">
-          <div class="about-calvin-image-slot">Calvin Image Slot</div>
-          <article class="about-calvin-letter">
-            <h3>Dear Reader</h3>
-            <p>My name is Calvin S. I am a Christian, a husband, a father, and the heart behind BibleMapped.</p>
-            <p>I built BibleMapped because I believe Scripture is not vague or disconnected from real life. The Bible happened in real places, among real people, inside real history.</p>
-            <p>The goal is not just maps. The goal is Jesus Christ.</p>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
   <div class="modal-overlay" id="oldTestamentModal" aria-hidden="true">
     <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="oldModalTitle">
       <div class="modal-top">
@@ -2376,9 +2144,9 @@
             <div class="book-list">
               <a href="books/index.html#genesis">Genesis</a>
               <a href="books/index.html#exodus">Exodus</a>
-              <a href="books/index.html">Leviticus</a>
-              <a href="books/index.html">Numbers</a>
-              <a href="books/index.html">Deuteronomy</a>
+              <a href="books/index.html#leviticus">Leviticus</a>
+              <a href="books/index.html#numbers">Numbers</a>
+              <a href="books/index.html#deuteronomy">Deuteronomy</a>
             </div>
           </section>
 
@@ -2386,18 +2154,18 @@
             <h3>History</h3>
             <p>Israel’s land, kings, exile, return, and national story.</p>
             <div class="book-list">
-              <a href="books/index.html">Joshua</a>
-              <a href="books/index.html">Judges</a>
-              <a href="books/index.html">Ruth</a>
-              <a href="books/index.html">1 Samuel</a>
-              <a href="books/index.html">2 Samuel</a>
-              <a href="books/index.html">1 Kings</a>
-              <a href="books/index.html">2 Kings</a>
-              <a href="books/index.html">1 Chronicles</a>
-              <a href="books/index.html">2 Chronicles</a>
-              <a href="books/index.html">Ezra</a>
-              <a href="books/index.html">Nehemiah</a>
-              <a href="books/index.html">Esther</a>
+              <a href="books/index.html#joshua">Joshua</a>
+              <a href="books/index.html#judges">Judges</a>
+              <a href="books/index.html#ruth">Ruth</a>
+              <a href="books/index.html#1-samuel">1 Samuel</a>
+              <a href="books/index.html#2-samuel">2 Samuel</a>
+              <a href="books/index.html#1-kings">1 Kings</a>
+              <a href="books/index.html#2-kings">2 Kings</a>
+              <a href="books/index.html#1-chronicles">1 Chronicles</a>
+              <a href="books/index.html#2-chronicles">2 Chronicles</a>
+              <a href="books/index.html#ezra">Ezra</a>
+              <a href="books/index.html#nehemiah">Nehemiah</a>
+              <a href="books/index.html#esther">Esther</a>
             </div>
           </section>
 
@@ -2405,11 +2173,11 @@
             <h3>Poetry & Wisdom</h3>
             <p>Prayer, suffering, worship, wisdom, love, and the fear of God.</p>
             <div class="book-list">
-              <a href="books/index.html">Job</a>
-              <a href="books/index.html">Psalms</a>
-              <a href="books/index.html">Proverbs</a>
-              <a href="books/index.html">Ecclesiastes</a>
-              <a href="books/index.html">Song of Solomon</a>
+              <a href="books/index.html#job">Job</a>
+              <a href="books/index.html#psalms">Psalms</a>
+              <a href="books/index.html#proverbs">Proverbs</a>
+              <a href="books/index.html#ecclesiastes">Ecclesiastes</a>
+              <a href="books/index.html#song-of-solomon">Song of Solomon</a>
             </div>
           </section>
 
@@ -2417,11 +2185,11 @@
             <h3>Major Prophets</h3>
             <p>Judgment, hope, exile, restoration, and the coming Messiah.</p>
             <div class="book-list">
-              <a href="books/index.html">Isaiah</a>
-              <a href="books/index.html">Jeremiah</a>
-              <a href="books/index.html">Lamentations</a>
-              <a href="books/index.html">Ezekiel</a>
-              <a href="books/index.html">Daniel</a>
+              <a href="books/index.html#isaiah">Isaiah</a>
+              <a href="books/index.html#jeremiah">Jeremiah</a>
+              <a href="books/index.html#lamentations">Lamentations</a>
+              <a href="books/index.html#ezekiel">Ezekiel</a>
+              <a href="books/index.html#daniel">Daniel</a>
             </div>
           </section>
 
@@ -2429,18 +2197,18 @@
             <h3>Minor Prophets</h3>
             <p>Shorter prophetic books with major theological weight.</p>
             <div class="book-list">
-              <a href="books/index.html">Hosea</a>
-              <a href="books/index.html">Joel</a>
-              <a href="books/index.html">Amos</a>
-              <a href="books/index.html">Obadiah</a>
-              <a href="books/index.html">Jonah</a>
-              <a href="books/index.html">Micah</a>
-              <a href="books/index.html">Nahum</a>
-              <a href="books/index.html">Habakkuk</a>
-              <a href="books/index.html">Zephaniah</a>
-              <a href="books/index.html">Haggai</a>
-              <a href="books/index.html">Zechariah</a>
-              <a href="books/index.html">Malachi</a>
+              <a href="books/index.html#hosea">Hosea</a>
+              <a href="books/index.html#joel">Joel</a>
+              <a href="books/index.html#amos">Amos</a>
+              <a href="books/index.html#obadiah">Obadiah</a>
+              <a href="books/index.html#jonah">Jonah</a>
+              <a href="books/index.html#micah">Micah</a>
+              <a href="books/index.html#nahum">Nahum</a>
+              <a href="books/index.html#habakkuk">Habakkuk</a>
+              <a href="books/index.html#zephaniah">Zephaniah</a>
+              <a href="books/index.html#haggai">Haggai</a>
+              <a href="books/index.html#zechariah">Zechariah</a>
+              <a href="books/index.html#malachi">Malachi</a>
             </div>
           </section>
         </div>
@@ -2468,10 +2236,10 @@
             <h3>Gospels</h3>
             <p>The life, teaching, death, and resurrection of Jesus Christ.</p>
             <div class="book-list">
-              <a href="books/index.html">Matthew</a>
-              <a href="books/index.html">Mark</a>
-              <a href="books/index.html">Luke</a>
-              <a href="books/index.html">John</a>
+              <a href="books/index.html#matthew">Matthew</a>
+              <a href="books/index.html#mark">Mark</a>
+              <a href="books/index.html#luke">Luke</a>
+              <a href="books/index.html#john">John</a>
             </div>
           </section>
 
@@ -2479,7 +2247,7 @@
             <h3>Church History</h3>
             <p>The spread of the gospel and the formation of the early Church.</p>
             <div class="book-list">
-              <a href="books/index.html">Acts</a>
+              <a href="books/index.html#acts">Acts</a>
             </div>
           </section>
 
@@ -2487,19 +2255,19 @@
             <h3>Paul’s Letters</h3>
             <p>Doctrine, church life, salvation, unity, suffering, and discipleship.</p>
             <div class="book-list">
-              <a href="books/index.html">Romans</a>
-              <a href="books/index.html">1 Corinthians</a>
-              <a href="books/index.html">2 Corinthians</a>
-              <a href="books/index.html">Galatians</a>
-              <a href="books/index.html">Ephesians</a>
-              <a href="books/index.html">Philippians</a>
-              <a href="books/index.html">Colossians</a>
-              <a href="books/index.html">1 Thessalonians</a>
-              <a href="books/index.html">2 Thessalonians</a>
-              <a href="books/index.html">1 Timothy</a>
-              <a href="books/index.html">2 Timothy</a>
-              <a href="books/index.html">Titus</a>
-              <a href="books/index.html">Philemon</a>
+              <a href="books/index.html#romans">Romans</a>
+              <a href="books/index.html#1-corinthians">1 Corinthians</a>
+              <a href="books/index.html#2-corinthians">2 Corinthians</a>
+              <a href="books/index.html#galatians">Galatians</a>
+              <a href="books/index.html#ephesians">Ephesians</a>
+              <a href="books/index.html#philippians">Philippians</a>
+              <a href="books/index.html#colossians">Colossians</a>
+              <a href="books/index.html#1-thessalonians">1 Thessalonians</a>
+              <a href="books/index.html#2-thessalonians">2 Thessalonians</a>
+              <a href="books/index.html#1-timothy">1 Timothy</a>
+              <a href="books/index.html#2-timothy">2 Timothy</a>
+              <a href="books/index.html#titus">Titus</a>
+              <a href="books/index.html#philemon">Philemon</a>
             </div>
           </section>
 
@@ -2507,14 +2275,14 @@
             <h3>General Letters</h3>
             <p>Faithfulness, endurance, truth, holiness, and love.</p>
             <div class="book-list">
-              <a href="books/index.html">Hebrews</a>
-              <a href="books/index.html">James</a>
-              <a href="books/index.html">1 Peter</a>
-              <a href="books/index.html">2 Peter</a>
-              <a href="books/index.html">1 John</a>
-              <a href="books/index.html">2 John</a>
-              <a href="books/index.html">3 John</a>
-              <a href="books/index.html">Jude</a>
+              <a href="books/index.html#hebrews">Hebrews</a>
+              <a href="books/index.html#james">James</a>
+              <a href="books/index.html#1-peter">1 Peter</a>
+              <a href="books/index.html#2-peter">2 Peter</a>
+              <a href="books/index.html#1-john">1 John</a>
+              <a href="books/index.html#2-john">2 John</a>
+              <a href="books/index.html#3-john">3 John</a>
+              <a href="books/index.html#jude">Jude</a>
             </div>
           </section>
 
@@ -2522,7 +2290,7 @@
             <h3>Apocalypse</h3>
             <p>The unveiling of Christ, final judgment, and the hope of new creation.</p>
             <div class="book-list">
-              <a href="books/index.html">Revelation</a>
+              <a href="books/index.html#revelation">Revelation</a>
             </div>
           </section>
         </div>
@@ -2639,9 +2407,29 @@
       });
     });
 
+    function resetFormulaWindow() {
+      if (!formulaToggle || !formulaInlineWindow) return;
+
+      formulaInlineWindow.classList.remove("open");
+      formulaInlineWindow.setAttribute("aria-hidden", "true");
+      formulaToggle.setAttribute("aria-expanded", "false");
+
+      if (formulaArtFrame) {
+        formulaArtFrame.classList.remove("words-in-view");
+        formulaArtFrame.classList.remove("tour-active");
+      }
+
+      setFormulaTourStep(1);
+    }
+
     function closeMinimalPanels(exceptPanel = null) {
       document.querySelectorAll(".minimal-panel.open").forEach((openPanel) => {
         if (openPanel === exceptPanel) return;
+        if (exceptPanel && openPanel.contains(exceptPanel)) return;
+
+        if (openPanel.contains(formulaInlineWindow)) {
+          resetFormulaWindow();
+        }
 
         openPanel.classList.remove("open");
         openPanel.setAttribute("aria-hidden", "true");
@@ -2655,7 +2443,9 @@
 
     if (formulaToggle && formulaInlineWindow) {
       formulaToggle.addEventListener("click", () => {
-        closeMinimalPanels(formulaInlineWindow);
+        const parentMinimalPanel = formulaInlineWindow.closest(".minimal-panel");
+        closeMinimalPanels(parentMinimalPanel || formulaInlineWindow);
+
         const isOpen = formulaInlineWindow.classList.toggle("open");
 
         formulaToggle.setAttribute("aria-expanded", String(isOpen));
