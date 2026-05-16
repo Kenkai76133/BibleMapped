@@ -479,44 +479,47 @@
 
     .landing-panel-section,
     .minimal-bar-section {
-      padding: 0 20px 24px;
+      padding: 0 20px 18px;
       background: var(--cloud);
       overflow: hidden;
     }
 
     .landing-panel-section {
-      padding-top: clamp(74px, 9vw, 118px);
+      padding-top: clamp(52px, 7vw, 88px);
     }
 
     .minimal-bar {
-      width: min(1120px, 100%);
+      width: min(940px, calc(100vw - 40px));
+      max-width: 100%;
       margin: 0 auto;
-      background: var(--paper);
-      border-radius: 8px;
-      box-shadow: 0 16px 44px rgba(11, 15, 25, 0.07);
+      background: rgba(247, 245, 239, 0.92);
+      border-radius: 4px;
+      box-shadow: none;
       overflow: hidden;
     }
 
     .minimal-bar-toggle {
       width: 100%;
-      min-height: clamp(82px, 9vw, 112px);
+      min-height: clamp(64px, 7vw, 88px);
       min-width: 0;
+      position: relative;
       appearance: none;
       border: 0;
-      background: var(--paper);
+      background: rgba(247, 245, 239, 0.94);
       color: var(--ink);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
-      padding: 22px clamp(22px, 4vw, 42px);
+      gap: 20px;
+      padding: 18px clamp(20px, 4vw, 38px);
       text-align: left;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.45rem, 3.4vw, 3rem);
-      font-weight: 950;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-size: clamp(1rem, 1.6vw, 1.24rem);
+      font-weight: 900;
       line-height: 1;
-      letter-spacing: -0.04em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       white-space: normal;
       overflow-wrap: anywhere;
       transition: background 180ms ease, transform 180ms ease;
@@ -524,7 +527,7 @@
 
     .minimal-bar-toggle:hover,
     .minimal-bar-toggle:focus-visible {
-      background: #f3efe4;
+      background: #f7f5ef;
     }
 
     .minimal-bar-toggle::after {
@@ -540,12 +543,43 @@
       content: "-";
     }
 
+    .about-mapped-toggle {
+      min-height: clamp(92px, 12vw, 148px);
+      justify-content: center;
+      color: var(--bright-red);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-size: clamp(2.65rem, 7.4vw, 6.8rem);
+      font-weight: 950;
+      letter-spacing: -0.045em;
+      line-height: 0.9;
+      text-align: center;
+      text-transform: none;
+      overflow: hidden;
+      overflow-wrap: anywhere;
+    }
+
+    .about-mapped-toggle::after {
+      position: absolute;
+      right: clamp(20px, 4vw, 38px);
+      top: 18px;
+      color: var(--bright-red);
+      font-size: clamp(1rem, 1.5vw, 1.3rem);
+    }
+
+    .about-mapped-toggle:hover,
+    .about-mapped-toggle:focus-visible,
+    .about-mapped-toggle[aria-expanded="true"] {
+      background: transparent;
+      color: var(--bright-red);
+      transform: translateY(-2px);
+    }
+
     .minimal-panel {
       max-height: 0;
       overflow: hidden;
       opacity: 0;
-      background: rgba(255, 253, 246, 0.72);
-      transition: max-height 520ms ease, opacity 300ms ease;
+      background: rgba(255, 253, 246, 0.58);
+      transition: max-height 480ms cubic-bezier(0.16, 0.9, 0.22, 1), opacity 240ms ease;
     }
 
     .minimal-panel.open {
@@ -554,26 +588,43 @@
     }
 
     .minimal-panel-inner {
-      padding: 8px clamp(22px, 4vw, 42px) 46px;
+      padding: 4px clamp(20px, 4vw, 38px) 32px;
+      overflow: hidden;
+    }
+
+    .about-mapped-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(18px, 3vw, 34px);
+      align-items: start;
+      width: 100%;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .about-mapped-grid > * {
+      min-width: 0;
     }
 
     .landing-panel-copy {
-      max-width: 760px;
-      margin: 18px 0 0;
+      max-width: 62ch;
+      margin: 14px 0 0;
       color: var(--muted);
-      font-size: clamp(1rem, 1.5vw, 1.16rem);
-      font-weight: 650;
-      line-height: 1.65;
+      font-size: clamp(0.96rem, 1.2vw, 1.08rem);
+      font-weight: 560;
+      line-height: 1.62;
+      overflow-wrap: anywhere;
     }
 
     .landing-quote {
-      max-width: 900px;
-      margin: 30px 0 0;
+      max-width: 56ch;
+      margin: 14px 0 0;
       color: var(--ink);
       font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.45rem, 3vw, 2.35rem);
-      font-weight: 800;
-      line-height: 1.15;
+      font-size: clamp(1.18rem, 2vw, 1.72rem);
+      font-weight: 760;
+      line-height: 1.18;
+      overflow-wrap: anywhere;
     }
 
     .method-grid,
@@ -591,23 +642,23 @@
     .gospel-answer,
     .visual-slot,
     .about-calvin-image-slot {
-      min-height: 120px;
-      border: 0;
-      background: var(--white);
+      min-height: 104px;
+      border: 1px solid rgba(17, 19, 24, 0.07);
+      background: rgba(255, 255, 255, 0.72);
       color: var(--ink);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px;
-      font-weight: 950;
+      padding: 18px;
+      font-weight: 820;
       text-align: center;
     }
 
     .method-card p {
       margin: 10px 0 0;
       color: var(--muted);
-      font-weight: 650;
+      font-weight: 540;
       line-height: 1.45;
     }
 
@@ -638,12 +689,12 @@
     .about-calvin-split {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 30px;
+      gap: clamp(18px, 3vw, 34px);
       align-items: stretch;
     }
 
     .about-calvin-image-slot {
-      min-height: 420px;
+      min-height: 340px;
       color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -1653,6 +1704,7 @@
       .gospel-choice-grid,
       .gospel-answer-grid,
       .visual-slot-grid,
+      .about-mapped-grid,
       .about-calvin-split {
         grid-template-columns: 1fr;
       }
@@ -1986,20 +2038,24 @@
 
   <section class="landing-panel-section" id="about-biblemapped">
     <div class="minimal-bar">
-      <button class="minimal-bar-toggle" type="button" id="aboutMappedToggle" aria-expanded="false" aria-controls="aboutMappedPanel">
+      <button class="minimal-bar-toggle about-mapped-toggle" type="button" id="aboutMappedToggle" aria-expanded="false" aria-controls="aboutMappedPanel">
         About BibleMapped
       </button>
       <div class="minimal-panel" id="aboutMappedPanel" aria-hidden="true">
         <div class="minimal-panel-inner">
-          <p class="landing-panel-copy">
-            BibleMapped helps visitors see Scripture through books, people, places, history, words, meaning, and Christ.
-          </p>
-          <p class="landing-quote">
-            “The Bible was not written above history. It was written inside it. BibleMapped connects the where, the who, and the why so the what becomes clear.”
-          </p>
-          <p class="landing-panel-copy">
-            Q&amp;A lives here too: direct Bible questions, cultural claims, and common misunderstandings answered with Scripture and context.
-          </p>
+          <div class="about-mapped-grid">
+            <div>
+              <p class="landing-panel-copy">
+                BibleMapped helps visitors see Scripture through books, people, places, history, words, meaning, and Christ.
+              </p>
+              <p class="landing-panel-copy">
+                Q&amp;A lives here too: direct Bible questions, cultural claims, and common misunderstandings answered with Scripture and context.
+              </p>
+            </div>
+            <p class="landing-quote">
+              “The Bible was not written above history. It was written inside it. BibleMapped connects the where, the who, and the why so the what becomes clear.”
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -2360,8 +2416,23 @@
       });
     });
 
+    function closeMinimalPanels(exceptPanel = null) {
+      document.querySelectorAll(".minimal-panel.open").forEach((openPanel) => {
+        if (openPanel === exceptPanel) return;
+
+        openPanel.classList.remove("open");
+        openPanel.setAttribute("aria-hidden", "true");
+
+        const controllingToggle = document.querySelector(`[aria-controls="${openPanel.id}"]`);
+        if (controllingToggle) {
+          controllingToggle.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+
     if (formulaToggle && formulaInlineWindow) {
       formulaToggle.addEventListener("click", () => {
+        closeMinimalPanels(formulaInlineWindow);
         const isOpen = formulaInlineWindow.classList.toggle("open");
 
         formulaToggle.setAttribute("aria-expanded", String(isOpen));
@@ -2427,6 +2498,7 @@
       if (!toggle || !panel) return;
 
       toggle.addEventListener("click", () => {
+        closeMinimalPanels(panel);
         const isOpen = panel.classList.toggle("open");
         toggle.setAttribute("aria-expanded", String(isOpen));
         panel.setAttribute("aria-hidden", String(!isOpen));
