@@ -500,7 +500,7 @@
 
     .minimal-bar-toggle {
       width: 100%;
-      min-height: clamp(64px, 7vw, 88px);
+      min-height: clamp(74px, 7vw, 96px);
       min-width: 0;
       position: relative;
       appearance: none;
@@ -510,13 +510,13 @@
       cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       gap: 20px;
       padding: 18px clamp(20px, 4vw, 38px);
       text-align: left;
       font-family: Inter, Arial, Helvetica, sans-serif;
-      font-size: clamp(1rem, 1.6vw, 1.24rem);
-      font-weight: 900;
+      font-size: clamp(1.15rem, 2.1vw, 1.85rem);
+      font-weight: 950;
       line-height: 1;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -528,7 +528,7 @@
     .minimal-bar-toggle:hover,
     .minimal-bar-toggle:focus-visible {
       background: #ece8de;
-      transform: translateY(-2px);
+      transform: translateY(-4px);
     }
 
     .minimal-bar-toggle::after {
@@ -540,16 +540,16 @@
     }
 
     .about-mapped-toggle {
-      min-height: clamp(92px, 12vw, 148px);
-      justify-content: center;
+      min-height: clamp(74px, 7vw, 96px);
+      justify-content: flex-start;
       color: var(--bright-red);
       font-family: Inter, Arial, Helvetica, sans-serif;
-      font-size: clamp(2.65rem, 7.4vw, 6.8rem);
+      font-size: clamp(1.15rem, 2.1vw, 1.85rem);
       font-weight: 950;
-      letter-spacing: -0.045em;
-      line-height: 0.9;
-      text-align: center;
-      text-transform: none;
+      letter-spacing: 0.08em;
+      line-height: 1;
+      text-align: left;
+      text-transform: uppercase;
       overflow: hidden;
       overflow-wrap: anywhere;
     }
@@ -561,7 +561,7 @@
     .about-mapped-toggle:hover,
     .about-mapped-toggle:focus-visible,
     .about-mapped-toggle[aria-expanded="true"] {
-      background: transparent;
+      background: #ece8de;
       color: var(--bright-red);
       transform: translateY(-4px);
     }
@@ -597,7 +597,7 @@
 
     .about-mapped-grid {
       display: grid;
-      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
       gap: clamp(18px, 3vw, 34px);
       align-items: start;
       width: 100%;
@@ -630,27 +630,53 @@
       overflow-wrap: anywhere;
     }
 
-    .about-image-stack {
+    .formula-collage {
       display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
     }
 
-    .about-image-slot {
-      min-height: clamp(150px, 18vw, 230px);
-      display: grid;
-      place-items: center;
-      background: rgba(248, 247, 242, 0.82);
-      color: var(--muted);
-      font-size: 0.78rem;
-      font-weight: 900;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+    .formula-collage-item {
+      position: relative;
+      min-height: clamp(180px, 21vw, 280px);
+      overflow: hidden;
+      background: #e9e4d9;
+      isolation: isolate;
     }
 
-    .about-image-slot.wide {
-      aspect-ratio: 16 / 9;
-      min-height: 0;
+    .formula-collage-item img {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.92) contrast(1.02);
+      transition: transform 500ms ease;
+    }
+
+    .formula-collage-item:hover img {
+      transform: scale(1.025);
+    }
+
+    .formula-collage-item::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(11, 15, 25, 0.08), rgba(11, 15, 25, 0.58));
+      pointer-events: none;
+    }
+
+    .formula-collage-label {
+      position: absolute;
+      left: 18px;
+      bottom: 16px;
+      z-index: 2;
+      color: var(--white);
+      font-size: clamp(1.8rem, 4vw, 3.5rem);
+      font-weight: 950;
+      line-height: 0.9;
+      letter-spacing: -0.04em;
     }
 
     .method-grid,
@@ -1736,7 +1762,11 @@
       }
 
       .about-mapped-toggle {
-        font-size: clamp(2.25rem, 13vw, 4.2rem);
+        font-size: clamp(1rem, 5vw, 1.35rem);
+      }
+
+      .formula-collage {
+        grid-template-columns: 1fr;
       }
 
       .about-calvin-image-slot {
@@ -2069,7 +2099,7 @@
   <section class="landing-panel-section" id="about-biblemapped">
     <div class="minimal-bar about-mapped-shell" id="aboutMappedShell">
       <button class="minimal-bar-toggle about-mapped-toggle" type="button" id="aboutMappedToggle" aria-expanded="false" aria-controls="aboutMappedPanel">
-        About BibleMapped
+        About Bible Mapped
       </button>
       <div class="minimal-panel" id="aboutMappedPanel" aria-hidden="true">
         <div class="minimal-panel-inner">
@@ -2085,28 +2115,24 @@
             <p class="landing-quote">
               “The Bible was not written above history. It was written inside it. BibleMapped connects the where, the who, and the why so the what becomes clear.”
             </p>
-            <div class="about-image-stack" aria-label="BibleMapped image placeholders">
-              <div class="about-image-slot wide">Bible / Map Image Slot</div>
-              <div class="about-image-slot">Documentary Visual Slot</div>
+            <div class="formula-collage" aria-label="Bible Mapped formula images">
+              <figure class="formula-collage-item">
+                <img src="assets/formula-place.png" alt="Map-style image for Where in the Bible Mapped formula" />
+                <figcaption class="formula-collage-label">Where?</figcaption>
+              </figure>
+              <figure class="formula-collage-item">
+                <img src="assets/formula-people.png" alt="People-focused image for Who in the Bible Mapped formula" />
+                <figcaption class="formula-collage-label">Who?</figcaption>
+              </figure>
+              <figure class="formula-collage-item">
+                <img src="assets/formula-time.png" alt="Time and history image for When in the Bible Mapped formula" />
+                <figcaption class="formula-collage-label">When?</figcaption>
+              </figure>
+              <figure class="formula-collage-item">
+                <img src="assets/formula-design.png" alt="Bible Mapped formula design image for Why" />
+                <figcaption class="formula-collage-label">Why?</figcaption>
+              </figure>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="minimal-bar-section" id="formula">
-    <div class="minimal-bar">
-      <button class="minimal-bar-toggle" type="button" id="formulaToggle" aria-expanded="false" aria-controls="formulaInlineWindow">
-        The BibleMapped Formula
-      </button>
-      <div class="minimal-panel" id="formulaInlineWindow" aria-hidden="true">
-        <div class="minimal-panel-inner">
-          <p class="landing-panel-copy">Where did it happen? Who was there? Why does it matter? BibleMapped uses these questions to help the passage become clearer.</p>
-          <div class="method-grid">
-            <div class="method-card"><strong>Where</strong><p>Places give Scripture setting, movement, and historical texture.</p></div>
-            <div class="method-card"><strong>Who</strong><p>People reveal conflict, covenant, faith, failure, and witness.</p></div>
-            <div class="method-card"><strong>Why</strong><p>Meaning comes into focus as context points us toward Christ.</p></div>
           </div>
         </div>
       </div>
@@ -2116,10 +2142,11 @@
   <section class="minimal-bar-section" id="salvation">
     <div class="minimal-bar">
       <button class="minimal-bar-toggle" type="button" id="gospelToggle" aria-expanded="false" aria-controls="gospelPanel">
-        Is Heaven Your Home?
+        Is Heaven Your Casa?
       </button>
       <div class="minimal-panel" id="gospelPanel" aria-hidden="true">
         <div class="minimal-panel-inner">
+          <p class="landing-panel-copy"><strong>If you died tonight, would you know for sure you&rsquo;re going to heaven?</strong></p>
           <div class="gospel-choice-grid" aria-label="Initial gospel question">
             <button class="gospel-choice" type="button" data-gospel-choice>YES</button>
             <button class="gospel-choice" type="button" data-gospel-choice>NO</button>
