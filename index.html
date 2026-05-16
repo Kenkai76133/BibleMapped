@@ -608,12 +608,41 @@
     }
 
     .formula-collage {
-      grid-column: 2;
-      grid-row: 1 / span 2;
+      grid-column: 1 / -1;
     }
 
     .about-mapped-grid > * {
       min-width: 0;
+    }
+
+    .about-formula-feature {
+      grid-column: 1 / -1;
+      margin-top: clamp(22px, 4vw, 44px);
+    }
+
+    .about-formula-feature .formula-art-frame {
+      min-height: clamp(360px, 48vw, 640px);
+    }
+
+    .about-formula-feature .formula-art-frame img {
+      min-height: clamp(360px, 48vw, 640px);
+      padding: 0;
+    }
+
+    .formula-word.when {
+      left: 68%;
+      transform: translateX(-50%) translateY(58px);
+      transition-delay: 0.42s;
+    }
+
+    .about-formula-feature .formula-word.why {
+      right: 6%;
+      transition-delay: 0.58s;
+    }
+
+    .formula-art-frame.words-in-view .formula-word.when {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
     }
 
     .landing-panel-copy {
@@ -641,7 +670,7 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 0;
-      margin-top: 0;
+      margin-top: clamp(14px, 2vw, 22px);
     }
 
     .formula-collage-item {
@@ -2126,6 +2155,20 @@
             <p class="landing-quote">
               “The Bible was not written above history. It was written inside it. BibleMapped connects the where, the who, and the why so the what becomes clear.”
             </p>
+            <div class="about-formula-feature">
+              <div class="formula-art-frame words-in-view">
+                <img
+                  src="assets/formula-design.png"
+                  alt="Bible Mapped Formula Design"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+                />
+                <div class="formula-image-placeholder">Formula image missing.</div>
+                <span class="formula-word where">Where</span>
+                <span class="formula-word who">Who</span>
+                <span class="formula-word when">When</span>
+                <span class="formula-word why">Why</span>
+              </div>
+            </div>
             <div class="formula-collage" aria-label="Bible Mapped formula images">
               <figure class="formula-collage-item">
                 <img src="assets/formula-place.png" alt="Map-style image for Where in the Bible Mapped formula" />
