@@ -2135,65 +2135,174 @@
 
     </div>
   </section>
+<section class="landing-panel-section" id="about-biblemapped">
+  <div class="minimal-bar about-mapped-shell" id="aboutMappedShell">
+    <button
+      class="minimal-bar-toggle about-mapped-toggle"
+      type="button"
+      id="aboutMappedToggle"
+      aria-expanded="false"
+      aria-controls="aboutMappedPanel"
+    >
+      About Bible Mapped
+    </button>
 
-  <section class="landing-panel-section" id="about-biblemapped">
-    <div class="minimal-bar about-mapped-shell" id="aboutMappedShell">
-      <button class="minimal-bar-toggle about-mapped-toggle" type="button" id="aboutMappedToggle" aria-expanded="false" aria-controls="aboutMappedPanel">
-        About Bible Mapped
-      </button>
-      <div class="minimal-panel" id="aboutMappedPanel" aria-hidden="true">
-        <div class="minimal-panel-inner">
-          <div class="about-mapped-grid">
-            <div>
-              <p class="landing-panel-copy">
-                BibleMapped helps visitors see Scripture through books, people, places, history, words, meaning, and Christ.
-              </p>
-              <p class="landing-panel-copy">
-                Q&amp;A lives here too: direct Bible questions, cultural claims, and common misunderstandings answered with Scripture and context.
-              </p>
-            </div>
-            <p class="landing-quote">
-              “The Bible was not written above history. It was written inside it. BibleMapped connects the where, the who, and the why so the what becomes clear.”
+    <div class="minimal-panel" id="aboutMappedPanel" aria-hidden="true">
+      <div class="minimal-panel-inner">
+        <div class="about-mapped-grid">
+          <div>
+            <p class="landing-panel-copy">
+              BibleMapped helps people understand Scripture by mapping where it happened,
+              who was involved, and why those details matter.
             </p>
-            <div class="about-formula-feature">
-              <div class="formula-art-frame words-in-view">
+
+            <p class="landing-panel-copy">
+              The Bible did not float above history. It happened somewhere — in real places,
+              among real people, inside real cultures, empires, roads, deserts, temples,
+              wells, mountains, and cities.
+            </p>
+          </div>
+
+          <p class="landing-quote">
+            “The Bible was not written above history. It was written inside it.
+            BibleMapped connects the where, the who, and the why so the what becomes clear.”
+          </p>
+        </div>
+
+        <div class="about-panel-formula">
+          <button
+            class="minimal-bar-toggle formula-inside-toggle"
+            type="button"
+            id="formulaToggle"
+            aria-expanded="false"
+            aria-controls="formulaInlineWindow"
+          >
+            The Bible Mapped Formula
+          </button>
+
+          <div class="formula-inline-window" id="formulaInlineWindow" aria-hidden="true">
+            <div class="formula-window-inner">
+              <div class="formula-art-frame" id="formulaArtFrame">
                 <img
                   src="assets/formula-design.png"
                   alt="Bible Mapped Formula Design"
                   onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
                 />
-                <div class="formula-image-placeholder">Formula image missing.</div>
+
+                <div class="formula-image-placeholder">
+                  Formula image missing.
+                </div>
+
                 <span class="formula-word where">Where</span>
                 <span class="formula-word who">Who</span>
-                <span class="formula-word when">When</span>
                 <span class="formula-word why">Why</span>
+
+                <article class="formula-tour-panel where-panel active" data-formula-tour-panel="1">
+                  <p class="formula-tour-kicker">John 4 Case Study</p>
+                  <h3>Where?</h3>
+
+                  <div class="formula-tour-image">
+                    <img
+                      src="assets/john4-where.jpg"
+                      alt="Map or visual of Samaria and Jacob’s well"
+                      onerror="this.style.display='none';"
+                    />
+                  </div>
+
+                  <p>
+                    John 4 happens in Samaria, near Jacob’s well. That location matters
+                    because Samaria carried centuries of tension between Jews and Samaritans.
+                  </p>
+
+                  <div class="formula-tour-actions">
+                    <button class="formula-tour-btn" type="button" data-formula-tour-next="2">
+                      Next: Who →
+                    </button>
+                  </div>
+                </article>
+
+                <article class="formula-tour-panel who-panel" data-formula-tour-panel="2">
+                  <p class="formula-tour-kicker">John 4 Case Study</p>
+                  <h3>Who?</h3>
+
+                  <div class="formula-tour-image">
+                    <img
+                      src="assets/john4-who.jpg"
+                      alt="Visual of Jesus and the Samaritan woman"
+                      onerror="this.style.display='none';"
+                    />
+                  </div>
+
+                  <p>
+                    Jesus is a Jewish teacher. The woman is a Samaritan. This is not just
+                    a conversation at a well — it is Jesus crossing religious, ethnic,
+                    cultural, and personal boundaries.
+                  </p>
+
+                  <div class="formula-tour-actions">
+                    <button class="formula-tour-btn secondary" type="button" data-formula-tour-next="1">
+                      ← Back
+                    </button>
+
+                    <button class="formula-tour-btn" type="button" data-formula-tour-next="3">
+                      Next: Why →
+                    </button>
+                  </div>
+                </article>
+
+                <article class="formula-tour-panel why-panel" data-formula-tour-panel="3">
+                  <p class="formula-tour-kicker">John 4 Case Study</p>
+                  <h3>Why?</h3>
+
+                  <div class="formula-tour-image">
+                    <img
+                      src="assets/john4-why.jpg"
+                      alt="Visual showing the meaning of John 4"
+                      onerror="this.style.display='none';"
+                    />
+                  </div>
+
+                  <p>
+                    The location reveals the meaning. Jesus brings living water into a divided
+                    place and reveals that true worship is not limited by mountain, temple,
+                    ethnicity, or reputation.
+                  </p>
+
+                  <div class="formula-tour-actions">
+                    <button class="formula-tour-btn secondary" type="button" data-formula-tour-next="2">
+                      ← Back
+                    </button>
+
+                    <a class="formula-tour-link" href="case-studies/index.html">
+                      View Case Studies →
+                    </a>
+                  </div>
+                </article>
+
+                <div class="formula-tour-progress" aria-hidden="true">
+                  <span class="formula-tour-dot active" data-formula-tour-dot="1"></span>
+                  <span class="formula-tour-dot" data-formula-tour-dot="2"></span>
+                  <span class="formula-tour-dot" data-formula-tour-dot="3"></span>
+                </div>
               </div>
-            </div>
-            <div class="formula-collage" aria-label="Bible Mapped formula images">
-              <figure class="formula-collage-item">
-                <img src="assets/formula-place.png" alt="Map-style image for Where in the Bible Mapped formula" />
-                <figcaption class="formula-collage-label">Where?</figcaption>
-              </figure>
-              <figure class="formula-collage-item">
-                <img src="assets/formula-people.png" alt="People-focused image for Who in the Bible Mapped formula" />
-                <figcaption class="formula-collage-label">Who?</figcaption>
-              </figure>
-              <figure class="formula-collage-item">
-                <img src="assets/formula-time.png" alt="Time and history image for When in the Bible Mapped formula" />
-                <figcaption class="formula-collage-label">When?</figcaption>
-              </figure>
-              <figure class="formula-collage-item">
-                <img src="assets/formula-design.png" alt="Bible Mapped formula design image for Why" />
-                <figcaption class="formula-collage-label">Why?</figcaption>
-              </figure>
+
+              <div class="formula-tour-note">
+                <h3>The BibleMapped Method</h3>
+
+                <p>
+                  BibleMapped studies Scripture by asking where it happened, who was involved,
+                  and why the location, people, and history matter — so the meaning of the passage
+                  comes into clearer focus and points us to Jesus Christ.
+                </p>
+              </div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
-  </section>
-
-  <section class="minimal-bar-section" id="salvation">
+  </div>
+</section>
     <div class="minimal-bar">
       <button class="minimal-bar-toggle" type="button" id="gospelToggle" aria-expanded="false" aria-controls="gospelPanel">
         Is Heaven Your Casa?
