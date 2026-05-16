@@ -489,11 +489,11 @@
     }
 
     .minimal-bar {
-      width: min(940px, calc(100vw - 40px));
+      width: min(1120px, calc(100vw - 40px));
       max-width: 100%;
       margin: 0 auto;
-      background: rgba(247, 245, 239, 0.92);
-      border-radius: 4px;
+      background: #f1eee7;
+      border-radius: 0;
       box-shadow: none;
       overflow: hidden;
     }
@@ -505,7 +505,7 @@
       position: relative;
       appearance: none;
       border: 0;
-      background: rgba(247, 245, 239, 0.94);
+      background: #f1eee7;
       color: var(--ink);
       cursor: pointer;
       display: flex;
@@ -527,20 +527,16 @@
 
     .minimal-bar-toggle:hover,
     .minimal-bar-toggle:focus-visible {
-      background: #f7f5ef;
+      background: #ece8de;
+      transform: translateY(-2px);
     }
 
     .minimal-bar-toggle::after {
-      content: "+";
-      flex: 0 0 auto;
-      color: var(--electric-purple);
-      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-      font-size: 1.45rem;
-      font-weight: 950;
+      content: none;
     }
 
     .minimal-bar-toggle[aria-expanded="true"]::after {
-      content: "-";
+      content: none;
     }
 
     .about-mapped-toggle {
@@ -559,11 +555,7 @@
     }
 
     .about-mapped-toggle::after {
-      position: absolute;
-      right: clamp(20px, 4vw, 38px);
-      top: 18px;
-      color: var(--bright-red);
-      font-size: clamp(1rem, 1.5vw, 1.3rem);
+      content: none;
     }
 
     .about-mapped-toggle:hover,
@@ -571,7 +563,18 @@
     .about-mapped-toggle[aria-expanded="true"] {
       background: transparent;
       color: var(--bright-red);
-      transform: translateY(-2px);
+      transform: translateY(-4px);
+    }
+
+    .about-mapped-shell {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: opacity 680ms ease, transform 680ms cubic-bezier(0.16, 0.9, 0.22, 1);
+    }
+
+    .about-mapped-shell.in-view {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .minimal-panel {
@@ -594,7 +597,7 @@
 
     .about-mapped-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
       gap: clamp(18px, 3vw, 34px);
       align-items: start;
       width: 100%;
@@ -625,6 +628,29 @@
       font-weight: 760;
       line-height: 1.18;
       overflow-wrap: anywhere;
+    }
+
+    .about-image-stack {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .about-image-slot {
+      min-height: clamp(150px, 18vw, 230px);
+      display: grid;
+      place-items: center;
+      background: rgba(248, 247, 242, 0.82);
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .about-image-slot.wide {
+      aspect-ratio: 16 / 9;
+      min-height: 0;
     }
 
     .method-grid,
@@ -719,8 +745,8 @@
     }
 
     .youtube-contact-strip {
-      padding: 70px 20px 88px;
-      background: var(--ink);
+      padding: 34px 20px 38px;
+      background: var(--electric-purple);
       color: var(--white);
     }
 
@@ -730,7 +756,7 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       gap: 24px;
     }
 
@@ -739,10 +765,10 @@
       align-items: center;
       gap: 14px;
       color: var(--white);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.4rem, 3vw, 2.4rem);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-size: clamp(1.5rem, 3.5vw, 3.4rem);
       font-weight: 950;
-      letter-spacing: -0.035em;
+      letter-spacing: -0.04em;
     }
 
     .youtube-play {
@@ -1709,6 +1735,10 @@
         grid-template-columns: 1fr;
       }
 
+      .about-mapped-toggle {
+        font-size: clamp(2.25rem, 13vw, 4.2rem);
+      }
+
       .about-calvin-image-slot {
         min-height: 280px;
       }
@@ -2037,7 +2067,7 @@
   </section>
 
   <section class="landing-panel-section" id="about-biblemapped">
-    <div class="minimal-bar">
+    <div class="minimal-bar about-mapped-shell" id="aboutMappedShell">
       <button class="minimal-bar-toggle about-mapped-toggle" type="button" id="aboutMappedToggle" aria-expanded="false" aria-controls="aboutMappedPanel">
         About BibleMapped
       </button>
@@ -2055,6 +2085,10 @@
             <p class="landing-quote">
               “The Bible was not written above history. It was written inside it. BibleMapped connects the where, the who, and the why so the what becomes clear.”
             </p>
+            <div class="about-image-stack" aria-label="BibleMapped image placeholders">
+              <div class="about-image-slot wide">Bible / Map Image Slot</div>
+              <div class="about-image-slot">Documentary Visual Slot</div>
+            </div>
           </div>
         </div>
       </div>
@@ -2082,7 +2116,7 @@
   <section class="minimal-bar-section" id="salvation">
     <div class="minimal-bar">
       <button class="minimal-bar-toggle" type="button" id="gospelToggle" aria-expanded="false" aria-controls="gospelPanel">
-        If you died tonight, would you know for sure you&rsquo;re going to heaven?
+        Is Heaven Your Home?
       </button>
       <div class="minimal-panel" id="gospelPanel" aria-hidden="true">
         <div class="minimal-panel-inner">
@@ -2310,9 +2344,8 @@
     <div class="youtube-contact-inner">
       <a class="youtube-link" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noreferrer">
         <span class="youtube-play">▶</span>
-        Watch BibleMapped on YouTube
+        Watch Videos
       </a>
-      <a class="contact-link" href="mailto:calvin@biblemapped.com">calvin@biblemapped.com</a>
     </div>
   </footer>
 
@@ -2490,6 +2523,23 @@
     window.addEventListener("resize", checkFormulaWordsPanUp);
     window.addEventListener("load", checkFormulaWordsPanUp);
     requestAnimationFrame(checkFormulaWordsPanUp);
+
+    const aboutMappedShell = document.getElementById("aboutMappedShell");
+
+    if (aboutMappedShell) {
+      const aboutMappedObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              aboutMappedShell.classList.add("in-view");
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      aboutMappedObserver.observe(aboutMappedShell);
+    }
 
     function setupMinimalPanel(toggleId, panelId) {
       const toggle = document.getElementById(toggleId);
