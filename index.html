@@ -440,7 +440,7 @@
     }
 
     .landing-panel-section {
-      padding-top: clamp(52px, 7vw, 88px);
+      padding-top: clamp(18px, 3vw, 42px);
     }
 
     .section-rail {
@@ -594,7 +594,7 @@
 
     .about-mapped-grid {
       display: grid;
-      grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+      grid-template-columns: 1fr;
       gap: clamp(18px, 3vw, 34px);
       align-items: start;
       width: 100%;
@@ -613,13 +613,15 @@
     }
 
     .landing-quote {
-      max-width: 56ch;
-      margin: 14px 0 0;
+      grid-column: 1 / -1;
+      max-width: 980px;
+      margin: 14px auto 0;
       color: var(--ink);
       font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.18rem, 2vw, 1.72rem);
+      font-size: clamp(1.75rem, 4vw, 4.6rem);
       font-weight: 760;
-      line-height: 1.18;
+      line-height: 1.02;
+      text-align: center;
       overflow-wrap: anywhere;
     }
 
@@ -630,7 +632,7 @@
     .testament-puzzle-section {
       scroll-margin-top: calc(var(--nav-height) + 24px);
       padding-top: calc(var(--nav-height) + clamp(54px, 8vw, 110px));
-      padding-bottom: 140px;
+      padding-bottom: clamp(48px, 7vw, 86px);
       overflow: hidden;
       z-index: 12;
       border-top: 1px solid rgba(17, 19, 24, 0.14);
@@ -742,18 +744,6 @@
 
     .testament-svg-wrap.in-view .svg-piece:hover {
       transform: translateY(-8px) scale(1.015);
-    }
-
-    .puzzle-hint {
-      margin: 42px auto 0;
-      max-width: 760px;
-      text-align: center;
-      font-size: 1rem;
-      line-height: 1.7;
-      color: var(--muted);
-      font-weight: 900;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
     }
 
     /* =========================
@@ -1102,32 +1092,6 @@
       border-color: var(--bright-red);
     }
 
-    .formula-tour-note {
-      width: min(900px, calc(100% - 40px));
-      margin: 34px auto 0;
-      padding: 28px;
-      background: var(--white);
-      border-left: 8px solid var(--bright-red);
-      box-shadow: 0 22px 55px rgba(17, 19, 24, 0.08);
-      text-align: left;
-    }
-
-    .formula-tour-note h3 {
-      margin: 0;
-      font-size: clamp(2rem, 4vw, 4rem);
-      line-height: 1;
-      letter-spacing: 0;
-      color: var(--ink);
-    }
-
-    .formula-tour-note p {
-      margin: 16px 0 0;
-      color: var(--soft-ink);
-      font-size: 1.02rem;
-      line-height: 1.7;
-      font-weight: 680;
-    }
-
     /* =========================
        GOSPEL / ABOUT CALVIN
     ========================= */
@@ -1197,6 +1161,28 @@
       text-transform: uppercase;
       letter-spacing: 0.1em;
       font-size: 0.82rem;
+      overflow: hidden;
+      padding: 0;
+      background: var(--paper);
+    }
+
+    .about-calvin-image-slot img {
+      width: 100%;
+      height: 100%;
+      min-height: 340px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .about-calvin-image-fallback {
+      display: none;
+      width: 100%;
+      min-height: 340px;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
     }
 
     .about-calvin-letter {
@@ -1403,7 +1389,7 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       gap: 24px;
     }
 
@@ -1583,7 +1569,7 @@
       }
 
       .testament-puzzle-section {
-        padding-bottom: 90px;
+        padding-bottom: 54px;
       }
 
       .method-grid,
@@ -1604,7 +1590,13 @@
         font-size: clamp(1rem, 5vw, 1.35rem);
       }
 
-      .about-calvin-image-slot {
+      .landing-quote {
+        font-size: clamp(1.8rem, 9vw, 3.4rem);
+      }
+
+      .about-calvin-image-slot,
+      .about-calvin-image-slot img,
+      .about-calvin-image-fallback {
         min-height: 280px;
       }
 
@@ -1681,11 +1673,6 @@
 
       .formula-tour-image {
         aspect-ratio: 4 / 3;
-      }
-
-      .formula-tour-note {
-        width: min(100% - 28px, 900px);
-        padding: 22px;
       }
     }
   </style>
@@ -1882,8 +1869,6 @@
           </g>
         </svg>
       </div>
-
-      <p class="puzzle-hint">Click a shard to explore the Testament libraries</p>
     </div>
   </section>
 
@@ -1903,22 +1888,9 @@
       <div class="minimal-panel" id="aboutMappedPanel" aria-hidden="true">
         <div class="minimal-panel-inner">
           <div class="about-mapped-grid">
-            <div>
-              <p class="landing-panel-copy">
-                BibleMapped helps people understand Scripture by mapping where it happened,
-                who was involved, and why those details matter.
-              </p>
-
-              <p class="landing-panel-copy">
-                The Bible did not float above history. It happened somewhere — in real places,
-                among real people, inside real cultures, empires, roads, deserts, temples,
-                wells, mountains, and cities.
-              </p>
-            </div>
-
             <p class="landing-quote">
               “The Bible was not written above history. It was written inside it.
-              BibleMapped connects the where, the who, and the why so the what becomes clear.”
+              Bible Mapped connects the where, the who, and the why so the what becomes clear.”
             </p>
           </div>
 
@@ -2038,16 +2010,6 @@
                     <span class="formula-tour-dot" data-formula-tour-dot="3"></span>
                   </div>
                 </div>
-
-                <div class="formula-tour-note">
-                  <h3>The BibleMapped Method</h3>
-
-                  <p>
-                    BibleMapped studies Scripture by asking where it happened, who was involved,
-                    and why the location, people, and history matter — so the meaning of the passage
-                    comes into clearer focus and points us to Jesus Christ.
-                  </p>
-                </div>
               </div>
             </div>
           </div>
@@ -2105,11 +2067,21 @@
               </button>
               <div class="minimal-panel" id="calvinPanel" aria-hidden="true">
                 <div class="minimal-panel-inner about-calvin-split">
-                  <div class="about-calvin-image-slot">Calvin Image Slot</div>
+                  <div class="about-calvin-image-slot">
+                    <img
+                      src="assets/about-calvin.jpg"
+                      alt="Calvin Strickland, creator of Bible Mapped"
+                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                    />
+                    <div class="about-calvin-image-fallback">
+                      Add your image at assets/about-calvin.jpg
+                    </div>
+                  </div>
+
                   <article class="about-calvin-letter">
                     <h3>Dear Reader</h3>
-                    <p>My name is Calvin S. I am a Christian, a husband, a father, and the heart behind BibleMapped.</p>
-                    <p>I built BibleMapped because I believe Scripture is not vague or disconnected from real life. The Bible happened in real places, among real people, inside real history.</p>
+                    <p>My name is Calvin S. I am a Christian, a husband, a father, and the heart behind Bible Mapped.</p>
+                    <p>I built Bible Mapped because I believe Scripture is not vague or disconnected from real life. The Bible happened in real places, among real people, inside real history.</p>
                     <p>The goal is not just maps. The goal is Jesus Christ.</p>
                   </article>
                 </div>
