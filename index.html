@@ -84,6 +84,18 @@
       border-bottom: 1px solid rgba(17, 19, 24, 0.08);
       box-shadow: 0 14px 34px rgba(11, 15, 25, 0.06);
       backdrop-filter: blur(18px);
+      transition: opacity 320ms ease, transform 320ms ease;
+    }
+
+    .landing-start .site-header {
+      position: fixed;
+      left: 0;
+    }
+
+    .landing-start:not(.journey-open) .site-header {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-110%);
     }
 
     .nav {
@@ -245,13 +257,23 @@
 
     .hero {
       position: relative;
-      min-height: 720px;
-      padding: 108px 20px 116px;
+      min-height: 100vh;
+      min-height: 100svh;
+      padding: 80px 20px;
       overflow: hidden;
       background: var(--ink);
       color: var(--white);
       display: flex;
       align-items: center;
+      transition: min-height 680ms cubic-bezier(.2,.8,.2,1), padding 680ms cubic-bezier(.2,.8,.2,1);
+      will-change: min-height;
+    }
+
+    .journey-open .hero {
+      min-height: 44vh;
+      min-height: 44svh;
+      padding-top: 72px;
+      padding-bottom: 72px;
     }
 
     .hero-video-bg {
@@ -275,10 +297,9 @@
       inset: 0;
       z-index: 1;
       background:
-        radial-gradient(circle at 50% 42%, rgba(200, 155, 60, 0.2), transparent 34%),
         linear-gradient(
-          rgba(11, 15, 25, 0.46),
-          rgba(11, 15, 25, 0.82)
+          rgba(11, 15, 25, 0.52),
+          rgba(11, 15, 25, 0.76)
         );
       pointer-events: none;
     }
@@ -297,8 +318,8 @@
 
     .hero h1 {
       margin: 0 auto;
-      max-width: 920px;
-      font-size: clamp(2.7rem, 7.2vw, 6.1rem);
+      max-width: 1040px;
+      font-size: clamp(3rem, 7.8vw, 7.4rem);
       line-height: 0.98;
       letter-spacing: 0;
       font-weight: 950;
@@ -316,8 +337,12 @@
       text-shadow: 0 12px 35px rgba(0, 0, 0, 0.44);
     }
 
+    .landing-start .hero p {
+      display: none;
+    }
+
     .hero-actions {
-      margin-top: 32px;
+      margin-top: 34px;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -365,6 +390,27 @@
       color: var(--white);
       border-color: rgba(255, 255, 255, 0.9);
       background: rgba(255, 255, 255, 0.14);
+    }
+
+    .btn-start {
+      min-height: 58px;
+      padding: 0 34px;
+      border-radius: 0;
+      border-color: var(--electric-purple);
+      background: var(--electric-purple);
+      color: var(--white);
+      box-shadow: 0 22px 54px rgba(109, 40, 255, 0.36);
+      font-size: 0.94rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .btn-start:hover,
+    .btn-start:focus-visible {
+      background: #7b3cff;
+      border-color: #7b3cff;
+      color: var(--white);
+      transform: translateY(-3px);
     }
 
     /* =========================
@@ -445,8 +491,22 @@
     ========================= */
 
     .testament-puzzle-section {
+      padding-top: clamp(80px, 10vw, 128px);
       padding-bottom: 140px;
       overflow: hidden;
+      z-index: 12;
+      border-top: 1px solid rgba(17, 19, 24, 0.14);
+      box-shadow: 0 -28px 80px rgba(11, 15, 25, 0.18);
+      transform: translateY(86px);
+      opacity: 0.96;
+      transition: transform 760ms cubic-bezier(.2,.8,.2,1), opacity 760ms ease;
+      will-change: transform;
+    }
+
+    .journey-open .testament-puzzle-section,
+    .testament-puzzle-section:target {
+      transform: translateY(0);
+      opacity: 1;
     }
 
     .testament-puzzle-stage {
@@ -1275,12 +1335,13 @@
       }
 
       .hero {
-        min-height: 620px;
-        padding: 86px 16px 92px;
+        min-height: 100vh;
+        min-height: 100svh;
+        padding: 72px 16px;
       }
 
       .hero h1 {
-        font-size: clamp(2.7rem, 15vw, 4.9rem);
+        font-size: clamp(2.35rem, 12vw, 4.35rem);
       }
 
       .hero p {
@@ -1382,7 +1443,7 @@
   </style>
 </head>
 
-<body>
+<body class="landing-start">
   <header class="site-header">
     <nav class="nav">
       <a href="index.html" class="brand" aria-label="Bible Mapped Home">
@@ -1466,7 +1527,7 @@
 
     <div class="hero-inner">
       <div class="hero-copy parallax-item" data-speed="-0.012">
-        <h1>Understand the Bible through place, context, and meaning.</h1>
+        <h1>What if we could see the Bible where it happened?</h1>
 
         <p>
           Bible Mapped helps Christians and seekers follow Scripture through real places,
@@ -1475,8 +1536,9 @@
         </p>
 
         <div class="hero-actions">
-          <a href="#testaments" class="btn btn-dark">Enter Bible Mapped</a>
-          <a href="#formula" class="btn btn-light">See How It Works</a>
+          <button class="btn btn-start" type="button" id="startHereButton" aria-controls="testaments">
+            Start Here
+          </button>
         </div>
       </div>
     </div>
@@ -2150,6 +2212,31 @@
     requestAnimationFrame(checkFormulaWordsPanUp);
 
     const testamentWrap = document.getElementById("testamentPuzzleWrap");
+    const startHereButton = document.getElementById("startHereButton");
+    const testamentsSection = document.getElementById("testaments");
+
+    function openLandingPanel() {
+      document.body.classList.add("journey-open");
+
+      window.setTimeout(() => {
+        if (testamentsSection) {
+          testamentsSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+        }
+
+        checkTestamentPuzzleAnimation();
+      }, 180);
+    }
+
+    if (window.location.hash && window.location.hash !== "#") {
+      document.body.classList.add("journey-open");
+    }
+
+    if (startHereButton) {
+      startHereButton.addEventListener("click", openLandingPanel);
+    }
 
     function checkTestamentPuzzleAnimation() {
       if (!testamentWrap) return;
