@@ -479,7 +479,7 @@
 
     .landing-panel-section,
     .minimal-bar-section {
-      padding: 0 20px 18px;
+      padding: 0 0 14px;
       background: var(--cloud);
       overflow: hidden;
     }
@@ -489,7 +489,7 @@
     }
 
     .minimal-bar {
-      width: min(1120px, calc(100vw - 40px));
+      width: 100%;
       max-width: 100%;
       margin: 0 auto;
       background: #f1eee7;
@@ -512,14 +512,14 @@
       align-items: center;
       justify-content: flex-start;
       gap: 20px;
-      padding: 18px clamp(20px, 4vw, 38px);
+      padding: 18px max(clamp(20px, 5vw, 72px), calc((100vw - 1120px) / 2 + 20px));
       text-align: left;
       font-family: Inter, Arial, Helvetica, sans-serif;
       font-size: clamp(1.15rem, 2.1vw, 1.85rem);
       font-weight: 950;
       line-height: 1;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      letter-spacing: -0.015em;
+      text-transform: none;
       white-space: normal;
       overflow-wrap: anywhere;
       transition: background 180ms ease, transform 180ms ease;
@@ -546,10 +546,10 @@
       font-family: Inter, Arial, Helvetica, sans-serif;
       font-size: clamp(1.15rem, 2.1vw, 1.85rem);
       font-weight: 950;
-      letter-spacing: 0.08em;
+      letter-spacing: -0.015em;
       line-height: 1;
       text-align: left;
-      text-transform: uppercase;
+      text-transform: none;
       overflow: hidden;
       overflow-wrap: anywhere;
     }
@@ -591,7 +591,9 @@
     }
 
     .minimal-panel-inner {
-      padding: 4px clamp(20px, 4vw, 38px) 32px;
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 8px 0 36px;
       overflow: hidden;
     }
 
@@ -603,6 +605,11 @@
       width: 100%;
       min-width: 0;
       overflow: hidden;
+    }
+
+    .formula-collage {
+      grid-column: 2;
+      grid-row: 1 / span 2;
     }
 
     .about-mapped-grid > * {
@@ -633,15 +640,17 @@
     .formula-collage {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+      gap: 0;
+      margin-top: 0;
     }
 
     .formula-collage-item {
       position: relative;
-      min-height: clamp(180px, 21vw, 280px);
+      min-height: clamp(150px, 16vw, 230px);
       overflow: hidden;
       background: #e9e4d9;
       isolation: isolate;
+      margin: 0;
     }
 
     .formula-collage-item img {
@@ -1766,6 +1775,8 @@
       }
 
       .formula-collage {
+        grid-column: auto;
+        grid-row: auto;
         grid-template-columns: 1fr;
       }
 
