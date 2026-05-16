@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -102,9 +102,9 @@
       width: 100%;
       height: 92px;
       padding: 0 clamp(22px, 4vw, 72px) 0 12px;
-      display: flex;
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) auto minmax(220px, 1fr);
       align-items: center;
-      justify-content: space-between;
       gap: clamp(28px, 4vw, 60px);
     }
 
@@ -139,14 +139,18 @@
     }
 
     .nav-links {
-      flex: 1;
+      grid-column: 2 / 4;
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: center;
       gap: 0;
       font-weight: 900;
       font-size: 0.9rem;
       color: var(--soft-ink);
+    }
+
+    .nav-about {
+      margin-left: clamp(24px, 5vw, 92px);
     }
 
     .nav-links a,
@@ -320,6 +324,7 @@
       margin: 0 auto;
       max-width: 1040px;
       font-size: clamp(3rem, 7.8vw, 7.4rem);
+      font-family: Georgia, "Times New Roman", serif;
       line-height: 0.98;
       letter-spacing: 0;
       font-weight: 950;
@@ -399,7 +404,7 @@
       border-color: var(--electric-purple);
       background: var(--electric-purple);
       color: var(--white);
-      box-shadow: 0 22px 54px rgba(109, 40, 255, 0.36);
+      box-shadow: none;
       font-size: 0.94rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -1498,7 +1503,7 @@
 
         <a href="qa/index.html" class="nav-qa">Q&A</a>
 
-        <a href="https://biblemapped.com/about/" class="nav-about">
+        <a href="about/index.html" class="nav-about">
           <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="12" cy="12" r="9" stroke-width="2.2" />
             <path d="M12 10v7" stroke-width="2.2" stroke-linecap="round" />
@@ -1680,187 +1685,91 @@
     </div>
   </section>
 
-  <section class="statement-section cloud formula-section" id="formula">
-    <div class="section-rail">
-      <button
-        class="section-display formula-display"
-        type="button"
-        id="formulaToggle"
-        aria-expanded="false"
-        aria-controls="formulaInlineWindow"
-      >
-        The Bible Mapped Formula
+  <section class="landing-panel-section" id="about-biblemapped">
+    <div class="landing-panel-inner">
+      <p class="landing-kicker">About BibleMapped</p>
+      <h2 class="landing-panel-title">Scripture is not floating above history.</h2>
+      <p class="landing-panel-copy">
+        BibleMapped helps visitors see Scripture through books, people, places, history, words, meaning, and Christ.
+      </p>
+      <p class="landing-quote">
+        “The Bible was not written above history. It was written inside it. BibleMapped connects the where, the who, and the why so the what becomes clear.”
+      </p>
+      <p class="landing-panel-copy">
+        Q&amp;A lives here too: direct Bible questions, cultural claims, and common misunderstandings answered with Scripture and context.
+      </p>
+    </div>
+  </section>
+
+  <section class="minimal-bar-section" id="formula">
+    <div class="minimal-bar">
+      <button class="minimal-bar-toggle" type="button" id="formulaToggle" aria-expanded="false" aria-controls="formulaInlineWindow">
+        The BibleMapped Formula
       </button>
-
-      <div class="formula-inline-window" id="formulaInlineWindow" aria-hidden="true">
-        <div class="formula-window-inner">
-          <div class="formula-art-frame" id="formulaArtFrame">
-            <img
-              src="assets/formula-design.png"
-              alt="Bible Mapped Formula Design"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
-            />
-
-            <div class="formula-image-placeholder">
-              Formula image missing.
-            </div>
-
-            <span class="formula-word where">Where</span>
-            <span class="formula-word who">Who</span>
-            <span class="formula-word why">Why</span>
-
-            <article class="formula-tour-panel where-panel active" data-formula-tour-panel="1">
-              <p class="formula-tour-kicker">John 4 Case Study</p>
-              <h3>Where?</h3>
-
-              <div class="formula-tour-image">
-                <img
-                  src="assets/formula-place.png"
-                  alt="Map or visual of Samaria and Jacob’s well"
-                  onerror="this.style.display='none';"
-                />
-              </div>
-
-              <p>
-                John 4 happens in Samaria, near Jacob’s well. That location matters
-                because Samaria carried centuries of tension between Jews and Samaritans.
-              </p>
-
-              <div class="formula-tour-actions">
-                <button class="formula-tour-btn" type="button" data-formula-tour-next="2">
-                  Next: Who →
-                </button>
-              </div>
-            </article>
-
-            <article class="formula-tour-panel who-panel" data-formula-tour-panel="2">
-              <p class="formula-tour-kicker">John 4 Case Study</p>
-              <h3>Who?</h3>
-
-              <div class="formula-tour-image">
-                <img
-                  src="assets/formula-people.png"
-                  alt="Visual of Jesus and the Samaritan woman"
-                  onerror="this.style.display='none';"
-                />
-              </div>
-
-              <p>
-                Jesus is a Jewish teacher. The woman is a Samaritan. This is not just
-                a conversation at a well — it is Jesus crossing religious, ethnic,
-                cultural, and personal boundaries.
-              </p>
-
-              <div class="formula-tour-actions">
-                <button class="formula-tour-btn secondary" type="button" data-formula-tour-next="1">
-                  ← Back
-                </button>
-
-                <button class="formula-tour-btn" type="button" data-formula-tour-next="3">
-                  Next: Why →
-                </button>
-              </div>
-            </article>
-
-            <article class="formula-tour-panel why-panel" data-formula-tour-panel="3">
-              <p class="formula-tour-kicker">John 4 Case Study</p>
-              <h3>Why?</h3>
-
-              <div class="formula-tour-image">
-                <img
-                  src="assets/formula-time.png"
-                  alt="Visual showing the meaning of John 4"
-                  onerror="this.style.display='none';"
-                />
-              </div>
-
-              <p>
-                The location reveals the meaning. Jesus brings living water into a divided
-                place and reveals that true worship is not limited by mountain, temple,
-                ethnicity, or reputation.
-              </p>
-
-              <div class="formula-tour-actions">
-                <button class="formula-tour-btn secondary" type="button" data-formula-tour-next="2">
-                  ← Back
-                </button>
-
-                <a class="formula-tour-link" href="case-studies/index.html">
-                  View Case Studies →
-                </a>
-              </div>
-            </article>
-
-            <div class="formula-tour-progress" aria-hidden="true">
-              <span class="formula-tour-dot active" data-formula-tour-dot="1"></span>
-              <span class="formula-tour-dot" data-formula-tour-dot="2"></span>
-              <span class="formula-tour-dot" data-formula-tour-dot="3"></span>
-            </div>
-          </div>
-
-          <div class="formula-tour-note">
-            <h3>The BibleMapped Method</h3>
-            <p class="formula-quote">
-              “The Bible was not written above history. It was written inside it.
-              BibleMapped connects the where, the who, and the why so the what becomes clear.”
-            </p>
-
-            <p>
-              Bible Mapped studies Scripture by asking where it happened, who was involved,
-              and why the location, people, and history matter — so the meaning of the passage
-              comes into clearer focus and points us to Jesus Christ.
-            </p>
+      <div class="minimal-panel" id="formulaInlineWindow" aria-hidden="true">
+        <div class="minimal-panel-inner">
+          <p class="landing-panel-copy">Where did it happen? Who was there? Why does it matter? BibleMapped uses these questions to help the passage become clearer.</p>
+          <div class="method-grid">
+            <div class="method-card"><strong>Where</strong><p>Places give Scripture setting, movement, and historical texture.</p></div>
+            <div class="method-card"><strong>Who</strong><p>People reveal conflict, covenant, faith, failure, and witness.</p></div>
+            <div class="method-card"><strong>Why</strong><p>Meaning comes into focus as context points us toward Christ.</p></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="statement-section white" id="about" style="padding-bottom:90px;">
-    <div class="section-rail" style="margin-bottom:70px;">
-      <p class="rail-eyebrow">People</p>
-      <a class="section-display why-display" href="characters/index.html">
-        Who Are These People?
-      </a>
-    </div>
-
-    <div class="section-rail" style="margin-bottom:70px;">
-      <p class="rail-eyebrow">Maps</p>
-      <a class="section-display why-display" href="maps/index.html">
-        Where Is This Happening?
-      </a>
-    </div>
-
-    <div class="section-rail" style="margin-bottom:70px;">
-      <p class="rail-eyebrow">Case Studies</p>
-      <a class="section-display why-display" href="case-studies/index.html">
-        Investigate the Story
-      </a>
-    </div>
-
-    <div class="section-rail" style="margin-bottom:70px;">
-      <p class="rail-eyebrow">Q&amp;A</p>
-      <a class="section-display why-display" href="qa/index.html">
-        Questions &amp; Answers
-      </a>
-    </div>
-
-    <div class="section-rail">
-      <a class="section-display why-display" href="https://biblemapped.com/about/">
-        About Bible Mapped
-      </a>
+  <section class="minimal-bar-section" id="salvation">
+    <div class="minimal-bar">
+      <button class="minimal-bar-toggle" type="button" id="gospelToggle" aria-expanded="false" aria-controls="gospelPanel">
+        If you died tonight, would you know for sure you&rsquo;re going to heaven?
+      </button>
+      <div class="minimal-panel" id="gospelPanel" aria-hidden="true">
+        <div class="minimal-panel-inner">
+          <div class="gospel-choice-grid" aria-label="Initial gospel question">
+            <button class="gospel-choice" type="button" data-gospel-choice>YES</button>
+            <button class="gospel-choice" type="button" data-gospel-choice>NO</button>
+          </div>
+          <div class="gospel-response" id="gospelResponse">
+            <p class="landing-panel-copy"><strong>If God asked you, “Why should I let you into heaven?” what would you say?</strong></p>
+            <div class="gospel-answer-grid">
+              <button class="gospel-answer" type="button">I tried to be a good person</button>
+              <button class="gospel-answer" type="button">I have not hurt anybody</button>
+              <button class="gospel-answer" type="button">I went to church</button>
+              <button class="gospel-answer" type="button">I believe in God</button>
+              <button class="gospel-answer" type="button">I trusted in Jesus Christ</button>
+              <button class="gospel-answer" type="button">I am not sure</button>
+              <button class="gospel-answer" type="button">None of the above</button>
+            </div>
+            <p class="landing-panel-copy">The Bible says all have sinned (Romans 3:23), that sin earns death (Romans 6:23), and that good works cannot save us (Ephesians 2:8-9). The good news is that Jesus died for our sins, rose again, and salvation is received by grace through faith in Him (John 3:16; Romans 10:9-13).</p>
+            <div class="visual-slot-grid">
+              <div class="visual-slot">Gospel Visual Slot</div>
+              <div class="visual-slot">Scripture Path Image Slot</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="statement-section white" style="padding-top:0;padding-bottom:110px;">
-    <div class="section-rail">
-      <p class="rail-eyebrow">Start Here</p>
-      <a class="section-display why-display" href="books/index.html#genesis">
-        Begin with Genesis
-      </a>
+  <section class="minimal-bar-section" id="about-calvin">
+    <div class="minimal-bar">
+      <button class="minimal-bar-toggle" type="button" id="calvinToggle" aria-expanded="false" aria-controls="calvinPanel">
+        About Calvin
+      </button>
+      <div class="minimal-panel" id="calvinPanel" aria-hidden="true">
+        <div class="minimal-panel-inner about-calvin-split">
+          <div class="about-calvin-image-slot">Calvin Image Slot</div>
+          <article class="about-calvin-letter">
+            <h3>Dear Reader</h3>
+            <p>My name is Calvin S. I am a Christian, a husband, a father, and the heart behind BibleMapped.</p>
+            <p>I built BibleMapped because I believe Scripture is not vague or disconnected from real life. The Bible happened in real places, among real people, inside real history.</p>
+            <p>The goal is not just maps. The goal is Jesus Christ.</p>
+          </article>
+        </div>
+      </div>
     </div>
   </section>
-
   <div class="modal-overlay" id="oldTestamentModal" aria-hidden="true">
     <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="oldModalTitle">
       <div class="modal-top">
@@ -2037,17 +1946,13 @@
     </div>
   </div>
 
-  <footer class="footer">
-    <div style="width:min(1120px,100%);margin:0 auto;display:grid;gap:18px;">
-      <h2 style="margin:0;color:white;">Watch BibleMapped on YouTube</h2>
-      <p>Short visual explainers that connect Scripture to place, context, culture, and meaning.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;">
-        <a href="https://www.youtube.com/" style="color:white;font-weight:900;">View YouTube Page</a>
-        <a href="#" style="color:white;font-weight:900;">TikTok</a>
-        <a href="#" style="color:white;font-weight:900;">Instagram</a>
-        <a href="mailto:contact@biblemapped.com" style="color:white;font-weight:900;">Contact</a>
-      </div>
-      <p>© Bible Mapped — Understanding Scripture through place, context, and meaning.</p>
+  <footer class="youtube-contact-strip">
+    <div class="youtube-contact-inner">
+      <a class="youtube-link" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noreferrer">
+        <span class="youtube-play">▶</span>
+        Watch BibleMapped on YouTube
+      </a>
+      <a class="contact-link" href="mailto:calvin@biblemapped.com">calvin@biblemapped.com</a>
     </div>
   </footer>
 
@@ -2210,6 +2115,44 @@
     window.addEventListener("resize", checkFormulaWordsPanUp);
     window.addEventListener("load", checkFormulaWordsPanUp);
     requestAnimationFrame(checkFormulaWordsPanUp);
+
+    function setupMinimalPanel(toggleId, panelId) {
+      const toggle = document.getElementById(toggleId);
+      const panel = document.getElementById(panelId);
+
+      if (!toggle || !panel) return;
+
+      toggle.addEventListener("click", () => {
+        const isOpen = panel.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", String(isOpen));
+        panel.setAttribute("aria-hidden", String(!isOpen));
+      });
+    }
+
+    setupMinimalPanel("gospelToggle", "gospelPanel");
+    setupMinimalPanel("calvinToggle", "calvinPanel");
+
+    const gospelResponse = document.getElementById("gospelResponse");
+    const gospelChoices = document.querySelectorAll("[data-gospel-choice]");
+    const gospelAnswers = document.querySelectorAll(".gospel-answer");
+
+    gospelChoices.forEach((choice) => {
+      choice.addEventListener("click", () => {
+        gospelChoices.forEach((item) => item.classList.remove("active"));
+        choice.classList.add("active");
+
+        if (gospelResponse) {
+          gospelResponse.classList.add("active");
+        }
+      });
+    });
+
+    gospelAnswers.forEach((answer) => {
+      answer.addEventListener("click", () => {
+        gospelAnswers.forEach((item) => item.classList.remove("active"));
+        answer.classList.add("active");
+      });
+    });
 
     const testamentWrap = document.getElementById("testamentPuzzleWrap");
     const startHereButton = document.getElementById("startHereButton");
