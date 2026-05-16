@@ -28,7 +28,8 @@
       --white: #ffffff;
       --line: rgba(17, 19, 24, 0.12);
       --gold: #c89b3c;
-      --header-bg: rgba(255, 255, 255, 0.9);
+      --header-bg: #f7f5ef;
+      --nav-height: 92px;
       --shadow-soft: 0 24px 80px rgba(11, 15, 25, 0.14);
     }
 
@@ -81,9 +82,8 @@
       z-index: 60;
       width: 100%;
       background: var(--header-bg);
-      border-bottom: 1px solid rgba(17, 19, 24, 0.08);
-      box-shadow: 0 14px 34px rgba(11, 15, 25, 0.06);
-      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(17, 19, 24, 0.05);
+      box-shadow: none;
       transition: opacity 320ms ease, transform 320ms ease;
       overflow: hidden;
     }
@@ -101,12 +101,35 @@
 
     .nav {
       width: 100%;
-      height: 92px;
+      height: var(--nav-height);
       padding: 0 clamp(22px, 4vw, 72px) 0 12px;
       display: grid;
-      grid-template-columns: minmax(220px, 1fr) auto minmax(220px, 1fr);
+      grid-template-columns: minmax(150px, 220px) minmax(0, 1fr) minmax(60px, 90px);
       align-items: center;
-      gap: clamp(28px, 4vw, 60px);
+      gap: clamp(18px, 3vw, 42px);
+      position: relative;
+    }
+
+    .nav-left {
+      justify-self: start;
+      min-width: 0;
+    }
+
+    .nav-center {
+      justify-self: center;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .nav-right {
+      justify-self: end;
+      min-width: 0;
+      position: absolute;
+      right: clamp(18px, 4vw, 72px);
+      top: 50%;
+      z-index: 2;
+      transform: translateY(-50%);
+      background: var(--header-bg);
     }
 
     .brand {
@@ -118,10 +141,12 @@
       margin-left: 0;
       padding-left: 0;
       color: var(--ink);
+      max-width: 220px;
+      overflow: hidden;
     }
 
     .brand-crop {
-      width: 330px;
+      width: 220px;
       height: 82px;
       overflow: hidden;
       display: flex;
@@ -130,8 +155,8 @@
     }
 
     .brand-logo {
-      height: 104px;
-      width: auto;
+      height: auto;
+      width: 208px;
       max-width: none;
       object-fit: contain;
       display: block;
@@ -140,21 +165,25 @@
     }
 
     .nav-links {
-      grid-column: 2 / 4;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 0;
+      justify-content: space-evenly;
+      gap: clamp(0.8rem, 2vw, 2.2rem);
       font-weight: 900;
       font-size: 0.9rem;
       color: var(--soft-ink);
     }
 
     .nav-about {
-      margin-left: clamp(24px, 5vw, 92px);
+      margin-left: 0;
+    }
+
+    .nav-right .nav-icon {
+      display: none;
     }
 
     .nav-links a,
+    .nav-right a,
     .nav-dropdown-toggle {
       position: relative;
       display: inline-flex;
@@ -180,7 +209,12 @@
       display: block;
     }
 
+    .nav-right .nav-icon {
+      display: none;
+    }
+
     .nav-links a svg,
+    .nav-right a svg,
     .nav-dropdown-toggle svg {
       stroke: currentColor;
       fill: none;
@@ -191,6 +225,7 @@
     }
 
     .nav-links a:hover,
+    .nav-right a:hover,
     .nav-dropdown-toggle:hover,
     .nav-dropdown.open .nav-dropdown-toggle,
     .nav-dropdown[open] .nav-dropdown-toggle {
@@ -731,7 +766,8 @@
     ========================= */
 
     .testament-puzzle-section {
-      padding-top: clamp(80px, 10vw, 128px);
+      scroll-margin-top: calc(var(--nav-height) + 24px);
+      padding-top: calc(var(--nav-height) + clamp(54px, 8vw, 110px));
       padding-bottom: 140px;
       overflow: hidden;
       z-index: 12;
@@ -1448,26 +1484,28 @@
 
     @media (max-width: 980px) {
       .nav {
-        height: 92px;
+        height: var(--nav-height);
         gap: 20px;
         padding: 0 16px 0 10px;
       }
 
       .brand-crop {
-        width: 320px;
+        width: 220px;
         height: 82px;
       }
 
       .brand-logo {
-        height: 104px;
+        width: 208px;
         transform: translateX(4px);
       }
 
       .nav-links {
         font-size: 0.92rem;
+        gap: clamp(1rem, 2.6vw, 2rem);
       }
 
       .nav-links a,
+      .nav-right a,
       .nav-dropdown-toggle {
         padding: 0 14px;
       }
@@ -1526,19 +1564,28 @@
     }
 
     @media (max-width: 720px) {
+      :root {
+        --nav-height: 82px;
+      }
+
       .nav {
-        height: 82px;
+        height: var(--nav-height);
         padding: 0 12px 0 8px;
         gap: 16px;
+        grid-template-columns: 150px minmax(0, 1fr) 64px;
+      }
+
+      .nav-right {
+        right: 12px;
       }
 
       .brand-crop {
-        width: 235px;
+        width: 150px;
         height: 72px;
       }
 
       .brand-logo {
-        height: 88px;
+        width: 150px;
         transform: translateX(2px);
       }
 
@@ -1551,6 +1598,7 @@
       }
 
       .nav-links a,
+      .nav-right a,
       .nav-dropdown-toggle {
         min-height: 58px;
       }
@@ -1698,17 +1746,19 @@
 <body class="landing-start">
   <header class="site-header">
     <nav class="nav">
-      <a href="index.html" class="brand" aria-label="Bible Mapped Home">
-        <span class="brand-crop">
-          <img
-            src="assets/bible-mapped-logo.png"
-            alt="Bible Mapped"
-            class="brand-logo"
-          />
-        </span>
-      </a>
+      <div class="nav-left">
+        <a href="index.html" class="brand" aria-label="Bible Mapped Home">
+          <span class="brand-crop">
+            <img
+              src="assets/bible-mapped-logo.png"
+              alt="Bible Mapped"
+              class="brand-logo"
+            />
+          </span>
+        </a>
+      </div>
 
-      <div class="nav-links">
+      <div class="nav-links nav-center">
         <details class="nav-dropdown" data-books-dropdown>
           <summary class="nav-books nav-dropdown-toggle" aria-controls="booksDropdown">
             <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -1749,7 +1799,9 @@
         </a>
 
         <a href="qa/index.html" class="nav-qa">Q&A</a>
+      </div>
 
+      <div class="nav-right">
         <a href="about/index.html" class="nav-about">
           <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="12" cy="12" r="9" stroke-width="2.2" />
@@ -2416,9 +2468,15 @@
 
       window.setTimeout(() => {
         if (testamentsSection) {
-          testamentsSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
+          const navHeight = Number.parseFloat(
+            getComputedStyle(document.documentElement).getPropertyValue("--nav-height")
+          ) || 92;
+          const targetTop =
+            testamentsSection.getBoundingClientRect().top + window.scrollY - navHeight - 24;
+
+          window.scrollTo({
+            top: Math.max(0, targetTop),
+            behavior: "smooth"
           });
         }
 

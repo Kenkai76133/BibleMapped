@@ -10,6 +10,8 @@
   --border-soft: #DDD8D0;
   --surface: #FCFBF8;
   --shadow-soft: 0 18px 50px rgba(11, 16, 32, 0.08);
+  --nav-height: 74px;
+  --nav-bg: #F7F5EF;
 }
 
 * {
@@ -52,27 +54,35 @@ a {
 .site-header,
 .header {
   position: sticky;
-  top: 12px;
+  top: 0;
   z-index: 100;
-  width: min(1180px, calc(100% - 32px));
-  margin: 12px auto 0;
-  background: rgba(247, 246, 242, 0.92);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--border-soft);
-  border-radius: 16px;
-  box-shadow: 0 12px 32px rgba(11, 16, 32, 0.05);
+  width: 100%;
+  margin: 0;
+  background: var(--nav-bg);
+  border: 1px solid rgba(31, 41, 51, 0.08);
+  border-width: 0 0 1px;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: hidden;
 }
 
 .nav-wrap,
 .header-inner {
-  display: flex;
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(140px, 180px) minmax(0, 1fr) minmax(60px, 90px);
   align-items: center;
-  justify-content: space-between;
-  min-height: 74px;
+  min-height: var(--nav-height);
   gap: 20px;
+  overflow: hidden;
+  position: relative;
 }
 
 .brand {
+  justify-self: start;
+  max-width: 180px;
+  overflow: hidden;
   font-family: "Syne", sans-serif;
   font-weight: 800;
   font-size: 1.4rem;
@@ -82,9 +92,12 @@ a {
 .main-nav,
 .nav {
   display: flex;
-  gap: 18px;
+  gap: clamp(0.8rem, 2vw, 2.2rem);
   flex-wrap: wrap;
   align-items: center;
+  justify-content: space-evenly;
+  justify-self: center;
+  width: 100%;
 }
 
 .main-nav a,
@@ -102,6 +115,13 @@ a {
 .header-actions {
   display: flex;
   align-items: center;
+  justify-self: end;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
+  background: var(--nav-bg);
 }
 
 .see-all {
@@ -389,6 +409,20 @@ h3 {
   .nav {
     display: flex;
     gap: 10px;
+    justify-content: center;
+  }
+
+  .nav-wrap,
+  .header-inner {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 12px 0;
+  }
+
+  .header-actions {
+    justify-self: center;
+    position: static;
+    transform: none;
   }
 
   h1 {

@@ -27,6 +27,7 @@
       --books-gold: #c89b3c;
       --books-red: #d72638;
       --header-height: 72px;
+      --nav-bg: #f7f5ef;
       --retracted-width: clamp(96px, 9vw, 132px);
       --editorial: "Cormorant Garamond", Georgia, serif;
       --blackletter: "UnifrakturCook", "Old English Text MT", Georgia, serif;
@@ -61,27 +62,32 @@
       height: var(--header-height);
       display: flex;
       align-items: center;
-      border-bottom: 1px solid var(--books-line);
-      background: rgba(247, 246, 242, 0.96);
-      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(31, 41, 51, 0.08);
+      background: var(--nav-bg);
       position: sticky;
       top: 0;
       z-index: 50;
+      width: 100%;
+      margin: 0;
+      border-radius: 0;
+      overflow: hidden;
     }
 
     .nav-wrap {
-      width: 100%;
+      width: min(1180px, calc(100% - 32px));
       max-width: none;
-      margin: 0;
+      margin: 0 auto;
       padding: 0 18px;
-      display: flex;
+      display: grid;
+      grid-template-columns: minmax(140px, 180px) minmax(0, 1fr) minmax(60px, 90px);
       align-items: center;
-      justify-content: space-between;
       gap: 18px;
+      overflow: hidden;
+      position: relative;
     }
 
     .nav-wrap--simple {
-      justify-content: flex-end;
+      justify-content: initial;
     }
 
     .brand {
@@ -90,20 +96,25 @@
       font-weight: 950;
       letter-spacing: 0.01em;
       text-decoration: none;
+      max-width: 180px;
+      overflow: hidden;
     }
 
     .main-nav {
       display: flex;
       align-items: center;
-      gap: 16px;
+      justify-self: center;
+      justify-content: space-evenly;
+      width: 100%;
+      gap: clamp(0.8rem, 2vw, 2.2rem);
     }
 
     .main-nav a {
-      padding: 8px 12px;
-      border: 1px solid var(--books-line);
-      border-radius: 999px;
+      padding: 8px 0;
+      border: 0;
+      border-radius: 0;
       color: var(--books-ink);
-      background: #fff;
+      background: transparent;
       font-size: 0.84rem;
       font-weight: 900;
       letter-spacing: 0.08em;
@@ -115,7 +126,31 @@
     .main-nav a:hover,
     .main-nav a:focus-visible {
       transform: translateY(-2px);
-      border-color: rgba(124, 58, 237, 0.5);
+      color: var(--books-purple);
+      outline: none;
+    }
+
+    .nav-right {
+      justify-self: end;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      z-index: 2;
+      transform: translateY(-50%);
+      background: var(--nav-bg);
+      color: var(--books-ink);
+      font-size: 0.84rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: transform 180ms ease, color 180ms ease;
+    }
+
+    .nav-right:hover,
+    .nav-right:focus-visible {
+      color: var(--books-purple);
+      transform: translateY(calc(-50% - 2px));
       outline: none;
     }
 
@@ -873,15 +908,31 @@
     @media (max-width: 560px) {
       .nav-wrap {
         padding: 0 12px;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        height: auto;
+        min-height: var(--header-height);
+        gap: 8px;
       }
 
       .brand {
         font-size: 1.12rem;
       }
 
+      .main-nav {
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
       .main-nav a {
-        padding: 7px 10px;
+        padding: 7px 4px;
         font-size: 0.72rem;
+      }
+
+      .nav-right {
+        justify-self: center;
+        position: static;
+        transform: none;
       }
 
       .testament-word {
@@ -913,14 +964,15 @@
 <body>
   <header class="site-header">
     <div class="nav-wrap nav-wrap--simple">
+      <a class="brand" href="../index.html" aria-label="BibleMapped Home">BibleMapped</a>
       <nav class="main-nav" aria-label="Primary">
         <a href="../books/index.html" aria-current="page">Books</a>
         <a href="../characters/index.html">People</a>
         <a href="../maps/index.html">Maps</a>
         <a href="../case-studies/index.html">Case Studies</a>
         <a href="../qa/index.html">Q&amp;A</a>
-        <a href="../about/index.html">About</a>
       </nav>
+      <a class="nav-right" href="../about/index.html">About</a>
     </div>
   </header>
 
