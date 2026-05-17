@@ -4,427 +4,2771 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Bible Mapped | About Me</title>
+  <title>Bible Mapped</title>
 
   <meta
     name="description"
-    content="Meet Calvin, the heart behind Bible Mapped, and learn the mission behind helping people understand Scripture through place, people, history, and meaning."
+    content="Bible Mapped helps readers understand Scripture through real places, people, timelines, and context."
   />
+
+  <link rel="icon" href="/assets/bible-mapped-logo.png" type="image/png" />
+  <link rel="shortcut icon" href="/assets/bible-mapped-logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/assets/bible-mapped-logo.png" />
 
   <style>
     :root {
-      --purple: #7B2CFF;
-      --charcoal: #151515;
-      --ink: #241F1A;
-      --muted: #665F58;
-      --cloud: #F8F7F2;
-      --paper: #FFFDF6;
-      --white: #FFFFFF;
-      --line: rgba(21, 21, 21, 0.12);
-      --shadow: 0 24px 70px rgba(21, 21, 21, 0.08);
-      --max: 980px;
+      --cloud: #f8f7f2;
+      --paper: #f1eee7;
+      --ink: #0b0f19;
+      --soft-ink: #3f4147;
+      --muted: #6d6d73;
+      --electric-purple: #6d28ff;
+      --bright-red: #ff2a2a;
+      --navy: #123c69;
+      --white: #ffffff;
+      --line: rgba(17, 19, 24, 0.12);
+      --gold: #c89b3c;
+      --header-bg: #ffffff;
+      --nav-height: 92px;
+      --shadow-soft: 0 24px 80px rgba(11, 15, 25, 0.14);
     }
 
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     html {
       scroll-behavior: smooth;
-    }
-
-    body {
-      min-height: 100vh;
-      background: var(--cloud);
-      color: var(--charcoal);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.65;
       overflow-x: hidden;
     }
 
-    img {
-      display: block;
-      max-width: 100%;
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background: var(--cloud);
+      color: var(--ink);
+      overflow-x: hidden;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .container {
-      width: min(var(--max), calc(100% - 42px));
-      margin: 0 auto;
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(109, 40, 255, 0.42);
+      outline-offset: 4px;
+      border-radius: 10px;
     }
 
     /* =========================
-       IMAGE-ONLY HERO SLOT
-       Upload image here:
-       ../assets/about-hero-collage.jpg
+       HEADER
     ========================= */
 
-    .about-hero-slot {
-      position: relative;
-      min-height: clamp(360px, 72vh, 760px);
-      background: var(--cloud);
-      overflow: hidden;
-      isolation: isolate;
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      width: 100%;
+      background: var(--header-bg);
+      border-bottom: 1px solid rgba(17, 19, 24, 0.05);
+      box-shadow: none;
+      transition: opacity 320ms ease, transform 320ms ease;
+      overflow: visible;
     }
 
-    .about-hero-image {
+    .landing-start .site-header {
+      position: fixed;
+      left: 0;
+    }
+
+    .landing-start:not(.journey-open) .site-header {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-110%);
+    }
+
+    .nav {
+      width: 100%;
+      height: var(--nav-height);
+      padding: 0 clamp(22px, 4vw, 72px) 0 12px;
+      display: grid;
+      grid-template-columns: minmax(150px, 220px) minmax(0, 1fr) minmax(60px, 90px);
+      align-items: center;
+      gap: clamp(18px, 3vw, 42px);
+      position: relative;
+    }
+
+    .nav-left {
+      justify-self: start;
+      min-width: 0;
+    }
+
+    .nav-center {
+      justify-self: center;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .nav-right {
+      justify-self: end;
+      min-width: 0;
+      position: absolute;
+      right: clamp(18px, 4vw, 72px);
+      top: 50%;
+      z-index: 2;
+      transform: translateY(-50%);
+      background: var(--header-bg);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-shrink: 0;
+      line-height: 1;
+      margin-left: 0;
+      padding-left: 0;
+      color: var(--ink);
+      max-width: 220px;
+      overflow: hidden;
+    }
+
+    .brand-crop {
+      width: 220px;
+      height: 82px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .brand-logo {
+      height: auto;
+      width: 208px;
+      max-width: none;
+      object-fit: contain;
+      display: block;
+      transform: translateX(6px);
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      gap: clamp(0.8rem, 2vw, 2.2rem);
+      font-weight: 900;
+      font-size: 0.9rem;
+      color: var(--soft-ink);
+    }
+
+    .nav-links a,
+    .nav-right a,
+    .nav-dropdown-toggle {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 62px;
+      padding: 0 clamp(10px, 1.5vw, 18px);
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      text-align: center;
+      cursor: pointer;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-icon {
+      width: 24px;
+      height: 24px;
+      color: var(--electric-purple);
+      display: block;
+    }
+
+    .nav-right .nav-icon {
+      display: none;
+    }
+
+    .nav-links a svg,
+    .nav-right a svg,
+    .nav-dropdown-toggle svg {
+      stroke: currentColor;
+      fill: none;
+    }
+
+    .nav-links a.nav-active {
+      color: var(--electric-purple);
+    }
+
+    .nav-links a:hover,
+    .nav-right a:hover,
+    .nav-dropdown-toggle:hover,
+    .nav-dropdown.open .nav-dropdown-toggle,
+    .nav-dropdown[open] .nav-dropdown-toggle {
+      color: var(--electric-purple);
+      transform: translateY(-1px);
+    }
+
+    .nav-dropdown {
+      position: relative;
+      display: inline-flex;
+      align-self: stretch;
+      align-items: center;
+    }
+
+    .nav-dropdown-toggle {
+      list-style: none;
+    }
+
+    .nav-dropdown-toggle::-webkit-details-marker {
+      display: none;
+    }
+
+    .nav-dropdown-menu {
+      position: absolute;
+      z-index: 90;
+      top: calc(100% - 8px);
+      left: 50%;
+      min-width: 210px;
+      padding: 8px;
+      border: 1px solid rgba(17, 19, 24, 0.1);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 22px 54px rgba(11, 15, 25, 0.14);
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, 8px);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .nav-dropdown.open .nav-dropdown-menu,
+    .nav-dropdown[open] .nav-dropdown-menu,
+    .nav-dropdown:focus-within .nav-dropdown-menu {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, 0);
+    }
+
+    .nav-dropdown-menu a {
+      display: block;
+      min-height: 0;
+      padding: 12px 14px;
+      border-radius: 6px;
+      color: var(--soft-ink);
+      font-size: 0.82rem;
+      font-weight: 900;
+      text-align: left;
+      transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+    }
+
+    .nav-dropdown-menu a:hover {
+      background: var(--cloud);
+      color: var(--electric-purple);
+      transform: translateY(-1px);
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      padding: 80px 20px;
+      overflow: hidden;
+      background: var(--ink);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      transition: min-height 680ms cubic-bezier(.2,.8,.2,1), padding 680ms cubic-bezier(.2,.8,.2,1);
+      will-change: min-height;
+    }
+
+    .journey-open .hero {
+      min-height: 44vh;
+      min-height: 44svh;
+      padding-top: 72px;
+      padding-bottom: 72px;
+    }
+
+    .hero-video-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      background: var(--ink);
+    }
+
+    .hero-video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.94) contrast(1.08);
+    }
+
+    .hero-video-tint {
       position: absolute;
       inset: 0;
       z-index: 1;
-      background-image: url("../assets/about-hero-collage.jpg");
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
-      transform: scale(1.01);
-    }
-
-    .about-hero-image::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      background:
-        linear-gradient(
-          to bottom,
-          rgba(248, 247, 242, 0.04) 0%,
-          rgba(248, 247, 242, 0.02) 42%,
-          rgba(248, 247, 242, 0.32) 74%,
-          rgba(248, 247, 242, 0.72) 90%,
-          var(--cloud) 100%
-        ),
-        linear-gradient(
-          to right,
-          rgba(248, 247, 242, 0.50) 0%,
-          rgba(248, 247, 242, 0.08) 18%,
-          rgba(248, 247, 242, 0) 50%,
-          rgba(248, 247, 242, 0.08) 82%,
-          rgba(248, 247, 242, 0.50) 100%
-        );
+      background: linear-gradient(rgba(11, 15, 25, 0.52), rgba(11, 15, 25, 0.76));
       pointer-events: none;
     }
 
-    .about-hero-image::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -1px;
-      z-index: 3;
-      height: 46%;
-      background: linear-gradient(
-        to bottom,
-        rgba(248, 247, 242, 0) 0%,
-        rgba(248, 247, 242, 0.20) 28%,
-        rgba(248, 247, 242, 0.62) 66%,
-        var(--cloud) 100%
-      );
-      pointer-events: none;
-    }
-
-    .image-slot-note {
-      position: absolute;
-      right: 18px;
-      bottom: 18px;
-      z-index: 4;
-      padding: 8px 11px;
-      border: 1px solid rgba(21, 21, 21, 0.12);
-      background: rgba(255, 253, 246, 0.74);
-      color: var(--muted);
-      font-size: 0.72rem;
-      font-weight: 900;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      backdrop-filter: blur(8px);
-    }
-
-    /* =========================
-       ABOUT ME ONLY
-    ========================= */
-
-    .about-me {
+    .hero-inner {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      text-align: center;
       position: relative;
-      z-index: 5;
-      margin-top: clamp(-38px, -4vw, -18px);
-      padding: 0 0 clamp(86px, 12vw, 150px);
-      background: var(--cloud);
+      z-index: 3;
     }
 
-    .about-me-inner {
-      max-width: 900px;
+    .hero-copy {
+      will-change: transform;
     }
 
-    .section-kicker {
-      display: inline-flex;
-      margin-bottom: 18px;
-      color: var(--purple);
-      font-size: 0.78rem;
-      font-weight: 950;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .about-title {
-      max-width: 860px;
-      color: var(--ink);
+    .hero h1 {
+      margin: 0 auto;
+      max-width: 1040px;
+      font-size: clamp(3rem, 7.8vw, 7.4rem);
       font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(3.2rem, 8vw, 7.5rem);
+      line-height: 0.98;
+      letter-spacing: 0;
       font-weight: 950;
-      letter-spacing: -0.085em;
-      line-height: 0.86;
-      text-wrap: balance;
+      color: var(--white);
+      text-shadow: 0 18px 60px rgba(0, 0, 0, 0.46);
     }
 
-    .about-letter {
-      margin-top: clamp(30px, 5vw, 56px);
-      padding-top: clamp(24px, 4vw, 38px);
-      border-top: 1px solid var(--line);
+    .hero p {
+      max-width: 780px;
+      margin: 26px auto 0;
+      font-size: clamp(1rem, 1.9vw, 1.22rem);
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.88);
+      font-weight: 620;
+      text-shadow: 0 12px 35px rgba(0, 0, 0, 0.44);
     }
 
-    .about-letter p {
-      max-width: 78ch;
-      color: var(--ink);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.08rem, 1.42vw, 1.22rem);
-      line-height: 1.82;
+    .landing-start .hero p {
+      display: none;
     }
 
-    .about-letter p + p {
-      margin-top: 19px;
-    }
-
-    .about-letter strong {
-      color: var(--charcoal);
-      font-weight: 950;
-    }
-
-    .formula-callout {
-      margin: clamp(32px, 5vw, 54px) 0;
-      padding: clamp(24px, 4vw, 36px);
-      border: 1px solid var(--line);
-      background: var(--paper);
-      box-shadow: var(--shadow);
-    }
-
-    .formula-callout h2 {
-      margin-bottom: 18px;
-      color: var(--ink);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2.3rem, 5vw, 4.5rem);
-      font-weight: 950;
-      letter-spacing: -0.075em;
-      line-height: 0.92;
-    }
-
-    .formula-words {
+    .hero-actions {
+      margin-top: 34px;
       display: flex;
+      justify-content: center;
       flex-wrap: wrap;
-      gap: 10px;
-      margin: 18px 0 24px;
+      gap: 14px;
     }
 
-    .formula-words span {
+    .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 42px;
-      padding: 9px 14px;
-      background: var(--purple);
-      color: var(--white);
+      min-height: 48px;
+      padding: 0 22px;
       border-radius: 999px;
-      font-size: 0.88rem;
+      text-decoration: none;
       font-weight: 950;
-      letter-spacing: 0.06em;
+      border: 1px solid currentColor;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+    }
+
+    .btn-start {
+      min-height: 58px;
+      padding: 0 34px;
+      border-radius: 0;
+      border-color: var(--electric-purple);
+      background: var(--electric-purple);
+      color: var(--white);
+      box-shadow: none;
+      font-size: 0.94rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
-    .question-list {
-      display: grid;
-      gap: 8px;
-      margin-top: 18px;
+    .btn-start:hover,
+    .btn-start:focus-visible {
+      background: #7b3cff;
+      border-color: #7b3cff;
+      color: var(--white);
+      transform: translateY(-3px);
     }
 
-    .question-list p {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: clamp(1rem, 1.35vw, 1.14rem);
-      font-weight: 850;
-      line-height: 1.35;
-      color: var(--charcoal);
+    /* =========================
+       SHARED SECTIONS
+    ========================= */
+
+    .statement-section {
+      padding: 110px 20px 0;
+      background: var(--paper);
+      position: relative;
     }
 
-    .truth-line {
-      margin: clamp(34px, 6vw, 64px) 0;
-      padding: clamp(26px, 5vw, 44px) 0;
-      border-top: 5px solid var(--purple);
-      border-bottom: 1px solid var(--line);
+    .landing-panel-section,
+    .minimal-bar-section {
+      padding: 0 0 14px;
+      background: var(--cloud);
+      overflow: hidden;
     }
 
-    .truth-line p {
-      max-width: 820px;
-      color: var(--charcoal);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: clamp(2.5rem, 8vw, 7rem);
+    .landing-panel-section {
+      padding-top: clamp(18px, 3vw, 42px);
+    }
+
+    .section-rail {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 8px;
+    }
+
+    .rail-eyebrow {
+      margin: 0 0 18px;
+      font-size: 0.82rem;
       font-weight: 950;
-      letter-spacing: -0.085em;
-      line-height: 0.88;
-      text-wrap: balance;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--electric-purple);
     }
 
-    .closing-line {
-      margin-top: clamp(34px, 5vw, 58px) !important;
-      padding-left: 18px;
-      border-left: 6px solid var(--purple);
-      color: var(--charcoal) !important;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-      font-size: clamp(1.28rem, 2.5vw, 2.05rem) !important;
+    .section-display {
+      display: block;
+      text-align: center;
+      width: 100%;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
       font-weight: 950;
-      letter-spacing: -0.04em;
-      line-height: 1.16 !important;
+      letter-spacing: 0;
+      line-height: 1;
+      font-size: clamp(3.2rem, 8vw, 7rem);
+      color: var(--ink);
+      transition: transform 0.25s ease, color 0.25s ease;
+      padding: 0;
+      margin: 0;
     }
 
-    .scroll-reveal {
+    .section-display:hover {
+      transform: translateY(-6px);
+    }
+
+    .explore-display:hover {
+      color: var(--electric-purple);
+    }
+
+    .minimal-bar {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      background: #f1eee7;
+      border-radius: 0;
+      box-shadow: none;
+      overflow: hidden;
+    }
+
+    .minimal-bar-toggle {
+      width: 100%;
+      min-height: clamp(74px, 7vw, 96px);
+      min-width: 0;
+      position: relative;
+      appearance: none;
+      border: 0;
+      background: #f1eee7;
+      color: var(--ink);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 20px;
+      padding: 18px max(clamp(20px, 5vw, 72px), calc((100vw - 1120px) / 2 + 20px));
+      text-align: left;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-size: clamp(1.15rem, 2.1vw, 1.85rem);
+      font-weight: 950;
+      line-height: 1;
+      letter-spacing: -0.015em;
+      text-transform: none;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      transition: background 180ms ease, transform 180ms ease;
+    }
+
+    .minimal-bar-toggle:hover,
+    .minimal-bar-toggle:focus-visible,
+    .minimal-bar-toggle[aria-expanded="true"] {
+      background: #ece8de;
+      transform: translateY(-4px);
+    }
+
+    .about-mapped-toggle,
+    .formula-inside-toggle {
+      color: var(--bright-red);
+    }
+
+    .about-mapped-toggle {
+      min-height: clamp(150px, 20vw, 260px);
+      justify-content: center;
+      text-align: center;
+      padding: clamp(34px, 6vw, 86px) 20px;
+      font-size: clamp(3.2rem, 8vw, 7rem) !important;
+      font-weight: 950;
+      line-height: 1;
+      letter-spacing: 0;
+      overflow-wrap: normal;
+      will-change: transform;
+    }
+
+    .about-mapped-toggle:hover,
+    .about-mapped-toggle:focus-visible,
+    .about-mapped-toggle[aria-expanded="true"] {
+      transform: translateY(-8px);
+    }
+
+    .about-mapped-toggle:hover,
+    .about-mapped-toggle:focus-visible,
+    .about-mapped-toggle[aria-expanded="true"],
+    .formula-inside-toggle:hover,
+    .formula-inside-toggle:focus-visible,
+    .formula-inside-toggle[aria-expanded="true"] {
+      color: var(--bright-red);
+    }
+
+    .about-mapped-shell {
       opacity: 0;
-      transform: translateY(24px);
-      transition:
-        opacity 700ms ease,
-        transform 900ms cubic-bezier(.2,.8,.2,1);
-      transition-delay: var(--delay, 0ms);
-      will-change: opacity, transform;
+      transform: translateY(34px);
+      transition: opacity 680ms ease, transform 680ms cubic-bezier(0.16, 0.9, 0.22, 1);
     }
 
-    .scroll-reveal.is-visible {
+    .about-mapped-shell.in-view {
       opacity: 1;
       transform: translateY(0);
     }
 
-    @media (max-width: 720px) {
-      .container {
-        width: min(var(--max), calc(100% - 24px));
+    .minimal-panel {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      background: rgba(255, 253, 246, 0.58);
+      transition: max-height 480ms cubic-bezier(0.16, 0.9, 0.22, 1), opacity 240ms ease;
+    }
+
+    .minimal-panel.open {
+      max-height: 7200px;
+      opacity: 1;
+    }
+
+    .minimal-panel-inner {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 8px 0 36px;
+      overflow: hidden;
+    }
+
+    /* ABOUT BIBLE MAPPED IMAGE FIX */
+    #aboutMappedPanel .minimal-panel-inner {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0 0 36px;
+      overflow: visible;
+    }
+
+    #aboutMappedPanel .about-panel-formula {
+      width: 100%;
+      margin: 0;
+    }
+
+    #aboutMappedPanel .formula-window-inner {
+      width: 100%;
+      padding: 0 0 46px;
+    }
+
+    #aboutMappedPanel .formula-art-frame {
+      width: 100%;
+      max-width: none;
+      aspect-ratio: 16 / 9;
+    }
+
+    #aboutMappedPanel .formula-art-frame > img {
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .about-mapped-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(18px, 3vw, 34px);
+      align-items: start;
+      width: 100%;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .landing-panel-copy {
+      max-width: 62ch;
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: clamp(0.96rem, 1.2vw, 1.08rem);
+      font-weight: 560;
+      line-height: 1.62;
+      overflow-wrap: anywhere;
+    }
+
+    .landing-quote {
+      grid-column: 1 / -1;
+      max-width: 980px;
+      margin: 14px auto 0;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.75rem, 4vw, 4.6rem);
+      font-weight: 760;
+      line-height: 1.02;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    /* =========================
+       TESTAMENT SVG PUZZLE
+    ========================= */
+
+    .testament-puzzle-section {
+      scroll-margin-top: calc(var(--nav-height) + 24px);
+      padding-top: calc(var(--nav-height) + clamp(54px, 8vw, 110px));
+      padding-bottom: clamp(48px, 7vw, 86px);
+      overflow: hidden;
+      z-index: 12;
+      border-top: 1px solid rgba(17, 19, 24, 0.14);
+      box-shadow: 0 -28px 80px rgba(11, 15, 25, 0.18);
+      transform: translateY(86px);
+      opacity: 0.96;
+      transition: transform 760ms cubic-bezier(.2,.8,.2,1), opacity 760ms ease;
+      will-change: transform;
+    }
+
+    .journey-open .testament-puzzle-section,
+    .testament-puzzle-section:target {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .testament-puzzle-stage {
+      width: min(1240px, 100%);
+      margin: 72px auto 0;
+      padding: 0 20px;
+    }
+
+    .testament-svg-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      filter: drop-shadow(0 34px 80px rgba(0, 0, 0, 0.22));
+    }
+
+    .testament-svg-wrap::after {
+      content: "";
+      position: absolute;
+      left: 5%;
+      right: 5%;
+      bottom: -26px;
+      height: 54px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.22);
+      filter: blur(30px);
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.7s ease 0.5s;
+      pointer-events: none;
+    }
+
+    .testament-svg-wrap.in-view::after {
+      opacity: 1;
+    }
+
+    .testament-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      overflow: visible;
+      position: relative;
+      z-index: 2;
+    }
+
+    .svg-piece {
+      cursor: pointer;
+      opacity: 0;
+      transition: transform 1.15s cubic-bezier(0.16, 0.9, 0.22, 1), opacity 0.65s ease, filter 0.35s ease;
+      transform-box: fill-box;
+      transform-origin: center center;
+    }
+
+    .svg-piece:hover {
+      filter: brightness(1.08) saturate(1.06) drop-shadow(0 18px 26px rgba(11, 15, 25, 0.22));
+      transform: translateY(-8px) scale(1.015);
+    }
+
+    .svg-piece .piece-stroke {
+      fill: transparent;
+      stroke: rgba(248, 247, 242, 0.92);
+      stroke-width: 5;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .svg-piece-word {
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-size: 122px;
+      font-weight: 950;
+      letter-spacing: 0;
+      fill: rgba(255, 255, 255, 0.96);
+      text-transform: uppercase;
+      paint-order: stroke;
+      stroke: rgba(0, 0, 0, 0.18);
+      stroke-width: 1.5px;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .piece-1 { transform: translate(-130px, -38px) rotate(-5deg); }
+    .piece-2 { transform: translate(-155px, 46px) rotate(4deg); }
+    .piece-3 { transform: translate(-75px, 0px) rotate(-2.8deg); }
+    .piece-4 { transform: translate(76px, 0px) rotate(2.8deg); }
+    .piece-5 { transform: translate(142px, 8px) rotate(-4deg); }
+
+    .testament-svg-wrap.in-view .svg-piece {
+      opacity: 1;
+      transform: translate(0, 0) rotate(0deg);
+    }
+
+    .testament-svg-wrap.in-view .piece-1 { transition-delay: 0.02s; }
+    .testament-svg-wrap.in-view .piece-2 { transition-delay: 0.10s; }
+    .testament-svg-wrap.in-view .piece-3 { transition-delay: 0.18s; }
+    .testament-svg-wrap.in-view .piece-4 { transition-delay: 0.26s; }
+    .testament-svg-wrap.in-view .piece-5 { transition-delay: 0.34s; }
+
+    .testament-svg-wrap.in-view .svg-piece:hover {
+      transform: translateY(-8px) scale(1.015);
+    }
+
+    /* =========================
+       FORMULA INSIDE ABOUT
+    ========================= */
+
+    .about-panel-formula {
+      grid-column: 1 / -1;
+      margin-top: clamp(28px, 4vw, 52px);
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    }
+
+    .about-sub-bars {
+      grid-column: 1 / -1;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      margin-top: clamp(24px, 4vw, 48px);
+      display: grid;
+      gap: 14px;
+    }
+
+    .about-sub-bars .minimal-bar {
+      background: transparent;
+    }
+
+    .about-sub-bars .minimal-bar-toggle {
+      background: #f1eee7;
+      border-top: 0;
+      border-bottom: 0;
+      color: var(--ink);
+    }
+
+    #salvation > .minimal-bar-toggle:hover,
+    #salvation > .minimal-bar-toggle:focus-visible,
+    #salvation > .minimal-bar-toggle[aria-expanded="true"],
+    #about-calvin > .minimal-bar-toggle:hover,
+    #about-calvin > .minimal-bar-toggle:focus-visible,
+    #about-calvin > .minimal-bar-toggle[aria-expanded="true"] {
+      color: var(--navy);
+    }
+
+    .about-sub-bars .minimal-panel {
+      background: rgba(255, 253, 246, 0.62);
+    }
+
+    .about-sub-bars .minimal-panel-inner {
+      width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .formula-inside-toggle {
+      margin-top: 10px;
+      min-height: clamp(104px, 11vw, 156px);
+      justify-content: center;
+      border-top: 0;
+      border-bottom: 0;
+      text-align: center;
+      font-size: clamp(2.1rem, 5vw, 5.8rem);
+    }
+
+    .formula-inline-window {
+      width: 100%;
+      margin: 0 auto;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transform: translateY(28px);
+      transition: max-height 0.75s cubic-bezier(0.16, 0.9, 0.22, 1), opacity 0.45s ease, transform 0.65s ease;
+    }
+
+    .formula-inline-window.open {
+      max-height: 5200px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .formula-window-inner {
+      width: 100%;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      padding: 0 0 46px;
+      overflow: visible;
+    }
+
+    .formula-art-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      min-height: 0;
+      overflow: hidden;
+      background: var(--white);
+      border: none;
+      box-shadow: none;
+      display: block;
+    }
+
+    .formula-art-frame img {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      background: var(--white);
+      border: none;
+      border-radius: 0;
+    }
+
+    .formula-image-placeholder {
+      position: absolute;
+      inset: 0;
+      border: none;
+      display: none;
+      place-items: center;
+      text-align: center;
+      color: var(--muted);
+      font-weight: 900;
+      line-height: 1.45;
+      padding: 24px;
+      background: var(--white);
+    }
+
+    .formula-art-frame::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 46%;
+      z-index: 2;
+      background: linear-gradient(to top, rgba(11, 15, 25, 0.62), rgba(11, 15, 25, 0.24), transparent);
+      pointer-events: none;
+    }
+
+    .formula-art-frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background: linear-gradient(rgba(11, 15, 25, 0.28), rgba(11, 15, 25, 0.62));
+      opacity: 0;
+      transition: opacity 700ms ease;
+      pointer-events: none;
+    }
+
+    .formula-art-frame.tour-active::before {
+      opacity: 0;
+    }
+
+    .formula-word {
+      position: absolute;
+      z-index: 4;
+      bottom: 68px;
+      font-size: clamp(2.1rem, 5.2vw, 5.4rem);
+      line-height: 1;
+      letter-spacing: 0;
+      font-weight: 950;
+      opacity: 0;
+      pointer-events: none;
+      white-space: nowrap;
+      color: var(--cloud);
+      text-shadow: 0 18px 50px rgba(0, 0, 0, 0.65);
+      transition: opacity 0.85s ease, transform 1s cubic-bezier(0.16, 0.9, 0.22, 1);
+      will-change: opacity, transform;
+    }
+
+    .formula-word.where {
+      left: 8%;
+      transform: translateY(58px);
+      transition-delay: 0.08s;
+    }
+
+    .formula-word.who {
+      left: 50%;
+      transform: translateX(-50%) translateY(58px);
+      transition-delay: 0.28s;
+    }
+
+    .formula-word.why {
+      right: 13%;
+      transform: translateY(58px);
+      transition-delay: 0.48s;
+    }
+
+    .formula-art-frame.words-in-view .formula-word.where {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .formula-art-frame.words-in-view .formula-word.who {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .formula-art-frame.words-in-view .formula-word.why {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .formula-tour-panel {
+      display: none;
+      position: absolute;
+      z-index: 8;
+      width: min(390px, calc(100% - 32px));
+      background: rgba(248, 247, 242, 0.96);
+      color: var(--ink);
+      border-top: 8px solid var(--electric-purple);
+      box-shadow: var(--shadow-soft);
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(28px) scale(0.96);
+      transition: opacity 420ms ease, transform 520ms cubic-bezier(0.16, 0.9, 0.22, 1);
+    }
+
+    .formula-tour-panel.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    .formula-tour-panel.where-panel {
+      left: 7%;
+      bottom: 150px;
+    }
+
+    .formula-tour-panel.who-panel {
+      left: 50%;
+      bottom: 150px;
+      transform: translateX(-50%) translateY(28px) scale(0.96);
+    }
+
+    .formula-tour-panel.who-panel.active {
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+
+    .formula-tour-panel.why-panel {
+      right: 7%;
+      bottom: 150px;
+    }
+
+    .formula-tour-kicker {
+      margin: 0 0 8px;
+      color: var(--bright-red);
+      font-size: 0.74rem;
+      font-weight: 950;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .formula-tour-panel h3 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1;
+      letter-spacing: 0;
+      font-weight: 950;
+      color: var(--ink);
+    }
+
+    .formula-tour-panel p {
+      margin: 12px 0 0;
+      color: var(--soft-ink);
+      font-size: 0.96rem;
+      line-height: 1.55;
+      font-weight: 680;
+    }
+
+    .formula-tour-image {
+      margin: 16px 0 0;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: var(--paper);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .formula-tour-image img {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .formula-tour-actions {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .formula-tour-btn,
+    .formula-tour-link {
+      appearance: none;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: var(--white);
+      min-height: 42px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 950;
+      cursor: pointer;
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease, border-color 180ms ease;
+    }
+
+    .formula-tour-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .formula-tour-btn:hover,
+    .formula-tour-link:hover {
+      transform: translateY(-2px);
+      background: var(--electric-purple);
+      border-color: var(--electric-purple);
+      color: var(--white);
+    }
+
+    .formula-tour-btn.secondary {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--line);
+    }
+
+    .formula-tour-btn.secondary:hover {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--white);
+    }
+
+    .formula-tour-progress {
+      display: none;
+      position: absolute;
+      left: 50%;
+      bottom: 24px;
+      z-index: 9;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      opacity: 0;
+      transition: opacity 400ms ease;
+    }
+
+    .formula-art-frame.tour-active .formula-tour-progress {
+      opacity: 1;
+    }
+
+    .formula-tour-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: rgba(248, 247, 242, 0.45);
+      border: 1px solid rgba(248, 247, 242, 0.7);
+    }
+
+    .formula-tour-dot.active {
+      background: var(--bright-red);
+      border-color: var(--bright-red);
+    }
+
+    /* =========================
+       GOSPEL / ABOUT CALVIN
+    ========================= */
+
+    .method-grid,
+    .gospel-choice-grid,
+    .gospel-answer-grid,
+    .visual-slot-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .method-card,
+    .gospel-choice,
+    .gospel-answer,
+    .visual-slot,
+    .about-calvin-image-slot {
+      min-height: 104px;
+      border: 1px solid rgba(17, 19, 24, 0.07);
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      font-weight: 820;
+      text-align: center;
+    }
+
+    .gospel-choice,
+    .gospel-answer {
+      cursor: pointer;
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .gospel-choice:hover,
+    .gospel-answer:hover,
+    .gospel-choice.active,
+    .gospel-answer.active {
+      background: var(--electric-purple);
+      color: var(--white);
+      transform: translateY(-3px);
+    }
+
+    .gospel-response {
+      display: none;
+      margin-top: 28px;
+    }
+
+    .gospel-response.active {
+      display: block;
+    }
+
+    .about-calvin-split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(18px, 3vw, 34px);
+      align-items: stretch;
+    }
+
+    .about-calvin-image-slot {
+      min-height: 340px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.82rem;
+      overflow: hidden;
+      padding: 0;
+      background: var(--paper);
+    }
+
+    .about-calvin-image-slot img {
+      width: 100%;
+      height: 100%;
+      min-height: 340px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .about-calvin-image-fallback {
+      display: none;
+      width: 100%;
+      min-height: 340px;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .about-calvin-letter {
+      background: var(--white);
+      padding: clamp(24px, 4vw, 42px);
+      color: var(--muted);
+      font-weight: 650;
+      line-height: 1.7;
+    }
+
+    .about-calvin-letter h3 {
+      margin: 0 0 18px;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+    }
+
+    /* =========================
+       MODALS
+    ========================= */
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(17, 19, 24, 0.62);
+      backdrop-filter: blur(10px);
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-window {
+      width: min(980px, 100%);
+      max-height: min(800px, 90vh);
+      overflow: auto;
+      border-radius: 38px;
+      background: var(--cloud);
+      color: var(--ink);
+      box-shadow: 0 40px 120px rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      transform: translateY(54px) scale(0.98);
+      transform-origin: center bottom;
+      opacity: 0;
+      transition: transform 0.34s ease, opacity 0.34s ease;
+    }
+
+    .modal-overlay.active .modal-window {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    .modal-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 28px 30px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.48);
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      backdrop-filter: blur(12px);
+    }
+
+    .modal-top span {
+      font-weight: 950;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--electric-purple);
+      font-size: 0.78rem;
+    }
+
+    .modal-close {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--ink);
+      font-size: 1.4rem;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .modal-body {
+      padding: 36px 38px 42px;
+    }
+
+    .modal-body h2 {
+      margin: 0;
+      font-size: clamp(2.8rem, 6vw, 5.8rem);
+      line-height: 1;
+      letter-spacing: 0;
+      font-weight: 950;
+    }
+
+    .modal-body p {
+      margin: 24px 0 0;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--soft-ink);
+    }
+
+    .book-category-grid {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .book-category {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+      overflow: hidden;
+      transform: translateY(18px);
+      opacity: 0;
+    }
+
+    .modal-overlay.active .book-category {
+      animation: retractOut 0.55s ease forwards;
+    }
+
+    .modal-overlay.active .book-category:nth-child(1) { animation-delay: 0.04s; }
+    .modal-overlay.active .book-category:nth-child(2) { animation-delay: 0.10s; }
+    .modal-overlay.active .book-category:nth-child(3) { animation-delay: 0.16s; }
+    .modal-overlay.active .book-category:nth-child(4) { animation-delay: 0.22s; }
+    .modal-overlay.active .book-category:nth-child(5) { animation-delay: 0.28s; }
+
+    @keyframes retractOut {
+      from {
+        transform: translateY(18px) scale(0.96);
+        opacity: 0;
       }
 
-      .about-hero-slot {
-        min-height: clamp(320px, 62vh, 620px);
-      }
-
-      .about-hero-image {
-        background-position: center top;
-      }
-
-      .image-slot-note {
-        display: none;
-      }
-
-      .about-title {
-        font-size: clamp(3rem, 16vw, 5.6rem);
-      }
-
-      .formula-callout {
-        padding: 22px;
+      to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
       }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
+    .book-category h3 {
+      margin: 0;
+      font-size: 1.5rem;
+      letter-spacing: 0;
+    }
+
+    .book-category p {
+      margin: 8px 0 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+
+    .book-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .book-list a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 0.88rem;
+      font-weight: 900;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .book-list a:hover {
+      transform: translateY(-3px);
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    /* =========================
+       FOOTER — MINIMAL PURPLE
+    ========================= */
+
+    .site-footer {
+      background: var(--electric-purple);
+      color: var(--white);
+      padding: 34px 20px 36px;
+      text-align: center;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+    }
+
+    .footer-inner {
+      width: min(920px, 100%);
+      margin: 0 auto;
+      display: grid;
+      justify-items: center;
+      gap: 18px;
+    }
+
+    .footer-brand-slot {
+      width: min(132px, 34vw);
+      aspect-ratio: 1 / 1;
+      border: none;
+      border-radius: 0;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      background: transparent;
+    }
+
+    .footer-brand-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .footer-brand-fallback {
+      padding: 12px;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.74);
+    }
+
+    .footer-business-name {
+      margin: 0;
+      font-size: clamp(1.35rem, 3vw, 2.4rem);
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      text-transform: none;
+    }
+
+    .footer-email {
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      font-weight: 400;
+      color: var(--white);
+      text-decoration: underline;
+      text-underline-offset: 5px;
+      text-decoration-thickness: 1px;
+    }
+
+    .footer-youtube-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--white);
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      transition: transform 180ms ease, opacity 180ms ease;
+    }
+
+    .footer-youtube-link:hover {
+      transform: translateY(-2px);
+      opacity: 0.88;
+    }
+
+    .footer-youtube-circle {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #ffffff;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 12px 26px rgba(11, 15, 25, 0.16);
+    }
+
+    .footer-youtube-logo {
+      width: 42px;
+      height: auto;
+      display: block;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 14px;
+      margin-top: 4px;
+      font-size: 0.88rem;
+      font-weight: 400;
+    }
+
+    .footer-links a,
+    .footer-links span {
+      color: var(--white);
+      opacity: 0.9;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+      text-decoration: underline;
+      text-underline-offset: 5px;
+    }
+
+    .footer-divider {
+      width: 70px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.34);
+    }
+
+    .footer-copy {
+      margin: 0;
+      font-size: 0.86rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .parallax-item {
+      will-change: transform;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 980px) {
+      .nav {
+        height: var(--nav-height);
+        gap: 20px;
+        padding: 0 16px 0 10px;
       }
 
-      .scroll-reveal,
-      .scroll-reveal.is-visible {
-        transition: none !important;
-        transform: none !important;
-        opacity: 1 !important;
+      .brand-crop {
+        width: 220px;
+        height: 82px;
+      }
+
+      .brand-logo {
+        width: 208px;
+        transform: translateX(4px);
+      }
+
+      .nav-links {
+        font-size: 0.92rem;
+        gap: clamp(1rem, 2.6vw, 2rem);
+      }
+
+      .nav-links a,
+      .nav-right a,
+      .nav-dropdown-toggle {
+        padding: 0 14px;
+      }
+
+      .book-category-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .formula-tour-panel.where-panel,
+      .formula-tour-panel.who-panel,
+      .formula-tour-panel.why-panel {
+        left: 50%;
+        right: auto;
+        bottom: 110px;
+        transform: translateX(-50%) translateY(28px) scale(0.96);
+      }
+
+      .formula-tour-panel.where-panel.active,
+      .formula-tour-panel.who-panel.active,
+      .formula-tour-panel.why-panel.active {
+        transform: translateX(-50%) translateY(0) scale(1);
+      }
+    }
+
+    @media (max-width: 820px) {
+      .testament-puzzle-stage {
+        padding: 0 12px;
+        margin-top: 48px;
+      }
+
+      .svg-piece-word {
+        font-size: 84px;
+      }
+
+      .piece-1 { transform: translate(-78px, -26px) rotate(-4deg); }
+      .piece-2 { transform: translate(-88px, 32px) rotate(4deg); }
+      .piece-3 { transform: translate(-46px, 0px) rotate(-2deg); }
+      .piece-4 { transform: translate(48px, 0px) rotate(2deg); }
+      .piece-5 { transform: translate(82px, 10px) rotate(-3deg); }
+    }
+
+    @media (max-width: 720px) {
+      :root {
+        --nav-height: 82px;
+      }
+
+      .nav {
+        height: var(--nav-height);
+        padding: 0 12px 0 8px;
+        gap: 16px;
+        grid-template-columns: 150px minmax(0, 1fr) 64px;
+      }
+
+      .nav-right {
+        right: 12px;
+      }
+
+      .brand-crop {
+        width: 150px;
+        height: 72px;
+      }
+
+      .brand-logo {
+        width: 150px;
+        transform: translateX(2px);
+      }
+
+      .nav-links {
+        gap: 0;
+        font-size: 0.84rem;
+        overflow-x: auto;
+        justify-content: flex-start;
+        white-space: nowrap;
+      }
+
+      .nav-links a,
+      .nav-right a,
+      .nav-dropdown-toggle {
+        min-height: 58px;
+      }
+
+      .nav-dropdown-menu {
+        position: fixed;
+        top: 76px;
+        left: 50%;
+        width: min(260px, calc(100vw - 28px));
+        transform: translate(-50%, 8px);
+      }
+
+      .nav-dropdown.open .nav-dropdown-menu,
+      .nav-dropdown[open] .nav-dropdown-menu,
+      .nav-dropdown:focus-within .nav-dropdown-menu {
+        transform: translate(-50%, 0);
+      }
+
+      .nav-icon {
+        width: 21px;
+        height: 21px;
+      }
+
+      .hero {
+        min-height: 100vh;
+        min-height: 100svh;
+        padding: 72px 16px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.35rem, 12vw, 4.35rem);
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .statement-section {
+        padding: 82px 16px 0;
+      }
+
+      .testament-puzzle-section {
+        padding-bottom: 54px;
+      }
+
+      .method-grid,
+      .gospel-choice-grid,
+      .gospel-answer-grid,
+      .visual-slot-grid,
+      .about-mapped-grid,
+      .about-calvin-split {
+        grid-template-columns: 1fr;
+      }
+
+      .about-mapped-toggle {
+        min-height: clamp(128px, 32vw, 190px);
+        font-size: clamp(2.85rem, 13vw, 4.8rem) !important;
+      }
+
+      .formula-inside-toggle {
+        font-size: clamp(1rem, 5vw, 1.35rem);
+      }
+
+      .landing-quote {
+        font-size: clamp(1.8rem, 9vw, 3.4rem);
+      }
+
+      .about-calvin-image-slot,
+      .about-calvin-image-slot img,
+      .about-calvin-image-fallback {
+        min-height: 280px;
+      }
+
+      .formula-art-frame {
+        min-height: 0;
+      }
+
+      .formula-art-frame img {
+        min-height: 0;
+      }
+
+      .formula-word {
+        bottom: 54px;
+      }
+
+      .formula-word.where {
+        left: 7%;
+      }
+
+      .formula-word.why {
+        right: 11%;
+      }
+
+      .modal-body {
+        padding: 30px 24px 34px;
+      }
+
+      .modal-top {
+        padding: 22px 24px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .brand-crop {
+        width: 180px;
+        height: 62px;
+      }
+
+      .brand-logo {
+        height: 74px;
+        width: auto;
+        transform: translateX(2px);
+      }
+
+      .svg-piece-word {
+        font-size: 58px;
+      }
+
+      .formula-art-frame {
+        min-height: 0;
+      }
+
+      .formula-art-frame img {
+        min-height: 0;
+      }
+
+      .formula-word {
+        bottom: 46px;
+        font-size: clamp(1.55rem, 8vw, 3rem);
+      }
+
+      .formula-word.why {
+        right: 10%;
+      }
+
+      .formula-tour-panel {
+        padding: 16px;
+        bottom: 82px !important;
+      }
+
+      .formula-tour-panel p {
+        font-size: 0.88rem;
+      }
+
+      .formula-tour-image {
+        aspect-ratio: 4 / 3;
+      }
+
+      .site-footer {
+        padding: 30px 18px 34px;
+      }
+
+      .footer-inner {
+        gap: 16px;
+      }
+
+      .footer-brand-slot {
+        width: 108px;
+      }
+
+      .footer-youtube-link {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .footer-youtube-circle {
+        width: 56px;
+        height: 56px;
+      }
+
+      .footer-youtube-logo {
+        width: 40px;
+      }
+
+      .footer-links {
+        gap: 7px 12px;
+        font-size: 0.84rem;
       }
     }
   </style>
 </head>
 
-<body>
-  <main>
-    <section class="about-hero-slot" aria-label="About Bible Mapped hero image">
-      <div class="about-hero-image" role="img" aria-label="Bible Mapped about page hero collage image slot"></div>
-      <div class="image-slot-note">about-hero-collage.jpg</div>
-    </section>
-
-    <section class="about-me" aria-labelledby="aboutMeTitle">
-      <div class="container about-me-inner">
-        <span class="section-kicker scroll-reveal">About Me</span>
-        <h1 id="aboutMeTitle" class="about-title scroll-reveal">Good day, I’m Calvin.</h1>
-
-        <article class="about-letter">
-          <p class="scroll-reveal"><strong>Good day, I’m Calvin — the heart behind Bible Mapped.</strong></p>
-
-          <p class="scroll-reveal">Bible Mapped was built from a simple belief: the Bible is not boring, vague, or disconnected from real life. It happened in real places, among real people, inside real history — and all of it points to Jesus Christ.</p>
-
-          <p class="scroll-reveal">I believe every Christian is responsible for their own relationship with God. Too many people only see Scripture through someone else’s eyes, someone else’s voice, or someone else’s fear.</p>
-
-          <p class="scroll-reveal">But getting to know someone you love is not a chore.</p>
-
-          <p class="scroll-reveal">A relationship takes time. It takes attention. It takes curiosity. And I believe our walk with God is the same way.</p>
-
-          <div class="formula-callout scroll-reveal">
-            <h2>That is why Bible Mapped uses a simple lens.</h2>
-
-            <div class="formula-words" aria-label="Bible Mapped formula">
-              <span>Where</span>
-              <span>Who</span>
-              <span>Why</span>
-              <span>What</span>
-            </div>
-
-            <div class="question-list">
-              <p>Where did this happen?</p>
-              <p>Who was involved?</p>
-              <p>Why did it matter?</p>
-              <p>What does it reveal?</p>
-            </div>
-          </div>
-
-          <p class="scroll-reveal">But this formula is not only about biblical places.</p>
-
-          <p class="scroll-reveal">It is also about us.</p>
-
-          <p class="scroll-reveal">You are standing in your own place in life. That is your where. You have purpose with God. That is your who. Your love for God is your why. And who you are becoming in Him is your what.</p>
-
-          <p class="scroll-reveal">God plays no favorites.</p>
-
-          <p class="scroll-reveal">You matter. Your story matters. Your questions matter. And your relationship with God matters.</p>
-
-          <p class="scroll-reveal">My goal is not to tell you what church to attend or what denomination to join. My goal is to make one thing clear:</p>
-
-          <div class="truth-line scroll-reveal">
-            <p>Jesus is King.</p>
-          </div>
-
-          <p class="scroll-reveal">Bible Mapped is built with an iron-sharpens-iron mindset. We do not know everything. We miss things. So challenge us. Ask questions. Test the claims. Help us keep building a better framework for believers who want to know their Bible and its history.</p>
-
-          <p class="closing-line scroll-reveal">Know your Bible. Know its history. Know the King it points to.</p>
-        </article>
+<body class="landing-start">
+  <header class="site-header">
+    <nav class="nav">
+      <div class="nav-left">
+        <a href="index.html" class="brand" aria-label="Bible Mapped Home">
+          <span class="brand-crop">
+            <img
+              src="assets/bible-mapped-logo.png"
+              alt="Bible Mapped"
+              class="brand-logo"
+            />
+          </span>
+        </a>
       </div>
-    </section>
-  </main>
+
+      <div class="nav-links nav-center">
+        <details class="nav-dropdown" data-books-dropdown>
+          <summary class="nav-books nav-dropdown-toggle" aria-controls="booksDropdown">
+            <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 5.5C4 4.7 4.7 4 5.5 4H10c1.1 0 2 .9 2 2v14c0-1.1-.9-2-2-2H5.5C4.7 18 4 17.3 4 16.5v-11Z" stroke-width="2" />
+              <path d="M20 5.5C20 4.7 19.3 4 18.5 4H14c-1.1 0-2 .9-2 2v14c0-1.1.9-2 2-2h4.5c.8 0 1.5-.7 1.5-1.5v-11Z" stroke-width="2" />
+            </svg>
+            Books
+          </summary>
+          <div class="nav-dropdown-menu" id="booksDropdown" aria-label="Books sections">
+            <a href="books/index.html#old">Old Testament</a>
+            <a href="books/index.html#new">New Testament</a>
+          </div>
+        </details>
+
+        <a href="characters/index.html" class="nav-people">
+          <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="8" r="4" fill="currentColor" stroke="none" />
+            <path d="M4 21c.8-4.2 3.8-6.5 8-6.5s7.2 2.3 8 6.5" fill="currentColor" stroke="none" />
+          </svg>
+          People
+        </a>
+
+        <a href="maps/index.html" class="nav-maps">
+          <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 22s7-6.4 7-13A7 7 0 0 0 5 9c0 6.6 7 13 7 13Z" fill="currentColor" stroke="none" />
+            <circle cx="12" cy="9" r="2.4" fill="white" stroke="none" />
+          </svg>
+          Maps
+        </a>
+
+        <a href="case-studies/index.html" class="nav-case-studies">
+          <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 3h8l4 4v14H6V3Z" fill="currentColor" stroke="none" />
+            <path d="M14 3v5h5" fill="rgba(255,255,255,0.35)" stroke="none" />
+            <path d="M9 11h6M9 15h6M9 19h4" stroke="white" stroke-width="1.7" stroke-linecap="round" />
+          </svg>
+          Case Studies
+        </a>
+
+        <a href="qa/index.html" class="nav-qa">Q&A</a>
+      </div>
+
+      <div class="nav-right">
+        <a href="about/index.html" class="nav-about">
+          <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" stroke-width="2.2" />
+            <path d="M12 10v7" stroke-width="2.2" stroke-linecap="round" />
+            <circle cx="12" cy="7" r="1.3" fill="currentColor" stroke="none" />
+          </svg>
+          About
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-video-bg" aria-hidden="true">
+      <video
+        id="heroBackgroundVideo"
+        autoplay
+        muted
+        playsinline
+        preload="metadata"
+      >
+        <source src="assets/videos/video-1.mp4" type="video/mp4" />
+      </video>
+
+      <div class="hero-video-tint"></div>
+    </div>
+
+    <div class="hero-inner">
+      <div class="hero-copy parallax-item" data-speed="-0.012">
+        <h1>What if we could see the Bible where it happened?</h1>
+
+        <p>
+          Bible Mapped helps Christians and seekers follow Scripture through real places,
+          real people, real timelines, and real meaning — from Eden to Abraham,
+          from Egypt to Sinai, from Jerusalem to the empty tomb.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn btn-start" type="button" id="startHereButton" aria-controls="testaments">
+            Start Here
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="statement-section testament-puzzle-section" id="testaments">
+    <div class="section-rail">
+      <p class="rail-eyebrow">Begin the Journey</p>
+
+      <div class="section-display explore-display">
+        Explore Scripture by Testament
+      </div>
+    </div>
+
+    <div class="testament-puzzle-stage">
+      <div class="testament-svg-wrap" id="testamentPuzzleWrap">
+        <svg
+          class="testament-svg"
+          viewBox="0 0 1200 430"
+          preserveAspectRatio="xMidYMid meet"
+          aria-label="Old and New Testament puzzle reveal"
+        >
+          <defs>
+            <clipPath id="piece-old-1">
+              <path d="M0,0 H275 L245,205 H0 Z"></path>
+            </clipPath>
+
+            <clipPath id="piece-old-2">
+              <path d="M0,205 H245 L275,430 H0 Z"></path>
+            </clipPath>
+
+            <clipPath id="piece-old-3">
+              <path d="M245,0 H585 L555,430 H275 Z"></path>
+            </clipPath>
+
+            <clipPath id="piece-new-1">
+              <path d="M585,0 H905 L875,430 H555 Z"></path>
+            </clipPath>
+
+            <clipPath id="piece-new-2">
+              <path d="M905,0 H1200 V430 H875 Z"></path>
+            </clipPath>
+          </defs>
+
+          <g class="svg-piece old-piece piece-1" data-modal-target="oldTestamentModal">
+            <g clip-path="url(#piece-old-1)">
+              <rect x="0" y="0" width="1200" height="430" fill="#0b0f19"></rect>
+              <image href="assets/old-puzzle-1.png" x="0" y="0" width="275" height="205" preserveAspectRatio="xMidYMid slice"></image>
+              <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
+              <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
+            </g>
+            <path class="piece-stroke" d="M0,0 H275 L245,205 H0 Z"></path>
+          </g>
+
+          <g class="svg-piece old-piece piece-2" data-modal-target="oldTestamentModal">
+            <g clip-path="url(#piece-old-2)">
+              <image href="assets/old-puzzle-2.png" x="0" y="205" width="275" height="225" preserveAspectRatio="xMidYMid slice"></image>
+              <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
+              <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
+            </g>
+            <path class="piece-stroke" d="M0,205 H245 L275,430 H0 Z"></path>
+          </g>
+
+          <g class="svg-piece old-piece piece-3" data-modal-target="oldTestamentModal">
+            <g clip-path="url(#piece-old-3)">
+              <image href="assets/old-puzzle-3.png" x="0" y="0" width="1450" height="430" preserveAspectRatio="xMinYMid slice"></image>
+              <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
+              <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
+            </g>
+            <path class="piece-stroke" d="M245,0 H585 L555,430 H275 Z"></path>
+          </g>
+
+          <g class="svg-piece new-piece piece-4" data-modal-target="newTestamentModal">
+            <g clip-path="url(#piece-new-1)">
+              <image href="assets/new-puzzle-1.png" x="555" y="0" width="350" height="430" preserveAspectRatio="xMidYMid slice"></image>
+              <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
+              <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
+            </g>
+            <path class="piece-stroke" d="M585,0 H905 L875,430 H555 Z"></path>
+          </g>
+
+          <g class="svg-piece new-piece piece-5" data-modal-target="newTestamentModal">
+            <g clip-path="url(#piece-new-2)">
+              <image href="assets/new-puzzle-2.png" x="880" y="0" width="355" height="430" preserveAspectRatio="xMidYMin slice"></image>
+              <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
+              <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
+            </g>
+            <path class="piece-stroke" d="M905,0 H1200 V430 H875 Z"></path>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="landing-panel-section" id="about-biblemapped">
+    <div class="minimal-bar about-mapped-shell" id="aboutMappedShell">
+      <button
+        class="minimal-bar-toggle about-mapped-toggle parallax-item"
+        data-speed="-0.018"
+        type="button"
+        id="aboutMappedToggle"
+        aria-expanded="false"
+        aria-controls="aboutMappedPanel"
+      >
+        About Bible Mapped
+      </button>
+
+      <div class="minimal-panel" id="aboutMappedPanel" aria-hidden="true">
+        <div class="minimal-panel-inner">
+          <div class="about-panel-formula">
+            <div class="formula-inline-window open" id="formulaInlineWindow" aria-hidden="false">
+              <div class="formula-window-inner">
+                <div class="formula-art-frame tour-active" id="formulaArtFrame">
+                  <img
+                    src="assets/formula-design.png"
+                    alt="Bible Mapped Formula Design"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+                  />
+
+                  <div class="formula-image-placeholder">
+                    Formula image missing. Add assets/formula-design.png
+                  </div>
+
+                  <span class="formula-word where">Where</span>
+                  <span class="formula-word who">Who</span>
+                  <span class="formula-word why">Why</span>
+
+                  <article class="formula-tour-panel where-panel active" data-formula-tour-panel="1">
+                    <p class="formula-tour-kicker">John 4 Case Study</p>
+                    <h3>Where?</h3>
+
+                    <div class="formula-tour-image">
+                      <img
+                        src="assets/formula-place.png"
+                        alt="Map or visual of Samaria and Jacob’s well"
+                        onerror="this.style.display='none';"
+                      />
+                    </div>
+
+                    <p>
+                      John 4 happens in Samaria, near Jacob’s well. That location matters
+                      because Samaria carried centuries of tension between Jews and Samaritans.
+                    </p>
+
+                    <div class="formula-tour-actions">
+                      <button class="formula-tour-btn" type="button" data-formula-tour-next="2">
+                        Next: Who →
+                      </button>
+                    </div>
+                  </article>
+
+                  <article class="formula-tour-panel who-panel" data-formula-tour-panel="2">
+                    <p class="formula-tour-kicker">John 4 Case Study</p>
+                    <h3>Who?</h3>
+
+                    <div class="formula-tour-image">
+                      <img
+                        src="assets/formula-people.png"
+                        alt="Visual of Jesus and the Samaritan woman"
+                        onerror="this.style.display='none';"
+                      />
+                    </div>
+
+                    <p>
+                      Jesus is a Jewish teacher. The woman is a Samaritan. This is not just
+                      a conversation at a well — it is Jesus crossing religious, ethnic,
+                      cultural, and personal boundaries.
+                    </p>
+
+                    <div class="formula-tour-actions">
+                      <button class="formula-tour-btn secondary" type="button" data-formula-tour-next="1">
+                        ← Back
+                      </button>
+
+                      <button class="formula-tour-btn" type="button" data-formula-tour-next="3">
+                        Next: Why →
+                      </button>
+                    </div>
+                  </article>
+
+                  <article class="formula-tour-panel why-panel" data-formula-tour-panel="3">
+                    <p class="formula-tour-kicker">John 4 Case Study</p>
+                    <h3>Why?</h3>
+
+                    <div class="formula-tour-image">
+                      <img
+                        src="assets/formula-time.png"
+                        alt="Visual showing the meaning of John 4"
+                        onerror="this.style.display='none';"
+                      />
+                    </div>
+
+                    <p>
+                      The location reveals the meaning. Jesus brings living water into a divided
+                      place and reveals that true worship is not limited by mountain, temple,
+                      ethnicity, or reputation.
+                    </p>
+
+                    <div class="formula-tour-actions">
+                      <button class="formula-tour-btn secondary" type="button" data-formula-tour-next="2">
+                        ← Back
+                      </button>
+
+                      <a class="formula-tour-link" href="case-studies/index.html">
+                        View Case Studies →
+                      </a>
+                    </div>
+                  </article>
+
+                  <div class="formula-tour-progress" aria-hidden="true">
+                    <span class="formula-tour-dot active" data-formula-tour-dot="1"></span>
+                    <span class="formula-tour-dot" data-formula-tour-dot="2"></span>
+                    <span class="formula-tour-dot" data-formula-tour-dot="3"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal-overlay" id="oldTestamentModal" aria-hidden="true">
+    <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="oldModalTitle">
+      <div class="modal-top">
+        <span>Old Testament Library</span>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close window">×</button>
+      </div>
+
+      <div class="modal-body">
+        <h2 id="oldModalTitle">Old Testament</h2>
+
+        <p>
+          The Old Testament tells the story before Christ through law, history,
+          poetry, wisdom, and prophecy.
+        </p>
+
+        <div class="book-category-grid">
+          <section class="book-category">
+            <h3>Law / Torah</h3>
+            <p>The foundation of creation, covenant, deliverance, and worship.</p>
+            <div class="book-list">
+              <a href="books/index.html#genesis">Genesis</a>
+              <a href="books/index.html#exodus">Exodus</a>
+              <a href="books/index.html#leviticus">Leviticus</a>
+              <a href="books/index.html#numbers">Numbers</a>
+              <a href="books/index.html#deuteronomy">Deuteronomy</a>
+            </div>
+          </section>
+
+          <section class="book-category">
+            <h3>History</h3>
+            <p>Israel’s land, kings, exile, return, and national story.</p>
+            <div class="book-list">
+              <a href="books/index.html#joshua">Joshua</a>
+              <a href="books/index.html#judges">Judges</a>
+              <a href="books/index.html#ruth">Ruth</a>
+              <a href="books/index.html#1-samuel">1 Samuel</a>
+              <a href="books/index.html#2-samuel">2 Samuel</a>
+              <a href="books/index.html#1-kings">1 Kings</a>
+              <a href="books/index.html#2-kings">2 Kings</a>
+              <a href="books/index.html#1-chronicles">1 Chronicles</a>
+              <a href="books/index.html#2-chronicles">2 Chronicles</a>
+              <a href="books/index.html#ezra">Ezra</a>
+              <a href="books/index.html#nehemiah">Nehemiah</a>
+              <a href="books/index.html#esther">Esther</a>
+            </div>
+          </section>
+
+          <section class="book-category">
+            <h3>Poetry & Wisdom</h3>
+            <p>Prayer, suffering, worship, wisdom, love, and the fear of God.</p>
+            <div class="book-list">
+              <a href="books/index.html#job">Job</a>
+              <a href="books/index.html#psalms">Psalms</a>
+              <a href="books/index.html#proverbs">Proverbs</a>
+              <a href="books/index.html#ecclesiastes">Ecclesiastes</a>
+              <a href="books/index.html#song-of-solomon">Song of Solomon</a>
+            </div>
+          </section>
+
+          <section class="book-category">
+            <h3>Major Prophets</h3>
+            <p>Judgment, hope, exile, restoration, and the coming Messiah.</p>
+            <div class="book-list">
+              <a href="books/index.html#isaiah">Isaiah</a>
+              <a href="books/index.html#jeremiah">Jeremiah</a>
+              <a href="books/index.html#lamentations">Lamentations</a>
+              <a href="books/index.html#ezekiel">Ezekiel</a>
+              <a href="books/index.html#daniel">Daniel</a>
+            </div>
+          </section>
+
+          <section class="book-category">
+            <h3>Minor Prophets</h3>
+            <p>Shorter prophetic books with major theological weight.</p>
+            <div class="book-list">
+              <a href="books/index.html#hosea">Hosea</a>
+              <a href="books/index.html#joel">Joel</a>
+              <a href="books/index.html#amos">Amos</a>
+              <a href="books/index.html#obadiah">Obadiah</a>
+              <a href="books/index.html#jonah">Jonah</a>
+              <a href="books/index.html#micah">Micah</a>
+              <a href="books/index.html#nahum">Nahum</a>
+              <a href="books/index.html#habakkuk">Habakkuk</a>
+              <a href="books/index.html#zephaniah">Zephaniah</a>
+              <a href="books/index.html#haggai">Haggai</a>
+              <a href="books/index.html#zechariah">Zechariah</a>
+              <a href="books/index.html#malachi">Malachi</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="newTestamentModal" aria-hidden="true">
+    <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="newModalTitle">
+      <div class="modal-top">
+        <span>New Testament Library</span>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close window">×</button>
+      </div>
+
+      <div class="modal-body">
+        <h2 id="newModalTitle">New Testament</h2>
+
+        <p>
+          The New Testament tells the story of Jesus Christ, the Church,
+          apostolic teaching, and the hope of all things made new.
+        </p>
+
+        <div class="book-category-grid">
+          <section class="book-category">
+            <h3>Gospels</h3>
+            <p>The life, teaching, death, and resurrection of Jesus Christ.</p>
+            <div class="book-list">
+              <a href="books/index.html#matthew">Matthew</a>
+              <a href="books/index.html#mark">Mark</a>
+              <a href="books/index.html#luke">Luke</a>
+              <a href="books/index.html#john">John</a>
+            </div>
+          </section>
+
+          <section class="book-category">
+            <h3>Church History</h3>
+            <p>The spread of the gospel and the formation of the early Church.</p>
+            <div class="book-list">
+              <a href="books/index.html#acts">Acts</a>
+            </div>
+          </section>
+
+          <section class="book-category">
+            <h3>Paul’s Letters</h3>
+            <p>Doctrine, church life, salvation, unity, suffering, and discipleship.</p>
+            <div class="book-list">
+              <a href="books/index.html#romans">Romans</a>
+              <a href="books/index.html#1-corinthians">1 Corinthians</a>
+              <a href="books/index.html#2-corinthians">2 Corinthians</a>
+              <a href="books/index.html#galatians">Galatians</a>
+              <a href="books/index.html#ephesians">Ephesians</a>
+              <a href="books/index.html#philippians">Philippians</a>
+              <a href="books/index.html#colossians">Colossians</a>
+              <a href="books/index.html#1-thessalonians">1 Thessalonians</a>
+              <a href="books/index.html#2-thessalonians">2 Thessalonians</a>
+              <a href="books/index.html#1-timothy">1 Timothy</a>
+              <a href="books/index.html#2-timothy">2 Timothy</a>
+              <a href="books/index.html#titus">Titus</a>
+              <a href="books/index.html#philemon">Philemon</a>
+            </div>
+          </section>
+
+          <section class="book-category">
+            <h3>General Letters</h3>
+            <p>Faithfulness, endurance, truth, holiness, and love.</p>
+            <div class="book-list">
+              <a href="books/index.html#hebrews">Hebrews</a>
+              <a href="books/index.html#james">James</a>
+              <a href="books/index.html#1-peter">1 Peter</a>
+              <a href="books/index.html#2-peter">2 Peter</a>
+              <a href="books/index.html#1-john">1 John</a>
+              <a href="books/index.html#2-john">2 John</a>
+              <a href="books/index.html#3-john">3 John</a>
+              <a href="books/index.html#jude">Jude</a>
+            </div>
+          </section>
+
+          <section class="book-category">
+            <h3>Apocalypse</h3>
+            <p>The unveiling of Christ, final judgment, and the hope of new creation.</p>
+            <div class="book-list">
+              <a href="books/index.html#revelation">Revelation</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand-slot">
+        <img
+          src="assets/footer-brand-image.png"
+          alt="Bible Mapped logo"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        />
+        <span class="footer-brand-fallback">Brand Image Slot</span>
+      </div>
+
+      <h2 class="footer-business-name">Bible Mapped</h2>
+
+      <a class="footer-email" href="mailto:calvin@biblemapped.com">
+        calvin@biblemapped.com
+      </a>
+
+      <a
+        class="footer-youtube-link"
+        href="https://www.youtube.com/@biblemapped"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Watch Bible Mapped on YouTube"
+      >
+        <span class="footer-youtube-circle">
+          <img
+            class="footer-youtube-logo"
+            src="assets/youtube-logo.png"
+            alt="YouTube"
+          />
+        </span>
+        <span>Watch us on YouTube</span>
+      </a>
+
+      <div class="footer-divider"></div>
+
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="about/index.html">About Us</a>
+        <span>|</span>
+        <a href="contact/index.html">Contact</a>
+        <span>|</span>
+        <a href="privacy/index.html">Privacy</a>
+        <span>|</span>
+        <a href="terms/index.html">Terms &amp; Conditions</a>
+      </nav>
+
+      <div class="footer-divider"></div>
+
+      <p class="footer-copy">
+        © 2026 Bible Mapped. All rights reserved.
+      </p>
+    </div>
+  </footer>
 
   <script>
-    const revealItems = document.querySelectorAll(".scroll-reveal");
+    const modalTriggers = document.querySelectorAll("[data-modal-target]");
+    const modalCloseButtons = document.querySelectorAll("[data-modal-close]");
+    const modals = document.querySelectorAll(".modal-overlay");
+    const booksDropdown = document.querySelector("[data-books-dropdown]");
 
-    revealItems.forEach((item, index) => {
-      item.style.setProperty("--delay", `${Math.min(index * 55, 330)}ms`);
+    function closeBooksDropdown() {
+      if (!booksDropdown) return;
+
+      booksDropdown.classList.remove("open");
+      booksDropdown.removeAttribute("open");
+    }
+
+    if (booksDropdown) {
+      document.addEventListener("click", (event) => {
+        if (!booksDropdown.contains(event.target)) {
+          closeBooksDropdown();
+        }
+      });
+    }
+
+    function openModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (!modal) return;
+
+      modal.classList.add("active");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+    }
+
+    function closeModal(modal) {
+      if (!modal) return;
+
+      modal.classList.remove("active");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    }
+
+    modalTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        openModal(trigger.dataset.modalTarget);
+      });
     });
 
-    const revealObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
+    modalCloseButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        closeModal(button.closest(".modal-overlay"));
+      });
+    });
+
+    modals.forEach((modal) => {
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          closeModal(modal);
+        }
+      });
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeBooksDropdown();
+
+        modals.forEach((modal) => {
+          if (modal.classList.contains("active")) {
+            closeModal(modal);
           }
         });
-      },
-      {
-        threshold: 0.12,
-        rootMargin: "0px 0px -8% 0px"
       }
-    );
+    });
 
-    revealItems.forEach((item) => revealObserver.observe(item));
+    const formulaToggle = document.getElementById("formulaToggle");
+    const formulaInlineWindow = document.getElementById("formulaInlineWindow");
+    const formulaArtFrame = document.getElementById("formulaArtFrame");
+    const formulaTourPanels = document.querySelectorAll("[data-formula-tour-panel]");
+    const formulaTourDots = document.querySelectorAll("[data-formula-tour-dot]");
+    const formulaTourButtons = document.querySelectorAll("[data-formula-tour-next]");
+
+    function setFormulaTourStep(step) {
+      const safeStep = Math.min(Math.max(Number(step) || 1, 1), 3);
+
+      formulaTourPanels.forEach((panel) => {
+        const panelStep = Number(panel.dataset.formulaTourPanel);
+        const isActive = panelStep === safeStep;
+
+        panel.classList.toggle("active", isActive);
+        panel.setAttribute("aria-hidden", String(!isActive));
+      });
+
+      formulaTourDots.forEach((dot) => {
+        const dotStep = Number(dot.dataset.formulaTourDot);
+        dot.classList.toggle("active", dotStep === safeStep);
+      });
+    }
+
+    formulaTourButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        setFormulaTourStep(button.dataset.formulaTourNext);
+      });
+    });
+
+    function resetFormulaWindow() {
+      if (!formulaToggle || !formulaInlineWindow) return;
+
+      formulaInlineWindow.classList.remove("open");
+      formulaInlineWindow.setAttribute("aria-hidden", "true");
+      formulaToggle.setAttribute("aria-expanded", "false");
+
+      if (formulaArtFrame) {
+        formulaArtFrame.classList.remove("words-in-view");
+        formulaArtFrame.classList.remove("tour-active");
+      }
+
+      setFormulaTourStep(1);
+    }
+
+    function closeMinimalPanels(exceptPanel = null) {
+      document.querySelectorAll(".minimal-panel.open").forEach((openPanel) => {
+        if (openPanel === exceptPanel) return;
+        if (exceptPanel && openPanel.contains(exceptPanel)) return;
+
+        if (openPanel.contains(formulaInlineWindow)) {
+          resetFormulaWindow();
+        }
+
+        openPanel.classList.remove("open");
+        openPanel.setAttribute("aria-hidden", "true");
+
+        const controllingToggle = document.querySelector(`[aria-controls="${openPanel.id}"]`);
+        if (controllingToggle) {
+          controllingToggle.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+
+    if (formulaToggle && formulaInlineWindow) {
+      formulaToggle.addEventListener("click", () => {
+        const parentMinimalPanel = formulaInlineWindow.closest(".minimal-panel");
+        closeMinimalPanels(parentMinimalPanel || formulaInlineWindow);
+
+        const isOpen = formulaInlineWindow.classList.toggle("open");
+
+        formulaToggle.setAttribute("aria-expanded", String(isOpen));
+        formulaInlineWindow.setAttribute("aria-hidden", String(!isOpen));
+
+        if (isOpen) {
+          setFormulaTourStep(1);
+
+          if (formulaArtFrame) {
+            formulaArtFrame.classList.remove("tour-active");
+          }
+
+          setTimeout(() => {
+            formulaInlineWindow.scrollIntoView({
+              behavior: "smooth",
+              block: "center"
+            });
+          }, 180);
+
+          setTimeout(() => {
+            if (formulaArtFrame) {
+              formulaArtFrame.classList.add("tour-active");
+            }
+          }, 700);
+
+          setTimeout(checkFormulaWordsPanUp, 520);
+        } else {
+          if (formulaArtFrame) {
+            formulaArtFrame.classList.remove("words-in-view");
+            formulaArtFrame.classList.remove("tour-active");
+          }
+
+          setFormulaTourStep(1);
+        }
+      });
+    }
+
+    function checkFormulaWordsPanUp() {
+      if (!formulaArtFrame || !formulaInlineWindow) return;
+      if (!formulaInlineWindow.classList.contains("open")) return;
+
+      const rect = formulaArtFrame.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      const isVisible =
+        rect.top < windowHeight * 0.78 &&
+        rect.bottom > windowHeight * 0.18;
+
+      if (isVisible) {
+        formulaArtFrame.classList.add("words-in-view");
+      }
+    }
+
+    window.addEventListener("scroll", checkFormulaWordsPanUp);
+    window.addEventListener("resize", checkFormulaWordsPanUp);
+    window.addEventListener("load", checkFormulaWordsPanUp);
+    requestAnimationFrame(checkFormulaWordsPanUp);
+
+    const aboutMappedShell = document.getElementById("aboutMappedShell");
+
+    if (aboutMappedShell) {
+      const aboutMappedObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              aboutMappedShell.classList.add("in-view");
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      aboutMappedObserver.observe(aboutMappedShell);
+    }
+
+    function setupMinimalPanel(toggleId, panelId) {
+      const toggle = document.getElementById(toggleId);
+      const panel = document.getElementById(panelId);
+
+      if (!toggle || !panel) return;
+
+      toggle.addEventListener("click", () => {
+        closeMinimalPanels(panel);
+        const isOpen = panel.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", String(isOpen));
+        panel.setAttribute("aria-hidden", String(!isOpen));
+
+        if (isOpen && panelId === "aboutMappedPanel") {
+          setTimeout(checkFormulaWordsPanUp, 220);
+        }
+      });
+    }
+
+    setupMinimalPanel("aboutMappedToggle", "aboutMappedPanel");
+
+    const testamentWrap = document.getElementById("testamentPuzzleWrap");
+    const startHereButton = document.getElementById("startHereButton");
+    const testamentsSection = document.getElementById("testaments");
+
+    function openLandingPanel() {
+      document.body.classList.add("journey-open");
+
+      window.setTimeout(() => {
+        if (testamentsSection) {
+          const navHeight = Number.parseFloat(
+            getComputedStyle(document.documentElement).getPropertyValue("--nav-height")
+          ) || 92;
+          const targetTop =
+            testamentsSection.getBoundingClientRect().top + window.scrollY - navHeight - 24;
+
+          window.scrollTo({
+            top: Math.max(0, targetTop),
+            behavior: "smooth"
+          });
+        }
+
+        checkTestamentPuzzleAnimation();
+      }, 180);
+    }
+
+    if (window.location.hash && window.location.hash !== "#") {
+      document.body.classList.add("journey-open");
+    }
+
+    if (startHereButton) {
+      startHereButton.addEventListener("click", openLandingPanel);
+    }
+
+    function checkTestamentPuzzleAnimation() {
+      if (!testamentWrap) return;
+
+      const rect = testamentWrap.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      const isVisible =
+        rect.top < windowHeight * 0.82 &&
+        rect.bottom > windowHeight * 0.15;
+
+      if (isVisible) {
+        testamentWrap.classList.add("in-view");
+      }
+    }
+
+    window.addEventListener("scroll", checkTestamentPuzzleAnimation);
+    window.addEventListener("resize", checkTestamentPuzzleAnimation);
+    window.addEventListener("load", checkTestamentPuzzleAnimation);
+
+    requestAnimationFrame(checkTestamentPuzzleAnimation);
+    setTimeout(checkTestamentPuzzleAnimation, 300);
+    setTimeout(checkTestamentPuzzleAnimation, 900);
+
+    const heroVideoPlaylist = [
+      "assets/videos/video-1.mp4",
+      "assets/videos/video-2.mp4",
+      "assets/videos/video-3.mp4",
+      "assets/videos/video-4.mp4",
+      "assets/videos/video-5.mp4",
+      "assets/videos/video-6.mp4"
+    ];
+
+    const heroBackgroundVideo = document.getElementById("heroBackgroundVideo");
+    let heroVideoIndex = 0;
+
+    function playHeroVideoByIndex(index) {
+      if (!heroBackgroundVideo) return;
+
+      heroVideoIndex = index;
+      heroBackgroundVideo.src = heroVideoPlaylist[heroVideoIndex];
+
+      const playPromise = heroBackgroundVideo.play();
+
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
+    }
+
+    if (heroBackgroundVideo) {
+      heroBackgroundVideo.addEventListener("ended", () => {
+        const nextVideoIndex =
+          (heroVideoIndex + 1) % heroVideoPlaylist.length;
+
+        playHeroVideoByIndex(nextVideoIndex);
+      });
+
+      heroBackgroundVideo.addEventListener("error", () => {
+        const nextVideoIndex =
+          (heroVideoIndex + 1) % heroVideoPlaylist.length;
+
+        playHeroVideoByIndex(nextVideoIndex);
+      });
+    }
+
+    const parallaxItems = document.querySelectorAll(".parallax-item");
+    let ticking = false;
+
+    function updateParallax() {
+      const scrollY = window.scrollY;
+      const viewportHeight = window.innerHeight;
+
+      parallaxItems.forEach((item) => {
+        const speed = Number(item.dataset.speed || 0.03);
+        const rect = item.getBoundingClientRect();
+        const itemTop = rect.top + scrollY;
+        const distanceFromCenter = scrollY + viewportHeight / 2 - itemTop;
+        const rawMovement = distanceFromCenter * speed;
+        const movement = Math.max(-24, Math.min(24, rawMovement));
+        item.style.transform = `translate3d(0, ${movement}px, 0)`;
+      });
+
+      ticking = false;
+    }
+
+    function requestParallaxUpdate() {
+      if (!ticking) {
+        window.requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener("scroll", requestParallaxUpdate);
+    window.addEventListener("resize", requestParallaxUpdate);
+    window.addEventListener("load", updateParallax);
   </script>
 </body>
 </html>
