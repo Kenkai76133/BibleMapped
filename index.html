@@ -1508,8 +1508,20 @@
       opacity: 0.88;
     }
 
+    .footer-youtube-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #ffffff;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 16px 34px rgba(11, 15, 25, 0.18);
+    }
+
     .footer-youtube-logo {
-      width: 58px;
+      width: 54px;
       height: auto;
       display: block;
     }
@@ -1821,8 +1833,13 @@
         gap: 10px;
       }
 
+      .footer-youtube-circle {
+        width: 74px;
+        height: 74px;
+      }
+
       .footer-youtube-logo {
-        width: 64px;
+        width: 56px;
       }
 
       .footer-links {
@@ -2357,18 +2374,20 @@
         rel="noopener noreferrer"
         aria-label="Watch Bible Mapped on YouTube"
       >
-        <img
-          class="footer-youtube-logo"
-          src="assets/youtube-logo.png"
-          alt="YouTube"
-        />
+        <span class="footer-youtube-circle">
+          <img
+            class="footer-youtube-logo"
+            src="assets/youtube-logo.png"
+            alt="YouTube"
+          />
+        </span>
         <span>Watch us on YouTube</span>
       </a>
 
       <div class="footer-divider"></div>
 
       <nav class="footer-links" aria-label="Footer navigation">
-        <a href="about/index.html">About</a>
+        <a href="about/index.html">About Us</a>
         <span>|</span>
         <a href="contact/index.html">Contact</a>
         <span>|</span>
