@@ -910,9 +910,9 @@
       left: 0;
       right: 0;
       bottom: 0;
-      height: 46%;
+      height: 44%;
       z-index: 2;
-      background: linear-gradient(to top, rgba(11, 15, 25, 0.62), rgba(11, 15, 25, 0.24), transparent);
+      background: linear-gradient(to top, rgba(11, 15, 25, 0.86), rgba(11, 15, 25, 0.52), transparent);
       pointer-events: none;
     }
 
@@ -931,52 +931,66 @@
       opacity: 0;
     }
 
-    .formula-word {
+    .formula-question {
       position: absolute;
       z-index: 4;
-      bottom: 68px;
-      font-size: clamp(2.1rem, 5.2vw, 5.4rem);
-      line-height: 1;
-      letter-spacing: 0;
-      font-weight: 950;
+      bottom: 58px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: var(--cloud);
       opacity: 0;
       pointer-events: none;
       white-space: nowrap;
-      color: var(--cloud);
-      text-shadow: 0 18px 50px rgba(0, 0, 0, 0.65);
+      text-align: center;
+      text-shadow: 0 18px 50px rgba(0, 0, 0, 0.72);
+      transform: translateY(58px);
       transition: opacity 0.85s ease, transform 1s cubic-bezier(0.16, 0.9, 0.22, 1);
       will-change: opacity, transform;
     }
 
-    .formula-word.where {
+    .formula-main {
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-size: clamp(2rem, 4.4vw, 5rem);
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      font-weight: 950;
+    }
+
+    .formula-sub {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(0.82rem, 1.65vw, 1.75rem);
+      font-style: italic;
+      line-height: 1;
+      font-weight: 500;
+      letter-spacing: 0.035em;
+      color: rgba(248, 247, 242, 0.94);
+    }
+
+    .formula-question.where {
       left: 8%;
-      transform: translateY(58px);
+      bottom: 82px;
       transition-delay: 0.08s;
     }
 
-    .formula-word.who {
-      left: 50%;
-      transform: translateX(-50%) translateY(58px);
-      transition-delay: 0.28s;
+    .formula-question.who {
+      left: 34%;
+      transition-delay: 0.22s;
     }
 
-    .formula-word.why {
-      right: 13%;
-      transform: translateY(58px);
-      transition-delay: 0.48s;
+    .formula-question.why {
+      left: 58%;
+      transition-delay: 0.36s;
     }
 
-    .formula-art-frame.words-in-view .formula-word.where {
-      opacity: 1;
-      transform: translateY(0);
+    .formula-question.what {
+      right: 5%;
+      transition-delay: 0.50s;
     }
 
-    .formula-art-frame.words-in-view .formula-word.who {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .formula-art-frame.words-in-view .formula-word.why {
+    .formula-art-frame.words-in-view .formula-question,
+    .formula-art-frame.tour-active .formula-question {
       opacity: 1;
       transform: translateY(0);
     }
@@ -1773,16 +1787,35 @@
         min-height: 0;
       }
 
-      .formula-word {
+      .formula-question {
+        bottom: 34px;
+        gap: 4px;
+      }
+
+      .formula-question.where {
+        left: 5%;
         bottom: 54px;
       }
 
-      .formula-word.where {
-        left: 7%;
+      .formula-question.who {
+        left: 31%;
       }
 
-      .formula-word.why {
-        right: 11%;
+      .formula-question.why {
+        left: 55%;
+      }
+
+      .formula-question.what {
+        right: 3%;
+      }
+
+      .formula-main {
+        font-size: clamp(1.15rem, 5.4vw, 2.4rem);
+      }
+
+      .formula-sub {
+        font-size: clamp(0.48rem, 2.1vw, 0.95rem);
+        letter-spacing: 0.01em;
       }
 
       .modal-body {
@@ -1818,13 +1851,20 @@
         min-height: 0;
       }
 
-      .formula-word {
-        bottom: 46px;
-        font-size: clamp(1.55rem, 8vw, 3rem);
+      .formula-question {
+        bottom: 28px;
       }
 
-      .formula-word.why {
-        right: 10%;
+      .formula-question.where {
+        bottom: 45px;
+      }
+
+      .formula-main {
+        font-size: clamp(1rem, 5.2vw, 1.9rem);
+      }
+
+      .formula-sub {
+        font-size: clamp(0.42rem, 2vw, 0.78rem);
       }
 
       .formula-tour-panel {
@@ -2097,9 +2137,25 @@
                     Formula image missing. Add assets/formula-design.png
                   </div>
 
-                  <span class="formula-word where">Where</span>
-                  <span class="formula-word who">Who</span>
-                  <span class="formula-word why">Why</span>
+                  <div class="formula-question where">
+                    <span class="formula-main">Where</span>
+                    <span class="formula-sub">did it happen?</span>
+                  </div>
+
+                  <div class="formula-question who">
+                    <span class="formula-main">Who</span>
+                    <span class="formula-sub">is this about?</span>
+                  </div>
+
+                  <div class="formula-question why">
+                    <span class="formula-main">Why</span>
+                    <span class="formula-sub">is this happening?</span>
+                  </div>
+
+                  <div class="formula-question what">
+                    <span class="formula-main">What</span>
+                    <span class="formula-sub">makes this matter to me?</span>
+                  </div>
 
                   <article class="formula-tour-panel where-panel active" data-formula-tour-panel="1">
                     <p class="formula-tour-kicker">John 4 Case Study</p>
