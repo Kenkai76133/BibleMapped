@@ -1905,27 +1905,10 @@
 
       <div class="minimal-panel" id="aboutMappedPanel" aria-hidden="true">
         <div class="minimal-panel-inner">
-          <div class="about-mapped-grid">
-            <p class="landing-quote">
-              “The Bible was not written above history. It was written inside it.
-              Bible Mapped connects the where, the who, and the why so the what becomes clear.”
-            </p>
-          </div>
-
           <div class="about-panel-formula">
-            <button
-              class="minimal-bar-toggle formula-inside-toggle"
-              type="button"
-              id="formulaToggle"
-              aria-expanded="false"
-              aria-controls="formulaInlineWindow"
-            >
-              The Bible Mapped Formula
-            </button>
-
-            <div class="formula-inline-window" id="formulaInlineWindow" aria-hidden="true">
+            <div class="formula-inline-window open" id="formulaInlineWindow" aria-hidden="false">
               <div class="formula-window-inner">
-                <div class="formula-art-frame" id="formulaArtFrame">
+                <div class="formula-art-frame tour-active" id="formulaArtFrame">
                   <img
                     src="assets/formula-design.png"
                     alt="Bible Mapped Formula Design"
@@ -2027,81 +2010,6 @@
                     <span class="formula-tour-dot" data-formula-tour-dot="2"></span>
                     <span class="formula-tour-dot" data-formula-tour-dot="3"></span>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="about-sub-bars">
-            <div class="minimal-bar" id="salvation">
-              <button class="minimal-bar-toggle" type="button" id="gospelToggle" aria-expanded="false" aria-controls="gospelPanel">
-                Is Heaven Your Casa?
-              </button>
-              <div class="minimal-panel" id="gospelPanel" aria-hidden="true">
-                <div class="minimal-panel-inner">
-                  <p class="landing-panel-copy">
-                    <strong>If you died tonight, would you know for sure you&rsquo;re going to heaven?</strong>
-                  </p>
-
-                  <div class="gospel-choice-grid" aria-label="Initial gospel question">
-                    <button class="gospel-choice" type="button" data-gospel-choice>YES</button>
-                    <button class="gospel-choice" type="button" data-gospel-choice>NO</button>
-                  </div>
-
-                  <div class="gospel-response" id="gospelResponse">
-                    <p class="landing-panel-copy">
-                      <strong>If God asked you, “Why should I let you into heaven?” what would you say?</strong>
-                    </p>
-
-                    <div class="gospel-answer-grid">
-                      <button class="gospel-answer" type="button">I tried to be a good person</button>
-                      <button class="gospel-answer" type="button">I have not hurt anybody</button>
-                      <button class="gospel-answer" type="button">I went to church</button>
-                      <button class="gospel-answer" type="button">I believe in God</button>
-                      <button class="gospel-answer" type="button">I trusted in Jesus Christ</button>
-                      <button class="gospel-answer" type="button">I am not sure</button>
-                      <button class="gospel-answer" type="button">None of the above</button>
-                    </div>
-
-                    <p class="landing-panel-copy">
-                      The Bible says all have sinned (Romans 3:23), that sin earns death (Romans 6:23),
-                      and that good works cannot save us (Ephesians 2:8-9). The good news is that Jesus
-                      died for our sins, rose again, and salvation is received by grace through faith in Him
-                      (John 3:16; Romans 10:9-13).
-                    </p>
-
-                    <div class="visual-slot-grid">
-                      <div class="visual-slot">Gospel Visual Slot</div>
-                      <div class="visual-slot">Scripture Path Image Slot</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="minimal-bar" id="about-calvin">
-              <button class="minimal-bar-toggle" type="button" id="calvinToggle" aria-expanded="false" aria-controls="calvinPanel">
-                About Calvin
-              </button>
-              <div class="minimal-panel" id="calvinPanel" aria-hidden="true">
-                <div class="minimal-panel-inner about-calvin-split">
-                  <div class="about-calvin-image-slot">
-                    <img
-                      src="assets/calvin-photo.jpg.png"
-                      alt="Calvin Strickland, creator of Bible Mapped"
-                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                    />
-                    <div class="about-calvin-image-fallback">
-                      Add your image at assets/calvin-photo.jpg.png
-                    </div>
-                  </div>
-
-                  <article class="about-calvin-letter">
-                    <h3>Dear Reader</h3>
-                    <p>My name is Calvin S. I am a Christian, a husband, a father, and the heart behind Bible Mapped.</p>
-                    <p>I built Bible Mapped because I believe Scripture is not vague or disconnected from real life. The Bible happened in real places, among real people, inside real history.</p>
-                    <p>The goal is not just maps. The goal is Jesus Christ.</p>
-                  </article>
                 </div>
               </div>
             </div>
@@ -2522,34 +2430,14 @@
         const isOpen = panel.classList.toggle("open");
         toggle.setAttribute("aria-expanded", String(isOpen));
         panel.setAttribute("aria-hidden", String(!isOpen));
+
+        if (isOpen && panelId === "aboutMappedPanel") {
+          setTimeout(checkFormulaWordsPanUp, 220);
+        }
       });
     }
 
     setupMinimalPanel("aboutMappedToggle", "aboutMappedPanel");
-    setupMinimalPanel("gospelToggle", "gospelPanel");
-    setupMinimalPanel("calvinToggle", "calvinPanel");
-
-    const gospelResponse = document.getElementById("gospelResponse");
-    const gospelChoices = document.querySelectorAll("[data-gospel-choice]");
-    const gospelAnswers = document.querySelectorAll(".gospel-answer");
-
-    gospelChoices.forEach((choice) => {
-      choice.addEventListener("click", () => {
-        gospelChoices.forEach((item) => item.classList.remove("active"));
-        choice.classList.add("active");
-
-        if (gospelResponse) {
-          gospelResponse.classList.add("active");
-        }
-      });
-    });
-
-    gospelAnswers.forEach((answer) => {
-      answer.addEventListener("click", () => {
-        gospelAnswers.forEach((item) => item.classList.remove("active"));
-        answer.classList.add("active");
-      });
-    });
 
     const testamentWrap = document.getElementById("testamentPuzzleWrap");
     const startHereButton = document.getElementById("startHereButton");
