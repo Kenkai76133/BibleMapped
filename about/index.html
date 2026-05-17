@@ -209,12 +209,35 @@
 
     .section-kicker {
       display: inline-flex;
-      margin-bottom: 18px;
+      margin-bottom: 0;
       color: var(--purple);
       font-size: 0.78rem;
       font-weight: 950;
       letter-spacing: 0.14em;
       text-transform: uppercase;
+    }
+
+    .about-label-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .about-home-link {
+      color: var(--charcoal);
+      font-size: 0.78rem;
+      font-weight: 950;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 180ms ease, transform 180ms ease;
+    }
+
+    .about-home-link:hover,
+    .about-home-link:focus-visible {
+      color: var(--purple);
+      transform: translateY(-2px);
     }
 
     .about-title {
@@ -361,6 +384,10 @@
         text-align: left;
       }
 
+      .about-label-row {
+        gap: 14px;
+      }
+
       .container {
         width: min(var(--max), calc(100% - 24px));
       }
@@ -405,7 +432,10 @@
 
     <section class="about-me" aria-labelledby="aboutMeTitle">
       <div class="container about-me-inner">
-        <span class="section-kicker scroll-reveal">About Me</span>
+        <div class="about-label-row scroll-reveal">
+          <span class="section-kicker">About Me</span>
+          <a class="about-home-link" href="../index.html">Home</a>
+        </div>
         <h1 id="aboutMeTitle" class="about-title scroll-reveal">Good day, I’m Calvin.</h1>
 
         <article class="about-letter">
@@ -468,7 +498,6 @@
           </span>
           <span class="bottom-wordmark">Watch us Tik Tok</span>
         </a>
-        <a class="bottom-tagline" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noopener noreferrer">Watch us on YouTube</a>
       </div>
     </footer>
   </main>
