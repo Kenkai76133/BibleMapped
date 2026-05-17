@@ -577,7 +577,9 @@
       overflow: hidden;
       opacity: 0;
       background: rgba(255, 253, 246, 0.58);
-      transition: max-height 480ms cubic-bezier(0.16, 0.9, 0.22, 1), opacity 240ms ease;
+      transition:
+        max-height 920ms cubic-bezier(0.12, 0.86, 0.18, 1),
+        opacity 420ms ease;
     }
 
     .minimal-panel.open {
@@ -623,6 +625,15 @@
       max-width: none;
       object-fit: cover;
       object-position: center;
+    }
+
+    #aboutMappedPanel .formula-window-inner,
+    #aboutMappedPanel .minimal-panel-inner {
+      padding-bottom: 0;
+    }
+
+    #aboutMappedPanel .formula-inline-window.open {
+      margin-bottom: 0;
     }
 
     .about-mapped-grid {
@@ -847,8 +858,11 @@
       max-height: 0;
       opacity: 0;
       overflow: hidden;
-      transform: translateY(28px);
-      transition: max-height 0.75s cubic-bezier(0.16, 0.9, 0.22, 1), opacity 0.45s ease, transform 0.65s ease;
+      transform: translateY(36px);
+      transition:
+        max-height 1100ms cubic-bezier(0.12, 0.86, 0.18, 1),
+        opacity 520ms ease,
+        transform 980ms cubic-bezier(0.18, 1.2, 0.28, 1);
     }
 
     .formula-inline-window.open {
@@ -862,7 +876,7 @@
       background: transparent;
       border: none;
       box-shadow: none;
-      padding: 0 0 46px;
+      padding: 0;
       overflow: visible;
     }
 
@@ -890,18 +904,20 @@
       border-radius: 0;
     }
 
-    /* Image opens slightly zoomed in, then pans / zooms out when the panel opens */
+    /* Image opens low and slightly zoomed, then liquid-pans / zooms out when the panel opens */
     .formula-hero-image {
-      transform: scale(1.14) translateY(10px);
+      transform: scale(1.18) translateY(26px);
       transform-origin: center center;
-      transition: transform 2400ms cubic-bezier(0.16, 0.9, 0.22, 1), filter 2400ms ease;
-      will-change: transform;
-      filter: saturate(0.96) contrast(1.02);
+      transition:
+        transform 3200ms cubic-bezier(0.12, 0.86, 0.18, 1),
+        filter 2600ms ease;
+      will-change: transform, filter;
+      filter: saturate(0.94) contrast(1.01) brightness(0.96);
     }
 
     .formula-art-frame.image-pan-out .formula-hero-image {
       transform: scale(1) translateY(0);
-      filter: saturate(1) contrast(1.04);
+      filter: saturate(1) contrast(1.04) brightness(1);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -931,9 +947,9 @@
       left: 0;
       right: 0;
       bottom: 0;
-      height: 44%;
+      height: 48%;
       z-index: 2;
-      background: linear-gradient(to top, rgba(11, 15, 25, 0.86), rgba(11, 15, 25, 0.52), transparent);
+      background: linear-gradient(to top, rgba(11, 15, 25, 0.9), rgba(11, 15, 25, 0.5), transparent);
       pointer-events: none;
     }
 
@@ -942,9 +958,9 @@
       position: absolute;
       inset: 0;
       z-index: 3;
-      background: linear-gradient(rgba(11, 15, 25, 0.28), rgba(11, 15, 25, 0.62));
+      background: linear-gradient(rgba(11, 15, 25, 0.12), rgba(11, 15, 25, 0.34));
       opacity: 0;
-      transition: opacity 700ms ease;
+      transition: opacity 1200ms ease;
       pointer-events: none;
     }
 
@@ -952,14 +968,30 @@
       opacity: 0;
     }
 
-    .formula-question {
+    .formula-question-row {
       position: absolute;
-      z-index: 4;
-      bottom: 58px;
+      left: clamp(34px, 6.5vw, 110px);
+      right: clamp(34px, 5vw, 88px);
+      bottom: clamp(42px, 6vw, 74px);
+      z-index: 5;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      align-items: end;
+      gap: clamp(16px, 3.2vw, 64px);
+      pointer-events: none;
+    }
+
+    .formula-question {
+      --mx: 0px;
+      --my: 0px;
+      --snap-delay: 0ms;
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: flex-end;
       gap: 6px;
+      min-width: 0;
       color: var(--cloud);
       opacity: 0;
       pointer-events: auto;
@@ -967,29 +999,56 @@
       text-align: center;
       text-decoration: none;
       cursor: pointer;
-      text-shadow: 0 18px 50px rgba(0, 0, 0, 0.72);
-      transform: translateY(58px);
-      transition: opacity 0.85s ease, transform 1s cubic-bezier(0.16, 0.9, 0.22, 1), filter 220ms ease;
-      will-change: opacity, transform;
+      text-shadow: 0 18px 50px rgba(0, 0, 0, 0.76);
+      filter: blur(5px);
+      transform: translate3d(var(--mx), calc(62px + var(--my)), 0) scale(0.96);
+      transition:
+        opacity 820ms ease var(--snap-delay),
+        filter 900ms ease var(--snap-delay),
+        transform 1180ms cubic-bezier(0.18, 1.28, 0.28, 1) var(--snap-delay);
+      will-change: opacity, transform, filter;
+    }
+
+    .formula-question::after {
+      content: "";
+      width: min(84px, 54%);
+      height: 3px;
+      margin-top: 12px;
+      border-radius: 999px;
+      background: var(--bright-red);
+      opacity: 0;
+      transform: scaleX(0.22);
+      transform-origin: center;
+      transition: opacity 360ms ease, transform 520ms cubic-bezier(0.18, 1.28, 0.28, 1);
     }
 
     .formula-question:hover,
     .formula-question:focus-visible {
-      filter: brightness(1.08);
-      transform: translateY(-6px);
+      color: var(--white);
     }
+
+    .formula-question:hover::after,
+    .formula-question:focus-visible::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .formula-question.where { --snap-delay: 120ms; }
+    .formula-question.who { --snap-delay: 230ms; }
+    .formula-question.why { --snap-delay: 340ms; }
+    .formula-question.what { --snap-delay: 450ms; }
 
     .formula-main {
       font-family: Inter, Arial, Helvetica, sans-serif;
-      font-size: clamp(2rem, 4.4vw, 5rem);
+      font-size: clamp(2rem, 4.35vw, 4.95rem);
       line-height: 0.92;
-      letter-spacing: -0.04em;
+      letter-spacing: -0.045em;
       font-weight: 950;
     }
 
     .formula-sub {
       font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(0.82rem, 1.65vw, 1.75rem);
+      font-size: clamp(0.82rem, 1.42vw, 1.55rem);
       font-style: italic;
       line-height: 1;
       font-weight: 500;
@@ -997,38 +1056,10 @@
       color: rgba(248, 247, 242, 0.94);
     }
 
-    .formula-question.where {
-      left: 8%;
-      bottom: 82px;
-      transition-delay: 0.08s;
-    }
-
-    .formula-question.who {
-      left: 34%;
-      transition-delay: 0.22s;
-    }
-
-    .formula-question.why {
-      left: 58%;
-      transition-delay: 0.36s;
-    }
-
-    .formula-question.what {
-      right: 5%;
-      transition-delay: 0.50s;
-    }
-
-    .formula-art-frame.words-in-view .formula-question,
-    .formula-art-frame.tour-active .formula-question {
+    .formula-art-frame.words-in-view .formula-question {
       opacity: 1;
-      transform: translateY(0);
-    }
-
-    .formula-art-frame.words-in-view .formula-question:hover,
-    .formula-art-frame.words-in-view .formula-question:focus-visible,
-    .formula-art-frame.tour-active .formula-question:hover,
-    .formula-art-frame.tour-active .formula-question:focus-visible {
-      transform: translateY(-6px);
+      filter: blur(0);
+      transform: translate3d(var(--mx), var(--my), 0) scale(1);
     }
 
     .formula-tour-panel {
@@ -1823,34 +1854,24 @@
         min-height: 0;
       }
 
+      .formula-question-row {
+        left: 14px;
+        right: 14px;
+        bottom: 32px;
+        gap: 8px;
+      }
+
       .formula-question {
-        bottom: 34px;
         gap: 4px;
       }
 
-      .formula-question.where {
-        left: 5%;
-        bottom: 54px;
-      }
-
-      .formula-question.who {
-        left: 31%;
-      }
-
-      .formula-question.why {
-        left: 55%;
-      }
-
-      .formula-question.what {
-        right: 3%;
-      }
-
       .formula-main {
-        font-size: clamp(1.15rem, 5.4vw, 2.4rem);
+        font-size: clamp(1.1rem, 5vw, 2.15rem);
+        letter-spacing: -0.04em;
       }
 
       .formula-sub {
-        font-size: clamp(0.48rem, 2.1vw, 0.95rem);
+        font-size: clamp(0.46rem, 1.95vw, 0.86rem);
         letter-spacing: 0.01em;
       }
 
@@ -1887,20 +1908,25 @@
         min-height: 0;
       }
 
-      .formula-question {
-        bottom: 28px;
-      }
-
-      .formula-question.where {
-        bottom: 45px;
+      .formula-question-row {
+        left: 10px;
+        right: 10px;
+        bottom: 24px;
+        gap: 5px;
       }
 
       .formula-main {
-        font-size: clamp(1rem, 5.2vw, 1.9rem);
+        font-size: clamp(0.9rem, 4.9vw, 1.7rem);
       }
 
       .formula-sub {
-        font-size: clamp(0.42rem, 2vw, 0.78rem);
+        font-size: clamp(0.38rem, 1.85vw, 0.7rem);
+      }
+
+      .formula-question::after {
+        width: min(44px, 62%);
+        height: 2px;
+        margin-top: 7px;
       }
 
       .formula-tour-panel {
@@ -2162,7 +2188,7 @@
           <div class="about-panel-formula">
             <div class="formula-inline-window open" id="formulaInlineWindow" aria-hidden="false">
               <div class="formula-window-inner">
-                <div class="formula-art-frame tour-active" id="formulaArtFrame">
+                <div class="formula-art-frame" id="formulaArtFrame">
                   <img
                     src="assets/formula-design.png"
                     alt="Bible Mapped Formula Design"
@@ -2174,25 +2200,27 @@
                     Formula image missing. Add assets/formula-design.png
                   </div>
 
-                  <a class="formula-question where" href="maps/index.html" aria-label="Open Maps page">
-                    <span class="formula-main">Where</span>
-                    <span class="formula-sub">did it happen?</span>
-                  </a>
+                  <div class="formula-question-row" aria-label="Bible Mapped formula navigation">
+                    <a class="formula-question where" href="maps/index.html" aria-label="Open Maps page">
+                      <span class="formula-main">Where</span>
+                      <span class="formula-sub">did it happen?</span>
+                    </a>
 
-                  <a class="formula-question who" href="characters/index.html" aria-label="Open People page">
-                    <span class="formula-main">Who</span>
-                    <span class="formula-sub">is this about?</span>
-                  </a>
+                    <a class="formula-question who" href="characters/index.html" aria-label="Open People page">
+                      <span class="formula-main">Who</span>
+                      <span class="formula-sub">is this about?</span>
+                    </a>
 
-                  <a class="formula-question why" href="books/index.html" aria-label="Open Books page">
-                    <span class="formula-main">Why</span>
-                    <span class="formula-sub">is this happening?</span>
-                  </a>
+                    <a class="formula-question why" href="books/index.html" aria-label="Open Books page">
+                      <span class="formula-main">Why</span>
+                      <span class="formula-sub">is this happening?</span>
+                    </a>
 
-                  <a class="formula-question what" href="case-studies/index.html" aria-label="Open Case Studies page">
-                    <span class="formula-main">What</span>
-                    <span class="formula-sub">makes this matter to me?</span>
-                  </a>
+                    <a class="formula-question what" href="case-studies/index.html" aria-label="Open Case Studies page">
+                      <span class="formula-main">What</span>
+                      <span class="formula-sub">makes this matter to me?</span>
+                    </a>
+                  </div>
 
                   <article class="formula-tour-panel where-panel active" data-formula-tour-panel="1">
                     <p class="formula-tour-kicker">John 4 Case Study</p>
@@ -2597,6 +2625,7 @@
     const formulaTourPanels = document.querySelectorAll("[data-formula-tour-panel]");
     const formulaTourDots = document.querySelectorAll("[data-formula-tour-dot]");
     const formulaTourButtons = document.querySelectorAll("[data-formula-tour-next]");
+    const formulaQuestionLinks = document.querySelectorAll(".formula-question");
 
     function triggerFormulaImagePanOut() {
       if (!formulaArtFrame) return;
@@ -2614,6 +2643,27 @@
     function resetFormulaImagePanOut() {
       if (!formulaArtFrame) return;
       formulaArtFrame.classList.remove("image-pan-out");
+    }
+
+
+    function setupFormulaMagnetLinks() {
+      formulaQuestionLinks.forEach((link) => {
+        link.addEventListener("mousemove", (event) => {
+          const rect = link.getBoundingClientRect();
+          const x = event.clientX - rect.left - rect.width / 2;
+          const y = event.clientY - rect.top - rect.height / 2;
+          const pullX = Math.max(Math.min(x * 0.12, 12), -12);
+          const pullY = Math.max(Math.min(y * 0.14, 10), -10);
+
+          link.style.setProperty("--mx", `${pullX}px`);
+          link.style.setProperty("--my", `${pullY}px`);
+        });
+
+        link.addEventListener("mouseleave", () => {
+          link.style.setProperty("--mx", "0px");
+          link.style.setProperty("--my", "0px");
+        });
+      });
     }
 
     function setFormulaTourStep(step) {
@@ -2640,11 +2690,13 @@
     });
 
     function resetFormulaWindow() {
-      if (!formulaToggle || !formulaInlineWindow) return;
+      if (!formulaInlineWindow) return;
 
-      formulaInlineWindow.classList.remove("open");
-      formulaInlineWindow.setAttribute("aria-hidden", "true");
-      formulaToggle.setAttribute("aria-expanded", "false");
+      if (formulaToggle) {
+        formulaInlineWindow.classList.remove("open");
+        formulaInlineWindow.setAttribute("aria-hidden", "true");
+        formulaToggle.setAttribute("aria-expanded", "false");
+      }
 
       if (formulaArtFrame) {
         formulaArtFrame.classList.remove("words-in-view");
@@ -2777,9 +2829,19 @@
         panel.setAttribute("aria-hidden", String(!isOpen));
 
         if (isOpen && panelId === "aboutMappedPanel") {
+          if (formulaArtFrame) {
+            formulaArtFrame.classList.remove("words-in-view");
+            formulaArtFrame.classList.remove("tour-active");
+          }
+
           triggerFormulaImagePanOut();
-          setTimeout(checkFormulaWordsPanUp, 220);
+          setTimeout(checkFormulaWordsPanUp, 520);
         } else if (!isOpen && panelId === "aboutMappedPanel") {
+          if (formulaArtFrame) {
+            formulaArtFrame.classList.remove("words-in-view");
+            formulaArtFrame.classList.remove("tour-active");
+          }
+
           resetFormulaImagePanOut();
         }
       });
