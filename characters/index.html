@@ -8,22 +8,159 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Cormorant+Garamond:wght@600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../src/styles.css" />
+  <style>
+    .people-page {
+      background: var(--cloud-white);
+    }
+
+    .people-page .site-header {
+      position: relative;
+      background: transparent;
+      border: 0;
+      overflow: visible;
+    }
+
+    .people-page .nav-wrap {
+      min-height: 0;
+      display: flex;
+      justify-content: flex-start;
+      padding: 22px 0 8px;
+    }
+
+    .people-home-link {
+      color: var(--ink-navy);
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 180ms ease, transform 180ms ease;
+    }
+
+    .people-home-link:hover,
+    .people-home-link:focus-visible {
+      color: var(--electric-purple);
+      transform: translateY(-2px);
+    }
+
+    .people-page .hero {
+      display: none;
+    }
+
+    .people-gallery-section {
+      padding: clamp(18px, 4vw, 46px) 0 clamp(42px, 7vw, 84px);
+    }
+
+    .people-gallery-container {
+      width: min(1480px, calc(100% - 24px));
+    }
+
+    .people-gallery {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(8px, 1.2vw, 16px);
+    }
+
+    .people-gallery .info-card {
+      position: relative;
+      min-height: clamp(340px, 36vw, 620px);
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      overflow: hidden;
+      isolation: isolate;
+      cursor: pointer;
+      transition: transform 240ms ease, filter 240ms ease;
+    }
+
+    .people-gallery .info-card:hover,
+    .people-gallery .info-card:focus-within {
+      transform: translateY(-12px) scale(1.025);
+      filter: drop-shadow(0 28px 38px rgba(11, 16, 32, 0.18));
+      z-index: 3;
+    }
+
+    .people-gallery .image-slot {
+      position: absolute;
+      inset: 0;
+      min-height: 100%;
+      height: 100%;
+      margin: 0;
+      border: 0;
+      border-radius: 0;
+      background:
+        linear-gradient(to top, rgba(11, 16, 32, 0.72), rgba(11, 16, 32, 0.08) 55%, rgba(255, 255, 255, 0.02)),
+        var(--surface);
+      color: rgba(31, 41, 51, 0.36);
+      font-size: 0.72rem;
+    }
+
+    .people-gallery .info-card h3,
+    .people-gallery .info-card p,
+    .people-gallery .placeholder-btn {
+      position: absolute;
+      left: clamp(16px, 2vw, 28px);
+      right: clamp(16px, 2vw, 28px);
+      z-index: 2;
+      margin: 0;
+    }
+
+    .people-gallery .info-card h3 {
+      bottom: clamp(74px, 7vw, 104px);
+      color: white;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2rem, 4vw, 4.5rem);
+      line-height: 0.9;
+      text-shadow: 0 18px 38px rgba(0, 0, 0, 0.32);
+    }
+
+    .people-gallery .info-card p {
+      bottom: clamp(34px, 4vw, 58px);
+      max-width: 34ch;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .people-gallery .info-card .meta-line,
+    .people-gallery .placeholder-btn {
+      display: none;
+    }
+
+    .people-page .site-footer {
+      margin-top: 0;
+    }
+
+    @media (max-width: 1100px) {
+      .people-gallery {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .people-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .people-gallery .info-card {
+        min-height: clamp(300px, 68vw, 520px);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .people-gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
-<body>
+<body class="people-page">
   <!-- Global navigation -->
   <header class="site-header">
     <div class="container nav-wrap">
-      <a class="brand" href="../index.html">BibleMapped</a>
-      <nav class="main-nav" aria-label="Primary">
-        <a href="../books/index.html">Books</a>
-        <a href="../characters/index.html">People</a>
-        <a href="../maps/index.html">Maps</a>
-        <a href="../case-studies/index.html">Case Studies</a>
-        <a href="../qa/index.html">Q&amp;A</a>
-      </nav>
-      <div class="header-actions">
-        <a class="see-all" href="../about/index.html">About</a>
-      </div>
+      <a class="people-home-link" href="../index.html">Home</a>
     </div>
   </header>
 
@@ -41,9 +178,9 @@
     </section>
 
     <!-- Person placeholder cards -->
-    <section class="section">
-      <div class="container">
-        <div class="card-grid four">
+    <section class="section people-gallery-section">
+      <div class="container people-gallery-container">
+        <div class="card-grid four people-gallery">
           <article class="info-card">
             <div class="image-slot">Image Slot</div>
             <h3>Moses</h3>
