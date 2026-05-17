@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Questions & Answers — BibleMapped</title>
+    <title>Questions & Answers - BibleMapped</title>
     <link rel="stylesheet" href="../src/styles.css" />
     <style>
       .simple-page .header {
@@ -34,79 +34,188 @@
         color: var(--electric-purple);
         transform: translateY(-2px);
       }
+
+      .qa-page-main {
+        width: calc(100vw - 12px);
+        max-width: none;
+      }
+
+      .qa-gallery-section {
+        padding-top: clamp(18px, 4vw, 46px);
+      }
+
+      .qa-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(142px, 1fr));
+        gap: clamp(8px, 1vw, 14px);
+      }
+
+      .qa-poster {
+        position: relative;
+        aspect-ratio: 2 / 3;
+        min-height: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        overflow: hidden;
+        isolation: isolate;
+        cursor: pointer;
+        transition: transform 240ms ease, filter 240ms ease;
+      }
+
+      .qa-poster:hover,
+      .qa-poster:focus-within {
+        transform: translateY(-12px) scale(1.025);
+        filter: drop-shadow(0 28px 38px rgba(11, 16, 32, 0.18));
+        z-index: 3;
+      }
+
+      .qa-poster-image {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background:
+          linear-gradient(to top, rgba(11, 16, 32, 0.76), rgba(11, 16, 32, 0.18) 52%, rgba(255, 255, 255, 0.02)),
+          var(--surface);
+        color: rgba(31, 41, 51, 0.36);
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .qa-poster .kicker,
+      .qa-poster h3,
+      .qa-poster p,
+      .qa-poster .placeholder-btn {
+        position: absolute;
+        left: clamp(14px, 1.8vw, 24px);
+        right: clamp(14px, 1.8vw, 24px);
+        z-index: 2;
+        margin: 0;
+      }
+
+      .qa-poster .kicker {
+        top: clamp(14px, 1.8vw, 24px);
+        color: rgba(255, 255, 255, 0.78);
+      }
+
+      .qa-poster h3 {
+        bottom: clamp(54px, 6vw, 86px);
+        color: white;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(1.35rem, 2.45vw, 3rem);
+        line-height: 0.95;
+        text-shadow: 0 18px 38px rgba(0, 0, 0, 0.32);
+      }
+
+      .qa-poster p,
+      .qa-poster .placeholder-btn {
+        display: none;
+      }
+
+      @media (max-width: 760px) {
+        .qa-gallery {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
     </style>
   </head>
   <body class="simple-page">
-    <!-- Global navigation -->
     <header class="header">
       <div class="container header-inner">
         <a class="simple-home-link" href="/">Home</a>
       </div>
     </header>
 
-    <main class="container">
-      <!-- Q&A hero -->
-      <section class="hero">
-        <p class="eyebrow">Q&amp;A</p>
-        <h1>Questions &amp; Answers</h1>
-        <p class="hero-copy">
-          Clear answers to Bible questions, cultural claims, objections, and common misunderstandings.
-        </p>
-      </section>
-
-      <!-- Q&A categories -->
-      <section class="section">
-        <div class="section-head">
-          <h2>Answer Categories</h2>
-          <span class="see-all">Framework placeholders</span>
-        </div>
-        <div class="pill-row">
-          <span class="pill">The Gospel</span>
-          <span class="pill">The Bible</span>
-          <span class="pill">Jesus Christ</span>
-          <span class="pill">History &amp; Culture</span>
-          <span class="pill">Hard Questions</span>
-          <span class="pill">Modern Claims</span>
-        </div>
-      </section>
-
-      <!-- Q&A placeholder cards -->
-      <section class="section">
-        <div class="grid">
-          <article class="card">
+    <main class="container qa-page-main">
+      <section class="section qa-gallery-section">
+        <div class="grid qa-gallery">
+          <article class="card qa-poster" tabindex="0">
+            <div class="qa-poster-image">Image Slot</div>
             <div class="kicker">The Gospel</div>
-            <h3>Can I know for sure I’m going to heaven?</h3>
+            <h3>Can I know for sure I am going to heaven?</h3>
             <p>A direct answer about assurance, grace, faith, and Jesus Christ.</p>
             <span class="placeholder-btn">Read Answer</span>
           </article>
-          <article class="card">
+          <article class="card qa-poster" tabindex="0">
+            <div class="qa-poster-image">Image Slot</div>
             <div class="kicker">Jesus Christ</div>
             <h3>Did Jesus claim to be God?</h3>
             <p>A sourced answer from the words and actions of Jesus in Scripture.</p>
             <span class="placeholder-btn">Read Answer</span>
           </article>
-          <article class="card">
+          <article class="card qa-poster" tabindex="0">
+            <div class="qa-poster-image">Image Slot</div>
             <div class="kicker">The Bible</div>
             <h3>Can we trust the Bible?</h3>
             <p>A place for textual, historical, and theological response notes.</p>
             <span class="placeholder-btn">Read Answer</span>
           </article>
-          <article class="card">
+          <article class="card qa-poster" tabindex="0">
+            <div class="qa-poster-image">Image Slot</div>
             <div class="kicker">The Bible</div>
             <h3>Why does the Old Testament matter?</h3>
             <p>A clear answer about promise, covenant, prophecy, and Christ.</p>
             <span class="placeholder-btn">Read Answer</span>
           </article>
-          <article class="card">
+          <article class="card qa-poster" tabindex="0">
+            <div class="qa-poster-image">Image Slot</div>
             <div class="kicker">Modern Claims</div>
             <h3>Was Christianity copied from pagan myths?</h3>
             <p>A placeholder for a careful, sourced cultural-claim response.</p>
             <span class="placeholder-btn">Read Answer</span>
           </article>
-          <article class="card">
-            <div class="kicker">History &amp; Culture</div>
+          <article class="card qa-poster" tabindex="0">
+            <div class="qa-poster-image">Image Slot</div>
+            <div class="kicker">History & Culture</div>
             <h3>Why does geography matter in Scripture?</h3>
             <p>A BibleMapped answer about place, movement, context, and meaning.</p>
+            <span class="placeholder-btn">Read Answer</span>
+          </article>
+          <article class="card qa-poster" tabindex="0">
+            <div class="qa-poster-image">Image Slot</div>
+            <div class="kicker">The Gospel</div>
+            <h3>What is the gospel?</h3>
+            <p>A clear answer about sin, grace, Christ, repentance, and faith.</p>
+            <span class="placeholder-btn">Read Answer</span>
+          </article>
+          <article class="card qa-poster" tabindex="0">
+            <div class="qa-poster-image">Image Slot</div>
+            <div class="kicker">Jesus Christ</div>
+            <h3>Why did Jesus have to die?</h3>
+            <p>A short answer about sacrifice, substitution, love, and resurrection.</p>
+            <span class="placeholder-btn">Read Answer</span>
+          </article>
+          <article class="card qa-poster" tabindex="0">
+            <div class="qa-poster-image">Image Slot</div>
+            <div class="kicker">Hard Questions</div>
+            <h3>Why does God allow suffering?</h3>
+            <p>A placeholder for a careful biblical response to suffering.</p>
+            <span class="placeholder-btn">Read Answer</span>
+          </article>
+          <article class="card qa-poster" tabindex="0">
+            <div class="qa-poster-image">Image Slot</div>
+            <div class="kicker">History & Culture</div>
+            <h3>What is a covenant?</h3>
+            <p>A BibleMapped answer about promise, relationship, and Scripture.</p>
+            <span class="placeholder-btn">Read Answer</span>
+          </article>
+          <article class="card qa-poster" tabindex="0">
+            <div class="qa-poster-image">Image Slot</div>
+            <div class="kicker">The Bible</div>
+            <h3>How should I start reading the Bible?</h3>
+            <p>A simple path for new readers learning Scripture.</p>
+            <span class="placeholder-btn">Read Answer</span>
+          </article>
+          <article class="card qa-poster" tabindex="0">
+            <div class="qa-poster-image">Image Slot</div>
+            <div class="kicker">Modern Claims</div>
+            <h3>Is faith against evidence?</h3>
+            <p>A place for a thoughtful answer on faith, reason, and history.</p>
             <span class="placeholder-btn">Read Answer</span>
           </article>
         </div>
@@ -119,7 +228,10 @@
         <div class="footer-links">
           <a href="/">Home</a>
           <a href="/books/">Books</a>
+          <a href="/characters/">People</a>
+          <a href="/maps/">Maps</a>
           <a href="/case-studies/">Case Studies</a>
+          <a href="/qa/">Q&amp;A</a>
           <a href="/about/">About</a>
         </div>
       </div>
