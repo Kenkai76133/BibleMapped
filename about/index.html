@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Bible Mapped | About</title>
+  <title>Bible Mapped | About Me</title>
 
   <meta
     name="description"
-    content="About Bible Mapped and the mission behind helping people understand Scripture through place, context, and meaning."
+    content="Meet Calvin, the heart behind Bible Mapped, and learn the mission behind helping people understand Scripture through place, people, history, and meaning."
   />
 
   <style>
@@ -20,14 +20,9 @@
       --cloud: #F8F7F2;
       --paper: #FFFDF6;
       --white: #FFFFFF;
-      --navy: #0E376E;
-      --red: #FF1F2D;
-      --line: rgba(21, 21, 21, 0.14);
-      --soft-line: rgba(21, 21, 21, 0.08);
-      --shadow: 0 18px 42px rgba(21, 21, 21, 0.08);
-      --max: 1080px;
-      --nav-height: 74px;
-      --nav-bg: #FFFFFF;
+      --line: rgba(21, 21, 21, 0.12);
+      --shadow: 0 24px 70px rgba(21, 21, 21, 0.08);
+      --max: 980px;
     }
 
     * {
@@ -41,16 +36,12 @@
     }
 
     body {
+      min-height: 100vh;
       background: var(--cloud);
       color: var(--charcoal);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.58;
+      line-height: 1.65;
       overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
     }
 
     img {
@@ -64,718 +55,142 @@
     }
 
     /* =========================
-       ABOUT PAGE HERO
+       IMAGE-ONLY HERO SLOT
+       Upload image here:
+       ../assets/about-hero-collage.jpg
     ========================= */
 
-    .about-hero {
-      padding: clamp(74px, 12vw, 148px) 0 clamp(44px, 7vw, 84px);
-      border-bottom: 1px solid var(--line);
+    .about-hero-slot {
+      position: relative;
+      min-height: clamp(360px, 72vh, 760px);
       background: var(--cloud);
-      overflow: hidden;
-    }
-
-    .about-hero-inner {
-      max-width: 980px;
-      padding-left: clamp(18px, 3vw, 30px);
-      border-left: 2px solid rgba(123, 44, 255, 0.72);
-    }
-
-    .about-hero h1 {
-      margin: 0;
-      max-width: 100%;
-      color: var(--ink);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(4.2rem, 13vw, 10.5rem);
-      font-weight: 950;
-      letter-spacing: -0.07em;
-      line-height: 0.82;
-      text-transform: none;
-      overflow-wrap: break-word;
-    }
-
-    .about-hero-copy {
-      max-width: 760px;
-      margin-top: clamp(28px, 4vw, 44px);
-      color: var(--ink);
-      font-size: clamp(1.2rem, 2.2vw, 1.75rem);
-      font-weight: 850;
-      line-height: 1.22;
-    }
-
-    .about-hero-line {
-      max-width: 680px;
-      margin-top: 18px;
-      color: var(--muted);
-      font-family: "Courier New", Courier, monospace;
-      font-size: clamp(0.92rem, 1.6vw, 1.08rem);
-      letter-spacing: 0.01em;
-    }
-
-    .about-section-stack {
-      padding: 42px 0 70px;
-      overflow: hidden;
-    }
-
-    .about-accordion {
-      margin-bottom: 18px;
-      border: 0;
-      border-radius: 8px;
-      background: var(--paper);
-      box-shadow: 0 16px 44px rgba(21, 21, 21, 0.07);
-      overflow: hidden;
-    }
-
-    .about-accordion:last-child {
-      border-bottom: 0;
-    }
-
-    .about-accordion summary {
-      min-height: clamp(82px, 9vw, 112px);
-      min-width: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      color: var(--ink);
-      cursor: pointer;
-      list-style: none;
-      padding: 22px clamp(22px, 4vw, 42px);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.45rem, 3.2vw, 2.35rem);
-      font-weight: 900;
-      letter-spacing: -0.035em;
-      line-height: 1;
-      white-space: normal;
-      overflow-wrap: anywhere;
-      transition: background 180ms ease;
-    }
-
-    .about-accordion summary:hover,
-    .about-accordion summary:focus-visible {
-      background: #f3efe4;
-    }
-
-    .about-accordion summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .about-accordion summary::after {
-      content: "+";
-      flex: 0 0 auto;
-      color: var(--purple);
-      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-      font-size: 1.25rem;
-      font-weight: 950;
-      line-height: 1;
-    }
-
-    .about-accordion[open] summary::after {
-      content: "-";
-    }
-
-    .about-accordion-body {
-      padding: 8px clamp(22px, 4vw, 42px) 38px;
-      background: rgba(255, 253, 246, 0.72);
-    }
-
-    .about-accordion-body > p,
-    .about-accordion-body .method-grid p,
-    .about-accordion-body .qa-blog-card p {
-      max-width: 78ch;
-      margin-top: 12px;
-      color: var(--muted);
-      font-weight: 650;
-    }
-
-    .method-grid,
-    .qa-blog-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 22px;
-    }
-
-    .method-card,
-    .qa-blog-card {
-      border: 1px solid var(--line);
-      background: var(--paper);
-      padding: 20px;
-    }
-
-    .method-card strong,
-    .qa-blog-card strong {
-      display: block;
-      color: var(--ink);
-      font-size: 0.92rem;
-      font-weight: 950;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .about-accordion .gospel-section {
-      margin-bottom: 0;
-      padding: 0;
-      border: 0;
-      border-radius: 0;
-      background: transparent;
-      box-shadow: none;
-    }
-
-    .about-accordion .gospel-section h2 {
-      display: none;
-    }
-
-    .about-accordion .gospel-option,
-    .about-accordion .gospel-step,
-    .about-accordion .reference-chip {
-      border-radius: 0;
-    }
-
-    .about-accordion .profile-inner {
-      grid-template-columns: 190px 1fr;
-      border: 0;
-      padding: 4px 0 0;
-    }
-
-    .about-accordion .profile-photo {
-      position: relative;
-      top: auto;
-      width: 190px;
-      box-shadow: none;
-    }
-
-    .about-letter-panel {
-      border-top: 1px solid var(--line);
-      padding-top: 24px;
-    }
-
-    .about-letter-panel h3 {
-      margin: 0 0 14px;
-      color: var(--ink);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      line-height: 1;
-      letter-spacing: -0.035em;
-    }
-
-    .about-letter-panel p {
-      max-width: 82ch;
-      margin-top: 14px;
-      color: var(--muted);
-      font-weight: 650;
-    }
-
-    .section-kicker {
-      display: inline-flex;
-      margin-bottom: 12px;
-      color: var(--purple);
-      font-size: 0.76rem;
-      font-weight: 950;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    /* =========================
-       TOP BAR
-    ========================= */
-
-    .brand-bar {
-      background: var(--nav-bg);
-      color: var(--charcoal);
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      border: 1px solid rgba(21, 21, 21, 0.08);
-      border-width: 0 0 1px;
-      border-radius: 0;
-      width: 100%;
-      margin: 0;
-      box-shadow: none;
-      overflow: hidden;
-    }
-
-    .brand-bar-inner {
-      width: min(var(--max), calc(100% - 42px));
-      margin: 0 auto;
-      min-height: var(--nav-height);
-      display: grid;
-      grid-template-columns: minmax(140px, 180px) minmax(0, 1fr) minmax(60px, 90px);
-      align-items: center;
-      gap: 18px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .about-brand {
-      font-weight: 950;
-      letter-spacing: -0.02em;
-      max-width: 180px;
-      overflow: hidden;
-    }
-
-    .about-nav {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      justify-self: center;
-      width: 100%;
-      gap: clamp(0.8rem, 2vw, 2.2rem);
-      font-size: 0.9rem;
-      font-weight: 850;
-    }
-
-    .back-home-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      justify-self: end;
-      position: absolute;
-      right: 0;
-      top: 50%;
-      z-index: 2;
-      transform: translateY(-50%);
-      background: var(--nav-bg);
-      min-height: 38px;
-      padding: 8px 13px;
-      border-radius: 0;
-      border: 0;
-      color: var(--charcoal);
-      font-size: 0.86rem;
-      font-weight: 900;
-      letter-spacing: 0.01em;
-      transition: background 180ms ease, transform 180ms ease;
-    }
-
-    .back-home-link:hover {
-      background: transparent;
-      color: var(--purple);
-      transform: translateY(calc(-50% - 1px));
-    }
-
-    .back-home-link::before {
-      content: none;
-    }
-
-    .about-intro-panel,
-    .gospel-section {
-      padding: 34px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: var(--paper);
-      box-shadow: var(--shadow);
-    }
-
-    .about-intro-panel {
-      margin: 0 auto 18px;
-    }
-
-    .about-intro-panel h1,
-    .gospel-section h2 {
-      margin: 0 0 14px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2.4rem, 6vw, 4.8rem);
-      line-height: 0.95;
-    }
-
-    .about-intro-panel p,
-    .gospel-section p {
-      max-width: 78ch;
-      margin: 12px 0 0;
-      color: var(--muted);
-      font-weight: 650;
-    }
-
-    .gospel-section {
-      margin-bottom: 28px;
-    }
-
-    .gospel-options,
-    .gospel-map-grid,
-    .reference-grid {
-      display: grid;
-      gap: 12px;
-      margin-top: 22px;
-    }
-
-    .gospel-options {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .gospel-map-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .gospel-option,
-    .gospel-step,
-    .reference-chip {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--white);
-      padding: 16px;
-      transition: transform 180ms ease, border-color 180ms ease;
-    }
-
-    .gospel-option {
-      cursor: pointer;
-      font-weight: 900;
-      text-align: left;
-    }
-
-    .gospel-option:hover,
-    .gospel-step:hover {
-      transform: translateY(-3px);
-      border-color: rgba(123, 44, 255, 0.38);
-    }
-
-    .gospel-step span {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--purple);
-      font-size: 0.76rem;
-      font-weight: 950;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .reference-grid {
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    .reference-chip {
-      padding: 8px 11px;
-      font-size: 0.86rem;
-      font-weight: 850;
-    }
-
-    .gospel-final {
-      margin-top: 26px;
-      padding-top: 22px;
-      border-top: 1px solid var(--line);
-    }
-
-    .gospel-cta {
-      display: inline-flex;
-      margin-top: 18px;
-      padding: 12px 16px;
-      border-radius: 999px;
-      background: var(--charcoal);
-      color: var(--white);
-      font-weight: 900;
-    }
-
-    /* =========================
-       HERO
-    ========================= */
-
-    .hero {
-      background: var(--cloud);
-      padding: 34px 0 24px;
-    }
-
-    .hero-visual {
-      position: relative;
-      width: 100%;
-      min-height: clamp(310px, 48vw, 560px);
-      background-image: url("../assets/about-static.png");
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
       overflow: hidden;
       isolation: isolate;
     }
 
-    .hero-visual::before {
-      content: "";
+    .about-hero-image {
       position: absolute;
       inset: 0;
       z-index: 1;
+      background-image: url("../assets/about-hero-collage.jpg");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      transform: scale(1.01);
+    }
+
+    .about-hero-image::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
       background:
         linear-gradient(
           to bottom,
-          rgba(248, 247, 242, 0.06) 0%,
+          rgba(248, 247, 242, 0.04) 0%,
           rgba(248, 247, 242, 0.02) 42%,
-          rgba(248, 247, 242, 0.48) 78%,
-          rgba(248, 247, 242, 0.86) 92%,
-          rgba(248, 247, 242, 1) 100%
+          rgba(248, 247, 242, 0.32) 74%,
+          rgba(248, 247, 242, 0.72) 90%,
+          var(--cloud) 100%
         ),
         linear-gradient(
           to right,
-          rgba(248, 247, 242, 0.86) 0%,
-          rgba(248, 247, 242, 0.18) 9%,
-          rgba(248, 247, 242, 0) 19%,
-          rgba(248, 247, 242, 0) 81%,
-          rgba(248, 247, 242, 0.18) 91%,
-          rgba(248, 247, 242, 0.86) 100%
+          rgba(248, 247, 242, 0.50) 0%,
+          rgba(248, 247, 242, 0.08) 18%,
+          rgba(248, 247, 242, 0) 50%,
+          rgba(248, 247, 242, 0.08) 82%,
+          rgba(248, 247, 242, 0.50) 100%
         );
       pointer-events: none;
     }
 
-    .hero-visual::after {
+    .about-hero-image::after {
       content: "";
       position: absolute;
       left: 0;
       right: 0;
       bottom: -1px;
-      height: 42%;
-      z-index: 2;
+      z-index: 3;
+      height: 46%;
       background: linear-gradient(
         to bottom,
         rgba(248, 247, 242, 0) 0%,
-        rgba(248, 247, 242, 0.18) 32%,
-        rgba(248, 247, 242, 0.55) 62%,
+        rgba(248, 247, 242, 0.20) 28%,
+        rgba(248, 247, 242, 0.62) 66%,
         var(--cloud) 100%
       );
       pointer-events: none;
     }
 
-    .hero-grid {
-      display: block;
-      margin-top: 0;
-      position: relative;
-      z-index: 5;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
+    .image-slot-note {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      z-index: 4;
+      padding: 8px 11px;
+      border: 1px solid rgba(21, 21, 21, 0.12);
+      background: rgba(255, 253, 246, 0.74);
       color: var(--muted);
-      font-size: 0.8rem;
-      font-weight: 950;
+      font-size: 0.72rem;
+      font-weight: 900;
       letter-spacing: 0.09em;
       text-transform: uppercase;
-      margin-bottom: 18px;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--purple);
-      box-shadow: 0 0 0 8px rgba(123, 44, 255, 0.14);
-    }
-
-    .hero-title {
-      max-width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: clamp(3rem, 7vw, 6.6rem);
-      line-height: 0.98;
-      letter-spacing: -0.075em;
-      font-weight: 950;
-    }
-
-    .title-line {
-      display: block;
-      width: 100%;
-      padding: 0.06em 0.16em 0.1em;
-      box-decoration-break: clone;
-      -webkit-box-decoration-break: clone;
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: bannerPanUp 900ms cubic-bezier(.2,.8,.2,1) forwards;
-      will-change: transform, opacity;
-    }
-
-    .title-line:nth-child(1) {
-      animation-delay: 120ms;
-    }
-
-    .title-line:nth-child(2) {
-      animation-delay: 260ms;
-    }
-
-    .title-line:nth-child(3) {
-      animation-delay: 400ms;
-    }
-
-    .title-line::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      background: rgba(255, 255, 255, 0.12);
-      transform: translateY(110%);
-      animation: bannerLightPan 5.8s ease-in-out infinite;
-      animation-delay: 1.2s;
-      pointer-events: none;
-    }
-
-    .title-line:nth-child(2)::after {
-      animation-delay: 1.8s;
-    }
-
-    .title-line:nth-child(3)::after {
-      animation-delay: 2.4s;
-    }
-
-    .title-purple {
-      background: var(--purple);
-      color: white;
-    }
-
-    .title-red {
-      background: var(--red);
-      color: white;
-    }
-
-    .title-navy {
-      background: var(--navy);
-      color: white;
-    }
-
-    @keyframes bannerPanUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes bannerLightPan {
-      0%,
-      68% {
-        transform: translateY(110%);
-        opacity: 0;
-      }
-
-      78% {
-        opacity: 0.42;
-      }
-
-      100% {
-        transform: translateY(-110%);
-        opacity: 0;
-      }
-    }
-
-    .feature-image-wrap {
-      width: 100%;
-      margin-top: 22px;
-    }
-
-    .feature-image-frame {
-      width: 100%;
-      min-height: clamp(220px, 32vw, 420px);
-      background-image: url("../assets/about-feature-image.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
-      background-color: var(--paper);
-    }
-
-    .feature-image-frame::before {
-      content: "Add about-feature-image.png";
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      color: var(--muted);
-      font-size: 0.82rem;
-      font-weight: 950;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      background:
-        linear-gradient(rgba(248,247,242,0.52), rgba(248,247,242,0.52)),
-        repeating-linear-gradient(90deg, rgba(21,21,21,0.05) 0 1px, transparent 1px 48px),
-        repeating-linear-gradient(0deg, rgba(21,21,21,0.04) 0 1px, transparent 1px 48px),
-        var(--paper);
-      z-index: 1;
-    }
-
-    .feature-image-frame.has-image::before {
-      display: none;
-    }
-
-    .feature-image-frame::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: linear-gradient(
-        to bottom,
-        rgba(248, 247, 242, 0.04) 0%,
-        rgba(248, 247, 242, 0.00) 55%,
-        rgba(248, 247, 242, 0.16) 78%,
-        rgba(248, 247, 242, 0.32) 100%
-      );
-      z-index: 2;
+      backdrop-filter: blur(8px);
     }
 
     /* =========================
-       ABOUT LETTER
+       ABOUT ME ONLY
     ========================= */
 
-    .profile-band {
-      padding: 28px 0 78px;
+    .about-me {
+      position: relative;
+      z-index: 5;
+      margin-top: clamp(-38px, -4vw, -18px);
+      padding: 0 0 clamp(86px, 12vw, 150px);
       background: var(--cloud);
     }
 
-    .profile-inner {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 28px;
-      align-items: start;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      padding: 30px 0 34px;
+    .about-me-inner {
+      max-width: 900px;
     }
 
-    .profile-photo {
-      width: 220px;
-      aspect-ratio: 4 / 5;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      position: sticky;
-      top: 24px;
-    }
-
-    .profile-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .profile-meta h2 {
-      font-size: clamp(2.4rem, 5vw, 5.2rem);
-      line-height: 0.94;
-      letter-spacing: -0.07em;
+    .section-kicker {
+      display: inline-flex;
+      margin-bottom: 18px;
+      color: var(--purple);
+      font-size: 0.78rem;
       font-weight: 950;
-      margin-bottom: 22px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .about-title {
+      max-width: 860px;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.2rem, 8vw, 7.5rem);
+      font-weight: 950;
+      letter-spacing: -0.085em;
+      line-height: 0.86;
+      text-wrap: balance;
     }
 
     .about-letter {
-      max-width: 880px;
+      margin-top: clamp(30px, 5vw, 56px);
+      padding-top: clamp(24px, 4vw, 38px);
+      border-top: 1px solid var(--line);
     }
 
     .about-letter p {
+      max-width: 78ch;
       color: var(--ink);
       font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.02rem, 1.35vw, 1.12rem);
-      line-height: 1.78;
-      margin: 0;
+      font-size: clamp(1.08rem, 1.42vw, 1.22rem);
+      line-height: 1.82;
     }
 
     .about-letter p + p {
-      margin-top: 17px;
+      margin-top: 19px;
     }
 
     .about-letter strong {
@@ -783,226 +198,138 @@
       font-weight: 950;
     }
 
-    .conviction-block {
-      margin: 26px 0;
-      padding: 22px 0 24px;
-      border-top: 4px solid var(--purple);
+    .formula-callout {
+      margin: clamp(32px, 5vw, 54px) 0;
+      padding: clamp(24px, 4vw, 36px);
+      border: 1px solid var(--line);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .formula-callout h2 {
+      margin-bottom: 18px;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.3rem, 5vw, 4.5rem);
+      font-weight: 950;
+      letter-spacing: -0.075em;
+      line-height: 0.92;
+    }
+
+    .formula-words {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0 24px;
+    }
+
+    .formula-words span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 9px 14px;
+      background: var(--purple);
+      color: var(--white);
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 950;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .question-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .question-list p {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: clamp(1rem, 1.35vw, 1.14rem);
+      font-weight: 850;
+      line-height: 1.35;
+      color: var(--charcoal);
+    }
+
+    .truth-line {
+      margin: clamp(34px, 6vw, 64px) 0;
+      padding: clamp(26px, 5vw, 44px) 0;
+      border-top: 5px solid var(--purple);
       border-bottom: 1px solid var(--line);
     }
 
-    .conviction-block blockquote {
-      font-size: clamp(1.55rem, 3.4vw, 2.7rem);
-      line-height: 1.12;
-      letter-spacing: -0.05em;
-      font-weight: 950;
+    .truth-line p {
+      max-width: 820px;
       color: var(--charcoal);
-    }
-
-    .letter-emphasis {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-      font-size: clamp(2.2rem, 5.5vw, 5.2rem) !important;
-      line-height: 0.95 !important;
-      letter-spacing: -0.075em;
-      color: var(--purple) !important;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: clamp(2.5rem, 8vw, 7rem);
       font-weight: 950;
-      margin-top: 30px !important;
-      margin-bottom: 22px !important;
+      letter-spacing: -0.085em;
+      line-height: 0.88;
+      text-wrap: balance;
     }
 
-    .belief-panel {
-      margin: 28px 0;
-      padding: 26px;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-    }
-
-    .belief-panel p + p {
-      margin-top: 15px;
-    }
-
-    .closing-lines {
-      margin-top: 26px;
+    .closing-line {
+      margin-top: clamp(34px, 5vw, 58px) !important;
       padding-left: 18px;
-      border-left: 5px solid var(--purple);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-      font-size: clamp(1.2rem, 2.2vw, 1.8rem) !important;
-      line-height: 1.22 !important;
-      letter-spacing: -0.035em;
-      font-weight: 950;
-    }
-
-    .signature {
-      margin-top: 30px !important;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-      font-weight: 950;
+      border-left: 6px solid var(--purple);
       color: var(--charcoal) !important;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+      font-size: clamp(1.28rem, 2.5vw, 2.05rem) !important;
+      font-weight: 950;
+      letter-spacing: -0.04em;
+      line-height: 1.16 !important;
     }
 
-    .social-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 26px;
-      align-items: center;
-    }
-
-    .social-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      min-height: 44px;
-      padding: 7px 13px 7px 7px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--white);
-      color: var(--charcoal);
-      font-size: 0.9rem;
-      font-weight: 850;
-      transition: transform 180ms ease, box-shadow 180ms ease;
-    }
-
-    .social-link:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-    }
-
-    .social-link img {
-      width: 30px;
-      height: 30px;
-      padding: 5px;
-      border-radius: 999px;
-      object-fit: contain;
-      background: var(--cloud);
-      border: 1px solid rgba(21, 21, 21, 0.08);
-    }
-
-    .scroll-pan-up {
+    .scroll-reveal {
       opacity: 0;
       transform: translateY(24px);
       transition:
         opacity 700ms ease,
         transform 900ms cubic-bezier(.2,.8,.2,1);
-      transition-delay: var(--pan-delay, 0ms);
+      transition-delay: var(--delay, 0ms);
       will-change: opacity, transform;
     }
 
-    .scroll-pan-up.is-visible {
+    .scroll-reveal.is-visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-      background: var(--purple);
-      color: white;
-      padding: 36px 0 46px;
-    }
-
-    .footer-wordmark {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.8rem, 3vw, 2.7rem);
-      letter-spacing: -0.06em;
-      font-weight: 800;
-      margin-bottom: 14px;
-    }
-
-    .footer-rule {
-      border-top: 1px dashed rgba(255, 255, 255, 0.55);
-      padding-top: 18px;
-      color: rgba(255, 255, 255, 0.78);
-      font-size: 0.92rem;
-    }
-
-    @media (max-width: 900px) {
-      .profile-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .profile-photo {
-        width: 180px;
-        position: relative;
-        top: auto;
-      }
-    }
-
-    @media (max-width: 620px) {
+    @media (max-width: 720px) {
       .container {
         width: min(var(--max), calc(100% - 24px));
       }
 
-      .brand-bar-inner {
-        min-height: 62px;
+      .about-hero-slot {
+        min-height: clamp(320px, 62vh, 620px);
       }
 
-      .hero {
-        padding: 28px 0 18px;
-      }
-
-      .hero-visual {
-        min-height: 260px;
+      .about-hero-image {
         background-position: center top;
       }
 
-      .hero-title {
-        font-size: clamp(2.2rem, 13vw, 4rem);
+      .image-slot-note {
+        display: none;
       }
 
-      .feature-image-frame {
-        min-height: 180px;
+      .about-title {
+        font-size: clamp(3rem, 16vw, 5.6rem);
       }
 
-      .profile-band {
-        padding-bottom: 58px;
-      }
-
-      .belief-panel {
-        padding: 20px;
-      }
-
-      .brand-bar-inner,
-      .about-nav {
-        align-items: center;
-        justify-content: center;
-        padding: 14px 0;
-      }
-
-      .brand-bar-inner {
-        grid-template-columns: 1fr;
-        justify-items: center;
-      }
-
-      .back-home-link {
-        justify-self: center;
-        position: static;
-        transform: none;
-      }
-
-      .gospel-options,
-      .gospel-map-grid,
-      .method-grid,
-      .qa-blog-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .about-accordion .profile-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .about-accordion .profile-photo {
-        width: min(220px, 100%);
+      .formula-callout {
+        padding: 22px;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .title-line,
-      .title-line::after,
-      .scroll-pan-up,
-      .scroll-pan-up.is-visible {
-        animation: none !important;
+      html {
+        scroll-behavior: auto;
+      }
+
+      .scroll-reveal,
+      .scroll-reveal.is-visible {
         transition: none !important;
         transform: none !important;
         opacity: 1 !important;
@@ -1011,251 +338,93 @@
   </style>
 </head>
 
-<body class="about-page">
-  <header class="brand-bar" aria-label="Bible Mapped page header">
-    <div class="container brand-bar-inner">
-      <a class="about-brand" href="../index.html">BibleMapped</a>
-      <nav class="about-nav" aria-label="Primary">
-        <a href="../books/index.html">Books</a>
-        <a href="../characters/index.html">People</a>
-        <a href="../maps/index.html">Maps</a>
-        <a href="../case-studies/index.html">Case Studies</a>
-        <a href="../qa/index.html">Q&amp;A</a>
-      </nav>
-      <a class="back-home-link" href="../about/index.html">About</a>
-    </div>
-  </header>
-
+<body>
   <main>
-    <!-- About hero -->
-    <section class="about-hero" aria-labelledby="aboutHeroTitle">
-      <div class="container about-hero-inner">
-        <span class="eyebrow">About</span>
-        <h1 id="aboutHeroTitle">Bible Mapped</h1>
-        <p class="about-hero-copy">BibleMapped exists to help people understand Scripture through place, people, history, and meaning &mdash; and to point people clearly to Jesus Christ.</p>
-        <p class="about-hero-line">The Bible happened in real places, among real people, inside real history.</p>
-      </div>
+    <section class="about-hero-slot" aria-label="About Bible Mapped hero image">
+      <div class="about-hero-image" role="img" aria-label="Bible Mapped about page hero collage image slot"></div>
+      <div class="image-slot-note">about-hero-collage.jpg</div>
     </section>
 
-    <!-- About accordion sections -->
-    <section class="container about-section-stack" aria-label="About page sections">
-      <details class="about-accordion">
-        <summary>About BibleMapped</summary>
-        <div class="about-accordion-body">
-          <article class="about-letter-panel">
-            <h3>Why BibleMapped Exists</h3>
-            <p>BibleMapped exists because the Bible did not happen in a vacuum. It happened somewhere.</p>
-            <p>It happened in gardens, deserts, mountains, rivers, cities, temples, roads, prisons, battlefields, fishing villages, and empty tombs.</p>
-            <p>It is about helping people slow down, look closer, and see the Bible as a real story grounded in real places, real people, real history, real language, and real meaning.</p>
-            <p>Bible Mapped was created to help people see that the Bible is not myth, not motivational material, and not a collection of disconnected religious stories.</p>
-            <p><strong>It is the true Word of the living God.</strong></p>
-            <p class="closing-lines">
-              It happened in real places.<br />
-              It was given through real history.<br />
-              It reveals the real Savior.
-            </p>
-            <p><strong>Q&amp;A belongs here too:</strong> direct Bible questions, cultural claims, objections, and common misunderstandings answered with Scripture and context.</p>
-          </article>
-        </div>
-      </details>
+    <section class="about-me" aria-labelledby="aboutMeTitle">
+      <div class="container about-me-inner">
+        <span class="section-kicker scroll-reveal">About Me</span>
+        <h1 id="aboutMeTitle" class="about-title scroll-reveal">Good day, I’m Calvin.</h1>
 
-      <details class="about-accordion">
-        <summary>If you died tonight, would you know for sure you&rsquo;re going to heaven?</summary>
-        <div class="about-accordion-body">
-          <article class="gospel-section" aria-labelledby="heavenQuestionTitle">
-            <h2 id="heavenQuestionTitle">Are You Going to Heaven?</h2>
-            <p><strong>If you died tonight, would you know for sure you would go to heaven?</strong></p>
-            <p>Not based on guessing. Not based on being good enough. The Bible gives a clear answer.</p>
+        <article class="about-letter">
+          <p class="scroll-reveal"><strong>Good day, I’m Calvin — the heart behind Bible Mapped.</strong></p>
 
-            <div class="gospel-options" aria-label="Gospel reflection options">
-              <button class="gospel-option" type="button">YES</button>
-              <button class="gospel-option" type="button">NO</button>
+          <p class="scroll-reveal">Bible Mapped was built from a simple belief: the Bible is not boring, vague, or disconnected from real life. It happened in real places, among real people, inside real history — and all of it points to Jesus Christ.</p>
+
+          <p class="scroll-reveal">I believe every Christian is responsible for their own relationship with God. Too many people only see Scripture through someone else’s eyes, someone else’s voice, or someone else’s fear.</p>
+
+          <p class="scroll-reveal">But getting to know someone you love is not a chore.</p>
+
+          <p class="scroll-reveal">A relationship takes time. It takes attention. It takes curiosity. And I believe our walk with God is the same way.</p>
+
+          <div class="formula-callout scroll-reveal">
+            <h2>That is why Bible Mapped uses a simple lens.</h2>
+
+            <div class="formula-words" aria-label="Bible Mapped formula">
+              <span>Where</span>
+              <span>Who</span>
+              <span>Why</span>
+              <span>What</span>
             </div>
 
-            <h3 style="margin-top:32px;">If God asked you, “Why should I let you into heaven?” what would you say?</h3>
-            <div class="gospel-map-grid">
-              <div class="gospel-step"><span>Answer</span><strong>I tried to be a good person</strong></div>
-              <div class="gospel-step"><span>Answer</span><strong>I went to church</strong></div>
-              <div class="gospel-step"><span>Answer</span><strong>I believe in God</strong></div>
-              <div class="gospel-step"><span>Answer</span><strong>I trusted in Jesus Christ</strong></div>
-              <div class="gospel-step"><span>Answer</span><strong>I am not sure</strong></div>
-              <div class="gospel-step"><span>Answer</span><strong>None of the above</strong></div>
+            <div class="question-list">
+              <p>Where did this happen?</p>
+              <p>Who was involved?</p>
+              <p>Why did it matter?</p>
+              <p>What does it reveal?</p>
             </div>
-
-            <div class="belief-panel">
-              <p><strong>I believe Jesus Christ is God in the flesh.</strong> He is not merely a teacher, a prophet, or a religious example. He is the eternal Son of God who came into the world, lived without sin, died for sinners, rose again, and is coming again.</p>
-              <p><strong>I believe the Trinity is biblical.</strong> There is one God, eternally existing as Father, Son, and Holy Spirit. We see this clearly at the baptism of Jesus: the Son is baptized, the Spirit descends, and the Father speaks from heaven.</p>
-              <p><strong>I believe baptism is obedience, but it does not save.</strong> Salvation is by grace through faith in Jesus Christ. Baptism is a public declaration of faith, not the source of it.</p>
-            </div>
-
-            <div class="reference-grid" aria-label="KJV references">
-              <span class="reference-chip">Romans 3:23</span>
-              <span class="reference-chip">Romans 6:23</span>
-              <span class="reference-chip">John 3:16</span>
-              <span class="reference-chip">John 14:6</span>
-              <span class="reference-chip">Ephesians 2:8-9</span>
-              <span class="reference-chip">Romans 10:9-13</span>
-              <span class="reference-chip">1 Corinthians 15:3-4</span>
-            </div>
-
-            <div class="gospel-final">
-              <p>The question is not, &ldquo;Are you religious?&rdquo;</p>
-              <p>The question is, &ldquo;Have you trusted Jesus Christ?&rdquo;</p>
-              <p>The Bible teaches that all have sinned and come short of the glory of God. Sin separates us from God, and no amount of good works can erase our guilt.</p>
-              <p>But God loved the world and gave His Son. Jesus Christ died for our sins, was buried, and rose again. Salvation is not earned by being good enough. It is received by grace through faith in Christ.</p>
-              <p><strong>That is the good news.</strong></p>
-              <a class="gospel-cta" href="../qa/index.html">Learn What the Bible Says</a>
-            </div>
-          </article>
-        </div>
-      </details>
-
-      <details class="about-accordion">
-        <summary>The BibleMapped Formula</summary>
-        <div class="about-accordion-body">
-          <article class="about-letter-panel">
-            <h3>The BibleMapped Formula</h3>
-            <p class="letter-emphasis">The where matters.</p>
-            <p>Because when you understand where something happened, you begin to see the story more clearly. A mountain is not just a mountain. A wilderness is not just empty space. A road is not just a path between two cities.</p>
-            <p>In Scripture, places carry meaning. Geography creates context. Context brings clarity.</p>
-            <p>The maps matter. The timelines matter. The history matters. The geography, archaeology, culture, and original languages all matter. But they only matter because they help us see the greater story God is telling: the story of redemption through His Son.</p>
-            <div class="method-grid">
-              <div class="method-card">
-                <strong>Where</strong>
-                <p>Places give Scripture setting, movement, and historical texture.</p>
-              </div>
-              <div class="method-card">
-                <strong>Who</strong>
-                <p>People reveal conflict, covenant, faith, failure, and witness.</p>
-              </div>
-              <div class="method-card">
-                <strong>Why</strong>
-                <p>Meaning comes into focus as context points us toward Christ.</p>
-              </div>
-            </div>
-          </article>
-        </div>
-      </details>
-
-      <details class="about-accordion" id="about-calvin">
-        <summary>About Calvin</summary>
-        <div class="about-accordion-body">
-          <div class="profile-inner">
-            <div class="profile-photo">
-              <img src="../assets/calvin-photo.jpg.png" alt="Calvin in front of a map" />
-            </div>
-
-            <article class="profile-meta about-letter">
-              <h2>About Calvin</h2>
-              <p><strong>Hi everyone,</strong></p>
-              <p>My name is <strong>Calvin S.</strong> I am a Christian, a husband, a father, and the heart behind <strong>BibleMapped</strong>.</p>
-              <p>I was saved in 2008, and since then, I have loved telling people about Jesus Christ. Over the years, my journey has taken me through faith, doubt, Bible college, church hurt, hard questions, and seasons where I had to examine what I really believed.</p>
-              <p>And through all of it, I keep coming back to one conviction:</p>
-              <div class="conviction-block">
-                <blockquote>Let God be true, and every man a liar &mdash; including me.</blockquote>
-              </div>
-              <p>People fail. Leaders fail. Churches can wound. Culture changes. Opinions shift. Even my own understanding can be wrong.</p>
-              <p><strong>But God&rsquo;s Word remains true.</strong></p>
-              <p>That is the foundation of Bible Mapped.</p>
-              <p><strong>But the goal is not just maps.</strong></p>
-              <p><strong>The goal is Jesus.</strong></p>
-              <p>Because without Jesus, none of this means anything.</p>
-              <p>And every road, every region, every city, every wilderness, every promise, and every page ultimately points to Jesus Christ.</p>
-              <p class="signature">
-                Sincerely,<br />
-                Calvin S.
-              </p>
-              <div class="social-row" aria-label="Follow Bible Mapped">
-                <a class="social-link" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noreferrer">
-                  <img src="../assets/youtube-logo.png" alt="YouTube" />
-                  <span>YouTube</span>
-                </a>
-
-                <a class="social-link" href="mailto:calvin@biblemapped.com">
-                  <span>calvin@biblemapped.com</span>
-                </a>
-              </div>
-            </article>
           </div>
-        </div>
-      </details>
 
-      <details class="about-accordion" id="qa-blog">
-        <summary>Contact</summary>
-        <div class="about-accordion-body">
-          <article class="about-letter-panel">
-            <h3>Contact BibleMapped</h3>
-            <p><strong>I believe the Bible is the inerrant Word of God.</strong> It is true, trustworthy, preserved, and cannot be broken. When I disagree with Scripture, I am wrong.</p>
-            <p><strong>And I believe Satan is a liar.</strong> He has lied from the beginning, but his end is already written. Christ has conquered, and one day every enemy of God will be judged.</p>
-            <p>For BibleMapped questions, notes, corrections, or collaboration, use the contact email below.</p>
-            <div class="qa-blog-grid">
-              <div class="qa-blog-card">
-                <strong>Common Questions</strong>
-                <p>Clear answers to questions about the gospel, Jesus Christ, the Bible, history, and hard passages.</p>
-              </div>
-              <div class="qa-blog-card">
-                <strong>Response Hub</strong>
-                <p>Short explainers for things people are asking, claiming, or misunderstanding about Scripture.</p>
-              </div>
-            </div>
-            <a class="gospel-cta" href="mailto:calvin@biblemapped.com">calvin@biblemapped.com</a>
-          </article>
-        </div>
-      </details>
+          <p class="scroll-reveal">But this formula is not only about biblical places.</p>
+
+          <p class="scroll-reveal">It is also about us.</p>
+
+          <p class="scroll-reveal">You are standing in your own place in life. That is your where. You have purpose with God. That is your who. Your love for God is your why. And who you are becoming in Him is your what.</p>
+
+          <p class="scroll-reveal">God plays no favorites.</p>
+
+          <p class="scroll-reveal">You matter. Your story matters. Your questions matter. And your relationship with God matters.</p>
+
+          <p class="scroll-reveal">My goal is not to tell you what church to attend or what denomination to join. My goal is to make one thing clear:</p>
+
+          <div class="truth-line scroll-reveal">
+            <p>Jesus is King.</p>
+          </div>
+
+          <p class="scroll-reveal">Bible Mapped is built with an iron-sharpens-iron mindset. We do not know everything. We miss things. So challenge us. Ask questions. Test the claims. Help us keep building a better framework for believers who want to know their Bible and its history.</p>
+
+          <p class="closing-line scroll-reveal">Know your Bible. Know its history. Know the King it points to.</p>
+        </article>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <div class="footer-wordmark">Bible Mapped</div>
-      <div class="footer-rule">Understanding Scripture through place, context, and meaning.</div>
-    </div>
-  </footer>
-
   <script>
-    const aboutAccordions = document.querySelectorAll(".about-accordion");
+    const revealItems = document.querySelectorAll(".scroll-reveal");
 
-    aboutAccordions.forEach((accordion) => {
-      accordion.addEventListener("toggle", () => {
-        if (!accordion.open) return;
-
-        aboutAccordions.forEach((otherAccordion) => {
-          if (otherAccordion !== accordion) {
-            otherAccordion.open = false;
-          }
-        });
-      });
+    revealItems.forEach((item, index) => {
+      item.style.setProperty("--delay", `${Math.min(index * 55, 330)}ms`);
     });
 
-    const panTargets = document.querySelectorAll(`
-      .profile-inner,
-      .about-letter h2,
-      .about-letter p,
-      .conviction-block,
-      .belief-panel,
-      .social-row
-    `);
-
-    panTargets.forEach((item, index) => {
-      item.classList.add("scroll-pan-up");
-      item.style.setProperty("--pan-delay", `${(index % 5) * 70}ms`);
-    });
-
-    const panObserver = new IntersectionObserver(
+    const revealObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          entry.target.classList.toggle("is-visible", entry.isIntersecting);
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          }
         });
       },
       {
-        threshold: 0.14,
+        threshold: 0.12,
         rootMargin: "0px 0px -8% 0px"
       }
     );
 
-    document.querySelectorAll(".scroll-pan-up").forEach((item) => {
-      panObserver.observe(item);
-    });
+    revealItems.forEach((item) => revealObserver.observe(item));
   </script>
 </body>
 </html>
