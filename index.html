@@ -1427,13 +1427,117 @@
       color: var(--white);
     }
 
+
+
+    /* =========================
+       ABOUT / CONTACT RESTORED SECTION
+    ========================= */
+
+    .about-section-content {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: clamp(28px, 5vw, 58px) 0;
+    }
+
+    .about-contact-panel {
+      background: var(--white);
+      border: 1px solid rgba(17, 19, 24, 0.07);
+      padding: clamp(24px, 4vw, 46px);
+      box-shadow: 0 24px 70px rgba(11, 15, 25, 0.08);
+    }
+
+    .about-contact-kicker {
+      margin: 0 0 12px;
+      color: var(--electric-purple);
+      font-size: 0.76rem;
+      font-weight: 950;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .about-contact-title {
+      margin: 0;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.2rem, 5vw, 4.8rem);
+      font-weight: 820;
+      letter-spacing: -0.055em;
+      line-height: 0.96;
+    }
+
+    .about-contact-copy {
+      max-width: 70ch;
+      margin: 18px 0 0;
+      color: var(--soft-ink);
+      font-size: clamp(1rem, 1.35vw, 1.14rem);
+      font-weight: 620;
+      line-height: 1.7;
+    }
+
+    .contact-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .contact-card {
+      min-height: 148px;
+      padding: 22px;
+      background: var(--paper);
+      border: 1px solid rgba(17, 19, 24, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+      color: var(--ink);
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-4px);
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    .contact-card strong {
+      display: block;
+      font-size: 1rem;
+      font-weight: 950;
+      letter-spacing: -0.02em;
+    }
+
+    .contact-card span {
+      display: block;
+      color: inherit;
+      opacity: 0.78;
+      font-size: 0.94rem;
+      font-weight: 720;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    .about-calvin-letter .contact-inline-link,
+    .about-contact-panel .contact-inline-link {
+      color: var(--electric-purple);
+      font-weight: 900;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    @media (max-width: 820px) {
+      .contact-card-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* =========================
        FOOTER / PURPLE CONTACT BANNER
     ========================= */
 
     .youtube-contact-strip {
       padding: 30px 20px 34px;
-      background: var(--electric-purple);
+      background: #6b1efb; /* footer matched to the emblem image purple */
       color: var(--white);
     }
 
@@ -1461,27 +1565,25 @@
       transform: translateY(-2px);
     }
 
-    .bm-footer-emblem {
+    .footer-emblem-wrap {
       width: 74px;
       height: 74px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      background: #6b1efb;
+      overflow: hidden;
       flex-shrink: 0;
     }
 
-    .bm-footer-emblem svg {
-      width: 100%;
-      height: 100%;
+    .footer-emblem {
+      width: 74px;
+      height: 74px;
+      max-width: none;
+      object-fit: contain;
+      object-position: center;
       display: block;
-    }
-
-    .bm-footer-emblem .pin-shape {
-      fill: var(--white);
-    }
-
-    .bm-footer-emblem .book-shape {
-      fill: var(--electric-purple);
+      background: #6b1efb;
     }
 
     .footer-brand-info {
@@ -1563,7 +1665,8 @@
         flex-direction: column;
       }
 
-      .bm-footer-emblem {
+      .footer-emblem-wrap,
+      .footer-emblem {
         width: 68px;
         height: 68px;
       }
@@ -2154,6 +2257,110 @@
             </div>
           </div>
 
+          <div class="about-sub-bars">
+            <div class="minimal-bar" id="contact-biblemapped">
+              <button
+                class="minimal-bar-toggle"
+                type="button"
+                id="contactToggle"
+                aria-expanded="false"
+                aria-controls="contactPanel"
+              >
+                Contact Bible Mapped
+              </button>
+
+              <div class="minimal-panel" id="contactPanel" aria-hidden="true">
+                <div class="minimal-panel-inner">
+                  <div class="about-section-content">
+                    <section class="about-contact-panel">
+                      <p class="about-contact-kicker">Contact</p>
+                      <h2 class="about-contact-title">Reach Bible Mapped</h2>
+
+                      <p class="about-contact-copy">
+                        For questions, collaborations, corrections, or video ideas, reach out directly.
+                        Bible Mapped is built to help people see Scripture through place, people,
+                        history, and meaning — without making the Bible feel boring.
+                      </p>
+
+                      <div class="contact-card-grid">
+                        <a class="contact-card" href="mailto:calvin@biblemapped.com">
+                          <strong>Email</strong>
+                          <span>calvin@biblemapped.com</span>
+                        </a>
+
+                        <a class="contact-card" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noreferrer">
+                          <strong>YouTube</strong>
+                          <span>Watch us on YouTube</span>
+                        </a>
+
+                        <a class="contact-card" href="about/index.html">
+                          <strong>About</strong>
+                          <span>Learn more about the heart behind Bible Mapped</span>
+                        </a>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="minimal-bar" id="about-calvin">
+              <button
+                class="minimal-bar-toggle"
+                type="button"
+                id="aboutCalvinToggle"
+                aria-expanded="false"
+                aria-controls="aboutCalvinPanel"
+              >
+                About Calvin
+              </button>
+
+              <div class="minimal-panel" id="aboutCalvinPanel" aria-hidden="true">
+                <div class="minimal-panel-inner">
+                  <div class="about-section-content">
+                    <div class="about-calvin-split">
+                      <div class="about-calvin-image-slot">
+                        <img
+                          src="assets/calvin-about.jpg"
+                          alt="Calvin, the heart behind Bible Mapped"
+                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                        />
+                        <div class="about-calvin-image-fallback">
+                          Add assets/calvin-about.jpg
+                        </div>
+                      </div>
+
+                      <article class="about-calvin-letter">
+                        <h3>Good day, I’m Calvin.</h3>
+
+                        <p>
+                          I’m a Christian, a husband, a father, and the heart behind Bible Mapped.
+                        </p>
+
+                        <p>
+                          Bible Mapped was built from a simple belief: the Bible is not boring,
+                          vague, or disconnected from real life. It happened in real places,
+                          among real people, inside real history — and all of it points to Jesus Christ.
+                        </p>
+
+                        <p>
+                          The goal is not just maps. The goal is to help people slow down,
+                          ask better questions, and see how the where, the who, and the why
+                          make Scripture come alive.
+                        </p>
+
+                        <p>
+                          You can reach me at
+                          <a class="contact-inline-link" href="mailto:calvin@biblemapped.com">calvin@biblemapped.com</a>.
+                        </p>
+                      </article>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -2338,17 +2545,12 @@
   <footer class="youtube-contact-strip">
     <div class="youtube-contact-inner">
       <a class="footer-brand-link" href="about/index.html" aria-label="About Bible Mapped">
-        <span class="bm-footer-emblem" aria-hidden="true">
-          <svg viewBox="0 0 120 120" role="img">
-            <path
-              class="pin-shape"
-              d="M60 6C35.2 6 15 26.2 15 51c0 31.5 45 63 45 63s45-31.5 45-63C105 26.2 84.8 6 60 6Z"
-            />
-            <path
-              class="book-shape"
-              d="M30 42c0-3 2-5 5-5h18c8 0 14 3 19 9 5-6 11-9 19-9h18c3 0 5 2 5 5v34c0 3-2 5-5 5H89c-8 0-14 2-17 6-3-4-9-6-17-6H35c-3 0-5-2-5-5V42Z"
-            />
-          </svg>
+        <span class="footer-emblem-wrap" aria-hidden="true">
+          <img
+            src="assets/bible-mapped-logo.png"
+            alt=""
+            class="footer-emblem"
+          />
         </span>
 
         <span class="footer-brand-info">
@@ -2609,6 +2811,8 @@
     }
 
     setupMinimalPanel("aboutMappedToggle", "aboutMappedPanel");
+    setupMinimalPanel("contactToggle", "contactPanel");
+    setupMinimalPanel("aboutCalvinToggle", "aboutCalvinPanel");
 
     const testamentWrap = document.getElementById("testamentPuzzleWrap");
     const startHereButton = document.getElementById("startHereButton");
