@@ -51,18 +51,19 @@
     }
 
     .people-gallery-container {
-      width: min(1480px, calc(100% - 24px));
+      width: min(1540px, calc(100% - 18px));
     }
 
     .people-gallery {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: clamp(8px, 1.2vw, 16px);
+      grid-template-columns: repeat(auto-fit, minmax(142px, 1fr));
+      gap: clamp(8px, 1vw, 14px);
     }
 
     .people-gallery .info-card {
       position: relative;
-      min-height: clamp(340px, 36vw, 620px);
+      aspect-ratio: 2 / 3;
+      min-height: 0;
       padding: 0;
       border: 0;
       border-radius: 0;
@@ -135,7 +136,7 @@
 
     @media (max-width: 1100px) {
       .people-gallery {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
       }
     }
 
@@ -145,7 +146,7 @@
       }
 
       .people-gallery .info-card {
-        min-height: clamp(300px, 68vw, 520px);
+        min-height: 0;
       }
     }
 
@@ -181,56 +182,56 @@
     <section class="section people-gallery-section">
       <div class="container people-gallery-container">
         <div class="card-grid four people-gallery">
-          <article class="info-card">
+          <article class="info-card" tabindex="0">
             <div class="image-slot">Image Slot</div>
             <h3>Moses</h3>
             <p>Deliverer, prophet, and mediator of the covenant.</p>
             <p class="meta-line">Egypt → Sinai → Wilderness</p>
             <span class="placeholder-btn">Open Study</span>
           </article>
-          <article class="info-card">
+          <article class="info-card" tabindex="0">
             <div class="image-slot">Image Slot</div>
             <h3>David</h3>
             <p>Shepherd, king, psalmist, and flawed covenant ruler.</p>
             <p class="meta-line">Bethlehem → Jerusalem</p>
             <span class="placeholder-btn">Open Study</span>
           </article>
-          <article class="info-card">
+          <article class="info-card" tabindex="0">
             <div class="image-slot">Image Slot</div>
             <h3>Esther</h3>
             <p>Queen in exile whose courage preserved her people.</p>
             <p class="meta-line">Persia / Susa</p>
             <span class="placeholder-btn">Open Study</span>
           </article>
-          <article class="info-card">
+          <article class="info-card" tabindex="0">
             <div class="image-slot">Image Slot</div>
             <h3>Daniel</h3>
             <p>Exile, interpreter, and faithful witness under empire.</p>
             <p class="meta-line">Jerusalem → Babylon</p>
             <span class="placeholder-btn">Open Study</span>
           </article>
-          <article class="info-card">
+          <article class="info-card" tabindex="0">
             <div class="image-slot">Image Slot</div>
             <h3>Mary</h3>
             <p>Mother of Jesus and witness to God’s promise.</p>
             <p class="meta-line">Nazareth → Bethlehem</p>
             <span class="placeholder-btn">Open Study</span>
           </article>
-          <article class="info-card">
+          <article class="info-card" tabindex="0">
             <div class="image-slot">Image Slot</div>
             <h3>Peter</h3>
             <p>Disciple, denier, restored witness, and apostle.</p>
             <p class="meta-line">Galilee → Jerusalem</p>
             <span class="placeholder-btn">Open Study</span>
           </article>
-          <article class="info-card">
+          <article class="info-card" tabindex="0">
             <div class="image-slot">Image Slot</div>
             <h3>Paul</h3>
             <p>Former persecutor sent to preach Christ among the nations.</p>
             <p class="meta-line">Tarsus → Damascus → Rome</p>
             <span class="placeholder-btn">Open Study</span>
           </article>
-          <article class="info-card">
+          <article class="info-card" tabindex="0">
             <div class="image-slot">Image Slot</div>
             <h3>Woman at the Well</h3>
             <p>Samaritan witness who met Jesus at Jacob’s well.</p>
