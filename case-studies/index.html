@@ -113,11 +113,25 @@
         box-shadow: 0 30px 80px rgba(11, 16, 32, 0.13);
       }
 
+      .case-image-slot.has-image {
+        background: transparent;
+        box-shadow: none;
+        display: grid;
+        place-items: center;
+      }
+
       .case-image-slot img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         display: block;
+      }
+
+      .case-image-slot img.case-folder-image {
+        width: min(100%, 620px);
+        height: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 28px 42px rgba(11, 16, 32, 0.14));
       }
 
       .case-image-placeholder {
@@ -251,8 +265,12 @@
           </p>
         </div>
 
-        <div class="case-image-slot" aria-label="Case Studies image slot">
-          <div class="case-image-placeholder">Image Slot</div>
+        <div class="case-image-slot has-image" aria-label="Case Studies image slot">
+          <img
+            src="../assets/case-study-folder.png"
+            alt="Case study folder"
+            class="case-folder-image"
+          />
         </div>
       </section>
 
