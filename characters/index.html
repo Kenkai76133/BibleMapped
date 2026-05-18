@@ -109,10 +109,21 @@
     }
 
     .people-gallery .image-slot img.people-daniel-image {
-      height: 128%;
-      object-position: center 9%;
-      transform: translateY(-12%) scale(1.18);
+      height: 118%;
+      object-position: center 26%;
+      transform: translateY(-1%) scale(1.14);
       transform-origin: center center;
+    }
+
+    .people-gallery .image-slot:has(.people-daniel-image)::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 23%;
+      background: linear-gradient(to top, rgba(11, 16, 32, 0.96), rgba(11, 16, 32, 0.72), transparent);
+      pointer-events: none;
     }
 
     .people-gallery .info-card h3,
