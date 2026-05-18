@@ -38,19 +38,26 @@
       .case-page-main {
         width: calc(100vw - 12px);
         max-width: none;
+        margin-left: auto;
+        margin-right: auto;
       }
 
       .case-page-main .hero {
-        display: none;
+        display: block;
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+        padding-top: clamp(36px, 6vw, 76px);
+        padding-bottom: clamp(18px, 3vw, 34px);
       }
 
       .case-poster-section {
-        padding-top: clamp(18px, 4vw, 46px);
+        padding-top: clamp(10px, 2vw, 24px);
+        padding-bottom: 0;
       }
 
       .case-gallery {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(142px, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: clamp(8px, 1vw, 14px);
       }
 
@@ -121,9 +128,19 @@
         display: none;
       }
 
-      @media (max-width: 760px) {
+      .simple-page .footer {
+        margin-top: 0;
+      }
+
+      @media (max-width: 900px) {
         .case-gallery {
           grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 560px) {
+        .case-gallery {
+          grid-template-columns: 1fr;
         }
       }
     </style>

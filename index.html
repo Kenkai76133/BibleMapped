@@ -1010,16 +1010,7 @@
     }
 
     .formula-question::after {
-      content: "";
-      width: min(84px, 54%);
-      height: 3px;
-      margin-top: 12px;
-      border-radius: 999px;
-      background: var(--bright-red);
-      opacity: 0;
-      transform: scaleX(0.22);
-      transform-origin: center;
-      transition: opacity 360ms ease, transform 520ms cubic-bezier(0.18, 1.28, 0.28, 1);
+      display: none;
     }
 
     .formula-question:hover,
@@ -1029,8 +1020,7 @@
 
     .formula-question:hover::after,
     .formula-question:focus-visible::after {
-      opacity: 1;
-      transform: scaleX(1);
+      display: none;
     }
 
     .formula-question.where { --snap-delay: 120ms; }
