@@ -166,6 +166,50 @@
       border: 0;
     }
 
+    .bm-section-footer {
+      margin: 0;
+      padding: 31px clamp(22px, 5vw, 76px);
+      background: var(--books-purple);
+      color: #ffffff;
+    }
+
+    .bm-section-footer-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .bm-section-footer p {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .bm-section-footer-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .bm-section-footer a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .bm-section-footer a:hover,
+    .bm-section-footer a:focus-visible {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
     .books-entry-main {
       min-height: calc(100vh - var(--header-height));
     }
@@ -1007,6 +1051,21 @@
       </article>
     </section>
   </main>
+
+  <footer class="bm-section-footer">
+    <div class="bm-section-footer-inner">
+      <p>© 2026 BibleMapped</p>
+      <nav class="bm-section-footer-links" aria-label="Footer navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/characters/">People</a>
+        <a href="/maps/">Maps</a>
+        <a href="/case-studies/">Case Studies</a>
+        <a href="/qa/">Q&amp;A</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </footer>
 
   <div class="case-overlay" id="caseOverlay" role="dialog" aria-modal="true" aria-labelledby="caseTitle" aria-hidden="true">
     <article class="case-study-card">
