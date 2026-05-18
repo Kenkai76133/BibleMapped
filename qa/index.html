@@ -43,11 +43,48 @@
       }
 
       .qa-page-main .hero {
-        display: block;
+        display: grid;
+        grid-template-columns: minmax(0, 0.92fr) minmax(280px, 1.08fr);
+        align-items: center;
+        gap: clamp(24px, 5vw, 78px);
         width: min(1120px, calc(100% - 40px));
         margin: 0 auto;
         padding-top: clamp(36px, 6vw, 76px);
         padding-bottom: clamp(18px, 3vw, 34px);
+      }
+
+      .qa-hero-copy {
+        min-width: 0;
+      }
+
+      .qa-image-slot {
+        position: relative;
+        min-height: clamp(280px, 38vw, 520px);
+        overflow: hidden;
+        border: 0;
+        background:
+          linear-gradient(to top, rgba(11, 16, 32, 0.5), rgba(11, 16, 32, 0.08) 58%, transparent),
+          var(--surface);
+        box-shadow: 0 30px 80px rgba(11, 16, 32, 0.13);
+      }
+
+      .qa-image-slot img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .qa-image-placeholder {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        color: rgba(31, 41, 51, 0.36);
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
       }
 
       .qa-gallery-section {
@@ -133,6 +170,10 @@
       }
 
       @media (max-width: 900px) {
+        .qa-page-main .hero {
+          grid-template-columns: 1fr;
+        }
+
         .qa-gallery {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
@@ -154,12 +195,18 @@
 
     <main class="container qa-page-main">
       <section class="hero">
-        <p class="eyebrow">Q&amp;A</p>
-        <h1>Questions &amp; Answers</h1>
-        <p class="hero-copy">
-          Clear answers to Bible questions, cultural claims, objections,
-          and common misunderstandings.
-        </p>
+        <div class="qa-hero-copy">
+          <p class="eyebrow">Q&amp;A</p>
+          <h1>Questions &amp; Answers</h1>
+          <p class="hero-copy">
+            Clear answers to Bible questions, cultural claims, objections,
+            and common misunderstandings.
+          </p>
+        </div>
+
+        <div class="qa-image-slot" aria-label="Q&A image slot">
+          <div class="qa-image-placeholder">Image Slot</div>
+        </div>
       </section>
 
       <section class="section qa-gallery-section">
