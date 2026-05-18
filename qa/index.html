@@ -38,15 +38,26 @@
       .qa-page-main {
         width: calc(100vw - 12px);
         max-width: none;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .qa-page-main .hero {
+        display: block;
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+        padding-top: clamp(36px, 6vw, 76px);
+        padding-bottom: clamp(18px, 3vw, 34px);
       }
 
       .qa-gallery-section {
-        padding-top: clamp(18px, 4vw, 46px);
+        padding-top: clamp(10px, 2vw, 24px);
+        padding-bottom: 0;
       }
 
       .qa-gallery {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(142px, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: clamp(8px, 1vw, 14px);
       }
 
@@ -117,9 +128,19 @@
         display: none;
       }
 
-      @media (max-width: 760px) {
+      .simple-page .footer {
+        margin-top: 0;
+      }
+
+      @media (max-width: 900px) {
         .qa-gallery {
           grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 560px) {
+        .qa-gallery {
+          grid-template-columns: 1fr;
         }
       }
     </style>
@@ -132,6 +153,15 @@
     </header>
 
     <main class="container qa-page-main">
+      <section class="hero">
+        <p class="eyebrow">Q&amp;A</p>
+        <h1>Questions &amp; Answers</h1>
+        <p class="hero-copy">
+          Clear answers to Bible questions, cultural claims, objections,
+          and common misunderstandings.
+        </p>
+      </section>
+
       <section class="section qa-gallery-section">
         <div class="grid qa-gallery">
           <article class="card qa-poster" tabindex="0">
