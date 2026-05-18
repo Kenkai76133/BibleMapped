@@ -108,6 +108,13 @@
       display: block;
     }
 
+    .people-gallery .image-slot img.people-daniel-image {
+      height: 116%;
+      object-position: center 20%;
+      transform: translateY(-5%) scale(1.08);
+      transform-origin: center center;
+    }
+
     .people-gallery .info-card h3,
     .people-gallery .info-card p,
     .people-gallery .placeholder-btn {
@@ -266,7 +273,9 @@
             <span class="placeholder-btn">Open Study</span>
           </article>
           <article class="info-card" tabindex="0">
-            <div class="image-slot">Image Slot</div>
+            <div class="image-slot">
+              <img class="people-daniel-image" src="../assets/people-daniel.png" alt="Daniel in the lions' den" />
+            </div>
             <h3>Daniel</h3>
             <p>Exile, interpreter, and faithful witness under empire.</p>
             <p class="meta-line">Jerusalem → Babylon</p>
