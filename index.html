@@ -87,7 +87,7 @@
       width: 100%;
       background: var(--header-bg);
       border-bottom: 0;
-      box-shadow: 0 10px 34px rgba(11, 15, 25, 0.045);
+      box-shadow: none;
       transition: opacity 320ms ease, transform 320ms ease;
       overflow: visible;
     }
@@ -102,8 +102,9 @@
       height: var(--nav-height);
       padding: 0 clamp(22px, 4vw, 72px) 0 12px;
       display: grid;
-      grid-template-columns: minmax(150px, 220px) minmax(0, 1fr) minmax(60px, 90px);
+      grid-template-columns: minmax(150px, 220px) auto;
       align-items: center;
+      justify-content: space-between;
       gap: clamp(18px, 3vw, 42px);
       position: relative;
     }
@@ -122,12 +123,10 @@
     .nav-right {
       justify-self: end;
       min-width: 0;
-      position: absolute;
-      right: clamp(18px, 4vw, 72px);
-      top: 50%;
-      z-index: 2;
-      transform: translateY(-50%);
-      background: var(--header-bg);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(2px, 1vw, 10px);
     }
 
     .brand {
@@ -666,7 +665,7 @@
 
     .testament-puzzle-section {
       scroll-margin-top: calc(var(--nav-height) + 24px);
-      padding-top: calc(var(--nav-height) + clamp(54px, 8vw, 110px));
+      padding-top: clamp(28px, 4vw, 58px);
       padding-bottom: clamp(48px, 7vw, 86px);
       overflow: hidden;
       z-index: 12;
@@ -691,7 +690,7 @@
 
     .testament-puzzle-stage {
       width: min(1240px, 100%);
-      margin: 72px auto 0;
+      margin: clamp(28px, 4vw, 48px) auto 0;
       padding: 0 20px;
     }
 
@@ -1732,11 +1731,7 @@
         height: var(--nav-height);
         padding: 0 12px 0 8px;
         gap: 16px;
-        grid-template-columns: 150px minmax(0, 1fr) 64px;
-      }
-
-      .nav-right {
-        right: 12px;
+        grid-template-columns: minmax(118px, 150px) auto;
       }
 
       .brand-crop {
@@ -1801,6 +1796,7 @@
       }
 
       .testament-puzzle-section {
+        padding-top: 28px;
         padding-bottom: 54px;
       }
 
@@ -2202,46 +2198,7 @@
         </a>
       </div>
 
-      <div class="nav-links nav-center">
-        <details class="nav-dropdown" data-books-dropdown>
-          <summary class="nav-books nav-dropdown-toggle" aria-controls="booksDropdown">
-            <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M4 5.5C4 4.7 4.7 4 5.5 4H10c1.1 0 2 .9 2 2v14c0-1.1-.9-2-2-2H5.5C4.7 18 4 17.3 4 16.5v-11Z" stroke-width="2" />
-              <path d="M20 5.5C20 4.7 19.3 4 18.5 4H14c-1.1 0-2 .9-2 2v14c0-1.1.9-2 2-2h4.5c.8 0 1.5-.7 1.5-1.5v-11Z" stroke-width="2" />
-            </svg>
-            Books
-          </summary>
-          <div class="nav-dropdown-menu" id="booksDropdown" aria-label="Books sections">
-            <a href="books/index.html#old">Old Testament</a>
-            <a href="books/index.html#new">New Testament</a>
-          </div>
-        </details>
-
-        <a href="characters/index.html" class="nav-people">
-          <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="8" r="4" fill="currentColor" stroke="none" />
-            <path d="M4 21c.8-4.2 3.8-6.5 8-6.5s7.2 2.3 8 6.5" fill="currentColor" stroke="none" />
-          </svg>
-          People
-        </a>
-
-        <a href="maps/index.html" class="nav-maps">
-          <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 22s7-6.4 7-13A7 7 0 0 0 5 9c0 6.6 7 13 7 13Z" fill="currentColor" stroke="none" />
-            <circle cx="12" cy="9" r="2.4" fill="white" stroke="none" />
-          </svg>
-          Maps
-        </a>
-
-        <a href="case-studies/index.html" class="nav-case-studies">
-          <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6 3h8l4 4v14H6V3Z" fill="currentColor" stroke="none" />
-            <path d="M14 3v5h5" fill="rgba(255,255,255,0.35)" stroke="none" />
-            <path d="M9 11h6M9 15h6M9 19h4" stroke="white" stroke-width="1.7" stroke-linecap="round" />
-          </svg>
-          Case Studies
-        </a>
-
+      <div class="nav-right">
         <a href="qa/index.html" class="nav-qa">
           <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="12" cy="12" r="9" stroke-width="2.2" />
@@ -2250,9 +2207,7 @@
           </svg>
           Q&A
         </a>
-      </div>
 
-      <div class="nav-right">
         <a href="about/index.html" class="nav-about">
           <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="12" cy="12" r="9" stroke-width="2.2" />
