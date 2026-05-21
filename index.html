@@ -97,12 +97,6 @@
       left: 0;
     }
 
-    .landing-start:not(.journey-open) .site-header {
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(-110%);
-    }
-
     .nav {
       width: 100%;
       height: var(--nav-height);
@@ -295,10 +289,10 @@
       position: relative;
       min-height: 100vh;
       min-height: 100svh;
-      padding: 80px 20px;
+      padding: calc(var(--nav-height) + clamp(88px, 10vw, 148px)) 20px clamp(88px, 10vw, 148px);
       overflow: hidden;
-      background: var(--ink);
-      color: var(--white);
+      background: var(--white);
+      color: var(--ink);
       display: flex;
       align-items: center;
       transition: min-height 680ms cubic-bezier(.2,.8,.2,1), padding 680ms cubic-bezier(.2,.8,.2,1);
@@ -310,30 +304,6 @@
       min-height: 44svh;
       padding-top: 72px;
       padding-bottom: 72px;
-    }
-
-    .hero-video-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-      background: var(--ink);
-    }
-
-    .hero-video-bg video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: saturate(0.94) contrast(1.08);
-    }
-
-    .hero-video-tint {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      background: linear-gradient(rgba(11, 15, 25, 0.52), rgba(11, 15, 25, 0.76));
-      pointer-events: none;
     }
 
     .hero-inner {
@@ -356,8 +326,8 @@
       line-height: 0.98;
       letter-spacing: 0;
       font-weight: 950;
-      color: var(--white);
-      text-shadow: 0 18px 60px rgba(0, 0, 0, 0.46);
+      color: var(--ink);
+      text-shadow: none;
     }
 
     .hero p {
@@ -365,9 +335,9 @@
       margin: 26px auto 0;
       font-size: clamp(1rem, 1.9vw, 1.22rem);
       line-height: 1.6;
-      color: rgba(255, 255, 255, 0.88);
+      color: var(--soft-ink);
       font-weight: 620;
-      text-shadow: 0 12px 35px rgba(0, 0, 0, 0.44);
+      text-shadow: none;
     }
 
     .landing-start .hero p {
@@ -700,6 +670,11 @@
       padding-bottom: clamp(48px, 7vw, 86px);
       overflow: hidden;
       z-index: 12;
+      background-color: var(--cloud);
+      background-image: url("assets/map-graph-bg.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       border-top: 1px solid rgba(17, 19, 24, 0.14);
       box-shadow: 0 -28px 80px rgba(11, 15, 25, 0.18);
       transform: translateY(86px);
@@ -1810,7 +1785,7 @@
       .hero {
         min-height: 100vh;
         min-height: 100svh;
-        padding: 72px 16px;
+        padding: calc(var(--nav-height) + 54px) 16px 72px;
       }
 
       .hero h1 {
@@ -2291,20 +2266,6 @@
   </header>
 
   <section class="hero">
-    <div class="hero-video-bg" aria-hidden="true">
-      <video
-        id="heroBackgroundVideo"
-        autoplay
-        muted
-        playsinline
-        preload="metadata"
-      >
-        <source src="assets/videos/video-1.mp4" type="video/mp4" />
-      </video>
-
-      <div class="hero-video-tint"></div>
-    </div>
-
     <div class="hero-inner">
       <div class="hero-copy parallax-item" data-speed="-0.012">
         <h1>What if we could see the Bible where it happened?</h1>
@@ -3167,47 +3128,6 @@
     requestAnimationFrame(checkTestamentPuzzleAnimation);
     setTimeout(checkTestamentPuzzleAnimation, 300);
     setTimeout(checkTestamentPuzzleAnimation, 900);
-
-    const heroVideoPlaylist = [
-      "assets/videos/video-1.mp4",
-      "assets/videos/video-2.mp4",
-      "assets/videos/video-3.mp4",
-      "assets/videos/video-4.mp4",
-      "assets/videos/video-5.mp4",
-      "assets/videos/video-6.mp4"
-    ];
-
-    const heroBackgroundVideo = document.getElementById("heroBackgroundVideo");
-    let heroVideoIndex = 0;
-
-    function playHeroVideoByIndex(index) {
-      if (!heroBackgroundVideo) return;
-
-      heroVideoIndex = index;
-      heroBackgroundVideo.src = heroVideoPlaylist[heroVideoIndex];
-
-      const playPromise = heroBackgroundVideo.play();
-
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {});
-      }
-    }
-
-    if (heroBackgroundVideo) {
-      heroBackgroundVideo.addEventListener("ended", () => {
-        const nextVideoIndex =
-          (heroVideoIndex + 1) % heroVideoPlaylist.length;
-
-        playHeroVideoByIndex(nextVideoIndex);
-      });
-
-      heroBackgroundVideo.addEventListener("error", () => {
-        const nextVideoIndex =
-          (heroVideoIndex + 1) % heroVideoPlaylist.length;
-
-        playHeroVideoByIndex(nextVideoIndex);
-      });
-    }
 
     const parallaxItems = document.querySelectorAll(".parallax-item");
     let ticking = false;
