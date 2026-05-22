@@ -737,6 +737,17 @@
       background: var(--white);
     }
 
+    .read-bible-bar {
+      background: #ece8de;
+    }
+
+    .read-bible-bar:hover,
+    .read-bible-bar:focus-visible {
+      background: #e5dfd1;
+      color: var(--electric-purple);
+      transform: translateY(-4px);
+    }
+
     .watch-videos-grid {
       width: min(1120px, 100%);
       margin: 0 auto;
@@ -2769,6 +2780,8 @@
         <video class="watch-video" controls preload="metadata" src="assets/videos/video-3.mp4" aria-label="Bible Mapped video 3"></video>
       </div>
     </div>
+
+    <a class="landing-followup-bar read-bible-bar" href="books/index.html">Read the Bible</a>
   </section>
 
   <div class="modal-overlay" id="oldTestamentModal" aria-hidden="true">
