@@ -2331,55 +2331,61 @@
 
     /* =========================
        HERO PEOPLE STRIP
-       Adds the biblical procession without touching footer/page layout
+       Keeps the page the same, but makes the people visible on the hero edge
     ========================= */
+
+    .hero {
+      isolation: isolate;
+    }
 
     .hero-people-layer {
       position: absolute;
       left: 0;
       right: 0;
-      bottom: -18px;
+      bottom: -2px;
+      height: clamp(215px, 31vw, 395px);
       z-index: 2;
       pointer-events: none;
       display: flex;
       justify-content: center;
       align-items: flex-end;
+      overflow: visible;
     }
 
     .hero-people-img {
       width: 100vw;
       max-width: none;
-      height: clamp(185px, 28vw, 360px);
-      object-fit: cover;
+      height: 100%;
+      object-fit: contain;
       object-position: center bottom;
-      opacity: 0.94;
+      opacity: 0.96;
       mix-blend-mode: multiply;
       filter: saturate(0.92) contrast(1.02);
 
       -webkit-mask-image: linear-gradient(
         to bottom,
         transparent 0%,
-        rgba(0, 0, 0, 0.15) 10%,
-        black 28%,
+        rgba(0, 0, 0, 0.82) 18%,
+        black 30%,
         black 100%
       );
       mask-image: linear-gradient(
         to bottom,
         transparent 0%,
-        rgba(0, 0, 0, 0.15) 10%,
-        black 28%,
+        rgba(0, 0, 0, 0.82) 18%,
+        black 30%,
         black 100%
       );
     }
 
     @media (max-width: 720px) {
       .hero-people-layer {
-        bottom: -10px;
+        bottom: -1px;
+        height: clamp(128px, 38vw, 210px);
       }
 
       .hero-people-img {
-        height: clamp(120px, 34vw, 190px);
-        opacity: 0.82;
+        opacity: 0.9;
       }
     }
 
