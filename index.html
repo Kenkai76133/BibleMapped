@@ -665,8 +665,8 @@
 
     .testament-puzzle-section {
       scroll-margin-top: calc(var(--nav-height) + 24px);
-      padding-top: clamp(28px, 4vw, 58px);
-      padding-bottom: clamp(48px, 7vw, 86px);
+      padding-top: clamp(40px, 6vw, 80px);
+      padding-bottom: clamp(80px, 10vw, 130px);
       overflow: hidden;
       z-index: 12;
       background-color: var(--cloud);
@@ -688,9 +688,16 @@
       opacity: 1;
     }
 
+    .testament-title {
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+      color: var(--electric-purple);
+    }
+
     .testament-puzzle-stage {
       width: min(1240px, 100%);
-      margin: clamp(28px, 4vw, 48px) auto 0;
+      margin: clamp(12px, 2vw, 28px) auto clamp(60px, 8vw, 100px);
       padding: 0 20px;
     }
 
@@ -718,7 +725,7 @@
       pointer-events: none;
     }
 
-    .testament-svg-wrap.in-view::after {
+    .testament-puzzle-section.is-active .testament-svg-wrap::after {
       opacity: 1;
     }
 
@@ -770,18 +777,18 @@
     .piece-4 { transform: translate(76px, 0px) rotate(2.8deg); }
     .piece-5 { transform: translate(142px, 8px) rotate(-4deg); }
 
-    .testament-svg-wrap.in-view .svg-piece {
+    .testament-puzzle-section.is-active .svg-piece {
       opacity: 1;
       transform: translate(0, 0) rotate(0deg);
     }
 
-    .testament-svg-wrap.in-view .piece-1 { transition-delay: 0.02s; }
-    .testament-svg-wrap.in-view .piece-2 { transition-delay: 0.10s; }
-    .testament-svg-wrap.in-view .piece-3 { transition-delay: 0.18s; }
-    .testament-svg-wrap.in-view .piece-4 { transition-delay: 0.26s; }
-    .testament-svg-wrap.in-view .piece-5 { transition-delay: 0.34s; }
+    .testament-puzzle-section.is-active .piece-1 { transition-delay: 0.02s; }
+    .testament-puzzle-section.is-active .piece-2 { transition-delay: 0.10s; }
+    .testament-puzzle-section.is-active .piece-3 { transition-delay: 0.18s; }
+    .testament-puzzle-section.is-active .piece-4 { transition-delay: 0.26s; }
+    .testament-puzzle-section.is-active .piece-5 { transition-delay: 0.34s; }
 
-    .testament-svg-wrap.in-view .svg-piece:hover {
+    .testament-puzzle-section.is-active .svg-piece:hover {
       transform: translateY(-8px) scale(1.015);
     }
 
@@ -920,6 +927,16 @@
         transition: none;
         transform: none;
       }
+
+      .svg-piece,
+      .testament-puzzle-section {
+        transition: none;
+      }
+
+      .testament-puzzle-section .svg-piece {
+        opacity: 1;
+        transform: translate(0, 0) rotate(0deg);
+      }
     }
 
     .formula-image-placeholder {
@@ -1039,6 +1056,37 @@
       font-weight: 500;
       letter-spacing: 0.035em;
       color: rgba(248, 247, 242, 0.94);
+    }
+
+    .formula-link-row {
+      margin-top: 0.65rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.45rem;
+    }
+
+    .formula-chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(44, 38, 55, 0.14);
+      border-radius: 999px;
+      padding: 0.32rem 0.65rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #2b2436;
+      background: rgba(255, 255, 255, 0.72);
+      text-shadow: none;
+      transition: border-color 180ms ease, color 180ms ease, background 180ms ease;
+    }
+
+    .formula-chip:hover,
+    .formula-chip:focus-visible {
+      color: #6b2cff;
+      border-color: rgba(107, 44, 255, 0.45);
+      background: rgba(255, 255, 255, 0.92);
     }
 
     .formula-art-frame.words-in-view .formula-question {
@@ -1769,12 +1817,10 @@
     }
 
     .patreon-mark {
-      width: 15px;
-      height: 19px;
+      width: 18px;
+      height: 18px;
       display: block;
-      background: #000000;
-      border-radius: 54% 48% 44% 60% / 42% 50% 58% 62%;
-      transform: rotate(12deg);
+      fill: #000000;
     }
 
     .parallax-item {
@@ -2106,18 +2152,19 @@
 
 
     /* =========================================================
-       NO-NEGATIVE-SPACE PATCH
-       Keeps the image sections full-bleed and removes the white
-       dead space below the Formula image and Testament images.
+       FULL-BLEED SECTION PATCH
+       Keeps the image sections full-bleed while preserving the
+       Testament shard breathing room before the About bar.
     ========================================================= */
 
     .testament-puzzle-section {
-      padding-bottom: 0 !important;
+      padding-top: clamp(40px, 6vw, 80px) !important;
+      padding-bottom: clamp(80px, 10vw, 130px) !important;
       margin-bottom: 0 !important;
     }
 
     .testament-puzzle-stage {
-      margin-bottom: 0 !important;
+      margin: clamp(12px, 2vw, 28px) auto clamp(60px, 8vw, 100px) !important;
       padding-bottom: 0 !important;
       line-height: 0;
     }
@@ -2388,11 +2435,11 @@
     </div>
   </section>
 
-  <section class="statement-section testament-puzzle-section premium-reveal" id="testaments">
+  <section class="statement-section testament-puzzle-section testament-section premium-reveal" id="testaments">
     <div class="section-rail">
       <p class="rail-eyebrow">Begin the Journey</p>
 
-      <div class="section-display explore-display">
+      <div class="section-display explore-display testament-title">
         Explore Scripture by Testament
       </div>
     </div>
@@ -2508,25 +2555,38 @@
                   </div>
 
                   <div class="formula-question-row" aria-label="Bible Mapped formula navigation">
-                    <a class="formula-question where" href="maps/index.html" aria-label="Open Maps page">
+                    <div class="formula-question where">
                       <span class="formula-main">Where</span>
                       <span class="formula-sub">did it happen?</span>
-                    </a>
+                      <div class="formula-link-row">
+                        <a class="formula-chip" href="maps/index.html">Maps &rarr;</a>
+                      </div>
+                    </div>
 
-                    <a class="formula-question who" href="characters/index.html" aria-label="Open People page">
+                    <div class="formula-question who">
                       <span class="formula-main">Who</span>
                       <span class="formula-sub">is this about?</span>
-                    </a>
+                      <div class="formula-link-row">
+                        <a class="formula-chip" href="characters/index.html">People &rarr;</a>
+                        <a class="formula-chip" href="books/index.html">Books &rarr;</a>
+                      </div>
+                    </div>
 
-                    <a class="formula-question why" href="books/index.html" aria-label="Open Books page">
+                    <div class="formula-question why">
                       <span class="formula-main">Why</span>
                       <span class="formula-sub">is this happening?</span>
-                    </a>
+                      <div class="formula-link-row">
+                        <a class="formula-chip" href="case-studies/index.html">Case Studies &rarr;</a>
+                      </div>
+                    </div>
 
-                    <a class="formula-question what" href="case-studies/index.html" aria-label="Open Case Studies page">
+                    <div class="formula-question what">
                       <span class="formula-main">What</span>
                       <span class="formula-sub">makes this matter to me?</span>
-                    </a>
+                      <div class="formula-link-row">
+                        <a class="formula-chip" href="qa/index.html">Q&amp;A &rarr;</a>
+                      </div>
+                    </div>
                   </div>
 
                   <article class="formula-tour-panel where-panel active" data-formula-tour-panel="1">
@@ -2834,7 +2894,9 @@
           <img src="assets/instagram-logo.png" alt="Instagram" />
         </a>
         <a class="bottom-social-emblem patreon-emblem" href="https://www.patreon.com/cw/Biblemapped" target="_blank" rel="noopener noreferrer" aria-label="Patreon">
-          <span class="patreon-mark"></span>
+          <svg class="patreon-mark" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M22.957 7.21c-.004-3.064-2.391-5.576-5.191-6.482-3.478-1.125-8.064-.962-11.384.604C2.357 3.231 1.093 7.391 1.046 11.54c-.039 3.411.302 12.396 5.369 12.46 3.765.047 4.326-4.804 6.068-7.141 1.24-1.662 2.836-2.132 4.801-2.618 3.376-.836 5.678-3.501 5.673-7.031Z" />
+          </svg>
         </a>
         <a class="bottom-social-emblem" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
           <img src="assets/youtube-logo.png" alt="YouTube" />
@@ -3165,7 +3227,6 @@
 
     setupMinimalPanel("aboutMappedToggle", "aboutMappedPanel");
 
-    const testamentWrap = document.getElementById("testamentPuzzleWrap");
     const startHereButton = document.getElementById("startHereButton");
     const testamentsSection = document.getElementById("testaments");
 
@@ -3186,7 +3247,6 @@
           });
         }
 
-        checkTestamentPuzzleAnimation();
       }, 760);
     }
 
@@ -3198,28 +3258,24 @@
       startHereButton.addEventListener("click", openLandingPanel);
     }
 
-    function checkTestamentPuzzleAnimation() {
-      if (!testamentWrap) return;
+    const testamentSection = document.querySelector(".testament-section");
 
-      const rect = testamentWrap.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
+    if (testamentSection) {
+      const testamentObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            testamentSection.classList.add("is-active");
+            testamentObserver.disconnect();
+          }
+        },
+        {
+          threshold: 0.35,
+          rootMargin: "0px 0px -20% 0px"
+        }
+      );
 
-      const isVisible =
-        rect.top < windowHeight * 0.82 &&
-        rect.bottom > windowHeight * 0.15;
-
-      if (isVisible) {
-        testamentWrap.classList.add("in-view");
-      }
+      testamentObserver.observe(testamentSection);
     }
-
-    window.addEventListener("scroll", checkTestamentPuzzleAnimation);
-    window.addEventListener("resize", checkTestamentPuzzleAnimation);
-    window.addEventListener("load", checkTestamentPuzzleAnimation);
-
-    requestAnimationFrame(checkTestamentPuzzleAnimation);
-    setTimeout(checkTestamentPuzzleAnimation, 300);
-    setTimeout(checkTestamentPuzzleAnimation, 900);
 
     const parallaxItems = document.querySelectorAll(".parallax-item");
     let ticking = false;
