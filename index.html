@@ -306,13 +306,18 @@
       will-change: min-height;
     }
 
+    .landing-start .hero {
+      align-items: flex-start;
+      padding-top: calc(var(--nav-height) + clamp(42px, 5.5vw, 82px));
+    }
+
     .hero::before {
       content: "";
       position: absolute;
       inset: 0;
       z-index: 1;
       background-image: url("assets/bible-journey-people-hero-strip.png");
-      background-position: center center;
+      background-position: center bottom;
       background-repeat: no-repeat;
       background-size: 100% auto;
       pointer-events: none;
@@ -2055,8 +2060,12 @@
         padding: calc(var(--nav-height) + 54px) 16px 72px;
       }
 
+      .landing-start .hero {
+        padding-top: calc(var(--nav-height) + 34px);
+      }
+
       .hero::before {
-        background-position: 62% center;
+        background-position: 62% bottom;
         background-size: cover;
       }
 
