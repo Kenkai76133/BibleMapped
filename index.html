@@ -1647,6 +1647,136 @@
       color: rgba(255, 255, 255, 0.82);
     }
 
+    .site-footer.route-footer {
+      padding: clamp(28px, 4vw, 42px) 20px;
+      text-align: left;
+    }
+
+    .route-footer .footer-inner {
+      width: min(980px, 100%);
+      justify-items: stretch;
+    }
+
+    .footer-route {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) clamp(54px, 8vw, 76px);
+      grid-template-rows: auto auto;
+      align-items: end;
+      gap: 10px clamp(12px, 2vw, 22px);
+      min-width: 0;
+    }
+
+    .route-footer .footer-business-name {
+      color: var(--white);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .footer-route-line {
+      min-width: 0;
+      border-bottom: 2px dotted rgba(255, 255, 255, 0.72);
+    }
+
+    .footer-route-mark {
+      width: clamp(54px, 8vw, 76px);
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: 50%;
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      justify-self: end;
+    }
+
+    .footer-route-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .route-footer .footer-links {
+      justify-content: flex-start;
+      gap: 8px 12px;
+      margin-top: 0;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 0.84rem;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      line-height: 1.3;
+      text-transform: uppercase;
+    }
+
+    .route-footer .footer-links a,
+    .route-footer .footer-links span {
+      color: inherit;
+      opacity: 1;
+    }
+
+    .route-footer .footer-links a:hover,
+    .route-footer .footer-links a:focus-visible {
+      opacity: 0.78;
+      text-decoration: none;
+    }
+
+    .bottom-social-row {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 9px;
+    }
+
+    .bottom-social-emblem {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--white);
+      color: var(--electric-purple);
+      font-size: 0.76rem;
+      font-weight: 950;
+      line-height: 1;
+      text-decoration: none;
+      transition: transform 180ms ease, opacity 180ms ease;
+    }
+
+    .bottom-social-emblem:hover,
+    .bottom-social-emblem:focus-visible {
+      transform: translateY(-2px);
+      opacity: 0.92;
+    }
+
+    .bottom-social-emblem img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+    }
+
+    .bottom-social-emblem.facebook-emblem {
+      background: #3b75bb;
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.35rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .bottom-social-emblem.patreon-emblem {
+      background: var(--white);
+    }
+
+    .patreon-mark {
+      width: 15px;
+      height: 19px;
+      display: block;
+      background: #000000;
+      border-radius: 54% 48% 44% 60% / 42% 50% 58% 62%;
+      transform: rotate(12deg);
+    }
+
     .parallax-item {
       will-change: transform;
     }
@@ -1953,6 +2083,24 @@
       .footer-links {
         gap: 7px 12px;
         font-size: 0.84rem;
+      }
+
+      .site-footer.route-footer {
+        padding: 30px 18px 34px;
+      }
+
+      .footer-route {
+        grid-template-columns: minmax(0, 1fr) 54px;
+        gap: 10px;
+      }
+
+      .route-footer .footer-business-name {
+        font-size: clamp(1.5rem, 7vw, 2.15rem);
+      }
+
+      .route-footer .footer-links {
+        gap: 8px 10px;
+        font-size: 0.75rem;
       }
     }
 
@@ -2654,57 +2802,46 @@
     </div>
   </div>
 
-  <footer class="site-footer premium-reveal">
+  <footer class="site-footer route-footer premium-reveal" aria-label="Bible Mapped footer">
     <div class="footer-inner">
-      <div class="footer-brand-slot">
-        <img
-          src="assets/footer-brand-image.png"
-          alt="Bible Mapped logo"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-        />
-        <span class="footer-brand-fallback">Brand Image Slot</span>
+      <div class="footer-route" aria-label="Bible Mapped route mark">
+        <h2 class="footer-business-name">Bible Mapped</h2>
+        <span class="footer-route-line" aria-hidden="true"></span>
+        <span class="footer-route-mark">
+          <img src="assets/footer-brand-image.png" alt="Bible Mapped logo mark" />
+        </span>
       </div>
 
-      <h2 class="footer-business-name">Bible Mapped</h2>
-
-      <a class="footer-email" href="mailto:calvin@biblemapped.com">
-        calvin@biblemapped.com
-      </a>
-
-      <a
-        class="footer-youtube-link"
-        href="https://www.youtube.com/@biblemapped"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Watch Bible Mapped on YouTube"
-      >
-        <span class="footer-youtube-circle">
-          <img
-            class="footer-youtube-logo"
-            src="assets/youtube-logo.png"
-            alt="YouTube"
-          />
-        </span>
-        <span>Watch us on YouTube</span>
-      </a>
-
-      <div class="footer-divider"></div>
-
       <nav class="footer-links" aria-label="Footer navigation">
-        <a href="about/index.html">About Us</a>
+        <a href="about/index.html">About</a>
         <span>|</span>
-        <a href="contact/index.html">Contact</a>
+        <a href="books/index.html">Books</a>
         <span>|</span>
-        <a href="privacy/index.html">Privacy</a>
+        <a href="characters/index.html">People</a>
         <span>|</span>
-        <a href="terms/index.html">Terms &amp; Conditions</a>
+        <a href="maps/index.html">Maps</a>
+        <span>|</span>
+        <a href="case-studies/index.html">Case Studies</a>
+        <span>|</span>
+        <a href="mailto:calvin@biblemapped.com">Contact</a>
       </nav>
 
-      <div class="footer-divider"></div>
+      <div class="bottom-social-row" aria-label="Bible Mapped social links">
+        <a class="bottom-social-emblem" href="https://www.tiktok.com/@biblemapped" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+          <img src="assets/tiktok-logo.png" alt="TikTok" />
+        </a>
+        <a class="bottom-social-emblem" href="#" aria-label="Instagram">
+          <img src="assets/instagram-logo.png" alt="Instagram" />
+        </a>
+        <a class="bottom-social-emblem patreon-emblem" href="https://www.patreon.com/cw/Biblemapped" target="_blank" rel="noopener noreferrer" aria-label="Patreon">
+          <span class="patreon-mark"></span>
+        </a>
+        <a class="bottom-social-emblem" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <img src="assets/youtube-logo.png" alt="YouTube" />
+        </a>
+        <a class="bottom-social-emblem facebook-emblem" href="#" aria-label="Facebook">f</a>
+      </div>
 
-      <p class="footer-copy">
-        © 2026 Bible Mapped. All rights reserved.
-      </p>
     </div>
   </footer>
 
