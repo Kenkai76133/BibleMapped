@@ -748,6 +748,27 @@
       transform: translateY(-4px);
     }
 
+    .bible-mood-slot {
+      min-height: clamp(200px, 30vw, 420px);
+      display: grid;
+      place-items: center;
+      padding: clamp(44px, 8vw, 110px) 20px;
+      background: var(--white);
+      color: var(--gunmetal);
+      text-align: center;
+    }
+
+    .bible-mood-slot h2 {
+      width: min(900px, 100%);
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 5.5vw, 6rem);
+      font-weight: 760;
+      letter-spacing: 0;
+      line-height: 1.02;
+      overflow-wrap: anywhere;
+    }
+
     .watch-videos-grid {
       width: min(1120px, 100%);
       margin: 0 auto;
@@ -2782,6 +2803,10 @@
     </div>
 
     <a class="landing-followup-bar read-bible-bar" href="books/index.html">Read the Bible</a>
+
+    <section class="bible-mood-slot" aria-labelledby="bibleMoodTitle">
+      <h2 id="bibleMoodTitle">How are you feeling today?</h2>
+    </section>
   </section>
 
   <div class="modal-overlay" id="oldTestamentModal" aria-hidden="true">
