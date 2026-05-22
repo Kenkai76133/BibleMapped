@@ -99,10 +99,26 @@
       background: linear-gradient(
         to bottom,
         var(--white) 0%,
-        rgba(255, 255, 255, 0.99) 72%,
-        rgba(255, 255, 255, 0.94) 86%,
+        rgba(255, 255, 255, 1) 82%,
+        rgba(255, 255, 255, 0.98) 94%,
         rgba(255, 255, 255, 0) 100%
       );
+    }
+
+    .landing-start .site-header::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      height: clamp(44px, 6vw, 82px);
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.94) 0%,
+        rgba(255, 255, 255, 0.5) 48%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      pointer-events: none;
     }
 
     .nav {
@@ -370,6 +386,13 @@
       font-weight: 950;
       color: var(--gunmetal);
       text-shadow: none;
+    }
+
+    .landing-start .hero h1 {
+      max-width: min(1420px, calc(100vw - 40px));
+      font-size: clamp(2.6rem, 5vw, 5.35rem);
+      line-height: 0.96;
+      white-space: nowrap;
     }
 
     .hero p {
@@ -724,12 +747,20 @@
     }
 
     .heaven-test-bar {
-      background: #ece8de;
+      --heaven-test-image: url("assets/map-graph-bg.png");
+      background:
+        linear-gradient(90deg, rgba(241, 238, 231, 0.98), rgba(241, 238, 231, 0.7)),
+        var(--heaven-test-image) center / cover;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.2rem, 4.6vw, 5.2rem);
+      font-weight: 720;
     }
 
     .heaven-test-bar:hover,
     .heaven-test-bar:focus-visible {
-      background: #e5dfd1;
+      background:
+        linear-gradient(90deg, rgba(229, 223, 209, 0.98), rgba(229, 223, 209, 0.68)),
+        var(--heaven-test-image) center / cover;
       color: var(--electric-purple);
       transform: translateY(-4px);
     }
@@ -737,6 +768,11 @@
     .watch-videos-bar {
       margin: 0;
       background: var(--cloud);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-size: clamp(1.45rem, 2.8vw, 2.8rem);
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .watch-videos-stage {
@@ -819,6 +855,7 @@
       aspect-ratio: 9 / 16;
       flex: 0 0 auto;
       background: #080808;
+      box-shadow: 0 28px 70px rgba(11, 15, 25, 0.18);
       overflow: hidden;
     }
 
@@ -2147,6 +2184,11 @@
         font-size: clamp(2.35rem, 12vw, 4.35rem);
       }
 
+      .landing-start .hero h1 {
+        font-size: clamp(2rem, 11vw, 3.8rem);
+        white-space: normal;
+      }
+
       .hero p {
         font-size: 1rem;
       }
@@ -2902,9 +2944,17 @@
               <iframe class="watch-video-embed" src="https://www.youtube.com/embed/9KO6829IwNM" title="Bible Mapped YouTube Short 3" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
 
-            <div class="watch-video-card watch-video-slot">More videos soon</div>
-            <div class="watch-video-card watch-video-slot">More videos soon</div>
-            <div class="watch-video-card watch-video-slot">More videos soon</div>
+            <div class="watch-video-card">
+              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/vFDihb4G_ho" title="Bible Mapped YouTube Short 4" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+
+            <div class="watch-video-card">
+              <iframe class="watch-video-embed" src="https://www.tiktok.com/embed/v2/7446491700182191406" title="Bible Mapped TikTok video 1" loading="lazy" allow="encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+
+            <div class="watch-video-card">
+              <iframe class="watch-video-embed" src="https://www.tiktok.com/embed/v2/7621071656974322957" title="Bible Mapped TikTok video 2" loading="lazy" allow="encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
           </div>
 
           <div class="watch-video-group" aria-hidden="true">
@@ -2920,9 +2970,17 @@
               <iframe class="watch-video-embed" src="https://www.youtube.com/embed/9KO6829IwNM" title="Duplicate Bible Mapped YouTube Short 3" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
             </div>
 
-            <div class="watch-video-card watch-video-slot">More videos soon</div>
-            <div class="watch-video-card watch-video-slot">More videos soon</div>
-            <div class="watch-video-card watch-video-slot">More videos soon</div>
+            <div class="watch-video-card">
+              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/vFDihb4G_ho" title="Duplicate Bible Mapped YouTube Short 4" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+            </div>
+
+            <div class="watch-video-card">
+              <iframe class="watch-video-embed" src="https://www.tiktok.com/embed/v2/7446491700182191406" title="Duplicate Bible Mapped TikTok video 1" loading="lazy" tabindex="-1" allow="encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+
+            <div class="watch-video-card">
+              <iframe class="watch-video-embed" src="https://www.tiktok.com/embed/v2/7621071656974322957" title="Duplicate Bible Mapped TikTok video 2" loading="lazy" tabindex="-1" allow="encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
           </div>
         </div>
       </div>
@@ -3115,7 +3173,7 @@
     </div>
   </div>
 
-  <footer class="site-footer route-footer premium-reveal" aria-label="Bible Mapped footer">
+  <footer class="site-footer route-footer" aria-label="Bible Mapped footer">
     <div class="footer-inner">
       <div class="footer-route" aria-label="Bible Mapped route mark">
         <h2 class="footer-business-name">Bible Mapped</h2>
