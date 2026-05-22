@@ -748,17 +748,33 @@
       transform: translateY(-4px);
     }
 
-    .bible-mood-slot {
+    .bible-mood-slot,
+    .heaven-question-slot {
       min-height: clamp(200px, 30vw, 420px);
       display: grid;
       place-items: center;
       padding: clamp(44px, 8vw, 110px) 20px;
-      background: var(--white);
       color: var(--gunmetal);
       text-align: center;
     }
 
-    .bible-mood-slot h2 {
+    .bible-mood-slot {
+      background: var(--white);
+    }
+
+    .heaven-question-slot {
+      background: var(--cloud);
+      transition: background 180ms ease, color 180ms ease;
+    }
+
+    .heaven-question-slot:hover,
+    .heaven-question-slot:focus-visible {
+      background: #ece8de;
+      color: var(--electric-purple);
+    }
+
+    .bible-mood-slot h2,
+    .heaven-question-slot h2 {
       width: min(900px, 100%);
       margin: 0;
       font-family: Georgia, "Times New Roman", serif;
@@ -2807,6 +2823,10 @@
     <section class="bible-mood-slot" aria-labelledby="bibleMoodTitle">
       <h2 id="bibleMoodTitle">How are you feeling today?</h2>
     </section>
+
+    <a class="heaven-question-slot" href="qa/index.html" aria-labelledby="heavenQuestionTitle">
+      <h2 id="heavenQuestionTitle">How can I go to heaven?</h2>
+    </a>
   </section>
 
   <div class="modal-overlay" id="oldTestamentModal" aria-hidden="true">
