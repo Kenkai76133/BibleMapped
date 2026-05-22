@@ -2328,6 +2328,60 @@
       }
     }
 
+
+    /* =========================
+       HERO PEOPLE STRIP
+       Adds the biblical procession without changing hero layout
+    ========================= */
+
+    .hero-people-layer {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -18px;
+      z-index: 2;
+      pointer-events: none;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .hero-people-img {
+      width: 100vw;
+      max-width: none;
+      height: clamp(185px, 28vw, 360px);
+      object-fit: cover;
+      object-position: center bottom;
+      opacity: 0.94;
+      mix-blend-mode: multiply;
+      filter: saturate(0.92) contrast(1.02);
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0, 0, 0, 0.15) 10%,
+        black 28%,
+        black 100%
+      );
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0, 0, 0, 0.15) 10%,
+        black 28%,
+        black 100%
+      );
+    }
+
+    @media (max-width: 720px) {
+      .hero-people-layer {
+        bottom: -10px;
+      }
+
+      .hero-people-img {
+        height: clamp(120px, 34vw, 190px);
+        opacity: 0.82;
+      }
+    }
+
   </style>
 </head>
 
