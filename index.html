@@ -3379,6 +3379,15 @@
     }
 
 
+
+
+    /* LUX PATCH 6 — cards fan open on scroll down and stay static on scroll up */
+    .scripture-card-fan.scroll-retracted .scripture-story-card,
+    .scripture-card-fan.scroll-fanned.scroll-retracted .scripture-story-card {
+      opacity: 1 !important;
+      transform: translate(-50%, -50%) translateX(var(--x)) translateY(var(--y)) rotate(var(--r)) scale(1) !important;
+    }
+
 </style>
 </head>
 
@@ -4469,8 +4478,10 @@
             scriptureFan.classList.add("scroll-fanned");
             scriptureFan.classList.remove("scroll-retracted");
           } else {
-            scriptureFan.classList.add("scroll-retracted");
-            scriptureFan.classList.remove("scroll-fanned");
+            // Keep the cards static when scrolling back up.
+            // No retracting inward after the fan has opened.
+            scriptureFan.classList.add("scroll-fanned");
+            scriptureFan.classList.remove("scroll-retracted");
           }
         }
 
