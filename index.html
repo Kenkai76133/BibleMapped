@@ -3199,6 +3199,87 @@
       }
     }
 
+
+    /* =========================================================
+       LUX PATCH 3 — hero headline reaches the side guide area
+       Keeps the existing landing page intact; only widens and
+       scales the opening question so it fills the left/right space.
+    ========================================================= */
+
+    .landing-start .hero h1 {
+      max-width: min(1240px, calc(100vw - clamp(140px, 14vw, 260px))) !important;
+      width: 100% !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      margin-top: clamp(14px, 2vw, 30px) !important;
+      font-size: clamp(1.62rem, 2.85vw, 3.45rem) !important;
+      line-height: 1.04 !important;
+      letter-spacing: 0.012em !important;
+      text-align: center !important;
+      text-wrap: balance !important;
+      white-space: normal !important;
+    }
+
+    @media (max-width: 980px) {
+      .landing-start .hero h1 {
+        max-width: min(760px, calc(100vw - 72px)) !important;
+        font-size: clamp(1.45rem, 4.2vw, 2.55rem) !important;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .landing-start .hero h1 {
+        max-width: min(520px, calc(100vw - 34px)) !important;
+        font-size: clamp(1.16rem, 5.6vw, 1.82rem) !important;
+        line-height: 1.08 !important;
+      }
+    }
+
+
+    /* =========================================================
+       LUX PATCH 4 — wider hero question + smaller Start Here
+       Only adjusts the hero question width/scale and button size.
+    ========================================================= */
+
+    .landing-start .hero h1 {
+      max-width: min(1480px, calc(100vw - clamp(52px, 6vw, 112px))) !important;
+      font-size: clamp(1.85rem, 3.45vw, 4.25rem) !important;
+      line-height: 1.02 !important;
+      letter-spacing: 0.018em !important;
+      transform: scaleX(1.06) !important;
+      transform-origin: center center !important;
+    }
+
+    .landing-start .btn-start {
+      min-height: 58px !important;
+      padding: 0 clamp(30px, 3.8vw, 48px) !important;
+      font-size: clamp(0.82rem, 1vw, 0.98rem) !important;
+      letter-spacing: 0.075em !important;
+    }
+
+    @media (max-width: 980px) {
+      .landing-start .hero h1 {
+        max-width: min(900px, calc(100vw - 42px)) !important;
+        font-size: clamp(1.62rem, 5vw, 3rem) !important;
+        transform: scaleX(1.035) !important;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .landing-start .hero h1 {
+        max-width: min(620px, calc(100vw - 26px)) !important;
+        font-size: clamp(1.22rem, 6.6vw, 2.05rem) !important;
+        line-height: 1.05 !important;
+        transform: scaleX(1.015) !important;
+      }
+
+      .landing-start .btn-start {
+        min-height: 52px !important;
+        padding: 0 28px !important;
+        font-size: 0.82rem !important;
+      }
+    }
+
 </style>
 </head>
 
