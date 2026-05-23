@@ -2625,6 +2625,328 @@
       }
     }
 
+
+
+    /* =========================================================
+       LUX PATCH — original layout preserved, graph cards added
+    ========================================================= */
+
+    .site-header,
+    .landing-start .site-header,
+    .nav {
+      border: 0 !important;
+      border-bottom: 0 !important;
+      box-shadow: none !important;
+      outline: 0 !important;
+    }
+
+    .landing-start .site-header {
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 1) 76%,
+        rgba(255, 255, 255, 0.98) 88%,
+        rgba(255, 255, 255, 0) 100%
+      ) !important;
+    }
+
+    .landing-start .site-header::after {
+      top: calc(100% - 2px) !important;
+      height: clamp(58px, 7vw, 96px) !important;
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.98) 0%,
+        rgba(255, 255, 255, 0.76) 42%,
+        rgba(255, 255, 255, 0.28) 74%,
+        rgba(255, 255, 255, 0) 100%
+      ) !important;
+      border: 0 !important;
+      box-shadow: none !important;
+    }
+
+    .hero + .testament-puzzle-section,
+    .testament-puzzle-section {
+      border-top: 0 !important;
+      box-shadow: none !important;
+    }
+
+    .hero::after {
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.96) 10%,
+        rgba(255, 255, 255, 0.58) 26%,
+        rgba(255, 255, 255, 0.18) 40%,
+        rgba(255, 255, 255, 0.02) 56%,
+        rgba(255, 255, 255, 0.16) 84%,
+        rgba(255, 255, 255, 0.92) 100%
+      ) !important;
+    }
+
+    .hero + .testament-puzzle-section {
+      padding-top: clamp(38px, 5.5vw, 82px) !important;
+      padding-bottom: clamp(52px, 7vw, 96px) !important;
+    }
+
+    .testament-puzzle-section .section-rail {
+      padding-top: clamp(16px, 2.8vw, 38px) !important;
+    }
+
+    .testament-puzzle-section .rail-eyebrow {
+      margin-bottom: clamp(14px, 2vw, 22px) !important;
+    }
+
+    .scripture-card-stage,
+    .testament-puzzle-stage.scripture-card-stage {
+      width: min(1280px, 100%) !important;
+      margin: clamp(46px, 6vw, 82px) auto 0 !important;
+      padding: 0 clamp(16px, 4vw, 44px) clamp(28px, 4vw, 56px) !important;
+      line-height: normal !important;
+    }
+
+    .scripture-card-fan {
+      position: relative;
+      width: min(1160px, 100%);
+      min-height: clamp(470px, 46vw, 590px);
+      margin: 0 auto;
+      perspective: 1400px;
+      isolation: isolate;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 760ms ease, transform 960ms cubic-bezier(0.16, 0.9, 0.22, 1);
+    }
+
+    .scripture-card-fan.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scripture-card-fan::before {
+      content: "";
+      position: absolute;
+      inset: clamp(20px, 4vw, 54px) 0 auto;
+      height: 68%;
+      background: radial-gradient(circle at center, rgba(248, 247, 242, 0.7), rgba(248, 247, 242, 0.06) 64%, transparent 78%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .scripture-card-fan::after {
+      content: "";
+      position: absolute;
+      left: 13%;
+      right: 13%;
+      bottom: clamp(18px, 4vw, 52px);
+      height: 46px;
+      border-radius: 999px;
+      background: rgba(11, 15, 25, 0.22);
+      filter: blur(22px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .scripture-story-card {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: clamp(178px, 17vw, 252px);
+      min-height: clamp(315px, 30vw, 410px);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+      padding: 18px;
+      color: var(--white);
+      background:
+        linear-gradient(to bottom, rgba(11, 15, 25, 0.08), rgba(11, 15, 25, 0.82)),
+        var(--card-image) center / cover,
+        linear-gradient(135deg, #ece8de, #ffffff);
+      box-shadow: 0 28px 72px rgba(11, 15, 25, 0.2);
+      text-decoration: none;
+      cursor: pointer;
+      z-index: 2;
+      opacity: 0;
+      transform: translate(-50%, -50%) translateX(var(--x)) translateY(calc(var(--y) + 44px)) rotate(var(--r)) scale(0.94);
+      transform-origin: center bottom;
+      transition:
+        opacity 700ms ease var(--delay),
+        transform 520ms cubic-bezier(0.16, 0.9, 0.22, 1),
+        box-shadow 260ms ease,
+        filter 260ms ease;
+    }
+
+    .scripture-card-fan.in-view .scripture-story-card {
+      opacity: 1;
+      transform: translate(-50%, -50%) translateX(var(--x)) translateY(var(--y)) rotate(var(--r)) scale(1);
+    }
+
+    .scripture-story-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.12), transparent 28%),
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.24), transparent 34%);
+      pointer-events: none;
+    }
+
+    .scripture-story-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .scripture-story-card:hover,
+    .scripture-story-card:focus-visible {
+      z-index: 24;
+      filter: saturate(1.06) contrast(1.02);
+      box-shadow: 0 38px 92px rgba(11, 15, 25, 0.3);
+      transform: translate(-50%, -59%) translateX(0) translateY(-20px) rotate(0deg) scale(1.1) !important;
+    }
+
+    .card-era {
+      display: block;
+      margin-bottom: 7px;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 0.68rem;
+      font-weight: 950;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-shadow: 0 12px 30px rgba(0, 0, 0, 0.58);
+    }
+
+    .scripture-story-card strong {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.9rem, 3.2vw, 3.05rem);
+      font-weight: 760;
+      line-height: 0.92;
+      letter-spacing: -0.045em;
+      text-shadow: 0 16px 34px rgba(0, 0, 0, 0.64);
+    }
+
+    .scripture-story-card em,
+    .scripture-story-card .card-link {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: max-height 280ms ease, opacity 220ms ease, transform 260ms ease;
+    }
+
+    .scripture-story-card em {
+      margin-top: 12px;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-style: normal;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 0.9rem;
+      font-weight: 650;
+      line-height: 1.42;
+      text-shadow: 0 12px 30px rgba(0, 0, 0, 0.62);
+    }
+
+    .scripture-story-card .card-link {
+      display: inline-flex;
+      width: fit-content;
+      margin-top: 14px;
+      color: var(--white);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.78);
+      font-size: 0.84rem;
+      font-weight: 950;
+      text-shadow: 0 12px 30px rgba(0, 0, 0, 0.62);
+    }
+
+    .scripture-story-card:hover em,
+    .scripture-story-card:focus-visible em,
+    .scripture-story-card:hover .card-link,
+    .scripture-story-card:focus-visible .card-link {
+      max-height: 130px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #about-biblemapped {
+      padding-top: clamp(46px, 7vw, 108px) !important;
+      background: var(--cloud) !important;
+    }
+
+    .about-mapped-toggle {
+      min-height: clamp(112px, 13vw, 184px) !important;
+      padding: clamp(28px, 4vw, 54px) 20px !important;
+      font-size: clamp(2.35rem, 5.8vw, 5.3rem) !important;
+      line-height: 0.98 !important;
+    }
+
+    .watch-videos-bar {
+      min-height: 72px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      font-family: Inter, Arial, Helvetica, sans-serif !important;
+      font-size: 0.9rem !important;
+      font-weight: 400 !important;
+      letter-spacing: 0 !important;
+      text-transform: none !important;
+      background: var(--cloud) !important;
+    }
+
+    @media (max-width: 920px) {
+      .scripture-card-fan {
+        min-height: 760px;
+      }
+
+      .scripture-story-card {
+        width: min(44vw, 238px);
+      }
+
+      .scripture-card-fan.in-view .scripture-story-card {
+        transform: translate(-50%, -50%) translateX(calc(var(--x) * 0.58)) translateY(var(--y)) rotate(var(--r)) scale(1);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .hero + .testament-puzzle-section {
+        padding-top: 40px !important;
+      }
+
+      .section-display {
+        font-size: clamp(2.35rem, 11vw, 4.15rem);
+      }
+
+      .scripture-card-stage,
+      .testament-puzzle-stage.scripture-card-stage {
+        margin-top: 42px !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+      }
+
+      .scripture-card-fan {
+        min-height: 980px;
+      }
+
+      .scripture-story-card {
+        width: min(78vw, 276px);
+        min-height: 365px;
+      }
+
+      .scripture-card-fan.in-view .scripture-story-card:nth-child(1) { transform: translate(-50%, -50%) translateX(-76px) translateY(-280px) rotate(-6deg); }
+      .scripture-card-fan.in-view .scripture-story-card:nth-child(2) { transform: translate(-50%, -50%) translateX(76px) translateY(-215px) rotate(5deg); }
+      .scripture-card-fan.in-view .scripture-story-card:nth-child(3) { transform: translate(-50%, -50%) translateX(-78px) translateY(-145px) rotate(-5deg); }
+      .scripture-card-fan.in-view .scripture-story-card:nth-child(4) { transform: translate(-50%, -50%) translateX(78px) translateY(-75px) rotate(5deg); }
+      .scripture-card-fan.in-view .scripture-story-card:nth-child(5) { transform: translate(-50%, -50%) translateX(-78px) translateY(-5px) rotate(-5deg); }
+      .scripture-card-fan.in-view .scripture-story-card:nth-child(6) { transform: translate(-50%, -50%) translateX(78px) translateY(65px) rotate(5deg); }
+      .scripture-card-fan.in-view .scripture-story-card:nth-child(7) { transform: translate(-50%, -50%) translateX(-78px) translateY(135px) rotate(-5deg); }
+      .scripture-card-fan.in-view .scripture-story-card:nth-child(8) { transform: translate(-50%, -50%) translateX(78px) translateY(205px) rotate(5deg); }
+
+      .scripture-story-card:hover,
+      .scripture-story-card:focus-visible {
+        transform: translate(-50%, -58%) translateX(0) translateY(-12px) rotate(0deg) scale(1.04) !important;
+      }
+
+      .about-mapped-toggle {
+        font-size: clamp(2.35rem, 11vw, 4rem) !important;
+      }
+    }
   </style>
 </head>
 
@@ -2694,82 +3016,63 @@
       </div>
     </div>
 
-    <div class="testament-puzzle-stage">
-      <div class="testament-svg-wrap" id="testamentPuzzleWrap">
-        <svg
-          class="testament-svg"
-          viewBox="0 0 1200 430"
-          preserveAspectRatio="xMidYMid meet"
-          aria-label="Old and New Testament puzzle reveal"
-        >
-          <defs>
-            <clipPath id="piece-old-1">
-              <path d="M0,0 H275 L245,205 H0 Z"></path>
-            </clipPath>
+    <div class="testament-puzzle-stage scripture-card-stage">
+      <div class="scripture-card-fan" id="testamentPuzzleWrap" aria-label="Explore Scripture story cards">
+        <a class="scripture-story-card eden-card" href="books/index.html#genesis" style="--card-image: url('assets/card-eden.png'); --x: clamp(-360px, -30vw, -150px); --y: 46px; --r: -15deg; --delay: 0.02s;">
+          <span class="card-era">Genesis 1–3</span>
+          <strong>Eden</strong>
+          <em>Creation, rebellion, and the first promise of redemption.</em>
+          <span class="card-link">Read more →</span>
+        </a>
 
-            <clipPath id="piece-old-2">
-              <path d="M0,205 H245 L275,430 H0 Z"></path>
-            </clipPath>
+        <a class="scripture-story-card noah-card" href="books/index.html#genesis" style="--card-image: url('assets/card-noah.png'); --x: clamp(-270px, -22vw, -112px); --y: 24px; --r: -10deg; --delay: 0.08s;">
+          <span class="card-era">Genesis 6–9</span>
+          <strong>Noah</strong>
+          <em>Judgment, mercy, covenant, and a family carried through water.</em>
+          <span class="card-link">Read more →</span>
+        </a>
 
-            <clipPath id="piece-old-3">
-              <path d="M245,0 H585 L555,430 H275 Z"></path>
-            </clipPath>
+        <a class="scripture-story-card abraham-card" href="books/index.html#genesis" style="--card-image: url('assets/card-abraham.png'); --x: clamp(-180px, -14vw, -72px); --y: 10px; --r: -6deg; --delay: 0.14s;">
+          <span class="card-era">Genesis 12–25</span>
+          <strong>Abraham</strong>
+          <em>A promise leaves Mesopotamia and becomes a people.</em>
+          <span class="card-link">Read more →</span>
+        </a>
 
-            <clipPath id="piece-new-1">
-              <path d="M585,0 H905 L875,430 H555 Z"></path>
-            </clipPath>
+        <a class="scripture-story-card moses-card" href="books/index.html#exodus" style="--card-image: url('assets/card-moses.png'); --x: clamp(-82px, -6vw, -28px); --y: 0px; --r: -2deg; --delay: 0.20s;">
+          <span class="card-era">Exodus</span>
+          <strong>Moses</strong>
+          <em>Deliverance from Egypt and the forming of Israel by covenant.</em>
+          <span class="card-link">Read more →</span>
+        </a>
 
-            <clipPath id="piece-new-2">
-              <path d="M905,0 H1200 V430 H875 Z"></path>
-            </clipPath>
-          </defs>
+        <a class="scripture-story-card david-card" href="books/index.html#1-samuel" style="--card-image: url('assets/card-david.png'); --x: clamp(82px, 6vw, 28px); --y: 0px; --r: 2deg; --delay: 0.26s;">
+          <span class="card-era">1–2 Samuel</span>
+          <strong>David</strong>
+          <em>A shepherd becomes king, and the royal promise begins pointing forward.</em>
+          <span class="card-link">Read more →</span>
+        </a>
 
-          <g class="svg-piece old-piece piece-1" data-modal-target="oldTestamentModal">
-            <g clip-path="url(#piece-old-1)">
-              <rect x="0" y="0" width="1200" height="430" fill="#0b0f19"></rect>
-              <image href="assets/old-puzzle-1.png" x="0" y="0" width="275" height="205" preserveAspectRatio="xMidYMid slice"></image>
-              <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
-              <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
-            </g>
-            <path class="piece-stroke" d="M0,0 H275 L245,205 H0 Z"></path>
-          </g>
+        <a class="scripture-story-card bethlehem-card" href="books/index.html#matthew" style="--card-image: url('assets/card-bethlehem.png'); --x: clamp(180px, 14vw, 72px); --y: 10px; --r: 6deg; --delay: 0.32s;">
+          <span class="card-era">Matthew / Luke</span>
+          <strong>Bethlehem</strong>
+          <em>The promise steps into history through the birth of Christ.</em>
+          <span class="card-link">Read more →</span>
+        </a>
 
-          <g class="svg-piece old-piece piece-2" data-modal-target="oldTestamentModal">
-            <g clip-path="url(#piece-old-2)">
-              <image href="assets/old-puzzle-2.png" x="0" y="205" width="275" height="225" preserveAspectRatio="xMidYMid slice"></image>
-              <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
-              <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
-            </g>
-            <path class="piece-stroke" d="M0,205 H245 L275,430 H0 Z"></path>
-          </g>
+        <a class="scripture-story-card cross-card" href="books/index.html#john" style="--card-image: url('assets/card-cross.png'); --x: clamp(270px, 22vw, 112px); --y: 24px; --r: 10deg; --delay: 0.38s;">
+          <span class="card-era">John 19–20</span>
+          <strong>The Cross</strong>
+          <em>Death, resurrection, and the center point of the gospel story.</em>
+          <span class="card-link">Read more →</span>
+        </a>
 
-          <g class="svg-piece old-piece piece-3" data-modal-target="oldTestamentModal">
-            <g clip-path="url(#piece-old-3)">
-              <image href="assets/old-puzzle-3.png" x="0" y="0" width="1450" height="430" preserveAspectRatio="xMinYMid slice"></image>
-              <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
-              <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
-            </g>
-            <path class="piece-stroke" d="M245,0 H585 L555,430 H275 Z"></path>
-          </g>
-
-          <g class="svg-piece new-piece piece-4" data-modal-target="newTestamentModal">
-            <g clip-path="url(#piece-new-1)">
-              <image href="assets/new-puzzle-1.png" x="555" y="0" width="350" height="430" preserveAspectRatio="xMidYMid slice"></image>
-              <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
-              <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
-            </g>
-            <path class="piece-stroke" d="M585,0 H905 L875,430 H555 Z"></path>
-          </g>
-
-          <g class="svg-piece new-piece piece-5" data-modal-target="newTestamentModal">
-            <g clip-path="url(#piece-new-2)">
-              <image href="assets/new-puzzle-2.png" x="880" y="0" width="355" height="430" preserveAspectRatio="xMidYMin slice"></image>
-              <rect x="0" y="0" width="1200" height="430" fill="rgba(8,12,22,0.42)"></rect>
-              <text class="svg-piece-word" x="600" y="245" text-anchor="middle">TESTAMENT</text>
-            </g>
-            <path class="piece-stroke" d="M905,0 H1200 V430 H875 Z"></path>
-          </g>
-        </svg>
+        <a class="scripture-story-card acts-card" href="books/index.html#acts" style="--card-image: url('assets/card-acts.png'); --x: clamp(360px, 30vw, 150px); --y: 46px; --r: 15deg; --delay: 0.44s;">
+          <span class="card-era">Acts</span>
+          <strong>The Church</strong>
+          <em>The message moves from Jerusalem into the nations.</em>
+          <span class="card-link">Read more →</span>
+        </a>
       </div>
     </div>
   </section>
@@ -2926,7 +3229,7 @@
   <section class="landing-followup-bars premium-reveal" aria-label="Bible Mapped features">
     <a class="landing-followup-bar heaven-test-bar" href="qa/index.html">Heaven Test</a>
 
-    <h2 class="landing-followup-bar watch-videos-bar">Watch Videos</h2>
+    <h2 class="landing-followup-bar watch-videos-bar">Watch More Videos</h2>
 
     <div class="watch-videos-stage">
       <div class="watch-videos-marquee">
@@ -2987,14 +3290,6 @@
     </div>
 
     <a class="landing-followup-bar read-bible-bar" href="books/index.html">Read the Bible</a>
-
-    <section class="bible-mood-slot" aria-labelledby="bibleMoodTitle">
-      <h2 id="bibleMoodTitle">How are you feeling today?</h2>
-    </section>
-
-    <a class="heaven-question-slot" href="qa/index.html" aria-labelledby="heavenQuestionTitle">
-      <h2 id="heavenQuestionTitle">How can I go to heaven?</h2>
-    </a>
   </section>
 
   <div class="modal-overlay" id="oldTestamentModal" aria-hidden="true">
