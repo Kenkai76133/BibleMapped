@@ -2975,6 +2975,230 @@
       }
     }
 
+
+    /* =========================================================
+       LUX PATCH 2 — refined hero, bigger story cards,
+       slower card text reveal, scroll fan/retract behavior,
+       taller About bar, and larger Watch More Videos title.
+    ========================================================= */
+
+    .landing-start .hero {
+      overflow: visible !important;
+      padding-top: calc(var(--nav-height) + clamp(28px, 4.4vw, 62px)) !important;
+      padding-bottom: clamp(150px, 18vw, 242px) !important;
+    }
+
+    .landing-start .hero h1 {
+      max-width: min(780px, calc(100vw - 40px)) !important;
+      margin-top: clamp(6px, 1.6vw, 20px) !important;
+      font-size: clamp(1.28rem, 2.05vw, 2.42rem) !important;
+      line-height: 1.08 !important;
+      letter-spacing: 0.012em !important;
+      font-weight: 800 !important;
+      white-space: normal !important;
+      text-wrap: balance !important;
+    }
+
+    .landing-start .hero-actions {
+      position: absolute !important;
+      left: 50% !important;
+      bottom: 0 !important;
+      z-index: 18 !important;
+      margin-top: 0 !important;
+      transform: translate(-50%, 54%) !important;
+    }
+
+    .landing-start .btn-start {
+      min-height: 72px !important;
+      padding-inline: clamp(46px, 5.4vw, 78px) !important;
+    }
+
+    .hero + .testament-puzzle-section {
+      padding-top: clamp(92px, 9vw, 132px) !important;
+    }
+
+    .scripture-card-stage,
+    .testament-puzzle-stage.scripture-card-stage {
+      width: min(1440px, 100%) !important;
+      margin: clamp(30px, 4vw, 58px) auto 0 !important;
+      padding-inline: clamp(14px, 3vw, 34px) !important;
+      padding-bottom: 0 !important;
+    }
+
+    .scripture-card-fan {
+      width: min(1320px, 100%) !important;
+      min-height: clamp(555px, 50vw, 690px) !important;
+      transform: translateY(34px) scale(0.985) !important;
+      transition:
+        opacity 900ms ease,
+        transform 1550ms cubic-bezier(0.16, 0.9, 0.22, 1) !important;
+    }
+
+    .scripture-card-fan.in-view {
+      transform: translateY(0) scale(1) !important;
+    }
+
+    .scripture-story-card {
+      width: clamp(214px, 19.4vw, 302px) !important;
+      min-height: clamp(360px, 33vw, 482px) !important;
+      padding: clamp(16px, 1.8vw, 22px) !important;
+      border-radius: 20px !important;
+      transition:
+        opacity 980ms ease var(--delay),
+        transform 1500ms cubic-bezier(0.16, 0.9, 0.22, 1),
+        box-shadow 820ms ease,
+        filter 820ms ease !important;
+    }
+
+    .scripture-card-fan.in-view .scripture-story-card {
+      transform: translate(-50%, -50%) translateX(var(--x)) translateY(var(--y)) rotate(var(--r)) scale(1) !important;
+    }
+
+    .scripture-card-fan.scroll-retracted .scripture-story-card {
+      opacity: 0.98 !important;
+      transform: translate(-50%, -50%) translateX(calc(var(--x) * 0.16)) translateY(calc(var(--y) + 20px)) rotate(0deg) scale(0.965) !important;
+    }
+
+    .scripture-card-fan.scroll-fanned.in-view .scripture-story-card {
+      transform: translate(-50%, -50%) translateX(var(--x)) translateY(var(--y)) rotate(var(--r)) scale(1) !important;
+    }
+
+    .scripture-story-card:hover,
+    .scripture-story-card:focus-visible {
+      transform: translate(-50%, -50%) translateX(var(--x)) translateY(calc(var(--y) - 20px)) rotate(var(--r)) scale(1.035) !important;
+    }
+
+    .scripture-story-card.card-clicked {
+      transform: translate(-50%, -50%) translateX(var(--x)) translateY(calc(var(--y) - 22px)) rotate(var(--r)) scale(1.025) !important;
+    }
+
+    .card-era {
+      max-width: 100% !important;
+      font-size: clamp(0.54rem, 0.72vw, 0.72rem) !important;
+      letter-spacing: 0.135em !important;
+      white-space: normal !important;
+      overflow-wrap: anywhere !important;
+    }
+
+    .scripture-story-card strong {
+      max-width: 100% !important;
+      font-size: clamp(1.55rem, 2.42vw, 2.65rem) !important;
+      line-height: 0.96 !important;
+      letter-spacing: -0.042em !important;
+      overflow-wrap: normal !important;
+      word-break: normal !important;
+      text-wrap: balance !important;
+    }
+
+    .crucifixion-card strong {
+      font-size: clamp(1.24rem, 1.9vw, 2.12rem) !important;
+      line-height: 0.98 !important;
+      letter-spacing: -0.038em !important;
+    }
+
+    .king-jesus-card strong {
+      font-size: clamp(1.48rem, 2.28vw, 2.5rem) !important;
+    }
+
+    .scripture-story-card em,
+    .scripture-story-card .card-link {
+      transition:
+        max-height 920ms cubic-bezier(0.16, 0.9, 0.22, 1),
+        opacity 780ms ease,
+        transform 920ms cubic-bezier(0.16, 0.9, 0.22, 1) !important;
+    }
+
+    #about-biblemapped {
+      padding-top: 0 !important;
+      margin-top: 0 !important;
+      background: var(--cloud) !important;
+    }
+
+    .about-mapped-toggle {
+      min-height: clamp(154px, 17vw, 248px) !important;
+      padding: clamp(38px, 5vw, 74px) 20px !important;
+      font-size: clamp(3.05rem, 7vw, 6.15rem) !important;
+      line-height: 0.96 !important;
+    }
+
+    .watch-videos-bar {
+      min-height: clamp(96px, 10vw, 152px) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      font-family: Inter, Arial, Helvetica, sans-serif !important;
+      font-size: clamp(1.95rem, 3.75vw, 4.35rem) !important;
+      font-weight: 950 !important;
+      letter-spacing: 0.055em !important;
+      line-height: 0.95 !important;
+      text-transform: uppercase !important;
+      background: var(--cloud) !important;
+    }
+
+    @media (max-width: 920px) {
+      .scripture-card-fan {
+        min-height: 790px !important;
+      }
+
+      .scripture-story-card {
+        width: min(45vw, 276px) !important;
+      }
+
+      .crucifixion-card strong {
+        font-size: clamp(1.18rem, 2.9vw, 1.85rem) !important;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .landing-start .hero {
+        padding-top: calc(var(--nav-height) + 26px) !important;
+        padding-bottom: 142px !important;
+      }
+
+      .landing-start .hero h1 {
+        max-width: min(440px, calc(100vw - 34px)) !important;
+        font-size: clamp(1rem, 4.8vw, 1.48rem) !important;
+      }
+
+      .landing-start .hero-actions {
+        bottom: 0 !important;
+        transform: translate(-50%, 50%) !important;
+      }
+
+      .hero + .testament-puzzle-section {
+        padding-top: 96px !important;
+      }
+
+      .scripture-card-fan {
+        min-height: 1110px !important;
+      }
+
+      .scripture-story-card {
+        width: min(82vw, 304px) !important;
+        min-height: 390px !important;
+      }
+
+      .scripture-card-fan.in-view .scripture-story-card:nth-child(1) { transform: translate(-50%, -50%) translateX(-88px) translateY(-338px) rotate(-6deg) scale(1) !important; }
+      .scripture-card-fan.in-view .scripture-story-card:nth-child(2) { transform: translate(-50%, -50%) translateX(88px) translateY(-258px) rotate(5deg) scale(1) !important; }
+      .scripture-card-fan.in-view .scripture-story-card:nth-child(3) { transform: translate(-50%, -50%) translateX(-88px) translateY(-172px) rotate(-5deg) scale(1) !important; }
+      .scripture-card-fan.in-view .scripture-story-card:nth-child(4) { transform: translate(-50%, -50%) translateX(88px) translateY(-86px) rotate(5deg) scale(1) !important; }
+      .scripture-card-fan.in-view .scripture-story-card:nth-child(5) { transform: translate(-50%, -50%) translateX(-88px) translateY(0px) rotate(-5deg) scale(1) !important; }
+
+      .scripture-card-fan.scroll-retracted .scripture-story-card {
+        transform: translate(-50%, -50%) translateX(0) translateY(-132px) rotate(0deg) scale(0.955) !important;
+      }
+
+      .about-mapped-toggle {
+        min-height: clamp(142px, 34vw, 210px) !important;
+        font-size: clamp(2.65rem, 12vw, 4.4rem) !important;
+      }
+
+      .watch-videos-bar {
+        font-size: clamp(1.55rem, 7.2vw, 2.8rem) !important;
+        min-height: 108px !important;
+      }
+    }
+
 </style>
 </head>
 
@@ -3046,38 +3270,38 @@
 
     <div class="testament-puzzle-stage scripture-card-stage">
       <div class="scripture-card-fan" id="testamentPuzzleWrap" aria-label="Explore Scripture story cards">
-        <a class="scripture-story-card eden-card" href="books/index.html#genesis" style="--card-image: url('assets/old-puzzle-1.png'); --x: clamp(-330px, -26vw, -118px); --y: 48px; --r: -13deg; --delay: 0.02s;">
+        <a class="scripture-story-card eden-card" href="books/index.html#genesis" style="--card-image: url('assets/old-puzzle-1.png'); --x: clamp(-380px, -29vw, -135px); --y: 42px; --r: -13deg; --delay: 0.02s;">
           <span class="card-era">Genesis 1-3</span>
           <strong>Eden</strong>
           <em>Creation, rebellion, and the first promise of redemption.</em>
           <span class="card-link">Read more -></span>
         </a>
 
-        <a class="scripture-story-card abraham-card" href="books/index.html#genesis" style="--card-image: url('assets/old-puzzle-2.png'); --x: clamp(-170px, -13vw, -62px); --y: 18px; --r: -6deg; --delay: 0.10s;">
-          <span class="card-era">Genesis 12-25</span>
-          <strong>Abraham</strong>
-          <em>A promise leaves Mesopotamia and becomes a people.</em>
+        <a class="scripture-story-card job-card" href="books/index.html#job" style="--card-image: url('assets/old-puzzle-2.png'); --x: clamp(-200px, -15vw, -74px); --y: 10px; --r: -6deg; --delay: 0.14s;">
+          <span class="card-era">Job 1-42</span>
+          <strong>Job</strong>
+          <em>Suffering, worship, and the question of trusting God when the map goes dark.</em>
           <span class="card-link">Read more -></span>
         </a>
 
-        <a class="scripture-story-card moses-card" href="books/index.html#exodus" style="--card-image: url('assets/old-puzzle-3.png'); --x: 0px; --y: 0px; --r: 0deg; --delay: 0.18s;">
+        <a class="scripture-story-card moses-card" href="books/index.html#exodus" style="--card-image: url('assets/old-puzzle-3.png'); --x: 0px; --y: -6px; --r: 0deg; --delay: 0.26s;">
           <span class="card-era">Exodus</span>
           <strong>Moses</strong>
           <em>Deliverance from Egypt and the forming of Israel by covenant.</em>
           <span class="card-link">Read more -></span>
         </a>
 
-        <a class="scripture-story-card david-card" href="books/index.html#1-samuel" style="--card-image: url('assets/new-puzzle-1.png'); --x: clamp(170px, 13vw, 62px); --y: 18px; --r: 6deg; --delay: 0.26s;">
-          <span class="card-era">1-2 Samuel</span>
-          <strong>David</strong>
-          <em>A shepherd becomes king, and the royal promise begins pointing forward.</em>
+        <a class="scripture-story-card crucifixion-card" href="books/index.html#matthew" style="--card-image: url('assets/new-puzzle-1.png'); --x: clamp(200px, 15vw, 74px); --y: 10px; --r: 6deg; --delay: 0.38s;">
+          <span class="card-era">Matthew 27</span>
+          <strong>The Crucifixion</strong>
+          <em>The promised King is lifted up, and the story turns at the cross.</em>
           <span class="card-link">Read more -></span>
         </a>
 
-        <a class="scripture-story-card bethlehem-card" href="books/index.html#matthew" style="--card-image: url('assets/new-puzzle-2.png'); --x: clamp(330px, 26vw, 118px); --y: 48px; --r: 13deg; --delay: 0.34s;">
-          <span class="card-era">Matthew / Luke</span>
-          <strong>Bethlehem</strong>
-          <em>The promise steps into history through the birth of Christ.</em>
+        <a class="scripture-story-card king-jesus-card" href="books/index.html#revelation" style="--card-image: url('assets/new-puzzle-2.png'); --x: clamp(380px, 29vw, 135px); --y: 42px; --r: 13deg; --delay: 0.50s;">
+          <span class="card-era">Revelation 19</span>
+          <strong>King Jesus</strong>
+          <em>The risen Christ reigns, and history is moving toward His kingdom.</em>
           <span class="card-link">Read more -></span>
         </a>
       </div>
@@ -3999,9 +4223,49 @@
         window.setTimeout(() => {
           card.classList.remove("card-clicked");
           clickLocked = false;
-        }, 520);
+        }, 880);
       });
     });
+
+
+
+    const scriptureFan = document.querySelector(".scripture-card-fan");
+
+    if (scriptureFan && !reduceMotion.matches) {
+      let lastCardScrollY = window.scrollY;
+      let cardFanTicking = false;
+
+      function updateStoryCardFanByScroll() {
+        const currentScrollY = window.scrollY;
+        const delta = currentScrollY - lastCardScrollY;
+        const rect = scriptureFan.getBoundingClientRect();
+        const fanIsNearViewport = rect.top < window.innerHeight + 260 && rect.bottom > -260;
+
+        if (fanIsNearViewport && Math.abs(delta) > 3) {
+          if (delta > 0) {
+            scriptureFan.classList.add("scroll-fanned");
+            scriptureFan.classList.remove("scroll-retracted");
+          } else {
+            scriptureFan.classList.add("scroll-retracted");
+            scriptureFan.classList.remove("scroll-fanned");
+          }
+        }
+
+        lastCardScrollY = currentScrollY;
+        cardFanTicking = false;
+      }
+
+      function requestStoryCardFanUpdate() {
+        if (!cardFanTicking) {
+          window.requestAnimationFrame(updateStoryCardFanByScroll);
+          cardFanTicking = true;
+        }
+      }
+
+      scriptureFan.classList.add("scroll-fanned");
+      window.addEventListener("scroll", requestStoryCardFanUpdate, { passive: true });
+      window.addEventListener("resize", requestStoryCardFanUpdate);
+    }
 
     const parallaxItems = document.querySelectorAll(".parallax-item");
     let ticking = false;
