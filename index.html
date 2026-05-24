@@ -3688,7 +3688,8 @@
     }
 
     .hero::before {
-      background-position: center 72% !important;
+      background-size: 100% auto !important;
+      background-position: center clamp(15.5rem, 23vw, 20rem) !important;
     }
 
     .hero-inner {
@@ -3702,13 +3703,14 @@
 
     .landing-start .hero-copy {
       position: static !important;
+      transform: none !important;
     }
 
     .landing-start .hero-actions {
       position: absolute !important;
       left: 50% !important;
       bottom: clamp(0.8rem, 2.5vw, 2rem) !important;
-      transform: translateX(-50%) !important;
+      transform: translate(-50%, clamp(0.4rem, 1.2vw, 1rem)) !important;
       margin-top: 0 !important;
       z-index: 5 !important;
     }
@@ -3743,6 +3745,11 @@
 
       .landing-start .hero-actions {
         bottom: clamp(0.75rem, 4vw, 1.5rem) !important;
+      }
+
+      .hero::before {
+        background-size: 180% auto !important;
+        background-position: center clamp(15rem, 45vw, 18rem) !important;
       }
     }
 
