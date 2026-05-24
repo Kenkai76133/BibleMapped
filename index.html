@@ -3688,11 +3688,29 @@
     }
 
     .hero::before {
-      background-position: center 44% !important;
+      background-position: center 72% !important;
     }
 
     .hero-inner {
       z-index: 4 !important;
+    }
+
+    .hero-what-if {
+      font-family: Didot, "Bodoni 72", "Bodoni MT", Georgia, "Times New Roman", serif;
+      font-weight: 700;
+    }
+
+    .landing-start .hero-copy {
+      position: static !important;
+    }
+
+    .landing-start .hero-actions {
+      position: absolute !important;
+      left: 50% !important;
+      bottom: clamp(0.8rem, 2.5vw, 2rem) !important;
+      transform: translateX(-50%) !important;
+      margin-top: 0 !important;
+      z-index: 5 !important;
     }
 
     .hero + .testament-puzzle-section {
@@ -3721,6 +3739,10 @@
 
       .hero + .testament-puzzle-section {
         padding-top: clamp(1rem, 6vw, 2.5rem) !important;
+      }
+
+      .landing-start .hero-actions {
+        bottom: clamp(0.75rem, 4vw, 1.5rem) !important;
       }
     }
 
@@ -3767,7 +3789,7 @@
   <section class="hero">
     <div class="hero-inner">
       <div class="hero-copy parallax-item" data-speed="-0.012">
-        <h1>What if we could see the Bible where it happened?</h1>
+        <h1><span class="hero-what-if">What if</span> we could see the Bible where it happened?</h1>
 
         <p>
           Bible Mapped helps Christians and seekers follow Scripture through real places,
@@ -3776,9 +3798,9 @@
         </p>
 
         <div class="hero-actions">
-          <button class="btn btn-start" type="button" id="startHereButton" aria-controls="testaments">
+          <a class="btn btn-start" href="books/index.html">
             Start Here
-          </button>
+          </a>
         </div>
       </div>
     </div>
