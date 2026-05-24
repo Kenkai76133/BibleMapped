@@ -3680,100 +3680,47 @@
       }
     }
 
-    /* Editorial hero headline composition */
-    .landing-start .hero h1.hero-title {
-      width: min(100%, 1180px) !important;
-      max-width: min(100%, 1180px) !important;
-      margin: clamp(0.5rem, 2vh, 1.5rem) auto 0 !important;
-      display: grid !important;
-      justify-items: center !important;
-      gap: clamp(0.02em, 0.45vw, 0.16em) !important;
-      color: var(--gunmetal) !important;
-      font-family: Georgia, "Times New Roman", serif !important;
-      font-weight: 950 !important;
-      line-height: 0.82 !important;
-      letter-spacing: 0 !important;
-      text-align: center !important;
-      text-wrap: balance !important;
+    /* Flow and hover polish */
+    .landing-start .hero {
+      min-height: clamp(460px, 70svh, 720px) !important;
+      padding-top: calc(var(--nav-height) + clamp(1.4rem, 4vw, 3rem)) !important;
+      padding-bottom: clamp(2rem, 5vw, 4.5rem) !important;
+    }
+
+    .hero::before {
+      background-position: center 44% !important;
+    }
+
+    .hero-inner {
+      z-index: 4 !important;
+    }
+
+    .hero + .testament-puzzle-section {
+      padding-top: clamp(1.25rem, 3.2vw, 3rem) !important;
+    }
+
+    .landing-followup-bar:hover,
+    .landing-followup-bar:focus-visible,
+    .heaven-test-bar:hover,
+    .heaven-test-bar:focus-visible,
+    .read-bible-bar:hover,
+    .read-bible-bar:focus-visible {
       transform: none !important;
-    }
-
-    .hero-title-line {
-      display: flex;
-      align-items: baseline;
-      justify-content: center;
-      gap: clamp(0.22rem, 1.4vw, 1.25rem);
-      width: 100%;
-      min-width: 0;
-    }
-
-    .hero-title-line,
-    .hero-title-word {
-      white-space: nowrap;
-    }
-
-    .hero-title-if {
-      font-size: clamp(5.8rem, 13.8vw, 13.25rem) !important;
-      letter-spacing: -0.045em !important;
-    }
-
-    .hero-title-could {
-      font-size: clamp(3.2rem, 7.25vw, 7rem) !important;
-      letter-spacing: -0.02em !important;
-    }
-
-    .hero-title-see {
-      font-size: clamp(3.95rem, 9.1vw, 8.8rem) !important;
-      letter-spacing: -0.03em !important;
-    }
-
-    .hero-title-bible {
-      font-size: clamp(6.8rem, 16.2vw, 15.5rem) !important;
-      letter-spacing: -0.055em !important;
-      line-height: 0.76 !important;
-    }
-
-    .hero-title-where {
-      font-size: clamp(3.45rem, 7.9vw, 7.6rem) !important;
-      letter-spacing: -0.025em !important;
-      line-height: 0.92 !important;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.72),
+        inset 0 -1px 0 rgba(11, 15, 25, 0.08),
+        0 14px 34px rgba(11, 15, 25, 0.08) !important;
     }
 
     @media (max-width: 768px) {
-      .landing-start .hero h1.hero-title {
-        width: min(100%, 720px) !important;
-        gap: 0.08em !important;
+      .landing-start .hero {
+        min-height: clamp(390px, 62svh, 540px) !important;
+        padding-top: calc(var(--nav-height) + clamp(1rem, 5vw, 2rem)) !important;
+        padding-bottom: clamp(1.5rem, 7vw, 3rem) !important;
       }
 
-      .hero-title-if {
-        font-size: clamp(3.6rem, 18vw, 7.8rem) !important;
-      }
-
-      .hero-title-could {
-        font-size: clamp(2.05rem, 9.8vw, 4.1rem) !important;
-      }
-
-      .hero-title-see {
-        font-size: clamp(2.65rem, 12.8vw, 5.35rem) !important;
-      }
-
-      .hero-title-bible {
-        font-size: clamp(4.55rem, 23.5vw, 9.1rem) !important;
-      }
-
-      .hero-title-where {
-        font-size: clamp(2.35rem, 11.5vw, 5rem) !important;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .landing-start .hero h1.hero-title {
-        width: min(100%, 420px) !important;
-        gap: 0.1em !important;
-      }
-
-      .hero-title-line {
-        gap: clamp(0.16rem, 1.5vw, 0.5rem);
+      .hero + .testament-puzzle-section {
+        padding-top: clamp(1rem, 6vw, 2.5rem) !important;
       }
     }
 
@@ -3820,21 +3767,7 @@
   <section class="hero">
     <div class="hero-inner">
       <div class="hero-copy parallax-item" data-speed="-0.012">
-        <h1 class="hero-title">
-          <span class="hero-title-line hero-title-line-top">
-            <span class="hero-title-word hero-title-if">What if</span>
-            <span class="hero-title-word hero-title-could">we could</span>
-          </span>
-          <span class="hero-title-line">
-            <span class="hero-title-word hero-title-see">see the</span>
-          </span>
-          <span class="hero-title-line">
-            <span class="hero-title-word hero-title-bible">Bible</span>
-          </span>
-          <span class="hero-title-line">
-            <span class="hero-title-word hero-title-where">where it happened?</span>
-          </span>
-        </h1>
+        <h1>What if we could see the Bible where it happened?</h1>
 
         <p>
           Bible Mapped helps Christians and seekers follow Scripture through real places,
@@ -4050,7 +3983,7 @@
   </section>
 
   <section class="landing-followup-bars premium-reveal" aria-label="Bible Mapped features">
-    <a class="landing-followup-bar heaven-test-bar" href="qa/index.html">Heaven Test</a>
+    <a class="landing-followup-bar heaven-test-bar" href="qa/index.html">How is your day?</a>
 
     <a class="landing-followup-bar read-bible-bar" href="books/index.html">Read the Bible</a>
 
