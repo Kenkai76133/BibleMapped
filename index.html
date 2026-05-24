@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Bible Mapped</title>
 
@@ -34,7 +34,9 @@
       --shadow-soft: 0 24px 80px rgba(11, 15, 25, 0.14);
     }
 
-    * {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
     }
 
@@ -48,7 +50,7 @@
       font-family: Inter, Arial, Helvetica, sans-serif;
       background: var(--cloud);
       color: var(--ink);
-      overflow-x: hidden;
+      overflow-x: clip;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
     }
@@ -57,9 +59,20 @@
       overflow: hidden;
     }
 
-    img {
+    img,
+    video,
+    svg,
+    canvas,
+    iframe {
       max-width: 100%;
+      height: auto;
       display: block;
+    }
+
+    .container,
+    .site-container {
+      width: min(100% - 2rem, 1200px);
+      margin-inline: auto;
     }
 
     a {
@@ -389,7 +402,7 @@
     }
 
     .landing-start .hero h1 {
-      max-width: min(1420px, calc(100vw - 40px));
+      max-width: min(1420px, calc(100% - 40px));
       font-size: clamp(2.6rem, 5vw, 5.35rem);
       line-height: 0.96;
       white-space: nowrap;
@@ -990,16 +1003,16 @@
     .about-panel-formula {
       grid-column: 1 / -1;
       margin-top: clamp(28px, 4vw, 52px);
-      width: 100vw;
-      margin-left: calc(50% - 50vw);
-      margin-right: calc(50% - 50vw);
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
     }
 
     .about-sub-bars {
       grid-column: 1 / -1;
-      width: 100vw;
-      margin-left: calc(50% - 50vw);
-      margin-right: calc(50% - 50vw);
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
       margin-top: clamp(24px, 4vw, 48px);
       display: grid;
       gap: 14px;
@@ -2102,7 +2115,7 @@
         position: fixed;
         top: 76px;
         left: 50%;
-        width: min(260px, calc(100vw - 28px));
+        width: min(260px, calc(100% - 28px));
         transform: translate(-50%, 8px);
       }
 
@@ -2429,7 +2442,7 @@
     }
 
     #aboutMappedPanel .formula-art-frame {
-      width: 100vw !important;
+      width: 100% !important;
       max-width: none !important;
       margin: 0 0 -1px 0 !important;
       padding: 0 !important;
@@ -2946,7 +2959,7 @@
     }
 
     .landing-start .hero h1 {
-      max-width: min(720px, calc(100vw - 40px)) !important;
+      max-width: min(720px, calc(100% - 40px)) !important;
       margin-top: clamp(8px, 2vw, 24px) !important;
       font-size: clamp(1.1rem, 2.4vw, 2rem) !important;
       line-height: 1.15 !important;
@@ -2971,7 +2984,7 @@
       }
 
       .landing-start .hero h1 {
-        max-width: min(420px, calc(100vw - 34px)) !important;
+        max-width: min(420px, calc(100% - 34px)) !important;
         font-size: clamp(1rem, 5vw, 1.55rem) !important;
       }
 
@@ -3000,7 +3013,7 @@
     }
 
     .landing-start .hero h1 {
-      max-width: min(780px, calc(100vw - 40px)) !important;
+      max-width: min(780px, calc(100% - 40px)) !important;
       margin-top: clamp(6px, 1.6vw, 20px) !important;
       font-size: clamp(1.28rem, 2.05vw, 2.42rem) !important;
       line-height: 1.08 !important;
@@ -3167,7 +3180,7 @@
       }
 
       .landing-start .hero h1 {
-        max-width: min(440px, calc(100vw - 34px)) !important;
+        max-width: min(440px, calc(100% - 34px)) !important;
         font-size: clamp(1rem, 4.8vw, 1.48rem) !important;
       }
 
@@ -3218,7 +3231,7 @@
     ========================================================= */
 
     .landing-start .hero h1 {
-      max-width: min(1240px, calc(100vw - clamp(140px, 14vw, 260px))) !important;
+      max-width: min(1240px, calc(100% - clamp(140px, 14vw, 260px))) !important;
       width: 100% !important;
       margin-left: auto !important;
       margin-right: auto !important;
@@ -3233,14 +3246,14 @@
 
     @media (max-width: 980px) {
       .landing-start .hero h1 {
-        max-width: min(760px, calc(100vw - 72px)) !important;
+        max-width: min(760px, calc(100% - 72px)) !important;
         font-size: clamp(1.45rem, 4.2vw, 2.55rem) !important;
       }
     }
 
     @media (max-width: 720px) {
       .landing-start .hero h1 {
-        max-width: min(520px, calc(100vw - 34px)) !important;
+        max-width: min(520px, calc(100% - 34px)) !important;
         font-size: clamp(1.16rem, 5.6vw, 1.82rem) !important;
         line-height: 1.08 !important;
       }
@@ -3253,11 +3266,11 @@
     ========================================================= */
 
     .landing-start .hero h1 {
-      max-width: min(1480px, calc(100vw - clamp(52px, 6vw, 112px))) !important;
+      max-width: min(1480px, calc(100% - clamp(52px, 6vw, 112px))) !important;
       font-size: clamp(1.85rem, 3.45vw, 4.25rem) !important;
       line-height: 1.02 !important;
       letter-spacing: 0.018em !important;
-      transform: scaleX(1.06) !important;
+      transform: none !important;
       transform-origin: center center !important;
     }
 
@@ -3270,18 +3283,18 @@
 
     @media (max-width: 980px) {
       .landing-start .hero h1 {
-        max-width: min(900px, calc(100vw - 42px)) !important;
+        max-width: min(900px, calc(100% - 42px)) !important;
         font-size: clamp(1.62rem, 5vw, 3rem) !important;
-        transform: scaleX(1.035) !important;
+        transform: none !important;
       }
     }
 
     @media (max-width: 720px) {
       .landing-start .hero h1 {
-        max-width: min(620px, calc(100vw - 26px)) !important;
+        max-width: min(620px, calc(100% - 26px)) !important;
         font-size: clamp(1.22rem, 6.6vw, 2.05rem) !important;
         line-height: 1.05 !important;
-        transform: scaleX(1.015) !important;
+        transform: none !important;
       }
 
       .landing-start .btn-start {
@@ -3323,12 +3336,12 @@
 
     /* Widen the hero question so the text reaches closer to the left/right dots */
     .landing-start .hero h1 {
-      max-width: min(1420px, calc(100vw - clamp(120px, 10vw, 210px))) !important;
+      max-width: min(1420px, calc(100% - clamp(120px, 10vw, 210px))) !important;
       width: 100% !important;
       font-size: clamp(2rem, 4.45vw, 5.45rem) !important;
       line-height: 0.98 !important;
       letter-spacing: clamp(0.055em, 0.42vw, 0.14em) !important;
-      transform: scaleX(1.08) !important;
+      transform: none !important;
       transform-origin: center center !important;
       text-align: center !important;
       text-wrap: balance !important;
@@ -3367,20 +3380,20 @@
 
     @media (max-width: 980px) {
       .landing-start .hero h1 {
-        max-width: min(900px, calc(100vw - 48px)) !important;
+        max-width: min(900px, calc(100% - 48px)) !important;
         font-size: clamp(1.55rem, 5.4vw, 3.25rem) !important;
         letter-spacing: 0.055em !important;
-        transform: scaleX(1.035) !important;
+        transform: none !important;
       }
     }
 
     @media (max-width: 720px) {
       .landing-start .hero h1 {
-        max-width: min(640px, calc(100vw - 24px)) !important;
+        max-width: min(640px, calc(100% - 24px)) !important;
         font-size: clamp(1.22rem, 7vw, 2.12rem) !important;
         line-height: 1.04 !important;
         letter-spacing: 0.026em !important;
-        transform: scaleX(1.01) !important;
+        transform: none !important;
       }
 
       #aboutMappedPanel .formula-art-frame.words-in-view .formula-question:hover,
@@ -3397,6 +3410,274 @@
     .scripture-card-fan.scroll-fanned.scroll-retracted .scripture-story-card {
       opacity: 1 !important;
       transform: translate(-50%, -50%) translateX(var(--x)) translateY(var(--y)) rotate(var(--r)) scale(1) !important;
+    }
+
+    /* =========================================================
+       RESPONSIVE STABILITY LAYER
+       Constrains existing visuals so zoom and narrow viewports
+       scale without overlap or horizontal overflow.
+    ========================================================= */
+
+    html,
+    body {
+      max-width: 100%;
+      overflow-x: clip !important;
+    }
+
+    .nav,
+    .hero-inner,
+    .section-rail,
+    .minimal-panel-inner,
+    .testament-puzzle-stage,
+    .formula-tour-content,
+    .about-calvin-grid,
+    .modal-window {
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .hero {
+      position: relative !important;
+      min-height: clamp(520px, 82svh, 860px) !important;
+      padding-block: clamp(4rem, 10vw, 8rem) !important;
+      padding-inline: 1rem !important;
+      overflow: hidden !important;
+      align-items: center !important;
+    }
+
+    .landing-start .hero {
+      min-height: clamp(520px, 82svh, 860px) !important;
+      padding-top: calc(var(--nav-height) + clamp(2rem, 5vw, 4rem)) !important;
+      padding-bottom: clamp(5rem, 12vw, 8rem) !important;
+      overflow: hidden !important;
+    }
+
+    .hero::before,
+    .hero::after {
+      position: absolute !important;
+      inset: 0 !important;
+    }
+
+    .hero::before {
+      background-size: cover !important;
+      background-position: center bottom !important;
+    }
+
+    .hero-inner,
+    .landing-start .hero-inner {
+      width: min(100% - 2rem, 1320px) !important;
+      min-height: 0 !important;
+      margin-inline: auto !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .hero-copy,
+    .landing-start .hero-copy {
+      width: min(100%, 1260px) !important;
+      min-height: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      position: relative !important;
+    }
+
+    .hero h1,
+    .landing-start .hero h1 {
+      width: 100% !important;
+      max-width: min(100%, 1040px) !important;
+      margin-inline: auto !important;
+      font-size: clamp(2.5rem, 7vw, 6.5rem) !important;
+      line-height: 1.02 !important;
+      letter-spacing: 0 !important;
+      text-align: center !important;
+      white-space: normal !important;
+      text-wrap: balance !important;
+      overflow-wrap: normal !important;
+      transform: none !important;
+    }
+
+    .landing-start .hero h1 {
+      max-width: min(100%, 1180px) !important;
+      margin-top: clamp(0.5rem, 2vh, 1.5rem) !important;
+      font-size: clamp(2.9rem, 5.8vw, 6.35rem) !important;
+      line-height: 0.94 !important;
+      letter-spacing: clamp(0.01em, 0.12vw, 0.045em) !important;
+    }
+
+    .hero p {
+      max-width: min(100%, 780px) !important;
+    }
+
+    .hero-actions,
+    .landing-start .hero-actions {
+      position: static !important;
+      left: auto !important;
+      bottom: auto !important;
+      transform: none !important;
+      margin-top: clamp(1.25rem, 4vw, 2.5rem) !important;
+      z-index: 7 !important;
+    }
+
+    .btn,
+    .landing-start .btn-start {
+      max-width: 100%;
+      white-space: normal;
+      text-align: center;
+    }
+
+    .statement-section,
+    .landing-panel-section,
+    .minimal-bar-section,
+    .landing-followup-bars,
+    .watch-videos-stage,
+    .testament-puzzle-section {
+      max-width: 100%;
+      overflow-x: clip;
+    }
+
+    .watch-videos-track {
+      max-width: none;
+    }
+
+    .scripture-card-stage,
+    .testament-puzzle-stage.scripture-card-stage,
+    .scripture-card-fan {
+      max-width: min(100%, 1200px) !important;
+    }
+
+    .scripture-story-card {
+      max-width: calc(100% - 2rem) !important;
+    }
+
+    .formula-question-row {
+      max-width: calc(100% - 2rem);
+      flex-wrap: wrap;
+    }
+
+    .about-mapped-toggle,
+    .landing-followup-bar,
+    .watch-videos-bar {
+      overflow-wrap: normal;
+      text-wrap: balance;
+    }
+
+    @media (max-width: 768px) {
+      .container,
+      .site-container,
+      .hero-inner,
+      .landing-start .hero-inner,
+      .section-rail,
+      .minimal-panel-inner {
+        width: min(100% - 1.5rem, 1200px) !important;
+      }
+
+      .hero,
+      .landing-start .hero {
+        min-height: clamp(420px, 72svh, 620px) !important;
+        padding-top: calc(var(--nav-height) + clamp(1.5rem, 6vw, 2.5rem)) !important;
+        padding-bottom: clamp(3rem, 10vw, 5rem) !important;
+      }
+
+      .hero h1,
+      .landing-start .hero h1 {
+        max-width: min(100%, 640px) !important;
+        font-size: clamp(2rem, 10vw, 4rem) !important;
+        line-height: 1.06 !important;
+      }
+
+      .landing-start .hero h1 {
+        max-width: min(100%, 720px) !important;
+        font-size: clamp(2.35rem, 10.6vw, 4.2rem) !important;
+        line-height: 0.96 !important;
+        letter-spacing: 0.01em !important;
+      }
+
+      .hero p {
+        font-size: clamp(0.98rem, 3.8vw, 1.08rem) !important;
+      }
+
+      .btn-start,
+      .landing-start .btn-start {
+        min-height: 52px !important;
+        padding-inline: 28px !important;
+        font-size: 0.86rem !important;
+      }
+
+      .hero + .testament-puzzle-section {
+        padding-top: clamp(3.5rem, 12vw, 6rem) !important;
+      }
+
+      .about-mapped-grid,
+      .formula-tour-grid,
+      .about-calvin-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .scripture-card-fan,
+      .scripture-card-fan.in-view,
+      .scripture-card-fan.scroll-fanned,
+      .scripture-card-fan.scroll-retracted {
+        width: min(100%, 420px) !important;
+        min-height: 0 !important;
+        display: grid !important;
+        gap: 1rem !important;
+        transform: none !important;
+      }
+
+      .scripture-story-card,
+      .scripture-card-fan.in-view .scripture-story-card,
+      .scripture-card-fan.scroll-fanned.in-view .scripture-story-card,
+      .scripture-card-fan.scroll-retracted .scripture-story-card,
+      .scripture-card-fan.scroll-fanned.scroll-retracted .scripture-story-card,
+      .scripture-story-card:hover,
+      .scripture-story-card:focus-visible,
+      .scripture-story-card.card-clicked {
+        position: relative !important;
+        inset: auto !important;
+        left: auto !important;
+        top: auto !important;
+        width: 100% !important;
+        min-height: clamp(340px, 92vw, 430px) !important;
+        transform: none !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container,
+      .site-container,
+      .hero-inner,
+      .landing-start .hero-inner,
+      .section-rail,
+      .minimal-panel-inner {
+        width: min(100% - 1rem, 1200px) !important;
+      }
+
+      .hero,
+      .landing-start .hero {
+        min-height: clamp(380px, 68svh, 560px) !important;
+        padding-inline: 0.5rem !important;
+      }
+
+      .hero h1,
+      .landing-start .hero h1 {
+        max-width: min(100%, 420px) !important;
+        font-size: clamp(2.05rem, 11.5vw, 3.4rem) !important;
+        line-height: 0.98 !important;
+      }
+
+      .landing-followup-bar {
+        padding-inline: 1rem !important;
+      }
+
+      .watch-video-card {
+        width: min(74vw, 250px) !important;
+      }
+
+      .modal-window {
+        width: min(100% - 1rem, 980px) !important;
+      }
     }
 
 </style>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Books | BibleMapped</title>
   <meta
     name="description"
@@ -33,7 +33,9 @@
       --blackletter: "UnifrakturCook", "Old English Text MT", Georgia, serif;
     }
 
-    * {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
     }
 
@@ -46,7 +48,23 @@
     }
 
     body {
-      overflow-x: hidden;
+      overflow-x: clip;
+    }
+
+    img,
+    video,
+    svg,
+    canvas,
+    iframe {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .container,
+    .site-container {
+      width: min(100% - 2rem, 1200px);
+      margin-inline: auto;
     }
 
     button,
@@ -215,8 +233,8 @@
     }
 
     .testament-stage {
-      width: 100vw;
-      min-height: calc(100vh - var(--header-height));
+      width: 100%;
+      min-height: calc(100svh - var(--header-height));
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0;
@@ -226,17 +244,17 @@
     }
 
     .testament-stage.is-old-open {
-      grid-template-columns: minmax(0, calc(100vw - var(--retracted-width))) var(--retracted-width);
+      grid-template-columns: minmax(0, calc(100% - var(--retracted-width))) var(--retracted-width);
     }
 
     .testament-stage.is-new-open {
-      grid-template-columns: var(--retracted-width) minmax(0, calc(100vw - var(--retracted-width)));
+      grid-template-columns: var(--retracted-width) minmax(0, calc(100% - var(--retracted-width)));
     }
 
     .testament-panel {
       position: relative;
       min-width: 0;
-      min-height: calc(100vh - var(--header-height));
+      min-height: calc(100svh - var(--header-height));
       overflow: hidden;
       border: 0;
       border-right: 1px solid var(--books-soft-line);
@@ -438,7 +456,7 @@
     .testament-panel-content {
       position: relative;
       z-index: 4;
-      height: calc(100vh - var(--header-height));
+      height: calc(100svh - var(--header-height));
       opacity: 0;
       pointer-events: none;
       overflow-y: auto;
@@ -906,21 +924,21 @@
       }
 
       .testament-stage.is-old-open {
-        grid-template-columns: minmax(0, calc(100vw - 78px)) 78px;
+        grid-template-columns: minmax(0, calc(100% - 78px)) 78px;
       }
 
       .testament-stage.is-new-open {
-        grid-template-columns: 78px minmax(0, calc(100vw - 78px));
+        grid-template-columns: 78px minmax(0, calc(100% - 78px));
       }
 
       .testament-panel {
-        min-height: calc(100vh - var(--header-height));
+        min-height: calc(100svh - var(--header-height));
         border-right: 1px solid var(--books-soft-line);
         border-bottom: 0;
       }
 
       .testament-trigger {
-        min-height: calc(100vh - var(--header-height));
+        min-height: calc(100svh - var(--header-height));
       }
 
       .testament-stage.is-old-open .testament-panel--old .testament-trigger,
@@ -934,7 +952,7 @@
       }
 
       .testament-panel-content {
-        height: calc(100vh - var(--header-height));
+        height: calc(100svh - var(--header-height));
       }
 
       .category-inner,
@@ -979,6 +997,23 @@
         transform: none;
       }
 
+      .testament-stage,
+      .testament-stage.is-old-open,
+      .testament-stage.is-new-open {
+        min-height: auto;
+        grid-template-columns: 1fr;
+      }
+
+      .testament-panel,
+      .testament-trigger {
+        min-height: clamp(420px, 78svh, 620px);
+      }
+
+      .testament-panel-content {
+        height: auto;
+        min-height: clamp(420px, 78svh, 620px);
+      }
+
       .testament-word {
         font-size: clamp(5rem, 30vw, 9rem);
       }
@@ -1000,7 +1035,7 @@
       }
 
       .case-study-card {
-        min-height: 100vh;
+        min-height: 100svh;
       }
     }
   </style>
