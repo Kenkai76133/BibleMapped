@@ -3724,6 +3724,40 @@
       }
     }
 
+    /* Hero image balance: keep headline placement, reveal the full people strip. */
+    .landing-start .hero {
+      min-height: clamp(760px, 105svh, 920px) !important;
+      padding-bottom: clamp(4rem, 9vw, 7rem) !important;
+    }
+
+    .landing-start .hero::before {
+      background-position: center clamp(15.25rem, 26vw, 18rem) !important;
+    }
+
+    .landing-start .hero-actions {
+      top: clamp(15.25rem, 26vw, 18rem) !important;
+      bottom: auto !important;
+      transform: translate(-50%, 0) !important;
+    }
+
+    .landing-start .hero + .testament-puzzle-section {
+      padding-top: clamp(3rem, 6vw, 5.5rem) !important;
+    }
+
+    @media (max-width: 768px) {
+      .landing-start .hero {
+        min-height: clamp(650px, 98svh, 800px) !important;
+      }
+
+      .landing-start .hero::before {
+        background-position: center clamp(16rem, 52vw, 18.5rem) !important;
+      }
+
+      .landing-start .hero-actions {
+        top: clamp(16rem, 52vw, 18.5rem) !important;
+      }
+    }
+
 </style>
 </head>
 
