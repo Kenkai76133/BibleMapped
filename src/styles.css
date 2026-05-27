@@ -527,49 +527,154 @@ h3 {
   color: white;
 }
 
-.bm-section-footer {
+.bm-section-footer,
+.bm-site-footer {
   margin: 0;
-  padding: 31px clamp(22px, 5vw, 76px);
+  padding: clamp(28px, 4vw, 42px) 20px;
   background: var(--electric-purple);
   color: #ffffff;
   border: 0;
+  text-align: center;
 }
 
-.bm-section-footer-inner {
-  min-height: 78px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  width: min(1180px, 100%);
+.bm-section-footer-inner,
+.bm-site-footer-inner {
+  width: min(980px, 100%);
   margin: 0 auto;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  gap: 14px;
 }
 
-.bm-section-footer p {
+.bm-footer-wordmark {
+  display: block;
+  width: min(220px, 70vw);
+  height: auto;
+  filter: drop-shadow(0 10px 18px rgba(28, 7, 84, 0.24));
+}
+
+.bm-section-footer p,
+.bm-footer-copy {
   margin: 0;
-  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.78rem;
   font-weight: 400;
+  letter-spacing: 0.04em;
 }
 
-.bm-section-footer-links {
+.bm-section-footer-links,
+.bm-footer-links {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 18px;
+  gap: 8px 12px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.84rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+  text-transform: uppercase;
 }
 
-.bm-section-footer a {
-  color: #ffffff;
+.bm-section-footer a,
+.bm-footer-links a,
+.bm-footer-contact a {
+  color: inherit;
   text-decoration: none;
-  font-size: 1rem;
-  font-weight: 400;
+  transition: opacity 180ms ease, transform 180ms ease;
 }
 
 .bm-section-footer a:hover,
-.bm-section-footer a:focus-visible {
-  text-decoration: underline;
-  text-underline-offset: 4px;
+.bm-section-footer a:focus-visible,
+.bm-footer-links a:hover,
+.bm-footer-links a:focus-visible,
+.bm-footer-contact a:hover,
+.bm-footer-contact a:focus-visible {
+  opacity: 0.78;
+  text-decoration: none;
+}
+
+.bm-footer-contact {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.bm-footer-social-row {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.bm-footer-social-emblem {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #ffffff;
+  color: var(--electric-purple);
+  font-size: 0.76rem;
+  font-weight: 950;
+  line-height: 1;
+  text-decoration: none;
+  box-shadow: 0 8px 16px rgba(28, 7, 84, 0.22);
+  transition: transform 180ms ease, opacity 180ms ease, box-shadow 180ms ease;
+}
+
+.bm-footer-social-emblem:hover,
+.bm-footer-social-emblem:focus-visible {
+  transform: translateY(-2px);
+  opacity: 0.92;
+  box-shadow: 0 12px 20px rgba(28, 7, 84, 0.28);
+}
+
+.bm-footer-social-emblem img {
+  width: 23px;
+  height: 23px;
+  object-fit: contain;
+}
+
+.bm-footer-social-emblem.tiktok-emblem img {
+  width: 25px;
+  height: 25px;
+}
+
+.bm-footer-social-emblem.instagram-emblem img {
+  width: 25px;
+  height: 25px;
+}
+
+.bm-footer-social-emblem.youtube-emblem img {
+  width: 26px;
+  height: 20px;
+}
+
+.bm-footer-social-emblem.facebook-emblem {
+  background: #3b75bb;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.bm-footer-social-emblem.patreon-emblem {
+  background: #ffffff;
+}
+
+.bm-footer-patreon-letter {
+  color: #000000;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1.12rem;
+  font-weight: 700;
+  line-height: 1;
 }
 
 @media (max-width: 960px) {

@@ -1135,6 +1135,127 @@
         max-height:none;
       }
     }
+
+    .bm-site-footer{
+      margin:0;
+      padding:clamp(28px,4vw,42px) 20px;
+      background:var(--purple);
+      color:#fff;
+      border:0;
+      text-align:center;
+    }
+    .bm-site-footer-inner{
+      width:min(980px,100%);
+      margin:0 auto;
+      display:grid;
+      align-items:center;
+      justify-items:center;
+      gap:14px;
+    }
+    .bm-footer-wordmark{
+      display:block;
+      width:min(220px,70vw);
+      height:auto;
+      filter:drop-shadow(0 10px 18px rgba(28,7,84,.24));
+    }
+    .bm-footer-links{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:8px 12px;
+      color:rgba(255,255,255,.92);
+      font-size:.84rem;
+      font-weight:400;
+      letter-spacing:.04em;
+      line-height:1.3;
+      text-transform:uppercase;
+    }
+    .bm-footer-links a,.bm-footer-contact a{
+      color:inherit;
+      text-decoration:none;
+      transition:opacity 180ms ease;
+    }
+    .bm-footer-links a:hover,.bm-footer-links a:focus-visible,.bm-footer-contact a:hover,.bm-footer-contact a:focus-visible{
+      opacity:.78;
+    }
+    .bm-footer-contact{
+      color:rgba(255,255,255,.9);
+      font-size:.82rem;
+      font-weight:400;
+      letter-spacing:.05em;
+      line-height:1.3;
+      text-transform:uppercase;
+    }
+    .bm-footer-social-row{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+    }
+    .bm-footer-social-emblem{
+      width:30px;
+      height:30px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:#fff;
+      color:var(--purple);
+      font-size:.76rem;
+      font-weight:950;
+      line-height:1;
+      text-decoration:none;
+      box-shadow:0 8px 16px rgba(28,7,84,.22);
+      transition:transform 180ms ease,opacity 180ms ease,box-shadow 180ms ease;
+    }
+    .bm-footer-social-emblem:hover,.bm-footer-social-emblem:focus-visible{
+      transform:translateY(-2px);
+      opacity:.92;
+      box-shadow:0 12px 20px rgba(28,7,84,.28);
+    }
+    .bm-footer-social-emblem img{
+      width:23px;
+      height:23px;
+      object-fit:contain;
+    }
+    .bm-footer-social-emblem.tiktok-emblem img{
+      width:25px;
+      height:25px;
+    }
+    .bm-footer-social-emblem.instagram-emblem img{
+      width:25px;
+      height:25px;
+    }
+    .bm-footer-social-emblem.youtube-emblem img{
+      width:26px;
+      height:20px;
+    }
+    .bm-footer-social-emblem.facebook-emblem{
+      background:#3b75bb;
+      color:#fff;
+      font-family:Arial, Helvetica, sans-serif;
+      font-size:1.35rem;
+      font-weight:900;
+      letter-spacing:-.04em;
+    }
+    .bm-footer-social-emblem.patreon-emblem{
+      background:#fff;
+    }
+    .bm-footer-patreon-letter{
+      color:#000;
+      font-family:Inter, Arial, sans-serif;
+      font-size:1.12rem;
+      font-weight:700;
+      line-height:1;
+    }
+    .bm-footer-copy{
+      margin:0;
+      color:rgba(255,255,255,.78);
+      font-size:.78rem;
+      font-weight:400;
+      letter-spacing:.04em;
+    }
+
   </style>
 </head>
 <body>
@@ -7964,5 +8085,52 @@
     renderChapter(currentChapter);
     renderMapPlaceList();
   </script>
+<footer class="bm-site-footer" aria-label="Bible Mapped footer">
+      <div class="bm-site-footer-inner">
+        <img class="bm-footer-wordmark" src="/assets/footer-brand-logo.png" alt="Bible Mapped" />
+
+        <nav class="bm-footer-links" aria-label="Footer navigation">
+          <a href="/">Home</a>
+          <span>|</span>
+          <a href="/about/">About</a>
+          <span>|</span>
+          <a href="/books/">Books</a>
+          <span>|</span>
+          <a href="/characters/">People</a>
+          <span>|</span>
+          <a href="/maps/">Maps</a>
+          <span>|</span>
+          <a href="/case-studies/">Case Studies</a>
+          <span>|</span>
+          <a href="/terms/">Terms of Use</a>
+          <span>|</span>
+          <a href="/help/">Help Center</a>
+          <span>|</span>
+          <a href="/heaven/">Are You Going to Heaven?</a>
+        </nav>
+
+        <div class="bm-footer-contact">
+          <a href="mailto:calvin@biblemapped.com">Contact</a>
+        </div>
+
+        <div class="bm-footer-social-row" aria-label="Bible Mapped social links">
+          <a class="bm-footer-social-emblem tiktok-emblem" href="https://www.tiktok.com/@biblemapped" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <img src="/assets/tiktok-logo.png" alt="TikTok" />
+          </a>
+          <a class="bm-footer-social-emblem instagram-emblem" href="#" aria-label="Instagram">
+            <img src="/assets/instagram-logo.png" alt="Instagram" />
+          </a>
+          <a class="bm-footer-social-emblem patreon-emblem" href="https://www.patreon.com/cw/Biblemapped" target="_blank" rel="noopener noreferrer" aria-label="Patreon">
+            <span class="bm-footer-patreon-letter" aria-hidden="true">P</span>
+          </a>
+          <a class="bm-footer-social-emblem youtube-emblem" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <img src="/assets/youtube-logo.png" alt="YouTube" />
+          </a>
+          <a class="bm-footer-social-emblem facebook-emblem" href="#" aria-label="Facebook">f</a>
+        </div>
+
+        <p class="bm-footer-copy">&copy; 2026 Bible Mapped. All rights reserved.</p>
+      </div>
+    </footer>
 </body>
 </html>
