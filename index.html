@@ -1878,7 +1878,8 @@
 
     .route-footer .footer-inner {
       width: min(980px, 100%);
-      justify-items: stretch;
+      justify-items: center;
+      gap: 16px;
     }
 
     .footer-route {
@@ -1887,12 +1888,12 @@
 
     .footer-wordmark {
       display: block;
-      width: min(430px, 100%);
+      width: min(320px, 86vw);
       height: auto;
     }
 
     .route-footer .footer-links {
-      justify-content: flex-start;
+      justify-content: center;
       gap: 8px 12px;
       margin-top: 0;
       color: rgba(255, 255, 255, 0.92);
@@ -1916,13 +1917,18 @@
     }
 
     .route-footer .footer-copy {
-      display: none;
+      display: block;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
     }
 
     .bottom-social-row {
       display: inline-flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       gap: 9px;
     }
 
@@ -4221,7 +4227,7 @@
   <footer class="site-footer route-footer" aria-label="Bible Mapped footer">
     <div class="footer-inner">
       <div class="footer-route" aria-label="Bible Mapped route mark">
-        <img class="footer-wordmark" src="assets/footer-brand-wordmark.svg" alt="Bible Mapped" />
+        <img class="footer-wordmark" src="assets/footer-brand-logo.png" alt="Bible Mapped" />
       </div>
 
       <nav class="footer-links" aria-label="Footer navigation">
@@ -4255,7 +4261,7 @@
       </div>
 
       <p class="footer-copy">
-        © 2026 Bible Mapped. All rights reserved.
+        &copy; 2026 Bible Mapped. All rights reserved.
       </p>
     </div>
   </footer>
