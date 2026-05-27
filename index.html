@@ -1888,7 +1888,7 @@
 
     .footer-wordmark {
       display: block;
-      width: min(320px, 86vw);
+      width: min(285px, 82vw);
       height: auto;
     }
 
@@ -3726,35 +3726,41 @@
 
     /* Hero image balance: keep headline placement, reveal the full people strip. */
     .landing-start .hero {
-      min-height: clamp(760px, 105svh, 920px) !important;
-      padding-bottom: clamp(4rem, 9vw, 7rem) !important;
+      --hero-image-top: clamp(15.25rem, 26vw, 18rem);
+      --hero-image-height: 56.3vw;
+      --hero-button-offset: clamp(4.2rem, 7vw, 5.8rem);
+      min-height: calc(var(--hero-image-top) + var(--hero-image-height)) !important;
+      padding-bottom: 0 !important;
     }
 
     .landing-start .hero::before {
-      background-position: center clamp(15.25rem, 26vw, 18rem) !important;
+      background-position: center var(--hero-image-top) !important;
     }
 
     .landing-start .hero-actions {
-      top: clamp(15.25rem, 26vw, 18rem) !important;
+      top: calc(var(--hero-image-top) + var(--hero-image-height) - var(--hero-button-offset)) !important;
       bottom: auto !important;
       transform: translate(-50%, 0) !important;
     }
 
     .landing-start .hero + .testament-puzzle-section {
-      padding-top: clamp(3rem, 6vw, 5.5rem) !important;
+      padding-top: clamp(0.65rem, 1.8vw, 1.4rem) !important;
     }
 
     @media (max-width: 768px) {
       .landing-start .hero {
-        min-height: clamp(650px, 98svh, 800px) !important;
+        --hero-image-top: clamp(16rem, 52vw, 18.5rem);
+        --hero-image-height: 101.4vw;
+        --hero-button-offset: clamp(4rem, 13vw, 5.4rem);
+        min-height: calc(var(--hero-image-top) + var(--hero-image-height)) !important;
       }
 
       .landing-start .hero::before {
-        background-position: center clamp(16rem, 52vw, 18.5rem) !important;
+        background-position: center var(--hero-image-top) !important;
       }
 
       .landing-start .hero-actions {
-        top: clamp(16rem, 52vw, 18.5rem) !important;
+        top: calc(var(--hero-image-top) + var(--hero-image-height) - var(--hero-button-offset)) !important;
       }
     }
 
