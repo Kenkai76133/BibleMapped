@@ -527,6 +527,51 @@ h3 {
   color: white;
 }
 
+.bm-section-footer {
+  margin: 0;
+  padding: 31px clamp(22px, 5vw, 76px);
+  background: var(--electric-purple);
+  color: #ffffff;
+  border: 0;
+}
+
+.bm-section-footer-inner {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.bm-section-footer p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.bm-section-footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.bm-section-footer a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.bm-section-footer a:hover,
+.bm-section-footer a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 @media (max-width: 960px) {
   .hero-grid,
   .card-grid.three,
