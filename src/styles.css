@@ -149,6 +149,117 @@ a {
   font-weight: 800;
 }
 
+.bm-global-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  height: var(--nav-height);
+  margin: 0;
+  background: #ffffff;
+  border: 0;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.bm-global-nav {
+  width: 100%;
+  height: var(--nav-height);
+  padding: 0 clamp(22px, 4vw, 72px) 0 12px;
+  display: grid;
+  grid-template-columns: minmax(150px, 220px) auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(18px, 3vw, 42px);
+}
+
+.bm-global-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  justify-self: start;
+  flex-shrink: 0;
+  max-width: 220px;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.bm-global-brand-crop {
+  width: 220px;
+  height: 82px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.bm-global-brand-logo {
+  width: 208px;
+  max-width: none;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  transform: translateX(6px);
+  flex-shrink: 0;
+}
+
+.bm-global-links {
+  justify-self: end;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(18px, 3vw, 38px);
+}
+
+.bm-global-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  color: var(--ink-navy);
+  font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-decoration: none;
+  text-transform: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.bm-global-links a:hover,
+.bm-global-links a:focus-visible {
+  color: var(--electric-purple);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 760px) {
+  .bm-global-nav {
+    padding: 0 14px 0 8px;
+    grid-template-columns: minmax(118px, 150px) auto;
+    gap: 16px;
+  }
+
+  .bm-global-brand,
+  .bm-global-brand-crop {
+    width: 150px;
+    max-width: 150px;
+    height: 72px;
+  }
+
+  .bm-global-brand-logo {
+    width: 150px;
+    transform: translateX(2px);
+  }
+
+  .bm-global-links {
+    gap: clamp(12px, 4vw, 24px);
+  }
+
+  .bm-global-links a {
+    font-size: 0.92rem;
+  }
+}
+
 .hero {
   padding: 72px 0 40px;
 }
