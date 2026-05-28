@@ -46,6 +46,32 @@
         scroll-margin-top: calc(var(--nav-height) + 24px);
       }
 
+      .gospel-hero::before,
+      .gospel-hero::after {
+        content: "";
+        position: absolute;
+        inset: calc(-1 * var(--nav-height)) 50% auto;
+        width: 100vw;
+        height: clamp(430px, 66vw, 740px);
+        transform: translateX(-50%);
+        pointer-events: none;
+      }
+
+      .gospel-hero::before {
+        z-index: -2;
+        background: url("../assets/heaven-hero-lineup.png") left 42% / min(118vw, 1720px) auto no-repeat;
+        opacity: 0.42;
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.26) 14%, #000 34%, #000 62%, transparent 100%);
+        mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.26) 14%, #000 34%, #000 62%, transparent 100%);
+      }
+
+      .gospel-hero::after {
+        z-index: -1;
+        background:
+          linear-gradient(to bottom, #ffffff 0%, rgba(255, 255, 255, 0.9) 14%, rgba(255, 255, 255, 0.44) 40%, rgba(255, 255, 255, 0.78) 74%, #ffffff 100%),
+          linear-gradient(to right, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.64) 34%, rgba(255, 255, 255, 0.36) 100%);
+      }
+
       .gospel-hero h1 {
         position: relative;
         max-width: 12ch;
@@ -345,6 +371,16 @@
 
         .gospel-hero {
           min-height: clamp(500px, 118vw, 640px);
+        }
+
+        .gospel-hero::before,
+        .gospel-hero::after {
+          height: clamp(420px, 112vw, 620px);
+        }
+
+        .gospel-hero::before {
+          background-size: auto 76%;
+          background-position: left 26%;
         }
 
         .gospel-path-actions,
