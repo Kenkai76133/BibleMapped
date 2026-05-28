@@ -9,35 +9,88 @@
     <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
     <link rel="stylesheet" href="../src/styles.css" />
     <style>
-      .terms-content {
-        max-width: 820px;
-        margin: 0 auto;
-        padding-bottom: 64px;
+      body.simple-page {
+        background: #ffffff;
       }
 
-      .terms-content article {
+      .terms-page {
+        width: min(100% - 2rem, 1120px);
+        margin: 0 auto;
+      }
+
+      .terms-hero {
+        max-width: 860px;
+        padding: clamp(76px, 10vw, 132px) 0 clamp(42px, 7vw, 82px);
+      }
+
+      .terms-hero h1 {
+        margin-bottom: 24px;
+      }
+
+      .terms-intro {
         display: grid;
-        gap: 24px;
+        gap: 18px;
+        color: var(--soft-ink);
+        font-size: clamp(1.04rem, 1.5vw, 1.22rem);
+        line-height: 1.78;
+      }
+
+      .terms-intro p {
+        margin: 0;
+      }
+
+      .terms-content {
+        max-width: 840px;
+        margin: 0 auto;
+        padding: 0 0 clamp(78px, 10vw, 132px);
+      }
+
+      .terms-article {
+        display: grid;
+        gap: clamp(38px, 6vw, 68px);
       }
 
       .terms-block h2 {
-        margin: 0 0 10px;
+        margin: 0 0 16px;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(2rem, 3.5vw, 3.25rem);
+        line-height: 1;
+        color: var(--gunmetal);
       }
 
       .terms-block p {
-        margin: 0 0 14px;
-        color: var(--muted);
+        margin: 0 0 15px;
+        color: var(--soft-ink);
         font-size: 1rem;
-        line-height: 1.8;
+        line-height: 1.82;
       }
 
       .terms-block p:last-child {
         margin-bottom: 0;
       }
 
+      .terms-credit {
+        margin: 18px 0 0;
+        padding-left: 22px;
+        color: var(--gunmetal);
+        font-weight: 800;
+        line-height: 1.8;
+      }
+
       .terms-contact {
         color: var(--electric-purple);
         font-weight: 900;
+        text-decoration: none;
+      }
+
+      @media (max-width: 720px) {
+        .terms-hero {
+          padding-top: clamp(58px, 14vw, 86px);
+        }
+
+        .terms-content {
+          margin: 0;
+        }
       }
     </style>
   </head>
@@ -56,75 +109,117 @@
       </nav>
     </header>
 
-    <main class="container">
-      <section class="hero">
-        <p class="eyebrow">Terms</p>
+    <main class="terms-page">
+      <section class="terms-hero">
+        <p class="eyebrow">TERMS OF USE</p>
         <h1>Terms of Use</h1>
-        <p class="hero-copy">
-          Bible Mapped is built to help people explore Scripture with care, clarity, and respect.
-        </p>
+        <div class="terms-intro">
+          <p>Bible Mapped is built to help people explore Scripture with care, clarity, and respect.</p>
+          <p>These Terms of Use explain how you may use Bible Mapped, including our articles, maps, timelines, images, summaries, studies, videos, downloads, and other resources.</p>
+          <p>By using Bible Mapped, you agree to use the site and its content in a way that honors God, respects the work, and helps others study Scripture with humility and care.</p>
+        </div>
       </section>
 
-      <section class="section terms-content">
-        <article class="card">
+      <section class="terms-content">
+        <article class="terms-article">
           <div class="terms-block">
-            <p>Bible Mapped is built to help people explore Scripture with care, clarity, and respect. By using this site, you agree to use the content in a way that honors God, respects the work, and supports thoughtful Bible study.</p>
+            <h2>1. Our Purpose</h2>
+            <p>Bible Mapped exists to help people see the Bible in context.</p>
+            <p>We focus on the where, the who, the what, and the why of Scripture. We believe the Bible was written through real people, in real places, across real history, all inspired by a real God.</p>
+            <p>Our goal is not to replace Scripture. Our goal is to help people slow down, study carefully, and see how the Bible connects across place, time, culture, meaning, and Jesus Christ.</p>
           </div>
 
           <div class="terms-block">
-            <h2>Use the Site Respectfully</h2>
-            <p>The content on Bible Mapped is provided for learning, study, teaching, and personal reference.</p>
-            <p>You may use Bible Mapped to better understand the where, who, what, and why of Scripture. You may share our content with others, quote small portions, and use it for personal Bible study, group discussion, or teaching.</p>
-            <p>Please do not copy, sell, repost, or misrepresent Bible Mapped content as your own.</p>
+            <h2>2. Using Bible Mapped Content</h2>
+            <p>You may use Bible Mapped content for personal study, Bible teaching, small groups, church use, classroom discussion, and sharing with others.</p>
+            <p>You may quote small portions of our content, share links to our pages, and use our resources to help explain Scripture, as long as you credit Bible Mapped and do not present the work as your own.</p>
+            <p>When sharing, please include credit like:</p>
+            <div class="terms-credit" aria-label="Suggested attribution">
+              <div>Source: Bible Mapped</div>
+              <div>Website: Biblemapped.com</div>
+            </div>
           </div>
 
           <div class="terms-block">
-            <h2>Content and Accuracy</h2>
-            <p>Bible Mapped seeks to present Scripture in context through geography, history, culture, language, timelines, and biblical meaning.</p>
-            <p>We work to keep the content thoughtful and accurate, but Bible study often involves interpretation, translation, and historical context. Some topics may include different views among faithful Bible readers, scholars, and teachers.</p>
-            <p>Always compare what you read with Scripture, pray for wisdom, and continue studying.</p>
+            <h2>3. What You May Not Do</h2>
+            <p>Please do not copy, sell, repost, or republish Bible Mapped content as your own.</p>
+            <p>Please do not use Bible Mapped content to create paid products, courses, books, videos, websites, apps, downloads, or social media pages without written permission.</p>
+            <p>Please do not alter our content in a way that changes its meaning, removes context, or presents something falsely as the view of Bible Mapped.</p>
+            <p>Please do not use our name, logo, maps, graphics, or written content in a way that suggests Bible Mapped sponsors, endorses, or approves your project unless we have agreed to it in writing.</p>
           </div>
 
           <div class="terms-block">
-            <h2>Our Purpose</h2>
-            <p>Bible Mapped is not built around secret knowledge or hidden teachings. Our goal is to share a perspective, a lens of context, that helps Scripture become clearer, deeper, and more connected to real people, real places, and God's real work in history.</p>
-            <p>We are learners too. The goal is not to replace Scripture, but to help people slow down, study carefully, and see the Bible more clearly.</p>
+            <h2>4. Sharing Online</h2>
+            <p>You are welcome to share Bible Mapped links online.</p>
+            <p>You may share short quotes, screenshots, or small excerpts for teaching, discussion, or encouragement, as long as you give clear credit and link back to Bible Mapped when possible.</p>
+            <p>Please do not upload full Bible Mapped videos, studies, maps, downloads, written resources, or image collections to another website, app, social media page, or video platform without permission.</p>
           </div>
 
           <div class="terms-block">
-            <h2>Sharing and Teaching</h2>
-            <p>You are welcome to use Bible Mapped ideas for teaching, discussion, and encouragement, as long as you do so respectfully.</p>
-            <p>When sharing larger portions of our content, please credit Bible Mapped. Do not alter our content in a way that changes its meaning or presents something falsely as our view.</p>
+            <h2>5. Churches, Groups, and Classrooms</h2>
+            <p>Churches, small groups, ministries, schools, and Bible study groups may use Bible Mapped content for teaching and discussion.</p>
+            <p>You may display Bible Mapped pages, images, or resources in a live teaching setting, as long as the content is not sold, edited in a misleading way, or presented as your own original work.</p>
+            <p>For larger use, repeated use, printed distribution, curriculum use, or public posting of full resources, please contact us first.</p>
           </div>
 
           <div class="terms-block">
-            <h2>Faith and Interpretation</h2>
-            <p>Bible Mapped is created from a Christian perspective and is centered on the belief that Scripture is inspired by God and points us to Jesus Christ.</p>
-            <p>Our content may include biblical interpretation, historical explanation, maps, timelines, cultural background, and theological reflection. We encourage every reader to study Scripture carefully and seek understanding with humility.</p>
+            <h2>6. Content Accuracy</h2>
+            <p>Bible Mapped works to present Scripture, history, geography, culture, timelines, and biblical meaning with care.</p>
+            <p>Some topics involve interpretation, translation, ancient history, archaeology, and scholarly discussion. Faithful Christians may disagree on certain details.</p>
+            <p>We encourage every reader to compare what they read with Scripture, pray for wisdom, and continue studying.</p>
+            <p>Bible Mapped is a study resource. It is not the final authority. Scripture is.</p>
           </div>
 
           <div class="terms-block">
-            <h2>User Contributions</h2>
-            <p>If you email us, message us, or share ideas, questions, corrections, or resources, you understand that we may read, respond to, learn from, or use those ideas to improve Bible Mapped.</p>
+            <h2>7. User Contributions</h2>
+            <p>If you send us questions, corrections, suggestions, images, research, notes, or ideas, you give Bible Mapped permission to read, respond to, learn from, and use those contributions to improve the site.</p>
             <p>Please do not send content you do not have the right to share.</p>
+            <p>We may choose whether or not to respond, publish, edit, or use submitted material.</p>
           </div>
 
           <div class="terms-block">
-            <h2>No Misuse of Content</h2>
-            <p>You agree not to use Bible Mapped content to mislead others, promote false claims, attack people, or present the work in a way that is hateful, dishonest, or harmful.</p>
-            <p>Our goal is to help people study Scripture with truth, love, and respect.</p>
+            <h2>8. Copyright Concerns</h2>
+            <p>If you believe Bible Mapped has used content that belongs to you, please contact us with clear details.</p>
+            <p>Include your name, contact information, the material you believe is being used, the page where it appears, and proof that you own or represent the content.</p>
+            <p>We take copyright concerns seriously and will review good faith requests.</p>
           </div>
 
           <div class="terms-block">
-            <h2>Changes to These Terms</h2>
-            <p>Bible Mapped may update these Terms of Use as the site grows. Continued use of the site means you accept the updated terms.</p>
+            <h2>9. Respectful Use of the Site</h2>
+            <p>You agree not to misuse Bible Mapped.</p>
+            <p>Do not use the site to spread false claims, attack people, promote hatred, disrupt the website, attempt to access private systems, scrape content in bulk, or use the content in a dishonest or harmful way.</p>
+            <p>Bible Mapped is meant to help people study Scripture with truth, love, clarity, and respect.</p>
           </div>
 
           <div class="terms-block">
-            <h2>Contact</h2>
+            <h2>10. Links to Other Websites</h2>
+            <p>Bible Mapped may link to other websites, videos, books, tools, or resources.</p>
+            <p>Those links are provided for reference and study. Bible Mapped is not responsible for the content, policies, or practices of third party websites.</p>
+          </div>
+
+          <div class="terms-block">
+            <h2>11. No Guarantee</h2>
+            <p>Bible Mapped is provided as a learning and study resource.</p>
+            <p>We work to keep the site helpful, accurate, and available, but we cannot guarantee that every page will always be complete, current, error free, or available at all times.</p>
+          </div>
+
+          <div class="terms-block">
+            <h2>12. Limitation of Responsibility</h2>
+            <p>By using Bible Mapped, you understand that you are responsible for how you use the content.</p>
+            <p>Bible Mapped is not responsible for losses, misunderstandings, decisions, or claims that may result from the use or misuse of the site or its resources.</p>
+          </div>
+
+          <div class="terms-block">
+            <h2>13. Changes to These Terms</h2>
+            <p>Bible Mapped may update these Terms of Use as the site grows.</p>
+            <p>When changes are made, the updated version will be posted on this page. Continued use of Bible Mapped means you accept the updated Terms.</p>
+          </div>
+
+          <div class="terms-block">
+            <h2>14. Contact</h2>
             <p>We are learners, and we welcome thoughtful questions, corrections, and conversations.</p>
-            <p>If you have questions about these Terms of Use or want to reach out, contact us at:</p>
-            <p class="terms-contact">Biblemapped@gmail.com</p>
+            <p>For questions about these Terms of Use, content permissions, copyright concerns, or site feedback, contact us at:</p>
+            <p><a class="terms-contact" href="mailto:Biblemapped@gmail.com">Biblemapped@gmail.com</a></p>
           </div>
         </article>
       </section>
