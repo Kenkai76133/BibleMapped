@@ -46,38 +46,6 @@
         scroll-margin-top: calc(var(--nav-height) + 24px);
       }
 
-      .gospel-hero-image-slot {
-        position: absolute;
-        inset: calc(-1 * var(--nav-height)) 50% auto;
-        width: 100vw;
-        height: clamp(420px, 66vw, 740px);
-        transform: translateX(-50%);
-        pointer-events: none;
-        z-index: -2;
-        overflow: hidden;
-      }
-
-      .gospel-hero-image-slot::before,
-      .gospel-hero-image-slot::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-      }
-
-      .gospel-hero-image-slot::before {
-        background: url("../assets/heaven-gospel-hero.png") center 36% / min(118vw, 1720px) auto no-repeat;
-        opacity: 0.4;
-        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.18) 13%, #000 33%, #000 62%, transparent 100%);
-        mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.18) 13%, #000 33%, #000 62%, transparent 100%);
-      }
-
-      .gospel-hero-image-slot::after {
-        background:
-          linear-gradient(to bottom, #ffffff 0%, rgba(255, 255, 255, 0.9) 14%, rgba(255, 255, 255, 0.5) 38%, rgba(255, 255, 255, 0.82) 76%, #ffffff 100%),
-          radial-gradient(circle at 16% 34%, rgba(255, 255, 255, 0.88), transparent 36%),
-          radial-gradient(circle at 68% 36%, rgba(255, 255, 255, 0.46), transparent 42%);
-      }
-
       .gospel-hero h1 {
         position: relative;
         max-width: 12ch;
@@ -379,15 +347,6 @@
           min-height: clamp(500px, 118vw, 640px);
         }
 
-        .gospel-hero-image-slot {
-          height: clamp(430px, 112vw, 620px);
-        }
-
-        .gospel-hero-image-slot::before {
-          background-size: auto 76%;
-          background-position: 48% 24%;
-        }
-
         .gospel-path-actions,
         .gospel-next-links {
           align-items: stretch;
@@ -418,7 +377,6 @@
 
     <main class="gospel-page">
       <section class="gospel-hero">
-        <div class="gospel-hero-image-slot" aria-hidden="true"></div>
         <p class="eyebrow">THE GOSPEL</p>
         <h1>Are You Going to Heaven?</h1>
         <p class="gospel-intro">The Bible does not ask us to guess our way to God. It shows us who God is, who we are, what sin has done, and what Jesus has done to bring us back to Himself.</p>
