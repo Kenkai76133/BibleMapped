@@ -23,6 +23,68 @@
         border-top: 1px solid rgba(31, 41, 51, 0.1);
       }
 
+      .testament-map-library {
+        padding: clamp(56px, 8vw, 96px) 0;
+        border-top: 1px solid rgba(31, 41, 51, 0.1);
+      }
+
+      .testament-map-intro {
+        max-width: 760px;
+        margin-bottom: clamp(30px, 5vw, 54px);
+      }
+
+      .testament-map-intro h2 {
+        margin: 0 0 16px;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        color: var(--gunmetal);
+        font-size: clamp(2.6rem, 5vw, 5.2rem);
+        line-height: 0.96;
+      }
+
+      .testament-map-intro p,
+      .testament-map-caption {
+        margin: 0;
+        color: var(--soft-ink);
+        font-size: 1rem;
+        line-height: 1.75;
+      }
+
+      .testament-map-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(24px, 4vw, 42px);
+      }
+
+      .testament-map {
+        min-width: 0;
+      }
+
+      .testament-map h3 {
+        margin: 0 0 12px;
+        color: var(--gunmetal);
+        font-size: clamp(1.5rem, 2.5vw, 2.3rem);
+        line-height: 1.08;
+      }
+
+      .testament-map-frame {
+        display: block;
+        overflow: hidden;
+        border-top: 1px solid rgba(31, 41, 51, 0.14);
+        border-bottom: 1px solid rgba(31, 41, 51, 0.14);
+        background: #ffffff;
+      }
+
+      .testament-map-frame img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .testament-map-caption {
+        margin-top: 14px;
+        font-size: 0.95rem;
+      }
+
       .story-regions-intro {
         max-width: 720px;
         margin-bottom: clamp(38px, 6vw, 68px);
@@ -257,6 +319,10 @@
       }
 
       @media (max-width: 820px) {
+        .testament-map-grid {
+          grid-template-columns: 1fr;
+        }
+
         .story-regions-layout {
           grid-template-columns: 1fr;
         }
@@ -327,6 +393,32 @@
         <p class="hero-copy">Places, routes, borders, and terrain so the story stays grounded.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="/places/">Open Map Navigator</a>
+        </div>
+      </section>
+
+      <section class="testament-map-library" aria-labelledby="testamentMapsTitle">
+        <div class="testament-map-intro">
+          <p class="eyebrow">MAP LIBRARY</p>
+          <h2 id="testamentMapsTitle">Old and New Testament Maps</h2>
+          <p>Two broad map references for the major locations, journeys, and movements that shape the biblical story.</p>
+        </div>
+
+        <div class="testament-map-grid">
+          <article class="testament-map">
+            <h3>Old Testament Locations</h3>
+            <a class="testament-map-frame" href="/assets/old-testament-locations-map.png" aria-label="Open Old Testament locations map">
+              <img src="/assets/old-testament-locations-map.png" alt="Major Old Testament locations map with routes from Ur, Egypt, Sinai, Canaan, Assyria, Babylon, and Persia" loading="lazy" />
+            </a>
+            <p class="testament-map-caption">Traditional and probable settings of Old Testament events, including Abraham's journey, the Exodus, conquest, exile, and return.</p>
+          </article>
+
+          <article class="testament-map">
+            <h3>New Testament Locations</h3>
+            <a class="testament-map-frame" href="/assets/new-testament-locations-map.png" aria-label="Open New Testament locations map">
+              <img src="/assets/new-testament-locations-map.png" alt="Major New Testament locations map with Jesus' ministry, Paul's missionary journeys, and Paul's voyage to Rome" loading="lazy" />
+            </a>
+            <p class="testament-map-caption">Traditional and historical settings of New Testament events, including Galilee, Judea, Asia Minor, Greece, Rome, and Paul's journeys.</p>
+          </article>
         </div>
       </section>
 
