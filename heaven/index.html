@@ -3,11 +3,330 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Are You Going to Heaven? - BibleMapped</title>
+    <title>The Gospel Map | Bible Mapped</title>
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/assets/favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
     <link rel="stylesheet" href="../src/styles.css" />
+    <style>
+      body.simple-page {
+        background: #ffffff;
+      }
+
+      .gospel-page {
+        width: min(100% - 2rem, 1120px);
+        margin: 0 auto;
+      }
+
+      .gospel-hero {
+        max-width: 930px;
+        padding: clamp(76px, 10vw, 132px) 0 clamp(40px, 7vw, 84px);
+      }
+
+      .gospel-hero h1 {
+        max-width: 12ch;
+        margin-bottom: 24px;
+      }
+
+      .gospel-intro {
+        max-width: 760px;
+        color: var(--soft-ink);
+        font-size: clamp(1.04rem, 1.5vw, 1.22rem);
+        line-height: 1.78;
+      }
+
+      .gospel-subheading {
+        margin: clamp(34px, 5vw, 58px) 0 18px;
+        color: var(--gunmetal);
+        font-size: 0.86rem;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .gospel-start-options,
+      .gospel-answer-options,
+      .gospel-next-links {
+        display: grid;
+        gap: 12px;
+        max-width: 760px;
+      }
+
+      .gospel-answer-node,
+      .gospel-link-node {
+        width: 100%;
+        min-height: 56px;
+        padding: 16px 18px;
+        border: 1px solid rgba(31, 41, 51, 0.16);
+        border-radius: 0;
+        background: #ffffff;
+        color: var(--gunmetal);
+        cursor: pointer;
+        font: inherit;
+        font-size: 1rem;
+        font-weight: 800;
+        line-height: 1.35;
+        text-align: left;
+        text-decoration: none;
+        transition: border-color 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+      }
+
+      .gospel-answer-node:hover,
+      .gospel-answer-node:focus-visible,
+      .gospel-answer-node.selected,
+      .gospel-link-node:hover,
+      .gospel-link-node:focus-visible {
+        border-color: rgba(109, 40, 255, 0.5);
+        color: var(--electric-purple);
+        transform: translateY(-2px);
+        box-shadow: 0 18px 44px rgba(11, 15, 25, 0.08);
+      }
+
+      .gospel-path-shell {
+        position: relative;
+        max-width: 860px;
+        margin: 0 0 clamp(70px, 10vw, 132px);
+        padding-left: clamp(30px, 5vw, 54px);
+      }
+
+      .gospel-path-shell::before,
+      .gospel-route::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 7px;
+        width: 1px;
+        background: linear-gradient(to bottom, rgba(200, 155, 60, 0), rgba(200, 155, 60, 0.56), rgba(109, 40, 255, 0.26));
+      }
+
+      .gospel-path-node {
+        position: relative;
+        display: none;
+        max-width: 760px;
+        padding: clamp(36px, 5vw, 58px) 0 0;
+      }
+
+      .gospel-path-node.open {
+        display: block;
+        animation: gospelFadeUp 360ms ease both;
+      }
+
+      .gospel-path-node::before,
+      .gospel-stop::before {
+        content: "";
+        position: absolute;
+        left: calc(-1 * clamp(30px, 5vw, 54px) - 1px);
+        top: clamp(43px, 5.6vw, 66px);
+        width: 15px;
+        height: 15px;
+        border: 2px solid var(--map-gold);
+        border-radius: 50%;
+        background: #ffffff;
+      }
+
+      .gospel-path-node h2,
+      .gospel-section h2,
+      .gospel-stop h3 {
+        margin: 0 0 14px;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        color: var(--gunmetal);
+        line-height: 1;
+      }
+
+      .gospel-path-node h2,
+      .gospel-section h2 {
+        font-size: clamp(2.3rem, 4.8vw, 4.4rem);
+      }
+
+      .gospel-stop h3 {
+        font-size: clamp(2rem, 3.6vw, 3.2rem);
+      }
+
+      .gospel-path-node p,
+      .gospel-section p,
+      .gospel-stop p {
+        margin: 0 0 15px;
+        color: var(--soft-ink);
+        font-size: 1rem;
+        line-height: 1.82;
+      }
+
+      .gospel-path-question {
+        margin: 28px 0 14px;
+        color: var(--gunmetal);
+        font-size: 0.82rem;
+        font-weight: 950;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .gospel-teaching {
+        margin-top: 28px;
+        padding-left: 18px;
+        border-left: 2px solid rgba(200, 155, 60, 0.45);
+      }
+
+      .gospel-path-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 30px;
+      }
+
+      .gospel-plain-button,
+      .gospel-primary-button {
+        min-height: 48px;
+        padding: 0 18px;
+        border-radius: 0;
+        cursor: pointer;
+        font: inherit;
+        font-size: 0.78rem;
+        font-weight: 950;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        transition: transform 180ms ease, opacity 180ms ease, border-color 180ms ease;
+      }
+
+      .gospel-primary-button {
+        border: 1px solid var(--electric-purple);
+        background: var(--electric-purple);
+        color: #ffffff;
+      }
+
+      .gospel-plain-button {
+        border: 1px solid rgba(31, 41, 51, 0.18);
+        background: #ffffff;
+        color: var(--gunmetal);
+      }
+
+      .gospel-primary-button:hover,
+      .gospel-primary-button:focus-visible,
+      .gospel-plain-button:hover,
+      .gospel-plain-button:focus-visible {
+        transform: translateY(-2px);
+        opacity: 0.86;
+      }
+
+      .gospel-section {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: clamp(74px, 10vw, 132px) 0;
+      }
+
+      .gospel-section-intro {
+        max-width: 720px;
+      }
+
+      .gospel-route {
+        position: relative;
+        display: grid;
+        gap: clamp(42px, 7vw, 76px);
+        max-width: 840px;
+        margin: clamp(42px, 7vw, 78px) auto 0;
+        padding-left: clamp(34px, 5vw, 62px);
+      }
+
+      .gospel-route::before {
+        left: 8px;
+      }
+
+      .gospel-stop {
+        position: relative;
+      }
+
+      .gospel-stop::before {
+        left: calc(-1 * clamp(34px, 5vw, 62px) - 1px);
+        top: 8px;
+      }
+
+      .gospel-map-label {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--map-gold);
+        font-size: 0.74rem;
+        font-weight: 950;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .gospel-video-placeholder {
+        display: grid;
+        min-height: clamp(240px, 44vw, 470px);
+        margin: clamp(28px, 5vw, 48px) 0 22px;
+        place-items: center;
+        background:
+          linear-gradient(135deg, rgba(109, 40, 255, 0.78), rgba(18, 60, 105, 0.6)),
+          url("../assets/heaven-test-cloud-bg.png") center / cover no-repeat;
+        color: #ffffff;
+        box-shadow: 0 28px 80px rgba(11, 15, 25, 0.14);
+      }
+
+      .gospel-video-placeholder span {
+        padding: 18px 24px;
+        border: 1px solid rgba(255, 255, 255, 0.42);
+        font-size: 0.82rem;
+        font-weight: 950;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      .gospel-prayer {
+        margin: clamp(28px, 5vw, 48px) 0;
+        padding-left: 22px;
+        border-left: 2px solid rgba(200, 155, 60, 0.48);
+        color: var(--gunmetal);
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(1.7rem, 3.5vw, 2.7rem);
+        line-height: 1.18;
+      }
+
+      .gospel-final-line {
+        color: var(--gunmetal);
+        font-weight: 900;
+      }
+
+      .gospel-link-node {
+        display: inline-flex;
+        align-items: center;
+        width: auto;
+        min-width: min(100%, 260px);
+      }
+
+      .is-hidden {
+        display: none;
+      }
+
+      @keyframes gospelFadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 720px) {
+        .gospel-hero,
+        .gospel-section {
+          padding-top: clamp(58px, 14vw, 86px);
+        }
+
+        .gospel-path-actions,
+        .gospel-next-links {
+          align-items: stretch;
+        }
+
+        .gospel-primary-button,
+        .gospel-plain-button,
+        .gospel-link-node {
+          width: 100%;
+        }
+      }
+    </style>
   </head>
   <body class="simple-page">
     <header class="bm-global-header">
@@ -24,28 +343,286 @@
       </nav>
     </header>
 
-    <main class="container">
-      <section class="hero">
-        <p class="eyebrow">The Gospel</p>
-        <h1>Are You Going to Heaven?</h1>
-        <p class="hero-copy">
-          The Bible points us to Jesus Christ: our need, His cross, His resurrection, and the gift of salvation by grace through faith.
-        </p>
+    <main class="gospel-page">
+      <section class="gospel-hero">
+        <p class="eyebrow">THE GOSPEL</p>
+        <h1>Where do you think you stand with God?</h1>
+        <p class="gospel-intro">The Bible does not ask us to guess our way to God. It shows us who God is, who we are, what sin has done, and what Jesus has done to bring us back to Himself.</p>
+        <p class="gospel-subheading">Choose the statement that best describes where you are right now.</p>
+        <div class="gospel-start-options" id="gospelStartOptions" aria-label="Choose where you are right now">
+          <button class="gospel-answer-node" type="button" data-path="unsure">I am not sure</button>
+          <button class="gospel-answer-node" type="button" data-path="goodPerson">I think I am a good person</button>
+          <button class="gospel-answer-node" type="button" data-path="believeInGod">I believe in God, but I do not understand Jesus</button>
+          <button class="gospel-answer-node" type="button" data-path="unsureSaved">I know about Jesus, but I do not know if I am saved</button>
+          <button class="gospel-answer-node" type="button" data-path="alreadyTrust">I already trust Jesus and want to grow</button>
+        </div>
       </section>
 
-      <section class="section">
-        <div class="card-grid two">
-          <article class="card">
-            <h2>Why We Need Grace</h2>
-            <p>Scripture teaches that sin separates us from God, and that no amount of good works can erase our guilt before Him.</p>
+      <section class="gospel-path-shell" aria-live="polite">
+        <article class="gospel-path-node" id="gospelPathNode">
+          <h2 id="gospelPathTitle"></h2>
+          <p id="gospelPathBody"></p>
+          <p class="gospel-path-question" id="gospelPathQuestion"></p>
+          <div class="gospel-answer-options" id="gospelPathAnswers"></div>
+          <div class="gospel-teaching is-hidden" id="gospelTeaching">
+            <p id="gospelTeachingText"></p>
+          </div>
+          <div class="gospel-path-actions">
+            <button class="gospel-primary-button" type="button" id="continueGospelButton">Continue to the Gospel Map</button>
+            <button class="gospel-plain-button" type="button" id="startOverButton">Start over</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="gospel-section is-hidden" id="gospelMapSection">
+        <p class="eyebrow">THE GOSPEL MAP</p>
+        <h2>The Gospel in One Story</h2>
+        <p class="gospel-section-intro">Every path leads to the same question: What has God done through Jesus Christ?</p>
+
+        <div class="gospel-route" aria-label="The Gospel in seven stops">
+          <article class="gospel-stop">
+            <span class="gospel-map-label">Where we began</span>
+            <h3>God Created Us</h3>
+            <p>God made us to know Him, love Him, and live with Him.</p>
           </article>
-          <article class="card">
-            <h2>What Jesus Has Done</h2>
-            <p>Jesus died for sinners and rose again, offering forgiveness and eternal life to everyone who turns to Him in faith.</p>
+
+          <article class="gospel-stop">
+            <span class="gospel-map-label">What went wrong</span>
+            <h3>Sin Separated Us</h3>
+            <p>Sin broke our relationship with God. We cannot fix that separation by our own goodness.</p>
+          </article>
+
+          <article class="gospel-stop">
+            <span class="gospel-map-label">The promise</span>
+            <h3>God Promised Rescue</h3>
+            <p>From the beginning, God promised that He would make a way back.</p>
+          </article>
+
+          <article class="gospel-stop">
+            <span class="gospel-map-label">The Savior enters history</span>
+            <h3>Jesus Came</h3>
+            <p>Jesus Christ came into real history. He lived without sin, revealed the Father, and came to save sinners.</p>
+          </article>
+
+          <article class="gospel-stop">
+            <span class="gospel-map-label">The center of the map</span>
+            <h3>Jesus Died and Rose Again</h3>
+            <p>Jesus died on the cross for our sins and rose from the dead on the third day.</p>
+          </article>
+
+          <article class="gospel-stop">
+            <span class="gospel-map-label">Repentance and faith</span>
+            <h3>We Respond</h3>
+            <p>The right response is repentance and faith. Turn from sin. Trust Jesus. Follow Him.</p>
+          </article>
+
+          <article class="gospel-stop">
+            <span class="gospel-map-label">The destination</span>
+            <h3>God Gives New Life</h3>
+            <p>Those who belong to Christ are forgiven, made new, and given the hope of eternal life with God.</p>
           </article>
         </div>
       </section>
+
+      <section class="gospel-section is-hidden" id="gospelVideoSection">
+        <p class="eyebrow">WATCH</p>
+        <h2>Watch the Gospel Map</h2>
+        <p>A short recap of what the Bible says about sin, grace, Jesus, salvation, and true belief.</p>
+        <div class="gospel-video-placeholder" role="img" aria-label="Video coming soon">
+          <span>Video coming soon</span>
+        </div>
+        <p>After watching, take a moment to think honestly about where you are before God.</p>
+      </section>
+
+      <section class="gospel-section is-hidden" id="gospelBeliefSection">
+        <p class="eyebrow">TRUE BELIEF</p>
+        <h2>What Does It Mean to Truly Believe?</h2>
+        <p>True belief is not just knowing religious facts.</p>
+        <p>It is not just saying a prayer.</p>
+        <p>It is not just feeling emotional for a moment.</p>
+        <p>True belief means you trust Jesus Christ as Savior and Lord. You stop relying on yourself to be right with God. You turn from sin and place your faith in what Jesus has done through His death and resurrection.</p>
+        <p>A prayer does not save you.</p>
+        <p><strong>Jesus saves.</strong></p>
+        <p>Prayer is one way we respond to Him with faith.</p>
+      </section>
+
+      <section class="gospel-section is-hidden" id="gospelPrayerSection">
+        <p class="eyebrow">RESPONSE</p>
+        <h2>A Prayer of Faith</h2>
+        <p>If you are ready to turn to Jesus, you can pray honestly to God.</p>
+        <p>You do not need perfect words. You need a sincere heart.</p>
+        <blockquote class="gospel-prayer">God, I know that I have sinned and that I cannot save myself. I believe that Jesus Christ died for my sins and rose again. I turn from my sin and put my trust in Jesus. Please forgive me, save me, and help me follow You. Amen.</blockquote>
+        <p>If you prayed this sincerely, do not stop here. Begin following Jesus. Read Scripture. Pray. Find a faithful church. Talk to a mature Christian. Keep walking.</p>
+        <p class="gospel-final-line">The Gospel is not just the way to heaven. It is the way back to God through Jesus Christ.</p>
+        <div class="gospel-next-links" aria-label="Next steps">
+          <a class="gospel-link-node" href="../books/index.html">Read the Bible</a>
+          <a class="gospel-link-node" href="../case-studies/index.html">Explore the Gospel in Scripture</a>
+          <a class="gospel-link-node" href="mailto:Biblemapped@gmail.com">Contact Bible Mapped</a>
+        </div>
+      </section>
     </main>
+
+    <script>
+      const gospelPaths = {
+        unsure: {
+          title: "That is an honest place to start.",
+          body: "The Bible does not ask us to guess our way to God. It shows us who God is, who we are, what sin has done, and what Jesus has done to bring us back.",
+          question: "What do you think separates people from God?",
+          answers: [
+            "Bad choices",
+            "Sin",
+            "Not being religious enough",
+            "I do not know"
+          ],
+          teaching: "The Bible calls the deeper problem sin. Sin is not just making mistakes. It is turning from God and choosing our own way."
+        },
+        goodPerson: {
+          title: "That is how many people think about heaven.",
+          body: "But the Bible says our problem is not that we need to become a little better. Our problem is that sin separates us from a holy God.",
+          question: "Can good works erase sin?",
+          answers: [
+            "Yes",
+            "No",
+            "I am not sure"
+          ],
+          teaching: "Good works matter, but they cannot pay for sin. We do not need improvement first. We need rescue. That is why grace matters."
+        },
+        believeInGod: {
+          title: "The center of the Gospel is Jesus Christ.",
+          body: "Jesus is not just a teacher, prophet, or example. He is the Son of God, the promised Savior, who died for our sins and rose again.",
+          question: "What do you believe Jesus came to do?",
+          answers: [
+            "Teach good morals",
+            "Show God's love",
+            "Die and rise to save sinners",
+            "I do not know"
+          ],
+          teaching: "Jesus taught truth and showed God's love, but He came to do more than teach. He came to save."
+        },
+        unsureSaved: {
+          title: "Knowing facts about Jesus is not the same as trusting Jesus.",
+          body: "True belief means trusting who Jesus is and what He has done. It means turning from sin and relying on Him, not yourself.",
+          question: "What are you relying on before God?",
+          answers: [
+            "My goodness",
+            "My religion",
+            "My church background",
+            "Jesus Christ alone",
+            "I am not sure"
+          ],
+          teaching: "Salvation is not earned by being good enough. It is received by grace through faith in Jesus Christ."
+        },
+        alreadyTrust: {
+          title: "Then this map is a reminder of the Gospel you stand on.",
+          body: "The Gospel is not only the message that begins the Christian life. It is the truth that carries the Christian life.",
+          question: "What is your next step?",
+          answers: [
+            "Keep learning Scripture",
+            "Pray more honestly",
+            "Find a faithful church",
+            "Share the Gospel with someone"
+          ],
+          teaching: "Keep walking with Jesus. Learn His Word. Pray. Repent. Love others. Grow in grace."
+        }
+      };
+
+      const startOptions = document.querySelectorAll("[data-path]");
+      const pathNode = document.getElementById("gospelPathNode");
+      const pathTitle = document.getElementById("gospelPathTitle");
+      const pathBody = document.getElementById("gospelPathBody");
+      const pathQuestion = document.getElementById("gospelPathQuestion");
+      const pathAnswers = document.getElementById("gospelPathAnswers");
+      const teaching = document.getElementById("gospelTeaching");
+      const teachingText = document.getElementById("gospelTeachingText");
+      const continueButton = document.getElementById("continueGospelButton");
+      const startOverButton = document.getElementById("startOverButton");
+      const revealSections = [
+        document.getElementById("gospelMapSection"),
+        document.getElementById("gospelVideoSection"),
+        document.getElementById("gospelBeliefSection"),
+        document.getElementById("gospelPrayerSection")
+      ];
+
+      function scrollToElement(element) {
+        if (!element) return;
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function hideSharedSections() {
+        revealSections.forEach((section) => {
+          section.classList.add("is-hidden");
+        });
+      }
+
+      function renderPath(pathKey) {
+        const path = gospelPaths[pathKey];
+        if (!path) return;
+
+        startOptions.forEach((button) => {
+          button.classList.toggle("selected", button.dataset.path === pathKey);
+          button.setAttribute("aria-pressed", String(button.dataset.path === pathKey));
+        });
+
+        pathTitle.textContent = path.title;
+        pathBody.textContent = path.body;
+        pathQuestion.textContent = path.question;
+        pathAnswers.innerHTML = "";
+
+        path.answers.forEach((answer) => {
+          const button = document.createElement("button");
+          button.className = "gospel-answer-node";
+          button.type = "button";
+          button.textContent = answer;
+          button.setAttribute("aria-pressed", "false");
+          button.addEventListener("click", () => {
+            pathAnswers.querySelectorAll(".gospel-answer-node").forEach((node) => {
+              node.classList.toggle("selected", node === button);
+              node.setAttribute("aria-pressed", String(node === button));
+            });
+
+            teaching.classList.remove("is-hidden");
+            teachingText.textContent = path.teaching;
+          });
+
+          pathAnswers.appendChild(button);
+        });
+
+        teaching.classList.add("is-hidden");
+        teachingText.textContent = "";
+        hideSharedSections();
+        pathNode.classList.add("open");
+        window.setTimeout(() => scrollToElement(pathNode), 80);
+      }
+
+      function showGospelMap() {
+        revealSections.forEach((section) => {
+          section.classList.remove("is-hidden");
+        });
+
+        window.setTimeout(() => scrollToElement(revealSections[0]), 80);
+      }
+
+      function startOver() {
+        startOptions.forEach((button) => {
+          button.classList.remove("selected");
+          button.setAttribute("aria-pressed", "false");
+        });
+        pathAnswers.innerHTML = "";
+        teaching.classList.add("is-hidden");
+        teachingText.textContent = "";
+        pathNode.classList.remove("open");
+        hideSharedSections();
+        scrollToElement(document.querySelector(".gospel-hero"));
+      }
+
+      startOptions.forEach((button) => {
+        button.setAttribute("aria-pressed", "false");
+        button.addEventListener("click", () => renderPath(button.dataset.path));
+      });
+
+      continueButton.addEventListener("click", showGospelMap);
+      startOverButton.addEventListener("click", startOver);
+    </script>
 
     <footer class="bm-site-footer" aria-label="Bible Mapped footer">
       <div class="bm-site-footer-inner">
@@ -92,7 +669,7 @@
           <span>|</span>
           <a href="/case-studies/">Case Studies</a>
           <span>|</span>
-          <a class="bm-footer-heaven-link" href="/heaven/">Are You Going to Heaven?</a>
+          <a class="bm-footer-heaven-link" href="/heaven/">The Gospel Map</a>
         </nav>
 
         <nav class="bm-footer-links bm-footer-secondary" aria-label="Footer utility navigation">
