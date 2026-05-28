@@ -756,13 +756,14 @@
     .bm-site-footer-inner {
       width: min(1100px, 100%);
       display: grid;
-      grid-template-columns: none;
+      grid-template-columns: 1fr;
       justify-items: stretch;
       gap: 14px;
       text-align: left;
     }
 
     .bm-footer-top {
+      grid-column: 1 / -1;
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
@@ -776,11 +777,13 @@
     }
 
     .bm-footer-divider {
+      grid-column: 1 / -1;
       width: 100%;
       border-top: 1px dotted rgba(255, 255, 255, 0.62);
     }
 
     .bm-footer-links {
+      grid-column: 1 / -1;
       justify-content: flex-start;
       gap: 8px 10px;
       font-weight: 700;
@@ -805,7 +808,7 @@
     }
 
     .bm-footer-copy {
-      grid-column: auto;
+      grid-column: 1 / -1;
     }
 
     @media (max-width: 768px) {

@@ -542,11 +542,13 @@ h3 {
   width: min(1100px, 100%);
   margin: 0 auto;
   display: grid;
+  grid-template-columns: 1fr;
   gap: 14px;
   text-align: left;
 }
 
 .bm-footer-top {
+  grid-column: 1 / -1;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -561,12 +563,14 @@ h3 {
 }
 
 .bm-footer-divider {
+  grid-column: 1 / -1;
   width: 100%;
   border-top: 1px dotted rgba(255, 255, 255, 0.62);
 }
 
 .bm-section-footer p,
 .bm-footer-copy {
+  grid-column: 1 / -1;
   margin: 0;
   color: rgba(255, 255, 255, 0.78);
   font-size: 0.78rem;
@@ -576,6 +580,7 @@ h3 {
 
 .bm-section-footer-links,
 .bm-footer-links {
+  grid-column: 1 / -1;
   display: flex;
   align-items: center;
   justify-content: flex-start;
