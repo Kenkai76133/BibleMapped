@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>The Gospel Map | Bible Mapped</title>
+    <title>Are You Going to Heaven? | Bible Mapped</title>
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/assets/favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
@@ -13,20 +13,71 @@
         background: #ffffff;
       }
 
+      body.simple-page .bm-global-header {
+        position: sticky;
+        isolation: isolate;
+        overflow: visible;
+        background:
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.88) 58%, rgba(255, 255, 255, 0.68) 100%),
+          url("../assets/bible-journey-people-hero-strip.png") center top / min(100vw, 1600px) auto no-repeat;
+      }
+
+      body.simple-page .bm-global-header::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        height: clamp(48px, 7vw, 92px);
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.68), rgba(255, 255, 255, 0));
+        pointer-events: none;
+        z-index: -1;
+      }
+
       .gospel-page {
         width: min(100% - 2rem, 1120px);
         margin: 0 auto;
       }
 
       .gospel-hero {
+        position: relative;
+        isolation: isolate;
         max-width: 930px;
-        padding: clamp(76px, 10vw, 132px) 0 clamp(40px, 7vw, 84px);
+        min-height: clamp(520px, 72vw, 780px);
+        padding: clamp(96px, 12vw, 160px) 0 clamp(52px, 8vw, 96px);
         scroll-margin-top: calc(var(--nav-height) + 24px);
+      }
+
+      .gospel-hero::before,
+      .gospel-hero::after {
+        content: "";
+        position: absolute;
+        inset: calc(-1 * var(--nav-height)) 50% auto;
+        width: 100vw;
+        height: clamp(420px, 66vw, 740px);
+        transform: translateX(-50%);
+        pointer-events: none;
+      }
+
+      .gospel-hero::before {
+        z-index: -2;
+        background: url("../assets/bible-journey-people-hero-strip.png") center top / min(100vw, 1600px) auto no-repeat;
+        opacity: 0.52;
+        -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, #000 26%, #000 64%, transparent 100%);
+        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, #000 26%, #000 64%, transparent 100%);
+      }
+
+      .gospel-hero::after {
+        z-index: -1;
+        background:
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.76) 0%, rgba(255, 255, 255, 0.32) 36%, rgba(255, 255, 255, 0.74) 74%, #ffffff 100%),
+          radial-gradient(circle at 26% 22%, rgba(255, 255, 255, 0.72), transparent 42%);
       }
 
       .gospel-hero h1 {
         max-width: 12ch;
         margin-bottom: 24px;
+        text-shadow: 0 2px 18px rgba(255, 255, 255, 0.78);
       }
 
       .gospel-intro {
@@ -34,6 +85,7 @@
         color: var(--soft-ink);
         font-size: clamp(1.04rem, 1.5vw, 1.22rem);
         line-height: 1.78;
+        text-shadow: 0 1px 16px rgba(255, 255, 255, 0.76);
       }
 
       .gospel-subheading {
@@ -318,6 +370,20 @@
           padding-top: clamp(58px, 14vw, 86px);
         }
 
+        .gospel-hero {
+          min-height: clamp(500px, 118vw, 640px);
+        }
+
+        .gospel-hero::before,
+        .gospel-hero::after {
+          height: clamp(430px, 112vw, 620px);
+        }
+
+        .gospel-hero::before {
+          background-size: 180vw auto;
+          background-position: center top;
+        }
+
         .gospel-path-actions,
         .gospel-next-links {
           align-items: stretch;
@@ -349,7 +415,7 @@
     <main class="gospel-page">
       <section class="gospel-hero">
         <p class="eyebrow">THE GOSPEL</p>
-        <h1>Where do you think you stand with God?</h1>
+        <h1>Are You Going to Heaven?</h1>
         <p class="gospel-intro">The Bible does not ask us to guess our way to God. It shows us who God is, who we are, what sin has done, and what Jesus has done to bring us back to Himself.</p>
         <p class="gospel-subheading">Choose the statement that best describes where you are right now.</p>
         <div class="gospel-start-options" id="gospelStartOptions" aria-label="Choose where you are right now">
@@ -672,7 +738,7 @@
           <span>|</span>
           <a href="/case-studies/">Case Studies</a>
           <span>|</span>
-          <a class="bm-footer-heaven-link" href="/heaven/">The Gospel Map</a>
+          <a class="bm-footer-heaven-link" href="/heaven/">Are You Going to Heaven?</a>
         </nav>
 
         <nav class="bm-footer-links bm-footer-secondary" aria-label="Footer utility navigation">
