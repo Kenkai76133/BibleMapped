@@ -805,17 +805,6 @@
       overflow: hidden;
     }
 
-    .read-bible-bar {
-      background: #ece8de;
-    }
-
-    .read-bible-bar:hover,
-    .read-bible-bar:focus-visible {
-      background: #e5dfd1;
-      color: var(--electric-purple);
-      transform: translateY(-4px);
-    }
-
     .watch-videos-marquee {
       width: 100%;
       overflow: hidden;
@@ -3877,9 +3866,7 @@
     .landing-followup-bar:hover,
     .landing-followup-bar:focus-visible,
     .heaven-test-bar:hover,
-    .heaven-test-bar:focus-visible,
-    .read-bible-bar:hover,
-    .read-bible-bar:focus-visible {
+    .heaven-test-bar:focus-visible {
       transform: none !important;
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.72),
@@ -4257,6 +4244,154 @@
       }
     }
 
+    .home-testament-maps {
+      padding: clamp(3rem, 7vw, 6rem) clamp(1rem, 4vw, 3.5rem);
+      background: #ffffff;
+      border-top: 1px solid rgba(31, 41, 51, 0.08);
+      border-bottom: 1px solid rgba(31, 41, 51, 0.08);
+    }
+
+    .home-testament-maps-inner {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .home-testament-maps-copy {
+      max-width: 720px;
+      margin-bottom: clamp(1.8rem, 4vw, 3.2rem);
+    }
+
+    .home-testament-maps-copy h2 {
+      margin: 0 0 0.9rem;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      color: var(--gunmetal);
+      font-size: clamp(2.8rem, 6vw, 5.8rem);
+      line-height: 0.94;
+    }
+
+    .home-testament-maps-copy p,
+    .home-map-caption {
+      margin: 0;
+      color: var(--soft-ink);
+      font-size: 1rem;
+      line-height: 1.72;
+    }
+
+    .home-map-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(1.4rem, 3vw, 2.4rem);
+    }
+
+    .home-map-item {
+      min-width: 0;
+    }
+
+    .home-map-item h3 {
+      margin: 0 0 0.75rem;
+      color: var(--gunmetal);
+      font-size: clamp(1.35rem, 2.4vw, 2rem);
+      line-height: 1.08;
+    }
+
+    .home-map-frame {
+      display: block;
+      overflow: hidden;
+      border-top: 1px solid rgba(31, 41, 51, 0.12);
+      border-bottom: 1px solid rgba(31, 41, 51, 0.12);
+      background: #ffffff;
+    }
+
+    .home-map-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .home-map-caption {
+      margin-top: 0.8rem;
+      font-size: 0.94rem;
+    }
+
+    .mood-mode-toggle {
+      width: 100%;
+      border: 0;
+      font: inherit;
+    }
+
+    .mood-mode-section {
+      display: none;
+      padding-top: clamp(2rem, 5vw, 4rem);
+      padding-bottom: clamp(2.2rem, 5vw, 4.5rem);
+      border-top: 1px solid rgba(31, 41, 51, 0.08);
+      border-bottom: 1px solid rgba(31, 41, 51, 0.08);
+    }
+
+    .mood-mode-section.open {
+      display: block;
+    }
+
+    .mood-mode-copy h2 {
+      max-width: 14ch;
+      font-size: clamp(2.4rem, 5vw, 5rem);
+    }
+
+    .mood-card-grid {
+      grid-template-columns: 1fr;
+      border-top: 1px solid rgba(31, 41, 51, 0.12);
+    }
+
+    .mood-card,
+    .mood-card:nth-child(2n),
+    .mood-card:nth-child(3n) {
+      border-right: 0;
+    }
+
+    .mood-card-toggle {
+      display: grid;
+      grid-template-columns: minmax(120px, 0.28fr) minmax(0, 0.72fr);
+      gap: clamp(1rem, 3vw, 2rem);
+      align-items: baseline;
+      padding: clamp(1rem, 2.2vw, 1.45rem) 0;
+    }
+
+    .mood-card-toggle span {
+      margin: 0;
+      font-size: 0.68rem;
+    }
+
+    .mood-card-toggle strong {
+      font-size: clamp(1.8rem, 3.6vw, 3.8rem);
+    }
+
+    .mood-card-toggle em {
+      grid-column: 2;
+      margin-top: 0.25rem;
+    }
+
+    .mood-card-panel {
+      padding: 0 0 clamp(1.25rem, 2.5vw, 2rem) min(30%, 190px);
+    }
+
+    @media (max-width: 780px) {
+      .home-map-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mood-card-toggle {
+        grid-template-columns: 1fr;
+        gap: 0.2rem;
+      }
+
+      .mood-card-toggle em {
+        grid-column: auto;
+      }
+
+      .mood-card-panel {
+        padding-left: 0;
+      }
+    }
+
   </style>
 </head>
 
@@ -4313,6 +4448,34 @@
             Start Here
           </a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-testament-maps" aria-labelledby="homeTestamentMapsTitle">
+    <div class="home-testament-maps-inner">
+      <div class="home-testament-maps-copy">
+        <p class="eyebrow">MAPS</p>
+        <h2 id="homeTestamentMapsTitle">Old and New Testament Maps</h2>
+        <p>See the major places, routes, kingdoms, and journeys that hold the biblical story together.</p>
+      </div>
+
+      <div class="home-map-grid">
+        <article class="home-map-item">
+          <h3>Old Testament Locations</h3>
+          <a class="home-map-frame" href="assets/old-testament-locations-map.png" aria-label="Open Old Testament locations map">
+            <img src="assets/old-testament-locations-map.png" alt="Major Old Testament locations map with routes through Egypt, Sinai, Canaan, Assyria, Babylon, and Persia" loading="lazy" />
+          </a>
+          <p class="home-map-caption">Traditional and probable settings of Old Testament events, including Abraham, the Exodus, conquest, exile, and return.</p>
+        </article>
+
+        <article class="home-map-item">
+          <h3>New Testament Locations</h3>
+          <a class="home-map-frame" href="assets/new-testament-locations-map.png" aria-label="Open New Testament locations map">
+            <img src="assets/new-testament-locations-map.png" alt="Major New Testament locations map with Jesus' ministry, Paul's missionary journeys, and Paul's voyage to Rome" loading="lazy" />
+          </a>
+          <p class="home-map-caption">Traditional and historical settings of New Testament events, including Galilee, Judea, Asia Minor, Greece, Rome, and Paul's journeys.</p>
+        </article>
       </div>
     </div>
   </section>
@@ -4515,145 +4678,143 @@
     </div>
   </section>
 
-  <section class="mood-mode-section premium-reveal" id="mood-mode" aria-labelledby="moodModeTitle">
-    <div class="mood-mode-inner">
-      <div class="mood-mode-copy">
-        <p class="eyebrow">MOOD MODE</p>
-        <h2 id="moodModeTitle">Don&rsquo;t Know Where to Start?</h2>
-        <p>Try finding Scripture by how you feel today. There is always someone in Scripture who can relate to fear, guilt, grief, confusion, loneliness, hope, and weakness — not because the Bible is centered on us, but because God has always dealt with real people in real moments.</p>
-        <p class="mood-mode-anchor">The Bible was not written first to us, but it was written for us.</p>
-      </div>
+  <section class="landing-followup-bars premium-reveal" aria-label="Bible Mapped features">
+    <button class="landing-followup-bar heaven-test-bar mood-mode-toggle" type="button" id="moodModeToggle" aria-expanded="false" aria-controls="mood-mode">How is your day?</button>
 
-      <p class="mood-mode-instruction">Choose a trail below.</p>
+    <div class="mood-mode-section" id="mood-mode" aria-labelledby="moodModeTitle" aria-hidden="true">
+      <div class="mood-mode-inner">
+        <div class="mood-mode-copy">
+          <p class="eyebrow">MOOD MODE</p>
+          <h2 id="moodModeTitle">Don&rsquo;t Know Where to Start?</h2>
+          <p>Try finding Scripture by how you feel today. There is always someone in Scripture who can relate to fear, guilt, grief, confusion, loneliness, hope, and weakness — not because the Bible is centered on us, but because God has always dealt with real people in real moments.</p>
+          <p class="mood-mode-anchor">The Bible was not written first to us, but it was written for us.</p>
+        </div>
 
-      <div class="mood-card-grid" data-mood-grid>
-        <article class="mood-card open">
-          <button class="mood-card-toggle" type="button" aria-expanded="true">
-            <span>Mood Trail</span>
-            <strong>Afraid</strong>
-            <em>David in the wilderness</em>
-          </button>
-          <div class="mood-card-panel">
-            <dl class="mood-detail-list">
-              <div><dt>Trail</dt><dd>David in the wilderness</dd></div>
-              <div><dt>Place</dt><dd>Wilderness / caves</dd></div>
-              <div><dt>Passage</dt><dd>Psalm 56, 1 Samuel 21-24</dd></div>
-              <div><dt>Question</dt><dd>What do you do when fear follows you?</dd></div>
-              <div><dt>Meaning</dt><dd>Faith does not mean fear disappears. It means fear has somewhere to go.</dd></div>
-              <div><dt>Jesus Connection</dt><dd>Christ is the Shepherd who does not abandon His sheep.</dd></div>
-              <div><dt>Trail Path</dt><dd>David -> Wilderness -> Psalms -> Trust -> Christ the Shepherd</dd></div>
-            </dl>
-            <a class="mood-trail-link" href="characters/index.html">Follow This Trail</a>
-          </div>
-        </article>
+        <p class="mood-mode-instruction">Choose a trail below.</p>
 
-        <article class="mood-card">
-          <button class="mood-card-toggle" type="button" aria-expanded="false">
-            <span>Mood Trail</span>
-            <strong>Guilty</strong>
-            <em>Peter&rsquo;s denial and restoration</em>
-          </button>
-          <div class="mood-card-panel">
-            <dl class="mood-detail-list">
-              <div><dt>Trail</dt><dd>Peter&rsquo;s denial and restoration</dd></div>
-              <div><dt>Place</dt><dd>Courtyard / Sea of Galilee</dd></div>
-              <div><dt>Passage</dt><dd>Luke 22, John 21</dd></div>
-              <div><dt>Question</dt><dd>Can God restore someone who failed?</dd></div>
-              <div><dt>Meaning</dt><dd>Failure is serious, but Christ&rsquo;s mercy is greater.</dd></div>
-              <div><dt>Jesus Connection</dt><dd>Jesus restores sinners, not performers.</dd></div>
-              <div><dt>Trail Path</dt><dd>Peter -> Denial -> Restoration -> Grace -> Gospel</dd></div>
-            </dl>
-            <a class="mood-trail-link" href="heaven/index.html">Follow This Trail</a>
-          </div>
-        </article>
+        <div class="mood-card-grid" data-mood-grid>
+          <article class="mood-card open">
+            <button class="mood-card-toggle" type="button" aria-expanded="true">
+              <span>Mood Trail</span>
+              <strong>Afraid</strong>
+              <em>David in the wilderness</em>
+            </button>
+            <div class="mood-card-panel">
+              <dl class="mood-detail-list">
+                <div><dt>Trail</dt><dd>David in the wilderness</dd></div>
+                <div><dt>Place</dt><dd>Wilderness / caves</dd></div>
+                <div><dt>Passage</dt><dd>Psalm 56, 1 Samuel 21-24</dd></div>
+                <div><dt>Question</dt><dd>What do you do when fear follows you?</dd></div>
+                <div><dt>Meaning</dt><dd>Faith does not mean fear disappears. It means fear has somewhere to go.</dd></div>
+                <div><dt>Jesus Connection</dt><dd>Christ is the Shepherd who does not abandon His sheep.</dd></div>
+                <div><dt>Trail Path</dt><dd>David -> Wilderness -> Psalms -> Trust -> Christ the Shepherd</dd></div>
+              </dl>
+              <a class="mood-trail-link" href="characters/index.html">Follow This Trail</a>
+            </div>
+          </article>
 
-        <article class="mood-card">
-          <button class="mood-card-toggle" type="button" aria-expanded="false">
-            <span>Mood Trail</span>
-            <strong>Forgotten</strong>
-            <em>Hagar in the wilderness</em>
-          </button>
-          <div class="mood-card-panel">
-            <dl class="mood-detail-list">
-              <div><dt>Trail</dt><dd>Hagar in the wilderness</dd></div>
-              <div><dt>Place</dt><dd>Wilderness of Shur</dd></div>
-              <div><dt>Passage</dt><dd>Genesis 16</dd></div>
-              <div><dt>Question</dt><dd>Does God see people others overlook?</dd></div>
-              <div><dt>Meaning</dt><dd>God sees the person pushed to the margins.</dd></div>
-              <div><dt>Jesus Connection</dt><dd>Christ repeatedly moves toward the overlooked.</dd></div>
-              <div><dt>Trail Path</dt><dd>Hagar -> Wilderness -> God who sees -> The overlooked -> Jesus</dd></div>
-            </dl>
-            <a class="mood-trail-link" href="characters/index.html">Follow This Trail</a>
-          </div>
-        </article>
+          <article class="mood-card">
+            <button class="mood-card-toggle" type="button" aria-expanded="false">
+              <span>Mood Trail</span>
+              <strong>Guilty</strong>
+              <em>Peter&rsquo;s denial and restoration</em>
+            </button>
+            <div class="mood-card-panel">
+              <dl class="mood-detail-list">
+                <div><dt>Trail</dt><dd>Peter&rsquo;s denial and restoration</dd></div>
+                <div><dt>Place</dt><dd>Courtyard / Sea of Galilee</dd></div>
+                <div><dt>Passage</dt><dd>Luke 22, John 21</dd></div>
+                <div><dt>Question</dt><dd>Can God restore someone who failed?</dd></div>
+                <div><dt>Meaning</dt><dd>Failure is serious, but Christ&rsquo;s mercy is greater.</dd></div>
+                <div><dt>Jesus Connection</dt><dd>Jesus restores sinners, not performers.</dd></div>
+                <div><dt>Trail Path</dt><dd>Peter -> Denial -> Restoration -> Grace -> Gospel</dd></div>
+              </dl>
+              <a class="mood-trail-link" href="heaven/index.html">Follow This Trail</a>
+            </div>
+          </article>
 
-        <article class="mood-card">
-          <button class="mood-card-toggle" type="button" aria-expanded="false">
-            <span>Mood Trail</span>
-            <strong>Confused</strong>
-            <em>Thomas and the risen Christ</em>
-          </button>
-          <div class="mood-card-panel">
-            <dl class="mood-detail-list">
-              <div><dt>Trail</dt><dd>Thomas and the risen Christ</dd></div>
-              <div><dt>Place</dt><dd>Jerusalem</dd></div>
-              <div><dt>Passage</dt><dd>John 20</dd></div>
-              <div><dt>Question</dt><dd>What does God do with honest doubt?</dd></div>
-              <div><dt>Meaning</dt><dd>Jesus meets Thomas with evidence and mercy.</dd></div>
-              <div><dt>Jesus Connection</dt><dd>Faith rests on the risen Christ, not blind optimism.</dd></div>
-              <div><dt>Trail Path</dt><dd>Thomas -> Doubt -> Evidence -> Resurrection -> Faith</dd></div>
-            </dl>
-            <a class="mood-trail-link" href="qa/index.html">Follow This Trail</a>
-          </div>
-        </article>
+          <article class="mood-card">
+            <button class="mood-card-toggle" type="button" aria-expanded="false">
+              <span>Mood Trail</span>
+              <strong>Forgotten</strong>
+              <em>Hagar in the wilderness</em>
+            </button>
+            <div class="mood-card-panel">
+              <dl class="mood-detail-list">
+                <div><dt>Trail</dt><dd>Hagar in the wilderness</dd></div>
+                <div><dt>Place</dt><dd>Wilderness of Shur</dd></div>
+                <div><dt>Passage</dt><dd>Genesis 16</dd></div>
+                <div><dt>Question</dt><dd>Does God see people others overlook?</dd></div>
+                <div><dt>Meaning</dt><dd>God sees the person pushed to the margins.</dd></div>
+                <div><dt>Jesus Connection</dt><dd>Christ repeatedly moves toward the overlooked.</dd></div>
+                <div><dt>Trail Path</dt><dd>Hagar -> Wilderness -> God who sees -> The overlooked -> Jesus</dd></div>
+              </dl>
+              <a class="mood-trail-link" href="characters/index.html">Follow This Trail</a>
+            </div>
+          </article>
 
-        <article class="mood-card">
-          <button class="mood-card-toggle" type="button" aria-expanded="false">
-            <span>Mood Trail</span>
-            <strong>Grieving</strong>
-            <em>Mary and Martha after Lazarus dies</em>
-          </button>
-          <div class="mood-card-panel">
-            <dl class="mood-detail-list">
-              <div><dt>Trail</dt><dd>Mary and Martha after Lazarus dies</dd></div>
-              <div><dt>Place</dt><dd>Bethany</dd></div>
-              <div><dt>Passage</dt><dd>John 11</dd></div>
-              <div><dt>Question</dt><dd>Where is Jesus when grief feels late?</dd></div>
-              <div><dt>Meaning</dt><dd>Jesus does not ignore sorrow. He enters it.</dd></div>
-              <div><dt>Jesus Connection</dt><dd>Christ is the resurrection and the life.</dd></div>
-              <div><dt>Trail Path</dt><dd>Bethany -> Lazarus -> Tears -> Resurrection -> Jesus</dd></div>
-            </dl>
-            <a class="mood-trail-link" href="case-studies/index.html">Follow This Trail</a>
-          </div>
-        </article>
+          <article class="mood-card">
+            <button class="mood-card-toggle" type="button" aria-expanded="false">
+              <span>Mood Trail</span>
+              <strong>Confused</strong>
+              <em>Thomas and the risen Christ</em>
+            </button>
+            <div class="mood-card-panel">
+              <dl class="mood-detail-list">
+                <div><dt>Trail</dt><dd>Thomas and the risen Christ</dd></div>
+                <div><dt>Place</dt><dd>Jerusalem</dd></div>
+                <div><dt>Passage</dt><dd>John 20</dd></div>
+                <div><dt>Question</dt><dd>What does God do with honest doubt?</dd></div>
+                <div><dt>Meaning</dt><dd>Jesus meets Thomas with evidence and mercy.</dd></div>
+                <div><dt>Jesus Connection</dt><dd>Faith rests on the risen Christ, not blind optimism.</dd></div>
+                <div><dt>Trail Path</dt><dd>Thomas -> Doubt -> Evidence -> Resurrection -> Faith</dd></div>
+              </dl>
+              <a class="mood-trail-link" href="qa/index.html">Follow This Trail</a>
+            </div>
+          </article>
 
-        <article class="mood-card">
-          <button class="mood-card-toggle" type="button" aria-expanded="false">
-            <span>Mood Trail</span>
-            <strong>Hopeful</strong>
-            <em>Simeon waiting for the Messiah</em>
-          </button>
-          <div class="mood-card-panel">
-            <dl class="mood-detail-list">
-              <div><dt>Trail</dt><dd>Simeon waiting for the Messiah</dd></div>
-              <div><dt>Place</dt><dd>Jerusalem temple</dd></div>
-              <div><dt>Passage</dt><dd>Luke 2</dd></div>
-              <div><dt>Question</dt><dd>What does faithful waiting look like?</dd></div>
-              <div><dt>Meaning</dt><dd>Hope waits because God keeps promises.</dd></div>
-              <div><dt>Jesus Connection</dt><dd>Jesus is the promise Simeon waited to see.</dd></div>
-              <div><dt>Trail Path</dt><dd>Simeon -> Temple -> Waiting -> Promise -> Christ</dd></div>
-            </dl>
-            <a class="mood-trail-link" href="maps/index.html">Follow This Trail</a>
-          </div>
-        </article>
+          <article class="mood-card">
+            <button class="mood-card-toggle" type="button" aria-expanded="false">
+              <span>Mood Trail</span>
+              <strong>Grieving</strong>
+              <em>Mary and Martha after Lazarus dies</em>
+            </button>
+            <div class="mood-card-panel">
+              <dl class="mood-detail-list">
+                <div><dt>Trail</dt><dd>Mary and Martha after Lazarus dies</dd></div>
+                <div><dt>Place</dt><dd>Bethany</dd></div>
+                <div><dt>Passage</dt><dd>John 11</dd></div>
+                <div><dt>Question</dt><dd>Where is Jesus when grief feels late?</dd></div>
+                <div><dt>Meaning</dt><dd>Jesus does not ignore sorrow. He enters it.</dd></div>
+                <div><dt>Jesus Connection</dt><dd>Christ is the resurrection and the life.</dd></div>
+                <div><dt>Trail Path</dt><dd>Bethany -> Lazarus -> Tears -> Resurrection -> Jesus</dd></div>
+              </dl>
+              <a class="mood-trail-link" href="case-studies/index.html">Follow This Trail</a>
+            </div>
+          </article>
+
+          <article class="mood-card">
+            <button class="mood-card-toggle" type="button" aria-expanded="false">
+              <span>Mood Trail</span>
+              <strong>Hopeful</strong>
+              <em>Simeon waiting for the Messiah</em>
+            </button>
+            <div class="mood-card-panel">
+              <dl class="mood-detail-list">
+                <div><dt>Trail</dt><dd>Simeon waiting for the Messiah</dd></div>
+                <div><dt>Place</dt><dd>Jerusalem temple</dd></div>
+                <div><dt>Passage</dt><dd>Luke 2</dd></div>
+                <div><dt>Question</dt><dd>What does faithful waiting look like?</dd></div>
+                <div><dt>Meaning</dt><dd>Hope waits because God keeps promises.</dd></div>
+                <div><dt>Jesus Connection</dt><dd>Jesus is the promise Simeon waited to see.</dd></div>
+                <div><dt>Trail Path</dt><dd>Simeon -> Temple -> Waiting -> Promise -> Christ</dd></div>
+              </dl>
+              <a class="mood-trail-link" href="maps/index.html">Follow This Trail</a>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
-  </section>
-
-  <section class="landing-followup-bars premium-reveal" aria-label="Bible Mapped features">
-    <a class="landing-followup-bar heaven-test-bar" href="qa/index.html">How is your day?</a>
-
-    <a class="landing-followup-bar read-bible-bar" href="books/index.html">Read the Bible</a>
 
     <h2 class="landing-followup-bar watch-videos-bar">Watch More Videos</h2>
 
@@ -5314,7 +5475,18 @@
 
     forceAboutMappedOpen();
 
+    const moodModeToggle = document.getElementById("moodModeToggle");
+    const moodModePanel = document.getElementById("mood-mode");
     const moodCards = document.querySelectorAll(".mood-card");
+
+    if (moodModeToggle && moodModePanel) {
+      moodModeToggle.addEventListener("click", () => {
+        const isOpen = moodModePanel.classList.toggle("open");
+        moodModeToggle.setAttribute("aria-expanded", String(isOpen));
+        moodModePanel.setAttribute("aria-hidden", String(!isOpen));
+
+      });
+    }
 
     moodCards.forEach((card) => {
       const toggle = card.querySelector(".mood-card-toggle");
