@@ -3,11 +3,210 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Help Center - BibleMapped</title>
+    <title>Help Center | Bible Mapped</title>
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/assets/favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
     <link rel="stylesheet" href="../src/styles.css" />
+    <style>
+      body.simple-page {
+        background: #ffffff;
+      }
+
+      .help-page {
+        width: min(100% - 2rem, 1120px);
+        margin: 0 auto;
+      }
+
+      .help-hero {
+        padding: clamp(76px, 10vw, 132px) 0 clamp(42px, 7vw, 84px);
+      }
+
+      .help-hero h1 {
+        max-width: 10ch;
+        margin-bottom: 24px;
+      }
+
+      .help-intro-copy {
+        display: grid;
+        gap: 18px;
+        max-width: 780px;
+        color: var(--soft-ink);
+        font-size: clamp(1.04rem, 1.5vw, 1.24rem);
+        line-height: 1.75;
+      }
+
+      .help-intro-copy p {
+        margin: 0;
+      }
+
+      .help-foundation {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(30px, 6vw, 84px);
+        padding: clamp(28px, 7vw, 86px) 0 clamp(54px, 8vw, 106px);
+      }
+
+      .help-foundation h2,
+      .help-section-copy h2,
+      .help-closing h2 {
+        margin: 0 0 14px;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(2.2rem, 4.5vw, 4rem);
+        line-height: 0.98;
+        color: var(--gunmetal);
+      }
+
+      .help-foundation p,
+      .help-section-copy p,
+      .help-closing p,
+      .help-question-list {
+        margin: 0;
+        color: var(--soft-ink);
+        font-size: 1rem;
+        line-height: 1.78;
+      }
+
+      .help-foundation article {
+        display: grid;
+        gap: 14px;
+      }
+
+      .help-flow {
+        display: grid;
+        gap: clamp(58px, 9vw, 112px);
+        padding: clamp(24px, 5vw, 54px) 0 clamp(70px, 10vw, 130px);
+      }
+
+      .help-section {
+        display: grid;
+        grid-template-columns: minmax(230px, 0.82fr) minmax(0, 1fr);
+        align-items: center;
+        gap: clamp(28px, 6vw, 78px);
+      }
+
+      .help-section:nth-child(even) {
+        grid-template-columns: minmax(0, 1fr) minmax(230px, 0.82fr);
+      }
+
+      .help-section:nth-child(even) .help-image-link {
+        grid-column: 2;
+      }
+
+      .help-section:nth-child(even) .help-section-copy {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .help-image-link {
+        position: relative;
+        display: block;
+        min-height: clamp(230px, 34vw, 380px);
+        overflow: hidden;
+        color: #ffffff;
+        text-decoration: none;
+        background:
+          linear-gradient(145deg, rgba(109, 40, 255, 0.78), rgba(18, 60, 105, 0.58)),
+          var(--help-image, linear-gradient(135deg, #f1eee7, #ffffff));
+        background-size: cover;
+        background-position: center;
+        box-shadow: 0 28px 80px rgba(11, 15, 25, 0.14);
+        transition: transform 220ms ease, box-shadow 220ms ease;
+      }
+
+      .help-image-link::before {
+        content: "";
+        position: absolute;
+        inset: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.42);
+        pointer-events: none;
+      }
+
+      .help-image-link::after {
+        content: attr(aria-label);
+        position: absolute;
+        left: 28px;
+        right: 28px;
+        bottom: 26px;
+        font-size: 0.76rem;
+        font-weight: 950;
+        letter-spacing: 0.18em;
+        line-height: 1.35;
+        text-transform: uppercase;
+      }
+
+      .help-image-link:hover,
+      .help-image-link:focus-visible {
+        transform: translateY(-5px);
+        box-shadow: 0 34px 92px rgba(11, 15, 25, 0.18);
+      }
+
+      .help-section-copy {
+        max-width: 590px;
+      }
+
+      .help-section-copy p {
+        margin-bottom: 18px;
+      }
+
+      .help-text-link {
+        display: inline-flex;
+        align-items: center;
+        color: var(--electric-purple);
+        font-size: 0.82rem;
+        font-weight: 950;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: transform 180ms ease, opacity 180ms ease;
+      }
+
+      .help-text-link:hover,
+      .help-text-link:focus-visible {
+        opacity: 0.78;
+        transform: translateX(4px);
+      }
+
+      .help-closing {
+        max-width: 820px;
+        margin: 0 auto;
+        padding: clamp(16px, 4vw, 46px) 0 clamp(76px, 10vw, 130px);
+      }
+
+      .help-question-list {
+        display: grid;
+        gap: 6px;
+        margin: 24px 0;
+        padding: 0;
+        list-style: none;
+        color: var(--gunmetal);
+        font-weight: 800;
+      }
+
+      .help-email {
+        color: var(--electric-purple);
+        font-weight: 900;
+        text-decoration: none;
+      }
+
+      @media (max-width: 820px) {
+        .help-foundation,
+        .help-section,
+        .help-section:nth-child(even) {
+          grid-template-columns: 1fr;
+        }
+
+        .help-section:nth-child(even) .help-image-link,
+        .help-section:nth-child(even) .help-section-copy {
+          grid-column: auto;
+          grid-row: auto;
+        }
+
+        .help-image-link {
+          min-height: 240px;
+        }
+      }
+    </style>
   </head>
   <body class="simple-page">
     <header class="bm-global-header">
@@ -24,30 +223,135 @@
       </nav>
     </header>
 
-    <main class="container">
-      <section class="hero">
-        <p class="eyebrow">Help Center</p>
+    <main class="help-page">
+      <section class="help-hero">
+        <p class="eyebrow">HELP CENTER</p>
         <h1>How can we help?</h1>
-        <p class="hero-copy">
-          Find your way around Bible Mapped, report an issue, or send a question for a future update.
-        </p>
+        <div class="help-intro-copy">
+          <p>Find your way around Bible Mapped, explore Scripture by context, ask a question, or learn how to use the site.</p>
+          <p>Bible Mapped helps people see the Bible through place, people, timeline, meaning, and Jesus. This page is here to guide that journey.</p>
+        </div>
       </section>
 
-      <section class="section">
-        <div class="card-grid three">
-          <article class="card">
-            <h2>Explore Books</h2>
-            <p>Start with the Books page to move through Scripture by category, context, and summary.</p>
-          </article>
-          <article class="card">
-            <h2>Ask a Question</h2>
-            <p>Use the Q&amp;A page for common questions, objections, and clear Bible study answers.</p>
-          </article>
-          <article class="card">
+      <section class="help-foundation" aria-label="Bible Mapped foundation">
+        <article>
+          <h2>What is the Bible?</h2>
+          <p>The Bible is the inspired Word of God, written through real people, in real places, across real history.</p>
+          <p>It is not a random collection of religious writings. It is one unfolding story of creation, covenant, promise, redemption, and the kingdom of God, all pointing to Jesus Christ.</p>
+        </article>
+
+        <article>
+          <h2>What is a map?</h2>
+          <p>A map helps you see where something happened and how it connects to everything around it.</p>
+          <p>At Bible Mapped, a map is more than a picture of land. It is a way of seeing Scripture in context. We map the where, the who, the what, and the why so the Bible becomes clearer, deeper, and more connected.</p>
+        </article>
+      </section>
+
+      <section class="help-flow" aria-label="Explore Bible Mapped">
+        <article class="help-section">
+          <a class="help-image-link" href="../books/index.html" aria-label="Explore the Old Testament" style="--help-image: url('../assets/old-testament-faces.jpg.jpeg');"></a>
+          <div class="help-section-copy">
+            <h2>Old Testament</h2>
+            <p>Explore creation, covenant, Israel, kings, exile, prophecy, wisdom, and the story before Christ.</p>
+            <a class="help-text-link" href="../books/index.html">Explore the Old Testament</a>
+          </div>
+        </article>
+
+        <article class="help-section">
+          <a class="help-image-link" href="../books/index.html" aria-label="Explore the New Testament" style="--help-image: url('../assets/new-puzzle-1.png');"></a>
+          <div class="help-section-copy">
+            <h2>New Testament</h2>
+            <p>Explore Jesus, the Gospels, the early church, the letters, Revelation, and the hope of all things made new.</p>
+            <a class="help-text-link" href="../books/index.html">Explore the New Testament</a>
+          </div>
+        </article>
+
+        <article class="help-section">
+          <a class="help-image-link" href="../books/index.html" aria-label="Explore Books" style="--help-image: url('../assets/case-study-folder.png');"></a>
+          <div class="help-section-copy">
+            <h2>Books of the Bible</h2>
+            <p>Move through Scripture by book, category, summary, timeline, context, and meaning.</p>
+            <a class="help-text-link" href="../books/index.html">Explore Books</a>
+          </div>
+        </article>
+
+        <article class="help-section">
+          <a class="help-image-link" href="../characters/index.html" aria-label="Explore People" style="--help-image: url('../assets/people-mary.png');"></a>
+          <div class="help-section-copy">
+            <h2>People of the Bible</h2>
+            <p>Study the men and women of Scripture by who they were, where they lived, what they faced, and why their story matters.</p>
+            <a class="help-text-link" href="../characters/index.html">Explore People</a>
+          </div>
+        </article>
+
+        <article class="help-section">
+          <a class="help-image-link" href="../maps/index.html" aria-label="Explore Maps" style="--help-image: url('../assets/map-graph-bg.png');"></a>
+          <div class="help-section-copy">
+            <h2>Maps and Places</h2>
+            <p>See where biblical events happened. Explore cities, regions, journeys, empires, mountains, rivers, and sacred places.</p>
+            <a class="help-text-link" href="../maps/index.html">Explore Maps</a>
+          </div>
+        </article>
+
+        <article class="help-section">
+          <a class="help-image-link" href="../case-studies/index.html" aria-label="View Case Studies" style="--help-image: url('../assets/exodus-hero.png');"></a>
+          <div class="help-section-copy">
+            <h2>Case Studies</h2>
+            <p>Take a closer look at key passages, people, places, and moments in Scripture through the Bible Mapped lens.</p>
+            <a class="help-text-link" href="../case-studies/index.html">View Case Studies</a>
+          </div>
+        </article>
+
+        <article class="help-section">
+          <a class="help-image-link" href="../qa/index.html" aria-label="Ask a Question" style="--help-image: url('../assets/about-feature-image.png');"></a>
+          <div class="help-section-copy">
+            <h2>Questions and Answers</h2>
+            <p>Find answers to common Bible questions, objections, context questions, and study questions.</p>
+            <a class="help-text-link" href="../qa/index.html">Ask a Question</a>
+          </div>
+        </article>
+
+        <article class="help-section">
+          <a class="help-image-link" href="mailto:Biblemapped@gmail.com?subject=Word%20Studies" aria-label="Explore Word Studies" style="--help-image: url('../assets/formula-design.png');"></a>
+          <div class="help-section-copy">
+            <h2>Word Studies</h2>
+            <p>Explore names, repeated words, biblical ideas, and original meanings that help Scripture come alive.</p>
+            <a class="help-text-link" href="mailto:Biblemapped@gmail.com?subject=Word%20Studies">Explore Word Studies</a>
+          </div>
+        </article>
+
+        <article class="help-section">
+          <a class="help-image-link" href="../about/index.html" aria-label="About Bible Mapped" style="--help-image: url('../assets/about-hero-collage.jpg');"></a>
+          <div class="help-section-copy">
+            <h2>About Bible Mapped</h2>
+            <p>Learn the heart behind Bible Mapped and why this resource was created.</p>
+            <a class="help-text-link" href="../about/index.html">About Bible Mapped</a>
+          </div>
+        </article>
+
+        <article class="help-section">
+          <a class="help-image-link" href="mailto:Biblemapped@gmail.com" aria-label="Contact Us" style="--help-image: url('../assets/footer-brand-image.png');"></a>
+          <div class="help-section-copy">
             <h2>Contact</h2>
-            <p>Email <a href="mailto:calvin@biblemapped.com">calvin@biblemapped.com</a> for help, corrections, or site feedback.</p>
-          </article>
-        </div>
+            <p>Send a question, report an issue, suggest a topic, or share something you are studying.</p>
+            <p>Email: <a class="help-email" href="mailto:Biblemapped@gmail.com">Biblemapped@gmail.com</a></p>
+            <a class="help-text-link" href="mailto:Biblemapped@gmail.com">Contact Us</a>
+          </div>
+        </article>
+      </section>
+
+      <section class="help-closing">
+        <h2>A simple way to use Bible Mapped</h2>
+        <p>Ask four questions:</p>
+        <ul class="help-question-list">
+          <li>Where did this happen?</li>
+          <li>Who was involved?</li>
+          <li>What was being said?</li>
+          <li>Why did it matter?</li>
+        </ul>
+        <p>That is the Bible Mapped lens. Nothing secret. Nothing hidden. Just Scripture studied with context, care, and purpose.</p>
+        <p>We are still building, still learning, and still growing. If you cannot find what you are looking for, reach out and let us know.</p>
+        <p>Email: <a class="help-email" href="mailto:Biblemapped@gmail.com">Biblemapped@gmail.com</a></p>
       </section>
     </main>
 
