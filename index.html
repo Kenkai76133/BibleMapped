@@ -4134,14 +4134,30 @@
       text-align: left;
     }
 
-    .mood-card-toggle span {
-      display: block;
+    .mood-card-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
       margin-bottom: 0.65rem;
       color: var(--map-gold);
       font-size: 0.72rem;
       font-weight: 950;
       letter-spacing: 0.16em;
       text-transform: uppercase;
+    }
+
+    .mood-symbol {
+      display: inline-grid;
+      width: 1.75rem;
+      height: 1.75rem;
+      flex: 0 0 1.75rem;
+      place-items: center;
+      border: 1px solid rgba(200, 155, 60, 0.5);
+      border-radius: 50%;
+      color: var(--electric-purple);
+      font-size: 0.95rem;
+      line-height: 1;
+      letter-spacing: 0;
     }
 
     .mood-card-toggle strong {
@@ -4355,7 +4371,7 @@
       padding: clamp(1rem, 2.2vw, 1.45rem) 0;
     }
 
-    .mood-card-toggle span {
+    .mood-card-label {
       margin: 0;
       font-size: 0.68rem;
     }
@@ -4679,23 +4695,23 @@
   </section>
 
   <section class="landing-followup-bars premium-reveal" aria-label="Bible Mapped features">
-    <button class="landing-followup-bar heaven-test-bar mood-mode-toggle" type="button" id="moodModeToggle" aria-expanded="false" aria-controls="mood-mode">How is your day?</button>
+    <button class="landing-followup-bar heaven-test-bar mood-mode-toggle" type="button" id="moodModeToggle" aria-expanded="false" aria-controls="mood-mode">Mood</button>
 
     <div class="mood-mode-section" id="mood-mode" aria-labelledby="moodModeTitle" aria-hidden="true">
       <div class="mood-mode-inner">
         <div class="mood-mode-copy">
           <p class="eyebrow">MOOD MODE</p>
-          <h2 id="moodModeTitle">Don&rsquo;t Know Where to Start?</h2>
+          <h2 id="moodModeTitle">What&rsquo;s Your Mood?</h2>
           <p>Try finding Scripture by how you feel today. There is always someone in Scripture who can relate to fear, guilt, grief, confusion, loneliness, hope, and weakness — not because the Bible is centered on us, but because God has always dealt with real people in real moments.</p>
           <p class="mood-mode-anchor">The Bible was not written first to us, but it was written for us.</p>
         </div>
 
-        <p class="mood-mode-instruction">Choose a trail below.</p>
+        <p class="mood-mode-instruction">Choose the mood that matches today.</p>
 
         <div class="mood-card-grid" data-mood-grid>
-          <article class="mood-card open">
-            <button class="mood-card-toggle" type="button" aria-expanded="true">
-              <span>Mood Trail</span>
+          <article class="mood-card">
+            <button class="mood-card-toggle" type="button" aria-expanded="false">
+              <span class="mood-card-label"><span class="mood-symbol" aria-hidden="true">&#9888;</span>Mood Trail</span>
               <strong>Afraid</strong>
               <em>David in the wilderness</em>
             </button>
@@ -4715,7 +4731,7 @@
 
           <article class="mood-card">
             <button class="mood-card-toggle" type="button" aria-expanded="false">
-              <span>Mood Trail</span>
+              <span class="mood-card-label"><span class="mood-symbol" aria-hidden="true">&#9878;</span>Mood Trail</span>
               <strong>Guilty</strong>
               <em>Peter&rsquo;s denial and restoration</em>
             </button>
@@ -4735,7 +4751,7 @@
 
           <article class="mood-card">
             <button class="mood-card-toggle" type="button" aria-expanded="false">
-              <span>Mood Trail</span>
+              <span class="mood-card-label"><span class="mood-symbol" aria-hidden="true">&#9673;</span>Mood Trail</span>
               <strong>Forgotten</strong>
               <em>Hagar in the wilderness</em>
             </button>
@@ -4755,7 +4771,7 @@
 
           <article class="mood-card">
             <button class="mood-card-toggle" type="button" aria-expanded="false">
-              <span>Mood Trail</span>
+              <span class="mood-card-label"><span class="mood-symbol" aria-hidden="true">?</span>Mood Trail</span>
               <strong>Confused</strong>
               <em>Thomas and the risen Christ</em>
             </button>
@@ -4775,7 +4791,7 @@
 
           <article class="mood-card">
             <button class="mood-card-toggle" type="button" aria-expanded="false">
-              <span>Mood Trail</span>
+              <span class="mood-card-label"><span class="mood-symbol" aria-hidden="true">&#10013;</span>Mood Trail</span>
               <strong>Grieving</strong>
               <em>Mary and Martha after Lazarus dies</em>
             </button>
@@ -4795,7 +4811,7 @@
 
           <article class="mood-card">
             <button class="mood-card-toggle" type="button" aria-expanded="false">
-              <span>Mood Trail</span>
+              <span class="mood-card-label"><span class="mood-symbol" aria-hidden="true">&#10022;</span>Mood Trail</span>
               <strong>Hopeful</strong>
               <em>Simeon waiting for the Messiah</em>
             </button>
