@@ -4408,6 +4408,282 @@
       }
     }
 
+    /* =========================================================
+       LANDING RESPONSIVE REPAIR
+       Final layer for the home page header and first hero.
+    ========================================================= */
+
+    .site-header {
+      isolation: isolate;
+    }
+
+    .nav {
+      display: flex !important;
+      grid-template-columns: none !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: clamp(0.75rem, 2.5vw, 2rem) !important;
+      min-height: var(--nav-height) !important;
+      height: auto !important;
+      padding: 0 clamp(0.75rem, 4vw, 4.5rem) 0 clamp(0.45rem, 2vw, 0.85rem) !important;
+      overflow: visible !important;
+    }
+
+    .nav-left {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .nav-right {
+      flex: 0 1 auto;
+      min-width: 0;
+      gap: clamp(0.25rem, 1.4vw, 0.85rem) !important;
+    }
+
+    .brand {
+      max-width: clamp(8.25rem, 16vw, 13.75rem) !important;
+      min-width: 0;
+    }
+
+    .brand-crop {
+      width: clamp(8.25rem, 16vw, 13.75rem) !important;
+      height: clamp(3.625rem, 6vw, 5.125rem) !important;
+      max-width: 100% !important;
+    }
+
+    .brand-logo {
+      width: 100% !important;
+      height: auto !important;
+      max-width: 100% !important;
+      transform: none !important;
+    }
+
+    .nav-right a {
+      min-width: 0;
+      min-height: clamp(2.75rem, 5vw, 3.875rem) !important;
+      padding: 0 clamp(0.5rem, 1.4vw, 1rem) !important;
+      white-space: nowrap;
+    }
+
+    .landing-start .hero {
+      --hero-image-top: clamp(13.75rem, 22vw, 18rem);
+      --hero-image-height: 56.3vw;
+      --hero-button-offset: clamp(4rem, 7vw, 5.75rem);
+      --hero-content-pad: calc(var(--nav-height) + clamp(1.25rem, 3.5vw, 3rem));
+      display: flex !important;
+      align-items: flex-start !important;
+      min-height: calc(var(--hero-image-top) + var(--hero-image-height) + clamp(0.75rem, 2vw, 1.5rem)) !important;
+      padding: var(--hero-content-pad) clamp(1rem, 4vw, 2rem) 0 !important;
+      background: var(--white) !important;
+      overflow: hidden !important;
+    }
+
+    .landing-start .hero::before {
+      inset: 0 !important;
+      background-size: 100vw auto !important;
+      background-position: center var(--hero-image-top) !important;
+      background-repeat: no-repeat !important;
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0, 0, 0, 0.62) 9%,
+        #000 20%,
+        #000 72%,
+        rgba(0, 0, 0, 0.38) 88%,
+        transparent 100%
+      );
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0, 0, 0, 0.62) 9%,
+        #000 20%,
+        #000 72%,
+        rgba(0, 0, 0, 0.38) 88%,
+        transparent 100%
+      );
+    }
+
+    .landing-start .hero::after {
+      background:
+        linear-gradient(
+          to bottom,
+          #ffffff 0%,
+          rgba(255, 255, 255, 0.96) 11%,
+          rgba(255, 255, 255, 0.46) 26%,
+          rgba(255, 255, 255, 0.06) 44%,
+          rgba(255, 255, 255, 0.14) 74%,
+          #ffffff 100%
+        ),
+        radial-gradient(ellipse at center 64%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.52) 78%, #ffffff 100%) !important;
+    }
+
+    .landing-start .hero-inner {
+      width: min(100%, 1320px) !important;
+      display: block !important;
+      margin-inline: auto !important;
+      z-index: 4 !important;
+    }
+
+    .landing-start .hero-copy {
+      width: 100% !important;
+      display: block !important;
+      transform: none !important;
+    }
+
+    .landing-start .hero h1 {
+      max-width: min(100%, 1180px) !important;
+      margin: 0 auto !important;
+      font-size: clamp(2.6rem, 5.7vw, 6.15rem) !important;
+      line-height: 0.98 !important;
+      letter-spacing: 0 !important;
+      white-space: normal !important;
+      text-wrap: balance !important;
+    }
+
+    .landing-start .hero-actions {
+      position: absolute !important;
+      left: 50% !important;
+      top: calc(var(--hero-image-top) + var(--hero-image-height) - var(--hero-button-offset) - var(--hero-content-pad)) !important;
+      bottom: auto !important;
+      width: min(100% - 2rem, 34rem);
+      transform: translateX(-50%) !important;
+      margin: 0 !important;
+      z-index: 6 !important;
+    }
+
+    .landing-start .btn-start {
+      width: auto;
+      max-width: 100%;
+      min-height: clamp(3.25rem, 5.2vw, 4.625rem) !important;
+      padding-inline: clamp(1.75rem, 4.5vw, 4.25rem) !important;
+      font-size: clamp(0.82rem, 1.2vw, 1.05rem) !important;
+    }
+
+    @media (max-width: 1024px) {
+      .landing-start .hero {
+        --hero-image-top: clamp(14.25rem, 25vw, 17.5rem);
+        --hero-button-offset: clamp(3.8rem, 7vw, 5rem);
+      }
+
+      .landing-start .hero h1 {
+        max-width: min(100%, 900px) !important;
+        font-size: clamp(2.35rem, 6.4vw, 4.7rem) !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      :root {
+        --nav-height: 78px;
+      }
+
+      .nav {
+        padding-right: clamp(0.75rem, 3vw, 1.25rem) !important;
+      }
+
+      .nav-right a {
+        font-size: 0.82rem;
+      }
+
+      .landing-start .hero {
+        --hero-image-top: clamp(15.5rem, 52vw, 18.5rem);
+        --hero-image-height: 101.4vw;
+        --hero-button-offset: clamp(4rem, 13vw, 5.25rem);
+        --hero-content-pad: calc(var(--nav-height) + clamp(1rem, 5vw, 2rem));
+        min-height: calc(var(--hero-image-top) + var(--hero-image-height) + clamp(0.75rem, 3vw, 1.5rem)) !important;
+        padding-top: var(--hero-content-pad) !important;
+      }
+
+      .landing-start .hero::before {
+        background-size: 180vw auto !important;
+      }
+
+      .landing-start .hero h1 {
+        max-width: min(100%, 42rem) !important;
+        font-size: clamp(2.1rem, 10.4vw, 4rem) !important;
+        line-height: 1.02 !important;
+      }
+    }
+
+    @media (max-width: 430px) {
+      :root {
+        --nav-height: 72px;
+      }
+
+      .nav {
+        gap: 0.5rem !important;
+      }
+
+      .brand,
+      .brand-crop {
+        width: clamp(7.75rem, 36vw, 8.75rem) !important;
+        max-width: clamp(7.75rem, 36vw, 8.75rem) !important;
+      }
+
+      .brand-crop {
+        height: clamp(3.25rem, 15vw, 3.875rem) !important;
+      }
+
+      .nav-right {
+        gap: 0.25rem !important;
+      }
+
+      .nav-right a {
+        width: 2.75rem;
+        min-height: 2.75rem !important;
+        padding: 0 !important;
+        overflow: hidden;
+        font-size: 0;
+      }
+
+      .nav-right .nav-icon {
+        display: block !important;
+        width: 1.35rem;
+        height: 1.35rem;
+      }
+
+      .landing-start .hero {
+        --hero-image-top: clamp(8rem, 32vw, 9.3rem);
+        --hero-image-height: 101.4vw;
+        --hero-button-offset: clamp(3.8rem, 14vw, 4.7rem);
+        padding-inline: 0.75rem !important;
+      }
+
+      .landing-start .hero::after {
+        background:
+          linear-gradient(
+            to bottom,
+            #ffffff 0%,
+            rgba(255, 255, 255, 0.94) 18%,
+            rgba(255, 255, 255, 0.42) 36%,
+            rgba(255, 255, 255, 0.08) 56%,
+            rgba(255, 255, 255, 0.44) 88%,
+            #ffffff 100%
+          ),
+          radial-gradient(ellipse at center 66%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.38) 76%, #ffffff 100%) !important;
+      }
+
+      .landing-start .hero h1 {
+        max-width: min(100%, 25rem) !important;
+        font-size: clamp(2rem, 8.7vw, 2.55rem) !important;
+        line-height: 0.96 !important;
+      }
+    }
+
+    @media (max-width: 375px) {
+      .brand,
+      .brand-crop {
+        width: 7.45rem !important;
+        max-width: 7.45rem !important;
+      }
+
+      .nav-right a {
+        width: 2.5rem;
+      }
+
+      .landing-start .hero h1 {
+        font-size: clamp(1.9rem, 8.8vw, 2.25rem) !important;
+      }
+    }
   </style>
 </head>
 
@@ -5736,6 +6012,14 @@
     let ticking = false;
 
     function updateParallax() {
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        parallaxItems.forEach((item) => {
+          item.style.transform = "";
+        });
+        ticking = false;
+        return;
+      }
+
       const scrollY = window.scrollY;
       const viewportHeight = window.innerHeight;
 
