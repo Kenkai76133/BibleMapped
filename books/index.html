@@ -311,6 +311,22 @@
       padding: clamp(22px, 5vw, 62px);
     }
 
+    .testament-slot-image {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 0;
+      width: min(82%, calc((100svh - var(--header-height) - 72px) * 9 / 16));
+      max-width: 540px;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      opacity: 0.9;
+      filter: saturate(0.94) sepia(0.08);
+      pointer-events: none;
+      box-shadow: 0 28px 70px rgba(11, 16, 32, 0.16);
+    }
+
     .testament-trigger:focus-visible {
       outline: 3px solid rgba(124, 58, 237, 0.45);
       outline-offset: -8px;
@@ -336,6 +352,11 @@
       border-color: rgba(124, 58, 237, 0.32);
     }
 
+    .testament-panel:not(.is-retracted):hover .testament-slot-image,
+    .testament-trigger:focus-visible .testament-slot-image {
+      opacity: 1;
+    }
+
     .testament-kicker,
     .testament-name,
     .testament-image-note {
@@ -346,9 +367,13 @@
       text-transform: uppercase;
     }
 
+    .testament-kicker {
+      color: rgba(31, 41, 51, 0.58);
+    }
+
     .testament-word {
       font-family: var(--blackletter);
-      font-size: clamp(6rem, 16vw, 16rem);
+      font-size: clamp(5.5rem, 12.5vw, 12.5rem);
       font-weight: 700;
       line-height: 0.78;
       letter-spacing: 0.01em;
@@ -1061,8 +1086,9 @@
     <section class="testament-stage" id="testamentStage" aria-label="Choose a Testament">
       <article class="testament-panel testament-panel--old" data-panel="Old Testament">
         <button class="testament-trigger" type="button" aria-label="Open Old Testament books" aria-expanded="false" data-testament="Old Testament">
+          <img class="testament-slot-image" src="../assets/books-old-testament-frame.png" alt="" aria-hidden="true" loading="eager" />
           <span class="testament-label-stack">
-            <span class="testament-kicker">9:16 Image Slot</span>
+            <span class="testament-kicker">Old Testament Frame</span>
             <strong class="testament-word">Old</strong>
             <span class="testament-name">Testament</span>
             <span class="testament-image-note">Click to open the Hebrew Scriptures</span>
@@ -1074,8 +1100,9 @@
 
       <article class="testament-panel testament-panel--new" data-panel="New Testament">
         <button class="testament-trigger" type="button" aria-label="Open New Testament books" aria-expanded="false" data-testament="New Testament">
+          <img class="testament-slot-image" src="../assets/books-new-testament-frame.png" alt="" aria-hidden="true" loading="eager" />
           <span class="testament-label-stack">
-            <span class="testament-kicker">9:16 Image Slot</span>
+            <span class="testament-kicker">New Testament Frame</span>
             <strong class="testament-word">New</strong>
             <span class="testament-name">Testament</span>
             <span class="testament-image-note">Click to open the fulfillment story</span>
