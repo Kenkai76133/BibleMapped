@@ -229,10 +229,40 @@
     }
 
     .books-entry-main {
+      position: relative;
       min-height: calc(100vh - var(--header-height));
+      background: #ffffff;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .books-entry-main::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: url("../assets/books-map-background.png") center top / cover no-repeat;
+      opacity: 0.95;
+      pointer-events: none;
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0,
+        rgba(0, 0, 0, 0.24) 34px,
+        rgba(0, 0, 0, 0.86) clamp(112px, 14vw, 190px),
+        #000 100%
+      );
+      mask-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0,
+        rgba(0, 0, 0, 0.24) 34px,
+        rgba(0, 0, 0, 0.86) clamp(112px, 14vw, 190px),
+        #000 100%
+      );
     }
 
     .testament-stage {
+      position: relative;
+      z-index: 1;
       width: 100%;
       min-height: calc(100svh - var(--header-height));
       display: grid;
@@ -240,7 +270,7 @@
       gap: 0;
       overflow: hidden;
       transition: grid-template-columns 760ms cubic-bezier(0.2, 0.9, 0.18, 1);
-      background: var(--books-cloud);
+      background: transparent;
     }
 
     .testament-stage.is-old-open {
@@ -258,7 +288,7 @@
       overflow: hidden;
       border: 0;
       border-right: 1px solid var(--books-soft-line);
-      background: var(--books-paper);
+      background: rgba(252, 251, 248, 0.62);
       isolation: isolate;
       transition: background 460ms ease, filter 460ms ease;
     }
@@ -267,31 +297,15 @@
       border-right: 0;
     }
 
-    .testament-panel::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      border: 1px dashed rgba(31, 41, 51, 0.2);
-      pointer-events: none;
-      transition: inset 540ms ease, opacity 540ms ease, border-color 540ms ease;
-    }
-
     .testament-stage.is-old-open .testament-panel--new,
     .testament-stage.is-new-open .testament-panel--old {
-      background: #efebe3;
+      background: rgba(239, 235, 227, 0.72);
       filter: saturate(0.8);
       box-shadow: inset 18px 0 36px rgba(11, 16, 32, 0.08);
     }
 
     .testament-stage.is-new-open .testament-panel--old {
       box-shadow: inset -18px 0 36px rgba(11, 16, 32, 0.08);
-    }
-
-    .testament-stage.is-old-open .testament-panel--new::before,
-    .testament-stage.is-new-open .testament-panel--old::before {
-      inset: 0;
-      opacity: 0.35;
     }
 
     .testament-trigger {
@@ -345,11 +359,6 @@
     .testament-panel:not(.is-retracted) .testament-trigger:hover .testament-label-stack,
     .testament-panel:not(.is-retracted) .testament-trigger:focus-visible .testament-label-stack {
       transform: translateY(-14px);
-    }
-
-    .testament-panel:not(.is-retracted):hover::before {
-      inset: 10px;
-      border-color: rgba(124, 58, 237, 0.32);
     }
 
     .testament-panel:not(.is-retracted):hover .testament-slot-image,
