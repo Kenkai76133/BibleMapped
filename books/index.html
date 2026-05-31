@@ -1,3 +1,8 @@
+Absolutely. And to keep it honest: **this is your existing Books page code**, updated with the **Old Testament mind-map category system**. My work here is the modification: Old Testament categories now open like branches, while the New Testament keeps the original accordion/card style. Your uploaded page is the base. 
+
+Replace your current Books page with this:
+
+```html id="books-page-full-mindmap"
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,12 +66,6 @@
       display: block;
     }
 
-    .container,
-    .site-container {
-      width: min(100% - 2rem, 1200px);
-      margin-inline: auto;
-    }
-
     button,
     a {
       font: inherit;
@@ -74,102 +73,6 @@
 
     a {
       color: inherit;
-    }
-
-    .site-header {
-      height: var(--header-height);
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid rgba(31, 41, 51, 0.08);
-      background: var(--nav-bg);
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      width: 100%;
-      margin: 0;
-      border-radius: 0;
-      overflow: hidden;
-    }
-
-    .nav-wrap {
-      width: min(1180px, calc(100% - 32px));
-      max-width: none;
-      margin: 0 auto;
-      padding: 0 18px;
-      display: grid;
-      grid-template-columns: minmax(140px, 180px) minmax(0, 1fr) minmax(60px, 90px);
-      align-items: center;
-      gap: 18px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .nav-wrap--simple {
-      justify-content: initial;
-    }
-
-    .brand {
-      color: var(--books-ink);
-      font-size: clamp(1.15rem, 2vw, 1.55rem);
-      font-weight: 950;
-      letter-spacing: 0.01em;
-      text-decoration: none;
-      max-width: 180px;
-      overflow: hidden;
-    }
-
-    .main-nav {
-      display: flex;
-      align-items: center;
-      justify-self: center;
-      justify-content: space-evenly;
-      width: 100%;
-      gap: clamp(0.8rem, 2vw, 2.2rem);
-    }
-
-    .main-nav a {
-      padding: 8px 0;
-      border: 0;
-      border-radius: 0;
-      color: var(--books-ink);
-      background: transparent;
-      font-size: 0.84rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      text-transform: uppercase;
-      transition: transform 180ms ease, border-color 180ms ease;
-    }
-
-    .main-nav a:hover,
-    .main-nav a:focus-visible {
-      transform: translateY(-2px);
-      color: var(--books-purple);
-      outline: none;
-    }
-
-    .nav-right {
-      justify-self: end;
-      position: absolute;
-      right: 0;
-      top: 50%;
-      z-index: 2;
-      transform: translateY(-50%);
-      background: var(--nav-bg);
-      color: var(--books-ink);
-      font-size: 0.84rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      text-transform: uppercase;
-      transition: transform 180ms ease, color 180ms ease;
-    }
-
-    .nav-right:hover,
-    .nav-right:focus-visible {
-      color: var(--books-purple);
-      transform: translateY(calc(-50% - 2px));
-      outline: none;
     }
 
     .sr-only {
@@ -301,11 +204,6 @@
         visibility 0s linear 0s;
     }
 
-    /*
-      BibleMapped fix:
-      Keep the Bible-page frame images on the first Old/New selection screen.
-      Hide them after either Testament opens so they do not show behind the next page.
-    */
     .testament-stage.is-old-open .testament-slot-image,
     .testament-stage.is-new-open .testament-slot-image {
       opacity: 0;
@@ -315,6 +213,12 @@
         opacity 280ms ease,
         transform 420ms ease,
         visibility 0s linear 420ms;
+    }
+
+    .testament-stage.is-old-open .testament-panel:hover .testament-slot-image,
+    .testament-stage.is-new-open .testament-panel:hover .testament-slot-image {
+      opacity: 0;
+      visibility: hidden;
     }
 
     .testament-trigger:focus-visible {
@@ -342,22 +246,6 @@
       opacity: 1;
     }
 
-    .testament-stage.is-old-open .testament-panel:hover .testament-slot-image,
-    .testament-stage.is-new-open .testament-panel:hover .testament-slot-image {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .testament-kicker,
-    .testament-name,
-    .testament-image-note {
-      color: var(--books-muted);
-      font-size: 0.74rem;
-      font-weight: 950;
-      letter-spacing: 0.17em;
-      text-transform: uppercase;
-    }
-
     .testament-word {
       font-family: var(--blackletter);
       font-size: clamp(5.5rem, 12.5vw, 12.5rem);
@@ -371,7 +259,9 @@
     .testament-name {
       color: var(--books-purple);
       font-size: clamp(1rem, 2vw, 1.45rem);
+      font-weight: 950;
       letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
 
     .testament-stage.is-old-open .testament-panel--old .testament-label-stack,
@@ -518,11 +408,6 @@
       font-size: clamp(0.9rem, 1.2vw, 1.02rem);
     }
 
-    .covenant-note strong {
-      color: var(--books-ink);
-      font-weight: 900;
-    }
-
     .category-list {
       display: grid;
       gap: 14px;
@@ -542,30 +427,9 @@
       transition: transform 430ms cubic-bezier(0.2, 0.9, 0.18, 1), opacity 300ms ease, border-color 200ms ease;
     }
 
-    .testament-stage.is-old-open .testament-panel--old .category-card,
     .testament-stage.is-new-open .testament-panel--new .category-card {
-      animation: categorySlideOut 560ms cubic-bezier(0.2, 0.9, 0.18, 1) both;
+      animation: categorySlideOutRight 560ms cubic-bezier(0.2, 0.9, 0.18, 1) both;
       animation-delay: calc(var(--card-index) * 90ms + 420ms);
-    }
-
-    @keyframes categorySlideOut {
-      from {
-        opacity: 0;
-        transform: translateX(-48px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    .testament-panel--new .category-card {
-      transform: translateX(48px);
-    }
-
-    .testament-stage.is-new-open .testament-panel--new .category-card {
-      animation-name: categorySlideOutRight;
     }
 
     @keyframes categorySlideOutRight {
@@ -766,6 +630,221 @@
       line-height: 1.3;
     }
 
+    /* Old Testament Mind Map */
+
+    .ot-mindmap {
+      position: relative;
+      width: min(1120px, 100%);
+      margin-top: 32px;
+      padding: clamp(22px, 4vw, 42px);
+      border: 1px solid var(--books-line);
+      background:
+        radial-gradient(circle at center, rgba(124, 58, 237, 0.08), transparent 34%),
+        linear-gradient(180deg, rgba(255,255,255,0.9), rgba(252,251,248,0.8));
+      box-shadow: 0 24px 70px rgba(11, 16, 32, 0.08);
+      overflow: hidden;
+    }
+
+    .ot-mindmap::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(31, 41, 51, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31, 41, 51, 0.045) 1px, transparent 1px);
+      background-size: 34px 34px;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .ot-map-center {
+      position: relative;
+      z-index: 2;
+      width: min(360px, 100%);
+      margin: 0 auto 42px;
+      padding: 22px 18px;
+      border: 2px solid rgba(124, 58, 237, 0.38);
+      background: #ffffff;
+      text-align: center;
+      box-shadow: 0 16px 38px rgba(11, 16, 32, 0.08);
+    }
+
+    .ot-map-center-kicker {
+      display: block;
+      color: var(--books-gold);
+      font-size: 0.72rem;
+      font-weight: 950;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .ot-map-center-title {
+      display: block;
+      margin-top: 6px;
+      font-family: var(--editorial);
+      font-size: clamp(2.1rem, 4vw, 3.6rem);
+      font-weight: 700;
+      line-height: 0.95;
+      color: var(--books-ink);
+    }
+
+    .ot-map-center-note {
+      margin: 10px auto 0;
+      max-width: 280px;
+      color: var(--books-muted);
+      font-size: 0.9rem;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    .ot-mindmap-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: clamp(14px, 2vw, 22px);
+      align-items: start;
+    }
+
+    .ot-mindmap-branch {
+      position: relative;
+      display: grid;
+      justify-items: center;
+      gap: 14px;
+    }
+
+    .ot-mindmap-branch::before {
+      content: "";
+      position: absolute;
+      top: -42px;
+      left: 50%;
+      width: 1px;
+      height: 42px;
+      border-left: 2px dashed rgba(124, 58, 237, 0.32);
+      transform: translateX(-50%);
+    }
+
+    .ot-category-node {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      min-height: 118px;
+      border: 1px solid var(--books-line);
+      background: #fffdf8;
+      color: var(--books-ink);
+      cursor: pointer;
+      padding: 16px 14px;
+      display: grid;
+      gap: 8px;
+      text-align: center;
+      box-shadow: 0 12px 28px rgba(11, 16, 32, 0.06);
+      transition:
+        transform 220ms ease,
+        border-color 220ms ease,
+        background 220ms ease,
+        box-shadow 220ms ease;
+    }
+
+    .ot-category-node:hover,
+    .ot-category-node:focus-visible {
+      transform: translateY(-5px);
+      border-color: rgba(124, 58, 237, 0.5);
+      background: #ffffff;
+      outline: none;
+      box-shadow: 0 18px 42px rgba(11, 16, 32, 0.1);
+    }
+
+    .ot-mindmap-branch.is-open .ot-category-node {
+      border-color: rgba(124, 58, 237, 0.7);
+      background: #ffffff;
+    }
+
+    .ot-category-title {
+      font-family: var(--editorial);
+      font-size: clamp(1.35rem, 2vw, 2rem);
+      font-weight: 700;
+      line-height: 0.95;
+    }
+
+    .ot-category-meta {
+      color: var(--books-purple);
+      font-size: 0.7rem;
+      font-weight: 950;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .ot-category-definition {
+      color: var(--books-muted);
+      font-size: 0.78rem;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    .ot-book-node-list {
+      width: 100%;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      display: grid;
+      gap: 10px;
+      transition:
+        max-height 720ms cubic-bezier(0.2, 0.9, 0.18, 1),
+        opacity 300ms ease;
+    }
+
+    .ot-mindmap-branch.is-open .ot-book-node-list {
+      max-height: 1600px;
+      opacity: 1;
+    }
+
+    .ot-book-node {
+      position: relative;
+      width: 100%;
+      border: 1px solid rgba(31, 41, 51, 0.14);
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--books-ink);
+      cursor: pointer;
+      padding: 12px;
+      text-align: left;
+      display: grid;
+      gap: 5px;
+      box-shadow: 0 8px 20px rgba(11, 16, 32, 0.04);
+      transform: translateY(10px);
+      opacity: 0;
+      transition:
+        transform 320ms ease,
+        opacity 260ms ease,
+        border-color 180ms ease,
+        background 180ms ease;
+      transition-delay: calc(var(--book-index) * 46ms);
+    }
+
+    .ot-mindmap-branch.is-open .ot-book-node {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .ot-book-node:hover,
+    .ot-book-node:focus-visible {
+      border-color: rgba(124, 58, 237, 0.46);
+      background: #ffffff;
+      outline: none;
+    }
+
+    .ot-book-node-name {
+      font-size: 0.98rem;
+      font-weight: 950;
+      line-height: 1.1;
+    }
+
+    .ot-book-node-mini {
+      color: var(--books-muted);
+      font-size: 0.72rem;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
     .case-overlay {
       position: fixed;
       inset: 0;
@@ -915,13 +994,19 @@
       line-height: 1.35;
     }
 
+    @media (max-width: 1000px) {
+      .ot-mindmap-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .ot-mindmap-branch::before {
+        display: none;
+      }
+    }
+
     @media (max-width: 900px) {
       :root {
         --header-height: 66px;
-      }
-
-      .testament-stage {
-        grid-template-columns: 1fr 1fr;
       }
 
       .testament-stage.is-old-open {
@@ -969,35 +1054,6 @@
     }
 
     @media (max-width: 560px) {
-      .nav-wrap {
-        padding: 0 12px;
-        grid-template-columns: 1fr;
-        justify-items: center;
-        height: auto;
-        min-height: var(--header-height);
-        gap: 8px;
-      }
-
-      .brand {
-        font-size: 1.12rem;
-      }
-
-      .main-nav {
-        gap: 10px;
-        flex-wrap: wrap;
-      }
-
-      .main-nav a {
-        padding: 7px 4px;
-        font-size: 0.72rem;
-      }
-
-      .nav-right {
-        justify-self: center;
-        position: static;
-        transform: none;
-      }
-
       .testament-stage,
       .testament-stage.is-old-open,
       .testament-stage.is-new-open {
@@ -1013,14 +1069,11 @@
       .testament-panel-content {
         height: auto;
         min-height: clamp(420px, 78svh, 620px);
+        padding: 22px 16px;
       }
 
       .testament-word {
         font-size: clamp(5rem, 30vw, 9rem);
-      }
-
-      .testament-panel-content {
-        padding: 22px 16px;
       }
 
       .category-button {
@@ -1029,6 +1082,18 @@
 
       .category-icon {
         justify-self: start;
+      }
+
+      .ot-mindmap {
+        padding: 18px 14px;
+      }
+
+      .ot-mindmap-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ot-category-node {
+        min-height: auto;
       }
 
       .case-overlay {
@@ -1050,6 +1115,7 @@
           <img src="../assets/header-brand-logo.png" alt="Bible Mapped" class="bm-global-brand-logo" />
         </span>
       </a>
+
       <div class="bm-global-links">
         <a href="../qa/index.html">Q&amp;A</a>
         <a href="../about/index.html">About</a>
@@ -1069,6 +1135,7 @@
             <span class="testament-name">Testament</span>
           </span>
         </button>
+
         <div class="retracted-hint"><strong>New</strong>Testament</div>
         <div class="testament-panel-content" id="oldContent" aria-hidden="true"></div>
       </article>
@@ -1081,6 +1148,7 @@
             <span class="testament-name">Testament</span>
           </span>
         </button>
+
         <div class="retracted-hint"><strong>Old</strong>Testament</div>
         <div class="testament-panel-content" id="newContent" aria-hidden="true"></div>
       </article>
@@ -1179,7 +1247,7 @@
       "Old Testament": {
         eyebrow: "Old Testament",
         title: "The Hebrew Scriptures",
-        copy: "Creation, covenant, law, kings, prophets, exile, and hope. Open a category to see its definition, image slot, and the books inside it.",
+        copy: "Creation, covenant, law, kings, prophets, exile, and hope. Open a category to see how each section branches into the books inside it.",
         note: "Testament means covenant. The Old Testament is the Scripture collection tied to God’s earlier covenant story with Israel, preparing the way for Christ."
       },
       "New Testament": {
@@ -1315,8 +1383,75 @@
       return bookData.filter(book => book.testament === testament && book.category === category);
     }
 
+    function renderOldTestamentMindMap() {
+      const categories = categoryOrder["Old Testament"];
+
+      return `
+        <section class="ot-mindmap" aria-label="Old Testament category mind map">
+          <div class="ot-map-center">
+            <span class="ot-map-center-kicker">Bible Mapped</span>
+            <span class="ot-map-center-title">Old Testament</span>
+            <p class="ot-map-center-note">
+              Choose a category. Each branch opens into the books inside that part of the story.
+            </p>
+          </div>
+
+          <div class="ot-mindmap-grid">
+            ${categories.map((category, index) => {
+              const categoryBooks = booksFor("Old Testament", category);
+
+              return `
+                <article class="ot-mindmap-branch" style="--branch-index:${index}">
+                  <button
+                    class="ot-category-node"
+                    type="button"
+                    aria-expanded="false"
+                    data-ot-category="${escapeHtml(category)}"
+                  >
+                    <span class="ot-category-title">${escapeHtml(category)}</span>
+                    <span class="ot-category-meta">${categoryBooks.length} book${categoryBooks.length === 1 ? "" : "s"}</span>
+                    <span class="ot-category-definition">${escapeHtml(categoryDefinitions[category])}</span>
+                  </button>
+
+                  <div class="ot-book-node-list" aria-hidden="true">
+                    ${categoryBooks.map((book, bookIndex) => `
+                      <button
+                        class="ot-book-node"
+                        type="button"
+                        style="--book-index:${bookIndex}"
+                        data-book="${escapeHtml(book.title)}"
+                      >
+                        <span class="ot-book-node-name">${escapeHtml(book.title)}</span>
+                        <span class="ot-book-node-mini">${escapeHtml(book.meaning)} • ${escapeHtml(book.summary)}</span>
+                      </button>
+                    `).join("")}
+                  </div>
+                </article>
+              `;
+            }).join("")}
+          </div>
+        </section>
+      `;
+    }
+
     function renderTestament(testament, mount) {
       const info = testamentInfo[testament];
+
+      if (testament === "Old Testament") {
+        mount.innerHTML = `
+          <div class="content-header">
+            <span class="eyebrow">${escapeHtml(info.eyebrow)}</span>
+            <h2 class="content-title">${escapeHtml(info.title)}</h2>
+            <p class="content-copy">${escapeHtml(info.copy)}</p>
+            <p class="content-copy covenant-note">${escapeHtml(info.note)}</p>
+          </div>
+
+          ${renderOldTestamentMindMap()}
+        `;
+
+        return;
+      }
+
       const categories = categoryOrder[testament];
 
       mount.innerHTML = `
@@ -1405,6 +1540,25 @@
       }
     }
 
+    function toggleOldTestamentMindMap(button) {
+      const branch = button.closest(".ot-mindmap-branch");
+      const map = button.closest(".ot-mindmap-grid");
+      const bookList = branch.querySelector(".ot-book-node-list");
+      const alreadyOpen = branch.classList.contains("is-open");
+
+      map.querySelectorAll(".ot-mindmap-branch.is-open").forEach(openBranch => {
+        openBranch.classList.remove("is-open");
+        openBranch.querySelector(".ot-category-node")?.setAttribute("aria-expanded", "false");
+        openBranch.querySelector(".ot-book-node-list")?.setAttribute("aria-hidden", "true");
+      });
+
+      if (!alreadyOpen) {
+        branch.classList.add("is-open");
+        button.setAttribute("aria-expanded", "true");
+        bookList.setAttribute("aria-hidden", "false");
+      }
+    }
+
     function openBookCaseStudy(title) {
       const book = bookData.find(item => item.title === title);
       if (!book) return;
@@ -1464,6 +1618,13 @@
         return;
       }
 
+      const oldTestamentCategoryButton = event.target.closest(".ot-category-node");
+
+      if (oldTestamentCategoryButton) {
+        toggleOldTestamentMindMap(oldTestamentCategoryButton);
+        return;
+      }
+
       const categoryButton = event.target.closest(".category-button");
 
       if (categoryButton) {
@@ -1471,7 +1632,7 @@
         return;
       }
 
-      const bookButton = event.target.closest(".book-card");
+      const bookButton = event.target.closest(".book-card, .ot-book-node");
 
       if (bookButton) {
         openBookCaseStudy(bookButton.dataset.book);
@@ -1502,3 +1663,19 @@
   </script>
 </body>
 </html>
+```
+
+What changed:
+
+```txt
+Old Testament now opens as:
+Old Testament
+→ Torah / Pentateuch
+   → Genesis, Exodus, Leviticus, Numbers, Deuteronomy
+→ Historical Books
+→ Wisdom & Poetry
+→ Major Prophets
+→ Minor Prophets
+```
+
+New Testament still uses your original category card layout.
