@@ -184,50 +184,6 @@
       border: 0;
     }
 
-    .bm-section-footer {
-      margin: 0;
-      padding: 31px clamp(22px, 5vw, 76px);
-      background: var(--books-purple);
-      color: #ffffff;
-    }
-
-    .bm-section-footer-inner {
-      min-height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      width: min(1180px, 100%);
-      margin: 0 auto;
-    }
-
-    .bm-section-footer p {
-      margin: 0;
-      font-size: 1rem;
-      font-weight: 400;
-    }
-
-    .bm-section-footer-links {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      flex-wrap: wrap;
-      gap: 18px;
-    }
-
-    .bm-section-footer a {
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 1rem;
-      font-weight: 400;
-    }
-
-    .bm-section-footer a:hover,
-    .bm-section-footer a:focus-visible {
-      text-decoration: underline;
-      text-underline-offset: 4px;
-    }
-
     .books-entry-main {
       position: relative;
       min-height: calc(100vh - var(--header-height));
@@ -339,6 +295,26 @@
       filter: saturate(0.94) sepia(0.08);
       pointer-events: none;
       box-shadow: 0 16px 34px rgba(11, 16, 32, 0.18);
+      transition:
+        opacity 280ms ease,
+        transform 420ms ease,
+        visibility 0s linear 0s;
+    }
+
+    /*
+      BibleMapped fix:
+      Keep the Bible-page frame images on the first Old/New selection screen.
+      Hide them after either Testament opens so they do not show behind the next page.
+    */
+    .testament-stage.is-old-open .testament-slot-image,
+    .testament-stage.is-new-open .testament-slot-image {
+      opacity: 0;
+      visibility: hidden;
+      transform: translate(-50%, -50%) scale(0.96);
+      transition:
+        opacity 280ms ease,
+        transform 420ms ease,
+        visibility 0s linear 420ms;
     }
 
     .testament-trigger:focus-visible {
@@ -366,6 +342,12 @@
       opacity: 1;
     }
 
+    .testament-stage.is-old-open .testament-panel:hover .testament-slot-image,
+    .testament-stage.is-new-open .testament-panel:hover .testament-slot-image {
+      opacity: 0;
+      visibility: hidden;
+    }
+
     .testament-kicker,
     .testament-name,
     .testament-image-note {
@@ -374,10 +356,6 @@
       font-weight: 950;
       letter-spacing: 0.17em;
       text-transform: uppercase;
-    }
-
-    .testament-kicker {
-      color: rgba(31, 41, 51, 0.58);
     }
 
     .testament-word {
@@ -394,11 +372,6 @@
       color: var(--books-purple);
       font-size: clamp(1rem, 2vw, 1.45rem);
       letter-spacing: 0.1em;
-    }
-
-    .testament-image-note {
-      color: rgba(31, 41, 51, 0.46);
-      font-size: 0.66rem;
     }
 
     .testament-stage.is-old-open .testament-panel--old .testament-label-stack,
@@ -468,12 +441,6 @@
 
     .testament-panel.is-retracted {
       cursor: pointer;
-    }
-
-    .testament-panel.is-retracted::before {
-      inset: 0;
-      border-style: solid;
-      border-color: rgba(31, 41, 51, 0.18);
     }
 
     .testament-panel.is-retracted:hover .retracted-hint {
@@ -1074,6 +1041,7 @@
     }
   </style>
 </head>
+
 <body>
   <header class="bm-global-header">
     <nav class="bm-global-nav" aria-label="Primary">
@@ -1120,16 +1088,17 @@
   </main>
 
   <footer class="bm-site-footer" aria-label="Bible Mapped footer">
-      <div class="bm-site-footer-inner">
-        <div class="bm-footer-top">
-          <img class="bm-footer-wordmark" src="/assets/footer-brand-logo.png" alt="Bible Mapped" />
+    <div class="bm-site-footer-inner">
+      <div class="bm-footer-top">
+        <img class="bm-footer-wordmark" src="/assets/footer-brand-logo.png" alt="Bible Mapped" />
 
-          <div class="bm-footer-social-row" aria-label="Bible Mapped social links">
+        <div class="bm-footer-social-row" aria-label="Bible Mapped social links">
           <a class="bm-footer-social-emblem tiktok-emblem" href="https://www.tiktok.com/@biblemapped" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M14.7 3.2c.3 2.3 1.6 3.8 3.9 4.2v3.3c-1.4 0-2.7-.4-3.9-1.1v5.8c0 3.2-2.1 5.4-5.2 5.4-2.8 0-5-2-5-4.7 0-2.9 2.2-4.9 5.1-4.9.4 0 .7 0 1 .1v3.4c-.3-.1-.7-.2-1-.2-1 0-1.8.6-1.8 1.5s.8 1.5 1.7 1.5c1.1 0 1.8-.7 1.8-2V3.2h3.4Z" />
             </svg>
           </a>
+
           <a class="bm-footer-social-emblem instagram-emblem" href="#" aria-label="Instagram">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <rect x="4" y="4" width="16" height="16" rx="5" ry="5" />
@@ -1137,47 +1106,50 @@
               <circle cx="17" cy="7" r="1.3" />
             </svg>
           </a>
+
           <a class="bm-footer-social-emblem patreon-emblem" href="https://www.patreon.com/cw/Biblemapped" target="_blank" rel="noopener noreferrer" aria-label="Patreon">
             <span class="bm-footer-patreon-letter" aria-hidden="true">P</span>
           </a>
+
           <a class="bm-footer-social-emblem youtube-emblem" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M21 8.1c-.2-1.1-.8-1.9-1.9-2.1C17.4 5.6 12 5.6 12 5.6s-5.4 0-7.1.4C3.8 6.2 3.2 7 3 8.1 2.6 9.8 2.6 12 2.6 12s0 2.2.4 3.9c.2 1.1.8 1.9 1.9 2.1 1.7.4 7.1.4 7.1.4s5.4 0 7.1-.4c1.1-.2 1.7-1 1.9-2.1.4-1.7.4-3.9.4-3.9s0-2.2-.4-3.9ZM10.1 14.8V9.2l5 2.8-5 2.8Z" />
             </svg>
           </a>
+
           <a class="bm-footer-social-emblem facebook-emblem" href="#" aria-label="Facebook">f</a>
         </div>
-        </div>
-
-        <div class="bm-footer-divider" aria-hidden="true"></div>
-
-        <nav class="bm-footer-links bm-footer-primary" aria-label="Footer navigation">
-          <a href="/">Home</a>
-          <span>|</span>
-          <a href="/about/">About</a>
-          <span>|</span>
-          <a href="/books/">Books</a>
-          <span>|</span>
-          <a href="/characters/">People</a>
-          <span>|</span>
-          <a href="/maps/">Maps</a>
-          <span>|</span>
-          <a href="/case-studies/">Case Studies</a>
-          <span>|</span>
-          <a class="bm-footer-heaven-link" href="/heaven/">Are You Going to Heaven?</a>
-        </nav>
-
-        <nav class="bm-footer-links bm-footer-secondary" aria-label="Footer utility navigation">
-          <a href="/terms/">Terms of Use</a>
-          <span>|</span>
-          <a href="/help/">Help Center</a>
-          <span>|</span>
-          <a href="mailto:calvin@biblemapped.com">Contact Us</a>
-        </nav>
-
-        <p class="bm-footer-copy">&copy; 2026 Bible Mapped. All rights reserved.</p>
       </div>
-    </footer>
+
+      <div class="bm-footer-divider" aria-hidden="true"></div>
+
+      <nav class="bm-footer-links bm-footer-primary" aria-label="Footer navigation">
+        <a href="/">Home</a>
+        <span>|</span>
+        <a href="/about/">About</a>
+        <span>|</span>
+        <a href="/books/">Books</a>
+        <span>|</span>
+        <a href="/characters/">People</a>
+        <span>|</span>
+        <a href="/maps/">Maps</a>
+        <span>|</span>
+        <a href="/case-studies/">Case Studies</a>
+        <span>|</span>
+        <a class="bm-footer-heaven-link" href="/heaven/">Are You Going to Heaven?</a>
+      </nav>
+
+      <nav class="bm-footer-links bm-footer-secondary" aria-label="Footer utility navigation">
+        <a href="/terms/">Terms of Use</a>
+        <span>|</span>
+        <a href="/help/">Help Center</a>
+        <span>|</span>
+        <a href="mailto:calvin@biblemapped.com">Contact Us</a>
+      </nav>
+
+      <p class="bm-footer-copy">&copy; 2026 Bible Mapped. All rights reserved.</p>
+    </div>
+  </footer>
 
   <div class="case-overlay" id="caseOverlay" role="dialog" aria-modal="true" aria-labelledby="caseTitle" aria-hidden="true">
     <article class="case-study-card">
@@ -1354,9 +1326,11 @@
           <p class="content-copy">${escapeHtml(info.copy)}</p>
           <p class="content-copy covenant-note">${escapeHtml(info.note)}</p>
         </div>
+
         <div class="category-list">
           ${categories.map((category, index) => {
             const categoryBooks = booksFor(testament, category);
+
             return `
               <article class="category-card" style="--card-index:${index}">
                 <button class="category-button" type="button" aria-expanded="false" data-category="${escapeHtml(category)}">
@@ -1366,11 +1340,13 @@
                   </span>
                   <span class="category-icon" aria-hidden="true">+</span>
                 </button>
+
                 <div class="category-drawer" aria-hidden="true">
                   <div class="category-inner">
                     <div class="definition-block">
                       <span class="definition-label">Definition</span>
                       <p class="definition-text">${escapeHtml(categoryDefinitions[category])}</p>
+
                       <div class="book-strip">
                         ${categoryBooks.map((book, bookIndex) => `
                           <button class="book-card" type="button" style="--book-index:${bookIndex}" data-book="${escapeHtml(book.title)}">
@@ -1380,6 +1356,7 @@
                         `).join("")}
                       </div>
                     </div>
+
                     <div class="category-image-slot">9:16 Image Slot<br />${escapeHtml(category)}</div>
                   </div>
                 </div>
@@ -1393,8 +1370,8 @@
     function openTestament(testament) {
       const oldButton = document.querySelector('[data-testament="Old Testament"]');
       const newButton = document.querySelector('[data-testament="New Testament"]');
-      const oldPanel = document.querySelector('.testament-panel--old');
-      const newPanel = document.querySelector('.testament-panel--new');
+      const oldPanel = document.querySelector(".testament-panel--old");
+      const newPanel = document.querySelector(".testament-panel--new");
 
       stage.classList.toggle("is-old-open", testament === "Old Testament");
       stage.classList.toggle("is-new-open", testament === "New Testament");
@@ -1404,6 +1381,7 @@
 
       oldButton.setAttribute("aria-expanded", String(testament === "Old Testament"));
       newButton.setAttribute("aria-expanded", String(testament === "New Testament"));
+
       oldContent.setAttribute("aria-hidden", String(testament !== "Old Testament"));
       newContent.setAttribute("aria-hidden", String(testament !== "New Testament"));
     }
@@ -1432,6 +1410,7 @@
       if (!book) return;
 
       caseMeta.textContent = `${book.testament} • ${book.category}`;
+
       caseBody.innerHTML = `
         <h2 id="caseTitle">${escapeHtml(book.title)}</h2>
         <p class="case-subtitle">${escapeHtml(book.summary)}</p>
@@ -1479,18 +1458,21 @@
 
     document.addEventListener("click", event => {
       const testamentButton = event.target.closest("[data-testament]");
+
       if (testamentButton) {
         openTestament(testamentButton.dataset.testament);
         return;
       }
 
       const categoryButton = event.target.closest(".category-button");
+
       if (categoryButton) {
         toggleCategory(categoryButton);
         return;
       }
 
       const bookButton = event.target.closest(".book-card");
+
       if (bookButton) {
         openBookCaseStudy(bookButton.dataset.book);
       }
