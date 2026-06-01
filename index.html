@@ -4329,12 +4329,6 @@
       font-size: 0.94rem;
     }
 
-    .mood-mode-toggle {
-      width: 100%;
-      border: 0;
-      font: inherit;
-    }
-
     .mood-mode-section {
       display: none;
       padding-top: clamp(2rem, 5vw, 4rem);
@@ -4730,26 +4724,16 @@
         font-size: clamp(1.82rem, 8vw, 2rem) !important;
       }
     }
-    .landing-followup-bars .mood-mode-toggle {
-      border-top: 1px solid rgba(142, 113, 77, 0.18);
-      border-bottom: 0;
-      background: #fbf4e8;
-      color: #745b3e;
-    }
-
     .mood-mode-redesign,
     .mood-mode-redesign.open {
       position: relative;
       display: block;
       overflow: hidden;
       min-height: clamp(780px, 88vw, 1040px);
-      padding: clamp(5rem, 8vw, 7.5rem) clamp(1rem, 4vw, 3rem) clamp(4.2rem, 7vw, 6rem);
+      padding: clamp(4rem, 8vw, 6.8rem) clamp(1rem, 4vw, 3rem) clamp(3.6rem, 6vw, 5rem);
       border-top: 1px solid rgba(142, 113, 77, 0.18);
       border-bottom: 1px solid rgba(142, 113, 77, 0.18);
-      background:
-        linear-gradient(180deg, rgba(255, 252, 245, 0.35), rgba(255, 249, 238, 0.84)),
-        url("assets/mood-mode-background.png") center / cover no-repeat,
-        #fff8ec;
+      background: #f7efe3 url("assets/mood-mode-background.png") center / cover no-repeat;
     }
 
     .mood-mode-redesign::before {
@@ -4757,9 +4741,7 @@
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background:
-        radial-gradient(circle at center, rgba(255, 252, 245, 0.82) 0 31%, rgba(255, 252, 245, 0.4) 48%, rgba(255, 252, 245, 0.08) 72%),
-        linear-gradient(90deg, rgba(255, 252, 245, 0.05), rgba(255, 252, 245, 0.42) 50%, rgba(255, 252, 245, 0.05));
+      background: rgba(247, 239, 227, 0.28);
     }
 
     .mood-mode-redesign .mood-mode-inner {
@@ -4784,7 +4766,7 @@
     .mood-mode-redesign .mood-mode-copy h2 {
       max-width: none;
       margin: 0 0 1rem;
-      color: #5d4732;
+      color: #554638;
       font-size: clamp(3rem, 7vw, 6rem);
       line-height: 0.92;
     }
@@ -4792,7 +4774,7 @@
     .mood-mode-redesign .mood-mode-copy p:not(.eyebrow) {
       max-width: 560px;
       margin: 0 auto;
-      color: #756247;
+      color: #554638;
       font-size: clamp(1.05rem, 1.5vw, 1.22rem);
       line-height: 1.72;
     }
@@ -4801,6 +4783,8 @@
       position: relative;
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(4, minmax(0, auto));
+      grid-auto-flow: column;
       gap: clamp(1rem, 2vw, 1.35rem) clamp(3.2rem, 8vw, 7rem);
       border: 0;
     }
@@ -4812,7 +4796,8 @@
       bottom: -2.6rem;
       left: 50%;
       width: 1px;
-      background: linear-gradient(180deg, transparent, rgba(116, 89, 57, 0.6) 16%, rgba(116, 89, 57, 0.62) 84%, transparent);
+      background: rgba(107, 84, 61, 0.42);
+      pointer-events: none;
       transform: translateX(-50%);
     }
 
@@ -4825,15 +4810,16 @@
       width: 3rem;
       height: 3rem;
       place-items: center;
-      border: 1px solid rgba(116, 89, 57, 0.42);
+      border: 1px solid rgba(107, 84, 61, 0.35);
       border-radius: 50%;
-      background: rgba(255, 249, 238, 0.92);
+      background: #fbf3e6;
       box-shadow: 0 10px 28px rgba(116, 89, 57, 0.12);
-      color: #8b6b45;
+      color: #6b543d;
       font-family: "Cormorant Garamond", Georgia, serif;
       font-size: 2rem;
       font-weight: 700;
       line-height: 1;
+      pointer-events: none;
       transform: translate(-50%, -50%);
     }
 
@@ -4845,49 +4831,67 @@
       background: transparent;
     }
 
-    .mood-mode-redesign .mood-card-link {
+    .mood-mode-redesign .mood-card-button {
       display: grid;
       grid-template-columns: auto minmax(0, 1fr);
       align-items: center;
       gap: clamp(1rem, 2vw, 1.35rem);
+      width: 100%;
       min-height: clamp(6.2rem, 10vw, 8rem);
       padding: clamp(1.1rem, 2vw, 1.55rem) clamp(1.2rem, 2.4vw, 2rem);
-      border: 1px solid rgba(172, 135, 83, 0.46);
+      border: 1px solid rgba(107, 84, 61, 0.35);
       border-radius: 999px;
-      background:
-        linear-gradient(135deg, rgba(255, 253, 247, 0.92), rgba(246, 232, 207, 0.78)),
-        #fbf1df;
+      background: #fff8ec;
       box-shadow: 0 12px 32px rgba(110, 82, 49, 0.08);
-      color: #5a4530;
-      text-decoration: none;
+      color: #554638;
+      cursor: pointer;
+      font: inherit;
+      text-align: left;
       transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, color 180ms ease;
     }
 
-    .mood-mode-redesign .mood-card-link:hover,
-    .mood-mode-redesign .mood-card-link:focus-visible {
-      border-color: rgba(166, 93, 212, 0.8);
+    .mood-mode-redesign .mood-card-button:hover,
+    .mood-mode-redesign .mood-card-button:focus-visible {
+      border-color: rgba(155, 91, 184, 0.8);
       box-shadow: 0 18px 42px rgba(110, 82, 49, 0.16);
-      color: #7f3fb7;
-      outline: 0;
+      color: #9b5bb8;
+      outline: 3px solid rgba(155, 91, 184, 0.16);
+      outline-offset: 4px;
       transform: translateY(-4px);
     }
 
-    .mood-mode-redesign .mood-card-link .mood-symbol {
+    .mood-mode-redesign .mood-card-button:active {
+      box-shadow: 0 10px 24px rgba(110, 82, 49, 0.13);
+      transform: translateY(-1px);
+    }
+
+    .mood-mode-redesign .mood-symbol {
       display: grid;
       width: clamp(3rem, 5.5vw, 4.2rem);
       height: clamp(3rem, 5.5vw, 4.2rem);
       flex: none;
       place-items: center;
-      border: 1px dashed rgba(143, 79, 190, 0.52);
+      border: 1px dashed rgba(155, 91, 184, 0.52);
       border-radius: 50%;
-      color: #a65dd4;
+      color: #9b5bb8;
       font-family: "Cormorant Garamond", Georgia, serif;
       font-size: clamp(1.45rem, 3vw, 2.1rem);
       font-weight: 700;
       line-height: 1;
     }
 
-    .mood-mode-redesign .mood-card-link strong {
+    .mood-mode-redesign .mood-symbol svg {
+      display: block;
+      width: 72%;
+      height: 72%;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .mood-mode-redesign .mood-card-button strong {
       display: block;
       min-width: 0;
       font-family: "Cormorant Garamond", Georgia, serif;
@@ -4896,15 +4900,116 @@
       line-height: 0.96;
     }
 
-    .mood-mode-redesign .mood-mode-statement {
+    .mood-route-modal[hidden] {
+      display: none;
+    }
+
+    body.mood-route-open {
+      overflow: hidden;
+    }
+
+    .mood-route-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1200;
+      display: grid;
+      place-items: center;
+      padding: clamp(1rem, 4vw, 2rem);
+    }
+
+    .mood-route-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(45, 34, 24, 0.34);
+      backdrop-filter: blur(4px);
+    }
+
+    .mood-route-dialog {
       position: relative;
-      margin: clamp(3rem, 6vw, 5rem) auto 0;
-      color: #755c3e;
+      width: min(560px, 100%);
+      padding: clamp(1.5rem, 4vw, 2.4rem);
+      border: 1px solid rgba(107, 84, 61, 0.35);
+      border-radius: 18px;
+      background: #fbf3e6;
+      box-shadow: 0 26px 70px rgba(45, 34, 24, 0.24);
+      color: #554638;
+    }
+
+    .mood-route-close {
+      position: absolute;
+      top: 0.9rem;
+      right: 0.9rem;
+      display: grid;
+      width: 2.45rem;
+      height: 2.45rem;
+      place-items: center;
+      border: 1px solid rgba(107, 84, 61, 0.35);
+      border-radius: 50%;
+      background: #fff8ec;
+      color: #554638;
+      cursor: pointer;
+      font: inherit;
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    .mood-route-close:hover,
+    .mood-route-close:focus-visible,
+    .mood-route-follow:hover,
+    .mood-route-follow:focus-visible {
+      border-color: rgba(155, 91, 184, 0.8);
+      outline: 3px solid rgba(155, 91, 184, 0.16);
+      outline-offset: 3px;
+    }
+
+    .mood-route-eyebrow {
+      margin: 0 0 0.75rem;
+      color: #9a7a48;
+      font-size: 0.72rem;
+      font-weight: 950;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .mood-route-dialog h3 {
+      margin: 0;
+      color: #554638;
       font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: clamp(1.7rem, 3.2vw, 2.6rem);
+      font-size: clamp(2.7rem, 8vw, 4.5rem);
+      line-height: 0.95;
+    }
+
+    .mood-route-reference {
+      margin: 0.8rem 0 1rem;
+      color: #9b5bb8;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(1.45rem, 4vw, 2rem);
       font-weight: 700;
-      line-height: 1.1;
-      text-align: center;
+    }
+
+    .mood-route-encouragement {
+      margin: 0;
+      color: #554638;
+      font-size: clamp(1rem, 2vw, 1.12rem);
+      line-height: 1.7;
+    }
+
+    .mood-route-follow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: clamp(1.35rem, 3vw, 2rem);
+      padding: 0.95rem 1.35rem;
+      border: 1px solid rgba(155, 91, 184, 0.58);
+      border-radius: 999px;
+      background: #fff8ec;
+      color: #9b5bb8;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 950;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
     }
 
     @media (max-width: 860px) {
@@ -4917,6 +5022,8 @@
 
       .mood-mode-redesign .mood-card-grid {
         grid-template-columns: 1fr;
+        grid-template-rows: none;
+        grid-auto-flow: row;
         gap: 1rem;
       }
 
@@ -4927,7 +5034,7 @@
     }
 
     @media (max-width: 520px) {
-      .mood-mode-redesign .mood-card-link {
+      .mood-mode-redesign .mood-card-button {
         min-height: 5.6rem;
         gap: 0.85rem;
         padding: 0.95rem 1rem;
@@ -5234,8 +5341,6 @@
   </section>
 
   <section class="landing-followup-bars premium-reveal" aria-label="Bible Mapped features">
-    <button class="landing-followup-bar heaven-test-bar mood-mode-toggle" type="button" id="moodModeToggle" aria-expanded="true" aria-controls="mood-mode">Mood Mode</button>
-
     <div class="mood-mode-section mood-mode-redesign open" id="mood-mode" aria-labelledby="moodModeTitle" aria-hidden="false">
       <div class="mood-mode-inner">
         <div class="mood-mode-copy">
@@ -5246,198 +5351,90 @@
 
         <div class="mood-card-grid" data-mood-grid>
           <article class="mood-card">
-            <a class="mood-card-link" href="themes/index.html#mood-afraid" aria-label="Explore Scripture for feeling afraid">
-              <span class="mood-symbol" aria-hidden="true">!</span>
+            <button class="mood-card-button" type="button" data-mood="Afraid" data-reference="Isaiah 41:10" data-encouragement="God does not leave you alone in fear. He calls you back to His presence." data-route="themes/index.html#mood-afraid">
+              <span class="mood-symbol" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path d="M24 5c7 9 13 17 13 26 0 7-6 12-13 12S11 38 11 31C11 22 17 14 24 5Z"/><path d="M18 32c1 4 4 6 8 6"/></svg>
+              </span>
               <strong>Afraid</strong>
-            </a>
+            </button>
           </article>
 
           <article class="mood-card">
-            <a class="mood-card-link" href="themes/index.html#mood-guilty" aria-label="Explore Scripture for feeling guilty">
-              <span class="mood-symbol" aria-hidden="true">&#9878;</span>
+            <button class="mood-card-button" type="button" data-mood="Guilty" data-reference="1 John 1:9" data-encouragement="Guilt is not the end of the story. Confession brings you back toward mercy." data-route="themes/index.html#mood-guilty">
+              <span class="mood-symbol" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path d="M24 39S10 31 10 19c0-5 4-9 9-9 3 0 5 1 5 4 0-3 2-4 5-4 5 0 9 4 9 9 0 12-14 20-14 20Z"/><path d="M15 19c0-2 2-4 4-4"/></svg>
+              </span>
               <strong>Guilty</strong>
-            </a>
+            </button>
           </article>
 
           <article class="mood-card">
-            <a class="mood-card-link" href="themes/index.html#mood-confused" aria-label="Explore Scripture for feeling confused">
-              <span class="mood-symbol" aria-hidden="true">?</span>
+            <button class="mood-card-button" type="button" data-mood="Confused" data-reference="James 1:5" data-encouragement="When your mind feels tangled, Scripture invites you to ask God for wisdom." data-route="themes/index.html#mood-confused">
+              <span class="mood-symbol" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path d="M16 18c7-9 21-3 14 5-4 5-11 1-8-5 4-8 18-3 15 7-3 9-20 10-26 1-5-8 4-18 15-14"/><path d="M15 34c8 5 19 4 25-2"/></svg>
+              </span>
               <strong>Confused</strong>
-            </a>
+            </button>
           </article>
 
           <article class="mood-card">
-            <a class="mood-card-link" href="themes/index.html#mood-grieving" aria-label="Explore Scripture for feeling grieving">
-              <span class="mood-symbol" aria-hidden="true">&#10013;</span>
+            <button class="mood-card-button" type="button" data-mood="Grieving" data-reference="Psalm 34:18" data-encouragement="God is near to the brokenhearted." data-route="themes/index.html#mood-grieving">
+              <span class="mood-symbol" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path d="M15 29c-5 0-8-3-8-7s4-7 9-6c2-5 8-8 14-5 4 2 6 5 6 10 3 1 5 4 5 7 0 5-4 8-9 8H15Z"/><path d="M17 41v3M25 39v4M33 41v3"/></svg>
+              </span>
               <strong>Grieving</strong>
-            </a>
+            </button>
           </article>
 
           <article class="mood-card">
-            <a class="mood-card-link" href="themes/index.html#mood-lonely" aria-label="Explore Scripture for feeling lonely">
-              <span class="mood-symbol" aria-hidden="true">&#9673;</span>
+            <button class="mood-card-button" type="button" data-mood="Lonely" data-reference="Hebrews 13:5" data-encouragement="Loneliness says no one is near. Scripture says God has not left." data-route="themes/index.html#mood-lonely">
+              <span class="mood-symbol" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path d="M19 22a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"/><path d="M10 39c1-8 4-12 9-12s8 4 9 12"/><path d="M33 11c-1 4 1 8 5 10-4 1-8-1-10-5"/><path d="M35 30h.1M40 25h.1"/></svg>
+              </span>
               <strong>Lonely</strong>
-            </a>
+            </button>
           </article>
 
           <article class="mood-card">
-            <a class="mood-card-link" href="themes/index.html#mood-weary" aria-label="Explore Scripture for feeling weary">
-              <span class="mood-symbol" aria-hidden="true">&#10022;</span>
+            <button class="mood-card-button" type="button" data-mood="Weary" data-reference="Matthew 11:28" data-encouragement="Jesus does not shame the tired. He invites the weary to come to Him." data-route="themes/index.html#mood-weary">
+              <span class="mood-symbol" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path d="M18 16h12M16 22h16M18 36h12"/><path d="M20 16c0-5 8-5 8 0M20 36c-3-4-4-9-4-14h16c0 5-1 10-4 14"/><path d="M13 40h22"/><path d="M24 8v4"/></svg>
+              </span>
               <strong>Weary</strong>
-            </a>
+            </button>
           </article>
 
           <article class="mood-card">
-            <a class="mood-card-link" href="themes/index.html#mood-hopeful" aria-label="Explore Scripture for feeling hopeful">
-              <span class="mood-symbol" aria-hidden="true">&#9734;</span>
+            <button class="mood-card-button" type="button" data-mood="Hopeful" data-reference="Romans 15:13" data-encouragement="Biblical hope is trust anchored in God." data-route="themes/index.html#mood-hopeful">
+              <span class="mood-symbol" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path d="M8 34c6-8 26-8 32 0"/><path d="M14 34h20"/><path d="M24 12v8M13 23l5 4M35 23l-5 4M10 32h28"/></svg>
+              </span>
               <strong>Hopeful</strong>
-            </a>
+            </button>
           </article>
 
           <article class="mood-card">
-            <a class="mood-card-link" href="themes/index.html#mood-angry" aria-label="Explore Scripture for feeling angry">
-              <span class="mood-symbol" aria-hidden="true">&#9670;</span>
+            <button class="mood-card-button" type="button" data-mood="Angry" data-reference="Ephesians 4:26&ndash;27" data-encouragement="Anger needs direction before it becomes destruction." data-route="themes/index.html#mood-angry">
+              <span class="mood-symbol" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path d="M24 42c8-3 13-9 13-17 0-6-3-10-8-14 1 5-1 8-5 10 1-6-2-10-7-14 1 8-6 12-6 21 0 7 5 12 13 14Z"/><path d="M24 42c-4-2-6-5-6-9 0-3 2-6 5-8 0 4 3 5 5 8 2 4 0 7-4 9Z"/></svg>
+              </span>
               <strong>Angry</strong>
-            </a>
+            </button>
           </article>
         </div>
 
-        <p class="mood-mode-statement">All Scripture. One Story. Pointing to Jesus.</p>
       </div>
     </div>
 
-    <div class="mood-mode-section" id="mood-mode-legacy" aria-labelledby="moodModeLegacyTitle" aria-hidden="true">
-      <div class="mood-mode-inner">
-        <div class="mood-mode-copy">
-          <p class="eyebrow">MOOD MODE</p>
-          <h2 id="moodModeLegacyTitle">What&rsquo;s Your Mood?</h2>
-          <p>Try finding Scripture by how you feel today. There is always someone in Scripture who can relate to fear, guilt, grief, confusion, loneliness, hope, and weakness — not because the Bible is centered on us, but because God has always dealt with real people in real moments.</p>
-          <p class="mood-mode-anchor">The Bible was not written first to us, but it was written for us.</p>
-        </div>
-
-        <p class="mood-mode-instruction">Choose the mood that matches today.</p>
-
-        <div class="mood-card-grid" data-mood-grid>
-          <article class="mood-card">
-            <button class="mood-card-toggle" type="button" aria-expanded="false">
-              <span class="mood-card-label"><span class="mood-symbol" aria-hidden="true">&#9888;</span>Mood Trail</span>
-              <strong>Afraid</strong>
-              <em>David in the wilderness</em>
-            </button>
-            <div class="mood-card-panel">
-              <dl class="mood-detail-list">
-                <div><dt>Trail</dt><dd>David in the wilderness</dd></div>
-                <div><dt>Place</dt><dd>Wilderness / caves</dd></div>
-                <div><dt>Passage</dt><dd>Psalm 56, 1 Samuel 21-24</dd></div>
-                <div><dt>Question</dt><dd>What do you do when fear follows you?</dd></div>
-                <div><dt>Meaning</dt><dd>Faith does not mean fear disappears. It means fear has somewhere to go.</dd></div>
-                <div><dt>Jesus Connection</dt><dd>Christ is the Shepherd who does not abandon His sheep.</dd></div>
-                <div><dt>Trail Path</dt><dd>David -> Wilderness -> Psalms -> Trust -> Christ the Shepherd</dd></div>
-              </dl>
-              <a class="mood-trail-link" href="characters/index.html">Follow This Trail</a>
-            </div>
-          </article>
-
-          <article class="mood-card">
-            <button class="mood-card-toggle" type="button" aria-expanded="false">
-              <span class="mood-card-label"><span class="mood-symbol" aria-hidden="true">&#9878;</span>Mood Trail</span>
-              <strong>Guilty</strong>
-              <em>Peter&rsquo;s denial and restoration</em>
-            </button>
-            <div class="mood-card-panel">
-              <dl class="mood-detail-list">
-                <div><dt>Trail</dt><dd>Peter&rsquo;s denial and restoration</dd></div>
-                <div><dt>Place</dt><dd>Courtyard / Sea of Galilee</dd></div>
-                <div><dt>Passage</dt><dd>Luke 22, John 21</dd></div>
-                <div><dt>Question</dt><dd>Can God restore someone who failed?</dd></div>
-                <div><dt>Meaning</dt><dd>Failure is serious, but Christ&rsquo;s mercy is greater.</dd></div>
-                <div><dt>Jesus Connection</dt><dd>Jesus restores sinners, not performers.</dd></div>
-                <div><dt>Trail Path</dt><dd>Peter -> Denial -> Restoration -> Grace -> Gospel</dd></div>
-              </dl>
-              <a class="mood-trail-link" href="heaven/index.html">Follow This Trail</a>
-            </div>
-          </article>
-
-          <article class="mood-card">
-            <button class="mood-card-toggle" type="button" aria-expanded="false">
-              <span class="mood-card-label"><span class="mood-symbol" aria-hidden="true">&#9673;</span>Mood Trail</span>
-              <strong>Forgotten</strong>
-              <em>Hagar in the wilderness</em>
-            </button>
-            <div class="mood-card-panel">
-              <dl class="mood-detail-list">
-                <div><dt>Trail</dt><dd>Hagar in the wilderness</dd></div>
-                <div><dt>Place</dt><dd>Wilderness of Shur</dd></div>
-                <div><dt>Passage</dt><dd>Genesis 16</dd></div>
-                <div><dt>Question</dt><dd>Does God see people others overlook?</dd></div>
-                <div><dt>Meaning</dt><dd>God sees the person pushed to the margins.</dd></div>
-                <div><dt>Jesus Connection</dt><dd>Christ repeatedly moves toward the overlooked.</dd></div>
-                <div><dt>Trail Path</dt><dd>Hagar -> Wilderness -> God who sees -> The overlooked -> Jesus</dd></div>
-              </dl>
-              <a class="mood-trail-link" href="characters/index.html">Follow This Trail</a>
-            </div>
-          </article>
-
-          <article class="mood-card">
-            <button class="mood-card-toggle" type="button" aria-expanded="false">
-              <span class="mood-card-label"><span class="mood-symbol" aria-hidden="true">?</span>Mood Trail</span>
-              <strong>Confused</strong>
-              <em>Thomas and the risen Christ</em>
-            </button>
-            <div class="mood-card-panel">
-              <dl class="mood-detail-list">
-                <div><dt>Trail</dt><dd>Thomas and the risen Christ</dd></div>
-                <div><dt>Place</dt><dd>Jerusalem</dd></div>
-                <div><dt>Passage</dt><dd>John 20</dd></div>
-                <div><dt>Question</dt><dd>What does God do with honest doubt?</dd></div>
-                <div><dt>Meaning</dt><dd>Jesus meets Thomas with evidence and mercy.</dd></div>
-                <div><dt>Jesus Connection</dt><dd>Faith rests on the risen Christ, not blind optimism.</dd></div>
-                <div><dt>Trail Path</dt><dd>Thomas -> Doubt -> Evidence -> Resurrection -> Faith</dd></div>
-              </dl>
-              <a class="mood-trail-link" href="qa/index.html">Follow This Trail</a>
-            </div>
-          </article>
-
-          <article class="mood-card">
-            <button class="mood-card-toggle" type="button" aria-expanded="false">
-              <span class="mood-card-label"><span class="mood-symbol" aria-hidden="true">&#10013;</span>Mood Trail</span>
-              <strong>Grieving</strong>
-              <em>Mary and Martha after Lazarus dies</em>
-            </button>
-            <div class="mood-card-panel">
-              <dl class="mood-detail-list">
-                <div><dt>Trail</dt><dd>Mary and Martha after Lazarus dies</dd></div>
-                <div><dt>Place</dt><dd>Bethany</dd></div>
-                <div><dt>Passage</dt><dd>John 11</dd></div>
-                <div><dt>Question</dt><dd>Where is Jesus when grief feels late?</dd></div>
-                <div><dt>Meaning</dt><dd>Jesus does not ignore sorrow. He enters it.</dd></div>
-                <div><dt>Jesus Connection</dt><dd>Christ is the resurrection and the life.</dd></div>
-                <div><dt>Trail Path</dt><dd>Bethany -> Lazarus -> Tears -> Resurrection -> Jesus</dd></div>
-              </dl>
-              <a class="mood-trail-link" href="case-studies/index.html">Follow This Trail</a>
-            </div>
-          </article>
-
-          <article class="mood-card">
-            <button class="mood-card-toggle" type="button" aria-expanded="false">
-              <span class="mood-card-label"><span class="mood-symbol" aria-hidden="true">&#10022;</span>Mood Trail</span>
-              <strong>Hopeful</strong>
-              <em>Simeon waiting for the Messiah</em>
-            </button>
-            <div class="mood-card-panel">
-              <dl class="mood-detail-list">
-                <div><dt>Trail</dt><dd>Simeon waiting for the Messiah</dd></div>
-                <div><dt>Place</dt><dd>Jerusalem temple</dd></div>
-                <div><dt>Passage</dt><dd>Luke 2</dd></div>
-                <div><dt>Question</dt><dd>What does faithful waiting look like?</dd></div>
-                <div><dt>Meaning</dt><dd>Hope waits because God keeps promises.</dd></div>
-                <div><dt>Jesus Connection</dt><dd>Jesus is the promise Simeon waited to see.</dd></div>
-                <div><dt>Trail Path</dt><dd>Simeon -> Temple -> Waiting -> Promise -> Christ</dd></div>
-              </dl>
-              <a class="mood-trail-link" href="maps/index.html">Follow This Trail</a>
-            </div>
-          </article>
-        </div>
+    <div class="mood-route-modal" id="moodRouteModal" hidden>
+      <div class="mood-route-backdrop" data-mood-close></div>
+      <div class="mood-route-dialog" role="dialog" aria-modal="true" aria-labelledby="moodRouteTitle" aria-describedby="moodRouteEncouragement" tabindex="-1">
+        <button class="mood-route-close" type="button" data-mood-close aria-label="Close mood route">&times;</button>
+        <p class="mood-route-eyebrow">Mood Route</p>
+        <h3 id="moodRouteTitle">Afraid</h3>
+        <p class="mood-route-reference" id="moodRouteReference">Isaiah 41:10</p>
+        <p class="mood-route-encouragement" id="moodRouteEncouragement">God does not leave you alone in fear. He calls you back to His presence.</p>
+        <button class="mood-route-follow" type="button" data-mood-follow>Follow this route</button>
       </div>
     </div>
 
@@ -6100,40 +6097,66 @@
 
     forceAboutMappedOpen();
 
-    const moodModeToggle = document.getElementById("moodModeToggle");
-    const moodModePanel = document.getElementById("mood-mode");
-    const moodCards = document.querySelectorAll(".mood-card");
+    const moodButtons = document.querySelectorAll(".mood-mode-redesign .mood-card-button");
+    const moodRouteModal = document.getElementById("moodRouteModal");
+    const moodRouteDialog = moodRouteModal ? moodRouteModal.querySelector(".mood-route-dialog") : null;
+    const moodRouteTitle = document.getElementById("moodRouteTitle");
+    const moodRouteReference = document.getElementById("moodRouteReference");
+    const moodRouteEncouragement = document.getElementById("moodRouteEncouragement");
+    const moodRouteFollow = moodRouteModal ? moodRouteModal.querySelector("[data-mood-follow]") : null;
+    let lastMoodTrigger = null;
+    let activeMoodRoute = "";
 
-    if (moodModeToggle && moodModePanel) {
-      moodModeToggle.addEventListener("click", () => {
-        moodModePanel.classList.add("open");
-        moodModeToggle.setAttribute("aria-expanded", "true");
-        moodModePanel.setAttribute("aria-hidden", "false");
-        moodModePanel.scrollIntoView({ behavior: "smooth", block: "start" });
+    function openMoodRoute(button) {
+      if (!moodRouteModal || !moodRouteDialog) return;
+
+      lastMoodTrigger = button;
+      activeMoodRoute = button.dataset.route || "";
+
+      if (moodRouteTitle) moodRouteTitle.textContent = button.dataset.mood || "";
+      if (moodRouteReference) moodRouteReference.textContent = button.dataset.reference || "";
+      if (moodRouteEncouragement) moodRouteEncouragement.textContent = button.dataset.encouragement || "";
+
+      moodRouteModal.hidden = false;
+      document.body.classList.add("mood-route-open");
+      moodRouteDialog.focus();
+    }
+
+    function closeMoodRoute() {
+      if (!moodRouteModal) return;
+
+      moodRouteModal.hidden = true;
+      document.body.classList.remove("mood-route-open");
+
+      if (lastMoodTrigger) {
+        lastMoodTrigger.focus();
+      }
+    }
+
+    moodButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        openMoodRoute(button);
+      });
+    });
+
+    if (moodRouteModal) {
+      moodRouteModal.querySelectorAll("[data-mood-close]").forEach((closeControl) => {
+        closeControl.addEventListener("click", closeMoodRoute);
       });
     }
 
-    moodCards.forEach((card) => {
-      const toggle = card.querySelector(".mood-card-toggle");
-
-      if (!toggle) return;
-
-      toggle.addEventListener("click", () => {
-        const isOpen = card.classList.contains("open");
-
-        moodCards.forEach((item) => {
-          item.classList.remove("open");
-          const itemToggle = item.querySelector(".mood-card-toggle");
-          if (itemToggle) {
-            itemToggle.setAttribute("aria-expanded", "false");
-          }
-        });
-
-        if (!isOpen) {
-          card.classList.add("open");
-          toggle.setAttribute("aria-expanded", "true");
+    if (moodRouteFollow) {
+      moodRouteFollow.addEventListener("click", () => {
+        if (activeMoodRoute) {
+          window.location.href = activeMoodRoute;
         }
       });
+    }
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && moodRouteModal && !moodRouteModal.hidden) {
+        closeMoodRoute();
+      }
     });
 
 
