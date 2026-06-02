@@ -2,713 +2,1297 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bible Mapped | The Bible Explained in Context</title>
+  <style>
+    :root {
+      --bm-purple: #6d28d9;
+      --bm-purple-dark: #4c1d95;
+      --bm-purple-soft: #f1e9ff;
+      --bm-cream: #fbfaf7;
+      --bm-warm: #f4efe7;
+      --bm-border: #e5ded2;
+      --bm-text: #111111;
+      --bm-muted: #555555;
+      --bm-footer: #191919;
+      --bm-green-soft: #edf5e7;
+      --bm-pink-soft: #fae9f1;
+      --bm-orange-soft: #faecd9;
+    }
 
-  <title>Bible Mapped</title>
+    * {
+      box-sizing: border-box;
+    }
 
-  <meta
-    name="description"
-    content="Bible Mapped helps readers understand Scripture through real places, people, timelines, and context."
-  />
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
 
-  <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="icon" href="/assets/favicon.png" type="image/png" />
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+    body {
+      margin: 0;
+      background: var(--bm-cream);
+      color: var(--bm-text);
+      font-family: Inter, Arial, sans-serif;
+    }
 
-  <link rel="stylesheet" href="src/home.css" />
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      width: 100%;
+      max-width: 100%;
+      display: block;
+      object-fit: cover;
+      background: linear-gradient(135deg, #eee5d7, #faf8f1 44%, #efe5ff);
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .page {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    .header {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 0 clamp(20px, 5vw, 64px);
+      background: rgba(251, 250, 247, 0.94);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      font-weight: 800;
+      font-size: 21px;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      flex: 0 0 auto;
+      color: var(--bm-purple);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav a:hover {
+      color: var(--bm-purple);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex: 0 0 auto;
+    }
+
+    .signin,
+    .primary-btn {
+      background: var(--bm-purple);
+      color: white;
+      border: 0;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+    }
+
+    .signin {
+      padding: 0 20px;
+    }
+
+    .icon-button {
+      width: 42px;
+      height: 42px;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+    }
+
+    .mobile-only {
+      display: none;
+    }
+
+    .hero {
+      padding: 34px clamp(20px, 5vw, 64px) 80px;
+      min-height: 590px;
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr);
+      align-items: center;
+      gap: 42px;
+    }
+
+    .announce {
+      grid-column: 1 / -1;
+      justify-self: center;
+      max-width: 100%;
+      border: 1px solid #c8b6e9;
+      border-radius: 999px;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      background: rgba(255, 255, 255, 0.78);
+      margin-bottom: 12px;
+    }
+
+    .announce-badge {
+      background: var(--bm-purple);
+      color: white;
+      font-weight: 800;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 13px;
+      flex: 0 0 auto;
+    }
+
+    .announce-arrow {
+      color: var(--bm-purple);
+      font-size: 22px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    .hero-copy {
+      max-width: 560px;
+      min-width: 0;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(54px, 7vw, 94px);
+      line-height: 0.95;
+      letter-spacing: -0.055em;
+      margin: 0 0 26px;
+      font-weight: 700;
+    }
+
+    .hero h1 em {
+      color: var(--bm-purple);
+      font-style: italic;
+      font-weight: 600;
+      display: block;
+    }
+
+    .hero p {
+      font-size: 21px;
+      line-height: 1.45;
+      max-width: 500px;
+      margin: 0 0 34px;
+      color: #222;
+    }
+
+    .hero-buttons {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px 28px;
+    }
+
+    .primary-btn {
+      padding: 0 34px;
+      font-size: 16px;
+      box-shadow: 0 10px 20px rgba(109, 40, 217, 0.16);
+    }
+
+    .text-link {
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-map {
+      min-height: 470px;
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+      position: relative;
+      background:
+        linear-gradient(90deg, rgba(251, 250, 247, 0.2), rgba(251, 250, 247, 0.55)),
+        url("/images/hero-map.jpg"),
+        linear-gradient(135deg, #efe5d6, #faf8ef 42%, #eadcff);
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-map::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 35% 37%, var(--bm-purple) 0 4px, transparent 5px),
+        radial-gradient(circle at 50% 43%, var(--bm-purple) 0 4px, transparent 5px),
+        radial-gradient(circle at 65% 47%, var(--bm-purple) 0 4px, transparent 5px),
+        radial-gradient(circle at 78% 55%, var(--bm-purple) 0 4px, transparent 5px);
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    .route-line {
+      position: absolute;
+      width: 70%;
+      height: 55%;
+      right: 6%;
+      top: 18%;
+      border-top: 3px dashed var(--bm-purple);
+      border-right: 3px dashed var(--bm-purple);
+      border-radius: 0 200px 0 0;
+      transform: rotate(9deg);
+      opacity: 0.65;
+    }
+
+    .section {
+      padding: 70px clamp(20px, 5vw, 64px);
+    }
+
+    .section-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(34px, 4vw, 48px);
+      line-height: 1.1;
+      text-align: center;
+      margin: 0 0 44px;
+      letter-spacing: -0.035em;
+    }
+
+    .start {
+      background: #fff;
+      border-top: 1px solid var(--bm-border);
+      border-bottom: 1px solid var(--bm-border);
+    }
+
+    .start-grid,
+    .map-grid,
+    .more-grid,
+    .context-inner {
+      width: 100%;
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .start-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .start-card {
+      background: white;
+      border: 1px solid var(--bm-border);
+      border-radius: 8px;
+      padding: 34px 26px 26px;
+      min-height: 245px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .start-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-icon-circle {
+      width: 76px;
+      height: 76px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      flex: 0 0 auto;
+    }
+
+    .start-card:nth-child(1) .card-icon-circle {
+      background: var(--bm-purple-soft);
+    }
+
+    .start-card:nth-child(2) .card-icon-circle {
+      background: var(--bm-orange-soft);
+    }
+
+    .start-card:nth-child(3) .card-icon-circle {
+      background: var(--bm-green-soft);
+    }
+
+    .start-card:nth-child(4) .card-icon-circle {
+      background: var(--bm-pink-soft);
+    }
+
+    .start-card svg,
+    .context-item svg,
+    .more-item svg {
+      stroke-width: 1.8;
+      fill: none;
+      flex: 0 0 auto;
+    }
+
+    .start-card svg {
+      width: 42px;
+      height: 42px;
+      stroke: #111;
+    }
+
+    .start-card h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 25px;
+      line-height: 1.05;
+      margin: 0 0 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .start-card p {
+      margin: 0;
+      color: var(--bm-muted);
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .card-arrow {
+      margin-top: auto;
+      align-self: flex-end;
+      font-size: 24px;
+    }
+
+    .context-strip {
+      background: linear-gradient(90deg, #fff, #f7f2ff, #fff);
+      padding: 58px clamp(20px, 5vw, 64px);
+      border-bottom: 1px solid var(--bm-border);
+    }
+
+    .context-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) repeat(4, minmax(0, 1fr));
+      align-items: center;
+      gap: 28px;
+    }
+
+    .context-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 40px;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      margin: 0;
+    }
+
+    .context-item {
+      border-left: 1px solid #d7cfea;
+      padding-left: 36px;
+      min-height: 112px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .context-item svg {
+      width: 46px;
+      height: 46px;
+      stroke: var(--bm-purple);
+      margin-bottom: 10px;
+    }
+
+    .context-item strong {
+      font-size: 16px;
+      letter-spacing: 0.08em;
+    }
+
+    .context-item span {
+      margin-top: 4px;
+      color: var(--bm-muted);
+      font-size: 16px;
+    }
+
+    .map-section {
+      background: white;
+    }
+
+    .map-section-header {
+      max-width: 1280px;
+      margin: 0 auto 34px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .map-section-header h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 40px;
+      line-height: 1.1;
+      margin: 0;
+      letter-spacing: -0.035em;
+    }
+
+    .view-all,
+    .purple-link {
+      color: var(--bm-purple);
+      font-weight: 800;
+    }
+
+    .map-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+    }
+
+    .map-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      background: var(--bm-cream);
+      border: 1px solid var(--bm-border);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+    }
+
+    .map-image {
+      height: 245px;
+      min-width: 0;
+      background:
+        linear-gradient(135deg, rgba(251, 250, 247, 0.1), rgba(109, 40, 217, 0.16)),
+        var(--map-src),
+        linear-gradient(135deg, #eee3d1, #fbfaf7 48%, #eadfff);
+      background-size: cover;
+      background-position: center;
+    }
+
+    .map-image.old-testament {
+      --map-src: url("/images/old-testament-map.jpg");
+    }
+
+    .map-image.new-testament {
+      --map-src: url("/images/new-testament-map.jpg");
+    }
+
+    .map-card-copy {
+      padding: 38px 34px;
+      min-width: 0;
+    }
+
+    .map-card-copy h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 34px;
+      line-height: 1.05;
+      margin: 0 0 16px;
+      letter-spacing: -0.03em;
+    }
+
+    .map-card-copy p {
+      font-size: 18px;
+      line-height: 1.45;
+      margin: 0 0 26px;
+      color: #333;
+    }
+
+    .explore-more {
+      background: var(--bm-cream);
+      padding-top: 30px;
+    }
+
+    .more-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 42px;
+    }
+
+    .more-item {
+      display: grid;
+      grid-template-columns: 70px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .more-item svg {
+      width: 64px;
+      height: 64px;
+    }
+
+    .more-item:nth-child(1) svg {
+      stroke: var(--bm-purple);
+    }
+
+    .more-item:nth-child(2) svg {
+      stroke: #d97706;
+    }
+
+    .more-item:nth-child(3) svg {
+      stroke: #db2777;
+    }
+
+    .more-item:nth-child(4) svg {
+      stroke: #65a30d;
+    }
+
+    .more-item h3 {
+      margin: 0 0 8px;
+      font-size: 23px;
+    }
+
+    .more-item p {
+      margin: 0 0 16px;
+      color: var(--bm-muted);
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .cta-band {
+      width: 100%;
+      max-width: 1280px;
+      margin: 40px auto 0;
+      background: #f7f0e8;
+      border-radius: 8px;
+      padding: 34px 52px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      border: 1px solid var(--bm-border);
+    }
+
+    .cta-brand {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .cta-brand svg {
+      width: 54px;
+      height: 54px;
+      color: var(--bm-purple);
+      flex: 0 0 auto;
+    }
+
+    .cta-brand h3 {
+      margin: 0 0 6px;
+      font-size: 24px;
+    }
+
+    .cta-brand p {
+      margin: 0;
+      color: var(--bm-muted);
+    }
+
+    .footer {
+      background: var(--bm-footer);
+      color: white;
+      padding: 54px 64px 40px;
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr) 1.3fr;
+      gap: 46px;
+      margin-bottom: 44px;
+    }
+
+    .footer h4 {
+      margin: 0 0 18px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .footer ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 9px;
+    }
+
+    .footer a,
+    .footer li {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 15px;
+    }
+
+    .email-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .email-row input {
+      min-width: 0;
+      flex: 1;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 4px;
+      padding: 14px;
+      color: white;
+    }
+
+    .email-row button {
+      background: var(--bm-purple);
+      color: white;
+      border: 0;
+      border-radius: 4px;
+      padding: 0 22px;
+      font-weight: 800;
+      min-height: 48px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.11);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      color: rgba(255, 255, 255, 0.64);
+      font-size: 14px;
+    }
+
+    .socials {
+      display: flex;
+      gap: 18px;
+    }
+
+    .socials span {
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      color: white;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 1050px) {
+      .header {
+        padding: 0 28px;
+      }
+
+      .nav,
+      .signin,
+      .header-actions > a {
+        display: none;
+      }
+
+      .mobile-only {
+        display: grid;
+      }
+
+      .hero {
+        padding: 28px 28px 60px;
+        min-height: 0;
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        max-width: 720px;
+      }
+
+      .hero-map {
+        min-height: 340px;
+        border-radius: 8px;
+      }
+
+      .start-grid,
+      .more-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .context-inner {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .context-title {
+        grid-column: 1 / -1;
+        text-align: center;
+      }
+
+      .map-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid .newsletter {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header {
+        height: 64px;
+        padding: 0 18px;
+        gap: 12px;
+      }
+
+      .brand {
+        font-size: 18px;
+      }
+
+      .brand-icon {
+        width: 29px;
+        height: 29px;
+      }
+
+      .header-actions {
+        gap: 6px;
+      }
+
+      .icon-button {
+        width: 38px;
+        height: 38px;
+      }
+
+      .hero {
+        padding: 24px 20px 46px;
+        gap: 28px;
+        text-align: left;
+      }
+
+      .announce {
+        justify-self: stretch;
+        border-radius: 16px;
+        font-size: 13px;
+        line-height: 1.35;
+        padding: 9px 12px;
+      }
+
+      .hero h1 {
+        font-size: clamp(42px, 13vw, 54px);
+        line-height: 0.98;
+        letter-spacing: -0.045em;
+        margin-bottom: 20px;
+      }
+
+      .hero p {
+        font-size: 17px;
+        line-height: 1.5;
+        margin-bottom: 26px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+      }
+
+      .primary-btn {
+        width: 100%;
+        min-height: 50px;
+        padding: 0 20px;
+      }
+
+      .text-link {
+        justify-content: center;
+        min-height: 44px;
+      }
+
+      .hero-map {
+        min-height: 260px;
+        border-radius: 8px;
+        background-position: center;
+      }
+
+      .route-line {
+        width: 76%;
+        height: 48%;
+        right: 8%;
+        top: 24%;
+      }
+
+      .section {
+        padding: 50px 20px;
+      }
+
+      .section-title {
+        font-size: 36px;
+        margin-bottom: 28px;
+      }
+
+      .start-grid,
+      .more-grid,
+      .context-inner,
+      .map-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .start-card {
+        min-height: 0;
+        padding: 28px 22px 22px;
+      }
+
+      .card-arrow {
+        margin-top: 20px;
+      }
+
+      .context-strip {
+        padding: 48px 20px;
+      }
+
+      .context-title {
+        font-size: 36px;
+      }
+
+      .context-item {
+        min-height: 0;
+        border-left: 0;
+        border-top: 1px solid #d7cfea;
+        padding: 22px 0 0;
+        text-align: center;
+        align-items: center;
+      }
+
+      .map-section-header {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .map-section-header h2 {
+        font-size: 36px;
+      }
+
+      .map-card {
+        grid-template-columns: 1fr;
+      }
+
+      .map-image {
+        height: 210px;
+      }
+
+      .map-card-copy {
+        padding: 26px 22px 28px;
+      }
+
+      .map-card-copy h3 {
+        font-size: 30px;
+      }
+
+      .map-card-copy p {
+        font-size: 16px;
+      }
+
+      .more-grid {
+        gap: 30px;
+      }
+
+      .more-item {
+        grid-template-columns: 56px minmax(0, 1fr);
+        gap: 16px;
+      }
+
+      .more-item svg {
+        width: 52px;
+        height: 52px;
+      }
+
+      .cta-band {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 24px;
+        padding: 26px 22px;
+      }
+
+      .cta-brand {
+        align-items: flex-start;
+      }
+
+      .footer {
+        padding: 44px 20px 34px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-bottom: 34px;
+      }
+
+      .footer-grid .newsletter {
+        grid-column: auto;
+      }
+
+      .email-row {
+        flex-direction: column;
+      }
+
+      .email-row button {
+        padding: 14px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .brand {
+        font-size: 16px;
+      }
+
+      .brand-icon {
+        width: 26px;
+        height: 26px;
+      }
+
+      .hero h1 {
+        font-size: 40px;
+      }
+    }
+  </style>
 </head>
+<body>
+  <main class="page">
+    <header class="header">
+      <a href="#" class="brand" aria-label="Bible Mapped home">
+        <svg class="brand-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M5 7.5C9.5 5.5 13 6.5 16 9C19 6.5 22.5 5.5 27 7.5V25C22.5 23 19 24 16 26.5C13 24 9.5 23 5 25V7.5Z" stroke="currentColor" stroke-width="2"/>
+          <path d="M16 9V26.5" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        Bible Mapped
+      </a>
 
-<body class="landing-start">
-  <header class="site-header">
-    <nav class="nav">
-      <div class="nav-left">
-        <a href="index.html" class="brand" aria-label="Bible Mapped Home">
-          <span class="brand-crop">
-            <img
-              src="assets/header-brand-logo.png"
-              alt="Bible Mapped"
-              class="brand-logo"
-            />
-          </span>
-        </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#maps">Maps</a>
+        <a href="#books">Books</a>
+        <a href="#mood">Mood</a>
+        <a href="#videos">Videos</a>
+        <a href="#resources">Resources</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#">Search</a>
+        <button class="icon-button" aria-label="Search">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" stroke="black" stroke-width="2"/>
+            <path d="M16.5 16.5L21 21" stroke="black" stroke-width="2"/>
+          </svg>
+        </button>
+        <button class="signin">Sign In</button>
+        <button class="icon-button mobile-only" aria-label="Menu">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+            <path d="M4 8H26M4 15H26M4 22H26" stroke="black" stroke-width="2.2"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="announce">
+        <span class="announce-badge">New</span>
+        <span>Explore the world behind the Bible with us</span>
+        <span class="announce-arrow" aria-hidden="true">&rarr;</span>
       </div>
 
-      <div class="nav-right">
-        <a href="qa/index.html" class="nav-qa">
-          <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="9" stroke-width="2.2" />
-            <path d="M9.6 9.2C10 7.9 10.9 7 12.4 7c1.7 0 2.9 1 2.9 2.5 0 1.2-.7 1.9-1.8 2.6-.9.6-1.3 1.1-1.3 2.2" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
-            <circle cx="12.2" cy="17.1" r="1.1" fill="currentColor" stroke="none" />
-          </svg>
-          Q&A
-        </a>
-
-        <a href="about/index.html" class="nav-about">
-          <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="9" stroke-width="2.2" />
-            <path d="M12 10v7" stroke-width="2.2" stroke-linecap="round" />
-            <circle cx="12" cy="7" r="1.3" fill="currentColor" stroke="none" />
-          </svg>
-          About
-        </a>
-
-        <a href="books/index.html" class="nav-action nav-search" aria-label="Search Bible Mapped">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="10.8" cy="10.8" r="6.2" stroke-width="2.2" />
-            <path d="m16 16 4.2 4.2" stroke-width="2.2" stroke-linecap="round" />
-          </svg>
-        </a>
-
-        <a href="#about-biblemapped" class="nav-action nav-menu" aria-label="Open menu">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M5 7h14M5 12h14M5 17h14" stroke-width="2.2" stroke-linecap="round" />
-          </svg>
-        </a>
-      </div>
-    </nav>
-  </header>
-
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-copy parallax-item" data-speed="-0.012">
-        <h1>The Bible explained, in <em>context</em></h1>
-
-        <p>
-          Bible Mapped helps Christians and seekers follow Scripture through real places,
-          real people, real timelines, and real meaning â€” from Eden to Abraham,
-          from Egypt to Sinai, from Jerusalem to the empty tomb.
-        </p>
-
-        <div class="hero-actions">
-          <a class="btn btn-start" href="books/index.html">
-            Start Here
-          </a>
+      <div class="hero-copy">
+        <h1>The Bible explained,<em>in context.</em></h1>
+        <p>Explore Scripture through the places, people, words, culture, history, and meaning behind the text.</p>
+        <div class="hero-buttons">
+          <a href="#start" class="primary-btn">Start Exploring</a>
+          <a href="#how" class="text-link">How it works <span aria-hidden="true">&rarr;</span></a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="home-testament-maps" aria-labelledby="homeTestamentMapsTitle">
-    <div class="home-testament-maps-inner">
-      <div class="home-testament-maps-copy">
-        <p class="eyebrow">MAPS</p>
-        <h2 id="homeTestamentMapsTitle">Old and New Testament Maps</h2>
-        <p>See the major places, routes, kingdoms, and journeys that hold the biblical story together.</p>
+      <div class="hero-map" role="img" aria-label="Biblical map route illustration">
+        <div class="route-line"></div>
+      </div>
+    </section>
+
+    <section id="start" class="section start">
+      <h2 class="section-title">Where do you want to start?</h2>
+      <div class="start-grid">
+        <a href="#" class="start-card">
+          <div class="card-icon-circle">
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <path d="M24 43S10 29 10 18a14 14 0 1 1 28 0c0 11-14 25-14 25Z"/>
+              <circle cx="24" cy="18" r="5"/>
+            </svg>
+          </div>
+          <h3>I'm reading<br />a passage</h3>
+          <p>Trace the places, people, and words behind the text.</p>
+          <span class="card-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+
+        <a href="#" class="start-card">
+          <div class="card-icon-circle">
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <path d="M6 12L18 8L30 12L42 8V36L30 40L18 36L6 40V12Z"/>
+              <path d="M18 8V36M30 12V40"/>
+            </svg>
+          </div>
+          <h3>I want to<br />find a place</h3>
+          <p>See where biblical events happened on ancient maps.</p>
+          <span class="card-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+
+        <a href="#" class="start-card">
+          <div class="card-icon-circle">
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <path d="M9 10C15 8 20 9 24 13C28 9 33 8 39 10V39C33 37 28 38 24 42C20 38 15 37 9 39V10Z"/>
+              <path d="M24 13V42"/>
+            </svg>
+          </div>
+          <h3>I'm studying<br />a book</h3>
+          <p>Understand a book in its historical context.</p>
+          <span class="card-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+
+        <a href="#" class="start-card">
+          <div class="card-icon-circle">
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <path d="M24 40S8 30 8 18a9 9 0 0 1 16-5a9 9 0 0 1 16 5c0 12-16 22-16 22Z"/>
+            </svg>
+          </div>
+          <h3>I need Scripture<br />for how I feel</h3>
+          <p>Find Scripture that speaks to where you are.</p>
+          <span class="card-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <section id="how" class="context-strip">
+      <div class="context-inner">
+        <h2 class="context-title">Every passage<br />has context.</h2>
+
+        <div class="context-item">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M24 43S10 29 10 18a14 14 0 1 1 28 0c0 11-14 25-14 25Z"/>
+            <circle cx="24" cy="18" r="5"/>
+          </svg>
+          <strong>WHERE</strong>
+          <span>did it happen?</span>
+        </div>
+
+        <div class="context-item">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <circle cx="17" cy="18" r="7"/>
+            <circle cx="31" cy="18" r="7"/>
+            <path d="M8 39c2-8 8-12 16-12s14 4 16 12"/>
+          </svg>
+          <strong>WHO</strong>
+          <span>was involved?</span>
+        </div>
+
+        <div class="context-item">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M9 13h30v22H16l-7 6V13Z"/>
+          </svg>
+          <strong>WHAT</strong>
+          <span>did the words mean?</span>
+        </div>
+
+        <div class="context-item">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M24 8l5 11h12l-9 8l3 12l-11-7l-11 7l3-12l-9-8h12l5-11Z"/>
+          </svg>
+          <strong>WHY</strong>
+          <span>does it matter?</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="maps" class="section map-section">
+      <div class="map-section-header">
+        <h2>Explore the Bible by map</h2>
+        <a href="#" class="view-all">View all maps &rarr;</a>
       </div>
 
-      <div class="home-map-grid">
-        <article class="home-map-item">
-          <h3>Old Testament Locations</h3>
-          <a class="home-map-frame" href="assets/old-testament-locations-map.png" aria-label="Open Old Testament locations map">
-            <img src="assets/old-testament-locations-map.png" alt="Major Old Testament locations map with routes through Egypt, Sinai, Canaan, Assyria, Babylon, and Persia" loading="lazy" />
-          </a>
-          <p class="home-map-caption">Traditional and probable settings of Old Testament events, including Abraham, the Exodus, conquest, exile, and return.</p>
+      <div class="map-grid">
+        <article class="map-card">
+          <div class="map-image old-testament" role="img" aria-label="Old Testament map"></div>
+          <div class="map-card-copy">
+            <h3>Old Testament</h3>
+            <p>Creation, covenant, exile, return.</p>
+            <a href="#" class="purple-link">Explore maps &rarr;</a>
+          </div>
         </article>
 
-        <article class="home-map-item">
-          <h3>New Testament Locations</h3>
-          <a class="home-map-frame" href="assets/new-testament-locations-map.png" aria-label="Open New Testament locations map">
-            <img src="assets/new-testament-locations-map.png" alt="Major New Testament locations map with Jesus' ministry, Paul's missionary journeys, and Paul's voyage to Rome" loading="lazy" />
-          </a>
-          <p class="home-map-caption">Traditional and historical settings of New Testament events, including Galilee, Judea, Asia Minor, Greece, Rome, and Paul's journeys.</p>
+        <article class="map-card">
+          <div class="map-image new-testament" role="img" aria-label="New Testament map"></div>
+          <div class="map-card-copy">
+            <h3>New Testament</h3>
+            <p>Jesus, the church, Rome, and Paul's journeys.</p>
+            <a href="#" class="purple-link">Explore maps &rarr;</a>
+          </div>
         </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="statement-section testament-puzzle-section premium-reveal" id="testaments">
-    <div class="section-rail">
-      <p class="rail-eyebrow">Begin the Journey</p>
+    <section id="resources" class="section explore-more">
+      <h2 class="section-title">Explore more</h2>
+      <div class="more-grid">
+        <a href="#" class="more-item">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <circle cx="24" cy="24" r="18"/>
+            <path d="M6 24h36M24 6c6 7 9 13 9 18s-3 11-9 18c-6-7-9-13-9-18s3-11 9-18Z"/>
+          </svg>
+          <div>
+            <h3>Maps</h3>
+            <p>Interactive maps that bring the Bible to life.</p>
+            <span class="purple-link">Explore &rarr;</span>
+          </div>
+        </a>
 
-      <div class="section-display explore-display">
-        Explore Scripture by Testament
+        <a href="#" class="more-item" id="books">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M9 10C15 8 20 9 24 13C28 9 33 8 39 10V39C33 37 28 38 24 42C20 38 15 37 9 39V10Z"/>
+            <path d="M24 13V42"/>
+          </svg>
+          <div>
+            <h3>Books</h3>
+            <p>Overviews and studies for every book.</p>
+            <span class="purple-link">Explore &rarr;</span>
+          </div>
+        </a>
+
+        <a href="#" class="more-item" id="mood">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M24 40S8 30 8 18a9 9 0 0 1 16-5a9 9 0 0 1 16 5c0 12-16 22-16 22Z"/>
+          </svg>
+          <div>
+            <h3>Mood Mode</h3>
+            <p>Find Scripture that meets you where you are.</p>
+            <span class="purple-link">Explore &rarr;</span>
+          </div>
+        </a>
+
+        <a href="#" class="more-item" id="videos">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <rect x="8" y="11" width="32" height="24" rx="2"/>
+            <path d="M21 18l10 5l-10 5V18Z"/>
+            <path d="M18 40h12"/>
+          </svg>
+          <div>
+            <h3>Videos</h3>
+            <p>Visual guides that explain Scripture in context.</p>
+            <span class="purple-link">Explore &rarr;</span>
+          </div>
+        </a>
       </div>
-    </div>
 
-    <div class="testament-puzzle-stage scripture-card-stage">
-      <div class="scripture-card-fan" id="testamentPuzzleWrap" aria-label="Explore Scripture story cards">
-        <a class="scripture-story-card eden-card" href="books/index.html#genesis" style="--card-image: url('assets/old-puzzle-1.png'); --x: clamp(-380px, -29vw, -135px); --y: 42px; --r: -13deg; --delay: 0.02s;">
-          <span class="card-era">Genesis 1-3</span>
-          <strong>Eden</strong>
-          <em>Creation, rebellion, and the first promise of redemption.</em>
-          <span class="card-link">Read more -></span>
-        </a>
-
-        <a class="scripture-story-card job-card" href="books/index.html#job" style="--card-image: url('assets/old-puzzle-2.png'); --x: clamp(-200px, -15vw, -74px); --y: 10px; --r: -6deg; --delay: 0.14s;">
-          <span class="card-era">Job 1-42</span>
-          <strong>Job</strong>
-          <em>Suffering, worship, and the question of trusting God when the map goes dark.</em>
-          <span class="card-link">Read more -></span>
-        </a>
-
-        <a class="scripture-story-card moses-card" href="books/index.html#exodus" style="--card-image: url('assets/old-puzzle-3.png'); --x: 0px; --y: -6px; --r: 0deg; --delay: 0.26s;">
-          <span class="card-era">Exodus</span>
-          <strong>Moses</strong>
-          <em>Deliverance from Egypt and the forming of Israel by covenant.</em>
-          <span class="card-link">Read more -></span>
-        </a>
-
-        <a class="scripture-story-card crucifixion-card" href="books/index.html#matthew" style="--card-image: url('assets/new-puzzle-1.png'); --x: clamp(200px, 15vw, 74px); --y: 10px; --r: 6deg; --delay: 0.38s;">
-          <span class="card-era">Matthew 27</span>
-          <strong>The Crucifixion</strong>
-          <em>The promised King is lifted up, and the story turns at the cross.</em>
-          <span class="card-link">Read more -></span>
-        </a>
-
-        <a class="scripture-story-card king-jesus-card" href="books/index.html#revelation" style="--card-image: url('assets/new-puzzle-2.png'); --x: clamp(380px, 29vw, 135px); --y: 42px; --r: 13deg; --delay: 0.50s;">
-          <span class="card-era">Revelation 19</span>
-          <strong>King Jesus</strong>
-          <em>The risen Christ reigns, and history is moving toward His kingdom.</em>
-          <span class="card-link">Read more -></span>
-        </a>
+      <div class="cta-band">
+        <div class="cta-brand">
+          <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <path d="M8 10C15 7 20 9 24 13C28 9 33 7 40 10V39C33 36 28 38 24 42C20 38 15 36 8 39V10Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M24 13V42" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <div>
+            <h3>Bible Mapped</h3>
+            <p>The Bible explained, in context.</p>
+          </div>
+        </div>
+        <a href="#" class="primary-btn">Get the App</a>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="landing-panel-section premium-reveal" id="about-biblemapped">
-    <div class="minimal-bar about-mapped-shell" id="aboutMappedShell">
-      <button
-        class="minimal-bar-toggle about-mapped-toggle parallax-item"
-        data-speed="-0.018"
-        type="button"
-        id="aboutMappedToggle"
-        aria-expanded="true"
-        aria-controls="aboutMappedPanel"
-      >
-        About Bible Mapped
-      </button>
-
-      <div class="minimal-panel open" id="aboutMappedPanel" aria-hidden="false">
-        <div class="minimal-panel-inner">
-          <div class="about-panel-formula">
-            <div class="formula-inline-window open" id="formulaInlineWindow" aria-hidden="false">
-              <div class="formula-window-inner">
-                <div class="formula-art-frame" id="formulaArtFrame">
-                  <img
-                    src="assets/formula-design.png"
-                    alt="Bible Mapped Formula Design"
-                    class="formula-hero-image"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
-                  />
-
-                  <div class="formula-image-placeholder">
-                    Formula image missing. Add assets/formula-design.png
-                  </div>
-
-                  <div class="formula-question-row" aria-label="Bible Mapped formula navigation">
-                    <a class="formula-question where" href="maps/index.html" aria-label="Open Maps page">
-                      <span class="formula-main">Where</span>
-                      <span class="formula-sub">did it happen?</span>
-                    </a>
-
-                    <a class="formula-question who" href="characters/index.html" aria-label="Open People page">
-                      <span class="formula-main">Who</span>
-                      <span class="formula-sub">is this about?</span>
-                    </a>
-
-                    <a class="formula-question why" href="books/index.html" aria-label="Open Books page">
-                      <span class="formula-main">Why</span>
-                      <span class="formula-sub">is this happening?</span>
-                    </a>
-
-                    <a class="formula-question what" href="case-studies/index.html" aria-label="Open Case Studies page">
-                      <span class="formula-main">What</span>
-                      <span class="formula-sub">makes this matter to me?</span>
-                    </a>
-                  </div>
-
-                  <article class="formula-tour-panel where-panel active" data-formula-tour-panel="1">
-                    <p class="formula-tour-kicker">John 4 Case Study</p>
-                    <h3>Where?</h3>
-
-                    <div class="formula-tour-image">
-                      <img
-                        src="assets/formula-place.png"
-                        alt="Map or visual of Samaria and Jacobâ€™s well"
-                        onerror="this.style.display='none';"
-                      />
-                    </div>
-
-                    <p>
-                      John 4 happens in Samaria, near Jacobâ€™s well. That location matters
-                      because Samaria carried centuries of tension between Jews and Samaritans.
-                    </p>
-
-                    <div class="formula-tour-actions">
-                      <button class="formula-tour-btn" type="button" data-formula-tour-next="2">
-                        Next: Who â†’
-                      </button>
-                    </div>
-                  </article>
-
-                  <article class="formula-tour-panel who-panel" data-formula-tour-panel="2">
-                    <p class="formula-tour-kicker">John 4 Case Study</p>
-                    <h3>Who?</h3>
-
-                    <div class="formula-tour-image">
-                      <img
-                        src="assets/formula-people.png"
-                        alt="Visual of Jesus and the Samaritan woman"
-                        onerror="this.style.display='none';"
-                      />
-                    </div>
-
-                    <p>
-                      Jesus is a Jewish teacher. The woman is a Samaritan. This is not just
-                      a conversation at a well â€” it is Jesus crossing religious, ethnic,
-                      cultural, and personal boundaries.
-                    </p>
-
-                    <div class="formula-tour-actions">
-                      <button class="formula-tour-btn secondary" type="button" data-formula-tour-next="1">
-                        â† Back
-                      </button>
-
-                      <button class="formula-tour-btn" type="button" data-formula-tour-next="3">
-                        Next: Why â†’
-                      </button>
-                    </div>
-                  </article>
-
-                  <article class="formula-tour-panel why-panel" data-formula-tour-panel="3">
-                    <p class="formula-tour-kicker">John 4 Case Study</p>
-                    <h3>Why?</h3>
-
-                    <div class="formula-tour-image">
-                      <img
-                        src="assets/formula-time.png"
-                        alt="Visual showing the meaning of John 4"
-                        onerror="this.style.display='none';"
-                      />
-                    </div>
-
-                    <p>
-                      The location reveals the meaning. Jesus brings living water into a divided
-                      place and reveals that true worship is not limited by mountain, temple,
-                      ethnicity, or reputation.
-                    </p>
-
-                    <div class="formula-tour-actions">
-                      <button class="formula-tour-btn secondary" type="button" data-formula-tour-next="2">
-                        â† Back
-                      </button>
-
-                      <a class="formula-tour-link" href="case-studies/index.html">
-                        View Case Studies â†’
-                      </a>
-                    </div>
-                  </article>
-
-                  <div class="formula-tour-progress" aria-hidden="true">
-                    <span class="formula-tour-dot active" data-formula-tour-dot="1"></span>
-                    <span class="formula-tour-dot" data-formula-tour-dot="2"></span>
-                    <span class="formula-tour-dot" data-formula-tour-dot="3"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div>
+            <h4>Explore</h4>
+            <ul>
+              <li><a href="#">Maps</a></li>
+              <li><a href="#">Books</a></li>
+              <li><a href="#">Mood</a></li>
+              <li><a href="#">Videos</a></li>
+              <li><a href="#">Resources</a></li>
+            </ul>
           </div>
 
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="landing-followup-bars premium-reveal" aria-label="Bible Mapped features">
-    <div class="mood-mode-section mood-mode-redesign open" id="mood-mode" aria-labelledby="moodModeTitle" aria-hidden="false">
-      <div class="mood-mode-inner">
-        <div class="mood-mode-copy">
-          <p class="eyebrow">MOOD MODE</p>
-          <h2 id="moodModeTitle">Choose a Mood</h2>
-          <p>Start where you are. Follow Scripture through what you feel.</p>
-        </div>
-
-        <div class="mood-card-grid" data-mood-grid>
-          <article class="mood-card">
-            <button class="mood-card-button" type="button" data-mood="Afraid" data-reference="Isaiah 41:10" data-encouragement="God does not leave you alone in fear. He calls you back to His presence.">
-              <span class="mood-symbol" aria-hidden="true">
-                <svg viewBox="0 0 48 48"><path d="M24 5c7 9 13 17 13 26 0 7-6 12-13 12S11 38 11 31C11 22 17 14 24 5Z"/><path d="M18 32c1 4 4 6 8 6"/></svg>
-              </span>
-              <strong>Afraid</strong>
-            </button>
-          </article>
-
-          <article class="mood-card">
-            <button class="mood-card-button" type="button" data-mood="Guilty" data-reference="1 John 1:9" data-encouragement="Guilt is not the end of the story. Confession brings you back toward mercy.">
-              <span class="mood-symbol" aria-hidden="true">
-                <svg viewBox="0 0 48 48"><path d="M24 39S10 31 10 19c0-5 4-9 9-9 3 0 5 1 5 4 0-3 2-4 5-4 5 0 9 4 9 9 0 12-14 20-14 20Z"/><path d="M15 19c0-2 2-4 4-4"/></svg>
-              </span>
-              <strong>Guilty</strong>
-            </button>
-          </article>
-
-          <article class="mood-card">
-            <button class="mood-card-button" type="button" data-mood="Confused" data-reference="James 1:5" data-encouragement="When your mind feels tangled, Scripture invites you to ask God for wisdom.">
-              <span class="mood-symbol" aria-hidden="true">
-                <svg viewBox="0 0 48 48"><path d="M16 18c7-9 21-3 14 5-4 5-11 1-8-5 4-8 18-3 15 7-3 9-20 10-26 1-5-8 4-18 15-14"/><path d="M15 34c8 5 19 4 25-2"/></svg>
-              </span>
-              <strong>Confused</strong>
-            </button>
-          </article>
-
-          <article class="mood-card">
-            <button class="mood-card-button" type="button" data-mood="Grieving" data-reference="Psalm 34:18" data-encouragement="God is near to the brokenhearted.">
-              <span class="mood-symbol" aria-hidden="true">
-                <svg viewBox="0 0 48 48"><path d="M15 29c-5 0-8-3-8-7s4-7 9-6c2-5 8-8 14-5 4 2 6 5 6 10 3 1 5 4 5 7 0 5-4 8-9 8H15Z"/><path d="M17 41v3M25 39v4M33 41v3"/></svg>
-              </span>
-              <strong>Grieving</strong>
-            </button>
-          </article>
-
-          <article class="mood-card">
-            <button class="mood-card-button" type="button" data-mood="Lonely" data-reference="Hebrews 13:5" data-encouragement="Loneliness says no one is near. Scripture says God has not left.">
-              <span class="mood-symbol" aria-hidden="true">
-                <svg viewBox="0 0 48 48"><path d="M19 22a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"/><path d="M10 39c1-8 4-12 9-12s8 4 9 12"/><path d="M33 11c-1 4 1 8 5 10-4 1-8-1-10-5"/><path d="M35 30h.1M40 25h.1"/></svg>
-              </span>
-              <strong>Lonely</strong>
-            </button>
-          </article>
-
-          <article class="mood-card">
-            <button class="mood-card-button" type="button" data-mood="Weary" data-reference="Matthew 11:28" data-encouragement="Jesus does not shame the tired. He invites the weary to come to Him.">
-              <span class="mood-symbol" aria-hidden="true">
-                <svg viewBox="0 0 48 48"><path d="M18 16h12M16 22h16M18 36h12"/><path d="M20 16c0-5 8-5 8 0M20 36c-3-4-4-9-4-14h16c0 5-1 10-4 14"/><path d="M13 40h22"/><path d="M24 8v4"/></svg>
-              </span>
-              <strong>Weary</strong>
-            </button>
-          </article>
-
-          <article class="mood-card">
-            <button class="mood-card-button" type="button" data-mood="Hopeful" data-reference="Romans 15:13" data-encouragement="Biblical hope is trust anchored in God.">
-              <span class="mood-symbol" aria-hidden="true">
-                <svg viewBox="0 0 48 48"><path d="M8 34c6-8 26-8 32 0"/><path d="M14 34h20"/><path d="M24 12v8M13 23l5 4M35 23l-5 4M10 32h28"/></svg>
-              </span>
-              <strong>Hopeful</strong>
-            </button>
-          </article>
-
-          <article class="mood-card">
-            <button class="mood-card-button" type="button" data-mood="Angry" data-reference="Ephesians 4:26&ndash;27" data-encouragement="Anger needs direction before it becomes destruction.">
-              <span class="mood-symbol" aria-hidden="true">
-                <svg viewBox="0 0 48 48"><path d="M24 42c8-3 13-9 13-17 0-6-3-10-8-14 1 5-1 8-5 10 1-6-2-10-7-14 1 8-6 12-6 21 0 7 5 12 13 14Z"/><path d="M24 42c-4-2-6-5-6-9 0-3 2-6 5-8 0 4 3 5 5 8 2 4 0 7-4 9Z"/></svg>
-              </span>
-              <strong>Angry</strong>
-            </button>
-          </article>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="mood-route-modal" id="moodRouteModal" hidden>
-      <div class="mood-route-backdrop" data-mood-close></div>
-      <div class="mood-route-dialog" role="dialog" aria-modal="true" aria-labelledby="moodRouteTitle" aria-describedby="moodRouteEncouragement" tabindex="-1">
-        <button class="mood-route-close" type="button" data-mood-close aria-label="Close mood route">&times;</button>
-        <p class="mood-route-eyebrow">Mood Route</p>
-        <h3 id="moodRouteTitle">Afraid</h3>
-        <p class="mood-route-reference" id="moodRouteReference">Isaiah 41:10</p>
-        <p class="mood-route-encouragement" id="moodRouteEncouragement">God does not leave you alone in fear. He calls you back to His presence.</p>
-      </div>
-    </div>
-
-    <h2 class="landing-followup-bar watch-videos-bar">Watch More Videos</h2>
-
-    <div class="watch-videos-stage">
-      <div class="watch-videos-marquee">
-        <div class="watch-videos-track">
-          <div class="watch-video-group">
-            <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/lH3Uf1G-cUs" title="Why God Chose a Title" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-
-            <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/1i123qXhBwg" title="Bible Mapped YouTube Short 2" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-
-            <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/9KO6829IwNM" title="Bible Mapped YouTube Short 3" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-
-            <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/vFDihb4G_ho" title="Bible Mapped YouTube Short 4" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-
-            <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/8K71geGXido" title="Bible Mapped YouTube Short 5" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-
-            <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/bofUpxOZW5k" title="Bible Mapped YouTube Short 6" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
+          <div>
+            <h4>About</h4>
+            <ul>
+              <li><a href="#">About Bible Mapped</a></li>
+              <li><a href="#">Our Story</a></li>
+              <li><a href="#">Team</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
           </div>
 
-          <div class="watch-video-group" aria-hidden="true">
-            <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/lH3Uf1G-cUs" title="Duplicate Why God Chose a Title" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-            </div>
+          <div>
+            <h4>Help</h4>
+            <ul>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Use</a></li>
+            </ul>
+          </div>
 
-            <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/1i123qXhBwg" title="Duplicate Bible Mapped YouTube Short 2" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-            </div>
+          <div>
+            <h4>Social</h4>
+            <ul>
+              <li><a href="#">YouTube</a></li>
+              <li><a href="#">TikTok</a></li>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">Facebook</a></li>
+            </ul>
+          </div>
 
-            <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/9KO6829IwNM" title="Duplicate Bible Mapped YouTube Short 3" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-            </div>
+          <div class="newsletter">
+            <h4>Stay in the loop</h4>
+            <p style="color: rgba(255,255,255,0.72); margin: 0;">
+              Get updates and new resources.
+            </p>
 
-            <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/vFDihb4G_ho" title="Duplicate Bible Mapped YouTube Short 4" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-            </div>
-
-            <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/8K71geGXido" title="Duplicate Bible Mapped YouTube Short 5" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-            </div>
-
-            <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/bofUpxOZW5k" title="Duplicate Bible Mapped YouTube Short 6" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+            <div class="email-row">
+              <input type="email" placeholder="Email address" />
+              <button>Subscribe</button>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <div class="modal-overlay" id="oldTestamentModal" aria-hidden="true">
-    <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="oldModalTitle">
-      <div class="modal-top">
-        <span>Old Testament Library</span>
-        <button class="modal-close" type="button" data-modal-close aria-label="Close window">Ã—</button>
-      </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 Bible Mapped</span>
 
-      <div class="modal-body">
-        <h2 id="oldModalTitle">Old Testament</h2>
-
-        <p>
-          The Old Testament tells the story before Christ through law, history,
-          poetry, wisdom, and prophecy.
-        </p>
-
-        <div class="book-category-grid">
-          <section class="book-category">
-            <h3>Law / Torah</h3>
-            <p>The foundation of creation, covenant, deliverance, and worship.</p>
-            <div class="book-list">
-              <a href="books/index.html#genesis">Genesis</a>
-              <a href="books/index.html#exodus">Exodus</a>
-              <a href="books/index.html#leviticus">Leviticus</a>
-              <a href="books/index.html#numbers">Numbers</a>
-              <a href="books/index.html#deuteronomy">Deuteronomy</a>
-            </div>
-          </section>
-
-          <section class="book-category">
-            <h3>History</h3>
-            <p>Israelâ€™s land, kings, exile, return, and national story.</p>
-            <div class="book-list">
-              <a href="books/index.html#joshua">Joshua</a>
-              <a href="books/index.html#judges">Judges</a>
-              <a href="books/index.html#ruth">Ruth</a>
-              <a href="books/index.html#1-samuel">1 Samuel</a>
-              <a href="books/index.html#2-samuel">2 Samuel</a>
-              <a href="books/index.html#1-kings">1 Kings</a>
-              <a href="books/index.html#2-kings">2 Kings</a>
-              <a href="books/index.html#1-chronicles">1 Chronicles</a>
-              <a href="books/index.html#2-chronicles">2 Chronicles</a>
-              <a href="books/index.html#ezra">Ezra</a>
-              <a href="books/index.html#nehemiah">Nehemiah</a>
-              <a href="books/index.html#esther">Esther</a>
-            </div>
-          </section>
-
-          <section class="book-category">
-            <h3>Poetry & Wisdom</h3>
-            <p>Prayer, suffering, worship, wisdom, love, and the fear of God.</p>
-            <div class="book-list">
-              <a href="books/index.html#job">Job</a>
-              <a href="books/index.html#psalms">Psalms</a>
-              <a href="books/index.html#proverbs">Proverbs</a>
-              <a href="books/index.html#ecclesiastes">Ecclesiastes</a>
-              <a href="books/index.html#song-of-solomon">Song of Solomon</a>
-            </div>
-          </section>
-
-          <section class="book-category">
-            <h3>Major Prophets</h3>
-            <p>Judgment, hope, exile, restoration, and the coming Messiah.</p>
-            <div class="book-list">
-              <a href="books/index.html#isaiah">Isaiah</a>
-              <a href="books/index.html#jeremiah">Jeremiah</a>
-              <a href="books/index.html#lamentations">Lamentations</a>
-              <a href="books/index.html#ezekiel">Ezekiel</a>
-              <a href="books/index.html#daniel">Daniel</a>
-            </div>
-          </section>
-
-          <section class="book-category">
-            <h3>Minor Prophets</h3>
-            <p>Shorter prophetic books with major theological weight.</p>
-            <div class="book-list">
-              <a href="books/index.html#hosea">Hosea</a>
-              <a href="books/index.html#joel">Joel</a>
-              <a href="books/index.html#amos">Amos</a>
-              <a href="books/index.html#obadiah">Obadiah</a>
-              <a href="books/index.html#jonah">Jonah</a>
-              <a href="books/index.html#micah">Micah</a>
-              <a href="books/index.html#nahum">Nahum</a>
-              <a href="books/index.html#habakkuk">Habakkuk</a>
-              <a href="books/index.html#zephaniah">Zephaniah</a>
-              <a href="books/index.html#haggai">Haggai</a>
-              <a href="books/index.html#zechariah">Zechariah</a>
-              <a href="books/index.html#malachi">Malachi</a>
-            </div>
-          </section>
+          <div class="socials">
+            <span>&#9654;</span>
+            <span>&#9678;</span>
+            <span>f</span>
+            <span>&#120143;</span>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="newTestamentModal" aria-hidden="true">
-    <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="newModalTitle">
-      <div class="modal-top">
-        <span>New Testament Library</span>
-        <button class="modal-close" type="button" data-modal-close aria-label="Close window">Ã—</button>
-      </div>
-
-      <div class="modal-body">
-        <h2 id="newModalTitle">New Testament</h2>
-
-        <p>
-          The New Testament tells the story of Jesus Christ, the Church,
-          apostolic teaching, and the hope of all things made new.
-        </p>
-
-        <div class="book-category-grid">
-          <section class="book-category">
-            <h3>Gospels</h3>
-            <p>The life, teaching, death, and resurrection of Jesus Christ.</p>
-            <div class="book-list">
-              <a href="books/index.html#matthew">Matthew</a>
-              <a href="books/index.html#mark">Mark</a>
-              <a href="books/index.html#luke">Luke</a>
-              <a href="books/index.html#john">John</a>
-            </div>
-          </section>
-
-          <section class="book-category">
-            <h3>Church History</h3>
-            <p>The spread of the gospel and the formation of the early Church.</p>
-            <div class="book-list">
-              <a href="books/index.html#acts">Acts</a>
-            </div>
-          </section>
-
-          <section class="book-category">
-            <h3>Paulâ€™s Letters</h3>
-            <p>Doctrine, church life, salvation, unity, suffering, and discipleship.</p>
-            <div class="book-list">
-              <a href="books/index.html#romans">Romans</a>
-              <a href="books/index.html#1-corinthians">1 Corinthians</a>
-              <a href="books/index.html#2-corinthians">2 Corinthians</a>
-              <a href="books/index.html#galatians">Galatians</a>
-              <a href="books/index.html#ephesians">Ephesians</a>
-              <a href="books/index.html#philippians">Philippians</a>
-              <a href="books/index.html#colossians">Colossians</a>
-              <a href="books/index.html#1-thessalonians">1 Thessalonians</a>
-              <a href="books/index.html#2-thessalonians">2 Thessalonians</a>
-              <a href="books/index.html#1-timothy">1 Timothy</a>
-              <a href="books/index.html#2-timothy">2 Timothy</a>
-              <a href="books/index.html#titus">Titus</a>
-              <a href="books/index.html#philemon">Philemon</a>
-            </div>
-          </section>
-
-          <section class="book-category">
-            <h3>General Letters</h3>
-            <p>Faithfulness, endurance, truth, holiness, and love.</p>
-            <div class="book-list">
-              <a href="books/index.html#hebrews">Hebrews</a>
-              <a href="books/index.html#james">James</a>
-              <a href="books/index.html#1-peter">1 Peter</a>
-              <a href="books/index.html#2-peter">2 Peter</a>
-              <a href="books/index.html#1-john">1 John</a>
-              <a href="books/index.html#2-john">2 John</a>
-              <a href="books/index.html#3-john">3 John</a>
-              <a href="books/index.html#jude">Jude</a>
-            </div>
-          </section>
-
-          <section class="book-category">
-            <h3>Apocalypse</h3>
-            <p>The unveiling of Christ, final judgment, and the hope of new creation.</p>
-            <div class="book-list">
-              <a href="books/index.html#revelation">Revelation</a>
-            </div>
-          </section>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <footer class="bm-site-footer" aria-label="Bible Mapped footer">
-      <div class="bm-site-footer-inner">
-        <div class="bm-footer-top">
-          <img class="bm-footer-wordmark" src="/assets/footer-brand-logo.png" alt="Bible Mapped" />
-
-          <div class="bm-footer-social-row" aria-label="Bible Mapped social links">
-          <a class="bm-footer-social-emblem tiktok-emblem" href="https://www.tiktok.com/@biblemapped" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M14.7 3.2c.3 2.3 1.6 3.8 3.9 4.2v3.3c-1.4 0-2.7-.4-3.9-1.1v5.8c0 3.2-2.1 5.4-5.2 5.4-2.8 0-5-2-5-4.7 0-2.9 2.2-4.9 5.1-4.9.4 0 .7 0 1 .1v3.4c-.3-.1-.7-.2-1-.2-1 0-1.8.6-1.8 1.5s.8 1.5 1.7 1.5c1.1 0 1.8-.7 1.8-2V3.2h3.4Z" />
-            </svg>
-          </a>
-          <a class="bm-footer-social-emblem instagram-emblem" href="#" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="4" y="4" width="16" height="16" rx="5" ry="5" />
-              <circle cx="12" cy="12" r="4" />
-              <circle cx="17" cy="7" r="1.3" />
-            </svg>
-          </a>
-          <a class="bm-footer-social-emblem patreon-emblem" href="https://www.patreon.com/cw/Biblemapped" target="_blank" rel="noopener noreferrer" aria-label="Patreon">
-            <span class="bm-footer-patreon-letter" aria-hidden="true">P</span>
-          </a>
-          <a class="bm-footer-social-emblem youtube-emblem" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M21 8.1c-.2-1.1-.8-1.9-1.9-2.1C17.4 5.6 12 5.6 12 5.6s-5.4 0-7.1.4C3.8 6.2 3.2 7 3 8.1 2.6 9.8 2.6 12 2.6 12s0 2.2.4 3.9c.2 1.1.8 1.9 1.9 2.1 1.7.4 7.1.4 7.1.4s5.4 0 7.1-.4c1.1-.2 1.7-1 1.9-2.1.4-1.7.4-3.9.4-3.9s0-2.2-.4-3.9ZM10.1 14.8V9.2l5 2.8-5 2.8Z" />
-            </svg>
-          </a>
-          <a class="bm-footer-social-emblem facebook-emblem" href="#" aria-label="Facebook">f</a>
-        </div>
-        </div>
-
-        <div class="bm-footer-divider" aria-hidden="true"></div>
-
-        <nav class="bm-footer-links bm-footer-primary" aria-label="Footer navigation">
-          <a href="/">Home</a>
-          <span>|</span>
-          <a href="/about/">About</a>
-          <span>|</span>
-          <a href="/books/">Books</a>
-          <span>|</span>
-          <a href="/characters/">People</a>
-          <span>|</span>
-          <a href="/maps/">Maps</a>
-          <span>|</span>
-          <a href="/case-studies/">Case Studies</a>
-          <span>|</span>
-          <a class="bm-footer-heaven-link" href="/heaven/">Are You Going to Heaven?</a>
-        </nav>
-
-        <nav class="bm-footer-links bm-footer-secondary" aria-label="Footer utility navigation">
-          <a href="/terms/">Terms of Use</a>
-          <span>|</span>
-          <a href="/help/">Help Center</a>
-          <span>|</span>
-          <a href="mailto:calvin@biblemapped.com">Contact Us</a>
-        </nav>
-
-        <p class="bm-footer-copy">&copy; 2026 Bible Mapped. All rights reserved.</p>
       </div>
     </footer>
-
-  <script src="src/home.js" defer></script>
+  </main>
 </body>
 </html>
-
