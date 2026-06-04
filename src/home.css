@@ -4640,7 +4640,7 @@
       min-height: clamp(620px, 60vw, 820px) !important;
       padding: clamp(58px, 7vw, 96px) clamp(18px, 5vw, 76px) !important;
       background:
-        linear-gradient(90deg, rgba(17, 22, 17, 0.76) 0%, rgba(17, 22, 17, 0.5) 36%, rgba(17, 22, 17, 0.13) 66%, rgba(17, 22, 17, 0.02) 100%),
+        linear-gradient(90deg, rgba(17, 22, 17, 0.72) 0%, rgba(17, 22, 17, 0.42) 34%, rgba(17, 22, 17, 0.06) 62%, rgba(17, 22, 17, 0) 100%),
         url("../assets/about-biblemapped-background.png") center / cover no-repeat !important;
     }
 
@@ -4650,8 +4650,9 @@
       inset: 0;
       z-index: -1;
       background:
-        linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.34)),
-        radial-gradient(circle at 25% 40%, rgba(0, 0, 0, 0.12), transparent 38%);
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.14) 42%, rgba(0, 0, 0, 0.03) 72%, rgba(0, 0, 0, 0) 100%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.2)),
+        radial-gradient(circle at 25% 40%, rgba(0, 0, 0, 0.1), transparent 38%);
       pointer-events: none;
     }
 
