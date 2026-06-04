@@ -593,7 +593,7 @@
 
 
     .landing-followup-bars {
-      background: var(--cloud);
+      background: #ffffff;
     }
 
     .landing-followup-bar {
@@ -622,9 +622,23 @@
       text-transform: uppercase;
     }
 
+
+    .watch-videos-image-band {
+      width: 100%;
+      padding: clamp(20px, 4vw, 54px) clamp(16px, 4vw, 48px) 0;
+      background: #ffffff;
+      text-align: center;
+    }
+
+    .watch-videos-image-band img {
+      display: block;
+      width: min(100%, 1280px);
+      height: auto;
+      margin: 0 auto;
+    }
     .watch-videos-stage {
       padding: clamp(30px, 5vw, 76px) 0 clamp(54px, 8vw, 108px);
-      background: var(--white);
+      background: #ffffff;
       overflow: hidden;
     }
 
