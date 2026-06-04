@@ -4585,35 +4585,6 @@
       font-size: clamp(0.5rem, 0.68vw, 0.62rem);
     }
 
-    .mood-mode-redesign .mood-mode-footer {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.25rem;
-      width: min(900px, 100%);
-      margin: clamp(4rem, 5vw, 5rem) auto 0;
-      color: #5a4330;
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: clamp(1.35rem, 2.1vw, 1.85rem);
-      font-weight: 700;
-      line-height: 1.2;
-      text-align: center;
-    }
-
-    .mood-mode-redesign .mood-mode-footer::before,
-    .mood-mode-redesign .mood-mode-footer::after {
-      content: "";
-      flex: 1 1 140px;
-      height: 1px;
-      max-width: 260px;
-      background: linear-gradient(90deg, transparent, rgba(155, 91, 184, 0.7), rgba(107, 84, 61, 0.35));
-    }
-
-    .mood-mode-redesign .mood-mode-footer::after {
-      background: linear-gradient(90deg, rgba(107, 84, 61, 0.35), rgba(155, 91, 184, 0.7), transparent);
-    }
-
     @media (max-width: 860px) {
       .mood-mode-redesign,
       .mood-mode-redesign.open {
@@ -4623,10 +4594,6 @@
       .mood-mode-redesign .mood-card-grid {
         width: min(560px, 100%);
         gap: 1rem;
-      }
-
-      .mood-mode-redesign .mood-mode-footer {
-        margin-top: 2.4rem;
       }
     }
 
@@ -4647,14 +4614,18 @@
       .mood-mode-redesign .mood-card-button strong {
         font-size: clamp(1.75rem, 9vw, 2.25rem);
       }
+    }
 
-      .mood-mode-redesign .mood-mode-footer {
-        display: block;
-        font-size: 1.25rem;
-      }
+    /* Choose a Mood cleanup: no background art, divider, cross, or footer line */
+    .mood-mode-redesign,
+    .mood-mode-redesign.open {
+      background: transparent;
+    }
 
-      .mood-mode-redesign .mood-mode-footer::before,
-      .mood-mode-redesign .mood-mode-footer::after {
-        display: none;
-      }
+    .mood-mode-redesign::before,
+    .mood-mode-redesign::after,
+    .mood-mode-redesign .mood-card-grid::before,
+    .mood-mode-redesign .mood-card-grid::after {
+      content: none;
+      display: none;
     }
