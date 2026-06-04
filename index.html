@@ -18,7 +18,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <link rel="stylesheet" href="src/home.css?v=videos-rabbit-3" />
+  <link rel="stylesheet" href="src/home.css?v=videos-rabbit-map-1" />
   <style id="about-biblemapped-critical">
     html body #about-biblemapped {
       position: relative !important;
@@ -464,19 +464,22 @@
   </section>
 
 
-  <section class="landing-followup-bars premium-reveal" aria-label="Bible Mapped features">
-    <div class="watch-videos-image-band" aria-label="Videos are rabbit holes">
-      <img src="assets/videos-rabbit-holes.jpg" alt="Rabbit beside a rabbit hole" loading="lazy" />
+  <section class="landing-followup-bars premium-reveal" aria-label="Bible Mapped videos">
+    <div class="watch-videos-map-shell">
       <div class="watch-videos-copy">
-        <h2>Videos are rabbit holes</h2>
-        <p>Ever wonder how we got hospitals, where the New Testament came from, or what strange Bible facts are hiding in plain sight?</p>
+        <h2>Videos are Rabbit Holes</h2>
+        <p>Strange facts. Big questions. Ancient context. Follow the rabbit trail below.</p>
       </div>
-    </div>
 
-    <div class="watch-videos-stage">
-      <div class="watch-videos-marquee">
-        <div class="watch-videos-track">
-          <div class="watch-video-group">
+      <div class="watch-rabbit-trail-scene" aria-label="Rabbit trail video map">
+        <svg class="watch-rabbit-trail-svg" viewBox="0 0 1000 620" aria-hidden="true" focusable="false">
+          <path id="watchRabbitTrailPath" d="M96 372 C188 188 342 162 462 282 S668 492 830 354 S892 148 712 132 S456 88 504 286 S334 548 166 482" />
+        </svg>
+
+        <img class="watch-rabbit-anchor" src="assets/videos-rabbit-holes.jpg" alt="Rabbit beside a rabbit hole" loading="lazy" />
+
+        <div class="watch-videos-stage">
+          <div class="watch-videos-track" data-rabbit-trail-videos>
             <div class="watch-video-card">
               <iframe class="watch-video-embed" src="https://www.youtube.com/embed/lH3Uf1G-cUs" title="Why God Chose a Title" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
@@ -501,37 +504,10 @@
               <iframe class="watch-video-embed" src="https://www.youtube.com/embed/bofUpxOZW5k" title="Bible Mapped YouTube Short 6" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
           </div>
-
-          <div class="watch-video-group" aria-hidden="true">
-            <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/lH3Uf1G-cUs" title="Duplicate Why God Chose a Title" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-            </div>
-
-            <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/1i123qXhBwg" title="Duplicate Bible Mapped YouTube Short 2" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-            </div>
-
-            <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/9KO6829IwNM" title="Duplicate Bible Mapped YouTube Short 3" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-            </div>
-
-            <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/vFDihb4G_ho" title="Duplicate Bible Mapped YouTube Short 4" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-            </div>
-
-            <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/8K71geGXido" title="Duplicate Bible Mapped YouTube Short 5" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-            </div>
-
-            <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/bofUpxOZW5k" title="Duplicate Bible Mapped YouTube Short 6" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </section>
-
   <div class="modal-overlay" id="oldTestamentModal" aria-hidden="true">
     <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="oldModalTitle">
       <div class="modal-top">
