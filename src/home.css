@@ -593,7 +593,7 @@
 
 
     .landing-followup-bars {
-      background: #fffdf7;
+      background: #ffffff;
     }
 
     .landing-followup-bar {
@@ -625,10 +625,10 @@
 
     .watch-rabbit-map {
       display: grid;
-      grid-template-columns: minmax(260px, 0.44fr) minmax(0, 1fr);
+      grid-template-columns: minmax(280px, 0.38fr) minmax(0, 0.62fr);
       align-items: center;
-      gap: clamp(28px, 5vw, 76px);
-      width: min(1220px, calc(100% - clamp(32px, 7vw, 96px)));
+      gap: clamp(18px, 3.6vw, 48px);
+      width: min(1160px, calc(100% - clamp(32px, 7vw, 96px)));
       margin: 0 auto;
       padding: clamp(58px, 8vw, 116px) 0 clamp(64px, 8vw, 120px);
     }
@@ -668,23 +668,32 @@
 
     .watch-rabbit-map-scene {
       position: relative;
-      min-height: clamp(540px, 56vw, 700px);
+      min-height: clamp(540px, 54vw, 680px);
+      margin-left: clamp(-42px, -3vw, -18px);
+      opacity: 0;
+      transform: translate3d(-24px, 22px, 0);
+      transition: opacity 900ms ease, transform 1050ms cubic-bezier(0.16, 0.9, 0.22, 1);
       isolation: isolate;
+    }
+
+    .landing-followup-bars.reveal-in-view .watch-rabbit-map-scene {
+      opacity: 1;
+      transform: translate3d(-18px, 0, 0);
     }
 
     .watch-rabbit-trail {
       position: absolute;
-      inset: 5% 0 0;
+      inset: 4% 0 0;
       z-index: 1;
       width: 100%;
-      height: 90%;
+      height: 92%;
       overflow: visible;
       pointer-events: none;
     }
 
     .watch-rabbit-trail path {
       fill: none;
-      stroke: rgba(17, 19, 24, 0.44);
+      stroke: rgba(17, 19, 24, 0.5);
       stroke-width: 2;
       stroke-linecap: round;
       stroke-linejoin: round;
@@ -694,10 +703,10 @@
     .watch-rabbit-center {
       position: absolute;
       z-index: 2;
-      left: 50%;
-      top: 50%;
+      left: 48%;
+      top: 51%;
       display: block;
-      width: min(48vw, 430px);
+      width: min(42vw, 390px);
       height: auto;
       transform: translate(-50%, -50%);
       filter: drop-shadow(0 18px 32px rgba(31, 41, 51, 0.08));
@@ -717,7 +726,7 @@
       position: absolute;
       left: 0;
       top: 0;
-      width: clamp(126px, 12vw, 168px);
+      width: clamp(118px, 10.8vw, 154px);
       aspect-ratio: 9 / 16;
       background: #080808;
       border: 1px solid rgba(31, 41, 51, 0.12);
@@ -731,7 +740,7 @@
     }
 
     .watch-video-card.is-featured {
-      --rabbit-scale: 1.12;
+      --rabbit-scale: 1.1;
       z-index: 6;
       border-color: rgba(123, 60, 255, 0.42);
       box-shadow: 0 22px 58px rgba(31, 41, 51, 0.2), 0 0 0 2px rgba(123, 60, 255, 0.13), 0 0 28px rgba(123, 60, 255, 0.16);
@@ -760,10 +769,14 @@
         transform: none;
       }
 
-      .watch-rabbit-map-scene {
+      .watch-rabbit-map-scene,
+      .landing-followup-bars.reveal-in-view .watch-rabbit-map-scene {
         display: grid;
         gap: 24px;
         min-height: 0;
+        margin-left: 0;
+        opacity: 1;
+        transform: none;
       }
 
       .watch-rabbit-trail {

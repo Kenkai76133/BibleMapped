@@ -468,19 +468,13 @@
     setTimeout(checkTestamentPuzzleAnimation, 900);
 
     const videoMap = document.querySelector("[data-rabbit-video-map]");
+    const videoPath = document.getElementById("watchRabbitTrailPath");
     const videoCards = videoMap ? Array.from(videoMap.querySelectorAll(".watch-video-card")) : [];
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const compactVideoMap = window.matchMedia("(max-width: 780px)");
 
-    if (videoMap && videoCards.length) {
-      const trailPoints = [
-        { x: 18, y: 58 },
-        { x: 32, y: 25 },
-        { x: 57, y: 27 },
-        { x: 82, y: 52 },
-        { x: 64, y: 78 },
-        { x: 30, y: 76 }
-      ];
+    if (videoMap && videoPath && videoCards.length) {
+      let pathLength = Math.max(1, videoPath.getTotalLength());
 
       let trailProgress = 0;
       let scrollVelocity = 0;
@@ -499,22 +493,6 @@
           card.classList.toggle("is-featured", cardIndex === featuredIndex);
         });
       }
-
-      function interpolateTrailPoint(progress) {
-        const count = trailPoints.length;
-        const wrapped = ((progress % count) + count) % count;
-        const index = Math.floor(wrapped);
-        const nextIndex = (index + 1) % count;
-        const mix = wrapped - index;
-        const point = trailPoints[index];
-        const nextPoint = trailPoints[nextIndex];
-
-        return {
-          x: point.x + (nextPoint.x - point.x) * mix,
-          y: point.y + (nextPoint.y - point.y) * mix
-        };
-      }
-
       function layoutVideos(now) {
         if (compactVideoMap.matches) {
           videoCards.forEach((card, index) => {
@@ -526,14 +504,16 @@
         }
 
         videoCards.forEach((card, index) => {
-          const point = interpolateTrailPoint(trailProgress + index);
+          const spacing = index / videoCards.length;
+          const progress = ((trailProgress + spacing) % 1 + 1) % 1;
+          const point = videoPath.getPointAtLength(progress * pathLength);
           const phase = now * 0.00032 + index * 1.8;
           const driftX = Math.sin(phase) * 5.5;
           const driftY = Math.cos(phase * 0.82) * 5;
           const isFeatured = index === featuredIndex;
 
-          card.style.setProperty("--rabbit-x", `calc(${point.x}% + ${driftX.toFixed(2)}px)`);
-          card.style.setProperty("--rabbit-y", `calc(${point.y}% + ${driftY.toFixed(2)}px)`);
+          card.style.setProperty("--rabbit-x", `calc(${(point.x / 1000) * 100}% + ${driftX.toFixed(2)}px)`);
+          card.style.setProperty("--rabbit-y", `calc(${(point.y / 640) * 100}% + ${driftY.toFixed(2)}px)`);
           card.style.setProperty("--rabbit-scale", isFeatured ? "1.12" : "0.88");
         });
       }
@@ -544,7 +524,7 @@
         lastScrollY = currentScrollY;
 
         if (Math.abs(delta) > 1) {
-          scrollVelocity += clamp(delta * 0.0022, -0.08, 0.08);
+          scrollVelocity += clamp(delta * 0.00018, -0.018, 0.018);
         }
       }
 
@@ -553,7 +533,7 @@
         lastFrameTime = now;
 
         if (!reduceMotion.matches && !compactVideoMap.matches) {
-          trailProgress += elapsed * 0.00008 + scrollVelocity;
+          trailProgress += elapsed * 0.000012 + scrollVelocity;
           scrollVelocity *= 0.88;
         }
 
@@ -577,7 +557,10 @@
       setFeaturedVideo(0);
       layoutVideos(performance.now());
       window.addEventListener("scroll", handleVideoMapScroll, { passive: true });
-      window.addEventListener("resize", () => layoutVideos(performance.now()));
+      window.addEventListener("resize", () => {
+        pathLength = Math.max(1, videoPath.getTotalLength());
+        layoutVideos(performance.now());
+      });
       window.requestAnimationFrame(animateVideoMap);
     }
     const storyCards = document.querySelectorAll(".scripture-story-card");
