@@ -467,102 +467,91 @@
     setTimeout(checkTestamentPuzzleAnimation, 300);
     setTimeout(checkTestamentPuzzleAnimation, 900);
 
-    const videoMap = document.querySelector("[data-rabbit-video-map]");
-    const videoPath = document.getElementById("watchRabbitTrailPath");
-    const videoCards = videoMap ? Array.from(videoMap.querySelectorAll(".watch-video-card")) : [];
+    const videoTrack = document.querySelector(".watch-videos-track");
+    const videoMarquee = document.querySelector(".watch-videos-marquee");
+    const videoCards = document.querySelectorAll(".watch-video-card");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const compactVideoMap = window.matchMedia("(max-width: 780px)");
 
-    if (videoMap && videoPath && videoCards.length) {
-      let pathLength = Math.max(1, videoPath.getTotalLength());
-
-      let trailProgress = 0;
-      let scrollVelocity = 0;
-      let featuredIndex = 0;
+    if (videoTrack && videoMarquee && !reduceMotion.matches) {
+      let videoOffset = 0;
+      let videoDirection = 1;
+      let videoRunning = true;
+      let videoPauseUntil = 0;
       let lastScrollY = window.scrollY;
       let lastFrameTime = performance.now();
-      let featureElapsed = 0;
 
-      function clamp(value, min, max) {
-        return Math.min(Math.max(value, min), max);
+      function getVideoLoopWidth() {
+        return Math.max(1, videoTrack.scrollWidth / 2);
       }
 
-      function setFeaturedVideo(index) {
-        featuredIndex = ((index % videoCards.length) + videoCards.length) % videoCards.length;
-        videoCards.forEach((card, cardIndex) => {
-          card.classList.toggle("is-featured", cardIndex === featuredIndex);
-        });
-      }
-      function layoutVideos(now) {
-        if (compactVideoMap.matches) {
-          videoCards.forEach((card, index) => {
-            card.style.setProperty("--rabbit-x", "50%");
-            card.style.setProperty("--rabbit-y", "0px");
-            card.style.setProperty("--rabbit-scale", index === featuredIndex ? "1" : "0.92");
-          });
-          return;
-        }
+      function normalizeVideoOffset() {
+        const loopWidth = getVideoLoopWidth();
 
-        videoCards.forEach((card, index) => {
-          const spacing = index / videoCards.length;
-          const progress = ((trailProgress + spacing) % 1 + 1) % 1;
-          const point = videoPath.getPointAtLength(progress * pathLength);
-          const phase = now * 0.00032 + index * 1.8;
-          const driftX = Math.sin(phase) * 5.5;
-          const driftY = Math.cos(phase * 0.82) * 5;
-          const isFeatured = index === featuredIndex;
-
-          card.style.setProperty("--rabbit-x", `calc(${(point.x / 1000) * 100}% + ${driftX.toFixed(2)}px)`);
-          card.style.setProperty("--rabbit-y", `calc(${(point.y / 640) * 100}% + ${driftY.toFixed(2)}px)`);
-          card.style.setProperty("--rabbit-scale", isFeatured ? "1.12" : "0.88");
-        });
-      }
-
-      function handleVideoMapScroll() {
-        const currentScrollY = window.scrollY;
-        const delta = currentScrollY - lastScrollY;
-        lastScrollY = currentScrollY;
-
-        if (Math.abs(delta) > 1) {
-          scrollVelocity += clamp(delta * 0.00018, -0.018, 0.018);
+        if (videoOffset <= -loopWidth) {
+          videoOffset += loopWidth;
+        } else if (videoOffset >= 0) {
+          videoOffset -= loopWidth;
         }
       }
 
-      function animateVideoMap(now) {
-        const elapsed = Math.min(42, now - lastFrameTime);
+      videoOffset = -getVideoLoopWidth() / 2;
+
+      function animateVideoTrack(now) {
+        const elapsed = Math.min(34, now - lastFrameTime);
         lastFrameTime = now;
 
-        if (!reduceMotion.matches && !compactVideoMap.matches) {
-          trailProgress += elapsed * 0.000012 + scrollVelocity;
-          scrollVelocity *= 0.88;
+        if (videoRunning && now >= videoPauseUntil) {
+          videoOffset += videoDirection * elapsed * 0.032;
+          normalizeVideoOffset();
+          videoTrack.style.setProperty("--watch-video-offset", `${videoOffset}px`);
         }
 
-        featureElapsed += elapsed;
-        if (featureElapsed > 3400) {
-          featureElapsed = 0;
-          setFeaturedVideo(featuredIndex + 1);
-        }
-
-        layoutVideos(now);
-        window.requestAnimationFrame(animateVideoMap);
+        window.requestAnimationFrame(animateVideoTrack);
       }
 
-      videoCards.forEach((card, index) => {
-        card.addEventListener("pointerdown", () => {
-          setFeaturedVideo(index);
-          featureElapsed = 0;
-        }, { passive: true });
+      function handleVideoScrollDirection() {
+        const currentScrollY = window.scrollY;
+        const delta = currentScrollY - lastScrollY;
+
+        if (Math.abs(delta) > 2) {
+          if (delta > 0) {
+            videoDirection = -1;
+            videoPauseUntil = 0;
+          } else {
+            videoDirection = 1;
+            videoPauseUntil = performance.now() + 420;
+          }
+        }
+
+        lastScrollY = currentScrollY;
+      }
+
+      function stopVideoCarousel() {
+        videoRunning = false;
+        videoTrack.classList.add("is-paused");
+      }
+
+      videoCards.forEach((card) => {
+        card.addEventListener("pointerdown", stopVideoCarousel, { passive: true });
+        card.addEventListener("click", stopVideoCarousel);
       });
 
-      setFeaturedVideo(0);
-      layoutVideos(performance.now());
-      window.addEventListener("scroll", handleVideoMapScroll, { passive: true });
-      window.addEventListener("resize", () => {
-        pathLength = Math.max(1, videoPath.getTotalLength());
-        layoutVideos(performance.now());
+      window.addEventListener("blur", () => {
+        if (document.activeElement && document.activeElement.classList.contains("watch-video-embed")) {
+          stopVideoCarousel();
+        }
       });
-      window.requestAnimationFrame(animateVideoMap);
+
+      window.addEventListener("scroll", handleVideoScrollDirection, { passive: true });
+      window.addEventListener("resize", () => {
+        videoOffset = -getVideoLoopWidth() / 2;
+        videoTrack.style.setProperty("--watch-video-offset", `${videoOffset}px`);
+      });
+
+      videoTrack.style.setProperty("--watch-video-offset", `${videoOffset}px`);
+      window.requestAnimationFrame(animateVideoTrack);
     }
+
     const storyCards = document.querySelectorAll(".scripture-story-card");
 
     storyCards.forEach((card) => {
