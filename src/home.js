@@ -467,116 +467,91 @@
     setTimeout(checkTestamentPuzzleAnimation, 300);
     setTimeout(checkTestamentPuzzleAnimation, 900);
 
-    const videoScene = document.querySelector(".watch-rabbit-trail-scene");
-    const videoTrack = document.querySelector("[data-rabbit-trail-videos]");
-    const videoPath = document.getElementById("watchRabbitTrailPath");
-    const videoCards = videoTrack ? Array.from(videoTrack.querySelectorAll(".watch-video-card")) : [];
+    const videoTrack = document.querySelector(".watch-videos-track");
+    const videoMarquee = document.querySelector(".watch-videos-marquee");
+    const videoCards = document.querySelectorAll(".watch-video-card");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const compactVideos = window.matchMedia("(max-width: 780px)");
 
-    if (videoScene && videoTrack && videoPath && videoCards.length) {
-      let featuredVideoIndex = 0;
-      let pathProgress = 0;
-      let scrollPush = 0;
+    if (videoTrack && videoMarquee && !reduceMotion.matches) {
+      let videoOffset = 0;
+      let videoDirection = 1;
+      let videoRunning = true;
+      let videoPauseUntil = 0;
       let lastScrollY = window.scrollY;
       let lastFrameTime = performance.now();
-      let featureTimer = 0;
-      let pathLength = 1;
 
-      function clamp(value, min, max) {
-        return Math.min(Math.max(value, min), max);
+      function getVideoLoopWidth() {
+        return Math.max(1, videoTrack.scrollWidth / 2);
       }
 
-      function refreshVideoPathLength() {
-        pathLength = Math.max(1, videoPath.getTotalLength());
-      }
+      function normalizeVideoOffset() {
+        const loopWidth = getVideoLoopWidth();
 
-      function setFeaturedVideo(index) {
-        featuredVideoIndex = ((index % videoCards.length) + videoCards.length) % videoCards.length;
-        videoCards.forEach((card, cardIndex) => {
-          card.classList.toggle("is-featured", cardIndex === featuredVideoIndex);
-        });
-      }
-
-      function layoutMobileVideos() {
-        videoCards.forEach((card, index) => {
-          card.style.setProperty("--trail-x", "50%");
-          card.style.setProperty("--trail-y", "0px");
-          card.style.setProperty("--trail-scale", index === featuredVideoIndex ? "1" : "0.92");
-        });
-      }
-
-      function layoutTrailVideos() {
-        if (compactVideos.matches) {
-          layoutMobileVideos();
-          return;
-        }
-
-        videoCards.forEach((card, index) => {
-          const spacing = index / videoCards.length;
-          const progress = (pathProgress + spacing) % 1;
-          const point = videoPath.getPointAtLength(progress * pathLength);
-          const isFeatured = index === featuredVideoIndex;
-          const floatPhase = performance.now() * 0.00035 + index * 1.7;
-          const driftX = Math.sin(floatPhase) * 7;
-          const driftY = Math.cos(floatPhase * 0.9) * 6;
-
-          card.style.setProperty("--trail-x", `calc(${(point.x / 1000) * 100}% + ${driftX.toFixed(2)}px)`);
-          card.style.setProperty("--trail-y", `calc(${(point.y / 620) * 100}% + ${driftY.toFixed(2)}px)`);
-          card.style.setProperty("--trail-scale", isFeatured ? "1.16" : "0.84");
-        });
-      }
-
-      function handleVideoScroll() {
-        const currentScrollY = window.scrollY;
-        const delta = currentScrollY - lastScrollY;
-        lastScrollY = currentScrollY;
-
-        if (Math.abs(delta) > 1) {
-          scrollPush += clamp(delta * 0.0009, -0.045, 0.045);
+        if (videoOffset <= -loopWidth) {
+          videoOffset += loopWidth;
+        } else if (videoOffset >= 0) {
+          videoOffset -= loopWidth;
         }
       }
 
-      function animateTrailVideos(now) {
-        const elapsed = Math.min(42, now - lastFrameTime);
+      videoOffset = -getVideoLoopWidth() / 2;
+
+      function animateVideoTrack(now) {
+        const elapsed = Math.min(34, now - lastFrameTime);
         lastFrameTime = now;
 
-        if (!reduceMotion.matches) {
-          const idleDrift = compactVideos.matches ? 0 : elapsed * 0.000006;
-          pathProgress = (pathProgress + idleDrift + scrollPush) % 1;
-          if (pathProgress < 0) pathProgress += 1;
-          scrollPush *= 0.88;
+        if (videoRunning && now >= videoPauseUntil) {
+          videoOffset += videoDirection * elapsed * 0.032;
+          normalizeVideoOffset();
+          videoTrack.style.setProperty("--watch-video-offset", `${videoOffset}px`);
         }
 
-        featureTimer += elapsed;
-        if (featureTimer > 3400) {
-          featureTimer = 0;
-          setFeaturedVideo(featuredVideoIndex + 1);
-        }
-
-        layoutTrailVideos();
-        window.requestAnimationFrame(animateTrailVideos);
+        window.requestAnimationFrame(animateVideoTrack);
       }
 
-      videoCards.forEach((card, index) => {
-        card.addEventListener("pointerdown", () => {
-          setFeaturedVideo(index);
-          featureTimer = 0;
-        }, { passive: true });
+      function handleVideoScrollDirection() {
+        const currentScrollY = window.scrollY;
+        const delta = currentScrollY - lastScrollY;
+
+        if (Math.abs(delta) > 2) {
+          if (delta > 0) {
+            videoDirection = -1;
+            videoPauseUntil = 0;
+          } else {
+            videoDirection = 1;
+            videoPauseUntil = performance.now() + 420;
+          }
+        }
+
+        lastScrollY = currentScrollY;
+      }
+
+      function stopVideoCarousel() {
+        videoRunning = false;
+        videoTrack.classList.add("is-paused");
+      }
+
+      videoCards.forEach((card) => {
+        card.addEventListener("pointerdown", stopVideoCarousel, { passive: true });
+        card.addEventListener("click", stopVideoCarousel);
       });
 
-      refreshVideoPathLength();
-      setFeaturedVideo(0);
-      layoutTrailVideos();
+      window.addEventListener("blur", () => {
+        if (document.activeElement && document.activeElement.classList.contains("watch-video-embed")) {
+          stopVideoCarousel();
+        }
+      });
 
-      window.addEventListener("scroll", handleVideoScroll, { passive: true });
+      window.addEventListener("scroll", handleVideoScrollDirection, { passive: true });
       window.addEventListener("resize", () => {
-        refreshVideoPathLength();
-        layoutTrailVideos();
+        videoOffset = -getVideoLoopWidth() / 2;
+        videoTrack.style.setProperty("--watch-video-offset", `${videoOffset}px`);
       });
 
-      window.requestAnimationFrame(animateTrailVideos);
+      videoTrack.style.setProperty("--watch-video-offset", `${videoOffset}px`);
+      window.requestAnimationFrame(animateVideoTrack);
     }
+
     const storyCards = document.querySelectorAll(".scripture-story-card");
 
     storyCards.forEach((card) => {
