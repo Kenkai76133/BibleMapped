@@ -4186,3 +4186,163 @@
       }
     }
 
+    /* About Bible Mapped compact upload-slot layout */
+    #about-biblemapped {
+      background: #f8f4ec !important;
+      padding: clamp(24px, 5vw, 64px) 16px !important;
+    }
+
+    #about-biblemapped .about-mapped-shell,
+    #aboutMappedPanel,
+    #aboutMappedPanel .minimal-panel-inner {
+      width: 100% !important;
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      border: 0 !important;
+      line-height: normal !important;
+      overflow: visible !important;
+      max-height: none !important;
+      opacity: 1 !important;
+    }
+
+    #aboutMappedPanel .about-panel-formula {
+      display: none !important;
+    }
+
+    #aboutMappedToggle.about-mapped-toggle {
+      display: block !important;
+      width: min(100%, 560px) !important;
+      margin: 0 auto clamp(14px, 2vw, 18px) !important;
+      padding: 0 !important;
+      border: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      color: #141414 !important;
+      font-family: Inter, Arial, Helvetica, sans-serif !important;
+      font-size: clamp(2rem, 5.2vw, 3.05rem) !important;
+      font-weight: 900 !important;
+      line-height: 0.95 !important;
+      letter-spacing: -0.03em !important;
+      text-align: center !important;
+      text-transform: none !important;
+      cursor: default !important;
+    }
+
+    #aboutMappedToggle.about-mapped-toggle::before,
+    #aboutMappedToggle.about-mapped-toggle::after {
+      display: none !important;
+    }
+
+    .about-biblemapped-card {
+      width: min(100%, 560px);
+      margin: 0 auto;
+      padding: 0;
+      color: #151515;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+    }
+
+    .about-biblemapped-list {
+      display: grid;
+      gap: clamp(14px, 2.3vw, 18px);
+    }
+
+    .about-biblemapped-item {
+      display: grid;
+      grid-template-columns: clamp(64px, 12vw, 86px) minmax(0, 1fr);
+      align-items: center;
+      gap: clamp(16px, 3vw, 24px);
+    }
+
+    .about-biblemapped-image-slot {
+      position: relative;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 3px solid #191919;
+      border-radius: 20% 28% 22% 18% / 24% 18% 28% 20%;
+      background: rgba(255, 253, 248, 0.72);
+      color: #7b2cff;
+      font-size: clamp(0.55rem, 1.6vw, 0.68rem);
+      font-weight: 800;
+      line-height: 1.05;
+      text-align: center;
+      transform: rotate(var(--slot-tilt, -2deg));
+      overflow: hidden;
+    }
+
+    .about-biblemapped-image-slot::before,
+    .about-biblemapped-image-slot::after {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border: 2px solid rgba(25, 25, 25, 0.18);
+      border-radius: 44% 36% 42% 38%;
+      pointer-events: none;
+    }
+
+    .about-biblemapped-image-slot::after {
+      inset: auto 14px 13px;
+      height: 18%;
+      border-width: 0 0 2px;
+      border-radius: 50%;
+      transform: rotate(-8deg);
+    }
+
+    .about-biblemapped-image-slot[data-image-slot="who"] {
+      --slot-tilt: 2deg;
+    }
+
+    .about-biblemapped-image-slot[data-image-slot="why"] {
+      --slot-tilt: -1deg;
+    }
+
+    .about-biblemapped-image-slot[data-image-slot="what"] {
+      --slot-tilt: 3deg;
+    }
+
+    .about-biblemapped-image-slot span {
+      position: relative;
+      z-index: 1;
+      width: min-content;
+      opacity: 0.78;
+    }
+
+    .about-biblemapped-copy h3 {
+      margin: 0 0 2px;
+      color: #111;
+      font-size: clamp(1.05rem, 2.3vw, 1.32rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .about-biblemapped-copy p {
+      max-width: 34ch;
+      margin: 0;
+      color: #242424;
+      font-size: clamp(0.86rem, 1.85vw, 1rem);
+      line-height: 1.16;
+      letter-spacing: -0.012em;
+    }
+
+    @media (max-width: 520px) {
+      #about-biblemapped {
+        padding: 22px 14px 30px !important;
+      }
+
+      #aboutMappedToggle.about-mapped-toggle {
+        font-size: clamp(1.85rem, 9vw, 2.35rem) !important;
+      }
+
+      .about-biblemapped-item {
+        grid-template-columns: 62px minmax(0, 1fr);
+        gap: 14px;
+      }
+
+      .about-biblemapped-image-slot {
+        border-width: 2.5px;
+      }
+    }
