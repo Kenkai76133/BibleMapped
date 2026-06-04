@@ -632,7 +632,7 @@
 
     .watch-videos-image-band img {
       display: block;
-      width: min(100%, 1280px);
+      width: min(100%, 980px);
       height: auto;
       margin: 0 auto;
     }
