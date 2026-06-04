@@ -96,6 +96,24 @@
         transform: translate3d(0, 0, 0) rotate(var(--slot-tilt, -2deg));
       }
     }
+    html body .home-testament-maps {
+      position: relative !important;
+      isolation: isolate !important;
+      overflow: hidden !important;
+      color: #ffffff !important;
+      background:
+        linear-gradient(90deg, rgba(12, 16, 20, 0.82) 0%, rgba(12, 16, 20, 0.58) 45%, rgba(12, 16, 20, 0.22) 100%),
+        url("/assets/testament-maps-background.jpg") center / cover no-repeat !important;
+    }
+
+    html body .home-testament-maps::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(12, 16, 20, 0.08) 42%, rgba(12, 16, 20, 0.38));
+      pointer-events: none;
+    }
   </style>
 </head>
 
