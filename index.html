@@ -18,7 +18,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <link rel="stylesheet" href="src/home.css?v=maps-bg-1" />
+  <link rel="stylesheet" href="src/home.css?v=maps-bg-2" />
   <style id="about-biblemapped-critical">
     html body #about-biblemapped {
       position: relative !important;
@@ -100,9 +100,9 @@
       position: relative !important;
       isolation: isolate !important;
       overflow: hidden !important;
-      color: #ffffff !important;
+      color: var(--gunmetal) !important;
       background:
-        linear-gradient(90deg, rgba(12, 16, 20, 0.82) 0%, rgba(12, 16, 20, 0.58) 45%, rgba(12, 16, 20, 0.22) 100%),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.7) 42%, rgba(255, 255, 255, 0.22) 74%, rgba(255, 255, 255, 0.04) 100%),
         url("/assets/testament-maps-background.jpg") center / cover no-repeat !important;
     }
 
@@ -111,8 +111,20 @@
       position: absolute;
       inset: 0;
       z-index: -1;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(12, 16, 20, 0.08) 42%, rgba(12, 16, 20, 0.38));
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.22) 48%, rgba(255, 255, 255, 0.08));
       pointer-events: none;
+    }
+    html body .home-testament-maps-copy h2,
+    html body .home-testament-maps .home-map-item h3 {
+      color: var(--gunmetal) !important;
+      text-shadow: 0 2px 18px rgba(255, 255, 255, 0.48) !important;
+    }
+
+    html body .home-testament-maps-copy p,
+    html body .home-testament-maps .home-map-caption,
+    html body .home-testament-maps .eyebrow {
+      color: rgba(31, 41, 51, 0.84) !important;
+      text-shadow: 0 1px 12px rgba(255, 255, 255, 0.54) !important;
     }
   </style>
 </head>
