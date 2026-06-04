@@ -4346,3 +4346,84 @@
         border-width: 2.5px;
       }
     }
+
+    /* Final About Bible Mapped visibility guard */
+    html body #about-biblemapped,
+    html body #about-biblemapped .about-mapped-shell,
+    html body #aboutMappedPanel,
+    html body #aboutMappedPanel.open,
+    html body #aboutMappedPanel .minimal-panel-inner {
+      min-height: 0 !important;
+      height: auto !important;
+      max-height: none !important;
+      overflow: visible !important;
+      line-height: normal !important;
+    }
+
+    html body #aboutMappedPanel .minimal-panel-inner {
+      display: block !important;
+      width: 100% !important;
+      max-width: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    html body #aboutMappedPanel .about-biblemapped-card {
+      display: block !important;
+      width: min(100% - 24px, 560px) !important;
+      margin: 0 auto !important;
+      padding: 0 0 2px !important;
+      line-height: normal !important;
+    }
+
+    html body #aboutMappedPanel .about-biblemapped-list {
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      gap: clamp(14px, 2.2vw, 18px) !important;
+    }
+
+    html body #aboutMappedPanel .about-biblemapped-item {
+      display: grid !important;
+      grid-template-columns: clamp(68px, 12vw, 86px) minmax(0, 1fr) !important;
+      align-items: center !important;
+      gap: clamp(16px, 3vw, 24px) !important;
+      min-height: clamp(70px, 12vw, 90px) !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      line-height: normal !important;
+    }
+
+    html body #aboutMappedPanel .about-biblemapped-image-slot {
+      display: grid !important;
+      width: clamp(64px, 12vw, 86px) !important;
+      min-width: clamp(64px, 12vw, 86px) !important;
+      height: clamp(64px, 12vw, 86px) !important;
+      min-height: clamp(64px, 12vw, 86px) !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      box-sizing: border-box !important;
+    }
+
+    html body #aboutMappedPanel .about-biblemapped-copy,
+    html body #aboutMappedPanel .about-biblemapped-copy h3,
+    html body #aboutMappedPanel .about-biblemapped-copy p {
+      line-height: normal !important;
+    }
+
+    @media (max-width: 520px) {
+      html body #aboutMappedPanel .about-biblemapped-card {
+        width: min(100% - 16px, 560px) !important;
+      }
+
+      html body #aboutMappedPanel .about-biblemapped-item {
+        grid-template-columns: 62px minmax(0, 1fr) !important;
+        min-height: 66px !important;
+      }
+
+      html body #aboutMappedPanel .about-biblemapped-image-slot {
+        width: 62px !important;
+        min-width: 62px !important;
+        height: 62px !important;
+        min-height: 62px !important;
+      }
+    }
