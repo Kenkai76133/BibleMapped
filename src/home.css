@@ -5487,26 +5487,86 @@
       }
     }
 
+    html body .home-testament-maps-copy h2 {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+    }
+
+    html body .home-testament-maps-title-accent {
+      display: block !important;
+      color: var(--electric-purple) !important;
+    }
+
+    html body .home-map-actions {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: clamp(0.85rem, 2vw, 1.25rem) !important;
+      width: min(720px, 100%) !important;
+      margin: clamp(2rem, 5vw, 4rem) auto 0 0 !important;
+    }
+
+    html body .home-map-action {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      min-height: 56px !important;
+      padding: 0.95rem 1.25rem !important;
+      border: 1px solid rgba(124, 58, 237, 0.34) !important;
+      border-radius: 999px !important;
+      background: var(--electric-purple) !important;
+      color: #ffffff !important;
+      box-shadow: 0 16px 36px rgba(84, 45, 168, 0.22), 0 3px 10px rgba(31, 22, 48, 0.1) !important;
+      font-weight: 800 !important;
+      text-align: center !important;
+      text-decoration: none !important;
+      transition: background 180ms ease, transform 180ms ease, box-shadow 180ms ease !important;
+    }
+
+    html body .home-map-action:hover,
+    html body .home-map-action:focus-visible {
+      background: #5f20d8 !important;
+      box-shadow: 0 18px 40px rgba(84, 45, 168, 0.28), 0 4px 12px rgba(31, 22, 48, 0.12) !important;
+      transform: translateY(-2px) !important;
+      outline: 0 !important;
+    }
+
+    @media (max-width: 640px) {
+      html body .home-map-actions {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
     /* Landing order correction: Maps -> People -> Videos */
     html body .testament-puzzle-section {
       display: none !important;
     }
 
     html body .home-people-feature {
+      position: relative !important;
       display: block !important;
       min-height: 0 !important;
       margin: 0 !important;
       padding: clamp(4.5rem, 8vw, 7.5rem) clamp(1rem, 4vw, 3.5rem) !important;
       overflow: hidden !important;
       color: #111827 !important;
-      background: linear-gradient(180deg, rgba(255, 252, 244, 0.96), rgba(248, 241, 224, 0.98)) !important;
-      background-image: linear-gradient(180deg, rgba(255, 252, 244, 0.96), rgba(248, 241, 224, 0.98)) !important;
+      background-color: #f8f1e0 !important;
+      background-image: url("../assets/bible-journey-people-hero-strip.png") !important;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+      background-size: cover !important;
       border-top: 1px solid rgba(31, 41, 51, 0.08) !important;
       border-bottom: 1px solid rgba(31, 41, 51, 0.16) !important;
     }
 
     html body .home-people-feature::before {
-      display: none !important;
+      content: "" !important;
+      position: absolute !important;
+      inset: 0 !important;
+      z-index: 0 !important;
+      display: block !important;
+      background: rgba(255, 252, 244, 0.7) !important;
+      pointer-events: none !important;
     }
 
     html body .home-people-feature-inner {
@@ -5567,16 +5627,16 @@
       margin-top: clamp(1.35rem, 2.6vw, 2rem) !important;
       padding: 0 1.45rem !important;
       border-radius: 999px !important;
-      background: #8b2cff !important;
+      background: #0B1F3A !important;
       color: #ffffff !important;
-      box-shadow: 0 15px 32px rgba(93, 28, 188, 0.28), 0 3px 10px rgba(20, 12, 36, 0.14) !important;
+      box-shadow: 0 15px 32px rgba(11, 31, 58, 0.24), 0 3px 10px rgba(20, 12, 36, 0.14) !important;
       text-decoration: none !important;
       text-shadow: none !important;
     }
 
     html body .home-people-feature-button:hover,
     html body .home-people-feature-button:focus-visible {
-      background: #9b45ff !important;
+      background: #132F55 !important;
       transform: translateY(-2px) !important;
       outline: 0 !important;
     }
@@ -5586,10 +5646,13 @@
       min-width: 0 !important;
       margin: 0 !important;
       overflow: hidden !important;
-      border: 1px solid rgba(31, 41, 51, 0.14) !important;
+      border: 0 !important;
       border-radius: 8px !important;
-      background: rgba(255, 255, 255, 0.48) !important;
-      box-shadow: 0 24px 60px rgba(74, 63, 44, 0.14), 0 1px 0 rgba(255, 255, 255, 0.86) inset !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
       transform: translate3d(24px, 0, 0);
       transition: transform 1200ms cubic-bezier(0.16, 0.9, 0.22, 1);
     }
