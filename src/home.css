@@ -5292,6 +5292,65 @@
       }
     }
 
+    /* Hero parchment lineup background */
+    html body.landing-start .hero {
+      min-height: clamp(620px, 88svh, 920px) !important;
+      padding-top: calc(var(--nav-height) + clamp(1.2rem, 3.4vw, 3rem)) !important;
+      background: #fff !important;
+      overflow: hidden !important;
+    }
+
+    html body.landing-start .hero::before {
+      background-image: url("../assets/hero-bible-lineup-parchment.png") !important;
+      background-repeat: no-repeat !important;
+      background-size: cover !important;
+      background-position: center bottom !important;
+      opacity: 1 !important;
+      filter: saturate(1.02) contrast(1.02) !important;
+    }
+
+    html body.landing-start .hero::after {
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(255, 255, 255, 0.96) 8%,
+          rgba(255, 255, 255, 0.72) 20%,
+          rgba(255, 255, 255, 0.3) 38%,
+          rgba(255, 255, 255, 0.08) 62%,
+          rgba(255, 255, 255, 0.38) 100%
+        ),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.52), rgba(255, 255, 255, 0.12) 42%, rgba(255, 255, 255, 0.38)) !important;
+    }
+
+    html body.landing-start .hero-inner {
+      min-height: clamp(520px, 74svh, 800px) !important;
+    }
+
+    html body.landing-start .hero-actions {
+      position: absolute !important;
+      left: 50% !important;
+      bottom: clamp(5.4rem, 10vw, 9rem) !important;
+      z-index: 18 !important;
+      transform: translateX(-50%) !important;
+      margin-top: 0 !important;
+    }
+
+    @media (max-width: 720px) {
+      html body.landing-start .hero {
+        min-height: clamp(560px, 82svh, 740px) !important;
+      }
+
+      html body.landing-start .hero::before {
+        background-size: cover !important;
+        background-position: center bottom !important;
+      }
+
+      html body.landing-start .hero-actions {
+        bottom: clamp(4.2rem, 16vw, 6.6rem) !important;
+      }
+    }
+
     /* Static map fan: restore section title and Old Testament label */
     html body .home-testament-maps-copy {
       display: block !important;
