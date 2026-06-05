@@ -43,7 +43,85 @@
     }
 
     .people-page .hero {
-      display: none;
+      position: relative;
+      display: grid;
+      align-items: center;
+      min-height: clamp(520px, 58vw, 760px);
+      padding: clamp(88px, 12vw, 150px) 0 clamp(76px, 10vw, 128px);
+      overflow: hidden;
+      isolation: isolate;
+      background: #f4ead9;
+      color: #ffffff;
+    }
+
+    .people-page .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background-image: url("../assets/bible-journey-people-hero-strip.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      opacity: 1;
+    }
+
+    .people-page .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: rgba(236, 218, 186, 0.42);
+      pointer-events: none;
+    }
+
+    .people-page .hero .container {
+      width: min(1120px, calc(100% - 40px));
+    }
+
+    .people-page .hero .eyebrow {
+      color: rgba(255, 255, 255, 0.86);
+      text-shadow: 0 3px 16px rgba(32, 22, 12, 0.38);
+    }
+
+    .people-page .hero h1 {
+      max-width: 760px;
+      margin-bottom: 18px;
+      color: #ffffff;
+      text-shadow: 0 6px 26px rgba(32, 22, 12, 0.48);
+    }
+
+    .people-page .hero-copy {
+      max-width: 680px;
+      color: rgba(255, 255, 255, 0.94);
+      text-shadow: 0 5px 20px rgba(32, 22, 12, 0.46);
+    }
+
+    .people-page .hero-actions {
+      margin-top: 28px;
+    }
+
+    .people-page .people-hero-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 24px;
+      border-radius: 999px;
+      background: var(--electric-purple);
+      color: #ffffff;
+      font-weight: 900;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      box-shadow: 0 18px 34px rgba(106, 45, 255, 0.26), 0 5px 18px rgba(32, 22, 12, 0.2);
+      transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+    }
+
+    .people-page .people-hero-btn:hover,
+    .people-page .people-hero-btn:focus-visible {
+      transform: translateY(-2px);
+      background: #7a2cff;
+      box-shadow: 0 22px 42px rgba(106, 45, 255, 0.32), 0 8px 22px rgba(32, 22, 12, 0.24);
     }
 
     .people-gallery-section {
@@ -251,11 +329,15 @@
     <section class="hero">
       <div class="container">
         <p class="eyebrow">People</p>
-        <h1>Who Are These People?</h1>
+        <h1>The People Behind the Story</h1>
         <p class="hero-copy">
-          The Bible is filled with real people living inside God’s larger story — kings,
-          prophets, families, enemies, disciples, doubters, failures, and witnesses.
+          The Bible moves through real people with real names, stories, cultures, failures,
+          questions, and faith. Explore the people behind the text and see how their world
+          helps the story come alive.
         </p>
+        <div class="hero-actions">
+          <a class="people-hero-btn" href="/people">Learn Their Story</a>
+        </div>
       </div>
     </section>
 
