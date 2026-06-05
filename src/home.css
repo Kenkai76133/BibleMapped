@@ -5111,3 +5111,52 @@
         transform: translate3d(clamp(2.2rem, 4vw, 3.8rem), clamp(3.2rem, 6vw, 5.4rem), 0) rotate(-3.4deg) !important;
       }
     }
+
+    /* Smaller rounded map display */
+    html body .home-map-grid {
+      width: min(66vw, 660px) !important;
+      max-width: 660px !important;
+      min-height: clamp(300px, 32vw, 440px) !important;
+    }
+
+    html body .home-map-item {
+      width: min(52vw, 470px) !important;
+      max-width: 470px !important;
+      border-radius: 18px !important;
+      overflow: hidden !important;
+    }
+
+    html body .home-map-frame {
+      border-radius: 14px !important;
+    }
+
+    html body .home-map-frame img {
+      border-radius: 14px !important;
+    }
+
+    html body .home-map-item-new {
+      transform: translate3d(-118%, clamp(2.6rem, 5vw, 4.2rem), 0) rotate(-3.4deg) !important;
+    }
+
+    html body .home-testament-maps.maps-in-view .home-map-item-new {
+      transform: translate3d(clamp(1.8rem, 3.4vw, 3.1rem), clamp(2.6rem, 5vw, 4.2rem), 0) rotate(-3.4deg) !important;
+    }
+
+    html body .home-testament-maps.maps-in-view .home-map-item-new:hover,
+    html body .home-testament-maps.maps-in-view .home-map-item-new:focus-within {
+      transform: translate3d(clamp(1.8rem, 3.4vw, 3.1rem), calc(clamp(2.6rem, 5vw, 4.2rem) - 8px), 0) rotate(-2.4deg) !important;
+    }
+
+    @media (max-width: 780px) {
+      html body .home-map-grid {
+        width: 100% !important;
+        max-width: none !important;
+      }
+
+      html body .home-map-item,
+      html body .home-map-item-old,
+      html body .home-map-item-new {
+        width: min(100%, 560px) !important;
+        max-width: 560px !important;
+      }
+    }
