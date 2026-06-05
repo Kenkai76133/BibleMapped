@@ -5291,3 +5291,58 @@
         transition: none !important;
       }
     }
+
+    /* Static map fan: restore section title and Old Testament label */
+    html body .home-testament-maps-copy {
+      display: block !important;
+    }
+
+    html body .home-testament-maps .home-map-item-old h3 {
+      display: block !important;
+    }
+
+    html body .home-testament-maps .home-map-item-new h3,
+    html body .home-testament-maps .home-map-caption {
+      display: none !important;
+    }
+
+    html body .home-map-item,
+    html body .home-map-item-old,
+    html body .home-map-item-new,
+    html body .home-testament-maps.maps-in-view .home-map-item-old,
+    html body .home-testament-maps.maps-in-view .home-map-item-new,
+    html body .home-map-grid:hover .home-map-item-old,
+    html body .home-map-grid:hover .home-map-item-new,
+    html body .home-map-grid:focus-within .home-map-item-old,
+    html body .home-map-grid:focus-within .home-map-item-new,
+    html body .home-testament-maps.maps-in-view .home-map-grid:hover .home-map-item-old,
+    html body .home-testament-maps.maps-in-view .home-map-grid:hover .home-map-item-new,
+    html body .home-testament-maps.maps-in-view .home-map-grid:focus-within .home-map-item-old,
+    html body .home-testament-maps.maps-in-view .home-map-grid:focus-within .home-map-item-new {
+      opacity: 1 !important;
+      transition: none !important;
+      animation: none !important;
+    }
+
+    html body .home-map-item-old,
+    html body .home-testament-maps.maps-in-view .home-map-item-old,
+    html body .home-map-grid:hover .home-map-item-old,
+    html body .home-map-grid:focus-within .home-map-item-old {
+      transform: translate3d(0, 0, 0) rotate(1.4deg) !important;
+    }
+
+    html body .home-map-item-new,
+    html body .home-testament-maps.maps-in-view .home-map-item-new,
+    html body .home-map-grid:hover .home-map-item-new,
+    html body .home-map-grid:focus-within .home-map-item-new {
+      transform: translate3d(clamp(1.4rem, 3vw, 2.5rem), clamp(2.1rem, 4vw, 3.4rem), 0) rotate(-1.5deg) !important;
+    }
+
+    @media (max-width: 780px) {
+      html body .home-map-item-old,
+      html body .home-map-item-new,
+      html body .home-testament-maps.maps-in-view .home-map-item-old,
+      html body .home-testament-maps.maps-in-view .home-map-item-new {
+        transform: none !important;
+      }
+    }
