@@ -5904,3 +5904,60 @@
         font-size: clamp(2.55rem, 13vw, 4.4rem) !important;
       }
     }
+
+    /* Landing title alignment only. Keep existing animations and section behavior. */
+    html body.landing-start .hero-inner,
+    html body.landing-start .hero-copy {
+      margin-left: 0 !important;
+      margin-right: auto !important;
+      text-align: left !important;
+    }
+
+    html body.landing-start .hero h1,
+    html body.landing-start .hero p,
+    html body.landing-start .hero-actions {
+      margin-left: 0 !important;
+      margin-right: auto !important;
+      text-align: left !important;
+      justify-content: flex-start !important;
+    }
+
+    html body #aboutMappedToggle.about-mapped-toggle {
+      margin-left: 0 !important;
+      margin-right: auto !important;
+      text-align: left !important;
+    }
+
+    html body .home-testament-maps-copy {
+      margin-left: 0 !important;
+      margin-right: auto !important;
+      text-align: left !important;
+    }
+
+    html body .home-testament-maps .eyebrow,
+    html body .home-testament-maps-copy h2,
+    html body .home-testament-maps-copy p {
+      text-align: left !important;
+    }
+
+    html body .home-people-feature-inner,
+    html body .home-people-feature-copy {
+      margin-left: 0 !important;
+      margin-right: auto !important;
+      text-align: left !important;
+    }
+
+    html body .home-people-feature .eyebrow,
+    html body .home-people-feature-copy h2,
+    html body .home-people-feature-copy p {
+      text-align: left !important;
+    }
+
+    html body .watch-videos-copy,
+    html body .watch-videos-title-wrap,
+    html body .watch-videos-copy h2.watch-videos-type-title,
+    html body .watch-videos-copy p {
+      margin-left: 0 !important;
+      margin-right: auto !important;
+      text-align: left !important;
+    }
