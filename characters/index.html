@@ -126,6 +126,7 @@
 
     .people-gallery-section {
       padding: clamp(18px, 4vw, 46px) 0 0;
+      scroll-margin-top: 24px;
     }
 
     .people-gallery-container {
@@ -157,9 +158,11 @@
     }
 
     .people-gallery .info-card:hover,
-    .people-gallery .info-card:focus-within {
+    .people-gallery .info-card:focus-visible {
       transform: translateY(-12px) scale(1.025);
       filter: drop-shadow(0 28px 38px rgba(11, 16, 32, 0.18));
+      outline: 3px solid rgba(106, 45, 255, 0.72);
+      outline-offset: 4px;
       z-index: 3;
     }
 
@@ -336,13 +339,13 @@
           helps the story come alive.
         </p>
         <div class="hero-actions">
-          <a class="people-hero-btn" href="/people">Learn Their Story</a>
+          <a class="people-hero-btn" href="#people-gallery">Learn Their Story</a>
         </div>
       </div>
     </section>
 
-    <!-- Person placeholder cards -->
-    <section class="section people-gallery-section">
+    <!-- People gallery cards -->
+    <section class="section people-gallery-section" id="people-gallery">
       <div class="container people-gallery-container">
         <div class="card-grid four people-gallery">
           <article class="info-card" tabindex="0">
