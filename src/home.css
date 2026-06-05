@@ -4906,3 +4906,127 @@
         transform: none;
       }
     }
+
+    /* Layered Old/New Testament map display */
+    html body .home-map-grid {
+      position: relative !important;
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) !important;
+      align-items: center !important;
+      width: min(100%, 980px) !important;
+      max-width: 980px !important;
+      min-height: clamp(470px, 48vw, 650px) !important;
+      margin: clamp(2rem, 5vw, 4rem) auto 0 !important;
+      padding: clamp(1.8rem, 4vw, 3.5rem) clamp(0.6rem, 3vw, 2rem) !important;
+    }
+
+    html body .home-map-item {
+      position: relative !important;
+      grid-area: 1 / 1 !important;
+      width: min(78vw, 720px) !important;
+      max-width: 720px !important;
+      padding: clamp(0.7rem, 1.3vw, 1rem) !important;
+      border: 1px solid rgba(102, 76, 45, 0.22) !important;
+      border-radius: 6px !important;
+      background: #f7ecd9 !important;
+      backdrop-filter: none !important;
+      box-shadow: 0 22px 50px rgba(41, 31, 21, 0.18), 0 3px 10px rgba(41, 31, 21, 0.08) !important;
+      transform-origin: center center !important;
+      transition: transform 220ms ease, box-shadow 220ms ease !important;
+    }
+
+    html body .home-map-item-old {
+      z-index: 1 !important;
+      justify-self: center !important;
+      align-self: start !important;
+      transform: translate3d(clamp(-2.4rem, -3vw, -1rem), 0, 0) rotate(3.2deg) !important;
+    }
+
+    html body .home-map-item-new {
+      z-index: 2 !important;
+      justify-self: center !important;
+      align-self: end !important;
+      transform: translate3d(clamp(2rem, 4vw, 4.2rem), clamp(4.5rem, 8vw, 7rem), 0) rotate(-3.4deg) !important;
+    }
+
+    html body .home-map-item-old:hover,
+    html body .home-map-item-old:focus-within {
+      transform: translate3d(clamp(-2.4rem, -3vw, -1rem), -8px, 0) rotate(2.2deg) !important;
+    }
+
+    html body .home-map-item-new:hover,
+    html body .home-map-item-new:focus-within {
+      transform: translate3d(clamp(2rem, 4vw, 4.2rem), calc(clamp(4.5rem, 8vw, 7rem) - 8px), 0) rotate(-2.4deg) !important;
+    }
+
+    html body .home-map-frame {
+      display: block !important;
+      overflow: hidden !important;
+      border: 1px solid rgba(102, 76, 45, 0.18) !important;
+      border-radius: 4px !important;
+      background: #efe0c7 !important;
+    }
+
+    html body .home-map-frame img {
+      display: block !important;
+      width: 100% !important;
+      height: auto !important;
+      max-width: none !important;
+    }
+
+    html body .home-map-item .home-map-caption {
+      margin-top: 0.75rem !important;
+      color: rgba(50, 38, 26, 0.76) !important;
+      font-size: clamp(0.78rem, 1vw, 0.92rem) !important;
+      line-height: 1.45 !important;
+      text-shadow: none !important;
+    }
+
+    html body .home-testament-maps .home-map-item-old h3 {
+      position: absolute !important;
+      top: 1rem !important;
+      left: 1rem !important;
+      z-index: 2 !important;
+      margin: 0 !important;
+      padding: 0.32rem 0.5rem !important;
+      border-radius: 4px !important;
+      background: rgba(248, 238, 220, 0.76) !important;
+      color: rgba(45, 34, 23, 0.78) !important;
+      font-family: Inter, Arial, Helvetica, sans-serif !important;
+      font-size: clamp(0.85rem, 1.2vw, 1.15rem) !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.08em !important;
+      line-height: 1 !important;
+      opacity: 0.75 !important;
+      text-shadow: none !important;
+      text-transform: uppercase !important;
+    }
+
+    html body .home-testament-maps .home-map-item-new h3 {
+      margin: 0 0 0.65rem !important;
+      color: rgba(45, 34, 23, 0.82) !important;
+      font-size: clamp(1.05rem, 1.8vw, 1.55rem) !important;
+      line-height: 1 !important;
+      text-shadow: none !important;
+    }
+
+    @media (max-width: 780px) {
+      html body .home-map-grid {
+        min-height: 0 !important;
+        padding: 1rem 0 0 !important;
+        gap: 1.25rem !important;
+      }
+
+      html body .home-map-item,
+      html body .home-map-item-old,
+      html body .home-map-item-new,
+      html body .home-map-item-old:hover,
+      html body .home-map-item-new:hover,
+      html body .home-map-item-old:focus-within,
+      html body .home-map-item-new:focus-within {
+        grid-area: auto !important;
+        width: min(100%, 620px) !important;
+        justify-self: center !important;
+        transform: rotate(0deg) !important;
+      }
+    }
