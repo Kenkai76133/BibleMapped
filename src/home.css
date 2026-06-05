@@ -5978,7 +5978,16 @@
     }
 
     html body .watch-videos-image-band img {
+      grid-column: 1 / -1 !important;
+      grid-row: 1 !important;
       justify-self: center !important;
       margin-left: auto !important;
       margin-right: auto !important;
+    }
+
+    html body .watch-videos-copy {
+      grid-column: 1 !important;
+      grid-row: 1 !important;
+      position: relative !important;
+      z-index: 1 !important;
     }
