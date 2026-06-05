@@ -5351,6 +5351,37 @@
       }
     }
 
+    /* Replace Explore Scripture section with the hero lineup image */
+    html body .testament-puzzle-section {
+      position: relative !important;
+      min-height: clamp(520px, 56vw, 780px) !important;
+      padding: 0 !important;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(255, 255, 255, 0.48) 12%,
+          rgba(255, 255, 255, 0.06) 36%,
+          rgba(255, 255, 255, 0.08) 78%,
+          rgba(255, 255, 255, 1) 100%
+        ),
+        url("../assets/hero-bible-lineup-parchment.png") center / cover no-repeat !important;
+      border: 0 !important;
+      overflow: hidden !important;
+    }
+
+    html body .testament-puzzle-section .section-rail,
+    html body .testament-puzzle-section .testament-puzzle-stage {
+      display: none !important;
+    }
+
+    @media (max-width: 720px) {
+      html body .testament-puzzle-section {
+        min-height: clamp(420px, 72vw, 620px) !important;
+        background-position: center bottom !important;
+      }
+    }
+
     /* Static map fan: restore section title and Old Testament label */
     html body .home-testament-maps-copy {
       display: block !important;
