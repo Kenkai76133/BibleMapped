@@ -5216,3 +5216,29 @@
         transform: none !important;
       }
     }
+
+    /* Maps only: remove card chrome and labels */
+    html body .home-testament-maps .home-map-item h3,
+    html body .home-testament-maps .home-map-caption {
+      display: none !important;
+    }
+
+    html body .home-map-item,
+    html body .home-map-frame {
+      border: 0 !important;
+      outline: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+
+    html body .home-map-frame {
+      display: block !important;
+      overflow: visible !important;
+    }
+
+    html body .home-map-frame img {
+      display: block !important;
+      border: 0 !important;
+      outline: 0 !important;
+      box-shadow: none !important;
+    }
