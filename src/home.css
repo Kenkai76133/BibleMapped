@@ -5618,3 +5618,232 @@
         transition: none !important;
       }
     }
+
+    /* Landing order correction: Maps -> People -> Videos */
+    html body .testament-puzzle-section {
+      display: none !important;
+    }
+
+    html body .home-people-feature {
+      display: block !important;
+      min-height: 0 !important;
+      margin: 0 !important;
+      padding: clamp(4.5rem, 8vw, 7.5rem) clamp(1rem, 4vw, 3.5rem) !important;
+      overflow: hidden !important;
+      color: var(--gunmetal) !important;
+      background: linear-gradient(180deg, rgba(255, 252, 244, 0.96), rgba(248, 241, 224, 0.98)) !important;
+      border-top: 1px solid rgba(31, 41, 51, 0.08) !important;
+      border-bottom: 1px solid rgba(31, 41, 51, 0.16) !important;
+    }
+
+    html body .home-people-feature::before {
+      display: none !important;
+    }
+
+    html body .home-people-feature-inner {
+      position: relative !important;
+      z-index: 1 !important;
+      display: grid !important;
+      grid-template-columns: minmax(0, 0.86fr) minmax(320px, 1.14fr) !important;
+      align-items: center !important;
+      gap: clamp(1.4rem, 4vw, 3.6rem) !important;
+      width: min(1180px, 100%) !important;
+      margin: 0 auto !important;
+      opacity: 0;
+      transform: translate3d(0, 34px, 0);
+      transition: opacity 900ms ease, transform 1100ms cubic-bezier(0.16, 0.9, 0.22, 1);
+    }
+
+    html body .home-people-feature.people-in-view .home-people-feature-inner {
+      opacity: 1 !important;
+      transform: translate3d(0, 0, 0) !important;
+    }
+
+    html body .home-people-feature-copy {
+      max-width: 640px !important;
+      color: var(--gunmetal) !important;
+      text-shadow: none !important;
+    }
+
+    html body .home-people-feature .eyebrow {
+      margin: 0 0 0.9rem !important;
+      color: rgba(93, 28, 188, 0.82) !important;
+      text-shadow: none !important;
+    }
+
+    html body .home-people-feature-copy h2 {
+      margin: 0 0 1rem !important;
+      color: var(--gunmetal) !important;
+      font-size: clamp(2.85rem, 5.8vw, 5.8rem) !important;
+      line-height: 0.94 !important;
+      text-shadow: 0 2px 18px rgba(255, 255, 255, 0.48) !important;
+    }
+
+    html body .home-people-feature-copy p {
+      max-width: 620px !important;
+      margin: 0 !important;
+      color: rgba(31, 41, 51, 0.82) !important;
+      font-size: clamp(1rem, 1.35vw, 1.18rem) !important;
+      line-height: 1.76 !important;
+      text-shadow: 0 1px 12px rgba(255, 255, 255, 0.52) !important;
+    }
+
+    html body .home-people-feature-button {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      min-height: 50px !important;
+      margin-top: clamp(1.35rem, 2.6vw, 2rem) !important;
+      padding: 0 1.45rem !important;
+      border-radius: 999px !important;
+      background: #8b2cff !important;
+      color: #ffffff !important;
+      box-shadow: 0 15px 32px rgba(93, 28, 188, 0.28), 0 3px 10px rgba(20, 12, 36, 0.14) !important;
+      text-decoration: none !important;
+      text-shadow: none !important;
+    }
+
+    html body .home-people-feature-button:hover,
+    html body .home-people-feature-button:focus-visible {
+      background: #9b45ff !important;
+      transform: translateY(-2px) !important;
+      outline: 0 !important;
+    }
+
+    html body .home-people-feature-card {
+      position: relative !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      overflow: hidden !important;
+      border: 1px solid rgba(31, 41, 51, 0.14) !important;
+      border-radius: 8px !important;
+      background: rgba(255, 255, 255, 0.48) !important;
+      box-shadow: 0 24px 60px rgba(74, 63, 44, 0.14), 0 1px 0 rgba(255, 255, 255, 0.86) inset !important;
+      transform: translate3d(24px, 0, 0);
+      transition: transform 1200ms cubic-bezier(0.16, 0.9, 0.22, 1);
+    }
+
+    html body .home-people-feature.people-in-view .home-people-feature-card {
+      transform: translate3d(0, 0, 0) !important;
+    }
+
+    html body .home-people-feature-card img {
+      display: block !important;
+      width: 100% !important;
+      height: auto !important;
+      aspect-ratio: 16 / 9 !important;
+      object-fit: cover !important;
+      object-position: center !important;
+      transform: none !important;
+    }
+
+    html body .home-people-image-overlay {
+      position: absolute !important;
+      inset: 0 !important;
+      z-index: 1 !important;
+      background: rgba(255, 252, 244, 0.2) !important;
+      pointer-events: none !important;
+    }
+
+    html body .landing-followup-bars {
+      border-top: 1px solid rgba(31, 41, 51, 0.16) !important;
+    }
+
+    html body .watch-videos-image-band {
+      grid-template-columns: minmax(320px, 0.88fr) minmax(0, 1.12fr) !important;
+      align-items: center !important;
+      gap: clamp(18px, 4vw, 62px) !important;
+      width: min(1180px, calc(100% - clamp(32px, 8vw, 96px))) !important;
+      padding-top: clamp(30px, 5vw, 64px) !important;
+    }
+
+    html body .watch-videos-copy {
+      justify-self: start !important;
+      order: 1 !important;
+      width: min(100%, 520px) !important;
+      max-width: 520px !important;
+      text-align: left !important;
+      transform: none !important;
+    }
+
+    html body .watch-videos-image-band img {
+      order: 2 !important;
+      justify-self: center !important;
+      width: min(100%, 690px) !important;
+      height: auto !important;
+      transform: none !important;
+    }
+
+    html body .watch-videos-title-wrap {
+      position: relative !important;
+      width: min(100%, 11.5ch) !important;
+      min-height: 1.95em !important;
+      margin: 0 0 clamp(0.8rem, 1.6vw, 1.2rem) !important;
+      font-family: "Cormorant Garamond", Georgia, serif !important;
+      font-size: clamp(2.55rem, 5vw, 5.5rem) !important;
+      line-height: 0.96 !important;
+    }
+
+    html body .watch-videos-title-wrap::before {
+      content: attr(data-title);
+      display: block;
+      visibility: hidden;
+      font: inherit;
+      font-weight: 500;
+      line-height: inherit;
+    }
+
+    html body .watch-videos-copy h2.watch-videos-type-title {
+      position: absolute !important;
+      inset: 0 auto auto 0 !important;
+      width: 100% !important;
+      min-height: 0 !important;
+      margin: 0 !important;
+      font-size: 1em !important;
+      line-height: inherit !important;
+      overflow-wrap: normal !important;
+      word-break: normal !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html body .home-people-feature-inner,
+      html body .home-people-feature-card {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 900px) {
+      html body .home-people-feature-inner,
+      html body .watch-videos-image-band {
+        grid-template-columns: 1fr !important;
+      }
+
+      html body .home-people-feature-card {
+        transform: translate3d(0, 24px, 0);
+      }
+
+      html body .watch-videos-copy {
+        order: 1 !important;
+      }
+
+      html body .watch-videos-image-band img {
+        order: 2 !important;
+        width: 100% !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      html body .home-people-feature {
+        padding: 4rem 1.25rem !important;
+      }
+
+      html body .home-people-feature-copy h2 {
+        font-size: clamp(2.85rem, 13vw, 4.45rem) !important;
+      }
+
+      html body .watch-videos-title-wrap {
+        font-size: clamp(2.55rem, 13vw, 4.4rem) !important;
+      }
+    }
