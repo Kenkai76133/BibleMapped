@@ -4886,3 +4886,23 @@
         transition: none;
       }
     }
+
+    /* Maps section heading placement */
+    html body .home-testament-maps-inner {
+      width: 100% !important;
+      max-width: none !important;
+    }
+
+    html body .home-testament-maps-copy {
+      width: min(720px, 100%) !important;
+      max-width: 720px !important;
+      margin-left: 0 !important;
+      margin-right: auto !important;
+      transform: translateX(clamp(-1.6rem, -2.5vw, -0.75rem));
+    }
+
+    @media (max-width: 720px) {
+      html body .home-testament-maps-copy {
+        transform: none;
+      }
+    }
