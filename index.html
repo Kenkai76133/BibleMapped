@@ -18,7 +18,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <link rel="stylesheet" href="src/home.css?v=landing-map-actions-2" />
+  <link rel="stylesheet" href="src/home.css?v=landing-map-cards-hero-white-1" />
   <style id="about-biblemapped-critical">
     html body #about-biblemapped {
       position: relative !important;
@@ -175,6 +175,128 @@
       html body .home-map-actions {
         grid-template-columns: 1fr !important;
         width: min(220px, 100%) !important;
+      }
+    }
+
+    html body.landing-start .hero {
+      min-height: clamp(320px, 46svh, 520px) !important;
+      padding: calc(var(--nav-height) + clamp(1.4rem, 4vw, 3rem)) clamp(1rem, 4vw, 2rem) clamp(2.5rem, 6vw, 4.5rem) !important;
+      background: #ffffff !important;
+      background-image: none !important;
+      overflow: hidden !important;
+    }
+
+    html body.landing-start .hero::before,
+    html body.landing-start .hero::after {
+      content: none !important;
+      display: none !important;
+      background: none !important;
+      background-image: none !important;
+      opacity: 0 !important;
+      -webkit-mask-image: none !important;
+      mask-image: none !important;
+    }
+
+    html body.landing-start .hero-inner {
+      min-height: 0 !important;
+    }
+
+    html body.landing-start .hero-actions {
+      position: static !important;
+      transform: none !important;
+      margin-top: clamp(1.4rem, 3vw, 2.2rem) !important;
+    }
+
+    html body.landing-start .hero + .testament-puzzle-section {
+      padding-top: 0 !important;
+    }
+
+    html body .home-map-grid {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: clamp(1.1rem, 3vw, 2rem) !important;
+      width: min(980px, 100%) !important;
+      margin: clamp(2rem, 5vw, 4rem) auto 0 0 !important;
+      padding: 0 !important;
+      min-height: 0 !important;
+    }
+
+    html body .home-map-item {
+      position: relative !important;
+      display: block !important;
+      width: 100% !important;
+      max-width: none !important;
+      min-height: clamp(280px, 30vw, 390px) !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: hidden !important;
+      border: 1px solid rgba(31, 41, 51, 0.16) !important;
+      border-radius: 10px !important;
+      background: #fffdf7 !important;
+      box-shadow: 0 18px 42px rgba(31, 41, 51, 0.12) !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    html body .home-map-frame {
+      display: block !important;
+      width: 100% !important;
+      height: 100% !important;
+      min-height: inherit !important;
+      border: 0 !important;
+      border-radius: inherit !important;
+      background: transparent !important;
+      overflow: hidden !important;
+    }
+
+    html body .home-map-frame img {
+      display: block !important;
+      width: 100% !important;
+      height: 100% !important;
+      min-height: inherit !important;
+      object-fit: cover !important;
+      object-position: center !important;
+      border-radius: inherit !important;
+    }
+
+    html body .home-testament-maps .home-map-item h3 {
+      position: absolute !important;
+      top: 1rem !important;
+      left: 1rem !important;
+      z-index: 2 !important;
+      display: inline-flex !important;
+      margin: 0 !important;
+      padding: 0.3rem 0.55rem !important;
+      border-radius: 999px !important;
+      background: rgba(255, 253, 247, 0.88) !important;
+      color: var(--gunmetal) !important;
+      font-family: Inter, Arial, Helvetica, sans-serif !important;
+      font-size: 0.72rem !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.08em !important;
+      line-height: 1 !important;
+      text-transform: uppercase !important;
+      text-shadow: none !important;
+    }
+
+    html body .home-map-item .home-map-action {
+      position: absolute !important;
+      left: 50% !important;
+      bottom: 1rem !important;
+      z-index: 2 !important;
+      transform: translateX(-50%) !important;
+      width: auto !important;
+      min-width: 150px !important;
+    }
+
+    html body .home-map-item .home-map-action:hover,
+    html body .home-map-item .home-map-action:focus-visible {
+      transform: translateX(-50%) translateY(-2px) !important;
+    }
+
+    @media (max-width: 760px) {
+      html body .home-map-grid {
+        grid-template-columns: 1fr !important;
       }
     }
   </style>
@@ -451,9 +573,22 @@
         <p>See the major places, routes, kingdoms, and journeys that hold the biblical story together.</p>
       </div>
 
-      <div class="home-map-actions" aria-label="Open Testament map pages">
-        <a class="home-map-action" href="/maps/#testamentMapsTitle">Old Testament Maps</a>
-        <a class="home-map-action" href="/maps/#testamentMapsTitle">New Testament Maps</a>
+      <div class="home-map-grid">
+        <article class="home-map-item home-map-item-old">
+          <h3>Old Testament</h3>
+          <a class="home-map-frame" href="/assets/old-testament-locations-map.png" aria-label="Open Old Testament locations map">
+            <img src="assets/old-testament-locations-map.png" alt="Major Old Testament locations map with routes through Egypt, Sinai, Canaan, Assyria, Babylon, and Persia" loading="lazy" />
+          </a>
+          <a class="home-map-action" href="/maps/#testamentMapsTitle">Old Testament Maps</a>
+        </article>
+
+        <article class="home-map-item home-map-item-new">
+          <h3>New Testament</h3>
+          <a class="home-map-frame" href="/assets/new-testament-locations-map.png" aria-label="Open New Testament locations map">
+            <img src="assets/new-testament-locations-map.png" alt="Major New Testament locations map with Jesus' ministry, Paul's missionary journeys, and Paul's voyage to Rome" loading="lazy" />
+          </a>
+          <a class="home-map-action" href="/maps/#testamentMapsTitle">New Testament Maps</a>
+        </article>
       </div>
     </div>
   </section>
