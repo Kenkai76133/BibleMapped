@@ -5292,138 +5292,6 @@
       }
     }
 
-    /* People feature + Rabbit positioning refresh */
-    html body .home-people-feature {
-      position: relative;
-      isolation: isolate;
-      min-height: clamp(560px, 62vw, 840px);
-      display: flex;
-      align-items: center;
-      margin: 0;
-      padding: clamp(5rem, 10vw, 9rem) clamp(1.15rem, 5vw, 4.75rem);
-      overflow: hidden;
-      background: url("../assets/bible-journey-people-hero-strip.png") center / cover no-repeat;
-      border: 0;
-    }
-
-    html body .home-people-feature::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      background: rgba(255, 252, 244, 0.24);
-      pointer-events: none;
-    }
-
-    html body .home-people-feature-inner {
-      position: relative;
-      z-index: 1;
-      width: min(1180px, 100%);
-      margin: 0 auto;
-    }
-
-    html body .home-people-feature-copy {
-      max-width: 720px;
-      color: #fffdf8;
-      text-shadow: 0 4px 14px rgba(22, 18, 14, 0.42), 0 18px 42px rgba(22, 18, 14, 0.34);
-    }
-
-    html body .home-people-feature-copy h2 {
-      margin: 0 0 clamp(1rem, 2vw, 1.45rem);
-      font-family: "Cormorant Garamond", Georgia, serif;
-      color: #ffffff;
-      font-size: clamp(3.4rem, 7.4vw, 7.25rem);
-      font-weight: 560;
-      line-height: 0.92;
-      letter-spacing: 0;
-      text-wrap: balance;
-    }
-
-    html body .home-people-feature-copy p {
-      max-width: 660px;
-      margin: 0;
-      color: rgba(255, 255, 255, 0.94);
-      font-size: clamp(1.06rem, 1.65vw, 1.28rem);
-      font-weight: 520;
-      line-height: 1.72;
-    }
-
-    html body .home-people-feature-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 52px;
-      margin-top: clamp(1.55rem, 3vw, 2.2rem);
-      padding: 0 1.55rem;
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      border-radius: 999px;
-      background: #8b2cff;
-      color: #ffffff;
-      box-shadow: 0 16px 34px rgba(93, 28, 188, 0.3), 0 4px 12px rgba(20, 12, 36, 0.18);
-      font-family: Inter, Arial, Helvetica, sans-serif;
-      font-size: 0.96rem;
-      font-weight: 900;
-      letter-spacing: 0;
-      text-decoration: none;
-      text-shadow: none;
-      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
-    }
-
-    html body .home-people-feature-button:hover,
-    html body .home-people-feature-button:focus-visible {
-      background: #9b45ff;
-      box-shadow: 0 20px 42px rgba(93, 28, 188, 0.38), 0 7px 16px rgba(20, 12, 36, 0.22);
-      transform: translateY(-2px);
-      outline: 0;
-    }
-
-    html body .watch-videos-image-band {
-      grid-template-columns: minmax(0, 0.92fr) minmax(320px, 1.08fr) !important;
-      gap: clamp(18px, 3.8vw, 56px) !important;
-    }
-
-    html body .watch-videos-image-band img {
-      width: min(100%, 700px) !important;
-      transform: translateX(clamp(12px, 2.5vw, 34px)) !important;
-    }
-
-    html body .watch-videos-copy {
-      justify-self: start !important;
-      max-width: 520px !important;
-      transform: translateX(clamp(-42px, -3vw, -18px)) !important;
-    }
-
-    @media (max-width: 900px) {
-      html body .home-people-feature {
-        min-height: clamp(520px, 76vw, 720px);
-        background-position: center;
-      }
-
-      html body .home-people-feature-copy {
-        max-width: 640px;
-      }
-
-      html body .watch-videos-image-band {
-        grid-template-columns: 1fr !important;
-      }
-
-      html body .watch-videos-image-band img,
-      html body .watch-videos-copy {
-        transform: none !important;
-      }
-    }
-
-    @media (max-width: 640px) {
-      html body .home-people-feature {
-        min-height: 560px;
-        padding: 4.5rem 1.25rem;
-      }
-
-      html body .home-people-feature-copy h2 {
-        font-size: clamp(3rem, 15vw, 4.6rem);
-      }
-    }
-
     /* Hero parchment lineup background */
     html body.landing-start .hero {
       min-height: clamp(620px, 88svh, 920px) !important;
@@ -5630,8 +5498,9 @@
       margin: 0 !important;
       padding: clamp(4.5rem, 8vw, 7.5rem) clamp(1rem, 4vw, 3.5rem) !important;
       overflow: hidden !important;
-      color: var(--gunmetal) !important;
+      color: #111827 !important;
       background: linear-gradient(180deg, rgba(255, 252, 244, 0.96), rgba(248, 241, 224, 0.98)) !important;
+      background-image: linear-gradient(180deg, rgba(255, 252, 244, 0.96), rgba(248, 241, 224, 0.98)) !important;
       border-top: 1px solid rgba(31, 41, 51, 0.08) !important;
       border-bottom: 1px solid rgba(31, 41, 51, 0.16) !important;
     }
@@ -5661,7 +5530,7 @@
 
     html body .home-people-feature-copy {
       max-width: 640px !important;
-      color: var(--gunmetal) !important;
+      color: #111827 !important;
       text-shadow: none !important;
     }
 
@@ -5673,19 +5542,21 @@
 
     html body .home-people-feature-copy h2 {
       margin: 0 0 1rem !important;
-      color: var(--gunmetal) !important;
+      color: #111827 !important;
       font-size: clamp(2.85rem, 5.8vw, 5.8rem) !important;
       line-height: 0.94 !important;
-      text-shadow: 0 2px 18px rgba(255, 255, 255, 0.48) !important;
+      text-align: left !important;
+      text-shadow: none !important;
     }
 
     html body .home-people-feature-copy p {
       max-width: 620px !important;
       margin: 0 !important;
-      color: rgba(31, 41, 51, 0.82) !important;
+      color: rgba(17, 24, 39, 0.82) !important;
       font-size: clamp(1rem, 1.35vw, 1.18rem) !important;
       line-height: 1.76 !important;
-      text-shadow: 0 1px 12px rgba(255, 255, 255, 0.52) !important;
+      text-align: left !important;
+      text-shadow: none !important;
     }
 
     html body .home-people-feature-button {
@@ -5732,9 +5603,10 @@
       width: 100% !important;
       height: auto !important;
       aspect-ratio: 16 / 9 !important;
-      object-fit: cover !important;
+      object-fit: contain !important;
       object-position: center !important;
       transform: none !important;
+      background: rgba(255, 252, 244, 0.8) !important;
     }
 
     html body .home-people-image-overlay {
