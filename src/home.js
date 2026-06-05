@@ -341,6 +341,24 @@
       watchTitleObserver.observe(watchVideosSection);
     }
 
+    const testamentMapsSection = document.querySelector(".home-testament-maps");
+
+    if (testamentMapsSection) {
+      const testamentMapsObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              testamentMapsSection.classList.add("maps-in-view");
+              testamentMapsObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { rootMargin: "0px 0px -12% 0px", threshold: 0.18 }
+      );
+
+      testamentMapsObserver.observe(testamentMapsSection);
+    }
+
     function setupMinimalPanel(toggleId, panelId) {
       const toggle = document.getElementById(toggleId);
       const panel = document.getElementById(panelId);

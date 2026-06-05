@@ -5030,3 +5030,84 @@
         transform: rotate(0deg) !important;
       }
     }
+
+    /* Tucked-left map pan-in refinement */
+    html body .home-map-grid {
+      width: min(72vw, 760px) !important;
+      max-width: 760px !important;
+      min-height: clamp(350px, 38vw, 520px) !important;
+      margin: clamp(1.5rem, 4vw, 3rem) auto 0 0 !important;
+      padding-left: 0 !important;
+    }
+
+    html body .home-map-item {
+      width: min(58vw, 560px) !important;
+      max-width: 560px !important;
+      opacity: 0;
+      will-change: transform, opacity;
+      transition: opacity 620ms ease, transform 860ms cubic-bezier(0.16, 0.9, 0.22, 1), box-shadow 220ms ease !important;
+    }
+
+    html body .home-map-item-old {
+      transform: translate3d(-118%, 0, 0) rotate(3.2deg) !important;
+    }
+
+    html body .home-map-item-new {
+      transform: translate3d(-118%, clamp(3.2rem, 6vw, 5.4rem), 0) rotate(-3.4deg) !important;
+    }
+
+    html body .home-testament-maps.maps-in-view .home-map-item-old {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) rotate(3.2deg) !important;
+    }
+
+    html body .home-testament-maps.maps-in-view .home-map-item-new {
+      opacity: 1;
+      transform: translate3d(clamp(2.2rem, 4vw, 3.8rem), clamp(3.2rem, 6vw, 5.4rem), 0) rotate(-3.4deg) !important;
+      transition-delay: 120ms;
+    }
+
+    html body .home-testament-maps.maps-in-view .home-map-item-old:hover,
+    html body .home-testament-maps.maps-in-view .home-map-item-old:focus-within {
+      transform: translate3d(0, -8px, 0) rotate(2.2deg) !important;
+    }
+
+    html body .home-testament-maps.maps-in-view .home-map-item-new:hover,
+    html body .home-testament-maps.maps-in-view .home-map-item-new:focus-within {
+      transform: translate3d(clamp(2.2rem, 4vw, 3.8rem), calc(clamp(3.2rem, 6vw, 5.4rem) - 8px), 0) rotate(-2.4deg) !important;
+    }
+
+    @media (max-width: 780px) {
+      html body .home-map-grid {
+        width: 100% !important;
+        max-width: none !important;
+        min-height: 0 !important;
+        margin-left: 0 !important;
+      }
+
+      html body .home-map-item,
+      html body .home-map-item-old,
+      html body .home-map-item-new {
+        width: min(100%, 620px) !important;
+        opacity: 1;
+        animation: none !important;
+        transform: none !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html body .home-map-item,
+      html body .home-testament-maps.maps-in-view .home-map-item-old,
+      html body .home-testament-maps.maps-in-view .home-map-item-new {
+        opacity: 1;
+        transition: none !important;
+      }
+
+      html body .home-map-item-old {
+        transform: translate3d(0, 0, 0) rotate(3.2deg) !important;
+      }
+
+      html body .home-map-item-new {
+        transform: translate3d(clamp(2.2rem, 4vw, 3.8rem), clamp(3.2rem, 6vw, 5.4rem), 0) rotate(-3.4deg) !important;
+      }
+    }
