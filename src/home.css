@@ -5246,3 +5246,48 @@
     html body .home-testament-maps-copy {
       display: none !important;
     }
+
+    /* Scroll-only map motion: static after pan-in, no hover fan */
+    html body .home-map-item {
+      opacity: 0 !important;
+      transition: opacity 620ms ease, transform 860ms cubic-bezier(0.16, 0.9, 0.22, 1) !important;
+    }
+
+    html body .home-map-item-old {
+      transform: translate3d(-118%, 0, 0) rotate(1.2deg) !important;
+    }
+
+    html body .home-map-item-new {
+      transform: translate3d(-118%, clamp(2.1rem, 4vw, 3.4rem), 0) rotate(-1.3deg) !important;
+      transition-delay: 120ms !important;
+    }
+
+    html body .home-testament-maps.maps-in-view .home-map-item-old,
+    html body .home-testament-maps.maps-in-view .home-map-grid:hover .home-map-item-old,
+    html body .home-testament-maps.maps-in-view .home-map-grid:focus-within .home-map-item-old,
+    html body .home-testament-maps.maps-in-view .home-map-item-old:hover,
+    html body .home-testament-maps.maps-in-view .home-map-item-old:focus-within {
+      opacity: 1 !important;
+      transform: translate3d(0, 0, 0) rotate(1.2deg) !important;
+    }
+
+    html body .home-testament-maps.maps-in-view .home-map-item-new,
+    html body .home-testament-maps.maps-in-view .home-map-grid:hover .home-map-item-new,
+    html body .home-testament-maps.maps-in-view .home-map-grid:focus-within .home-map-item-new,
+    html body .home-testament-maps.maps-in-view .home-map-item-new:hover,
+    html body .home-testament-maps.maps-in-view .home-map-item-new:focus-within {
+      opacity: 1 !important;
+      transform: translate3d(clamp(1.4rem, 3vw, 2.5rem), clamp(2.1rem, 4vw, 3.4rem), 0) rotate(-1.3deg) !important;
+    }
+
+    @media (max-width: 780px) {
+      html body .home-map-item,
+      html body .home-map-item-old,
+      html body .home-map-item-new,
+      html body .home-testament-maps.maps-in-view .home-map-item-old,
+      html body .home-testament-maps.maps-in-view .home-map-item-new {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
