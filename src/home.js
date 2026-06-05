@@ -266,6 +266,7 @@
 
     const revealPanels = document.querySelectorAll(".premium-reveal");
     const watchTypeTitle = document.querySelector("[data-type-text]");
+    const watchVideosSection = watchTypeTitle ? watchTypeTitle.closest(".landing-followup-bars") : null;
     const typewriterReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     function typeWatchTitle() {
@@ -301,15 +302,17 @@
       window.setTimeout(typeNextCharacter, 220);
     }
 
+    if (watchTypeTitle && !typewriterReduceMotion.matches) {
+      watchTypeTitle.textContent = "";
+      watchTypeTitle.classList.add("typing-ready");
+    }
+
     if (revealPanels.length) {
       const revealObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               entry.target.classList.add("reveal-in-view");
-              if (entry.target.contains(watchTypeTitle)) {
-                typeWatchTitle();
-              }
               revealObserver.unobserve(entry.target);
             }
           });
@@ -320,6 +323,22 @@
       revealPanels.forEach((panel) => {
         revealObserver.observe(panel);
       });
+    }
+
+    if (watchVideosSection && watchTypeTitle) {
+      const watchTitleObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              typeWatchTitle();
+              watchTitleObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { rootMargin: "0px 0px -18% 0px", threshold: 0.22 }
+      );
+
+      watchTitleObserver.observe(watchVideosSection);
     }
 
     function setupMinimalPanel(toggleId, panelId) {
