@@ -265,6 +265,41 @@
     }
 
     const revealPanels = document.querySelectorAll(".premium-reveal");
+    const watchTypeTitle = document.querySelector("[data-type-text]");
+    const typewriterReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function typeWatchTitle() {
+      if (!watchTypeTitle || watchTypeTitle.dataset.typed === "true") return;
+
+      const fullText = watchTypeTitle.dataset.typeText || watchTypeTitle.textContent || "";
+      const stepDelay = 58;
+      let index = 0;
+
+      watchTypeTitle.dataset.typed = "true";
+
+      if (typewriterReduceMotion.matches) {
+        watchTypeTitle.textContent = fullText;
+        watchTypeTitle.classList.add("typed");
+        return;
+      }
+
+      watchTypeTitle.textContent = "";
+      watchTypeTitle.classList.add("typing");
+
+      function typeNextCharacter() {
+        index += 1;
+        watchTypeTitle.textContent = fullText.slice(0, index);
+
+        if (index < fullText.length) {
+          window.setTimeout(typeNextCharacter, stepDelay);
+        } else {
+          watchTypeTitle.classList.remove("typing");
+          watchTypeTitle.classList.add("typed");
+        }
+      }
+
+      window.setTimeout(typeNextCharacter, 220);
+    }
 
     if (revealPanels.length) {
       const revealObserver = new IntersectionObserver(
@@ -272,6 +307,9 @@
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               entry.target.classList.add("reveal-in-view");
+              if (entry.target.contains(watchTypeTitle)) {
+                typeWatchTitle();
+              }
               revealObserver.unobserve(entry.target);
             }
           });
