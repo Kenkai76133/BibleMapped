@@ -5242,3 +5242,7 @@
       outline: 0 !important;
       box-shadow: none !important;
     }
+
+    html body .home-testament-maps-copy {
+      display: none !important;
+    }
