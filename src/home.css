@@ -5962,16 +5962,23 @@
       text-align: left !important;
     }
 
-    /* Rabbit Holes title: flush to the page's left edge. */
+    /* Rabbit Holes title: near-left, with rabbit centered in the section. */
     html body .watch-videos-image-band {
       width: 100% !important;
       margin-left: 0 !important;
       margin-right: auto !important;
-      padding-left: 0 !important;
+      padding-left: clamp(1rem, 2.6vw, 2rem) !important;
+      padding-right: clamp(1rem, 2.6vw, 2rem) !important;
     }
 
     html body .watch-videos-copy {
       padding-left: 0 !important;
       margin-left: 0 !important;
       justify-self: start !important;
+    }
+
+    html body .watch-videos-image-band img {
+      justify-self: center !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
     }
