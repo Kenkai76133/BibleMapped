@@ -5160,3 +5160,59 @@
         max-width: 560px !important;
       }
     }
+
+    /* Static borderless maps with subtle fan-out interaction */
+    html body .home-map-item,
+    html body .home-testament-maps.maps-in-view .home-map-item-old,
+    html body .home-testament-maps.maps-in-view .home-map-item-new {
+      opacity: 1 !important;
+      animation: none !important;
+      transition: transform 260ms cubic-bezier(0.16, 0.9, 0.22, 1), box-shadow 220ms ease !important;
+    }
+
+    html body .home-map-item {
+      border: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+    }
+
+    html body .home-map-frame {
+      border: 0 !important;
+      background: transparent !important;
+      box-shadow: 0 18px 42px rgba(41, 31, 21, 0.18) !important;
+    }
+
+    html body .home-map-frame,
+    html body .home-map-frame img {
+      border-radius: 18px !important;
+    }
+
+    html body .home-map-item-old,
+    html body .home-testament-maps.maps-in-view .home-map-item-old {
+      transform: translate3d(0, 0, 0) rotate(1.2deg) !important;
+    }
+
+    html body .home-map-item-new,
+    html body .home-testament-maps.maps-in-view .home-map-item-new {
+      transform: translate3d(clamp(1.4rem, 3vw, 2.5rem), clamp(2.1rem, 4vw, 3.4rem), 0) rotate(-1.3deg) !important;
+    }
+
+    html body .home-map-grid:hover .home-map-item-old,
+    html body .home-map-grid:focus-within .home-map-item-old {
+      transform: translate3d(clamp(-0.7rem, -1.4vw, -0.35rem), -0.45rem, 0) rotate(3deg) !important;
+    }
+
+    html body .home-map-grid:hover .home-map-item-new,
+    html body .home-map-grid:focus-within .home-map-item-new {
+      transform: translate3d(clamp(2rem, 4vw, 3.4rem), clamp(2.8rem, 5vw, 4.2rem), 0) rotate(-3deg) !important;
+    }
+
+    @media (max-width: 780px) {
+      html body .home-map-grid:hover .home-map-item-old,
+      html body .home-map-grid:hover .home-map-item-new,
+      html body .home-map-grid:focus-within .home-map-item-old,
+      html body .home-map-grid:focus-within .home-map-item-new {
+        transform: none !important;
+      }
+    }
