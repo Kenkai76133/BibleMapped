@@ -71,7 +71,7 @@
       position: absolute;
       inset: 0;
       z-index: -1;
-      background: rgba(236, 218, 186, 0.42);
+      background: rgba(244, 234, 217, 0.42);
       pointer-events: none;
     }
 
@@ -174,11 +174,17 @@
       margin: 0;
       border: 0;
       border-radius: 0;
-      background:
-        linear-gradient(to top, rgba(11, 16, 32, 0.72), rgba(11, 16, 32, 0.08) 55%, rgba(255, 255, 255, 0.02)),
-        var(--surface);
+      background: var(--surface);
       color: rgba(31, 41, 51, 0.36);
       font-size: 0.72rem;
+    }
+
+    .people-gallery .image-slot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(244, 234, 217, 0.24);
+      pointer-events: none;
     }
 
     .people-gallery .image-slot img {
@@ -194,17 +200,6 @@
       object-position: center center;
       transform: none;
       transform-origin: center center;
-    }
-
-    .people-gallery .image-slot:has(.people-daniel-image)::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 23%;
-      background: linear-gradient(to top, rgba(11, 16, 32, 0.96), rgba(11, 16, 32, 0.72), transparent);
-      pointer-events: none;
     }
 
     .people-gallery .info-card h3,
@@ -233,6 +228,7 @@
       font-size: 0.9rem;
       font-weight: 700;
       line-height: 1.35;
+      text-shadow: 0 5px 18px rgba(32, 22, 12, 0.44);
     }
 
     .people-gallery .info-card .meta-line,
