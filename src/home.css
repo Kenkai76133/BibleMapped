@@ -5991,3 +5991,11 @@
       position: relative !important;
       z-index: 1 !important;
     }
+
+    html body .watch-videos-title-wrap {
+      width: min(100%, 18ch) !important;
+    }
+
+    html body .watch-videos-copy h2.watch-videos-type-title {
+      white-space: nowrap !important;
+    }
