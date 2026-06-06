@@ -5993,9 +5993,9 @@
     }
 
     html body .watch-videos-title-wrap {
-      width: min(100%, 18ch) !important;
+      width: min(100%, 12.5ch) !important;
     }
 
     html body .watch-videos-copy h2.watch-videos-type-title {
-      white-space: nowrap !important;
+      white-space: normal !important;
     }
