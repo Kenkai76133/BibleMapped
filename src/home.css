@@ -5669,7 +5669,7 @@
       display: block !important;
       min-height: 0 !important;
       margin: 0 !important;
-      padding: clamp(4.5rem, 8vw, 7.5rem) clamp(1rem, 4vw, 3.5rem) !important;
+      padding: clamp(3rem, 5.2vw, 4.75rem) clamp(1rem, 4vw, 3.5rem) !important;
       overflow: hidden !important;
       color: #111827 !important;
       background-color: #f8f1e0 !important;
@@ -5896,7 +5896,7 @@
 
     @media (max-width: 640px) {
       html body .home-people-feature {
-        padding: 4rem 1.25rem !important;
+        padding: 3rem 1.25rem !important;
       }
 
       html body .home-people-feature-copy h2 {
