@@ -13,26 +13,18 @@
     <link rel="stylesheet" href="../src/styles.css" />
     <style>
       body.simple-page {
-        background: #ffffff;
+        background:
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.7) 58%, rgba(255, 255, 255, 0.92) 100%),
+          url("../assets/heaven-gate-background.png") center top / cover fixed no-repeat,
+          #ffffff;
       }
 
       body.simple-page .bm-global-header {
         position: sticky;
         isolation: isolate;
         overflow: visible;
-        background: linear-gradient(to bottom, #ffffff 0%, rgba(255, 255, 255, 0.94) 68%, rgba(255, 255, 255, 0.76) 100%);
-      }
-
-      body.simple-page .bm-global-header::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 100%;
-        height: clamp(48px, 7vw, 92px);
-        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.68), rgba(255, 255, 255, 0));
-        pointer-events: none;
-        z-index: -1;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(12px);
       }
 
       .gospel-page {
@@ -43,9 +35,10 @@
       .gospel-hero {
         position: relative;
         isolation: isolate;
-        max-width: 930px;
-        min-height: clamp(520px, 72vw, 780px);
-        padding: clamp(96px, 12vw, 160px) 0 clamp(52px, 8vw, 96px);
+        max-width: none;
+        min-height: clamp(680px, calc(100vh - var(--nav-height)), 980px);
+        margin-inline: calc(50% - 50vw);
+        padding: clamp(110px, 14vw, 190px) calc(50vw - 50%) clamp(64px, 9vw, 110px);
         scroll-margin-top: calc(var(--nav-height) + 24px);
       }
 
@@ -55,24 +48,21 @@
         position: absolute;
         inset: calc(-1 * var(--nav-height)) 50% auto;
         width: 100vw;
-        height: clamp(430px, 66vw, 740px);
+        height: calc(100% + var(--nav-height));
         transform: translateX(-50%);
         pointer-events: none;
       }
 
       .gospel-hero::before {
         z-index: -2;
-        background: url("../assets/heaven-hero-lineup.png") center 42% / 100vw auto no-repeat;
-        opacity: 0.42;
-        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.14) 18%, #000 42%, #000 62%, transparent 100%);
-        mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.14) 18%, #000 42%, #000 62%, transparent 100%);
+        background: transparent;
       }
 
       .gospel-hero::after {
         z-index: -1;
         background:
-          linear-gradient(to bottom, #ffffff 0%, rgba(255, 255, 255, 0.96) 18%, rgba(255, 255, 255, 0.5) 44%, rgba(255, 255, 255, 0.78) 74%, #ffffff 100%),
-          linear-gradient(to right, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.64) 34%, rgba(255, 255, 255, 0.36) 100%);
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.08) 46%, rgba(255, 255, 255, 0.74) 100%),
+          linear-gradient(to right, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.42) 38%, rgba(255, 255, 255, 0.08) 100%);
       }
 
       .gospel-hero h1 {
@@ -381,10 +371,10 @@
           height: clamp(420px, 112vw, 620px);
         }
 
-        .gospel-hero::before {
-          background-size: 100vw auto;
-          background-position: center 28%;
-        }
+          .gospel-hero::before {
+            background-size: cover;
+            background-position: center top;
+          }
 
         .gospel-path-actions,
         .gospel-next-links {
