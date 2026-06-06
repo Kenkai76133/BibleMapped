@@ -5674,11 +5674,11 @@
       color: #111827 !important;
       background-color: #f8f1e0 !important;
       background-image: url("../assets/bible-journey-people-hero-strip.png") !important;
-      background-position: center !important;
+      background-position: center 42% !important;
       background-repeat: no-repeat !important;
       background-size: cover !important;
       border-top: 1px solid rgba(31, 41, 51, 0.08) !important;
-      border-bottom: 1px solid rgba(31, 41, 51, 0.16) !important;
+      border-bottom: 0 !important;
     }
 
     html body .home-people-feature::before {
@@ -5766,6 +5766,7 @@
     html body .home-people-feature-card {
       position: relative !important;
       min-width: 0 !important;
+      aspect-ratio: 16 / 9 !important;
       margin: 0 !important;
       overflow: hidden !important;
       border: 0 !important;
@@ -5786,10 +5787,10 @@
     html body .home-people-feature-card img {
       display: block !important;
       width: 100% !important;
-      height: auto !important;
+      height: 100% !important;
       aspect-ratio: 16 / 9 !important;
-      object-fit: contain !important;
-      object-position: center !important;
+      object-fit: cover !important;
+      object-position: center 42% !important;
       transform: none !important;
       background: rgba(255, 252, 244, 0.8) !important;
     }
@@ -5803,7 +5804,9 @@
     }
 
     html body .landing-followup-bars {
-      border-top: 1px solid rgba(31, 41, 51, 0.16) !important;
+      margin-top: 0 !important;
+      border-top: 0 !important;
+      background: #ffffff !important;
     }
 
     html body .watch-videos-image-band {
