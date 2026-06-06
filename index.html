@@ -299,6 +299,56 @@
         grid-template-columns: 1fr !important;
       }
     }
+
+    html body .home-testament-maps .home-map-actions {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      gap: 0.75rem !important;
+      width: min(380px, 100%) !important;
+      margin: clamp(1.35rem, 3vw, 2rem) auto clamp(0.9rem, 2vw, 1.3rem) 0 !important;
+    }
+
+    html body .home-testament-maps .home-map-action {
+      position: static !important;
+      transform: none !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      min-width: 150px !important;
+      min-height: 48px !important;
+      padding: 0 22px !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: var(--map-navy) !important;
+      color: #ffffff !important;
+      box-shadow: none !important;
+      font-size: 0.82rem !important;
+      font-weight: 900 !important;
+      letter-spacing: 0.12em !important;
+      text-transform: uppercase !important;
+      text-align: center !important;
+      text-decoration: none !important;
+      text-shadow: none !important;
+      transition: background 180ms ease, transform 180ms ease !important;
+    }
+
+    html body .home-testament-maps .home-map-action:hover,
+    html body .home-testament-maps .home-map-action:focus-visible {
+      background: var(--ink-navy) !important;
+      transform: translateY(-2px) !important;
+      outline: 0 !important;
+    }
+
+    html body .home-testament-maps .home-map-grid {
+      display: none !important;
+    }
+
+    @media (max-width: 640px) {
+      html body .home-testament-maps .home-map-actions {
+        display: grid !important;
+        width: min(220px, 100%) !important;
+      }
+    }
   </style>
 </head>
 
@@ -570,25 +620,11 @@
       <div class="home-testament-maps-copy">
         <p class="eyebrow">MAPS</p>
         <h2 id="homeTestamentMapsTitle">Old and New Testament</h2>
+        <div class="home-map-actions" aria-label="Open testament map images">
+          <a class="home-map-action" href="/assets/old-testament-locations-map.png">OT Maps</a>
+          <a class="home-map-action" href="/assets/new-testament-locations-map.png">NT Maps</a>
+        </div>
         <p>See the major places, routes, kingdoms, and journeys that hold the biblical story together.</p>
-      </div>
-
-      <div class="home-map-grid">
-        <article class="home-map-item home-map-item-old">
-          <h3>Old Testament</h3>
-          <a class="home-map-frame" href="/assets/old-testament-locations-map.png" aria-label="Open Old Testament locations map">
-            <img src="assets/old-testament-locations-map.png" alt="Major Old Testament locations map with routes through Egypt, Sinai, Canaan, Assyria, Babylon, and Persia" loading="lazy" />
-          </a>
-          <a class="home-map-action" href="/maps/#testamentMapsTitle">Old Testament Maps</a>
-        </article>
-
-        <article class="home-map-item home-map-item-new">
-          <h3>New Testament</h3>
-          <a class="home-map-frame" href="/assets/new-testament-locations-map.png" aria-label="Open New Testament locations map">
-            <img src="assets/new-testament-locations-map.png" alt="Major New Testament locations map with Jesus' ministry, Paul's missionary journeys, and Paul's voyage to Rome" loading="lazy" />
-          </a>
-          <a class="home-map-action" href="/maps/#testamentMapsTitle">New Testament Maps</a>
-        </article>
       </div>
     </div>
   </section>
