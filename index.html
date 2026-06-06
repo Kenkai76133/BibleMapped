@@ -349,6 +349,32 @@
         width: min(220px, 100%) !important;
       }
     }
+
+    html body .home-people-feature-copy .home-people-static-title {
+      display: grid !important;
+      gap: 0 !important;
+      margin: 0 0 1rem !important;
+      color: #111827 !important;
+      font-size: 5rem !important;
+      line-height: 0.9 !important;
+      text-align: left !important;
+      transform: none !important;
+      transition: none !important;
+      animation: none !important;
+    }
+
+    html body .home-people-static-title span {
+      display: block !important;
+      transform: none !important;
+      transition: none !important;
+      animation: none !important;
+    }
+
+    @media (max-width: 640px) {
+      html body .home-people-feature-copy .home-people-static-title {
+        font-size: 3.6rem !important;
+      }
+    }
   </style>
 </head>
 
@@ -620,11 +646,11 @@
       <div class="home-testament-maps-copy">
         <p class="eyebrow">MAPS</p>
         <h2 id="homeTestamentMapsTitle">Old and New Testament</h2>
+        <p>See the major places, routes, kingdoms, and journeys that hold the biblical story together.</p>
         <div class="home-map-actions" aria-label="Open testament map images">
           <a class="home-map-action" href="/assets/old-testament-locations-map.png">OT Maps</a>
           <a class="home-map-action" href="/assets/new-testament-locations-map.png">NT Maps</a>
         </div>
-        <p>See the major places, routes, kingdoms, and journeys that hold the biblical story together.</p>
       </div>
     </div>
   </section>
@@ -633,7 +659,11 @@
     <div class="home-people-feature-inner">
       <div class="home-people-feature-copy">
         <p class="eyebrow">PEOPLE</p>
-        <h2 id="homePeopleFeatureTitle">The People Behind the Story</h2>
+        <h2 id="homePeopleFeatureTitle" class="home-people-static-title">
+          <span>The People</span>
+          <span>behind</span>
+          <span>the story</span>
+        </h2>
         <p>
           The Bible moves through real people with real names, stories, cultures, failures,
           questions, and faith. Explore the people behind the text and see how their world
