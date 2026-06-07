@@ -18,7 +18,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <link rel="stylesheet" href="src/home.css?v=jesus-hero-white-space-title-2" />
+  <link rel="stylesheet" href="src/home.css?v=hero-title-fixed-final-2" />
 
   <style id="about-biblemapped-critical">
     html body #about-biblemapped {
@@ -111,7 +111,7 @@
     }
 
     html body #aboutMappedPanel .about-biblemapped-question-icon {
-      stroke-width: 6.2 !important;
+      stroke-width: 6.4 !important;
     }
 
     @keyframes aboutCriticalSquarePanIn {
@@ -286,30 +286,38 @@
     html body.landing-start .hero-copy {
       position: relative !important;
       z-index: 4 !important;
-      max-width: clamp(420px, 43vw, 620px) !important;
+      width: auto !important;
+      max-width: min(820px, 64vw) !important;
       margin-left: clamp(0.5rem, 1.6vw, 1.6rem) !important;
       padding-top: clamp(0.25rem, 1.2vw, 1rem) !important;
     }
 
-    html body.landing-start .hero-copy h1 {
-      max-width: 12.2ch !important;
+    html body.landing-start .hero-title-fixed {
+      width: max-content !important;
+      max-width: none !important;
       margin: 0 !important;
+
       color: #16191d !important;
-      font-size: clamp(4.4rem, 7.3vw, 7.1rem) !important;
-      line-height: 0.92 !important;
-      letter-spacing: -0.055em !important;
-      text-wrap: balance !important;
+      font-size: clamp(3.2rem, 5.05vw, 5.25rem) !important;
+      line-height: 0.96 !important;
+      letter-spacing: -0.052em !important;
+
+      white-space: nowrap !important;
+      text-wrap: nowrap !important;
     }
 
-    html body.landing-start .hero-copy h1 .hero-line-1,
-    html body.landing-start .hero-copy h1 .hero-line-2 {
+    html body.landing-start .hero-title-fixed .hero-title-line {
       display: block !important;
+      width: max-content !important;
+      max-width: none !important;
+      white-space: nowrap !important;
+      text-wrap: nowrap !important;
     }
 
-    html body.landing-start .hero-copy h1 em {
+    html body.landing-start .hero-title-fixed em {
       display: inline-block !important;
       font-style: italic !important;
-      letter-spacing: -0.06em !important;
+      letter-spacing: -0.055em !important;
     }
 
     html body.landing-start .hero-copy p {
@@ -346,12 +354,11 @@
 
     @media (max-width: 900px) {
       html body.landing-start .hero-copy {
-        max-width: clamp(360px, 50vw, 540px) !important;
+        max-width: min(720px, 70vw) !important;
       }
 
-      html body.landing-start .hero-copy h1 {
-        max-width: 11.5ch !important;
-        font-size: clamp(4rem, 8vw, 6rem) !important;
+      html body.landing-start .hero-title-fixed {
+        font-size: clamp(2.95rem, 5.8vw, 4.65rem) !important;
       }
     }
 
@@ -384,15 +391,14 @@
 
     @media (max-width: 640px) {
       html body.landing-start .hero-copy {
-        max-width: min(88vw, 420px) !important;
+        max-width: 92vw !important;
         margin-left: 0 !important;
         padding-top: clamp(1rem, 5vw, 2rem) !important;
       }
 
-      html body.landing-start .hero-copy h1 {
-        max-width: 10.5ch !important;
-        font-size: clamp(3.3rem, 15vw, 5rem) !important;
-        line-height: 0.92 !important;
+      html body.landing-start .hero-title-fixed {
+        font-size: clamp(2.1rem, 8.8vw, 3.25rem) !important;
+        line-height: 0.98 !important;
       }
 
       html body.landing-start .btn-start {
@@ -409,6 +415,10 @@
 
       html body.landing-start .hero-image {
         object-position: 70% 48% !important;
+      }
+
+      html body.landing-start .hero-title-fixed {
+        font-size: clamp(1.85rem, 8.2vw, 2.85rem) !important;
       }
     }
 
@@ -640,9 +650,9 @@
 
     <div class="hero-inner">
       <div class="hero-copy parallax-item" data-speed="-0.012">
-        <h1>
-          <span class="hero-line-1">The Bible explained,</span>
-          <span class="hero-line-2">in <em>context</em></span>
+        <h1 class="hero-title-fixed">
+          <span class="hero-title-line hero-title-line-main">The Bible explained,</span>
+          <span class="hero-title-line hero-title-line-sub">in <em>context</em></span>
         </h1>
 
         <p>
