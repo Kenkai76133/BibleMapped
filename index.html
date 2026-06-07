@@ -19,6 +19,7 @@
   <link rel="manifest" href="/site.webmanifest" />
 
   <link rel="stylesheet" href="src/home.css?v=jesus-hero-top-fade-5" />
+
   <style id="about-biblemapped-critical">
     html body #about-biblemapped {
       position: relative !important;
@@ -109,12 +110,17 @@
       filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.26)) !important;
     }
 
+    html body #aboutMappedPanel .about-biblemapped-question-icon {
+      stroke-width: 5.2 !important;
+    }
+
     @keyframes aboutCriticalSquarePanIn {
       to {
         opacity: 1;
         transform: translate3d(0, 0, 0) rotate(var(--slot-tilt, -2deg));
       }
     }
+
     html body .home-testament-maps {
       position: relative !important;
       isolation: isolate !important;
@@ -133,6 +139,7 @@
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.22) 48%, rgba(255, 255, 255, 0.08));
       pointer-events: none;
     }
+
     html body .home-testament-maps-copy h2,
     html body .home-testament-maps .home-map-item h3 {
       color: var(--gunmetal) !important;
@@ -242,7 +249,7 @@
       width: 100% !important;
       height: 100% !important;
       object-fit: cover !important;
-      object-position: 78% 54% !important;
+      object-position: 78% 46% !important;
       pointer-events: none !important;
       user-select: none !important;
     }
@@ -266,7 +273,7 @@
     @media (max-width: 768px) {
       html body.landing-start .hero-image {
         object-fit: cover !important;
-        object-position: 72% 54% !important;
+        object-position: 72% 47% !important;
       }
 
       html body.landing-start .hero::after {
@@ -506,13 +513,14 @@
       loading="eager"
       fetchpriority="high"
     />
+
     <div class="hero-inner">
       <div class="hero-copy parallax-item" data-speed="-0.012">
         <h1>The Bible explained, in <em>context</em></h1>
 
         <p>
           Bible Mapped helps Christians and seekers follow Scripture through real places,
-          real people, real timelines, and real meaning â€” from Eden to Abraham,
+          real people, real timelines, and real meaning — from Eden to Abraham,
           from Egypt to Sinai, from Jerusalem to the empty tomb.
         </p>
 
@@ -545,11 +553,15 @@
               <article class="about-biblemapped-item">
                 <div class="about-biblemapped-image-slot" data-image-slot="where" aria-label="Where illustration image slot">
                   <svg class="about-biblemapped-icon" viewBox="0 0 64 64" aria-hidden="true">
-                    <circle cx="32" cy="30" r="18" />
-                    <path d="M14 30h36M32 12c6 7 8 14 8 18s-2 11-8 18M32 12c-6 7-8 14-8 18s2 11 8 18" />
-                    <path d="M44 45c-5 5-10 9-12 13-2-4-7-8-12-13" />
+                    <circle cx="32" cy="32" r="21" />
+                    <path d="M11 32h42" />
+                    <path d="M16 22h32" />
+                    <path d="M16 42h32" />
+                    <path d="M32 11c6 7 9 14 9 21s-3 14-9 21" />
+                    <path d="M32 11c-6 7-9 14-9 21s3 14 9 21" />
                   </svg>
                 </div>
+
                 <div class="about-biblemapped-copy">
                   <h3>Where <span class="about-biblemapped-arrow" aria-hidden="true">&larr;</span></h3>
                   <p>Trace biblical events through real geography and place.</p>
@@ -565,6 +577,7 @@
                     <path d="M42 49c2-7 7-11 12-11" />
                   </svg>
                 </div>
+
                 <div class="about-biblemapped-copy">
                   <h3>Who <span class="about-biblemapped-arrow" aria-hidden="true">&larr;</span></h3>
                   <p>Meet the people, cultures, and empires behind the text.</p>
@@ -573,11 +586,12 @@
 
               <article class="about-biblemapped-item">
                 <div class="about-biblemapped-image-slot" data-image-slot="why" aria-label="Why illustration image slot">
-                  <svg class="about-biblemapped-icon" viewBox="0 0 64 64" aria-hidden="true">
-                    <path d="M23 24c1-9 8-14 16-12 7 2 11 8 9 15-2 8-12 9-13 17" />
-                    <path d="M34 52h.2" />
+                  <svg class="about-biblemapped-icon about-biblemapped-question-icon" viewBox="0 0 64 64" aria-hidden="true">
+                    <path d="M23 24c1.2-8.8 8.4-14 17-11.8 7.3 1.9 11.7 8.4 9.6 15.7-2.2 7.9-12.8 9.4-14.1 17.6" />
+                    <circle cx="34.5" cy="53" r="2.8" fill="currentColor" stroke="none" />
                   </svg>
                 </div>
+
                 <div class="about-biblemapped-copy">
                   <h3>Why <span class="about-biblemapped-arrow" aria-hidden="true">&larr;</span></h3>
                   <p>Discover context, purpose, and the bigger biblical story.</p>
@@ -592,6 +606,7 @@
                     <path d="M23 24c4 0 8 1 11 3M23 34c4 0 8 1 11 3" />
                   </svg>
                 </div>
+
                 <div class="about-biblemapped-copy">
                   <h3>What <span class="about-biblemapped-arrow" aria-hidden="true">&larr;</span></h3>
                   <p>See how Scripture connects to meaning, faith, and everyday life.</p>
@@ -644,19 +659,19 @@
                     <div class="formula-tour-image">
                       <img
                         src="assets/formula-place.png"
-                        alt="Map or visual of Samaria and Jacobâ€™s well"
+                        alt="Map or visual of Samaria and Jacob’s well"
                         onerror="this.style.display='none';"
                       />
                     </div>
 
                     <p>
-                      John 4 happens in Samaria, near Jacobâ€™s well. That location matters
+                      John 4 happens in Samaria, near Jacob’s well. That location matters
                       because Samaria carried centuries of tension between Jews and Samaritans.
                     </p>
 
                     <div class="formula-tour-actions">
                       <button class="formula-tour-btn" type="button" data-formula-tour-next="2">
-                        Next: Who â†’
+                        Next: Who →
                       </button>
                     </div>
                   </article>
@@ -675,17 +690,17 @@
 
                     <p>
                       Jesus is a Jewish teacher. The woman is a Samaritan. This is not just
-                      a conversation at a well â€” it is Jesus crossing religious, ethnic,
+                      a conversation at a well — it is Jesus crossing religious, ethnic,
                       cultural, and personal boundaries.
                     </p>
 
                     <div class="formula-tour-actions">
                       <button class="formula-tour-btn secondary" type="button" data-formula-tour-next="1">
-                        â† Back
+                        ← Back
                       </button>
 
                       <button class="formula-tour-btn" type="button" data-formula-tour-next="3">
-                        Next: Why â†’
+                        Next: Why →
                       </button>
                     </div>
                   </article>
@@ -710,11 +725,11 @@
 
                     <div class="formula-tour-actions">
                       <button class="formula-tour-btn secondary" type="button" data-formula-tour-next="2">
-                        â† Back
+                        ← Back
                       </button>
 
                       <a class="formula-tour-link" href="case-studies/index.html">
-                        View Case Studies â†’
+                        View Case Studies →
                       </a>
                     </div>
                   </article>
@@ -740,6 +755,7 @@
         <p class="eyebrow">MAPS</p>
         <h2 id="homeTestamentMapsTitle">Old and New Testament</h2>
         <p>See the major places, routes, kingdoms, and journeys that hold the biblical story together.</p>
+
         <div class="home-map-actions" aria-label="Open testament map images">
           <a class="home-map-action" href="/assets/old-testament-locations-map.png">OT Maps</a>
           <a class="home-map-action" href="/assets/new-testament-locations-map.png">NT Maps</a>
@@ -752,16 +768,19 @@
     <div class="home-people-feature-inner">
       <div class="home-people-feature-copy">
         <p class="eyebrow">PEOPLE</p>
+
         <h2 id="homePeopleFeatureTitle" class="home-people-static-title">
           <span>The People</span>
           <span>behind</span>
           <span>the story</span>
         </h2>
+
         <p>
           The Bible moves through real people with real names, stories, cultures, failures,
           questions, and faith. Explore the people behind the text and see how their world
           helps the story come alive.
         </p>
+
         <a class="home-people-feature-button" href="/people">Learn Their Story</a>
       </div>
 
@@ -778,8 +797,10 @@
         <div class="watch-videos-title-wrap" data-title="Videos are Rabbit Holes">
           <h2 class="watch-videos-type-title" data-type-text="Videos are Rabbit Holes">Videos are Rabbit Holes</h2>
         </div>
+
         <p>Strange facts. Big questions. Ancient context.<br />Follow the rabbit trail below.</p>
       </div>
+
       <img src="assets/videos-rabbit-holes.jpg" alt="Rabbit beside a rabbit hole" loading="lazy" />
     </div>
 
@@ -846,7 +867,7 @@
     <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="oldModalTitle">
       <div class="modal-top">
         <span>Old Testament Library</span>
-        <button class="modal-close" type="button" data-modal-close aria-label="Close window">Ã—</button>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close window">×</button>
       </div>
 
       <div class="modal-body">
@@ -872,7 +893,7 @@
 
           <section class="book-category">
             <h3>History</h3>
-            <p>Israelâ€™s land, kings, exile, return, and national story.</p>
+            <p>Israel’s land, kings, exile, return, and national story.</p>
             <div class="book-list">
               <a href="books/index.html#joshua">Joshua</a>
               <a href="books/index.html#judges">Judges</a>
@@ -940,7 +961,7 @@
     <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="newModalTitle">
       <div class="modal-top">
         <span>New Testament Library</span>
-        <button class="modal-close" type="button" data-modal-close aria-label="Close window">Ã—</button>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close window">×</button>
       </div>
 
       <div class="modal-body">
@@ -972,7 +993,7 @@
           </section>
 
           <section class="book-category">
-            <h3>Paulâ€™s Letters</h3>
+            <h3>Paul’s Letters</h3>
             <p>Doctrine, church life, salvation, unity, suffering, and discipleship.</p>
             <div class="book-list">
               <a href="books/index.html#romans">Romans</a>
@@ -1019,16 +1040,17 @@
   </div>
 
   <footer class="bm-site-footer" aria-label="Bible Mapped footer">
-      <div class="bm-site-footer-inner">
-        <div class="bm-footer-top">
-          <img class="bm-footer-wordmark" src="/assets/footer-brand-logo.png" alt="Bible Mapped" />
+    <div class="bm-site-footer-inner">
+      <div class="bm-footer-top">
+        <img class="bm-footer-wordmark" src="/assets/footer-brand-logo.png" alt="Bible Mapped" />
 
-          <div class="bm-footer-social-row" aria-label="Bible Mapped social links">
+        <div class="bm-footer-social-row" aria-label="Bible Mapped social links">
           <a class="bm-footer-social-emblem tiktok-emblem" href="https://www.tiktok.com/@biblemapped" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M14.7 3.2c.3 2.3 1.6 3.8 3.9 4.2v3.3c-1.4 0-2.7-.4-3.9-1.1v5.8c0 3.2-2.1 5.4-5.2 5.4-2.8 0-5-2-5-4.7 0-2.9 2.2-4.9 5.1-4.9.4 0 .7 0 1 .1v3.4c-.3-.1-.7-.2-1-.2-1 0-1.8.6-1.8 1.5s.8 1.5 1.7 1.5c1.1 0 1.8-.7 1.8-2V3.2h3.4Z" />
             </svg>
           </a>
+
           <a class="bm-footer-social-emblem instagram-emblem" href="#" aria-label="Instagram">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <rect x="4" y="4" width="16" height="16" rx="5" ry="5" />
@@ -1036,49 +1058,51 @@
               <circle cx="17" cy="7" r="1.3" />
             </svg>
           </a>
+
           <a class="bm-footer-social-emblem patreon-emblem" href="https://www.patreon.com/cw/Biblemapped" target="_blank" rel="noopener noreferrer" aria-label="Patreon">
             <span class="bm-footer-patreon-letter" aria-hidden="true">P</span>
           </a>
+
           <a class="bm-footer-social-emblem youtube-emblem" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M21 8.1c-.2-1.1-.8-1.9-1.9-2.1C17.4 5.6 12 5.6 12 5.6s-5.4 0-7.1.4C3.8 6.2 3.2 7 3 8.1 2.6 9.8 2.6 12 2.6 12s0 2.2.4 3.9c.2 1.1.8 1.9 1.9 2.1 1.7.4 7.1.4 7.1.4s5.4 0 7.1-.4c1.1-.2 1.7-1 1.9-2.1.4-1.7.4-3.9.4-3.9s0-2.2-.4-3.9ZM10.1 14.8V9.2l5 2.8-5 2.8Z" />
             </svg>
           </a>
+
           <a class="bm-footer-social-emblem facebook-emblem" href="#" aria-label="Facebook">f</a>
         </div>
-        </div>
-
-        <div class="bm-footer-divider" aria-hidden="true"></div>
-
-        <nav class="bm-footer-links bm-footer-primary" aria-label="Footer navigation">
-          <a href="/">Home</a>
-          <span>|</span>
-          <a href="/about/">About</a>
-          <span>|</span>
-          <a href="/books/">Books</a>
-          <span>|</span>
-          <a href="/characters/">People</a>
-          <span>|</span>
-          <a href="/maps/">Maps</a>
-          <span>|</span>
-          <a href="/case-studies/">Case Studies</a>
-          <span>|</span>
-          <a class="bm-footer-heaven-link" href="/heaven/">Are You Going to Heaven?</a>
-        </nav>
-
-        <nav class="bm-footer-links bm-footer-secondary" aria-label="Footer utility navigation">
-          <a href="/terms/">Terms of Use</a>
-          <span>|</span>
-          <a href="/help/">Help Center</a>
-          <span>|</span>
-          <a href="mailto:calvin@biblemapped.com">Contact Us</a>
-        </nav>
-
-        <p class="bm-footer-copy">&copy; 2026 Bible Mapped. All rights reserved.</p>
       </div>
-    </footer>
+
+      <div class="bm-footer-divider" aria-hidden="true"></div>
+
+      <nav class="bm-footer-links bm-footer-primary" aria-label="Footer navigation">
+        <a href="/">Home</a>
+        <span>|</span>
+        <a href="/about/">About</a>
+        <span>|</span>
+        <a href="/books/">Books</a>
+        <span>|</span>
+        <a href="/characters/">People</a>
+        <span>|</span>
+        <a href="/maps/">Maps</a>
+        <span>|</span>
+        <a href="/case-studies/">Case Studies</a>
+        <span>|</span>
+        <a class="bm-footer-heaven-link" href="/heaven/">Are You Going to Heaven?</a>
+      </nav>
+
+      <nav class="bm-footer-links bm-footer-secondary" aria-label="Footer utility navigation">
+        <a href="/terms/">Terms of Use</a>
+        <span>|</span>
+        <a href="/help/">Help Center</a>
+        <span>|</span>
+        <a href="mailto:calvin@biblemapped.com">Contact Us</a>
+      </nav>
+
+      <p class="bm-footer-copy">&copy; 2026 Bible Mapped. All rights reserved.</p>
+    </div>
+  </footer>
 
   <script src="src/home.js?v=people-card-fix-1" defer></script>
 </body>
 </html>
-
