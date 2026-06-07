@@ -18,7 +18,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <link rel="stylesheet" href="src/home.css?v=jesus-hero-white-space-title-1" />
+  <link rel="stylesheet" href="src/home.css?v=jesus-hero-white-space-title-2" />
 
   <style id="about-biblemapped-critical">
     html body #about-biblemapped {
@@ -111,7 +111,7 @@
     }
 
     html body #aboutMappedPanel .about-biblemapped-question-icon {
-      stroke-width: 5.2 !important;
+      stroke-width: 6.2 !important;
     }
 
     @keyframes aboutCriticalSquarePanIn {
@@ -286,19 +286,24 @@
     html body.landing-start .hero-copy {
       position: relative !important;
       z-index: 4 !important;
-      max-width: clamp(360px, 39vw, 560px) !important;
+      max-width: clamp(420px, 43vw, 620px) !important;
       margin-left: clamp(0.5rem, 1.6vw, 1.6rem) !important;
       padding-top: clamp(0.25rem, 1.2vw, 1rem) !important;
     }
 
     html body.landing-start .hero-copy h1 {
-      max-width: 10.5ch !important;
+      max-width: 12.2ch !important;
       margin: 0 !important;
       color: #16191d !important;
       font-size: clamp(4.4rem, 7.3vw, 7.1rem) !important;
       line-height: 0.92 !important;
       letter-spacing: -0.055em !important;
       text-wrap: balance !important;
+    }
+
+    html body.landing-start .hero-copy h1 .hero-line-1,
+    html body.landing-start .hero-copy h1 .hero-line-2 {
+      display: block !important;
     }
 
     html body.landing-start .hero-copy h1 em {
@@ -320,20 +325,16 @@
     html body.landing-start .btn-start {
       min-width: 235px !important;
       min-height: 66px !important;
-
       display: inline-flex !important;
       align-items: center !important;
       justify-content: center !important;
-
       background: #6d28ff !important;
       color: #ffffff !important;
-
       font-size: 0.95rem !important;
       font-weight: 900 !important;
       letter-spacing: 0.12em !important;
       text-transform: uppercase !important;
       text-decoration: none !important;
-
       border-radius: 0 !important;
       border: 0 !important;
       box-shadow: none !important;
@@ -345,11 +346,11 @@
 
     @media (max-width: 900px) {
       html body.landing-start .hero-copy {
-        max-width: clamp(330px, 48vw, 500px) !important;
+        max-width: clamp(360px, 50vw, 540px) !important;
       }
 
       html body.landing-start .hero-copy h1 {
-        max-width: 10ch !important;
+        max-width: 11.5ch !important;
         font-size: clamp(4rem, 8vw, 6rem) !important;
       }
     }
@@ -358,7 +359,6 @@
       html body.landing-start .hero {
         --hero-jesus-drop: clamp(44px, 10vw, 88px);
         --hero-jesus-scale: 1.04;
-
         min-height: clamp(560px, 78svh, 740px) !important;
       }
 
@@ -390,7 +390,7 @@
       }
 
       html body.landing-start .hero-copy h1 {
-        max-width: 9.5ch !important;
+        max-width: 10.5ch !important;
         font-size: clamp(3.3rem, 15vw, 5rem) !important;
         line-height: 0.92 !important;
       }
@@ -640,7 +640,10 @@
 
     <div class="hero-inner">
       <div class="hero-copy parallax-item" data-speed="-0.012">
-        <h1>The Bible explained, in <em>context</em></h1>
+        <h1>
+          <span class="hero-line-1">The Bible explained,</span>
+          <span class="hero-line-2">in <em>context</em></span>
+        </h1>
 
         <p>
           Bible Mapped helps Christians and seekers follow Scripture through real places,
@@ -695,10 +698,9 @@
               <article class="about-biblemapped-item">
                 <div class="about-biblemapped-image-slot" data-image-slot="who" aria-label="Who illustration image slot">
                   <svg class="about-biblemapped-icon" viewBox="0 0 64 64" aria-hidden="true">
-                    <circle cx="31" cy="23" r="10" />
-                    <path d="M16 51c3-12 11-18 15-18s12 6 15 18" />
-                    <circle cx="47" cy="27" r="7" />
-                    <path d="M42 49c2-7 7-11 12-11" />
+                    <circle cx="32" cy="21" r="9" />
+                    <path d="M19 47c2.6-7.5 8.4-12 13-12s10.4 4.5 13 12" />
+                    <path d="M24.5 31.5c2.2 1.9 4.8 2.8 7.5 2.8s5.3-.9 7.5-2.8" />
                   </svg>
                 </div>
 
@@ -711,8 +713,8 @@
               <article class="about-biblemapped-item">
                 <div class="about-biblemapped-image-slot" data-image-slot="why" aria-label="Why illustration image slot">
                   <svg class="about-biblemapped-icon about-biblemapped-question-icon" viewBox="0 0 64 64" aria-hidden="true">
-                    <path d="M23 24c1.2-8.8 8.4-14 17-11.8 7.3 1.9 11.7 8.4 9.6 15.7-2.2 7.9-12.8 9.4-14.1 17.6" />
-                    <circle cx="34.5" cy="53" r="2.8" fill="currentColor" stroke="none" />
+                    <path d="M22 21.5c0-6.8 5.5-11.5 13-11.5 7 0 12 4.1 12 10.4 0 5.1-2.8 7.8-7.6 10.4-4.3 2.3-5.4 4.3-5.4 8.2" />
+                    <circle cx="34" cy="52" r="3.4" fill="currentColor" stroke="none" />
                   </svg>
                 </div>
 
@@ -725,9 +727,9 @@
               <article class="about-biblemapped-item">
                 <div class="about-biblemapped-image-slot" data-image-slot="what" aria-label="What illustration image slot">
                   <svg class="about-biblemapped-icon" viewBox="0 0 64 64" aria-hidden="true">
-                    <path d="M16 16c8-3 16-2 24 3v34c-8-5-16-6-24-3V16Z" />
-                    <path d="M40 19c5-3 10-4 14-2v33c-4-2-9-1-14 3" />
-                    <path d="M23 24c4 0 8 1 11 3M23 34c4 0 8 1 11 3" />
+                    <path d="M18 18c5-2 10-2 14 1v26c-4-2-9-2-14-1V18Z" />
+                    <path d="M46 18c-5-2-10-2-14 1v26c4-2 9-2 14-1V18Z" />
+                    <path d="M32 19v26" />
                   </svg>
                 </div>
 
