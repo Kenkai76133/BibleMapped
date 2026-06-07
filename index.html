@@ -18,7 +18,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <link rel="stylesheet" href="src/home.css?v=jesus-hero-more-headroom-1" />
+  <link rel="stylesheet" href="src/home.css?v=jesus-hero-white-space-title-1" />
 
   <style id="about-biblemapped-critical">
     html body #about-biblemapped {
@@ -244,10 +244,10 @@
         linear-gradient(
           90deg,
           rgba(255, 255, 255, 1) 0%,
-          rgba(255, 255, 255, 0.96) 22%,
-          rgba(255, 255, 255, 0.72) 38%,
-          rgba(255, 255, 255, 0.24) 56%,
-          rgba(255, 255, 255, 0) 72%
+          rgba(255, 255, 255, 0.98) 24%,
+          rgba(255, 255, 255, 0.84) 42%,
+          rgba(255, 255, 255, 0.36) 60%,
+          rgba(255, 255, 255, 0) 78%
         ) !important;
     }
 
@@ -286,17 +286,72 @@
     html body.landing-start .hero-copy {
       position: relative !important;
       z-index: 4 !important;
-      max-width: min(760px, 92vw) !important;
+      max-width: clamp(360px, 39vw, 560px) !important;
+      margin-left: clamp(0.5rem, 1.6vw, 1.6rem) !important;
+      padding-top: clamp(0.25rem, 1.2vw, 1rem) !important;
+    }
+
+    html body.landing-start .hero-copy h1 {
+      max-width: 10.5ch !important;
+      margin: 0 !important;
+      color: #16191d !important;
+      font-size: clamp(4.4rem, 7.3vw, 7.1rem) !important;
+      line-height: 0.92 !important;
+      letter-spacing: -0.055em !important;
+      text-wrap: balance !important;
+    }
+
+    html body.landing-start .hero-copy h1 em {
+      display: inline-block !important;
+      font-style: italic !important;
+      letter-spacing: -0.06em !important;
+    }
+
+    html body.landing-start .hero-copy p {
+      display: none !important;
     }
 
     html body.landing-start .hero-actions {
       position: static !important;
       transform: none !important;
-      margin-top: clamp(1.4rem, 3vw, 2.2rem) !important;
+      margin-top: clamp(1.6rem, 2.6vw, 2.4rem) !important;
+    }
+
+    html body.landing-start .btn-start {
+      min-width: 235px !important;
+      min-height: 66px !important;
+
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+
+      background: #6d28ff !important;
+      color: #ffffff !important;
+
+      font-size: 0.95rem !important;
+      font-weight: 900 !important;
+      letter-spacing: 0.12em !important;
+      text-transform: uppercase !important;
+      text-decoration: none !important;
+
+      border-radius: 0 !important;
+      border: 0 !important;
+      box-shadow: none !important;
     }
 
     html body.landing-start .hero + .testament-puzzle-section {
       padding-top: 0 !important;
+    }
+
+    @media (max-width: 900px) {
+      html body.landing-start .hero-copy {
+        max-width: clamp(330px, 48vw, 500px) !important;
+      }
+
+      html body.landing-start .hero-copy h1 {
+        max-width: 10ch !important;
+        font-size: clamp(4rem, 8vw, 6rem) !important;
+      }
     }
 
     @media (max-width: 768px) {
@@ -319,11 +374,30 @@
           linear-gradient(
             90deg,
             rgba(255, 255, 255, 1) 0%,
-            rgba(255, 255, 255, 0.95) 28%,
-            rgba(255, 255, 255, 0.66) 48%,
-            rgba(255, 255, 255, 0.18) 66%,
-            rgba(255, 255, 255, 0) 82%
+            rgba(255, 255, 255, 0.98) 30%,
+            rgba(255, 255, 255, 0.78) 50%,
+            rgba(255, 255, 255, 0.24) 70%,
+            rgba(255, 255, 255, 0) 88%
           ) !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      html body.landing-start .hero-copy {
+        max-width: min(88vw, 420px) !important;
+        margin-left: 0 !important;
+        padding-top: clamp(1rem, 5vw, 2rem) !important;
+      }
+
+      html body.landing-start .hero-copy h1 {
+        max-width: 9.5ch !important;
+        font-size: clamp(3.3rem, 15vw, 5rem) !important;
+        line-height: 0.92 !important;
+      }
+
+      html body.landing-start .btn-start {
+        min-width: 210px !important;
+        min-height: 60px !important;
       }
     }
 
