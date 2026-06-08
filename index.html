@@ -205,9 +205,6 @@
     }
 
     html body.landing-start .hero {
-      --hero-jesus-drop: clamp(70px, 9vw, 140px);
-      --hero-jesus-scale: 1.025;
-
       position: relative !important;
       isolation: isolate !important;
       overflow: hidden !important;
@@ -223,13 +220,17 @@
     }
 
     html body.landing-start .hero::before {
-      content: none !important;
-      display: none !important;
-      background: none !important;
-      background-image: none !important;
-      opacity: 0 !important;
-      -webkit-mask-image: none !important;
-      mask-image: none !important;
+      content: "" !important;
+      position: absolute !important;
+      inset: 0 !important;
+      z-index: 0 !important;
+      display: block !important;
+      background:
+        url("assets/jesus-word-funnel-hero.png") center center / cover no-repeat !important;
+      opacity: 0.28 !important;
+      filter: blur(14px) saturate(0.9) !important;
+      transform: scale(1.04) !important;
+      pointer-events: none !important;
     }
 
     html body.landing-start .hero::after {
@@ -357,9 +358,15 @@
 
     @media (max-width: 768px) {
       html body.landing-start .hero {
-        --hero-jesus-drop: clamp(44px, 10vw, 88px);
-        --hero-jesus-scale: 1.04;
         min-height: clamp(560px, 78svh, 740px) !important;
+      }
+
+      html body.landing-start .hero::before {
+        background:
+          url("assets/jesus-word-funnel-hero.png") center center / cover no-repeat !important;
+        opacity: 0.28 !important;
+        filter: blur(14px) saturate(0.9) !important;
+        transform: scale(1.04) !important;
       }
 
       html body.landing-start .hero-image {
@@ -399,11 +406,6 @@
     }
 
     @media (max-width: 480px) {
-      html body.landing-start .hero {
-        --hero-jesus-drop: clamp(34px, 9vw, 64px);
-        --hero-jesus-scale: 1.06;
-      }
-
       html body.landing-start .hero-image {
         object-fit: contain !important;
         object-position: center center !important;
