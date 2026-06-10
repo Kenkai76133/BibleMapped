@@ -1,1 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <title>Old Testament | BibleMapped</title>
+  <meta
+    name="description"
+    content="Explore the Old Testament through BibleMapped’s visual study system with maps, book sections, and teaching infographics."
+  />
+
+  <link rel="stylesheet" href="../src/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --ot-ink: #0b1020;
+      --ot-text: #1f2933;
+      --ot-purple: #7c3aed;
+      --ot-line: rgba(31, 41, 51, 0.12);
+      --header-height: 72px;
+      --editorial: "Cormorant Garamond", Georgia, serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: #ffffff;
+      color: var(--ot-ink);
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    img, video, svg, canvas, iframe {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a, button {
+      font: inherit;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .ot-page-main {
+      min-height: calc(100vh - var(--header-height));
+      background: #ffffff;
+      padding: clamp(34px, 5vw, 72px) 18px clamp(72px, 8vw, 120px);
+    }
+
+    .ot-shell {
+      width: min(1060px, 100%);
+      margin: 0 auto;
+    }
+
+    .ot-hero {
+      text-align: center;
+      margin-bottom: clamp(30px, 5vw, 58px);
+    }
+
+    .ot-back-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      margin: 0 auto 20px;
+      padding: 9px 14px;
+      border: 1px solid rgba(124, 58, 237, 0.18);
+      border-radius: 999px;
+      background: rgba(124, 58, 237, 0.06);
+      color: var(--ot-purple);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .ot-back-link:hover {
+      transform: translateY(-2px);
+      border-color: rgba(124, 58, 237, 0.34);
+      background: rgba(124, 58, 237, 0.1);
+    }
+
+    .ot-hero h1 {
+      margin: 0;
+      font-family: var(--editorial);
+      font-size: clamp(3.2rem, 8vw, 7rem);
+      font-weight: 700;
+      line-height: 0.88;
+      letter-spacing: -0.045em;
+      color: var(--ot-ink);
+    }
+
+    .ot-hero p {
+      max-width: 740px;
+      margin: 20px auto 0;
+      color: var(--ot-text);
+      font-size: clamp(1.02rem, 1.7vw, 1.22rem);
+      font-weight: 620;
+      line-height: 1.72;
+    }
+
+    .ot-jump-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      max-width: 920px;
+      margin: 26px auto 0;
+    }
+
+    .ot-jump-nav a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 9px 13px;
+      border: 1px solid var(--ot-line);
+      border-radius: 999px;
+      background: #ffffff;
+      color: var(--ot-ink);
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: transform 180ms ease, border-color 180ms ease, color 180ms ease;
+    }
+
+    .ot-jump-nav a:hover {
+      transform: translateY(-2px);
+      border-color: rgba(124, 58, 237, 0.36);
+      color: var(--ot-purple);
+    }
+
+    .infographic-stack {
+      display: grid;
+      gap: clamp(34px, 5vw, 64px);
+    }
+
+    .infographic-section {
+      scroll-margin-top: 100px;
+    }
+
+    .infographic-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .infographic-label h2 {
+      margin: 0;
+      color: var(--ot-ink);
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .infographic-label span {
+      color: var(--ot-purple);
+      font-size: 0.82rem;
+      font-weight: 950;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .infographic-card {
+      position: relative;
+      margin: 0;
+      overflow: hidden;
+      border-radius: 24px;
+      background: #ffffff;
+      border: 1px solid rgba(31, 41, 51, 0.08);
+    }
+
+    .infographic-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #ffffff;
+    }
+
+    .missing-card {
+      border: 1px dashed rgba(124, 58, 237, 0.38);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at top left, rgba(124, 58, 237, 0.08), transparent 32%),
+        #ffffff;
+      padding: clamp(28px, 5vw, 54px);
+      text-align: center;
+    }
+
+    .missing-card h3 {
+      margin: 0;
+      font-family: var(--editorial);
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.035em;
+      color: var(--ot-ink);
+    }
+
+    .missing-card p {
+      max-width: 620px;
+      margin: 16px auto 0;
+      color: var(--ot-text);
+      font-size: 1rem;
+      font-weight: 620;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 820px) {
+      :root {
+        --header-height: 66px;
+      }
+
+      .ot-page-main {
+        padding-top: 30px;
+      }
+
+      .infographic-label {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .infographic-label span {
+        white-space: normal;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .ot-page-main {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .ot-hero {
+        text-align: left;
+      }
+
+      .ot-back-link {
+        margin-left: 0;
+      }
+
+      .ot-jump-nav {
+        justify-content: flex-start;
+      }
+
+      .infographic-card,
+      .missing-card {
+        border-radius: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="bm-global-header">
+    <nav class="bm-global-nav" aria-label="Primary">
+      <a href="../index.html" class="bm-global-brand" aria-label="Bible Mapped Home">
+        <span class="bm-global-brand-crop">
+          <img src="../assets/header-brand-logo.png" alt="Bible Mapped" class="bm-global-brand-logo" />
+        </span>
+      </a>
+
+      <div class="bm-global-links">
+        <a href="../qa/index.html">Q&amp;A</a>
+        <a href="../about/index.html">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="ot-page-main">
+    <section class="ot-shell ot-hero" aria-labelledby="oldTestamentTitle">
+      <a class="ot-back-link" href="../books/">← Back to Books</a>
+
+      <h1 id="oldTestamentTitle">Old Testament</h1>
+
+      <p>
+        A visual guide to the books, sections, and map context of the Old Testament.
+      </p>
+
+      <nav class="ot-jump-nav" aria-label="Old Testament sections">
+        <a href="#overview">Overview</a>
+        <a href="#map">Map</a>
+        <a href="#torah">Torah / Law</a>
+        <a href="#history">History</a>
+        <a href="#poetry">Poetry</a>
+        <a href="#major-prophets">Major Prophets</a>
+        <a href="#minor-prophets">Minor Prophets</a>
+      </nav>
+    </section>
+
+    <section class="ot-shell infographic-stack" aria-label="Old Testament infographic guide">
+
+      <article class="infographic-section" id="overview">
+        <div class="infographic-label">
+          <h2>1. Old Testament Overview</h2>
+          <span>A simple map of the books</span>
+        </div>
+
+        <figure class="infographic-card">
+          <img
+            src="../assets/old-testament/ot-01-books-overview.png"
+            alt="Old Testament simple map of the books infographic"
+          />
+        </figure>
+      </article>
+
+      <article class="infographic-section" id="map">
+        <div class="infographic-label">
+          <h2>2. Old Testament Map</h2>
+          <span>Where key books were likely written</span>
+        </div>
+
+        <figure class="infographic-card">
+          <img
+            src="../assets/old-testament/ot-02-map.png"
+            alt="Old Testament map showing where key books were likely written"
+          />
+        </figure>
+      </article>
+
+      <article class="infographic-section" id="torah">
+        <div class="infographic-label">
+          <h2>3. Torah / Law</h2>
+          <span>The first five books</span>
+        </div>
+
+        <figure class="infographic-card">
+          <img
+            src="../assets/old-testament/ot-03-torah-law.png"
+            alt="Torah Law infographic showing Genesis, Exodus, Leviticus, Numbers, and Deuteronomy"
+          />
+        </figure>
+      </article>
+
+      <article class="infographic-section" id="history">
+        <div class="infographic-label">
+          <h2>4. History</h2>
+          <span>Israel in the land, exile, and return</span>
+        </div>
+
+        <div class="missing-card">
+          <h3>History Infographic Coming Soon</h3>
+          <p>
+            Upload this image later as <strong>ot-04-history.png</strong> inside
+            <strong>/assets/old-testament/</strong>.
+          </p>
+        </div>
+      </article>
+
+      <article class="infographic-section" id="poetry">
+        <div class="infographic-label">
+          <h2>5. Poetry &amp; Wisdom</h2>
+          <span>Songs, sayings, questions, and worship</span>
+        </div>
+
+        <figure class="infographic-card">
+          <img
+            src="../assets/old-testament/ot-05-poetry-wisdom.png"
+            alt="Poetry and Wisdom infographic showing Job, Psalms, Proverbs, Ecclesiastes, and Song of Songs"
+          />
+        </figure>
+      </article>
+
+      <article class="infographic-section" id="major-prophets">
+        <div class="infographic-label">
+          <h2>6. Major Prophets</h2>
+          <span>Longer prophetic books</span>
+        </div>
+
+        <div class="missing-card">
+          <h3>Major Prophets Infographic Coming Soon</h3>
+          <p>
+            Upload this image later as <strong>ot-06-major-prophets.png</strong> inside
+            <strong>/assets/old-testament/</strong>.
+          </p>
+        </div>
+      </article>
+
+      <article class="infographic-section" id="minor-prophets">
+        <div class="infographic-label">
+          <h2>7. Minor Prophets</h2>
+          <span>Shorter books with powerful warnings and hope</span>
+        </div>
+
+        <figure class="infographic-card">
+          <img
+            src="../assets/old-testament/ot-07-minor-prophets.png"
+            alt="Minor Prophets infographic showing Hosea through Malachi"
+          />
+        </figure>
+      </article>
+
+    </section>
+  </main>
+
+  <footer class="bm-site-footer" aria-label="Bible Mapped footer">
+    <div class="bm-site-footer-inner">
+      <div class="bm-footer-top">
+        <img class="bm-footer-wordmark" src="/assets/footer-brand-logo.png" alt="Bible Mapped" />
+
+        <div class="bm-footer-social-row" aria-label="Bible Mapped social links">
+          <a class="bm-footer-social-emblem tiktok-emblem" href="https://www.tiktok.com/@biblemapped" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14.7 3.2c.3 2.3 1.6 3.8 3.9 4.2v3.3c-1.4 0-2.7-.4-3.9-1.1v5.8c0 3.2-2.1 5.4-5.2 5.4-2.8 0-5-2-5-4.7 0-2.9 2.2-4.9 5.1-4.9.4 0 .7 0 1 .1v3.4c-.3-.1-.7-.2-1-.2-1 0-1.8.6-1.8 1.5s.8 1.5 1.7 1.5c1.1 0 1.8-.7 1.8-2V3.2h3.4Z" />
+            </svg>
+          </a>
+
+          <a class="bm-footer-social-emblem instagram-emblem" href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="4" y="4" width="16" height="16" rx="5" ry="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17" cy="7" r="1.3" />
+            </svg>
+          </a>
+
+          <a class="bm-footer-social-emblem patreon-emblem" href="https://www.patreon.com/cw/Biblemapped" target="_blank" rel="noopener noreferrer" aria-label="Patreon">
+            <span class="bm-footer-patreon-letter" aria-hidden="true">P</span>
+          </a>
+
+          <a class="bm-footer-social-emblem youtube-emblem" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 8.1c-.2-1.1-.8-1.9-1.9-2.1C17.4 5.6 12 5.6 12 5.6s-5.4 0-7.1.4C3.8 6.2 3.2 7 3 8.1 2.6 9.8 2.6 12 2.6 12s0 2.2.4 3.9c.2 1.1.8 1.9 1.9 2.1 1.7.4 7.1.4 7.1.4s5.4 0 7.1-.4c1.1-.2 1.7-1 1.9-2.1.4-1.7.4-3.9.4-3.9s0-2.2-.4-3.9ZM10.1 14.8V9.2l5 2.8-5 2.8Z" />
+            </svg>
+          </a>
+
+          <a class="bm-footer-social-emblem facebook-emblem" href="#" aria-label="Facebook">f</a>
+        </div>
+      </div>
+
+      <div class="bm-footer-divider" aria-hidden="true"></div>
+
+      <nav class="bm-footer-links bm-footer-primary" aria-label="Footer navigation">
+        <a href="/">Home</a>
+        <span>|</span>
+        <a href="/about/">About</a>
+        <span>|</span>
+        <a href="/books/">Books</a>
+        <span>|</span>
+        <a href="/characters/">People</a>
+        <span>|</span>
+        <a href="/maps/">Maps</a>
+        <span>|</span>
+        <a href="/case-studies/">Case Studies</a>
+        <span>|</span>
+        <a class="bm-footer-heaven-link" href="/heaven/">Are You Going to Heaven?</a>
+      </nav>
+
+      <nav class="bm-footer-links bm-footer-secondary" aria-label="Footer utility navigation">
+        <a href="/terms/">Terms of Use</a>
+        <span>|</span>
+        <a href="/help/">Help Center</a>
+        <span>|</span>
+        <a href="mailto:calvin@biblemapped.com">Contact Us</a>
+      </nav>
+
+      <p class="bm-footer-copy">&copy; 2026 Bible Mapped. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
