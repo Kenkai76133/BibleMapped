@@ -22,9 +22,7 @@
     :root {
       --books-ink: #0b1020;
       --books-text: #1f2933;
-      --books-muted: #667085;
       --books-purple: #7c3aed;
-      --books-gold: #c89b3c;
       --header-height: 72px;
       --editorial: "Cormorant Garamond", Georgia, serif;
     }
@@ -70,7 +68,7 @@
     .books-page-main {
       min-height: calc(100vh - var(--header-height));
       background: #ffffff;
-      padding: clamp(36px, 6vw, 76px) 20px clamp(70px, 8vw, 110px);
+      padding: clamp(28px, 4vw, 52px) 20px clamp(64px, 8vw, 100px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -82,11 +80,11 @@
     }
 
     .books-hero {
-      text-align: center;
-      min-height: calc(100vh - var(--header-height) - 120px);
+      min-height: calc(100vh - var(--header-height) - 100px);
       display: flex;
       align-items: center;
       justify-content: center;
+      text-align: center;
     }
 
     .books-hero-inner {
@@ -98,72 +96,32 @@
       gap: clamp(22px, 4vw, 34px);
     }
 
-    .books-kicker {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: fit-content;
-      margin: 0 auto;
-      padding: 8px 13px;
-      border: 1px solid rgba(124, 58, 237, 0.22);
-      border-radius: 999px;
-      background: rgba(124, 58, 237, 0.07);
-      color: var(--books-purple);
-      font-size: 0.74rem;
-      font-weight: 900;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .books-hero h1 {
-      margin: 0;
-      font-family: var(--editorial);
-      font-size: clamp(3.2rem, 8vw, 7rem);
-      font-weight: 700;
-      line-height: 0.9;
-      letter-spacing: -0.045em;
-      color: var(--books-ink);
-    }
-
-    .books-hero p {
-      max-width: 680px;
-      margin: -6px auto 0;
-      color: var(--books-text);
-      font-size: clamp(1.02rem, 1.7vw, 1.2rem);
-      font-weight: 620;
-      line-height: 1.7;
-    }
-
     .bible-stage {
-      width: min(620px, 92vw);
-      margin: 0 auto;
+      width: min(820px, 100%);
       display: flex;
       justify-content: center;
       align-items: center;
-      animation: bibleSlideIn 1.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation: bibleSlideIn 2.4s ease-in-out both;
       will-change: transform, opacity;
     }
 
     .bible-cover-image {
-      width: min(440px, 82vw);
-      filter: drop-shadow(0 28px 34px rgba(11, 16, 32, 0.16));
-      transform: translateZ(0);
+      width: min(620px, 90vw);
+      max-width: 100%;
+      filter: none;
+      box-shadow: none;
+      background: transparent;
     }
 
     @keyframes bibleSlideIn {
       0% {
         opacity: 0;
-        transform: translateX(-42vw) scale(0.96);
-      }
-
-      70% {
-        opacity: 1;
-        transform: translateX(2px) scale(1);
+        transform: translateX(-34vw);
       }
 
       100% {
         opacity: 1;
-        transform: translateX(0) scale(1);
+        transform: translateX(0);
       }
     }
 
@@ -171,18 +129,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 14px;
+      gap: 16px;
       flex-wrap: wrap;
-      margin-top: 2px;
+      margin-top: 4px;
     }
 
     .testament-button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 178px;
-      min-height: 52px;
-      padding: 14px 22px;
+      min-width: 190px;
+      min-height: 54px;
+      padding: 14px 24px;
       border-radius: 999px;
       border: 1px solid rgba(11, 16, 32, 0.12);
       background: #ffffff;
@@ -191,10 +149,8 @@
       font-weight: 900;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      box-shadow: 0 12px 32px rgba(11, 16, 32, 0.08);
       transition:
         transform 180ms ease,
-        box-shadow 180ms ease,
         border-color 180ms ease,
         background 180ms ease,
         color 180ms ease;
@@ -203,7 +159,6 @@
     .testament-button:hover {
       transform: translateY(-2px);
       border-color: rgba(124, 58, 237, 0.38);
-      box-shadow: 0 18px 42px rgba(11, 16, 32, 0.13);
     }
 
     .testament-button.primary {
@@ -238,16 +193,16 @@
       }
 
       .books-page-main {
-        padding-top: 34px;
+        padding-top: 24px;
       }
 
       .books-hero {
         min-height: auto;
-        padding: 28px 0 50px;
+        padding: 20px 0 40px;
       }
 
       .bible-cover-image {
-        width: min(390px, 84vw);
+        width: min(520px, 92vw);
       }
     }
 
@@ -257,16 +212,8 @@
         padding-right: 14px;
       }
 
-      .books-hero h1 {
-        font-size: clamp(3rem, 15vw, 4.8rem);
-      }
-
-      .books-hero p {
-        font-size: 1rem;
-      }
-
       .bible-cover-image {
-        width: min(330px, 88vw);
+        width: min(430px, 96vw);
       }
 
       .testament-buttons {
@@ -298,17 +245,8 @@
   </header>
 
   <main class="books-page-main">
-    <section class="books-shell books-hero" aria-labelledby="booksPageTitle">
+    <section class="books-shell books-hero" aria-label="Books hero">
       <div class="books-hero-inner">
-        <p class="books-kicker">BibleMapped Library</p>
-
-        <h1 id="booksPageTitle">Books of the Bible</h1>
-
-        <p>
-          Explore Scripture through the Old and New Testament with visual context,
-          maps, people, places, and purpose.
-        </p>
-
         <div class="bible-stage" aria-hidden="true">
           <img
             class="bible-cover-image"
