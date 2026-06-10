@@ -3,16 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Books | BibleMapped</title>
   <meta
     name="description"
-    content="Explore Bible books by testament through an animated BibleMapped book-entry experience."
+    content="Explore the books of the Bible through BibleMapped’s visual study system."
   />
 
   <link rel="stylesheet" href="../src/styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
 
   <style>
     :root {
@@ -21,16 +25,12 @@
       --books-muted: #667085;
       --books-paper: #fcfbf8;
       --books-cloud: #f7f6f2;
-      --books-line: #ddd8d0;
-      --books-soft-line: rgba(31, 41, 51, 0.14);
+      --books-line: rgba(31, 41, 51, 0.14);
       --books-purple: #7c3aed;
       --books-gold: #c89b3c;
-      --books-red: #d72638;
       --header-height: 72px;
       --nav-bg: #ffffff;
-      --retracted-width: clamp(96px, 9vw, 132px);
       --editorial: "Cormorant Garamond", Georgia, serif;
-      --blackletter: "UnifrakturCook", "Old English Text MT", Georgia, serif;
     }
 
     *,
@@ -48,7 +48,7 @@
     }
 
     body {
-      overflow-x: clip;
+      overflow-x: hidden;
     }
 
     img,
@@ -61,8 +61,8 @@
       display: block;
     }
 
-    button,
-    a {
+    a,
+    button {
       font: inherit;
     }
 
@@ -70,470 +70,125 @@
       color: inherit;
     }
 
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    .books-entry-main {
-      position: relative;
+    .books-page-main {
       min-height: calc(100vh - var(--header-height));
-      background: #ffffff;
-      isolation: isolate;
-      overflow: hidden;
+      background:
+        radial-gradient(circle at top left, rgba(124, 58, 237, 0.08), transparent 34%),
+        linear-gradient(180deg, #ffffff 0%, var(--books-cloud) 44%, var(--books-paper) 100%);
+      padding: clamp(48px, 7vw, 92px) 20px clamp(64px, 8vw, 110px);
     }
 
-    .books-entry-main::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      background: url("../assets/books-map-background.png") center top / cover no-repeat;
-      opacity: 0.95;
-      pointer-events: none;
-      -webkit-mask-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0) 0,
-        rgba(0, 0, 0, 0.24) 34px,
-        rgba(0, 0, 0, 0.86) clamp(112px, 14vw, 190px),
-        #000 100%
-      );
-      mask-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0) 0,
-        rgba(0, 0, 0, 0.24) 34px,
-        rgba(0, 0, 0, 0.86) clamp(112px, 14vw, 190px),
-        #000 100%
-      );
+    .books-shell {
+      width: min(1120px, 100%);
+      margin: 0 auto;
     }
 
-    .testament-stage {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      min-height: calc(100svh - var(--header-height));
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      overflow: hidden;
-      transition: grid-template-columns 760ms cubic-bezier(0.2, 0.9, 0.18, 1);
-      background: transparent;
+    .books-hero {
+      text-align: center;
+      padding: clamp(26px, 4vw, 46px) 0 clamp(34px, 6vw, 70px);
     }
 
-    .testament-stage.is-old-open {
-      grid-template-columns: minmax(0, calc(100% - var(--retracted-width))) var(--retracted-width);
-    }
-
-    .testament-stage.is-new-open {
-      grid-template-columns: var(--retracted-width) minmax(0, calc(100% - var(--retracted-width)));
-    }
-
-    .testament-panel {
-      position: relative;
-      min-width: 0;
-      min-height: calc(100svh - var(--header-height));
-      overflow: hidden;
-      border: 0;
-      border-right: 1px solid var(--books-soft-line);
-      background: rgba(252, 251, 248, 0.62);
-      isolation: isolate;
-      transition: background 460ms ease, filter 460ms ease;
-    }
-
-    .testament-panel:last-child {
-      border-right: 0;
-    }
-
-    .testament-stage.is-old-open .testament-panel--new,
-    .testament-stage.is-new-open .testament-panel--old {
-      background: rgba(239, 235, 227, 0.72);
-      filter: saturate(0.8);
-      box-shadow: inset 18px 0 36px rgba(11, 16, 32, 0.08);
-    }
-
-    .testament-stage.is-new-open .testament-panel--old {
-      box-shadow: inset -18px 0 36px rgba(11, 16, 32, 0.08);
-    }
-
-    .testament-trigger {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      width: 100%;
-      min-width: 0;
-      border: 0;
-      background: transparent;
-      color: var(--books-ink);
-      cursor: pointer;
-      display: flex;
+    .books-kicker {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      padding: clamp(22px, 5vw, 62px);
-    }
-
-    .testament-slot-image {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      z-index: 0;
-      width: min(82%, calc((100svh - var(--header-height) - 72px) * 9 / 16));
-      max-width: 540px;
-      aspect-ratio: 9 / 16;
-      object-fit: cover;
-      transform: translate(-50%, -50%);
-      opacity: 0.9;
-      filter: saturate(0.94) sepia(0.08);
-      pointer-events: none;
-      box-shadow: 0 16px 34px rgba(11, 16, 32, 0.18);
-      transition:
-        opacity 280ms ease,
-        transform 420ms ease,
-        visibility 0s linear 0s;
-    }
-
-    .testament-stage.is-old-open .testament-slot-image,
-    .testament-stage.is-new-open .testament-slot-image {
-      opacity: 0;
-      visibility: hidden;
-      transform: translate(-50%, -50%) scale(0.96);
-      transition:
-        opacity 280ms ease,
-        transform 420ms ease,
-        visibility 0s linear 420ms;
-    }
-
-    .testament-stage.is-old-open .testament-panel:hover .testament-slot-image,
-    .testament-stage.is-new-open .testament-panel:hover .testament-slot-image {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .testament-trigger:focus-visible {
-      outline: 3px solid rgba(124, 58, 237, 0.45);
-      outline-offset: -8px;
-    }
-
-    .testament-label-stack {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      justify-items: center;
-      gap: 12px;
-      width: min(520px, 90%);
-      transition: transform 720ms cubic-bezier(0.2, 0.9, 0.18, 1), opacity 440ms ease, visibility 440ms ease;
-    }
-
-    .testament-panel:not(.is-retracted) .testament-trigger:hover .testament-label-stack,
-    .testament-panel:not(.is-retracted) .testament-trigger:focus-visible .testament-label-stack {
-      transform: translateY(-14px);
-    }
-
-    .testament-panel:not(.is-retracted):hover .testament-slot-image,
-    .testament-trigger:focus-visible .testament-slot-image {
-      opacity: 1;
-    }
-
-    .testament-word {
-      font-family: var(--blackletter);
-      font-size: clamp(5.5rem, 12.5vw, 12.5rem);
-      font-weight: 700;
-      line-height: 0.78;
-      letter-spacing: 0.01em;
-      color: var(--books-ink);
-      text-shadow: 0 18px 40px rgba(11, 16, 32, 0.08);
-    }
-
-    .testament-name {
+      width: fit-content;
+      margin: 0 auto 18px;
+      padding: 8px 13px;
+      border: 1px solid rgba(124, 58, 237, 0.22);
+      border-radius: 999px;
+      background: rgba(124, 58, 237, 0.07);
       color: var(--books-purple);
-      font-size: clamp(1rem, 2vw, 1.45rem);
-      font-weight: 950;
-      letter-spacing: 0.1em;
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
     }
 
-    .testament-stage.is-old-open .testament-panel--old .testament-label-stack,
-    .testament-stage.is-new-open .testament-panel--new .testament-label-stack {
-      transform: translateX(-34vw) scale(0.82);
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .testament-stage.is-old-open .testament-panel--new .testament-label-stack,
-    .testament-stage.is-new-open .testament-panel--old .testament-label-stack {
-      transform: scale(0.35);
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .retracted-hint {
-      position: absolute;
-      inset: 0;
-      z-index: 6;
-      display: grid;
-      place-items: center;
-      opacity: 0;
-      pointer-events: none;
-      writing-mode: vertical-rl;
-      color: var(--books-ink);
-      font-family: var(--editorial);
-      font-size: clamp(1rem, 1.65vw, 1.65rem);
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      line-height: 0.95;
-      text-transform: uppercase;
-      white-space: nowrap;
-      transform-style: preserve-3d;
-      backface-visibility: hidden;
-      transform: perspective(700px) rotateY(88deg) translateX(24px);
-      transition: opacity 360ms ease, transform 620ms cubic-bezier(0.2, 0.9, 0.18, 1);
-    }
-
-    .testament-panel--old .retracted-hint {
-      transform-origin: left center;
-    }
-
-    .testament-panel--new .retracted-hint {
-      transform-origin: right center;
-    }
-
-    .retracted-hint strong {
-      display: block;
-      margin-bottom: 8px;
-      font-family: var(--blackletter);
-      font-size: clamp(2.2rem, 4.4vw, 4rem);
-      font-weight: 700;
-      line-height: 0.9;
-      text-transform: none;
-    }
-
-    .testament-stage.is-old-open .testament-panel--new .retracted-hint,
-    .testament-stage.is-new-open .testament-panel--old .retracted-hint {
-      opacity: 1;
-      pointer-events: none;
-      transform: perspective(700px) rotateY(0deg) translateX(0);
-      transition-delay: 260ms;
-    }
-
-    .testament-panel.is-retracted {
-      cursor: pointer;
-    }
-
-    .testament-panel.is-retracted:hover .retracted-hint {
-      transform: perspective(700px) rotateY(0deg) translateX(0) translateY(-10px);
-    }
-
-    .testament-stage.is-old-open .testament-panel--new .testament-trigger,
-    .testament-stage.is-new-open .testament-panel--old .testament-trigger {
-      z-index: 8;
-      padding: 0;
-      cursor: pointer;
-    }
-
-    .testament-panel-content {
-      position: relative;
-      z-index: 4;
-      height: calc(100svh - var(--header-height));
-      opacity: 0;
-      pointer-events: none;
-      overflow-y: auto;
-      padding: clamp(24px, 4vw, 56px);
-      transform: translateX(-42px);
-      transition: opacity 360ms ease, transform 640ms cubic-bezier(0.2, 0.9, 0.18, 1);
-    }
-
-    .testament-panel--new .testament-panel-content {
-      transform: translateX(42px);
-    }
-
-    .testament-stage.is-old-open .testament-panel--old .testament-panel-content,
-    .testament-stage.is-new-open .testament-panel--new .testament-panel-content {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateX(0);
-      transition-delay: 260ms;
-    }
-
-    .content-header {
-      max-width: 980px;
-      margin-bottom: 28px;
-      display: grid;
-      gap: 8px;
-    }
-
-    .eyebrow {
-      color: var(--books-gold);
-      font-size: 0.75rem;
-      font-weight: 950;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    .content-title {
+    .books-hero h1 {
       margin: 0;
-      color: var(--books-ink);
       font-family: var(--editorial);
-      font-size: clamp(2.65rem, 6vw, 6rem);
+      font-size: clamp(3.2rem, 8vw, 7.4rem);
       font-weight: 700;
       line-height: 0.88;
+      letter-spacing: -0.045em;
+      color: var(--books-ink);
     }
 
-    .content-copy {
-      max-width: 780px;
-      margin: 0;
+    .books-hero p {
+      max-width: 720px;
+      margin: 22px auto 0;
       color: var(--books-text);
-      font-size: clamp(1rem, 1.45vw, 1.18rem);
+      font-size: clamp(1.05rem, 1.8vw, 1.28rem);
       font-weight: 650;
       line-height: 1.72;
     }
 
-    .covenant-note {
-      max-width: 720px;
-      margin-top: 6px;
-      color: var(--books-muted);
-      font-size: clamp(0.9rem, 1.2vw, 1.02rem);
-    }
-
-    .category-list {
+    .testament-grid {
       display: grid;
-      gap: 14px;
-      width: min(1080px, 100%);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(18px, 3vw, 32px);
+      align-items: stretch;
     }
 
-    .category-card {
+    .testament-card {
       position: relative;
       overflow: hidden;
-      display: grid;
-      gap: 0;
+      min-height: 520px;
       border: 1px solid var(--books-line);
+      border-radius: 28px;
       background: rgba(255, 255, 255, 0.82);
-      box-shadow: 0 18px 50px rgba(11, 16, 32, 0.06);
-      transform: translateY(22px);
-      opacity: 0;
-      transition: transform 430ms cubic-bezier(0.2, 0.9, 0.18, 1), opacity 300ms ease, border-color 200ms ease;
-    }
-
-    .testament-stage.is-new-open .testament-panel--new .category-card {
-      animation: categorySlideOutRight 560ms cubic-bezier(0.2, 0.9, 0.18, 1) both;
-      animation-delay: calc(var(--card-index) * 90ms + 420ms);
-    }
-
-    @keyframes categorySlideOutRight {
-      from {
-        opacity: 0;
-        transform: translateX(48px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    .category-card.is-open {
-      border-color: rgba(124, 58, 237, 0.46);
-      background: #fff;
-    }
-
-    .category-button {
-      width: 100%;
-      border: 0;
-      background: transparent;
-      cursor: pointer;
+      box-shadow: 0 24px 70px rgba(11, 16, 32, 0.08);
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 22px;
-      align-items: center;
-      padding: clamp(18px, 3vw, 28px);
-      text-align: left;
-      color: var(--books-ink);
+      grid-template-rows: minmax(220px, 0.95fr) auto;
     }
 
-    .category-button:hover .category-title,
-    .category-button:focus-visible .category-title {
-      color: var(--books-purple);
+    .testament-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(31, 41, 51, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31, 41, 51, 0.045) 1px, transparent 1px);
+      background-size: 34px 34px;
+      opacity: 0.55;
     }
 
-    .category-button:focus-visible {
-      outline: 3px solid rgba(124, 58, 237, 0.38);
-      outline-offset: -5px;
+    .testament-image-placeholder {
+      position: relative;
+      z-index: 1;
+      min-height: 260px;
+      margin: clamp(18px, 2.5vw, 28px);
+      border: 1.5px dashed rgba(31, 41, 51, 0.28);
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(124, 58, 237, 0.08), transparent 30%),
+        linear-gradient(180deg, #f7f3ea, #eee9df);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: rgba(31, 41, 51, 0.58);
+      padding: 24px;
     }
 
-    .category-title {
-      display: block;
-      font-family: var(--editorial);
-      font-size: clamp(1.9rem, 4.4vw, 4.4rem);
-      font-weight: 700;
-      line-height: 0.95;
-      transition: color 180ms ease;
-    }
-
-    .category-meta {
-      display: block;
-      margin-top: 8px;
-      color: var(--books-muted);
-      font-size: 0.76rem;
+    .testament-image-placeholder span {
+      max-width: 240px;
+      font-size: 0.78rem;
       font-weight: 950;
       letter-spacing: 0.14em;
+      line-height: 1.5;
       text-transform: uppercase;
     }
 
-    .category-icon {
-      width: 44px;
-      height: 44px;
-      border: 1px solid var(--books-line);
-      border-radius: 999px;
-      display: grid;
-      place-items: center;
-      color: var(--books-purple);
-      font-size: 1.35rem;
-      font-weight: 900;
-      transition: transform 260ms ease, border-color 260ms ease;
+    .testament-content {
+      position: relative;
+      z-index: 1;
+      padding: 0 clamp(22px, 3vw, 34px) clamp(24px, 3.4vw, 38px);
     }
 
-    .category-card.is-open .category-icon {
-      transform: rotate(45deg);
-      border-color: rgba(124, 58, 237, 0.5);
-    }
-
-    .category-drawer {
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      border-top: 1px solid transparent;
-      transition: max-height 720ms cubic-bezier(0.2, 0.9, 0.18, 1), opacity 320ms ease, border-color 260ms ease;
-    }
-
-    .category-card.is-open .category-drawer {
-      max-height: 2000px;
-      opacity: 1;
-      border-top-color: var(--books-line);
-    }
-
-    .category-inner {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(160px, 220px);
-      gap: clamp(16px, 3vw, 28px);
-      padding: 0 clamp(18px, 3vw, 28px) clamp(20px, 3vw, 30px);
-    }
-
-    .definition-block {
-      display: grid;
-      align-content: start;
-      gap: 14px;
-      padding-top: 22px;
-    }
-
-    .definition-label {
+    .testament-label {
+      margin: 0 0 12px;
       color: var(--books-gold);
       font-size: 0.74rem;
       font-weight: 950;
@@ -541,853 +196,113 @@
       text-transform: uppercase;
     }
 
-    .definition-text {
+    .testament-content h2 {
       margin: 0;
-      color: var(--books-text);
-      font-size: clamp(1rem, 1.45vw, 1.15rem);
-      line-height: 1.72;
-      font-weight: 650;
-    }
-
-    .category-image-slot {
-      aspect-ratio: 9 / 16;
-      min-height: 260px;
-      display: grid;
-      place-items: center;
-      margin-top: 22px;
-      border: 1px dashed rgba(31, 41, 51, 0.32);
-      background: #f1eee7;
-      color: rgba(31, 41, 51, 0.52);
-      text-align: center;
-      padding: 18px;
-      font-size: 0.75rem;
-      font-weight: 950;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      transition: transform 180ms ease, border-color 180ms ease;
-    }
-
-    .category-image-slot:hover {
-      transform: translateY(-3px);
-      border-color: rgba(124, 58, 237, 0.44);
-    }
-
-    .book-strip {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 8px;
-    }
-
-    .book-card {
-      appearance: none;
-      border: 1px solid var(--books-line);
-      background: var(--books-paper);
-      color: var(--books-ink);
-      min-width: 150px;
-      flex: 1 1 150px;
-      min-height: 88px;
-      padding: 12px;
-      display: grid;
-      gap: 8px;
-      text-align: left;
-      cursor: pointer;
-      transform: translateY(18px);
-      opacity: 0;
-      transition: opacity 280ms ease, transform 360ms ease, border-color 160ms ease, background 160ms ease;
-      transition-delay: calc(var(--book-index) * 42ms);
-    }
-
-    .category-card.is-open .book-card {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .book-card:hover,
-    .book-card:focus-visible {
-      background: #fff;
-      border-color: rgba(124, 58, 237, 0.46);
-      outline: none;
-    }
-
-    .book-name {
-      display: block;
-      color: var(--books-ink);
-      font-size: 1rem;
-      font-weight: 950;
-      line-height: 1.1;
-    }
-
-    .book-mini {
-      color: var(--books-muted);
-      font-size: 0.72rem;
-      font-weight: 800;
-      line-height: 1.3;
-    }
-
-    /* Old Testament Mind Map */
-
-    .ot-mindmap {
-      position: relative;
-      width: min(1120px, 100%);
-      margin-top: 32px;
-      padding: clamp(22px, 4vw, 42px);
-      border: 0;
-      border-radius: 28px 22px 30px 20px;
-      background:
-        radial-gradient(circle at 50% 22%, rgba(124, 58, 237, 0.08), transparent 32%),
-        linear-gradient(180deg, rgba(255,255,255,0.92), rgba(252,251,248,0.82));
-      box-shadow: 0 24px 70px rgba(11, 16, 32, 0.08);
-      overflow: hidden;
-    }
-
-    .ot-mindmap::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(31, 41, 51, 0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(31, 41, 51, 0.045) 1px, transparent 1px);
-      background-size: 34px 34px;
-      opacity: 0.8;
-      pointer-events: none;
-    }
-
-    .ot-mindmap::after {
-      content: "";
-      position: absolute;
-      left: 8%;
-      right: 8%;
-      top: 252px;
-      z-index: 1;
-      height: 3px;
-      background-image: repeating-linear-gradient(
-        90deg,
-        rgba(124, 58, 237, 0.65) 0 10px,
-        transparent 10px 20px
-      );
-      opacity: 0.75;
-      border-radius: 999px;
-      transform: rotate(-0.7deg);
-      pointer-events: none;
-    }
-
-    .ot-map-center {
-      position: relative;
-      z-index: 3;
-      width: min(380px, 100%);
-      margin: 0 auto 48px;
-      padding: 22px 18px;
-      border: 0;
-      border-radius: 24px 18px 26px 20px;
-      outline: 2px solid rgba(11, 16, 32, 0.82);
-      outline-offset: 4px;
-      background: #ffffff;
-      text-align: center;
-      box-shadow:
-        0 16px 38px rgba(11, 16, 32, 0.08),
-        4px 5px 0 rgba(124, 58, 237, 0.14);
-    }
-
-    .ot-map-center::before {
-      content: "";
-      position: absolute;
-      inset: -9px;
-      border: 2px solid rgba(11, 16, 32, 0.72);
-      border-radius: 28px 20px 30px 22px;
-      transform: rotate(-1.2deg);
-      pointer-events: none;
-    }
-
-    .ot-map-center::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -50px;
-      width: 3px;
-      height: 50px;
-      background-image: repeating-linear-gradient(
-        to bottom,
-        rgba(124, 58, 237, 0.78) 0 8px,
-        transparent 8px 15px
-      );
-      transform: translateX(-50%);
-      pointer-events: none;
-    }
-
-    .ot-map-center-kicker {
-      display: block;
-      color: var(--books-gold);
-      font-size: 0.72rem;
-      font-weight: 950;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .ot-map-center-title {
-      display: block;
-      margin-top: 6px;
       font-family: var(--editorial);
-      font-size: clamp(2.1rem, 4vw, 3.6rem);
+      font-size: clamp(2.5rem, 5vw, 5rem);
       font-weight: 700;
-      line-height: 0.95;
+      line-height: 0.9;
+      letter-spacing: -0.035em;
       color: var(--books-ink);
     }
 
-    .ot-map-center-subtitle {
+    .testament-content p {
+      margin: 18px 0 0;
+      color: var(--books-text);
+      font-size: 1rem;
+      font-weight: 620;
+      line-height: 1.72;
+    }
+
+    .coming-soon-pill {
       display: inline-flex;
       width: fit-content;
-      margin: 10px auto 0;
-      padding: 6px 10px;
-      border: 1px solid rgba(124, 58, 237, 0.35);
+      margin-top: 22px;
+      padding: 8px 12px;
+      border: 1px solid rgba(124, 58, 237, 0.22);
       border-radius: 999px;
-      color: var(--books-purple);
       background: rgba(124, 58, 237, 0.07);
-      font-size: 0.7rem;
-      font-weight: 950;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .ot-map-center-note {
-      margin: 10px auto 0;
-      max-width: 300px;
-      color: var(--books-muted);
-      font-size: 0.9rem;
-      line-height: 1.45;
-      font-weight: 650;
-    }
-
-    .ot-mindmap-grid {
-      position: relative;
-      z-index: 2;
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: clamp(14px, 2vw, 22px);
-      align-items: start;
-    }
-
-    .ot-mindmap-branch {
-      position: relative;
-      display: grid;
-      justify-items: center;
-      gap: 14px;
-    }
-
-    .ot-mindmap-branch::before {
-      content: "";
-      position: absolute;
-      top: -48px;
-      left: 50%;
-      width: 3px;
-      height: 48px;
-      background-image: repeating-linear-gradient(
-        to bottom,
-        rgba(124, 58, 237, 0.72) 0 8px,
-        transparent 8px 15px
-      );
-      transform: translateX(-50%) rotate(0.8deg);
-      pointer-events: none;
-    }
-
-    .ot-mindmap-branch::after {
-      content: "";
-      position: absolute;
-      top: -54px;
-      left: 50%;
-      z-index: 2;
-      width: 11px;
-      height: 11px;
-      border: 2px solid rgba(11, 16, 32, 0.75);
-      border-radius: 999px;
-      background: #ffffff;
-      transform: translateX(-50%);
-      box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.14);
-    }
-
-    .ot-category-node {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      min-height: 118px;
-      border: 0;
-      border-radius: 20px 16px 22px 15px;
-      outline: 2px solid rgba(11, 16, 32, 0.72);
-      outline-offset: 3px;
-      background: #fffdf8;
-      color: var(--books-ink);
-      cursor: pointer;
-      padding: 16px 14px;
-      display: grid;
-      gap: 8px;
-      text-align: center;
-      box-shadow: 0 12px 28px rgba(11, 16, 32, 0.06);
-      transition:
-        transform 220ms ease,
-        outline-color 220ms ease,
-        background 220ms ease,
-        box-shadow 220ms ease;
-    }
-
-    .ot-category-node::before {
-      content: "";
-      position: absolute;
-      inset: -7px;
-      border: 2px solid rgba(11, 16, 32, 0.58);
-      border-radius: 24px 17px 26px 19px;
-      transform: rotate(-1deg);
-      pointer-events: none;
-    }
-
-    .ot-category-node::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -58px;
-      width: 3px;
-      height: 58px;
-      background-image: repeating-linear-gradient(
-        to bottom,
-        rgba(124, 58, 237, 0.72) 0 9px,
-        transparent 9px 18px
-      );
-      transform: translateX(-50%);
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .ot-mindmap-branch.is-open .ot-category-node::after {
-      opacity: 1;
-    }
-
-    .ot-category-node:hover,
-    .ot-category-node:focus-visible {
-      transform: translateY(-5px);
-      outline-color: rgba(124, 58, 237, 0.8);
-      background: #ffffff;
-      outline-offset: 3px;
-      box-shadow:
-        0 18px 42px rgba(11, 16, 32, 0.1),
-        4px 5px 0 rgba(124, 58, 237, 0.16);
-    }
-
-    .ot-mindmap-branch.is-open .ot-category-node {
-      outline-color: rgba(124, 58, 237, 0.85);
-      background:
-        linear-gradient(180deg, #ffffff, #fffdf8);
-    }
-
-    .ot-mindmap-branch:nth-child(2n) .ot-category-node::before {
-      transform: rotate(1deg);
-    }
-
-    .ot-mindmap-branch:nth-child(3n) .ot-category-node::before {
-      transform: rotate(-1.6deg);
-    }
-
-    .ot-mindmap-branch:nth-child(4n) .ot-category-node::before {
-      transform: rotate(1.4deg);
-    }
-
-    .ot-category-title {
-      font-family: var(--editorial);
-      font-size: clamp(1.35rem, 2vw, 2rem);
-      font-weight: 700;
-      line-height: 0.95;
-    }
-
-    .ot-category-meta {
       color: var(--books-purple);
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       font-weight: 950;
       letter-spacing: 0.13em;
       text-transform: uppercase;
     }
 
-    .ot-category-definition {
-      color: var(--books-muted);
-      font-size: 0.78rem;
-      line-height: 1.45;
-      font-weight: 650;
-    }
-
-    /* Opened book branch spacing + hand-drawn book-shaped nodes */
-
-    .ot-book-node-list {
-      position: relative;
-      width: 100%;
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      display: grid;
-      gap: 54px;
-      padding-top: 56px;
-      padding-bottom: 34px;
-      transition:
-        max-height 900ms cubic-bezier(0.2, 0.9, 0.18, 1),
-        opacity 320ms ease;
-    }
-
-    .ot-book-node-list::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 0;
-      z-index: 0;
-      width: 3px;
-      height: 0;
-      background-image: repeating-linear-gradient(
-        to bottom,
-        rgba(124, 58, 237, 0.78) 0 10px,
-        transparent 10px 20px
-      );
-      transform: translateX(-50%);
-      border-radius: 999px;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .ot-mindmap-branch.is-open .ot-book-node-list {
-      max-height: 2600px;
-      opacity: 1;
-    }
-
-    .ot-mindmap-branch.is-open .ot-book-node-list::before {
-      opacity: 1;
-      animation: bookRouteSlideDown 950ms cubic-bezier(0.2, 0.9, 0.18, 1) forwards;
-    }
-
-    @keyframes bookRouteSlideDown {
-      from {
-        height: 0;
-      }
-
-      to {
-        height: calc(100% - 12px);
-      }
-    }
-
-    .ot-book-node {
-      position: relative;
-      z-index: 2;
-      width: min(148px, 100%);
-      min-height: 218px;
-      justify-self: center;
-      border: 0;
-      border-radius: 14px 12px 7px 18px;
-      outline: 3px solid rgba(11, 16, 32, 0.86);
-      outline-offset: 0;
-      background: #ffffff;
-      color: var(--books-ink);
-      cursor: pointer;
-      padding: 42px 14px 42px 22px;
+    .rebuild-note {
+      margin-top: clamp(28px, 5vw, 52px);
+      border: 1px solid var(--books-line);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.74);
+      padding: clamp(26px, 4vw, 46px);
       text-align: center;
-      display: grid;
-      align-content: center;
-      gap: 7px;
-      transform: translateY(22px) rotate(-0.4deg);
-      opacity: 0;
-      box-shadow:
-        0 13px 26px rgba(11, 16, 32, 0.08),
-        5px 6px 0 rgba(124, 58, 237, 0.08);
-      transition:
-        transform 380ms ease,
-        opacity 300ms ease,
-        outline-color 180ms ease,
-        box-shadow 180ms ease;
-      transition-delay: calc(var(--book-index) * 110ms + 170ms);
+      box-shadow: 0 18px 54px rgba(11, 16, 32, 0.06);
     }
 
-    .ot-book-node::before {
-      content: "";
-      position: absolute;
-      inset: -5px -4px -4px -5px;
-      border: 2px solid rgba(11, 16, 32, 0.72);
-      border-radius: 18px 14px 8px 20px;
-      transform: rotate(0.8deg);
-      pointer-events: none;
-    }
-
-    .ot-book-node::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: -38px;
-      z-index: 3;
-      width: 12px;
-      height: 12px;
-      border: 2px solid rgba(11, 16, 32, 0.78);
-      border-radius: 999px;
-      background: #ffffff;
-      transform: translateX(-50%) scale(0.75);
-      box-shadow: 0 0 0 5px rgba(124, 58, 237, 0.15);
-      opacity: 0;
-      transition:
-        opacity 240ms ease,
-        transform 280ms ease;
-      transition-delay: calc(var(--book-index) * 110ms + 260ms);
-    }
-
-    .ot-book-node-name {
-      position: relative;
-      display: block;
+    .rebuild-note h2 {
+      max-width: 820px;
+      margin: 0 auto;
       font-family: var(--editorial);
-      font-size: 1.28rem;
+      font-size: clamp(2.2rem, 5vw, 4.8rem);
       font-weight: 700;
-      line-height: 1;
-      z-index: 2;
-    }
-
-    .ot-book-node-name::before {
-      content: "";
-      position: absolute;
-      left: -13px;
-      top: -58px;
-      width: 4px;
-      height: 168px;
-      border-left: 3px solid rgba(11, 16, 32, 0.82);
-      border-radius: 999px;
-      pointer-events: none;
-    }
-
-    .ot-book-node-name::after {
-      content: "";
-      position: absolute;
-      left: -17px;
-      top: -46px;
-      width: 20px;
-      height: 98px;
-      background:
-        linear-gradient(rgba(11, 16, 32, 0.82), rgba(11, 16, 32, 0.82)) left 0 top 0 / 20px 3px no-repeat,
-        linear-gradient(rgba(11, 16, 32, 0.82), rgba(11, 16, 32, 0.82)) left 0 bottom 0 / 20px 3px no-repeat;
-      pointer-events: none;
-    }
-
-    .ot-book-node-mini {
-      position: relative;
-      display: block;
-      color: var(--books-muted);
-      font-size: 0.7rem;
-      font-weight: 750;
-      line-height: 1.35;
-      z-index: 2;
-    }
-
-    .ot-book-node-mini::before {
-      content: "";
-      position: absolute;
-      left: -14px;
-      right: -8px;
-      bottom: -34px;
-      height: 34px;
-      border: 3px solid rgba(11, 16, 32, 0.82);
-      border-top: 0;
-      border-radius: 0 0 7px 17px;
-      background:
-        linear-gradient(rgba(11, 16, 32, 0.72), rgba(11, 16, 32, 0.72)) left 14px top 8px / 88px 2px no-repeat,
-        linear-gradient(rgba(11, 16, 32, 0.5), rgba(11, 16, 32, 0.5)) left 24px top 18px / 104px 2px no-repeat,
-        linear-gradient(rgba(11, 16, 32, 0.38), rgba(11, 16, 32, 0.38)) left 12px bottom 6px / 120px 2px no-repeat,
-        #ffffff;
-      pointer-events: none;
-    }
-
-    .ot-book-node-mini::after {
-      content: "";
-      position: absolute;
-      left: -9px;
-      right: -11px;
-      bottom: -42px;
-      height: 8px;
-      border: 3px solid rgba(11, 16, 32, 0.82);
-      border-top: 0;
-      border-radius: 0 0 5px 13px;
-      background: #ffffff;
-      pointer-events: none;
-    }
-
-    .ot-mindmap-branch.is-open .ot-book-node {
-      transform: translateY(0) rotate(-0.4deg);
-      opacity: 1;
-    }
-
-    .ot-mindmap-branch.is-open .ot-book-node::after {
-      opacity: 1;
-      transform: translateX(-50%) scale(1);
-    }
-
-    .ot-book-node:hover,
-    .ot-book-node:focus-visible {
-      outline-color: rgba(124, 58, 237, 0.9);
-      transform: translateY(-5px) rotate(-0.4deg);
-      box-shadow:
-        0 22px 48px rgba(11, 16, 32, 0.12),
-        5px 6px 0 rgba(124, 58, 237, 0.16);
-    }
-
-    .case-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 120;
-      display: none;
-      align-items: stretch;
-      justify-content: end;
-      background: rgba(11, 16, 32, 0.6);
-      padding: 18px;
-    }
-
-    .case-overlay.open {
-      display: flex;
-    }
-
-    .case-study-card {
-      width: min(900px, 100%);
-      overflow: auto;
-      border: 1px solid var(--books-line);
-      background: var(--books-paper);
-      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.25);
-    }
-
-    .case-top {
-      position: sticky;
-      top: 0;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 18px 22px;
-      border-bottom: 1px solid var(--books-line);
-      background: rgba(252, 251, 248, 0.96);
-      backdrop-filter: blur(12px);
-    }
-
-    .case-top span {
-      color: var(--books-purple);
-      font-size: 0.75rem;
-      font-weight: 950;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .case-close {
-      appearance: none;
-      width: 42px;
-      height: 42px;
-      border: 1px solid var(--books-line);
-      border-radius: 999px;
-      background: #fff;
+      line-height: 0.96;
+      letter-spacing: -0.035em;
       color: var(--books-ink);
-      font-size: 1.3rem;
-      font-weight: 950;
-      cursor: pointer;
     }
 
-    .case-body {
-      padding: clamp(24px, 4vw, 42px);
-    }
-
-    .case-body h2 {
-      margin: 0;
-      color: var(--books-ink);
-      font-family: var(--editorial);
-      font-size: clamp(2.6rem, 5vw, 5rem);
-      line-height: 0.95;
-    }
-
-    .case-subtitle {
-      margin: 12px 0 0;
-      max-width: 680px;
+    .rebuild-note p {
+      max-width: 760px;
+      margin: 18px auto 0;
       color: var(--books-text);
-      font-size: 1.08rem;
-      line-height: 1.7;
-      font-weight: 650;
+      font-size: clamp(1rem, 1.6vw, 1.18rem);
+      font-weight: 620;
+      line-height: 1.72;
     }
 
-    .case-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 28px;
-    }
-
-    .case-section {
-      padding: 18px;
-      border: 1px solid var(--books-line);
-      background: #fff;
-    }
-
-    .case-section.full {
-      grid-column: 1 / -1;
-    }
-
-    .case-section h3 {
-      margin: 0 0 10px;
-      color: var(--books-ink);
-      font-family: var(--editorial);
-      font-size: 1.35rem;
-      line-height: 1;
-    }
-
-    .case-section p {
-      margin: 0;
-      color: var(--books-text);
-      line-height: 1.65;
-    }
-
-    .chip-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .chip-list li {
-      border: 1px solid var(--books-line);
-      border-radius: 999px;
-      background: var(--books-paper);
-      padding: 7px 10px;
-      color: var(--books-text);
-      font-size: 0.86rem;
-      font-weight: 750;
-    }
-
-    .evidence-slot-grid {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .evidence-slot {
-      min-height: 118px;
-      display: grid;
-      place-items: center;
-      border: 1px dashed rgba(31, 41, 51, 0.32);
-      background: #f1eee7;
-      color: var(--books-muted);
-      text-align: center;
-      padding: 14px;
-      font-size: 0.72rem;
-      font-weight: 850;
-      line-height: 1.35;
-    }
-
-    @media (max-width: 1000px) {
-      .ot-mindmap-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .ot-mindmap::after,
-      .ot-map-center::after,
-      .ot-mindmap-branch::before,
-      .ot-mindmap-branch::after {
-        display: none;
-      }
-    }
-
-    @media (max-width: 900px) {
+    @media (max-width: 820px) {
       :root {
         --header-height: 66px;
       }
 
-      .testament-stage.is-old-open {
-        grid-template-columns: minmax(0, calc(100% - 78px)) 78px;
+      .books-page-main {
+        padding-top: 34px;
       }
 
-      .testament-stage.is-new-open {
-        grid-template-columns: 78px minmax(0, calc(100% - 78px));
-      }
-
-      .testament-panel {
-        min-height: calc(100svh - var(--header-height));
-        border-right: 1px solid var(--books-soft-line);
-        border-bottom: 0;
-      }
-
-      .testament-trigger {
-        min-height: calc(100svh - var(--header-height));
-      }
-
-      .testament-stage.is-old-open .testament-panel--old .testament-trigger,
-      .testament-stage.is-new-open .testament-panel--new .testament-trigger {
-        pointer-events: none;
-      }
-
-      .retracted-hint {
-        writing-mode: vertical-rl;
-        font-size: clamp(2rem, 12vw, 3.4rem);
-      }
-
-      .testament-panel-content {
-        height: calc(100svh - var(--header-height));
-      }
-
-      .category-inner,
-      .case-grid,
-      .evidence-slot-grid {
+      .testament-grid {
         grid-template-columns: 1fr;
       }
 
-      .category-image-slot {
-        width: min(190px, 100%);
-        min-height: 300px;
+      .testament-card {
+        min-height: auto;
       }
     }
 
-    @media (max-width: 560px) {
-      .testament-stage,
-      .testament-stage.is-old-open,
-      .testament-stage.is-new-open {
-        min-height: auto;
-        grid-template-columns: 1fr;
+    @media (max-width: 520px) {
+      .books-page-main {
+        padding-left: 14px;
+        padding-right: 14px;
       }
 
-      .testament-panel,
-      .testament-trigger {
-        min-height: clamp(420px, 78svh, 620px);
+      .books-hero {
+        text-align: left;
       }
 
-      .testament-panel-content {
-        height: auto;
-        min-height: clamp(420px, 78svh, 620px);
-        padding: 22px 16px;
+      .books-kicker {
+        margin-left: 0;
       }
 
-      .testament-word {
-        font-size: clamp(5rem, 30vw, 9rem);
+      .books-hero p {
+        margin-left: 0;
       }
 
-      .category-button {
-        grid-template-columns: 1fr;
+      .testament-card,
+      .rebuild-note {
+        border-radius: 22px;
       }
 
-      .category-icon {
-        justify-self: start;
-      }
-
-      .ot-mindmap {
-        padding: 18px 14px;
-      }
-
-      .ot-mindmap-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .ot-category-node {
-        min-height: auto;
-      }
-
-      .ot-book-node {
-        width: min(178px, 100%);
-      }
-
-      .case-overlay {
-        padding: 0;
-      }
-
-      .case-study-card {
-        min-height: 100svh;
+      .testament-image-placeholder {
+        min-height: 210px;
+        margin: 16px;
       }
     }
   </style>
@@ -1409,35 +324,57 @@
     </nav>
   </header>
 
-  <main class="books-entry-main">
-    <h1 class="sr-only">Explore Scripture by Testament</h1>
+  <main class="books-page-main">
+    <section class="books-hero" aria-labelledby="booksPageTitle">
+      <div class="books-shell">
+        <p class="books-kicker">BibleMapped Library</p>
+        <h1 id="booksPageTitle">Books of the Bible</h1>
+        <p>
+          Explore the Old and New Testament through BibleMapped’s visual study system.
+        </p>
+      </div>
+    </section>
 
-    <section class="testament-stage" id="testamentStage" aria-label="Choose a Testament">
-      <article class="testament-panel testament-panel--old" data-panel="Old Testament">
-        <button class="testament-trigger" type="button" aria-label="Open Old Testament books" aria-expanded="false" data-testament="Old Testament">
-          <img class="testament-slot-image" src="../assets/books-old-testament-frame.png" alt="" aria-hidden="true" loading="eager" />
-          <span class="testament-label-stack">
-            <strong class="testament-word">Old</strong>
-            <span class="testament-name">Testament</span>
-          </span>
-        </button>
+    <section class="books-shell testament-grid" aria-label="Bible testament sections">
+      <article class="testament-card">
+        <div class="testament-image-placeholder" aria-hidden="true">
+          <span>Old Testament Image Placeholder</span>
+        </div>
 
-        <div class="retracted-hint"><strong>New</strong>Testament</div>
-        <div class="testament-panel-content" id="oldContent" aria-hidden="true"></div>
+        <div class="testament-content">
+          <p class="testament-label">Scripture Section</p>
+          <h2>Old Testament</h2>
+          <p>
+            Creation, covenant, promise, law, kings, prophets, exile, and hope.
+            This section will become a visual guide to the books that prepare the way for Christ.
+          </p>
+          <span class="coming-soon-pill">Coming Soon</span>
+        </div>
       </article>
 
-      <article class="testament-panel testament-panel--new" data-panel="New Testament">
-        <button class="testament-trigger" type="button" aria-label="Open New Testament books" aria-expanded="false" data-testament="New Testament">
-          <img class="testament-slot-image" src="../assets/books-new-testament-frame.png" alt="" aria-hidden="true" loading="eager" />
-          <span class="testament-label-stack">
-            <strong class="testament-word">New</strong>
-            <span class="testament-name">Testament</span>
-          </span>
-        </button>
+      <article class="testament-card">
+        <div class="testament-image-placeholder" aria-hidden="true">
+          <span>New Testament Image Placeholder</span>
+        </div>
 
-        <div class="retracted-hint"><strong>Old</strong>Testament</div>
-        <div class="testament-panel-content" id="newContent" aria-hidden="true"></div>
+        <div class="testament-content">
+          <p class="testament-label">Scripture Section</p>
+          <h2>New Testament</h2>
+          <p>
+            Jesus, the apostles, the early church, letters, endurance, worship,
+            and final restoration. This section will become a visual guide to the fulfillment story.
+          </p>
+          <span class="coming-soon-pill">Coming Soon</span>
+        </div>
       </article>
+    </section>
+
+    <section class="books-shell rebuild-note" aria-labelledby="rebuildTitle">
+      <h2 id="rebuildTitle">A visual Bible library is being rebuilt.</h2>
+      <p>
+        This page will become a visual guide to every book of Scripture, with maps,
+        images, context, people, places, and purpose.
+      </p>
     </section>
   </main>
 
@@ -1504,450 +441,5 @@
       <p class="bm-footer-copy">&copy; 2026 Bible Mapped. All rights reserved.</p>
     </div>
   </footer>
-
-  <div class="case-overlay" id="caseOverlay" role="dialog" aria-modal="true" aria-labelledby="caseTitle" aria-hidden="true">
-    <article class="case-study-card">
-      <div class="case-top">
-        <span id="caseMeta">Book Case Study</span>
-        <button class="case-close" type="button" id="caseClose" aria-label="Close case study">×</button>
-      </div>
-      <div class="case-body" id="caseBody"></div>
-    </article>
-  </div>
-
-  <script>
-    const categoryDefinitions = {
-      "Torah / Pentateuch": "The first five books of the Bible. They introduce creation, covenant, law, worship, and Israel’s origin story.",
-      "Historical Books": "Books that trace Israel’s life in the land, the rise of kings, exile, and return.",
-      "Wisdom & Poetry": "Books that teach worship, suffering, love, wisdom, meaning, and life with God.",
-      "Major Prophets": "Long prophetic books focused on judgment, hope, exile, restoration, and the coming work of God.",
-      "Minor Prophets": "Shorter prophetic books that confront sin, injustice, false worship, and point toward restoration.",
-      "Gospels": "The four accounts of Jesus’ life, ministry, death, and resurrection.",
-      "Church History": "The story of the early church spreading the message of Jesus through the Roman world.",
-      "Pauline Letters": "Letters connected to Paul that teach doctrine, church life, salvation, suffering, and Christian practice.",
-      "General Letters": "Letters written to churches and believers about endurance, truth, holiness, and faithfulness.",
-      "Prophecy / Apocalypse": "A symbolic vision of Christ’s victory, judgment, worship, and the final restoration of all things."
-    };
-
-    const testamentInfo = {
-      "Old Testament": {
-        eyebrow: "Old Testament",
-        title: "The Hebrew Scriptures",
-        copy: "Creation, promise, law, kings, prophets, exile, and hope. Open a category to see how each section branches into the books inside it.",
-        note: "Testament means covenant. The Old Testament points to the old covenant story: creation, promise, law, kings, prophets, exile, and hope — all preparing the way for Christ."
-      },
-      "New Testament": {
-        eyebrow: "New Testament",
-        title: "The Fulfillment Story",
-        copy: "Jesus, the apostles, the church, letters, endurance, judgment, worship, and final restoration. Open a category to see how the books are grouped.",
-        note: "Testament means covenant. The New Testament reveals the new covenant fulfilled through Jesus Christ."
-      }
-    };
-
-    const categoryOrder = {
-      "Old Testament": [
-        "Torah / Pentateuch",
-        "Historical Books",
-        "Wisdom & Poetry",
-        "Major Prophets",
-        "Minor Prophets"
-      ],
-      "New Testament": [
-        "Gospels",
-        "Church History",
-        "Pauline Letters",
-        "General Letters",
-        "Prophecy / Apocalypse"
-      ]
-    };
-
-    const bookData = [
-      { testament: "Old Testament", category: "Torah / Pentateuch", title: "Genesis", original: "Bereshit", meaning: "Beginning", summary: "Origins, promise, exile, and covenant hope." },
-      { testament: "Old Testament", category: "Torah / Pentateuch", title: "Exodus", original: "Shemot", meaning: "Names", summary: "Deliverance, covenant, law, and God's presence." },
-      { testament: "Old Testament", category: "Torah / Pentateuch", title: "Leviticus", original: "Vayikra", meaning: "And He called", summary: "Holiness, sacrifice, priesthood, and worship." },
-      { testament: "Old Testament", category: "Torah / Pentateuch", title: "Numbers", original: "Bemidbar", meaning: "In the wilderness", summary: "Wilderness testing between promise and inheritance." },
-      { testament: "Old Testament", category: "Torah / Pentateuch", title: "Deuteronomy", original: "Devarim", meaning: "Words", summary: "Covenant renewal before entering the land." },
-
-      { testament: "Old Testament", category: "Historical Books", title: "Joshua", original: "Yehoshua", meaning: "The LORD saves", summary: "Inheritance, conquest, and covenant faithfulness." },
-      { testament: "Old Testament", category: "Historical Books", title: "Judges", original: "Shoftim", meaning: "Judges", summary: "Cycles of compromise, oppression, and rescue." },
-      { testament: "Old Testament", category: "Historical Books", title: "Ruth", original: "Rut", meaning: "Companion / friend", summary: "Loyal love, providence, and David’s line." },
-      { testament: "Old Testament", category: "Historical Books", title: "1 Samuel", original: "Shemuel Aleph", meaning: "God has heard", summary: "Prophet, king, and the rise of David." },
-      { testament: "Old Testament", category: "Historical Books", title: "2 Samuel", original: "Shemuel Bet", meaning: "Samuel, second", summary: "David’s kingdom, covenant, sin, and consequences." },
-      { testament: "Old Testament", category: "Historical Books", title: "1 Kings", original: "Melakhim Aleph", meaning: "Kings, first", summary: "Solomon, temple glory, division, and prophets." },
-      { testament: "Old Testament", category: "Historical Books", title: "2 Kings", original: "Melakhim Bet", meaning: "Kings, second", summary: "Decline, exile, prophets, and kingdom collapse." },
-      { testament: "Old Testament", category: "Historical Books", title: "1 Chronicles", original: "Divrei Hayamim Aleph", meaning: "Events of the days", summary: "Genealogy, David, worship, and restored identity." },
-      { testament: "Old Testament", category: "Historical Books", title: "2 Chronicles", original: "Divrei Hayamim Bet", meaning: "Events of the days", summary: "Temple, Judah’s kings, exile, and return hope." },
-      { testament: "Old Testament", category: "Historical Books", title: "Ezra", original: "Ezra", meaning: "Help", summary: "Return, rebuilding, and renewed devotion to Scripture." },
-      { testament: "Old Testament", category: "Historical Books", title: "Nehemiah", original: "Nechemyah", meaning: "The LORD comforts", summary: "Walls rebuilt, community restored, covenant renewed." },
-      { testament: "Old Testament", category: "Historical Books", title: "Esther", original: "Ester", meaning: "Hidden / star", summary: "Hidden providence and preservation in exile." },
-
-      { testament: "Old Testament", category: "Wisdom & Poetry", title: "Job", original: "Iyov", meaning: "Meaning uncertain", summary: "Suffering, wisdom, and the fear of God." },
-      { testament: "Old Testament", category: "Wisdom & Poetry", title: "Psalms", original: "Tehillim", meaning: "Praises", summary: "Israel’s prayerbook of worship, lament, and hope." },
-      { testament: "Old Testament", category: "Wisdom & Poetry", title: "Proverbs", original: "Mishlei", meaning: "Sayings", summary: "Wisdom for ordered life under the LORD." },
-      { testament: "Old Testament", category: "Wisdom & Poetry", title: "Ecclesiastes", original: "Qohelet", meaning: "Teacher", summary: "Life under the sun and the search for meaning." },
-      { testament: "Old Testament", category: "Wisdom & Poetry", title: "Song of Solomon", original: "Shir HaShirim", meaning: "Song of Songs", summary: "Love, longing, beauty, and covenant delight." },
-
-      { testament: "Old Testament", category: "Major Prophets", title: "Isaiah", original: "Yeshayahu", meaning: "The LORD saves", summary: "Judgment, holiness, servant hope, and new creation." },
-      { testament: "Old Testament", category: "Major Prophets", title: "Jeremiah", original: "Yirmeyahu", meaning: "The LORD appoints", summary: "Warning, tears, exile, and new covenant hope." },
-      { testament: "Old Testament", category: "Major Prophets", title: "Lamentations", original: "Eikhah", meaning: "How", summary: "Grief over Jerusalem’s fall and hope in mercy." },
-      { testament: "Old Testament", category: "Major Prophets", title: "Ezekiel", original: "Yechezkel", meaning: "God strengthens", summary: "Exile visions, judgment, restoration, and glory." },
-      { testament: "Old Testament", category: "Major Prophets", title: "Daniel", original: "Daniyyel", meaning: "God is my judge", summary: "Faithfulness in empire and visions of kingdoms." },
-
-      { testament: "Old Testament", category: "Minor Prophets", title: "Hosea", original: "Hoshea", meaning: "Salvation", summary: "Unfaithfulness, covenant love, and restoration." },
-      { testament: "Old Testament", category: "Minor Prophets", title: "Joel", original: "Yoel", meaning: "The LORD is God", summary: "The day of the LORD and poured-out Spirit." },
-      { testament: "Old Testament", category: "Minor Prophets", title: "Amos", original: "Amos", meaning: "Burden-bearer", summary: "Justice, worship, and judgment against oppression." },
-      { testament: "Old Testament", category: "Minor Prophets", title: "Obadiah", original: "Ovadyah", meaning: "Servant of the LORD", summary: "Edom judged and Zion restored." },
-      { testament: "Old Testament", category: "Minor Prophets", title: "Jonah", original: "Yonah", meaning: "Dove", summary: "Mercy, mission, repentance, and a reluctant prophet." },
-      { testament: "Old Testament", category: "Minor Prophets", title: "Micah", original: "Mikhah", meaning: "Who is like the LORD?", summary: "Justice, judgment, Bethlehem hope, and mercy." },
-      { testament: "Old Testament", category: "Minor Prophets", title: "Nahum", original: "Nachum", meaning: "Comfort", summary: "Nineveh’s fall and comfort for the oppressed." },
-      { testament: "Old Testament", category: "Minor Prophets", title: "Habakkuk", original: "Chavakuk", meaning: "Embrace", summary: "Wrestling with evil and living by faith." },
-      { testament: "Old Testament", category: "Minor Prophets", title: "Zephaniah", original: "Tsefanyah", meaning: "The LORD has hidden", summary: "Judgment, purification, and restored worship." },
-      { testament: "Old Testament", category: "Minor Prophets", title: "Haggai", original: "Chaggai", meaning: "Festal", summary: "Rebuild the temple and reorder priorities." },
-      { testament: "Old Testament", category: "Minor Prophets", title: "Zechariah", original: "Zekharyah", meaning: "The LORD remembers", summary: "Visions, restoration, kingly hope, and renewal." },
-      { testament: "Old Testament", category: "Minor Prophets", title: "Malachi", original: "Malakhi", meaning: "My messenger", summary: "Covenant rebuke and the coming messenger." },
-
-      { testament: "New Testament", category: "Gospels", title: "Matthew", original: "Kata Matthaion", meaning: "According to Matthew", summary: "Jesus as Messiah, teacher, king, and fulfillment." },
-      { testament: "New Testament", category: "Gospels", title: "Mark", original: "Kata Markon", meaning: "According to Mark", summary: "The urgent gospel of Jesus the suffering Son." },
-      { testament: "New Testament", category: "Gospels", title: "Luke", original: "Kata Loukan", meaning: "According to Luke", summary: "Jesus brings salvation to the lost and outsider." },
-      { testament: "New Testament", category: "Gospels", title: "John", original: "Kata Ioannen", meaning: "According to John", summary: "The Word made flesh who reveals God." },
-
-      { testament: "New Testament", category: "Church History", title: "Acts", original: "Praxeis Apostolon", meaning: "Acts of the Apostles", summary: "The Spirit sends the gospel from Jerusalem outward." },
-
-      { testament: "New Testament", category: "Pauline Letters", title: "Romans", original: "Pros Romaious", meaning: "To the Romans", summary: "Sin, righteousness, grace, Israel, and gospel life." },
-      { testament: "New Testament", category: "Pauline Letters", title: "1 Corinthians", original: "Pros Korinthious A", meaning: "To Corinth, first", summary: "Church disorder corrected by cross-shaped wisdom." },
-      { testament: "New Testament", category: "Pauline Letters", title: "2 Corinthians", original: "Pros Korinthious B", meaning: "To Corinth, second", summary: "Weakness, ministry, generosity, and apostolic endurance." },
-      { testament: "New Testament", category: "Pauline Letters", title: "Galatians", original: "Pros Galatas", meaning: "To the Galatians", summary: "Grace, faith, freedom, and life by the Spirit." },
-      { testament: "New Testament", category: "Pauline Letters", title: "Ephesians", original: "Pros Ephesious", meaning: "To the Ephesians", summary: "Union with Christ and the new humanity." },
-      { testament: "New Testament", category: "Pauline Letters", title: "Philippians", original: "Pros Philippesious", meaning: "To the Philippians", summary: "Joy, humility, partnership, and Christ’s mind." },
-      { testament: "New Testament", category: "Pauline Letters", title: "Colossians", original: "Pros Kolossaeis", meaning: "To the Colossians", summary: "Christ supreme over creation and the church." },
-      { testament: "New Testament", category: "Pauline Letters", title: "1 Thessalonians", original: "Pros Thessalonikeis A", meaning: "To Thessalonica, first", summary: "Hope, holiness, and Christ’s return." },
-      { testament: "New Testament", category: "Pauline Letters", title: "2 Thessalonians", original: "Pros Thessalonikeis B", meaning: "To Thessalonica, second", summary: "Endurance and correction about the day of the Lord." },
-      { testament: "New Testament", category: "Pauline Letters", title: "1 Timothy", original: "Pros Timotheon A", meaning: "To Timothy, first", summary: "Church order, doctrine, and leadership." },
-      { testament: "New Testament", category: "Pauline Letters", title: "2 Timothy", original: "Pros Timotheon B", meaning: "To Timothy, second", summary: "Endurance, Scripture, ministry, and final charge." },
-      { testament: "New Testament", category: "Pauline Letters", title: "Titus", original: "Pros Titon", meaning: "To Titus", summary: "Sound doctrine and good works in church life." },
-      { testament: "New Testament", category: "Pauline Letters", title: "Philemon", original: "Pros Philemona", meaning: "To Philemon", summary: "Forgiveness, reconciliation, and brotherhood in Christ." },
-
-      { testament: "New Testament", category: "General Letters", title: "Hebrews", original: "Pros Hebraious", meaning: "To the Hebrews", summary: "Christ as final priest, sacrifice, and better covenant." },
-      { testament: "New Testament", category: "General Letters", title: "James", original: "Iakobou", meaning: "Of James", summary: "Living faith shown in wisdom, speech, and action." },
-      { testament: "New Testament", category: "General Letters", title: "1 Peter", original: "Petrou A", meaning: "Peter, first", summary: "Hope and holiness for suffering believers." },
-      { testament: "New Testament", category: "General Letters", title: "2 Peter", original: "Petrou B", meaning: "Peter, second", summary: "Truth, false teachers, and final judgment." },
-      { testament: "New Testament", category: "General Letters", title: "1 John", original: "Ioannou A", meaning: "John, first", summary: "Truth, love, assurance, and eternal life." },
-      { testament: "New Testament", category: "General Letters", title: "2 John", original: "Ioannou B", meaning: "John, second", summary: "Truth, love, and guarding the teaching of Christ." },
-      { testament: "New Testament", category: "General Letters", title: "3 John", original: "Ioannou G", meaning: "John, third", summary: "Faithful hospitality and church integrity." },
-      { testament: "New Testament", category: "General Letters", title: "Jude", original: "Iouda", meaning: "Of Jude", summary: "Contend for the faith against corruption." },
-
-      { testament: "New Testament", category: "Prophecy / Apocalypse", title: "Revelation", original: "Apokalypsis Ioannou", meaning: "Revelation of John", summary: "Christ’s victory, judgment, worship, and restoration." }
-    ];
-
-    const overlayImageSlots = [
-      "Map / Location Slot",
-      "Artifact / Archaeology Slot",
-      "Manuscript / Textual Evidence Slot",
-      "Timeline Slot",
-      "Visual Summary Slot"
-    ];
-
-    const stage = document.getElementById("testamentStage");
-    const oldContent = document.getElementById("oldContent");
-    const newContent = document.getElementById("newContent");
-    const overlay = document.getElementById("caseOverlay");
-    const caseBody = document.getElementById("caseBody");
-    const caseMeta = document.getElementById("caseMeta");
-    const caseClose = document.getElementById("caseClose");
-
-    function escapeHtml(value) {
-      return String(value || "").replace(/[&<>'"]/g, char => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        "'": "&#039;",
-        '"': "&quot;"
-      }[char]));
-    }
-
-    function booksFor(testament, category) {
-      return bookData.filter(book => book.testament === testament && book.category === category);
-    }
-
-    function renderOldTestamentMindMap() {
-      const categories = categoryOrder["Old Testament"];
-
-      return `
-        <section class="ot-mindmap" aria-label="Old Testament category mind map">
-          <div class="ot-map-center">
-            <span class="ot-map-center-kicker">Bible Mapped</span>
-            <span class="ot-map-center-title">Old Testament</span>
-            <span class="ot-map-center-subtitle">Old Covenant Story</span>
-            <p class="ot-map-center-note">
-              Testament means covenant. This section maps the older covenant story that prepares the way for Christ.
-            </p>
-          </div>
-
-          <div class="ot-mindmap-grid">
-            ${categories.map((category, index) => {
-              const categoryBooks = booksFor("Old Testament", category);
-
-              return `
-                <article class="ot-mindmap-branch" style="--branch-index:${index}">
-                  <button
-                    class="ot-category-node"
-                    type="button"
-                    aria-expanded="false"
-                    data-ot-category="${escapeHtml(category)}"
-                  >
-                    <span class="ot-category-title">${escapeHtml(category)}</span>
-                    <span class="ot-category-meta">${categoryBooks.length} book${categoryBooks.length === 1 ? "" : "s"}</span>
-                    <span class="ot-category-definition">${escapeHtml(categoryDefinitions[category])}</span>
-                  </button>
-
-                  <div class="ot-book-node-list" aria-hidden="true">
-                    ${categoryBooks.map((book, bookIndex) => `
-                      <button
-                        class="ot-book-node"
-                        type="button"
-                        style="--book-index:${bookIndex}"
-                        data-book="${escapeHtml(book.title)}"
-                      >
-                        <span class="ot-book-node-name">${escapeHtml(book.title)}</span>
-                        <span class="ot-book-node-mini">${escapeHtml(book.meaning)} • ${escapeHtml(book.summary)}</span>
-                      </button>
-                    `).join("")}
-                  </div>
-                </article>
-              `;
-            }).join("")}
-          </div>
-        </section>
-      `;
-    }
-
-    function renderTestament(testament, mount) {
-      const info = testamentInfo[testament];
-
-      if (testament === "Old Testament") {
-        mount.innerHTML = `
-          <div class="content-header">
-            <span class="eyebrow">${escapeHtml(info.eyebrow)}</span>
-            <h2 class="content-title">${escapeHtml(info.title)}</h2>
-            <p class="content-copy">${escapeHtml(info.copy)}</p>
-            <p class="content-copy covenant-note">${escapeHtml(info.note)}</p>
-          </div>
-
-          ${renderOldTestamentMindMap()}
-        `;
-
-        return;
-      }
-
-      const categories = categoryOrder[testament];
-
-      mount.innerHTML = `
-        <div class="content-header">
-          <span class="eyebrow">${escapeHtml(info.eyebrow)}</span>
-          <h2 class="content-title">${escapeHtml(info.title)}</h2>
-          <p class="content-copy">${escapeHtml(info.copy)}</p>
-          <p class="content-copy covenant-note">${escapeHtml(info.note)}</p>
-        </div>
-
-        <div class="category-list">
-          ${categories.map((category, index) => {
-            const categoryBooks = booksFor(testament, category);
-
-            return `
-              <article class="category-card" style="--card-index:${index}">
-                <button class="category-button" type="button" aria-expanded="false" data-category="${escapeHtml(category)}">
-                  <span>
-                    <span class="category-title">${escapeHtml(category)}</span>
-                    <span class="category-meta">${categoryBooks.length} book${categoryBooks.length === 1 ? "" : "s"} • Click to open</span>
-                  </span>
-                  <span class="category-icon" aria-hidden="true">+</span>
-                </button>
-
-                <div class="category-drawer" aria-hidden="true">
-                  <div class="category-inner">
-                    <div class="definition-block">
-                      <span class="definition-label">Definition</span>
-                      <p class="definition-text">${escapeHtml(categoryDefinitions[category])}</p>
-
-                      <div class="book-strip">
-                        ${categoryBooks.map((book, bookIndex) => `
-                          <button class="book-card" type="button" style="--book-index:${bookIndex}" data-book="${escapeHtml(book.title)}">
-                            <span class="book-name">${escapeHtml(book.title)}</span>
-                            <span class="book-mini">${escapeHtml(book.meaning)} • ${escapeHtml(book.summary)}</span>
-                          </button>
-                        `).join("")}
-                      </div>
-                    </div>
-
-                    <div class="category-image-slot">9:16 Image Slot<br />${escapeHtml(category)}</div>
-                  </div>
-                </div>
-              </article>
-            `;
-          }).join("")}
-        </div>
-      `;
-    }
-
-    function openTestament(testament) {
-      const oldButton = document.querySelector('[data-testament="Old Testament"]');
-      const newButton = document.querySelector('[data-testament="New Testament"]');
-      const oldPanel = document.querySelector(".testament-panel--old");
-      const newPanel = document.querySelector(".testament-panel--new");
-
-      stage.classList.toggle("is-old-open", testament === "Old Testament");
-      stage.classList.toggle("is-new-open", testament === "New Testament");
-
-      oldPanel.classList.toggle("is-retracted", testament === "New Testament");
-      newPanel.classList.toggle("is-retracted", testament === "Old Testament");
-
-      oldButton.setAttribute("aria-expanded", String(testament === "Old Testament"));
-      newButton.setAttribute("aria-expanded", String(testament === "New Testament"));
-
-      oldContent.setAttribute("aria-hidden", String(testament !== "Old Testament"));
-      newContent.setAttribute("aria-hidden", String(testament !== "New Testament"));
-    }
-
-    function toggleCategory(button) {
-      const card = button.closest(".category-card");
-      const drawer = card.querySelector(".category-drawer");
-      const panel = button.closest(".testament-panel-content");
-      const alreadyOpen = card.classList.contains("is-open");
-
-      panel.querySelectorAll(".category-card.is-open").forEach(openCard => {
-        openCard.classList.remove("is-open");
-        openCard.querySelector(".category-button")?.setAttribute("aria-expanded", "false");
-        openCard.querySelector(".category-drawer")?.setAttribute("aria-hidden", "true");
-      });
-
-      if (!alreadyOpen) {
-        card.classList.add("is-open");
-        button.setAttribute("aria-expanded", "true");
-        drawer.setAttribute("aria-hidden", "false");
-      }
-    }
-
-    function toggleOldTestamentMindMap(button) {
-      const branch = button.closest(".ot-mindmap-branch");
-      const map = button.closest(".ot-mindmap-grid");
-      const bookList = branch.querySelector(".ot-book-node-list");
-      const alreadyOpen = branch.classList.contains("is-open");
-
-      map.querySelectorAll(".ot-mindmap-branch.is-open").forEach(openBranch => {
-        openBranch.classList.remove("is-open");
-        openBranch.querySelector(".ot-category-node")?.setAttribute("aria-expanded", "false");
-        openBranch.querySelector(".ot-book-node-list")?.setAttribute("aria-hidden", "true");
-      });
-
-      if (!alreadyOpen) {
-        branch.classList.add("is-open");
-        button.setAttribute("aria-expanded", "true");
-        bookList.setAttribute("aria-hidden", "false");
-      }
-    }
-
-    function openBookCaseStudy(title) {
-      const book = bookData.find(item => item.title === title);
-      if (!book) return;
-
-      caseMeta.textContent = `${book.testament} • ${book.category}`;
-
-      caseBody.innerHTML = `
-        <h2 id="caseTitle">${escapeHtml(book.title)}</h2>
-        <p class="case-subtitle">${escapeHtml(book.summary)}</p>
-
-        <div class="case-grid">
-          <section class="case-section">
-            <h3>Original Title</h3>
-            <p><strong>${escapeHtml(book.original)}</strong></p>
-          </section>
-
-          <section class="case-section">
-            <h3>Name Meaning</h3>
-            <p>${escapeHtml(book.meaning)}</p>
-          </section>
-
-          <section class="case-section full">
-            <h3>Why It Matters</h3>
-            <p>${escapeHtml(book.title)} belongs to ${escapeHtml(book.category)}. ${escapeHtml(book.summary)} This section is ready for a deeper BibleMapped case study.</p>
-          </section>
-
-          <section class="case-section full">
-            <h3>Image Slots</h3>
-            <div class="evidence-slot-grid">
-              ${overlayImageSlots.map(slot => `<div class="evidence-slot">${escapeHtml(slot)}</div>`).join("")}
-            </div>
-          </section>
-
-          <section class="case-section full">
-            <h3>Next Build Step</h3>
-            <ul class="chip-list">
-              <li>Map layer</li>
-              <li>People list</li>
-              <li>Timeline</li>
-              <li>Key verses</li>
-              <li>Sources</li>
-            </ul>
-          </section>
-        </div>
-      `;
-
-      overlay.classList.add("open");
-      overlay.setAttribute("aria-hidden", "false");
-      caseClose.focus();
-    }
-
-    document.addEventListener("click", event => {
-      const testamentButton = event.target.closest("[data-testament]");
-
-      if (testamentButton) {
-        openTestament(testamentButton.dataset.testament);
-        return;
-      }
-
-      const oldTestamentCategoryButton = event.target.closest(".ot-category-node");
-
-      if (oldTestamentCategoryButton) {
-        toggleOldTestamentMindMap(oldTestamentCategoryButton);
-        return;
-      }
-
-      const categoryButton = event.target.closest(".category-button");
-
-      if (categoryButton) {
-        toggleCategory(categoryButton);
-        return;
-      }
-
-      const bookButton = event.target.closest(".book-card, .ot-book-node");
-
-      if (bookButton) {
-        openBookCaseStudy(bookButton.dataset.book);
-      }
-    });
-
-    function closeOverlay() {
-      overlay.classList.remove("open");
-      overlay.setAttribute("aria-hidden", "true");
-    }
-
-    caseClose.addEventListener("click", closeOverlay);
-
-    overlay.addEventListener("click", event => {
-      if (event.target === overlay) {
-        closeOverlay();
-      }
-    });
-
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape") {
-        closeOverlay();
-      }
-    });
-
-    renderTestament("Old Testament", oldContent);
-    renderTestament("New Testament", newContent);
-  </script>
 </body>
 </html>
-```
