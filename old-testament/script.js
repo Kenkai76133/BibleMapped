@@ -15,7 +15,7 @@ function observePanUp(item) {
 }
 
 const animatedItems = document.querySelectorAll(
-  ".main-infographic, .floating-graphic, .floating-item"
+  ".main-infographic, .graphic-text, .floating-graphic, .floating-item"
 );
 
 animatedItems.forEach((item) => {
