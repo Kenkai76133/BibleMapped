@@ -1,4 +1,4 @@
-// BibleMapped Map Navigator (Leaflet, static)
+// Bible Mapped Map Navigator (Leaflet, static)
 const PLACES_URL = "/maps/navigator/places.geojson";
 
 const map = L.map("map", { zoomControl: true }).setView([31.778, 35.235], 7);
