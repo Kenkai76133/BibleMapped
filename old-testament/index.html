@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Old Testament | BibleMapped</title>
-  <meta name="description" content="An Old Testament-only BibleMapped page tracing Creation, Patriarchs, Exodus, Kingdom, Exile, and Return through place, people, time, and purpose.">
+  <meta name="description" content="A simple, visual Old Testament BibleMapped page centered on infographics, maps, and book-group visuals.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,216 +13,162 @@
       <img src="/assets/header-brand-logo.png" alt="BibleMapped">
     </a>
     <nav class="top-nav" aria-label="Page sections">
-      <a href="#story">Story</a>
-      <a href="#formula">Formula</a>
-      <a href="#books">Books</a>
+      <a href="#map">Map</a>
+      <a href="#graphics">Graphics</a>
+      <a href="#books">Library</a>
     </nav>
   </header>
 
-  <main>
-    <section class="hero" aria-labelledby="page-title">
-      <div class="hero-copy">
-        <p class="eyebrow">Old Testament Atlas</p>
-        <h1 id="page-title">One connected story before Christ</h1>
-        <p class="hero-lede">From Eden to Abraham, from Egypt to Sinai, from Jerusalem to Babylon and back again, the Old Testament follows God working through real places, real people, real timelines, and real meaning.</p>
-        <div class="hero-actions" aria-label="Primary actions">
-          <a class="button primary" href="#infographic">View the map</a>
-          <a class="button ghost" href="#story">Follow the story</a>
-        </div>
-      </div>
-      <figure class="hero-visual" aria-label="Old Testament infographic preview">
-        <img src="/assets/old-testament-locations-map.png" alt="Preview of the Old Testament BibleMapped infographic">
-        <figcaption>Creation to return, traced through places and movements.</figcaption>
-      </figure>
+  <main class="ot-page">
+    <section class="ot-hero" aria-labelledby="page-title">
+      <p class="eyebrow">Old Testament Atlas</p>
+      <h1 id="page-title">The Old Testament on the Map</h1>
+      <p>
+        From Eden to Abraham, from Egypt to Sinai, from Jerusalem to Babylon and back again,
+        the Old Testament follows God working through real places, real people, real timelines,
+        and real meaning.
+      </p>
     </section>
 
-    <section class="map-feature" id="infographic" aria-labelledby="map-title">
-      <div class="section-kicker">Main visual source</div>
-      <h2 id="map-title">The Old Testament on the map</h2>
-      <p class="section-intro">The story moves across Eden, Mesopotamia, Canaan, Egypt, Sinai, Jerusalem, Babylon, and Persia. The map keeps those movements visible while the page explains the storyline underneath.</p>
-      <figure class="infographic-frame">
-        <img src="/assets/old-testament-locations-map.png" alt="Old Testament BibleMapped infographic showing biblical locations, journeys, kingdoms, exile, and return">
-        <figcaption>Old Testament locations and movements, used here as the page's visual anchor.</figcaption>
-      </figure>
-    </section>
-
-    <section class="formula" id="formula" aria-labelledby="formula-title">
-      <div>
-        <div class="section-kicker">Teaching formula</div>
-        <h2 id="formula-title">Where / Who / When / Why</h2>
-        <p class="section-intro">BibleMapped reads Scripture in context. Each Old Testament section becomes clearer when you ask four steady questions.</p>
-      </div>
-      <div class="formula-grid">
-        <article>
-          <span>Where</span>
-          <h3>Place</h3>
-          <p>Locate the event: Eden, Canaan, Egypt, Sinai, Jerusalem, Babylon, or the return route home.</p>
-        </article>
-        <article>
-          <span>Who</span>
-          <h3>People</h3>
-          <p>Follow Adam, Noah, Abraham, Israel, Moses, David, the prophets, and the returned community.</p>
-        </article>
-        <article>
-          <span>When</span>
-          <h3>Timeline</h3>
-          <p>See how creation, covenant, kingdom, judgment, exile, and restoration unfold in sequence.</p>
-        </article>
-        <article>
-          <span>Why</span>
-          <h3>Meaning</h3>
-          <p>Ask what God is revealing about covenant, holiness, mercy, justice, worship, and hope.</p>
-        </article>
+    <section class="main-map-section" id="map" aria-label="Main Old Testament infographic">
+      <div class="flush-map-slot">
+        <img
+          class="main-infographic js-lightbox-image"
+          src="/assets/old-testament/ot-02-map.png"
+          alt="Old Testament BibleMapped map infographic"
+        >
       </div>
     </section>
 
-    <section class="story" id="story" aria-labelledby="story-title">
-      <div class="story-heading">
-        <div>
-          <div class="section-kicker">Connected story</div>
-          <h2 id="story-title">Seven movements of the Old Testament</h2>
-        </div>
-        <p>Choose a movement to see its place in the whole story.</p>
+    <section class="paired-graphics-section" id="graphics" aria-labelledby="graphics-title">
+      <div class="graphic-text">
+        <p class="eyebrow">Visual Source Material</p>
+        <h2 id="graphics-title">Let the Graphics Teach</h2>
+        <p>
+          These visuals are the center of the page. Each infographic is designed to explain
+          the Old Testament through place, movement, people, and meaning.
+        </p>
       </div>
 
-      <div class="story-layout">
-        <div class="story-tabs" role="tablist" aria-label="Old Testament story movements">
-          <button class="story-tab active" id="tab-creation" role="tab" aria-selected="true" aria-controls="panel-creation" data-story="creation">Creation</button>
-          <button class="story-tab" id="tab-patriarchs" role="tab" aria-selected="false" aria-controls="panel-patriarchs" data-story="patriarchs">Patriarchs</button>
-          <button class="story-tab" id="tab-exodus" role="tab" aria-selected="false" aria-controls="panel-exodus" data-story="exodus">Exodus</button>
-          <button class="story-tab" id="tab-kingdom" role="tab" aria-selected="false" aria-controls="panel-kingdom" data-story="kingdom">Kingdom</button>
-          <button class="story-tab" id="tab-divided" role="tab" aria-selected="false" aria-controls="panel-divided" data-story="divided">Divided Kingdom</button>
-          <button class="story-tab" id="tab-exile" role="tab" aria-selected="false" aria-controls="panel-exile" data-story="exile">Exile</button>
-          <button class="story-tab" id="tab-return" role="tab" aria-selected="false" aria-controls="panel-return" data-story="return">Return</button>
-        </div>
+      <div class="paired-graphics">
+        <img
+          class="floating-graphic tilt-left js-lightbox-image"
+          src="/assets/old-testament/ot-01-books-overview.png"
+          alt="Old Testament book overview infographic"
+          loading="lazy"
+        >
 
-        <div class="story-panels">
-          <article class="story-panel active" id="panel-creation" role="tabpanel" aria-labelledby="tab-creation" data-panel="creation">
-            <p class="story-marker">Genesis 1-11</p>
-            <h3>Creation</h3>
-            <p>God creates a good world, humanity rebels, violence spreads, and the nations scatter. The need for blessing is global from the beginning.</p>
-            <dl>
-              <div><dt>Where</dt><dd>Eden, the flood world, Babel</dd></div>
-              <div><dt>Why</dt><dd>The story begins with creation, sin, judgment, mercy, and promise.</dd></div>
-            </dl>
-          </article>
-
-          <article class="story-panel" id="panel-patriarchs" role="tabpanel" aria-labelledby="tab-patriarchs" data-panel="patriarchs" hidden>
-            <p class="story-marker">Genesis 12-50</p>
-            <h3>Patriarchs</h3>
-            <p>God calls Abraham and forms a covenant family through Sarah, Isaac, Rebekah, Jacob, Leah, Rachel, Joseph, and the tribes of Israel.</p>
-            <dl>
-              <div><dt>Where</dt><dd>Ur, Haran, Canaan, Egypt</dd></div>
-              <div><dt>Why</dt><dd>God promises land, descendants, and blessing for the nations.</dd></div>
-            </dl>
-          </article>
-
-          <article class="story-panel" id="panel-exodus" role="tabpanel" aria-labelledby="tab-exodus" data-panel="exodus" hidden>
-            <p class="story-marker">Exodus-Deuteronomy</p>
-            <h3>Exodus</h3>
-            <p>Israel is delivered from Egypt, brought through the sea, given the law at Sinai, and formed as a covenant people in the wilderness.</p>
-            <dl>
-              <div><dt>Where</dt><dd>Egypt, Red Sea, Sinai, wilderness</dd></div>
-              <div><dt>Why</dt><dd>Rescue leads to worship, holiness, and life with God.</dd></div>
-            </dl>
-          </article>
-
-          <article class="story-panel" id="panel-kingdom" role="tabpanel" aria-labelledby="tab-kingdom" data-panel="kingdom" hidden>
-            <p class="story-marker">Joshua-1 Kings 11</p>
-            <h3>Kingdom</h3>
-            <p>Israel enters the land, cycles through judges, and becomes a united kingdom under Saul, David, and Solomon with Jerusalem at the center.</p>
-            <dl>
-              <div><dt>Where</dt><dd>Canaan, Jerusalem, the temple</dd></div>
-              <div><dt>Why</dt><dd>The kingdom shows both the promise and danger of power under covenant.</dd></div>
-            </dl>
-          </article>
-
-          <article class="story-panel" id="panel-divided" role="tabpanel" aria-labelledby="tab-divided" data-panel="divided" hidden>
-            <p class="story-marker">1 Kings 12-2 Kings 17</p>
-            <h3>Divided Kingdom</h3>
-            <p>The kingdom splits into Israel in the north and Judah in the south. Prophets call both kingdoms back to justice, worship, and covenant faithfulness.</p>
-            <dl>
-              <div><dt>Where</dt><dd>Samaria, Jerusalem, surrounding empires</dd></div>
-              <div><dt>Why</dt><dd>Division exposes the cost of idolatry and injustice.</dd></div>
-            </dl>
-          </article>
-
-          <article class="story-panel" id="panel-exile" role="tabpanel" aria-labelledby="tab-exile" data-panel="exile" hidden>
-            <p class="story-marker">2 Kings 25; Prophets</p>
-            <h3>Exile</h3>
-            <p>Assyria and Babylon overtake Israel and Judah. Jerusalem falls, the temple is destroyed, and the people wrestle with judgment and hope far from home.</p>
-            <dl>
-              <div><dt>Where</dt><dd>Samaria, Jerusalem, Babylon</dd></div>
-              <div><dt>Why</dt><dd>Exile is judgment, but the prophets keep restoration in view.</dd></div>
-            </dl>
-          </article>
-
-          <article class="story-panel" id="panel-return" role="tabpanel" aria-labelledby="tab-return" data-panel="return" hidden>
-            <p class="story-marker">Ezra-Nehemiah</p>
-            <h3>Return</h3>
-            <p>God brings a remnant home. The altar, temple, and walls are rebuilt, but the story still waits for deeper renewal and lasting hope.</p>
-            <dl>
-              <div><dt>Where</dt><dd>Persia, Jerusalem, rebuilt Judah</dd></div>
-              <div><dt>Why</dt><dd>Return proves God keeps covenant mercy alive after judgment.</dd></div>
-            </dl>
-          </article>
-        </div>
+        <img
+          class="floating-graphic tilt-right js-lightbox-image"
+          src="/assets/old-testament-locations-map.png"
+          alt="Old Testament locations map"
+          loading="lazy"
+        >
       </div>
     </section>
 
-    <section class="books" id="books" aria-labelledby="books-title">
-      <div class="section-kicker">Book categories</div>
-      <h2 id="books-title">Old Testament library</h2>
-      <p class="section-intro">The books are grouped by role in the story: foundation, national history, worship and wisdom, and prophetic witness.</p>
+    <section class="ot-library" id="books" aria-labelledby="books-title">
+      <p class="eyebrow">Old Testament Library</p>
+      <h2 id="books-title">Infographic Library</h2>
+      <p>
+        The Old Testament books are housed here as visual guides. Click any image to open it fullscreen.
+      </p>
 
-      <div class="book-grid">
-        <article class="book-card has-infographic">
-          <a class="book-infographic" href="/assets/old-testament/ot-03-torah-law.png" aria-label="Open Law and Torah infographic">
-            <img src="/assets/old-testament/ot-03-torah-law.png" alt="Law and Torah Old Testament infographic" loading="lazy">
-          </a>
-          <h3>Law / Torah</h3>
-          <p>The foundation of creation, covenant, deliverance, law, worship, and wilderness formation.</p>
-          <p class="book-list">Genesis, Exodus, Leviticus, Numbers, Deuteronomy</p>
-        </article>
-        <article class="book-card">
-          <div class="book-infographic book-infographic-placeholder" aria-hidden="true">
-            <span>History</span>
-          </div>
-          <h3>History</h3>
-          <p>Israel's land, judges, kings, division, exile, return, and national memory.</p>
-          <p class="book-list">Joshua, Judges, Ruth, Samuel, Kings, Chronicles, Ezra, Nehemiah, Esther</p>
-        </article>
-        <article class="book-card has-infographic">
-          <a class="book-infographic" href="/assets/old-testament/ot-05-poetry-wisdom.png" aria-label="Open Poetry and Wisdom infographic">
-            <img src="/assets/old-testament/ot-05-poetry-wisdom.png" alt="Poetry and Wisdom Old Testament infographic" loading="lazy">
-          </a>
-          <h3>Poetry & Wisdom</h3>
-          <p>Prayer, suffering, worship, wisdom, love, longing, and the fear of the Lord.</p>
-          <p class="book-list">Job, Psalms, Proverbs, Ecclesiastes, Song of Solomon</p>
-        </article>
-        <article class="book-card">
-          <div class="book-infographic book-infographic-placeholder" aria-hidden="true">
-            <span>Major Prophets</span>
-          </div>
-          <h3>Major Prophets</h3>
-          <p>Judgment, hope, exile, restoration, new covenant, and the coming Messiah.</p>
-          <p class="book-list">Isaiah, Jeremiah, Lamentations, Ezekiel, Daniel</p>
-        </article>
-        <article class="book-card has-infographic">
-          <a class="book-infographic" href="/assets/old-testament/ot-07-minor-prophets.png" aria-label="Open Minor Prophets infographic">
-            <img src="/assets/old-testament/ot-07-minor-prophets.png" alt="Minor Prophets Old Testament infographic" loading="lazy">
-          </a>
-          <h3>Minor Prophets</h3>
-          <p>Shorter prophetic books with major theological weight for Israel, Judah, and the nations.</p>
-          <p class="book-list">Hosea through Malachi</p>
-        </article>
+      <div class="infographic-gallery">
+        <figure class="floating-item tilt-left">
+          <img class="js-lightbox-image" src="/assets/old-testament/ot-03-torah-law.png" alt="Law and Torah infographic" loading="lazy">
+          <figcaption>Law / Torah</figcaption>
+        </figure>
+
+        <figure class="floating-item tilt-right optional-graphic" data-optional-src="/assets/old-testament/ot-04-history.png" data-optional-alt="Old Testament History infographic">
+          <figcaption>History</figcaption>
+        </figure>
+
+        <figure class="floating-item tilt-left">
+          <img class="js-lightbox-image" src="/assets/old-testament/ot-05-poetry-wisdom.png" alt="Poetry and Wisdom infographic" loading="lazy">
+          <figcaption>Poetry & Wisdom</figcaption>
+        </figure>
+
+        <figure class="floating-item tilt-right optional-graphic" data-optional-src="/assets/old-testament/ot-06-major-prophets.png" data-optional-alt="Major Prophets infographic">
+          <figcaption>Major Prophets</figcaption>
+        </figure>
+
+        <figure class="floating-item tilt-left">
+          <img class="js-lightbox-image" src="/assets/old-testament/ot-07-minor-prophets.png" alt="Minor Prophets infographic" loading="lazy">
+          <figcaption>Minor Prophets</figcaption>
+        </figure>
       </div>
     </section>
+
+    <div class="image-lightbox" id="imageLightbox" aria-hidden="true" role="dialog" aria-label="Fullscreen infographic viewer">
+      <img id="lightboxImage" src="" alt="">
+    </div>
   </main>
 
-  <footer class="site-footer">
-    <img src="/assets/header-brand-logo.png" alt="BibleMapped">
-    <p>Old Testament context in BibleMapped style: where, who, when, and why.</p>
+  <footer class="bm-site-footer" aria-label="Bible Mapped footer">
+    <div class="bm-site-footer-inner">
+      <div class="bm-footer-top">
+        <img class="bm-footer-wordmark" src="/assets/footer-brand-logo.png" alt="Bible Mapped">
+
+        <div class="bm-footer-social-row" aria-label="Bible Mapped social links">
+          <a class="bm-footer-social-emblem tiktok-emblem" href="https://www.tiktok.com/@biblemapped" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14.7 3.2c.3 2.3 1.6 3.8 3.9 4.2v3.3c-1.4 0-2.7-.4-3.9-1.1v5.8c0 3.2-2.1 5.4-5.2 5.4-2.8 0-5-2-5-4.7 0-2.9 2.2-4.9 5.1-4.9.4 0 .7 0 1 .1v3.4c-.3-.1-.7-.2-1-.2-1 0-1.8.6-1.8 1.5s.8 1.5 1.7 1.5c1.1 0 1.8-.7 1.8-2V3.2h3.4Z"></path>
+            </svg>
+          </a>
+
+          <a class="bm-footer-social-emblem instagram-emblem" href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="4" y="4" width="16" height="16" rx="5" ry="5"></rect>
+              <circle cx="12" cy="12" r="4"></circle>
+              <circle cx="17" cy="7" r="1.3"></circle>
+            </svg>
+          </a>
+
+          <a class="bm-footer-social-emblem patreon-emblem" href="https://www.patreon.com/cw/Biblemapped" target="_blank" rel="noopener noreferrer" aria-label="Patreon">
+            <span class="bm-footer-patreon-letter" aria-hidden="true">P</span>
+          </a>
+
+          <a class="bm-footer-social-emblem youtube-emblem" href="https://www.youtube.com/@biblemapped" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 8.1c-.2-1.1-.8-1.9-1.9-2.1C17.4 5.6 12 5.6 12 5.6s-5.4 0-7.1.4C3.8 6.2 3.2 7 3 8.1 2.6 9.8 2.6 12 2.6 12s0 2.2.4 3.9c.2 1.1.8 1.9 1.9 2.1 1.7.4 7.1.4 7.1.4s5.4 0 7.1-.4c1.1-.2 1.7-1 1.9-2.1.4-1.7.4-3.9.4-3.9s0-2.2-.4-3.9ZM10.1 14.8V9.2l5 2.8-5 2.8Z"></path>
+            </svg>
+          </a>
+
+          <a class="bm-footer-social-emblem facebook-emblem" href="#" aria-label="Facebook">f</a>
+        </div>
+      </div>
+
+      <div class="bm-footer-divider" aria-hidden="true"></div>
+
+      <nav class="bm-footer-links bm-footer-primary" aria-label="Footer navigation">
+        <a href="/">Home</a>
+        <span>|</span>
+        <a href="/about/">About</a>
+        <span>|</span>
+        <a href="/books/">Books</a>
+        <span>|</span>
+        <a href="/old-testament/">Old Testament</a>
+        <span>|</span>
+        <a href="/characters/">People</a>
+        <span>|</span>
+        <a href="/maps/">Maps</a>
+        <span>|</span>
+        <a href="/case-studies/">Case Studies</a>
+        <span>|</span>
+        <a class="bm-footer-heaven-link" href="/heaven/">Are You Going to Heaven?</a>
+      </nav>
+
+      <nav class="bm-footer-links bm-footer-secondary" aria-label="Footer utility navigation">
+        <a href="/terms/">Terms of Use</a>
+        <span>|</span>
+        <a href="/help/">Help Center</a>
+        <span>|</span>
+        <a href="mailto:calvin@biblemapped.com">Contact Us</a>
+      </nav>
+
+      <p class="bm-footer-copy">&copy; 2026 Bible Mapped. All rights reserved.</p>
+    </div>
   </footer>
 
   <script src="script.js"></script>
