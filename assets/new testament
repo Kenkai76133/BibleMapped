@@ -1,1 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>New Testament | Bible Mapped</title>
+
+  <meta
+    name="description"
+    content="A simple, visual New Testament Bible Mapped page centered on infographics, maps, and book-group visuals."
+  >
+
+  <link rel="preload" as="image" href="/assets/new-testament/NT-01- New Testament map.png">
+  <link rel="preload" as="image" href="/assets/new-testament/NT-02- New Testament books.png">
+
+  <link rel="stylesheet" href="styles.css?v=nt-context-fill-1">
+</head>
+
+<body>
+  <header class="site-header" aria-label="Bible Mapped header">
+    <a class="brand" href="/" aria-label="Bible Mapped home">
+      <img src="/assets/header-brand-logo.png" alt="Bible Mapped">
+    </a>
+
+    <nav class="top-nav" aria-label="Page sections">
+      <a href="#map">Map</a>
+      <a href="#graphics">Context</a>
+      <a href="#books">Library</a>
+    </nav>
+  </header>
+
+  <main class="nt-page">
+
+    <section class="nt-hero" aria-labelledby="page-title">
+      <p class="eyebrow">New Testament Atlas</p>
+
+      <h1 id="page-title">The New Testament on the Map</h1>
+
+      <p>
+        From Galilee to Jerusalem, from Antioch to Ephesus, from Greece to Rome,
+        the New Testament follows Jesus, the birth of the Church, the spread of the gospel,
+        and the hope of new creation through real places, real people, real timelines,
+        and real meaning.
+      </p>
+    </section>
+
+    <section class="main-map-section" id="map" aria-label="Main New Testament infographic">
+      <div class="flush-map-slot">
+        <img
+          class="main-infographic js-lightbox-image"
+          src="/assets/new-testament/NT-01- New Testament map.png"
+          alt="New Testament Bible Mapped map infographic"
+          width="941"
+          height="1672"
+          decoding="async"
+          fetchpriority="high"
+        >
+      </div>
+    </section>
+
+    <section class="paired-graphics-section" id="graphics" aria-labelledby="graphics-title">
+      <div class="graphic-text">
+        <p class="eyebrow">Visual Source Material</p>
+
+        <h2 id="graphics-title">New Testament in Context</h2>
+
+        <p>
+          The New Testament is the story of Jesus Christ, his life, death, resurrection,
+          the beginning of the Church, the spread of the gospel, apostolic teaching,
+          and the hope of all things made new.
+        </p>
+
+        <p>
+          Context means seeing these books inside their real setting — Galilee, Judea,
+          Jerusalem, Antioch, Asia Minor, Greece, Corinth, Ephesus, Patmos, and Rome.
+          When we see the places, people, culture, and movement behind the text,
+          the story becomes clearer.
+        </p>
+      </div>
+
+      <div class="paired-graphics">
+        <img
+          class="floating-graphic context-infographic js-lightbox-image"
+          src="/assets/new-testament/NT-02- New Testament books.png"
+          alt="New Testament book overview infographic"
+          loading="lazy"
+          width="941"
+          height="1672"
+          decoding="async"
+        >
+      </div>
+    </section>
+
+    <section class="nt-library" id="books" aria-labelledby="books-title">
+      <p class="eyebrow">New Testament Library</p>
+
+      <h2 id="books-title">BibleMapped Context</h2>
+
+      <p class="library-description">
+        These New Testament visuals help connect the books to their setting:
+        Jesus in the Gospels, the Church in Acts, the letters to believers,
+        and the hope of Christ’s final victory in Revelation.
+      </p>
+
+      <div class="infographic-gallery">
+
+        <figure class="floating-item tilt-left">
+          <img
+            class="js-lightbox-image"
+            src="/assets/new-testament/NT-02- New Testament books.png"
+            alt="New Testament books overview infographic"
+            loading="lazy"
+            width="941"
+            height="1672"
+            decoding="async"
+          >
+          <figcaption>New Testament Books</figcaption>
+        </figure>
+
+        <figure class="floating-item tilt-right">
+          <img
+            class="js-lightbox-image"
+            src="/assets/new-testament/NT-03- The Gospels.png"
+            alt="The Gospels infographic"
+            loading="lazy"
+            width="941"
+            height="1672"
+            decoding="async"
+          >
+          <figcaption>The Gospels</figcaption>
+        </figure>
+
+        <figure class="floating-item tilt-left">
+          <img
+            class="js-lightbox-image"
+            src="/assets/new-testament/NT-06- The Book of Acts.png"
+            alt="The Book of Acts infographic"
+            loading="lazy"
+            width="941"
+            height="1672"
+            decoding="async"
+          >
+          <figcaption>Acts / Church History</figcaption>
+        </figure>
+
+        <figure class="floating-item tilt-right">
+          <img
+            class="js-lightbox-image"
+            src="/assets/new-testament/NT-04- Paul's letters.png"
+            alt="Paul's Letters infographic"
+            loading="lazy"
+            width="941"
+            height="1672"
+            decoding="async"
+          >
+          <figcaption>Paul’s Letters</figcaption>
+        </figure>
+
+        <figure class="floating-item tilt-left placeholder-item">
+          <div class="placeholder-graphic">
+            <span>General Letters</span>
+            <small>Infographic coming soon</small>
+          </div>
+          <figcaption>General Letters</figcaption>
+        </figure>
+
+        <figure class="floating-item tilt-right">
+          <img
+            class="js-lightbox-image"
+            src="/assets/new-testament/NT-05- Prophecy Revelation.png"
+            alt="Prophecy and Revelation infographic"
+            loading="lazy"
+            width="941"
+            height="1672"
+            decoding="async"
+          >
+          <figcaption>Prophecy / Revelation</figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <div
+      class="image-lightbox"
+      id="imageLightbox"
+      aria-hidden="true"
+      role="dialog"
+      aria-label="Fullscreen infographic viewer"
+    >
+      <img id="lightboxImage" src="" alt="">
+    </div>
+
+  </main>
+
+  <footer class="bm-site-footer" aria-label="Bible Mapped footer">
+    <div class="bm-site-footer-inner">
+
+      <div class="bm-footer-top">
+        <img class="bm-footer-wordmark" src="/assets/footer-brand-logo.png" alt="Bible Mapped">
+
+        <div class="bm-footer-social-row" aria-label="Bible Mapped social links">
+
+          <a
+            class="bm-footer-social-emblem tiktok-emblem"
+            href="https://www.tiktok.com/@biblemapped"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="TikTok"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14.7 3.2c.3 2.3 1.6 3.8 3.9 4.2v3.3c-1.4 0-2.7-.4-3.9-1.1v5.8c0 3.2-2.1 5.4-5.2 5.4-2.8 0-5-2-5-4.7 0-2.9 2.2-4.9 5.1-4.9.4 0 .7 0 1 .1v3.4c-.3-.1-.7-.2-1-.2-1 0-1.8.6-1.8 1.5s.8 1.5 1.7 1.5c1.1 0 1.8-.7 1.8-2V3.2h3.4Z"></path>
+            </svg>
+          </a>
+
+          <a class="bm-footer-social-emblem instagram-emblem" href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="4" y="4" width="16" height="16" rx="5" ry="5"></rect>
+              <circle cx="12" cy="12" r="4"></circle>
+              <circle cx="17" cy="7" r="1.3"></circle>
+            </svg>
+          </a>
+
+          <a
+            class="bm-footer-social-emblem patreon-emblem"
+            href="https://www.patreon.com/cw/Biblemapped"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Patreon"
+          >
+            <span class="bm-footer-patreon-letter" aria-hidden="true">P</span>
+          </a>
+
+          <a
+            class="bm-footer-social-emblem youtube-emblem"
+            href="https://www.youtube.com/@biblemapped"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="YouTube"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 8.1c-.2-1.1-.8-1.9-1.9-2.1C17.4 5.6 12 5.6 12 5.6s-5.4 0-7.1.4C3.8 6.2 3.2 7 3 8.1 2.6 9.8 2.6 12 2.6 12s0 2.2.4 3.9c.2 1.1.8 1.9 1.9 2.1 1.7.4 7.1.4 7.1.4s5.4 0 7.1-.4c1.1-.2 1.7-1 1.9-2.1.4-1.7.4-3.9.4-3.9s0-2.2-.4-3.9ZM10.1 14.8V9.2l5 2.8-5 2.8Z"></path>
+            </svg>
+          </a>
+
+          <a class="bm-footer-social-emblem facebook-emblem" href="#" aria-label="Facebook">f</a>
+        </div>
+      </div>
+
+      <div class="bm-footer-divider" aria-hidden="true"></div>
+
+      <nav class="bm-footer-links bm-footer-primary" aria-label="Footer navigation">
+        <a href="/">Home</a>
+        <span>|</span>
+        <a href="/about/">About</a>
+        <span>|</span>
+        <a href="/books/">Books</a>
+        <span>|</span>
+        <a href="/old-testament/">Old Testament</a>
+        <span>|</span>
+        <a href="/new-testament/">New Testament</a>
+        <span>|</span>
+        <a href="/characters/">People</a>
+        <span>|</span>
+        <a href="/maps/">Maps</a>
+        <span>|</span>
+        <a href="/case-studies/">Case Studies</a>
+        <span>|</span>
+        <a class="bm-footer-heaven-link" href="/heaven/">Are You Going to Heaven?</a>
+      </nav>
+
+      <nav class="bm-footer-links bm-footer-secondary" aria-label="Footer utility navigation">
+        <a href="/terms/">Terms of Use</a>
+        <span>|</span>
+        <a href="/help/">Help Center</a>
+        <span>|</span>
+        <a href="mailto:calvin@biblemapped.com">Contact Us</a>
+      </nav>
+
+      <p class="bm-footer-copy">&copy; 2026 Bible Mapped. All rights reserved.</p>
+
+    </div>
+  </footer>
+
+  <script src="script.js?v=nt-context-fill-1"></script>
+</body>
+</html>
