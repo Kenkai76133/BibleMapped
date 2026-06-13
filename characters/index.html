@@ -46,100 +46,60 @@
       position: relative;
       display: grid;
       align-items: center;
-      min-height: clamp(520px, 58vw, 760px);
-      padding: clamp(88px, 12vw, 150px) 0 clamp(76px, 10vw, 128px);
+      min-height: 0;
+      padding: clamp(72px, 10vw, 140px) 0 clamp(56px, 7vw, 96px);
       overflow: hidden;
       isolation: isolate;
-      background: #f4ead9;
-      color: #ffffff;
+      background: #ffffff;
+      color: var(--ink-navy);
     }
 
-    .people-page .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -2;
-      background-image: url("../assets/bible-journey-people-hero-strip.png");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: contain;
-      opacity: 1;
-    }
-
+    .people-page .hero::before,
     .people-page .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      background: rgba(244, 234, 217, 0.42);
-      pointer-events: none;
+      display: none;
+      content: none;
     }
 
     .people-page .hero .container {
-      width: min(1120px, calc(100% - 40px));
+      width: min(980px, calc(100% - 44px));
+      text-align: center;
     }
 
     .people-page .hero .eyebrow {
-      color: rgba(255, 255, 255, 0.86);
-      text-shadow: 0 3px 16px rgba(32, 22, 12, 0.38);
+      color: var(--electric-purple);
+      text-shadow: none;
     }
 
     .people-page .hero h1 {
-      max-width: 760px;
-      margin-bottom: 18px;
-      color: #ffffff;
-      text-shadow: 0 6px 26px rgba(32, 22, 12, 0.48);
+      max-width: 980px;
+      margin: 0 auto 22px;
+      color: var(--ink-navy);
+      text-shadow: none;
     }
 
     .people-page .hero-copy {
-      max-width: 680px;
-      color: rgba(255, 255, 255, 0.94);
-      text-shadow: 0 5px 20px rgba(32, 22, 12, 0.46);
-    }
-
-    .people-page .hero-actions {
-      margin-top: 28px;
-    }
-
-    .people-page .people-hero-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 0 24px;
-      border-radius: 999px;
-      background: var(--electric-purple);
-      color: #ffffff;
-      font-weight: 900;
-      letter-spacing: 0.01em;
-      text-decoration: none;
-      box-shadow: 0 18px 34px rgba(106, 45, 255, 0.26), 0 5px 18px rgba(32, 22, 12, 0.2);
-      transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
-    }
-
-    .people-page .people-hero-btn:hover,
-    .people-page .people-hero-btn:focus-visible {
-      transform: translateY(-2px);
-      background: #7a2cff;
-      box-shadow: 0 22px 42px rgba(106, 45, 255, 0.32), 0 8px 22px rgba(32, 22, 12, 0.24);
+      max-width: 760px;
+      margin: 0 auto;
+      color: rgba(31, 41, 51, 0.72);
+      text-shadow: none;
     }
 
     .people-gallery-section {
-      padding: clamp(18px, 4vw, 46px) 0 0;
+      padding: clamp(22px, 4vw, 54px) 0 clamp(70px, 9vw, 120px);
       scroll-margin-top: 24px;
     }
 
     .people-gallery-container {
-      width: calc(100vw - 12px);
-      max-width: none;
-      margin-left: calc(50% - 50vw + 6px);
-      margin-right: calc(50% - 50vw + 6px);
+      width: min(1180px, calc(100% - 44px));
+      max-width: 1180px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .people-gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(142px, 1fr));
-      gap: clamp(8px, 1vw, 14px);
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: clamp(24px, 3vw, 38px);
     }
 
     .people-gallery .info-card {
@@ -148,7 +108,7 @@
       min-height: 0;
       padding: 0;
       border: 0;
-      border-radius: 0;
+      border-radius: 6px;
       background: transparent;
       box-shadow: none;
       overflow: hidden;
@@ -159,9 +119,9 @@
 
     .people-gallery .info-card:hover,
     .people-gallery .info-card:focus-visible {
-      transform: translateY(-12px) scale(1.025);
-      filter: drop-shadow(0 28px 38px rgba(11, 16, 32, 0.18));
-      outline: 3px solid rgba(106, 45, 255, 0.72);
+      transform: translateY(-8px);
+      filter: drop-shadow(0 22px 30px rgba(11, 16, 32, 0.12));
+      outline: 2px solid rgba(106, 45, 255, 0.45);
       outline-offset: 4px;
       z-index: 3;
     }
@@ -173,7 +133,7 @@
       height: 100%;
       margin: 0;
       border: 0;
-      border-radius: 0;
+      border-radius: inherit;
       background: var(--surface);
       color: rgba(31, 41, 51, 0.36);
       font-size: 0.72rem;
@@ -183,7 +143,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(244, 234, 217, 0.24);
+      background: linear-gradient(180deg, rgba(11, 16, 32, 0.02) 0%, rgba(11, 16, 32, 0.34) 100%);
       pointer-events: none;
     }
 
@@ -193,12 +153,20 @@
       object-fit: cover;
       object-position: center;
       display: block;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 1050ms ease, transform 1050ms ease;
+      will-change: opacity, transform;
+    }
+
+    .people-gallery .info-card.in-view .image-slot img {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .people-gallery .image-slot img.people-daniel-image {
       height: 100%;
       object-position: center center;
-      transform: none;
       transform-origin: center center;
     }
 
@@ -287,7 +255,7 @@
 
     @media (max-width: 1100px) {
       .people-gallery {
-        grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
       }
     }
 
@@ -304,6 +272,14 @@
     @media (max-width: 480px) {
       .people-gallery {
         grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .people-gallery .image-slot img {
+        opacity: 1;
+        transform: none;
+        transition: none;
       }
     }
   </style>
@@ -334,9 +310,6 @@
           questions, and faith. Explore the people behind the text and see how their world
           helps the story come alive.
         </p>
-        <div class="hero-actions">
-          <a class="people-hero-btn" href="#people-gallery">Learn Their Story</a>
-        </div>
       </div>
     </section>
 
@@ -551,6 +524,26 @@
 
         <p class="bm-footer-copy">&copy; 2026 Bible Mapped. All rights reserved.</p>
       </div>
-    </footer>
+  </footer>
+  <script>
+    const peopleCards = document.querySelectorAll(".people-gallery .info-card");
+
+    if ("IntersectionObserver" in window) {
+      const peopleObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+            }
+          });
+        },
+        { threshold: 0.18 }
+      );
+
+      peopleCards.forEach((card) => peopleObserver.observe(card));
+    } else {
+      peopleCards.forEach((card) => card.classList.add("in-view"));
+    }
+  </script>
 </body>
 </html>
