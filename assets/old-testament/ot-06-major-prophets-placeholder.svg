@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 941 1672" role="img" aria-labelledby="title desc">
+  <title id="title">Major Prophets placeholder</title>
+  <desc id="desc">Placeholder for the Major Prophets infographic.</desc>
+  <rect width="941" height="1672" fill="#fff"/>
+  <g fill="none" stroke="#6d28ff" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M176 281h589" stroke-width="5" stroke-dasharray="14 18"/>
+    <path d="M176 1391h589" stroke-width="5" stroke-dasharray="14 18"/>
+    <path d="M286 560h369c38 0 69 31 69 69v553c0 38-31 69-69 69H286c-38 0-69-31-69-69V629c0-38 31-69 69-69z" stroke-width="8"/>
+    <path d="M333 702h276M333 812h276M333 922h216M333 1032h276" stroke-width="8"/>
+    <path d="M257 560c58-66 118-99 181-99s123 33 181 99" stroke-width="8"/>
+  </g>
+  <text x="470.5" y="198" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="900" fill="#151515">MAJOR PROPHETS</text>
+  <text x="470.5" y="302" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="800" fill="#6d28ff">Old Testament infographic coming soon</text>
+  <text x="470.5" y="1247" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="800" fill="#151515">Isaiah - Daniel</text>
+  <text x="470.5" y="1320" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#555">Judgment, hope, exile, and restoration.</text>
+</svg>

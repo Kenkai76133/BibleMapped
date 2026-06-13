@@ -9,22 +9,17 @@ optionalCutout.addEventListener("load", () => {
 });
 optionalCutout.src = "/assets/old-testament-cutout.png";
 
-document.querySelectorAll(".optional-graphic").forEach((figure) => {
-  const source = figure.dataset.optionalSrc;
-  const alt = figure.dataset.optionalAlt || "";
+document.querySelectorAll("[data-upgrade-src]").forEach((figure) => {
+  const upgradeSource = figure.dataset.upgradeSrc;
   const image = new Image();
 
-  image.className = "js-lightbox-image";
-  image.alt = alt;
-  image.loading = "lazy";
   image.addEventListener("load", () => {
-    figure.prepend(image);
-    figure.classList.add("has-image");
-    image.classList.add("pan-up");
-    observePanUp(image);
-    attachLightbox(image);
+    const currentImage = figure.querySelector("img");
+    if (!currentImage) return;
+    currentImage.src = upgradeSource;
+    currentImage.alt = "Major Prophets infographic";
   });
-  image.src = source;
+  image.src = upgradeSource;
 });
 
 function observePanUp(item) {
@@ -62,7 +57,7 @@ function attachLightbox(image) {
     lightboxImage.alt = image.alt || "";
     lightbox.classList.add("active");
     lightbox.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
+    document.body.classList.add("lightbox-open");
   });
 }
 
@@ -72,7 +67,7 @@ lightbox.addEventListener("click", () => {
   lightbox.classList.remove("active");
   lightbox.setAttribute("aria-hidden", "true");
   lightboxImage.src = "";
-  document.body.style.overflow = "";
+  document.body.classList.remove("lightbox-open");
 });
 
 document.addEventListener("keydown", (event) => {

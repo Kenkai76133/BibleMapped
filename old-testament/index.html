@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Old Testament | BibleMapped</title>
   <meta name="description" content="A simple, visual Old Testament BibleMapped page centered on infographics, maps, and book-group visuals.">
+  <link rel="preload" as="image" href="/assets/old-testament/ot-02-map.png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -36,6 +37,10 @@
           class="main-infographic js-lightbox-image"
           src="/assets/old-testament/ot-02-map.png"
           alt="Old Testament BibleMapped map infographic"
+          width="941"
+          height="1672"
+          decoding="async"
+          fetchpriority="high"
         >
       </div>
     </section>
@@ -43,10 +48,11 @@
     <section class="paired-graphics-section" id="graphics" aria-labelledby="graphics-title">
       <div class="graphic-text">
         <p class="eyebrow">Visual Source Material</p>
-        <h2 id="graphics-title">Let the Graphics Teach</h2>
+        <h2 id="graphics-title">Old Testament in Context</h2>
         <p>
-          These visuals are the center of the page. Each infographic is designed to explain
-          the Old Testament through place, movement, people, and meaning.
+          The Old Testament is the story of creation, covenant, worship, kingdom,
+          exile, and hope before Christ. Context means seeing the books inside their
+          place, people, timeline, and purpose so the story reads as one connected whole.
         </p>
       </div>
 
@@ -56,45 +62,46 @@
           src="/assets/old-testament/ot-01-books-overview.png"
           alt="Old Testament book overview infographic"
           loading="lazy"
-        >
-
-        <img
-          class="floating-graphic tilt-right js-lightbox-image"
-          src="/assets/old-testament-locations-map.png"
-          alt="Old Testament locations map"
-          loading="lazy"
+          width="941"
+          height="1672"
+          decoding="async"
         >
       </div>
     </section>
 
     <section class="ot-library" id="books" aria-labelledby="books-title">
       <p class="eyebrow">Old Testament Library</p>
-      <h2 id="books-title">Infographic Library</h2>
+      <h2 id="books-title">BibleMapped Context</h2>
       <p>
-        The Old Testament books are housed here as visual guides. Click any image to open it fullscreen.
+        Context is the frame that helps Scripture make sense: where a book belongs,
+        who it follows, when it sits in the story, and why its message matters. These
+        visual guides group the Old Testament books so each section can be read with
+        its setting and purpose in view.
       </p>
 
       <div class="infographic-gallery">
         <figure class="floating-item tilt-left">
-          <img class="js-lightbox-image" src="/assets/old-testament/ot-03-torah-law.png" alt="Law and Torah infographic" loading="lazy">
+          <img class="js-lightbox-image" src="/assets/old-testament/ot-03-torah-law.png" alt="Law and Torah infographic" loading="lazy" width="941" height="1672" decoding="async">
           <figcaption>Law / Torah</figcaption>
         </figure>
 
-        <figure class="floating-item tilt-right optional-graphic" data-optional-src="/assets/old-testament/ot-04-history.png" data-optional-alt="Old Testament History infographic">
+        <figure class="floating-item tilt-right">
+          <img class="js-lightbox-image" src="/assets/old-testament/ot-04-history-placeholder.svg" alt="Old Testament History infographic placeholder" loading="lazy" width="941" height="1672" decoding="async">
           <figcaption>History</figcaption>
         </figure>
 
         <figure class="floating-item tilt-left">
-          <img class="js-lightbox-image" src="/assets/old-testament/ot-05-poetry-wisdom.png" alt="Poetry and Wisdom infographic" loading="lazy">
+          <img class="js-lightbox-image" src="/assets/old-testament/ot-05-poetry-wisdom.png" alt="Poetry and Wisdom infographic" loading="lazy" width="941" height="1672" decoding="async">
           <figcaption>Poetry & Wisdom</figcaption>
         </figure>
 
-        <figure class="floating-item tilt-right optional-graphic" data-optional-src="/assets/old-testament/ot-06-major-prophets.png" data-optional-alt="Major Prophets infographic">
+        <figure class="floating-item tilt-right" data-upgrade-src="/assets/old-testament/ot-06-major-prophets.png">
+          <img class="js-lightbox-image" src="/assets/old-testament/ot-06-major-prophets-placeholder.svg" alt="Major Prophets infographic placeholder" loading="lazy" width="941" height="1672" decoding="async">
           <figcaption>Major Prophets</figcaption>
         </figure>
 
         <figure class="floating-item tilt-left">
-          <img class="js-lightbox-image" src="/assets/old-testament/ot-07-minor-prophets.png" alt="Minor Prophets infographic" loading="lazy">
+          <img class="js-lightbox-image" src="/assets/old-testament/ot-07-minor-prophets.png" alt="Minor Prophets infographic" loading="lazy" width="941" height="1672" decoding="async">
           <figcaption>Minor Prophets</figcaption>
         </figure>
       </div>
