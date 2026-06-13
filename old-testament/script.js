@@ -9,19 +9,6 @@ optionalCutout.addEventListener("load", () => {
 });
 optionalCutout.src = "/assets/old-testament-cutout.png";
 
-document.querySelectorAll("[data-upgrade-src]").forEach((figure) => {
-  const upgradeSource = figure.dataset.upgradeSrc;
-  const image = new Image();
-
-  image.addEventListener("load", () => {
-    const currentImage = figure.querySelector("img");
-    if (!currentImage) return;
-    currentImage.src = upgradeSource;
-    currentImage.alt = "Major Prophets infographic";
-  });
-  image.src = upgradeSource;
-});
-
 function observePanUp(item) {
   if (!item || !observer) return;
   observer.observe(item);
