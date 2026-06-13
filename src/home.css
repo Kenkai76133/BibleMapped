@@ -5687,7 +5687,7 @@
       inset: 0 !important;
       z-index: 0 !important;
       display: block !important;
-      background: rgba(255, 252, 244, 0.7) !important;
+      background: rgba(255, 252, 244, 0.805) !important;
       pointer-events: none !important;
     }
 
