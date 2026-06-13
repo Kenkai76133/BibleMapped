@@ -145,10 +145,13 @@ a {
   max-width: 1120px;
   margin: 0 auto;
   padding: 70px 22px;
-  display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  gap: 42px;
-  align-items: center;
+  display: block;
+  text-align: center;
+}
+
+.graphic-text {
+  max-width: 780px;
+  margin: 0 auto 38px;
 }
 
 .graphic-text h2,
@@ -161,19 +164,18 @@ a {
 }
 
 .paired-graphics {
-  display: grid;
-  grid-template-columns: minmax(0, 520px);
-  gap: 22px;
-  justify-content: center;
-  align-items: center;
+  width: min(92vw, 560px);
+  margin: 0 auto;
 }
 
 .floating-graphic {
   width: 100%;
-  aspect-ratio: 941 / 1672;
+  height: auto;
+  max-width: none;
   background: transparent;
   border: none;
   box-shadow: none;
+  object-fit: contain;
   cursor: zoom-in;
 }
 
@@ -414,7 +416,6 @@ body.lightbox-open {
 
 @media (max-width: 900px) {
   .paired-graphics-section {
-    grid-template-columns: 1fr;
     text-align: center;
   }
 
