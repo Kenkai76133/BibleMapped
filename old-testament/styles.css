@@ -409,6 +409,50 @@ figcaption {
   padding: 22px;
 }
 
+.book-infographic {
+  display: block;
+  width: 100%;
+  margin: 0 0 18px;
+  border: 1px solid rgba(51, 31, 18, 0.14);
+  background: var(--paper-warm);
+  text-decoration: none;
+  box-shadow: 0 14px 34px rgba(37, 26, 19, 0.08);
+}
+
+.book-infographic img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+}
+
+.book-infographic:hover,
+.book-infographic:focus-visible {
+  border-color: var(--purple);
+  box-shadow: 0 18px 42px rgba(111, 61, 187, 0.18);
+}
+
+.book-infographic-placeholder {
+  min-height: 0;
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(251, 248, 244, 0.78)),
+    repeating-linear-gradient(0deg, transparent 0 22px, rgba(111, 61, 187, 0.08) 22px 23px),
+    repeating-linear-gradient(90deg, transparent 0 22px, rgba(111, 61, 187, 0.08) 22px 23px);
+}
+
+.book-infographic-placeholder span {
+  padding: 10px 12px;
+  color: var(--purple);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .book-card h3 {
   min-height: 52px;
 }
