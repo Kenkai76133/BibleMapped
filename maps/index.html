@@ -12,6 +12,7 @@
         --bm-cream: #fffaf0;
         --bm-border: rgba(17, 17, 17, 0.12);
         --bm-muted: #666666;
+        --bm-shadow: 0 18px 50px rgba(17, 17, 17, 0.08);
       }
 
       html,
@@ -29,9 +30,9 @@
       }
 
       .atlas-page {
-        width: min(100% - 32px, 1180px);
+        width: min(100% - 40px, 1120px);
         margin: 0 auto;
-        padding: clamp(58px, 8vw, 104px) 0 clamp(72px, 10vw, 128px);
+        padding: clamp(58px, 8vw, 96px) 0 clamp(72px, 10vw, 128px);
       }
 
       .atlas-hero {
@@ -79,11 +80,9 @@
         aspect-ratio: 16 / 9;
         overflow: hidden;
         border: 1px solid var(--bm-border);
-        border-radius: 18px;
-        background:
-          linear-gradient(135deg, rgba(139, 61, 255, 0.10), rgba(255, 250, 240, 0.78)),
-          var(--bm-cream);
-        box-shadow: 0 28px 72px rgba(17, 17, 17, 0.12);
+        border-radius: 34px;
+        background: #ffffff;
+        box-shadow: var(--bm-shadow);
       }
 
       .atlas-map-frame img {
@@ -109,16 +108,52 @@
         text-align: center;
       }
 
+      .atlas-identity-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        margin: 48px auto 0;
+        overflow: hidden;
+        border: 1px solid var(--bm-border);
+        border-radius: 999px;
+        background: #ffffff;
+        box-shadow: 0 10px 35px rgba(17, 17, 17, 0.05);
+      }
+
+      .atlas-identity-strip div {
+        padding: 18px 16px;
+        border-right: 1px solid var(--bm-border);
+        text-align: center;
+      }
+
+      .atlas-identity-strip div:last-child {
+        border-right: 0;
+      }
+
+      .atlas-identity-strip strong {
+        display: block;
+        color: var(--bm-black);
+        font-size: 1rem;
+        line-height: 1.25;
+      }
+
+      .atlas-identity-strip span {
+        display: block;
+        margin-top: 3px;
+        color: var(--bm-muted);
+        font-size: 0.86rem;
+        line-height: 1.35;
+      }
+
       .atlas-exploration {
         display: grid;
         gap: clamp(24px, 4vw, 36px);
-        margin-top: clamp(58px, 8vw, 96px);
+        margin-top: 64px;
       }
 
       .atlas-bar {
         padding: clamp(24px, 4vw, 34px);
         border: 1px solid var(--bm-border);
-        border-radius: 18px;
+        border-radius: 32px;
         background: #ffffff;
         box-shadow: 0 18px 54px rgba(17, 17, 17, 0.06);
       }
@@ -154,10 +189,12 @@
       .atlas-card {
         display: flex;
         align-items: center;
+        justify-content: space-between;
+        gap: 14px;
         min-height: 72px;
         padding: 16px 18px;
         border: 1px solid rgba(17, 17, 17, 0.10);
-        border-radius: 14px;
+        border-radius: 22px;
         background: var(--bm-cream);
         color: var(--bm-black);
         font-size: 0.98rem;
@@ -167,9 +204,17 @@
         transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
       }
 
+      .atlas-card-arrow {
+        flex: 0 0 auto;
+        color: var(--electric-purple, var(--bm-purple));
+        font-size: 1.2rem;
+        line-height: 1;
+      }
+
       .atlas-card:hover,
       .atlas-card:focus-visible {
         border-color: rgba(139, 61, 255, 0.58);
+        background: #ffffff;
         box-shadow: 0 18px 38px rgba(139, 61, 255, 0.14);
         transform: translateY(-3px);
       }
@@ -178,11 +223,25 @@
         .atlas-card-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
+
+        .atlas-identity-strip {
+          grid-template-columns: repeat(2, 1fr);
+          border-radius: 28px;
+        }
+
+        .atlas-identity-strip div:nth-child(2) {
+          border-right: 0;
+        }
+
+        .atlas-identity-strip div:nth-child(1),
+        .atlas-identity-strip div:nth-child(2) {
+          border-bottom: 1px solid var(--bm-border);
+        }
       }
 
       @media (max-width: 560px) {
         .atlas-page {
-          width: min(100% - 24px, 1180px);
+          width: min(100% - 28px, 1120px);
           padding-top: 44px;
         }
 
@@ -199,6 +258,20 @@
           min-height: 66px;
           padding: 14px;
           font-size: 0.91rem;
+        }
+
+        .atlas-identity-strip {
+          grid-template-columns: 1fr;
+          border-radius: 24px;
+        }
+
+        .atlas-identity-strip div {
+          border-right: 0;
+          border-bottom: 1px solid var(--bm-border);
+        }
+
+        .atlas-identity-strip div:last-child {
+          border-bottom: 0;
         }
       }
 
@@ -240,6 +313,25 @@
         </figure>
       </section>
 
+      <section class="atlas-identity-strip" aria-label="BibleMapped method">
+        <div>
+          <strong>Where</strong>
+          <span>did it happen?</span>
+        </div>
+        <div>
+          <strong>Who</strong>
+          <span>was there?</span>
+        </div>
+        <div>
+          <strong>What</strong>
+          <span>happened?</span>
+        </div>
+        <div>
+          <strong>Why</strong>
+          <span>does it matter?</span>
+        </div>
+      </section>
+
       <div class="atlas-exploration" aria-label="BibleMapped Atlas exploration tools">
         <section class="atlas-bar" aria-labelledby="timelinesTitle">
           <div class="atlas-bar-header">
@@ -248,12 +340,12 @@
             <p class="atlas-bar-subtitle">Follow the Bible as one connected story.</p>
           </div>
           <div class="atlas-card-grid">
-            <a class="atlas-card" href="/maps/#genesis-timeline">Genesis Timeline</a>
-            <a class="atlas-card" href="/maps/#exodus-timeline">Exodus Timeline</a>
-            <a class="atlas-card" href="/maps/#kingdom-timeline">Kingdom Timeline</a>
-            <a class="atlas-card" href="/maps/#exile-timeline">Exile Timeline</a>
-            <a class="atlas-card" href="/maps/#life-of-jesus-timeline">Life of Jesus Timeline</a>
-            <a class="atlas-card" href="/maps/#early-church-timeline">Early Church Timeline</a>
+            <a class="atlas-card" href="/maps/#genesis-timeline"><span>Genesis Timeline</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#exodus-timeline"><span>Exodus Timeline</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#kingdom-timeline"><span>Kingdom Timeline</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#exile-timeline"><span>Exile Timeline</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#life-of-jesus-timeline"><span>Life of Jesus Timeline</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#early-church-timeline"><span>Early Church Timeline</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
           </div>
         </section>
 
@@ -264,14 +356,14 @@
             <p class="atlas-bar-subtitle">See where the story happened.</p>
           </div>
           <div class="atlas-card-grid">
-            <a class="atlas-card" href="/maps/#mesopotamia">Mesopotamia</a>
-            <a class="atlas-card" href="/maps/#egypt">Egypt</a>
-            <a class="atlas-card" href="/maps/#sinai-wilderness">Sinai &amp; Wilderness</a>
-            <a class="atlas-card" href="/maps/#canaan-israel">Canaan / Israel</a>
-            <a class="atlas-card" href="/maps/#jerusalem">Jerusalem</a>
-            <a class="atlas-card" href="/maps/#babylon-persia">Babylon &amp; Persia</a>
-            <a class="atlas-card" href="/maps/#galilee-judea">Galilee &amp; Judea</a>
-            <a class="atlas-card" href="/maps/#rome-mediterranean">Rome &amp; the Mediterranean</a>
+            <a class="atlas-card" href="/maps/#mesopotamia"><span>Mesopotamia</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#egypt"><span>Egypt</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#sinai-wilderness"><span>Sinai &amp; Wilderness</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#canaan-israel"><span>Canaan / Israel</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#jerusalem"><span>Jerusalem</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#babylon-persia"><span>Babylon &amp; Persia</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#galilee-judea"><span>Galilee &amp; Judea</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#rome-mediterranean"><span>Rome &amp; the Mediterranean</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
           </div>
         </section>
 
@@ -282,12 +374,12 @@
             <p class="atlas-bar-subtitle">Understand Scripture through movement, structure, and meaning.</p>
           </div>
           <div class="atlas-card-grid">
-            <a class="atlas-card" href="/maps/#bible-story-flow">Bible Story Flow</a>
-            <a class="atlas-card" href="/maps/#empires-of-the-bible">Empires of the Bible</a>
-            <a class="atlas-card" href="/maps/#covenants-chart">Covenants Chart</a>
-            <a class="atlas-card" href="/maps/#books-of-the-bible">Books of the Bible</a>
-            <a class="atlas-card" href="/maps/#people-connections">People Connections</a>
-            <a class="atlas-card" href="/maps/#temple-timeline">Temple Timeline</a>
+            <a class="atlas-card" href="/maps/#bible-story-flow"><span>Bible Story Flow</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#empires-of-the-bible"><span>Empires of the Bible</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#covenants-chart"><span>Covenants Chart</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#books-of-the-bible"><span>Books of the Bible</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#people-connections"><span>People Connections</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#temple-timeline"><span>Temple Timeline</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
           </div>
         </section>
 
@@ -298,12 +390,12 @@
             <p class="atlas-bar-subtitle">Start with a question, person, book, or journey.</p>
           </div>
           <div class="atlas-card-grid">
-            <a class="atlas-card" href="/maps/#start-with-genesis">Start with Genesis</a>
-            <a class="atlas-card" href="/maps/#follow-abraham">Follow Abraham</a>
-            <a class="atlas-card" href="/maps/#trace-the-exodus">Trace the Exodus</a>
-            <a class="atlas-card" href="/maps/#follow-jesus">Follow Jesus</a>
-            <a class="atlas-card" href="/maps/#pauls-journeys">Trace Paul's Journeys</a>
-            <a class="atlas-card" href="/maps/#understand-the-exile">Understand the Exile</a>
+            <a class="atlas-card" href="/maps/#start-with-genesis"><span>Start with Genesis</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#follow-abraham"><span>Follow Abraham</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#trace-the-exodus"><span>Trace the Exodus</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#follow-jesus"><span>Follow Jesus</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#pauls-journeys"><span>Trace Paul's Journeys</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="atlas-card" href="/maps/#understand-the-exile"><span>Understand the Exile</span><span class="atlas-card-arrow" aria-hidden="true">&rarr;</span></a>
           </div>
         </section>
       </div>
