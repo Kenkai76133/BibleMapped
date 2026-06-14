@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>BibleMapped Atlas | Maps, Timelines, Regions, and Context</title>
+  <title>Bible Mapped Atlas | Maps, Timelines, Regions, and Context</title>
 
   <meta
     name="description"
-    content="Explore Scripture through real places, ancient routes, biblical timelines, regions, empires, and meaning with the BibleMapped Atlas."
+    content="Explore Scripture through real places, ancient routes, biblical timelines, regions, empires, and meaning with the Bible Mapped Atlas."
   />
 
   <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -60,8 +60,6 @@
     a {
       color: inherit;
     }
-
-    /* PAGE WRAP */
 
     .atlas-page {
       background: #ffffff;
@@ -401,12 +399,12 @@
       font-size: 0.86rem;
     }
 
-    /* FEATURE SECTIONS */
+    /* IMAGE BAR SECTIONS */
 
     .atlas-feature-stack {
       display: grid;
-      gap: clamp(2.25rem, 5vw, 4.5rem);
-      padding: 0 clamp(1rem, 4vw, 2rem) clamp(5rem, 8vw, 8rem);
+      gap: 0;
+      padding: 0 0 clamp(5rem, 8vw, 8rem);
       background: #ffffff;
     }
 
@@ -416,29 +414,28 @@
       position: relative;
       isolation: isolate;
       overflow: hidden;
-      border: 1px solid var(--bm-border);
-      border-radius: clamp(22px, 3vw, 36px);
+      border: 0;
+      border-radius: 0;
       background: #ffffff;
-      box-shadow: 0 18px 60px rgba(31, 41, 51, 0.07);
+      box-shadow: none;
     }
 
-    .atlas-feature::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      background:
-        linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,0.72)),
-        radial-gradient(circle at 85% 20%, rgba(139,61,255,0.09), transparent 35%);
-      pointer-events: none;
+    .atlas-feature + .atlas-feature {
+      border-top: 1px solid rgba(31, 41, 51, 0.1);
     }
 
     .atlas-feature-inner {
       display: grid;
-      grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.35fr);
+      grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.25fr);
       gap: clamp(1.5rem, 4vw, 3rem);
-      padding: clamp(1.4rem, 4vw, 3.2rem);
-      align-items: center;
+      padding: clamp(2.2rem, 5vw, 4.2rem) clamp(1rem, 4vw, 2rem);
+      align-items: stretch;
+    }
+
+    .atlas-feature-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .atlas-feature-copy .eyebrow {
@@ -467,47 +464,84 @@
       line-height: 1.6;
     }
 
-    .atlas-card-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.85rem;
+    .atlas-image-bar-media {
+      position: relative;
+      display: block;
+      min-height: clamp(260px, 30vw, 430px);
+      overflow: hidden;
+      background: var(--bm-soft);
+      color: inherit;
+      text-decoration: none;
+      border: 0;
     }
 
-    .atlas-card {
-      position: relative;
-      display: flex;
+    .atlas-image-bar-media img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      object-fit: cover;
+      object-position: center;
+      border: 0;
+    }
+
+    .atlas-image-bar-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.1) 0%,
+          rgba(255, 255, 255, 0) 42%,
+          rgba(22, 33, 62, 0.12) 100%
+        );
+      pointer-events: none;
+    }
+
+    .atlas-explore-button {
+      position: absolute;
+      right: clamp(1rem, 3vw, 2rem);
+      bottom: clamp(1rem, 3vw, 2rem);
+      z-index: 2;
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-      min-height: 82px;
-      padding: 1rem 1rem;
-      border: 1px solid rgba(31, 41, 51, 0.12);
-      border-radius: 18px;
-      background: var(--bm-soft);
-      color: var(--bm-gunmetal);
-      text-decoration: none;
-      font-size: 0.94rem;
-      font-weight: 850;
-      box-shadow: 0 10px 24px rgba(31, 41, 51, 0.06);
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 1.35rem;
+      background: #16213e;
+      color: #ffffff;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: 0 12px 26px rgba(22, 33, 62, 0.18);
       transition:
         transform 180ms ease,
-        background 180ms ease,
-        border-color 180ms ease,
-        box-shadow 180ms ease;
+        background 180ms ease;
     }
 
-    .atlas-card:hover,
-    .atlas-card:focus-visible {
-      transform: translateY(-3px);
-      background: #ffffff;
-      border-color: rgba(139, 61, 255, 0.42);
-      box-shadow: 0 16px 34px rgba(139, 61, 255, 0.12);
-      outline: 0;
+    .atlas-image-bar-media:hover .atlas-explore-button,
+    .atlas-image-bar-media:focus-visible .atlas-explore-button {
+      transform: translateY(-2px);
+      background: var(--bm-purple-dark);
     }
 
-    .atlas-card span:last-child {
-      color: var(--bm-purple);
-      font-size: 1.2rem;
-      margin-left: 0.75rem;
+    .atlas-image-fallback {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(139, 61, 255, 0.12), transparent 30%),
+        linear-gradient(135deg, #fffdf7, #f4efe5);
+      color: rgba(31, 41, 51, 0.72);
+      font-size: 0.84rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
     }
 
     /* PREMIUM REVEAL */
@@ -524,8 +558,6 @@
       opacity: 1;
       transform: translateY(0);
     }
-
-    /* FOOTER SPACING FIX */
 
     .bm-site-footer {
       margin-top: 0;
@@ -610,16 +642,22 @@
         border-bottom: 0;
       }
 
-      .atlas-card-grid {
-        grid-template-columns: 1fr;
-      }
-
       .atlas-feature-inner {
-        padding: 1.1rem;
+        padding: clamp(2rem, 8vw, 3rem) 1rem;
       }
 
       .atlas-feature-copy h2 {
         font-size: clamp(2.5rem, 14vw, 3.8rem);
+      }
+
+      .atlas-image-bar-media {
+        min-height: clamp(240px, 62vw, 380px);
+      }
+
+      .atlas-explore-button {
+        left: 1rem;
+        right: 1rem;
+        width: auto;
       }
     }
   </style>
@@ -647,7 +685,7 @@
             <path d="M9.6 9.2C10 7.9 10.9 7 12.4 7c1.7 0 2.9 1 2.9 2.5 0 1.2-.7 1.9-1.8 2.6-.9.6-1.3 1.1-1.3 2.2" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
             <circle cx="12.2" cy="17.1" r="1.1" fill="currentColor" stroke="none" />
           </svg>
-          Q&A
+          Q&amp;A
         </a>
 
         <a href="/about/" class="nav-about">
@@ -682,7 +720,7 @@
           <p class="atlas-eyebrow">MAPS • TIMELINES • CONTEXT</p>
 
           <h1 class="atlas-title" id="atlasTitle">
-            <span>BibleMapped</span>
+            <span>Bible Mapped</span>
             <span><em>Atlas</em></span>
           </h1>
 
@@ -707,7 +745,7 @@
               </button>
             </div>
 
-            <div id="bibleAtlasMap" aria-label="Interactive BibleMapped Atlas map"></div>
+            <div id="bibleAtlasMap" aria-label="Interactive Bible Mapped Atlas map"></div>
           </div>
 
           <p class="atlas-map-caption">
@@ -718,7 +756,7 @@
       </div>
     </section>
 
-    <section class="atlas-method premium-reveal" aria-label="BibleMapped method">
+    <section class="atlas-method premium-reveal" aria-label="Bible Mapped method">
       <div class="atlas-method-inner">
         <div class="atlas-method-item">
           <strong>Where</strong>
@@ -742,7 +780,7 @@
       </div>
     </section>
 
-    <section class="atlas-feature-stack" id="atlasSections" aria-label="BibleMapped Atlas sections">
+    <section class="atlas-feature-stack" id="atlasSections" aria-label="Bible Mapped Atlas sections">
       <section class="atlas-feature premium-reveal" aria-labelledby="timelinesTitle">
         <div class="atlas-feature-inner">
           <div class="atlas-feature-copy">
@@ -754,14 +792,15 @@
             </p>
           </div>
 
-          <div class="atlas-card-grid">
-            <a class="atlas-card" href="/timelines/genesis/"><span>Genesis Timeline</span><span>→</span></a>
-            <a class="atlas-card" href="/timelines/exodus/"><span>Exodus Timeline</span><span>→</span></a>
-            <a class="atlas-card" href="/timelines/kingdom/"><span>Kingdom Timeline</span><span>→</span></a>
-            <a class="atlas-card" href="/timelines/exile/"><span>Exile Timeline</span><span>→</span></a>
-            <a class="atlas-card" href="/timelines/life-of-jesus/"><span>Life of Jesus Timeline</span><span>→</span></a>
-            <a class="atlas-card" href="/timelines/early-church/"><span>Early Church Timeline</span><span>→</span></a>
-          </div>
+          <a class="atlas-image-bar-media" href="/maps/timelines/" aria-label="Explore Timelines">
+            <img
+              src="/assets/maps-page/timelines-bar.jpg"
+              alt="Bible Mapped timelines visual"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+            />
+            <span class="atlas-image-fallback">Add /assets/maps-page/timelines-bar.jpg</span>
+            <span class="atlas-explore-button">Explore</span>
+          </a>
         </div>
       </section>
 
@@ -769,23 +808,22 @@
         <div class="atlas-feature-inner">
           <div class="atlas-feature-copy">
             <p class="eyebrow">PLACES</p>
-            <h2 id="regionsTitle">Maps & Regions</h2>
+            <h2 id="regionsTitle">Maps &amp; Regions</h2>
             <p>
               See the lands, cities, routes, and empires that shaped the world
               behind the biblical text.
             </p>
           </div>
 
-          <div class="atlas-card-grid">
-            <a class="atlas-card" href="/maps/mesopotamia/"><span>Mesopotamia</span><span>→</span></a>
-            <a class="atlas-card" href="/maps/egypt/"><span>Egypt</span><span>→</span></a>
-            <a class="atlas-card" href="/maps/sinai-wilderness/"><span>Sinai & Wilderness</span><span>→</span></a>
-            <a class="atlas-card" href="/maps/canaan-israel/"><span>Canaan / Israel</span><span>→</span></a>
-            <a class="atlas-card" href="/maps/jerusalem/"><span>Jerusalem</span><span>→</span></a>
-            <a class="atlas-card" href="/maps/babylon-persia/"><span>Babylon & Persia</span><span>→</span></a>
-            <a class="atlas-card" href="/maps/galilee-judea/"><span>Galilee & Judea</span><span>→</span></a>
-            <a class="atlas-card" href="/maps/rome-mediterranean/"><span>Rome & Mediterranean</span><span>→</span></a>
-          </div>
+          <a class="atlas-image-bar-media" href="/maps/regions/" aria-label="Explore Maps and Regions">
+            <img
+              src="/assets/maps-page/maps-regions-bar.jpg"
+              alt="Bible Mapped maps and regions visual"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+            />
+            <span class="atlas-image-fallback">Add /assets/maps-page/maps-regions-bar.jpg</span>
+            <span class="atlas-explore-button">Explore</span>
+          </a>
         </div>
       </section>
 
@@ -793,21 +831,22 @@
         <div class="atlas-feature-inner">
           <div class="atlas-feature-copy">
             <p class="eyebrow">JOURNEYS</p>
-            <h2 id="routesTitle">Routes & Movements</h2>
+            <h2 id="routesTitle">Routes &amp; Movements</h2>
             <p>
               Trace the journeys that carry the story forward — from Abraham’s
               call to the Exodus, from Jesus in Galilee to Paul moving toward Rome.
             </p>
           </div>
 
-          <div class="atlas-card-grid">
-            <a class="atlas-card" href="/maps/routes/abraham/"><span>Abraham’s Journey</span><span>→</span></a>
-            <a class="atlas-card" href="/maps/routes/exodus/"><span>Exodus Route</span><span>→</span></a>
-            <a class="atlas-card" href="/maps/routes/wilderness/"><span>Wilderness Journey</span><span>→</span></a>
-            <a class="atlas-card" href="/maps/routes/conquest/"><span>Israel Enters the Land</span><span>→</span></a>
-            <a class="atlas-card" href="/maps/routes/jesus-galilee/"><span>Jesus in Galilee</span><span>→</span></a>
-            <a class="atlas-card" href="/maps/routes/paul/"><span>Paul’s Missionary Journeys</span><span>→</span></a>
-          </div>
+          <a class="atlas-image-bar-media" href="/maps/routes/" aria-label="Explore Routes and Movements">
+            <img
+              src="/assets/maps-page/routes-movements-bar.jpg"
+              alt="Bible Mapped routes and movements visual"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+            />
+            <span class="atlas-image-fallback">Add /assets/maps-page/routes-movements-bar.jpg</span>
+            <span class="atlas-explore-button">Explore</span>
+          </a>
         </div>
       </section>
 
@@ -822,14 +861,15 @@
             </p>
           </div>
 
-          <div class="atlas-card-grid">
-            <a class="atlas-card" href="/charts/bible-story-flow/"><span>Bible Story Flow</span><span>→</span></a>
-            <a class="atlas-card" href="/charts/empires/"><span>Empires of the Bible</span><span>→</span></a>
-            <a class="atlas-card" href="/charts/covenants/"><span>Covenants Chart</span><span>→</span></a>
-            <a class="atlas-card" href="/charts/books-of-the-bible/"><span>Books of the Bible</span><span>→</span></a>
-            <a class="atlas-card" href="/charts/people-connections/"><span>People Connections</span><span>→</span></a>
-            <a class="atlas-card" href="/charts/temple-timeline/"><span>Temple Timeline</span><span>→</span></a>
-          </div>
+          <a class="atlas-image-bar-media" href="/maps/charts/" aria-label="Explore Charts">
+            <img
+              src="/assets/maps-page/charts-bar.jpg"
+              alt="Bible Mapped charts visual"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+            />
+            <span class="atlas-image-fallback">Add /assets/maps-page/charts-bar.jpg</span>
+            <span class="atlas-explore-button">Explore</span>
+          </a>
         </div>
       </section>
 
@@ -844,14 +884,15 @@
             </p>
           </div>
 
-          <div class="atlas-card-grid">
-            <a class="atlas-card" href="/study-paths/genesis/"><span>Start with Genesis</span><span>→</span></a>
-            <a class="atlas-card" href="/study-paths/abraham/"><span>Follow Abraham</span><span>→</span></a>
-            <a class="atlas-card" href="/study-paths/exodus/"><span>Trace the Exodus</span><span>→</span></a>
-            <a class="atlas-card" href="/study-paths/jesus/"><span>Follow Jesus</span><span>→</span></a>
-            <a class="atlas-card" href="/study-paths/paul/"><span>Trace Paul’s Journeys</span><span>→</span></a>
-            <a class="atlas-card" href="/study-paths/exile/"><span>Understand the Exile</span><span>→</span></a>
-          </div>
+          <a class="atlas-image-bar-media" href="/maps/study-paths/" aria-label="Explore Study Paths">
+            <img
+              src="/assets/maps-page/study-paths-bar.jpg"
+              alt="Bible Mapped study paths visual"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+            />
+            <span class="atlas-image-fallback">Add /assets/maps-page/study-paths-bar.jpg</span>
+            <span class="atlas-explore-button">Explore</span>
+          </a>
         </div>
       </section>
     </section>
@@ -1084,7 +1125,7 @@
 
         const popupHtml = `
           <div class="bm-map-popup">
-            <p class="bm-map-popup-kicker">BibleMapped Place</p>
+            <p class="bm-map-popup-kicker">Bible Mapped Place</p>
             <h3>${place.name}</h3>
 
             <div class="bm-map-popup-block">
