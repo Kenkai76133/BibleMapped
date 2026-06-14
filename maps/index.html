@@ -62,6 +62,7 @@
     .atlas-page {
       background: #ffffff;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     /* HERO */
@@ -397,48 +398,58 @@
       font-size: 0.86rem;
     }
 
-    /* IMAGE BAR SECTIONS — the bar itself is the image */
+    /* IMAGE BAR SECTIONS — wall-to-wall image bars, no white gaps */
 
     .atlas-feature-stack {
-      display: grid;
-      gap: 0;
-      padding: 0 0 clamp(5rem, 8vw, 8rem);
+      display: block;
+      padding: 0;
+      margin: 0;
       background: #ffffff;
+      line-height: 0;
     }
 
     .atlas-feature {
+      display: block;
       width: 100%;
       margin: 0;
+      padding: 0;
       position: relative;
       isolation: isolate;
       overflow: hidden;
       border: 0;
       border-radius: 0;
-      background: #ffffff;
+      background: transparent;
       box-shadow: none;
+      line-height: normal;
     }
 
     .atlas-feature + .atlas-feature {
-      border-top: 1px solid rgba(31, 41, 51, 0.08);
+      border-top: 0;
+      margin-top: 0;
     }
 
     .atlas-feature-inner {
-      width: min(1180px, 100%);
-      margin: 0 auto;
-      padding: clamp(2rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem);
+      display: block;
+      width: 100vw;
+      max-width: none;
+      margin-left: 50%;
+      transform: translateX(-50%);
+      padding: 0;
+      line-height: 0;
     }
 
     .atlas-image-bar-media {
       position: relative;
       display: block;
-      width: 100%;
-      min-height: clamp(300px, 34vw, 460px);
+      width: 100vw;
+      min-height: clamp(360px, 42vw, 620px);
       overflow: hidden;
       background: #fffdf7;
       color: #ffffff;
       text-decoration: none;
       border: 0;
       border-radius: 0;
+      line-height: normal;
     }
 
     .atlas-image-bar-media img {
@@ -481,7 +492,9 @@
       flex-direction: column;
       justify-content: center;
       width: min(680px, 72%);
-      padding: clamp(2rem, 5vw, 4rem);
+      margin-left: max(1rem, calc((100vw - 1180px) / 2));
+      padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 2rem);
+      line-height: normal;
     }
 
     .atlas-image-bar-content .eyebrow {
@@ -491,6 +504,7 @@
       font-weight: 900;
       letter-spacing: 0.16em;
       text-transform: uppercase;
+      line-height: 1;
     }
 
     .atlas-image-bar-content h2 {
@@ -514,7 +528,7 @@
 
     .atlas-explore-button {
       position: absolute;
-      right: clamp(1rem, 3vw, 2rem);
+      right: max(1rem, calc((100vw - 1180px) / 2));
       bottom: clamp(1rem, 3vw, 2rem);
       z-index: 4;
       display: inline-flex;
@@ -533,6 +547,7 @@
         transform 180ms ease,
         background 180ms ease,
         color 180ms ease;
+      line-height: 1;
     }
 
     .atlas-image-bar-media:hover .atlas-explore-button,
@@ -558,6 +573,7 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       text-align: center;
+      line-height: 1.4;
     }
 
     /* SCROLL REVEAL / PAN UP */
@@ -595,6 +611,11 @@
     @media (max-width: 920px) {
       .atlas-image-bar-content {
         width: min(720px, 86%);
+        margin-left: 1rem;
+      }
+
+      .atlas-explore-button {
+        right: 1rem;
       }
 
       .atlas-method-inner {
@@ -666,15 +687,20 @@
       }
 
       .atlas-feature-inner {
-        padding: 1rem 0;
+        width: 100vw;
+        margin-left: 50%;
+        transform: translateX(-50%);
+        padding: 0;
       }
 
       .atlas-image-bar-media {
-        min-height: clamp(360px, 86vw, 480px);
+        width: 100vw;
+        min-height: clamp(420px, 96vw, 540px);
       }
 
       .atlas-image-bar-content {
         width: 100%;
+        margin-left: 0;
         padding: 2rem 1rem 5.5rem;
       }
 
@@ -818,7 +844,6 @@
     </section>
 
     <section class="atlas-feature-stack" id="atlasSections" aria-label="Bible Mapped Atlas sections">
-
       <section class="atlas-feature premium-reveal pan-item" aria-labelledby="timelinesTitle">
         <div class="atlas-feature-inner">
           <a class="atlas-image-bar-media" href="/maps/timelines/" aria-label="Explore Timelines">
