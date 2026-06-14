@@ -3,450 +3,208 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Maps - Bible Mapped</title>
+    <title>BibleMapped Atlas - Bible Mapped</title>
     <link rel="stylesheet" href="../src/styles.css?v=footer-gunmetal-1" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
     <style>
+      :root {
+        --bm-purple: #8b3dff;
+        --bm-black: #111111;
+        --bm-cream: #fffaf0;
+        --bm-border: rgba(17, 17, 17, 0.12);
+        --bm-muted: #666666;
+      }
+
+      html,
       body.simple-page {
         background: #ffffff;
       }
 
-      .maps-page .hero {
-        padding-bottom: clamp(48px, 8vw, 82px);
+      body.simple-page {
+        color: var(--bm-black);
       }
 
-      .maps-page .hero h1 {
-        max-width: 10ch;
+      .bm-global-header,
+      .bm-global-nav {
+        background: #ffffff;
       }
 
-      .map-navigator-section {
-        padding: clamp(40px, 7vw, 82px) 0 clamp(56px, 8vw, 96px);
-        border-top: 1px solid rgba(31, 41, 51, 0.1);
+      .atlas-page {
+        width: min(100% - 32px, 1180px);
+        margin: 0 auto;
+        padding: clamp(58px, 8vw, 104px) 0 clamp(72px, 10vw, 128px);
       }
 
-      .map-navigator-copy {
-        max-width: 760px;
-        margin-bottom: clamp(28px, 4vw, 44px);
+      .atlas-hero {
+        display: grid;
+        justify-items: center;
+        text-align: center;
       }
 
-      .map-navigator-copy h2 {
-        margin: 0 0 16px;
+      .atlas-eyebrow,
+      .atlas-section-label {
+        margin: 0;
+        color: var(--electric-purple, var(--bm-purple));
+        font-size: 0.76rem;
+        font-weight: 950;
+        letter-spacing: 0.18em;
+        line-height: 1.3;
+        text-transform: uppercase;
+      }
+
+      .atlas-hero h1 {
+        margin: 14px 0 16px;
+        color: var(--bm-black);
         font-family: "Cormorant Garamond", Georgia, serif;
-        color: var(--gunmetal);
-        font-size: clamp(2.6rem, 5vw, 5.2rem);
-        line-height: 0.96;
+        font-size: clamp(3.6rem, 8vw, 7.2rem);
+        line-height: 0.92;
+        letter-spacing: 0;
       }
 
-      .map-navigator-copy p,
-      .bible-map-navigator .leaflet-popup-content {
-        color: var(--soft-ink);
+      .atlas-subtitle {
+        max-width: 760px;
+        margin: 0;
+        color: var(--bm-muted);
+        font-size: clamp(1.08rem, 2vw, 1.34rem);
+        line-height: 1.65;
+      }
+
+      .atlas-map-stage {
+        width: min(100%, 1100px);
+        margin: clamp(34px, 5vw, 58px) auto 0;
+      }
+
+      .atlas-map-frame {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        border: 1px solid var(--bm-border);
+        border-radius: 18px;
+        background:
+          linear-gradient(135deg, rgba(139, 61, 255, 0.10), rgba(255, 250, 240, 0.78)),
+          var(--bm-cream);
+        box-shadow: 0 28px 72px rgba(17, 17, 17, 0.12);
+      }
+
+      .atlas-map-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .atlas-map-frame::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+      }
+
+      .atlas-caption {
+        max-width: 720px;
+        margin: 16px auto 0;
+        color: rgba(17, 17, 17, 0.68);
+        font-size: 0.98rem;
+        line-height: 1.65;
+        text-align: center;
+      }
+
+      .atlas-exploration {
+        display: grid;
+        gap: clamp(24px, 4vw, 36px);
+        margin-top: clamp(58px, 8vw, 96px);
+      }
+
+      .atlas-bar {
+        padding: clamp(24px, 4vw, 34px);
+        border: 1px solid var(--bm-border);
+        border-radius: 18px;
+        background: #ffffff;
+        box-shadow: 0 18px 54px rgba(17, 17, 17, 0.06);
+      }
+
+      .atlas-bar-header {
+        display: grid;
+        gap: 8px;
+        margin-bottom: 22px;
+      }
+
+      .atlas-bar-title {
+        margin: 0;
+        color: var(--bm-black);
+        font-size: clamp(1.7rem, 3vw, 2.45rem);
+        line-height: 1.08;
+        letter-spacing: 0;
+      }
+
+      .atlas-bar-subtitle {
+        max-width: 720px;
+        margin: 0;
+        color: var(--bm-muted);
         font-size: 1rem;
         line-height: 1.65;
       }
 
-      .map-navigator-copy p {
-        margin: 0;
-      }
-
-      .bible-map-navigator {
-        width: 100%;
-        height: clamp(360px, 52vw, 560px);
-        border: 1px solid rgba(31, 41, 51, 0.12);
-        border-radius: 8px;
-        background: #f8f6ef;
-        overflow: hidden;
-        box-shadow: 0 22px 48px rgba(31, 41, 51, 0.08);
-      }
-
-      .bible-map-navigator .leaflet-container,
-      .bible-map-navigator.leaflet-container {
-        font-family: "DM Sans", Arial, sans-serif;
-      }
-
-      .bible-map-navigator .leaflet-popup-content-wrapper {
-        border-radius: 8px;
-        box-shadow: 0 16px 34px rgba(31, 41, 51, 0.18);
-      }
-
-      .bible-map-navigator .leaflet-popup-content {
-        min-width: 210px;
-        margin: 16px 18px;
-      }
-
-      .bible-map-navigator .leaflet-popup-content strong {
-        display: block;
-        margin-bottom: 6px;
-        color: var(--gunmetal);
-        font-size: 1rem;
-        letter-spacing: 0.02em;
-      }
-
-      .bible-map-navigator .leaflet-popup-content em {
-        display: block;
-        color: rgba(31, 41, 51, 0.72);
-        font-style: normal;
-      }
-
-      .bible-map-navigator .leaflet-control-attribution {
-        background: rgba(255, 255, 255, 0.82);
-        color: rgba(31, 41, 51, 0.66);
-        font-size: 0.68rem;
-      }
-
-      .story-regions {
-        padding: clamp(64px, 10vw, 116px) 0;
-        border-top: 1px solid rgba(31, 41, 51, 0.1);
-      }
-
-      .testament-map-library {
-        padding: clamp(56px, 8vw, 96px) 0;
-        border-top: 1px solid rgba(31, 41, 51, 0.1);
-      }
-
-      .testament-map-intro {
-        max-width: 760px;
-        margin-bottom: clamp(30px, 5vw, 54px);
-      }
-
-      .testament-map-intro h2 {
-        margin: 0 0 16px;
-        font-family: "Cormorant Garamond", Georgia, serif;
-        color: var(--gunmetal);
-        font-size: clamp(2.6rem, 5vw, 5.2rem);
-        line-height: 0.96;
-      }
-
-      .testament-map-intro p,
-      .testament-map-caption {
-        margin: 0;
-        color: var(--soft-ink);
-        font-size: 1rem;
-        line-height: 1.75;
-      }
-
-      .testament-map-actions {
-        display: flex;
-        flex-wrap: wrap;
+      .atlas-card-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 12px;
-        margin: 22px 0 18px;
       }
 
-      .testament-map-button {
-        display: inline-flex;
+      .atlas-card {
+        display: flex;
         align-items: center;
-        justify-content: center;
-        min-width: 150px;
-        min-height: 48px;
-        padding: 0 22px;
-        background: var(--map-navy);
-        color: #ffffff;
-        font-size: 0.82rem;
-        font-weight: 900;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        transition: background 180ms ease, transform 180ms ease;
-      }
-
-      .testament-map-button:hover,
-      .testament-map-button:focus-visible {
-        background: var(--ink-navy);
-        transform: translateY(-2px);
-      }
-
-      .story-regions-intro {
-        max-width: 720px;
-        margin-bottom: clamp(38px, 6vw, 68px);
-      }
-
-      .story-regions-intro h2,
-      .latest-maps h2 {
-        margin: 0 0 16px;
-        font-family: "Cormorant Garamond", Georgia, serif;
-        color: var(--gunmetal);
-        font-size: clamp(2.6rem, 5vw, 5.2rem);
-        line-height: 0.96;
-      }
-
-      .story-regions-intro p,
-      .region-description,
-      .region-meaning,
-      .latest-map-link p {
-        margin: 0;
-        color: var(--soft-ink);
-        font-size: 1rem;
-        line-height: 1.75;
-      }
-
-      .story-regions-layout {
-        display: grid;
-        grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
-        gap: clamp(34px, 6vw, 76px);
-        align-items: start;
-      }
-
-      .story-region-map {
-        position: relative;
-        min-height: clamp(430px, 54vw, 620px);
-        border-top: 1px solid rgba(31, 41, 51, 0.14);
-        border-bottom: 1px solid rgba(31, 41, 51, 0.14);
-        background:
-          linear-gradient(to right, rgba(200, 155, 60, 0.08) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(200, 155, 60, 0.08) 1px, transparent 1px);
-        background-size: 96px 96px;
-      }
-
-      .story-region-map::before,
-      .story-region-map::after {
-        content: "";
-        position: absolute;
-        pointer-events: none;
-      }
-
-      .story-region-map::before {
-        inset: 9% 10% 13% 12%;
-        border: 1px solid rgba(200, 155, 60, 0.22);
-        border-radius: 48% 52% 44% 56% / 38% 46% 54% 62%;
-        transform: rotate(-7deg);
-      }
-
-      .story-region-map::after {
-        inset: 18% 18% 19% 20%;
-        border-left: 1px solid rgba(31, 41, 51, 0.11);
-        border-bottom: 1px solid rgba(31, 41, 51, 0.1);
-        transform: skew(-16deg);
-      }
-
-      .region-marker {
-        position: absolute;
-        left: var(--x);
-        top: var(--y);
-        z-index: 1;
-        max-width: min(190px, 42vw);
-        padding: 0;
-        border: 0;
-        background: transparent;
-        color: var(--gunmetal);
-        cursor: pointer;
-        font: inherit;
-        text-align: left;
-      }
-
-      .region-marker::before {
-        content: "";
-        display: block;
-        width: 9px;
-        height: 9px;
-        margin-bottom: 8px;
-        border: 1px solid var(--map-gold);
-        border-radius: 50%;
-        background: #ffffff;
-        transition: transform 180ms ease, background 180ms ease;
-      }
-
-      .region-marker-name {
-        display: block;
-        font-size: 0.78rem;
-        font-weight: 900;
-        letter-spacing: 0.1em;
-        line-height: 1.25;
-        text-transform: uppercase;
-      }
-
-      .region-marker-label {
-        display: block;
-        margin-top: 4px;
-        color: rgba(31, 41, 51, 0.66);
-        font-size: 0.82rem;
-        line-height: 1.35;
-      }
-
-      .region-marker:hover,
-      .region-marker:focus-visible,
-      .region-marker[aria-pressed="true"] {
-        color: var(--electric-purple);
-        outline: 0;
-      }
-
-      .region-marker:hover::before,
-      .region-marker:focus-visible::before,
-      .region-marker[aria-pressed="true"]::before {
-        background: var(--map-gold);
-        transform: scale(1.35);
-      }
-
-      .story-region-note {
-        margin: 18px 0 0;
-        color: rgba(31, 41, 51, 0.58);
-        font-size: 0.84rem;
-        line-height: 1.6;
-      }
-
-      .story-region-details {
-        padding-top: 4px;
-        border-top: 1px solid rgba(31, 41, 51, 0.14);
-      }
-
-      .region-heading {
-        margin: 10px 0 8px;
-        font-family: "Cormorant Garamond", Georgia, serif;
-        color: var(--gunmetal);
-        font-size: clamp(2.2rem, 4vw, 4rem);
-        line-height: 0.98;
-      }
-
-      .region-map-label {
-        margin: 0 0 18px;
-        color: var(--map-gold);
-        font-size: 0.78rem;
-        font-weight: 900;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-      }
-
-      .region-list-group {
-        margin-top: 28px;
-        padding-top: 22px;
-        border-top: 1px solid rgba(31, 41, 51, 0.1);
-      }
-
-      .region-list-group h3 {
-        margin: 0 0 12px;
-        color: var(--gunmetal);
-        font-size: 0.82rem;
-        font-weight: 950;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-      }
-
-      .region-list-group ul {
-        display: grid;
-        gap: 8px;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
-
-      .region-list-group li {
-        color: var(--soft-ink);
+        min-height: 72px;
+        padding: 16px 18px;
+        border: 1px solid rgba(17, 17, 17, 0.10);
+        border-radius: 14px;
+        background: var(--bm-cream);
+        color: var(--bm-black);
         font-size: 0.98rem;
-        line-height: 1.55;
+        font-weight: 850;
+        line-height: 1.25;
+        box-shadow: 0 10px 26px rgba(17, 17, 17, 0.045);
+        transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
       }
 
-      .region-cta {
-        display: inline-flex;
-        margin-top: 30px;
-        color: var(--electric-purple);
-        font-size: 0.82rem;
-        font-weight: 950;
-        letter-spacing: 0.12em;
-        text-decoration: none;
-        text-transform: uppercase;
+      .atlas-card:hover,
+      .atlas-card:focus-visible {
+        border-color: rgba(139, 61, 255, 0.58);
+        box-shadow: 0 18px 38px rgba(139, 61, 255, 0.14);
+        transform: translateY(-3px);
       }
 
-      .latest-maps {
-        padding: clamp(56px, 8vw, 92px) 0 clamp(76px, 10vw, 124px);
-        border-top: 1px solid rgba(31, 41, 51, 0.1);
+      @media (max-width: 860px) {
+        .atlas-card-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
       }
 
-      .latest-map-list {
-        display: grid;
-        gap: 0;
-        margin-top: 30px;
-        border-top: 1px solid rgba(31, 41, 51, 0.12);
-      }
-
-      .latest-map-link {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        gap: 24px;
-        padding: 24px 0;
-        border-bottom: 1px solid rgba(31, 41, 51, 0.12);
-        color: inherit;
-        text-decoration: none;
-      }
-
-      .latest-map-link h3 {
-        margin: 0 0 6px;
-        color: var(--gunmetal);
-        font-size: clamp(1.35rem, 2.4vw, 2rem);
-        line-height: 1.08;
-      }
-
-      .latest-map-link span {
-        align-self: center;
-        color: var(--map-gold);
-        font-size: 0.76rem;
-        font-weight: 950;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-      }
-
-      .latest-map-link:hover h3,
-      .latest-map-link:focus-visible h3 {
-        color: var(--electric-purple);
-      }
-
-      @media (max-width: 820px) {
-        .testament-map-actions {
-          display: grid;
+      @media (max-width: 560px) {
+        .atlas-page {
+          width: min(100% - 24px, 1180px);
+          padding-top: 44px;
         }
 
-        .story-regions-layout {
-          grid-template-columns: 1fr;
+        .atlas-map-frame,
+        .atlas-bar {
+          border-radius: 14px;
         }
 
-        .story-region-map {
-          min-height: auto;
-          padding: 6px 0;
-          border-bottom: 0;
-          background-size: 72px 72px;
-        }
-
-        .story-region-map::before,
-        .story-region-map::after {
-          display: none;
-        }
-
-        .region-marker {
-          position: relative;
-          left: auto;
-          top: auto;
-          display: block;
-          max-width: none;
-          width: 100%;
-          padding: 14px 0;
-          border-bottom: 1px solid rgba(31, 41, 51, 0.1);
-        }
-
-        .region-marker::before {
-          display: inline-block;
-          margin: 0 10px 0 0;
-          vertical-align: middle;
-        }
-
-        .region-marker-name {
-          display: inline;
-        }
-
-        .region-marker-label {
-          margin-left: 23px;
-        }
-
-        .latest-map-link {
-          grid-template-columns: 1fr;
+        .atlas-card-grid {
           gap: 10px;
         }
 
-        .bible-map-navigator {
-          height: 420px;
+        .atlas-card {
+          min-height: 66px;
+          padding: 14px;
+          font-size: 0.91rem;
         }
       }
 
-      @media (max-width: 520px) {
-        .bible-map-navigator {
-          height: 360px;
-          border-radius: 6px;
+      @media (max-width: 390px) {
+        .atlas-card-grid {
+          grid-template-columns: 1fr;
         }
       }
     </style>
@@ -466,140 +224,89 @@
       </nav>
     </header>
 
-    <main class="container maps-page">
-      <section class="hero">
-        <p class="eyebrow">MAPS</p>
-        <h1>Maps</h1>
-        <p class="hero-copy">Places, routes, borders, and terrain so the story stays grounded.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="/places/">Open Map Navigator</a>
-        </div>
-      </section>
+    <main class="atlas-page">
+      <section class="atlas-hero" aria-labelledby="atlasTitle">
+        <p class="atlas-eyebrow">MAPS &bull; TIMELINES &bull; CONTEXT</p>
+        <h1 id="atlasTitle">BibleMapped Atlas</h1>
+        <p class="atlas-subtitle">Trace the Bible through real places, real people, real timelines, and real meaning.</p>
 
-      <section class="map-navigator-section" aria-labelledby="map-navigator-title">
-        <div class="map-navigator-copy">
-          <p class="eyebrow">Interactive Study Map</p>
-          <h2 id="map-navigator-title">Map Navigator</h2>
-          <p>
-            Explore the major regions that shape the biblical story. Click a place to see
-            why it matters in Scripture.
-          </p>
-        </div>
-
-        <div id="bibleMapNavigator" class="bible-map-navigator"></div>
-      </section>
-
-      <section class="testament-map-library" aria-labelledby="testamentMapsTitle">
-        <div class="testament-map-intro">
-          <p class="eyebrow">MAP LIBRARY</p>
-          <h2 id="testamentMapsTitle">Old and New Testament Maps</h2>
-          <div class="testament-map-actions" aria-label="Open testament map images">
-            <a class="testament-map-button" href="/old-testament/">OT Maps</a>
-            <a class="testament-map-button" href="/new-testament/">NT Maps</a>
+        <figure class="atlas-map-stage">
+          <div class="atlas-map-frame">
+            <img src="/images/biblemapped-atlas-map.png" alt="BibleMapped Atlas map preview" />
           </div>
-          <p>Two broad map references for the major locations, journeys, and movements that shape the biblical story.</p>
-        </div>
+          <figcaption class="atlas-caption">
+            The Bible happened in real places. Start with the map, then follow the story.
+          </figcaption>
+        </figure>
       </section>
 
-      <section class="story-regions" aria-labelledby="storyRegionsTitle">
-        <div class="story-regions-intro">
-          <p class="eyebrow">STORY REGIONS</p>
-          <h2 id="storyRegionsTitle">Stories by Region</h2>
-          <p>The Bible happened in real places. Choose a region to see the stories, people, and meaning connected to it.</p>
-        </div>
-
-        <div class="story-regions-layout">
-          <div>
-            <div class="story-region-map" aria-label="Story Regions Map">
-              <button class="region-marker" type="button" data-region-id="mediterranean" style="--x: 4%; --y: 36%;">
-                <span class="region-marker-name">Mediterranean</span>
-                <span class="region-marker-label">The Gospel Spreads</span>
-              </button>
-              <button class="region-marker" type="button" data-region-id="mesopotamia" style="--x: 72%; --y: 14%;">
-                <span class="region-marker-name">Mesopotamia</span>
-                <span class="region-marker-label">Beginnings and Exile</span>
-              </button>
-              <button class="region-marker" type="button" data-region-id="galilee" style="--x: 44%; --y: 26%;">
-                <span class="region-marker-name">Galilee</span>
-                <span class="region-marker-label">Jesus' Ministry</span>
-              </button>
-              <button class="region-marker" type="button" data-region-id="samaria" style="--x: 43%; --y: 41%;">
-                <span class="region-marker-name">Samaria</span>
-                <span class="region-marker-label">Division and Mercy</span>
-              </button>
-              <button class="region-marker" type="button" data-region-id="jerusalem" style="--x: 52%; --y: 61%;">
-                <span class="region-marker-name">Jerusalem</span>
-                <span class="region-marker-label">Temple, Kingdom, and Cross</span>
-              </button>
-              <button class="region-marker" type="button" data-region-id="canaan" style="--x: 30%; --y: 58%;">
-                <span class="region-marker-name">Canaan</span>
-                <span class="region-marker-label">Promise and Possession</span>
-              </button>
-              <button class="region-marker" type="button" data-region-id="sinai" style="--x: 29%; --y: 72%;">
-                <span class="region-marker-name">Sinai</span>
-                <span class="region-marker-label">Testing and Covenant</span>
-              </button>
-              <button class="region-marker" type="button" data-region-id="egypt" style="--x: 10%; --y: 72%;">
-                <span class="region-marker-name">Egypt</span>
-                <span class="region-marker-label">Slavery and Rescue</span>
-              </button>
-            </div>
-            <p class="story-region-note">This is a study map, not a survey map. Regions are simplified to help connect Scripture, place, and meaning.</p>
+      <div class="atlas-exploration" aria-label="BibleMapped Atlas exploration tools">
+        <section class="atlas-bar" aria-labelledby="timelinesTitle">
+          <div class="atlas-bar-header">
+            <p class="atlas-section-label">Story Order</p>
+            <h2 class="atlas-bar-title" id="timelinesTitle">Timelines</h2>
+            <p class="atlas-bar-subtitle">Follow the Bible as one connected story.</p>
           </div>
+          <div class="atlas-card-grid">
+            <a class="atlas-card" href="/maps/#genesis-timeline">Genesis Timeline</a>
+            <a class="atlas-card" href="/maps/#exodus-timeline">Exodus Timeline</a>
+            <a class="atlas-card" href="/maps/#kingdom-timeline">Kingdom Timeline</a>
+            <a class="atlas-card" href="/maps/#exile-timeline">Exile Timeline</a>
+            <a class="atlas-card" href="/maps/#life-of-jesus-timeline">Life of Jesus Timeline</a>
+            <a class="atlas-card" href="/maps/#early-church-timeline">Early Church Timeline</a>
+          </div>
+        </section>
 
-          <article class="story-region-details" aria-live="polite">
-            <p class="eyebrow">REGION</p>
-            <h2 class="region-heading" id="regionName"></h2>
-            <p class="region-map-label" id="regionMapLabel"></p>
-            <p class="region-description" id="regionDescription"></p>
+        <section class="atlas-bar" aria-labelledby="regionsTitle">
+          <div class="atlas-bar-header">
+            <p class="atlas-section-label">Places</p>
+            <h2 class="atlas-bar-title" id="regionsTitle">Maps &amp; Regions</h2>
+            <p class="atlas-bar-subtitle">See where the story happened.</p>
+          </div>
+          <div class="atlas-card-grid">
+            <a class="atlas-card" href="/maps/#mesopotamia">Mesopotamia</a>
+            <a class="atlas-card" href="/maps/#egypt">Egypt</a>
+            <a class="atlas-card" href="/maps/#sinai-wilderness">Sinai &amp; Wilderness</a>
+            <a class="atlas-card" href="/maps/#canaan-israel">Canaan / Israel</a>
+            <a class="atlas-card" href="/maps/#jerusalem">Jerusalem</a>
+            <a class="atlas-card" href="/maps/#babylon-persia">Babylon &amp; Persia</a>
+            <a class="atlas-card" href="/maps/#galilee-judea">Galilee &amp; Judea</a>
+            <a class="atlas-card" href="/maps/#rome-mediterranean">Rome &amp; the Mediterranean</a>
+          </div>
+        </section>
 
-            <div class="region-list-group">
-              <h3>Major Stories</h3>
-              <ul id="regionStories"></ul>
-            </div>
+        <section class="atlas-bar" aria-labelledby="chartsTitle">
+          <div class="atlas-bar-header">
+            <p class="atlas-section-label">Patterns</p>
+            <h2 class="atlas-bar-title" id="chartsTitle">Charts</h2>
+            <p class="atlas-bar-subtitle">Understand Scripture through movement, structure, and meaning.</p>
+          </div>
+          <div class="atlas-card-grid">
+            <a class="atlas-card" href="/maps/#bible-story-flow">Bible Story Flow</a>
+            <a class="atlas-card" href="/maps/#empires-of-the-bible">Empires of the Bible</a>
+            <a class="atlas-card" href="/maps/#covenants-chart">Covenants Chart</a>
+            <a class="atlas-card" href="/maps/#books-of-the-bible">Books of the Bible</a>
+            <a class="atlas-card" href="/maps/#people-connections">People Connections</a>
+            <a class="atlas-card" href="/maps/#temple-timeline">Temple Timeline</a>
+          </div>
+        </section>
 
-            <div class="region-list-group">
-              <h3>Key People</h3>
-              <ul id="regionPeople"></ul>
-            </div>
-
-            <div class="region-list-group">
-              <h3>Why It Matters</h3>
-              <p class="region-meaning" id="regionMeaning"></p>
-            </div>
-
-            <a class="region-cta" href="/places/" id="regionCta">Explore Region</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="latest-maps" aria-labelledby="latestMapsTitle">
-        <p class="eyebrow">LATEST</p>
-        <h2 id="latestMapsTitle">Latest</h2>
-        <div class="latest-map-list">
-          <a class="latest-map-link" href="/places/">
-            <div>
-              <h3>Judea under Rome</h3>
-              <p>Kingdom, empire, priesthood, and province in the world of Jesus.</p>
-            </div>
-            <span>Map Entry</span>
-          </a>
-          <a class="latest-map-link" href="/places/">
-            <div>
-              <h3>Nazareth &rarr; Bethlehem</h3>
-              <p>The route that helps place the birth of Jesus inside real geography.</p>
-            </div>
-            <span>Route</span>
-          </a>
-          <a class="latest-map-link" href="/places/">
-            <div>
-              <h3>Herodian kingdoms</h3>
-              <p>The political landscape behind the Gospels and early New Testament world.</p>
-            </div>
-            <span>Map Entry</span>
-          </a>
-        </div>
-      </section>
+        <section class="atlas-bar" aria-labelledby="studyPathsTitle">
+          <div class="atlas-bar-header">
+            <p class="atlas-section-label">Guided Study</p>
+            <h2 class="atlas-bar-title" id="studyPathsTitle">Study Paths</h2>
+            <p class="atlas-bar-subtitle">Start with a question, person, book, or journey.</p>
+          </div>
+          <div class="atlas-card-grid">
+            <a class="atlas-card" href="/maps/#start-with-genesis">Start with Genesis</a>
+            <a class="atlas-card" href="/maps/#follow-abraham">Follow Abraham</a>
+            <a class="atlas-card" href="/maps/#trace-the-exodus">Trace the Exodus</a>
+            <a class="atlas-card" href="/maps/#follow-jesus">Follow Jesus</a>
+            <a class="atlas-card" href="/maps/#pauls-journeys">Trace Paul's Journeys</a>
+            <a class="atlas-card" href="/maps/#understand-the-exile">Understand the Exile</a>
+          </div>
+        </section>
+      </div>
     </main>
 
     <footer class="bm-site-footer" aria-label="Bible Mapped footer">
@@ -661,220 +368,5 @@
         <p class="bm-footer-copy">&copy; 2026 Bible Mapped. All rights reserved.</p>
       </div>
     </footer>
-
-    <script>
-      const storyRegions = [
-        {
-          id: "mesopotamia",
-          name: "Mesopotamia",
-          mapLabel: "Beginnings and Exile",
-          description: "The world east of the promised land, tied to beginnings, empires, exile, and return.",
-          stories: ["Creation and Eden", "Babel", "Abraham called from Ur", "Israel and Judah in exile", "Daniel in Babylon"],
-          people: ["Adam and Eve", "Noah", "Abraham", "Daniel", "Ezra"],
-          meaning: "Mesopotamia reminds us that the Bible begins and continues inside the world of ancient kingdoms, exile, longing, and promise.",
-          cta: "Explore Mesopotamia"
-        },
-        {
-          id: "egypt",
-          name: "Egypt",
-          mapLabel: "Slavery and Rescue",
-          description: "A place of refuge, oppression, judgment, and deliverance.",
-          stories: ["Abraham goes to Egypt", "Joseph rises in Egypt", "Israel enslaved in Egypt", "The Exodus", "Jesus' family flees to Egypt"],
-          people: ["Abraham", "Joseph", "Moses", "Pharaoh", "Mary and Joseph"],
-          meaning: "Egypt shows both human power and God's rescue. It becomes one of the Bible's clearest pictures of deliverance.",
-          cta: "Explore Egypt"
-        },
-        {
-          id: "sinai",
-          name: "Sinai and Wilderness",
-          mapLabel: "Testing and Covenant",
-          description: "The desert space where Israel learns dependence, covenant, worship, and obedience.",
-          stories: ["The Red Sea crossing", "Manna in the wilderness", "The Ten Commandments", "The tabernacle", "Forty years of wandering"],
-          people: ["Moses", "Aaron", "Miriam", "Israel"],
-          meaning: "The wilderness is where God forms His people after rescue and teaches them how to walk with Him.",
-          cta: "Explore Sinai"
-        },
-        {
-          id: "canaan",
-          name: "Canaan and the Promised Land",
-          mapLabel: "Promise and Possession",
-          description: "The land promised to Abraham and given to Israel, filled with covenant meaning.",
-          stories: ["Abraham enters the land", "Joshua and the conquest", "The judges", "Ruth in Bethlehem", "David becomes king"],
-          people: ["Abraham", "Joshua", "Deborah", "Ruth", "David"],
-          meaning: "Canaan is where promise becomes place. It is the land where Israel learns what faithfulness looks like in real geography.",
-          cta: "Explore Canaan"
-        },
-        {
-          id: "jerusalem",
-          name: "Jerusalem and Judea",
-          mapLabel: "Temple, Kingdom, and Cross",
-          description: "The center of kingship, worship, conflict, judgment, and redemption.",
-          stories: ["David captures Jerusalem", "Solomon builds the temple", "The prophets confront Judah", "Jesus enters Jerusalem", "The cross and resurrection"],
-          people: ["David", "Solomon", "Isaiah", "Jeremiah", "Jesus"],
-          meaning: "Jerusalem becomes one of the Bible's most important places because kingship, worship, judgment, and salvation all meet there.",
-          cta: "Explore Jerusalem"
-        },
-        {
-          id: "galilee",
-          name: "Galilee",
-          mapLabel: "Jesus' Ministry",
-          description: "The northern region where Jesus taught, healed, called disciples, and revealed the kingdom.",
-          stories: ["Jesus grows up in Nazareth", "Jesus calls fishermen", "The Sermon on the Mount", "Miracles around the Sea of Galilee", "The risen Jesus meets His disciples"],
-          people: ["Jesus", "Peter", "Andrew", "James", "John", "Mary Magdalene"],
-          meaning: "Galilee shows the kingdom of God arriving among ordinary towns, fishermen, villages, roads, and shorelines.",
-          cta: "Explore Galilee"
-        },
-        {
-          id: "samaria",
-          name: "Samaria",
-          mapLabel: "Division and Mercy",
-          description: "A region marked by division, tension, and surprising mercy in the ministry of Jesus.",
-          stories: ["The divided kingdom", "Elijah and Elisha's northern ministry", "The fall of Samaria", "Jesus and the Samaritan woman", "The Gospel reaches Samaria in Acts"],
-          people: ["Elijah", "Elisha", "The Samaritan woman", "Philip", "Peter and John"],
-          meaning: "Samaria reminds us that God's mercy moves across ethnic, religious, and historical boundaries.",
-          cta: "Explore Samaria"
-        },
-        {
-          id: "mediterranean",
-          name: "Mediterranean World",
-          mapLabel: "The Gospel Spreads",
-          description: "The wider Roman world where the message of Jesus spread through cities, roads, ports, and churches.",
-          stories: ["Pentecost sends the message outward", "Paul's missionary journeys", "Churches planted across the empire", "Letters written to early believers", "John writes Revelation from Patmos"],
-          people: ["Paul", "Barnabas", "Silas", "Priscilla and Aquila", "John"],
-          meaning: "The Mediterranean world shows the Gospel moving from Jerusalem to the nations.",
-          cta: "Explore the Mediterranean World"
-        }
-      ];
-
-      const regionButtons = document.querySelectorAll("[data-region-id]");
-      const regionName = document.getElementById("regionName");
-      const regionMapLabel = document.getElementById("regionMapLabel");
-      const regionDescription = document.getElementById("regionDescription");
-      const regionStories = document.getElementById("regionStories");
-      const regionPeople = document.getElementById("regionPeople");
-      const regionMeaning = document.getElementById("regionMeaning");
-      const regionCta = document.getElementById("regionCta");
-
-      function renderList(target, items) {
-        target.replaceChildren(...items.map((item) => {
-          const li = document.createElement("li");
-          li.textContent = item;
-          return li;
-        }));
-      }
-
-      function selectRegion(regionId) {
-        const region = storyRegions.find((item) => item.id === regionId) || storyRegions[0];
-
-        regionButtons.forEach((button) => {
-          const isSelected = button.dataset.regionId === region.id;
-          button.setAttribute("aria-pressed", String(isSelected));
-        });
-
-        regionName.textContent = region.name;
-        regionMapLabel.textContent = region.mapLabel;
-        regionDescription.textContent = region.description;
-        renderList(regionStories, region.stories);
-        renderList(regionPeople, region.people);
-        regionMeaning.textContent = region.meaning;
-        regionCta.textContent = region.cta;
-      }
-
-      regionButtons.forEach((button) => {
-        button.addEventListener("click", () => selectRegion(button.dataset.regionId));
-      });
-
-      selectRegion("jerusalem");
-
-      document.addEventListener("DOMContentLoaded", () => {
-        const mapElement = document.getElementById("bibleMapNavigator");
-
-        if (!mapElement || typeof L === "undefined") return;
-
-        const bibleMap = L.map("bibleMapNavigator", {
-          scrollWheelZoom: false,
-          zoomControl: true
-        }).setView([32.0, 35.0], 5);
-
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          maxZoom: 18,
-          attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(bibleMap);
-
-        const regions = [
-          {
-            name: "Mediterranean",
-            coords: [35.0, 18.0],
-            description: "The sea world of travel, empire, trade, and mission.",
-            why: "The gospel spread through Mediterranean roads, ports, and cities."
-          },
-          {
-            name: "Mesopotamia",
-            coords: [33.3, 44.4],
-            description: "The world of beginnings, Babel, exile, and empire.",
-            why: "This region helps frame Genesis, Babylon, and Israel's exile."
-          },
-          {
-            name: "Galilee",
-            coords: [32.88, 35.57],
-            description: "The northern region where much of Jesus' ministry unfolded.",
-            why: "Galilee shows Jesus teaching, healing, calling disciples, and announcing the kingdom."
-          },
-          {
-            name: "Samaria",
-            coords: [32.22, 35.26],
-            description: "A region marked by division between Jews and Samaritans.",
-            why: "Samaria shows Jesus crossing boundaries with mercy and truth."
-          },
-          {
-            name: "Jerusalem",
-            coords: [31.7683, 35.2137],
-            description: "The city of temple, kingdom, cross, resurrection, and early Church.",
-            why: "Jerusalem is one of the Bible's most important theological locations."
-          },
-          {
-            name: "Canaan",
-            coords: [31.9, 35.2],
-            description: "The promised land connected to Abraham, Israel, and covenant.",
-            why: "Canaan holds the promise, possession, kingdom, and prophetic hope."
-          },
-          {
-            name: "Sinai",
-            coords: [29.5, 33.8],
-            description: "The wilderness region connected to covenant, law, and testing.",
-            why: "Sinai shows God forming Israel after the Exodus."
-          },
-          {
-            name: "Egypt",
-            coords: [30.0444, 31.2357],
-            description: "The land of slavery, rescue, plague, Passover, and Exodus.",
-            why: "Egypt reveals God as Redeemer and sets the pattern of deliverance."
-          },
-          {
-            name: "Babylon",
-            coords: [32.542, 44.421],
-            description: "The empire connected to exile, judgment, and prophetic hope.",
-            why: "Babylon becomes a major symbol of human pride and opposition to God."
-          },
-          {
-            name: "Rome",
-            coords: [41.9028, 12.4964],
-            description: "The imperial center of the New Testament world.",
-            why: "Rome shows the gospel reaching the heart of empire."
-          }
-        ];
-
-        regions.forEach((region) => {
-          L.marker(region.coords)
-            .addTo(bibleMap)
-            .bindPopup(`
-              <strong>${region.name}</strong>
-              ${region.description}<br><br>
-              <em>${region.why}</em>
-            `);
-        });
-      });
-    </script>
   </body>
 </html>
