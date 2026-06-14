@@ -457,7 +457,7 @@ h3 {
   border-top: 1px solid var(--border-soft);
   margin-top: 40px;
   padding: 28px 0;
-  background: var(--electric-purple);
+  background: #2a3439;
   color: white;
 }
 
@@ -483,7 +483,7 @@ h3 {
 .bm-site-footer {
   margin: 0;
   padding: clamp(24px, 4vw, 34px) clamp(22px, 5vw, 46px);
-  background: var(--electric-purple);
+  background: #2a3439;
   color: #ffffff;
   border: 0;
   text-align: left;

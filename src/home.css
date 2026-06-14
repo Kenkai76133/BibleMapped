@@ -1443,7 +1443,7 @@
     .bm-site-footer {
       margin: 0;
       padding: clamp(28px, 4vw, 42px) 20px;
-      background: var(--electric-purple);
+      background: #2a3439;
       color: #ffffff;
       border: 0;
       text-align: center;
