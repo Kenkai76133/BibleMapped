@@ -20,7 +20,6 @@
 
   <link rel="stylesheet" href="/src/home.css?v=footer-gunmetal-1" />
 
-  <!-- MapLibre GL JS -->
   <link
     href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
     rel="stylesheet"
@@ -34,7 +33,6 @@
       --bm-gunmetal: #1f2933;
       --bm-muted: rgba(31, 41, 51, 0.72);
       --bm-soft: #fffdf7;
-      --bm-cream: #f8f1e7;
       --bm-border: rgba(31, 41, 51, 0.14);
       --bm-shadow: 0 22px 70px rgba(31, 41, 51, 0.12);
       --nav-height: 76px;
@@ -399,7 +397,7 @@
       font-size: 0.86rem;
     }
 
-    /* IMAGE BAR SECTIONS */
+    /* IMAGE BAR SECTIONS — the bar itself is the image */
 
     .atlas-feature-stack {
       display: grid;
@@ -409,8 +407,8 @@
     }
 
     .atlas-feature {
-      width: min(1180px, 100%);
-      margin: 0 auto;
+      width: 100%;
+      margin: 0;
       position: relative;
       isolation: isolate;
       overflow: hidden;
@@ -421,116 +419,134 @@
     }
 
     .atlas-feature + .atlas-feature {
-      border-top: 1px solid rgba(31, 41, 51, 0.1);
+      border-top: 1px solid rgba(31, 41, 51, 0.08);
     }
 
     .atlas-feature-inner {
-      display: grid;
-      grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.25fr);
-      gap: clamp(1.5rem, 4vw, 3rem);
-      padding: clamp(2.2rem, 5vw, 4.2rem) clamp(1rem, 4vw, 2rem);
-      align-items: stretch;
-    }
-
-    .atlas-feature-copy {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .atlas-feature-copy .eyebrow {
-      margin: 0 0 0.75rem;
-      color: var(--bm-purple);
-      font-size: 0.74rem;
-      font-weight: 900;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .atlas-feature-copy h2 {
-      margin: 0;
-      color: #16191d;
-      font-size: clamp(2.35rem, 5vw, 5rem);
-      line-height: 0.9;
-      letter-spacing: -0.065em;
-      font-weight: 950;
-    }
-
-    .atlas-feature-copy p {
-      margin: 1rem 0 0;
-      max-width: 480px;
-      color: var(--bm-muted);
-      font-size: 1rem;
-      line-height: 1.6;
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      padding: clamp(2rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem);
     }
 
     .atlas-image-bar-media {
       position: relative;
       display: block;
-      min-height: clamp(260px, 30vw, 430px);
+      width: 100%;
+      min-height: clamp(300px, 34vw, 460px);
       overflow: hidden;
-      background: var(--bm-soft);
-      color: inherit;
+      background: #fffdf7;
+      color: #ffffff;
       text-decoration: none;
       border: 0;
+      border-radius: 0;
     }
 
     .atlas-image-bar-media img {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
       display: block;
       width: 100%;
-      height: 100%;
+      height: 120%;
       min-height: inherit;
       object-fit: cover;
-      object-position: center;
+      object-position: center center;
       border: 0;
+      transform: translate3d(0, var(--pan-y, 0px), 0) scale(1.04);
+      will-change: transform;
+      transition: transform 80ms linear;
     }
 
     .atlas-image-bar-media::after {
       content: "";
       position: absolute;
       inset: 0;
+      z-index: 2;
       background:
         linear-gradient(
           90deg,
-          rgba(255, 255, 255, 0.1) 0%,
-          rgba(255, 255, 255, 0) 42%,
-          rgba(22, 33, 62, 0.12) 100%
+          rgba(17, 24, 39, 0.82) 0%,
+          rgba(17, 24, 39, 0.62) 34%,
+          rgba(17, 24, 39, 0.24) 64%,
+          rgba(17, 24, 39, 0.42) 100%
         );
       pointer-events: none;
+    }
+
+    .atlas-image-bar-content {
+      position: relative;
+      z-index: 3;
+      min-height: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: min(680px, 72%);
+      padding: clamp(2rem, 5vw, 4rem);
+    }
+
+    .atlas-image-bar-content .eyebrow {
+      margin: 0 0 0.75rem;
+      color: #b985ff;
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .atlas-image-bar-content h2 {
+      margin: 0;
+      color: #ffffff;
+      font-size: clamp(2.6rem, 6vw, 5.6rem);
+      line-height: 0.9;
+      letter-spacing: -0.065em;
+      font-weight: 950;
+      text-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+    }
+
+    .atlas-image-bar-content p {
+      margin: 1rem 0 0;
+      max-width: 520px;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 1rem;
+      line-height: 1.6;
+      text-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
     }
 
     .atlas-explore-button {
       position: absolute;
       right: clamp(1rem, 3vw, 2rem);
       bottom: clamp(1rem, 3vw, 2rem);
-      z-index: 2;
+      z-index: 4;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       min-height: 52px;
       padding: 0 1.35rem;
-      background: #16213e;
-      color: #ffffff;
+      background: #ffffff;
+      color: #16213e;
       font-size: 0.78rem;
       font-weight: 900;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      box-shadow: 0 12px 26px rgba(22, 33, 62, 0.18);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
       transition:
         transform 180ms ease,
-        background 180ms ease;
+        background 180ms ease,
+        color 180ms ease;
     }
 
     .atlas-image-bar-media:hover .atlas-explore-button,
     .atlas-image-bar-media:focus-visible .atlas-explore-button {
       transform: translateY(-2px);
       background: var(--bm-purple-dark);
+      color: #ffffff;
     }
 
     .atlas-image-fallback {
       position: absolute;
       inset: 0;
-      display: grid;
+      z-index: 1;
+      display: none;
       place-items: center;
       padding: 2rem;
       background:
@@ -544,7 +560,7 @@
       text-align: center;
     }
 
-    /* PREMIUM REVEAL */
+    /* SCROLL REVEAL / PAN UP */
 
     .premium-reveal {
       opacity: 0;
@@ -559,19 +575,26 @@
       transform: translateY(0);
     }
 
+    .pan-item {
+      transform: translateY(36px);
+      opacity: 0;
+      transition:
+        transform 780ms cubic-bezier(0.16, 0.9, 0.22, 1),
+        opacity 780ms ease;
+    }
+
+    .pan-item.in-view {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
     .bm-site-footer {
       margin-top: 0;
     }
 
-    /* RESPONSIVE */
-
     @media (max-width: 920px) {
-      .atlas-feature-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .atlas-feature-copy p {
-        max-width: 720px;
+      .atlas-image-bar-content {
+        width: min(720px, 86%);
       }
 
       .atlas-method-inner {
@@ -643,21 +666,35 @@
       }
 
       .atlas-feature-inner {
-        padding: clamp(2rem, 8vw, 3rem) 1rem;
-      }
-
-      .atlas-feature-copy h2 {
-        font-size: clamp(2.5rem, 14vw, 3.8rem);
+        padding: 1rem 0;
       }
 
       .atlas-image-bar-media {
-        min-height: clamp(240px, 62vw, 380px);
+        min-height: clamp(360px, 86vw, 480px);
+      }
+
+      .atlas-image-bar-content {
+        width: 100%;
+        padding: 2rem 1rem 5.5rem;
+      }
+
+      .atlas-image-bar-content h2 {
+        font-size: clamp(2.7rem, 15vw, 4.1rem);
       }
 
       .atlas-explore-button {
         left: 1rem;
         right: 1rem;
         width: auto;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .premium-reveal,
+      .pan-item,
+      .atlas-image-bar-media img {
+        transition: none !important;
+        transform: none !important;
       }
     }
   </style>
@@ -781,17 +818,9 @@
     </section>
 
     <section class="atlas-feature-stack" id="atlasSections" aria-label="Bible Mapped Atlas sections">
-      <section class="atlas-feature premium-reveal" aria-labelledby="timelinesTitle">
-        <div class="atlas-feature-inner">
-          <div class="atlas-feature-copy">
-            <p class="eyebrow">STORY ORDER</p>
-            <h2 id="timelinesTitle">Timelines</h2>
-            <p>
-              Follow the Bible as one connected story across time, movement,
-              promise, kingdom, exile, Messiah, and mission.
-            </p>
-          </div>
 
+      <section class="atlas-feature premium-reveal pan-item" aria-labelledby="timelinesTitle">
+        <div class="atlas-feature-inner">
           <a class="atlas-image-bar-media" href="/maps/timelines/" aria-label="Explore Timelines">
             <img
               src="/assets/maps-page/timelines-bar.jpg"
@@ -799,22 +828,23 @@
               onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
             />
             <span class="atlas-image-fallback">Add /assets/maps-page/timelines-bar.jpg</span>
+
+            <div class="atlas-image-bar-content">
+              <p class="eyebrow">STORY ORDER</p>
+              <h2 id="timelinesTitle">Timelines</h2>
+              <p>
+                Follow the Bible as one connected story across time, movement,
+                promise, kingdom, exile, Messiah, and mission.
+              </p>
+            </div>
+
             <span class="atlas-explore-button">Explore</span>
           </a>
         </div>
       </section>
 
-      <section class="atlas-feature premium-reveal" aria-labelledby="regionsTitle">
+      <section class="atlas-feature premium-reveal pan-item" aria-labelledby="regionsTitle">
         <div class="atlas-feature-inner">
-          <div class="atlas-feature-copy">
-            <p class="eyebrow">PLACES</p>
-            <h2 id="regionsTitle">Maps &amp; Regions</h2>
-            <p>
-              See the lands, cities, routes, and empires that shaped the world
-              behind the biblical text.
-            </p>
-          </div>
-
           <a class="atlas-image-bar-media" href="/maps/regions/" aria-label="Explore Maps and Regions">
             <img
               src="/assets/maps-page/maps-regions-bar.jpg"
@@ -822,22 +852,23 @@
               onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
             />
             <span class="atlas-image-fallback">Add /assets/maps-page/maps-regions-bar.jpg</span>
+
+            <div class="atlas-image-bar-content">
+              <p class="eyebrow">PLACES</p>
+              <h2 id="regionsTitle">Maps &amp; Regions</h2>
+              <p>
+                See the lands, cities, routes, and empires that shaped the world
+                behind the biblical text.
+              </p>
+            </div>
+
             <span class="atlas-explore-button">Explore</span>
           </a>
         </div>
       </section>
 
-      <section class="atlas-feature premium-reveal" aria-labelledby="routesTitle">
+      <section class="atlas-feature premium-reveal pan-item" aria-labelledby="routesTitle">
         <div class="atlas-feature-inner">
-          <div class="atlas-feature-copy">
-            <p class="eyebrow">JOURNEYS</p>
-            <h2 id="routesTitle">Routes &amp; Movements</h2>
-            <p>
-              Trace the journeys that carry the story forward — from Abraham’s
-              call to the Exodus, from Jesus in Galilee to Paul moving toward Rome.
-            </p>
-          </div>
-
           <a class="atlas-image-bar-media" href="/maps/routes/" aria-label="Explore Routes and Movements">
             <img
               src="/assets/maps-page/routes-movements-bar.jpg"
@@ -845,22 +876,23 @@
               onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
             />
             <span class="atlas-image-fallback">Add /assets/maps-page/routes-movements-bar.jpg</span>
+
+            <div class="atlas-image-bar-content">
+              <p class="eyebrow">JOURNEYS</p>
+              <h2 id="routesTitle">Routes &amp; Movements</h2>
+              <p>
+                Trace the journeys that carry the story forward — from Abraham’s
+                call to the Exodus, from Jesus in Galilee to Paul moving toward Rome.
+              </p>
+            </div>
+
             <span class="atlas-explore-button">Explore</span>
           </a>
         </div>
       </section>
 
-      <section class="atlas-feature premium-reveal" aria-labelledby="chartsTitle">
+      <section class="atlas-feature premium-reveal pan-item" aria-labelledby="chartsTitle">
         <div class="atlas-feature-inner">
-          <div class="atlas-feature-copy">
-            <p class="eyebrow">PATTERNS</p>
-            <h2 id="chartsTitle">Charts</h2>
-            <p>
-              Understand Scripture through movement, structure, geography,
-              covenant, empire, people, and meaning.
-            </p>
-          </div>
-
           <a class="atlas-image-bar-media" href="/maps/charts/" aria-label="Explore Charts">
             <img
               src="/assets/maps-page/charts-bar.jpg"
@@ -868,22 +900,23 @@
               onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
             />
             <span class="atlas-image-fallback">Add /assets/maps-page/charts-bar.jpg</span>
+
+            <div class="atlas-image-bar-content">
+              <p class="eyebrow">PATTERNS</p>
+              <h2 id="chartsTitle">Charts</h2>
+              <p>
+                Understand Scripture through movement, structure, geography,
+                covenant, empire, people, and meaning.
+              </p>
+            </div>
+
             <span class="atlas-explore-button">Explore</span>
           </a>
         </div>
       </section>
 
-      <section class="atlas-feature premium-reveal" aria-labelledby="studyPathsTitle">
+      <section class="atlas-feature premium-reveal pan-item" aria-labelledby="studyPathsTitle">
         <div class="atlas-feature-inner">
-          <div class="atlas-feature-copy">
-            <p class="eyebrow">GUIDED STUDY</p>
-            <h2 id="studyPathsTitle">Study Paths</h2>
-            <p>
-              Start with a question, person, book, or journey and let the map
-              guide you into the Bible’s context.
-            </p>
-          </div>
-
           <a class="atlas-image-bar-media" href="/maps/study-paths/" aria-label="Explore Study Paths">
             <img
               src="/assets/maps-page/study-paths-bar.jpg"
@@ -891,6 +924,16 @@
               onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
             />
             <span class="atlas-image-fallback">Add /assets/maps-page/study-paths-bar.jpg</span>
+
+            <div class="atlas-image-bar-content">
+              <p class="eyebrow">GUIDED STUDY</p>
+              <h2 id="studyPathsTitle">Study Paths</h2>
+              <p>
+                Start with a question, person, book, or journey and let the map
+                guide you into the Bible’s context.
+              </p>
+            </div>
+
             <span class="atlas-explore-button">Explore</span>
           </a>
         </div>
@@ -1182,7 +1225,7 @@
       });
     }
 
-    const revealItems = document.querySelectorAll(".premium-reveal");
+    const revealItems = document.querySelectorAll(".premium-reveal, .pan-item");
 
     const revealObserver = new IntersectionObserver(
       (entries) => {
@@ -1198,6 +1241,43 @@
     );
 
     revealItems.forEach((item) => revealObserver.observe(item));
+
+    const panImages = document.querySelectorAll(".atlas-image-bar-media img");
+
+    function updateImagePan() {
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+      panImages.forEach((img) => {
+        const bar = img.closest(".atlas-image-bar-media");
+        if (!bar) return;
+
+        const rect = bar.getBoundingClientRect();
+        const progress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
+        const clamped = Math.max(0, Math.min(1, progress));
+
+        const panY = -48 * clamped;
+        img.style.setProperty("--pan-y", `${panY}px`);
+      });
+    }
+
+    let ticking = false;
+
+    function requestPanUpdate() {
+      if (ticking) return;
+
+      window.requestAnimationFrame(() => {
+        updateImagePan();
+        ticking = false;
+      });
+
+      ticking = true;
+    }
+
+    window.addEventListener("scroll", requestPanUpdate, { passive: true });
+    window.addEventListener("resize", requestPanUpdate);
+    window.addEventListener("load", requestPanUpdate);
+
+    requestPanUpdate();
   </script>
 </body>
 </html>
