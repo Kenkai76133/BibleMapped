@@ -5666,12 +5666,12 @@
 
     html body .home-people-feature {
       position: relative !important;
-      display: block !important;
-      min-height: 0 !important;
+      display: grid !important;
+      min-height: clamp(640px, 58vw, 780px) !important;
       margin: 0 !important;
-      padding: clamp(3rem, 5.2vw, 4.75rem) clamp(1rem, 4vw, 3.5rem) !important;
+      padding: clamp(2rem, 4vw, 3.5rem) clamp(1rem, 4vw, 3.5rem) !important;
       overflow: hidden !important;
-      color: #111827 !important;
+      color: #ffffff !important;
       background-color: #f8f1e0 !important;
       background-image: url("../assets/bible-journey-people-hero-strip.png") !important;
       background-position: center 42% !important;
@@ -5682,22 +5682,17 @@
     }
 
     html body .home-people-feature::before {
-      content: "" !important;
-      position: absolute !important;
-      inset: 0 !important;
-      z-index: 0 !important;
-      display: block !important;
-      background: rgba(255, 252, 244, 0.805) !important;
+      content: none !important;
+      display: none !important;
+      background: transparent !important;
       pointer-events: none !important;
     }
 
     html body .home-people-feature-inner {
       position: relative !important;
       z-index: 1 !important;
-      display: grid !important;
-      grid-template-columns: minmax(0, 0.86fr) minmax(320px, 1.14fr) !important;
-      align-items: center !important;
-      gap: clamp(1.4rem, 4vw, 3.6rem) !important;
+      display: block !important;
+      min-height: inherit !important;
       width: min(1180px, 100%) !important;
       margin: 0 auto !important;
       opacity: 0;
@@ -5711,34 +5706,38 @@
     }
 
     html body .home-people-feature-copy {
-      max-width: 640px !important;
-      color: #111827 !important;
-      text-shadow: none !important;
+      display: grid !important;
+      grid-template-rows: auto auto 1fr auto auto !important;
+      align-content: stretch !important;
+      min-height: inherit !important;
+      max-width: 760px !important;
+      color: #ffffff !important;
+      text-shadow: 0 5px 22px rgba(0, 0, 0, 0.5) !important;
     }
 
     html body .home-people-feature .eyebrow {
       margin: 0 0 0.9rem !important;
-      color: rgba(93, 28, 188, 0.82) !important;
-      text-shadow: none !important;
+      color: rgba(255, 255, 255, 0.88) !important;
+      text-shadow: 0 5px 18px rgba(0, 0, 0, 0.44) !important;
     }
 
     html body .home-people-feature-copy h2 {
       margin: 0 0 1rem !important;
-      color: #111827 !important;
+      color: #ffffff !important;
       font-size: clamp(2.85rem, 5.8vw, 5.8rem) !important;
       line-height: 0.94 !important;
       text-align: left !important;
-      text-shadow: none !important;
+      text-shadow: 0 8px 28px rgba(0, 0, 0, 0.5) !important;
     }
 
     html body .home-people-feature-copy p {
       max-width: 620px !important;
       margin: 0 !important;
-      color: rgba(17, 24, 39, 0.82) !important;
+      color: rgba(255, 255, 255, 0.94) !important;
       font-size: clamp(1rem, 1.35vw, 1.18rem) !important;
       line-height: 1.76 !important;
       text-align: left !important;
-      text-shadow: none !important;
+      text-shadow: 0 5px 20px rgba(0, 0, 0, 0.52) !important;
     }
 
     html body .home-people-feature-button {
@@ -5796,10 +5795,8 @@
     }
 
     html body .home-people-image-overlay {
-      position: absolute !important;
-      inset: 0 !important;
-      z-index: 1 !important;
-      background: rgba(255, 252, 244, 0.2) !important;
+      display: none !important;
+      background: transparent !important;
       pointer-events: none !important;
     }
 
