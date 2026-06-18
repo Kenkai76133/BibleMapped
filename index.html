@@ -18,7 +18,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <link rel="stylesheet" href="src/home.css?v=about-title-large-1" />
+  <link rel="stylesheet" href="src/home.css?v=about-icons-solid-1" />
 
   <style id="about-biblemapped-critical">
     html body #about-biblemapped {
@@ -101,17 +101,23 @@
       display: block !important;
       width: 58% !important;
       height: 58% !important;
-      color: #fffdf7 !important;
-      fill: none !important;
+      color: #ffffff !important;
+      fill: none;
       stroke: currentColor !important;
-      stroke-width: 3.2 !important;
+      stroke-width: 4.8 !important;
       stroke-linecap: round !important;
       stroke-linejoin: round !important;
-      filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.26)) !important;
+      opacity: 1 !important;
+      filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.34)) !important;
+    }
+
+    html body #aboutMappedPanel .about-biblemapped-icon .icon-fill {
+      fill: currentColor !important;
+      stroke: none !important;
     }
 
     html body #aboutMappedPanel .about-biblemapped-question-icon {
-      stroke-width: 6.4 !important;
+      stroke-width: 7.2 !important;
     }
 
     @keyframes aboutCriticalSquarePanIn {
@@ -784,9 +790,8 @@
               <article class="about-biblemapped-item">
                 <div class="about-biblemapped-image-slot" data-image-slot="who" aria-label="Who illustration image slot">
                   <svg class="about-biblemapped-icon" viewBox="0 0 64 64" aria-hidden="true">
-                    <circle cx="32" cy="21" r="9" />
-                    <path d="M19 47c2.6-7.5 8.4-12 13-12s10.4 4.5 13 12" />
-                    <path d="M24.5 31.5c2.2 1.9 4.8 2.8 7.5 2.8s5.3-.9 7.5-2.8" />
+                    <circle class="icon-fill" cx="32" cy="20.5" r="8.5" />
+                    <path class="icon-fill" d="M17.5 49.5c2.5-8.6 8.2-14.1 14.5-14.1s12 5.5 14.5 14.1H17.5Z" />
                   </svg>
                 </div>
 

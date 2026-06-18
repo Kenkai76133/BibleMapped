@@ -6056,13 +6056,19 @@
       display: block !important;
       width: 58% !important;
       height: 58% !important;
-      color: #fffdf7 !important;
-      fill: none !important;
+      color: #ffffff !important;
+      fill: none;
       stroke: currentColor !important;
-      stroke-width: 3.2 !important;
+      stroke-width: 4.8 !important;
       stroke-linecap: round !important;
       stroke-linejoin: round !important;
-      filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.26)) !important;
+      opacity: 1 !important;
+      filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.34)) !important;
+    }
+
+    html body #aboutMappedPanel .about-biblemapped-icon .icon-fill {
+      fill: currentColor !important;
+      stroke: none !important;
     }
 
     html body #aboutMappedPanel .about-biblemapped-arrow {
