@@ -25,6 +25,12 @@
     rel="stylesheet"
   />
 
+  <!-- Bible Earth / CesiumJS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/cesium@1.119.0/Build/Cesium/Widgets/widgets.css"
+    rel="stylesheet"
+  />
+
   <style>
     :root {
       --bm-purple: #8b3dff;
@@ -63,6 +69,215 @@
       background: #ffffff;
       min-height: 100vh;
       overflow-x: hidden;
+    }
+
+    /* BIBLE MAPPED EARTH */
+
+    .bible-earth-section {
+      width: 100%;
+      min-height: 92vh;
+      padding: 7rem 5vw 5rem;
+      display: grid;
+      grid-template-columns: minmax(280px, 0.85fr) minmax(320px, 1.4fr);
+      gap: 3rem;
+      align-items: center;
+      background:
+        radial-gradient(circle at 75% 30%, rgba(139, 61, 255, 0.22), transparent 28%),
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.08), transparent 24%),
+        #070812;
+      color: #f7f2e8;
+      overflow: hidden;
+    }
+
+    .bible-earth-copy {
+      max-width: 620px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .section-kicker {
+      margin: 0 0 1rem;
+      color: #b892ff;
+      font-size: 0.84rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .bible-earth-copy h1 {
+      margin: 0;
+      font-size: clamp(2.7rem, 7vw, 6.3rem);
+      line-height: 0.9;
+      letter-spacing: -0.07em;
+      max-width: 760px;
+    }
+
+    .bible-earth-copy > p:not(.section-kicker) {
+      margin: 1.5rem 0 0;
+      max-width: 560px;
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      line-height: 1.65;
+      color: rgba(247, 242, 232, 0.78);
+    }
+
+    .bible-earth-actions {
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .earth-btn {
+      border: 1px solid rgba(247, 242, 232, 0.28);
+      background: rgba(255, 255, 255, 0.06);
+      color: #f7f2e8;
+      padding: 0.85rem 1.05rem;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition:
+        transform 180ms ease,
+        background 180ms ease,
+        border-color 180ms ease;
+    }
+
+    .earth-btn:hover {
+      transform: translateY(-2px);
+      background: rgba(139, 61, 255, 0.22);
+      border-color: rgba(184, 146, 255, 0.72);
+    }
+
+    .earth-btn.primary {
+      background: #8b3dff;
+      border-color: #8b3dff;
+      color: white;
+    }
+
+    .earth-note {
+      margin-top: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      color: rgba(247, 242, 232, 0.68);
+      font-size: 0.92rem;
+    }
+
+    .earth-note span {
+      width: 0.7rem;
+      height: 0.7rem;
+      display: inline-block;
+      border-radius: 999px;
+      background: #8b3dff;
+      box-shadow: 0 0 20px rgba(139, 61, 255, 0.9);
+    }
+
+    .bible-earth-map-wrap {
+      position: relative;
+      min-height: 620px;
+      border-radius: 2.2rem;
+      overflow: hidden;
+      background: #050611;
+      box-shadow:
+        0 35px 120px rgba(0, 0, 0, 0.42),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    #bibleEarthMap {
+      width: 100%;
+      height: 620px;
+      min-height: 620px;
+      background: #050611;
+    }
+
+    .earth-info-card {
+      position: absolute;
+      right: 1.2rem;
+      bottom: 1.2rem;
+      width: min(360px, calc(100% - 2.4rem));
+      padding: 1.25rem;
+      border-radius: 1.35rem;
+      background: rgba(7, 8, 18, 0.84);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(247, 242, 232, 0.14);
+      color: #f7f2e8;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+      transform: translateY(130%);
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        transform 260ms ease,
+        opacity 260ms ease;
+    }
+
+    .earth-info-card.active {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .earth-info-close {
+      position: absolute;
+      right: 0.9rem;
+      top: 0.7rem;
+      width: 2rem;
+      height: 2rem;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #f7f2e8;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .earth-info-label {
+      margin: 0 0 0.45rem;
+      color: #b892ff;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .earth-info-card h2 {
+      margin: 0 2.5rem 0.75rem 0;
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    .earth-info-card p {
+      margin: 0;
+      color: rgba(247, 242, 232, 0.78);
+      line-height: 1.5;
+    }
+
+    .earth-scripture {
+      margin-top: 0.85rem !important;
+      color: #d8c2ff !important;
+      font-weight: 800;
+    }
+
+    .earth-credit {
+      position: absolute;
+      left: 1rem;
+      bottom: 0.9rem;
+      z-index: 5;
+      font-size: 0.68rem;
+      color: rgba(247, 242, 232, 0.48);
+      pointer-events: none;
+    }
+
+    .cesium-viewer-bottom,
+    .cesium-viewer-animationContainer,
+    .cesium-viewer-timelineContainer,
+    .cesium-viewer-toolbar,
+    .cesium-viewer-fullscreenContainer {
+      display: none !important;
+    }
+
+    .cesium-widget-credits {
+      display: none !important;
     }
 
     /* HERO */
@@ -609,6 +824,26 @@
     }
 
     @media (max-width: 920px) {
+      .bible-earth-section {
+        grid-template-columns: 1fr;
+        padding: 6rem 1.15rem 3rem;
+        gap: 2rem;
+      }
+
+      .bible-earth-copy h1 {
+        font-size: clamp(2.8rem, 15vw, 5rem);
+      }
+
+      .bible-earth-map-wrap {
+        min-height: 520px;
+        border-radius: 1.4rem;
+      }
+
+      #bibleEarthMap {
+        height: 520px;
+        min-height: 520px;
+      }
+
       .atlas-image-bar-content {
         width: min(720px, 86%);
         margin-left: 1rem;
@@ -634,6 +869,33 @@
     }
 
     @media (max-width: 640px) {
+      .bible-earth-section {
+        min-height: auto;
+      }
+
+      .bible-earth-actions {
+        flex-direction: column;
+      }
+
+      .earth-btn {
+        width: 100%;
+      }
+
+      .bible-earth-map-wrap {
+        min-height: 470px;
+      }
+
+      #bibleEarthMap {
+        height: 470px;
+        min-height: 470px;
+      }
+
+      .earth-info-card {
+        right: 0.8rem;
+        bottom: 0.8rem;
+        width: calc(100% - 1.6rem);
+      }
+
       .atlas-hero {
         padding-top: calc(var(--nav-height) + 2.2rem);
       }
@@ -777,6 +1039,57 @@
   </header>
 
   <main class="atlas-page">
+    <section class="bible-earth-section" id="bible-earth">
+      <div class="bible-earth-copy">
+        <p class="section-kicker">Bible Mapped Earth</p>
+
+        <h1>Explore the Bible in the Real World</h1>
+
+        <p>
+          Fly across the places of Scripture, from Ur to Jerusalem, from Egypt to
+          Babylon, from Galilee to Rome. The Bible was not written above history,
+          but inside it.
+        </p>
+
+        <div class="bible-earth-actions">
+          <button class="earth-btn primary" id="resetBibleEarth" type="button">
+            Reset View
+          </button>
+
+          <button class="earth-btn" id="showAbrahamRoute" type="button">
+            Abraham&rsquo;s Journey
+          </button>
+
+          <button class="earth-btn" id="showJesusPlaces" type="button">
+            Jesus&rsquo; World
+          </button>
+        </div>
+
+        <div class="earth-note">
+          <span></span>
+          Click a purple marker to learn why that place matters.
+        </div>
+      </div>
+
+      <div class="bible-earth-map-wrap">
+        <div id="bibleEarthMap"></div>
+
+        <div class="earth-info-card" id="earthInfoCard">
+          <button class="earth-info-close" id="closeEarthInfo" type="button">&times;</button>
+          <p class="earth-info-label">Selected Place</p>
+          <h2 id="earthPlaceTitle">Jerusalem</h2>
+          <p id="earthPlaceDescription">
+            Click a marker on the globe to explore a biblical location.
+          </p>
+          <p class="earth-scripture" id="earthPlaceScripture"></p>
+        </div>
+
+        <div class="earth-credit">
+          Built with CesiumJS. Location data starter set by Bible Mapped.
+        </div>
+      </div>
+    </section>
+
     <section class="atlas-hero" aria-labelledby="atlasTitle">
       <div class="atlas-hero-inner">
         <div class="atlas-hero-copy premium-reveal">
@@ -1029,6 +1342,343 @@
       <p class="bm-footer-copy">&copy; 2026 Bible Mapped. All rights reserved.</p>
     </div>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/cesium@1.119.0/Build/Cesium/Cesium.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (!window.Cesium) {
+        console.error("CesiumJS did not load.");
+        return;
+      }
+
+      const mapContainer = document.getElementById("bibleEarthMap");
+
+      if (!mapContainer) {
+        return;
+      }
+
+      // Use CesiumJS without a paid Cesium Ion token.
+      Cesium.Ion.defaultAccessToken = "";
+
+      const biblePlaces = [
+        {
+          name: "Jerusalem",
+          lat: 31.7683,
+          lon: 35.2137,
+          description:
+            "The city of David, the temple, the crucifixion, the resurrection, and the center of biblical history in so many ways that one city basically carries a whole library.",
+          scripture: "2 Samuel 5; Psalm 48; Luke 24; Acts 2",
+          group: "jesus",
+        },
+        {
+          name: "Bethlehem",
+          lat: 31.7054,
+          lon: 35.2024,
+          description:
+            "The city of David and the birthplace of Jesus, tying the Messiah to David's line and Israel's hope.",
+          scripture: "Micah 5:2; Matthew 2:1; Luke 2:4-7",
+          group: "jesus",
+        },
+        {
+          name: "Nazareth",
+          lat: 32.6996,
+          lon: 35.3035,
+          description:
+            "The hometown where Jesus grew up, reminding us that the Messiah came from humble, ordinary places too.",
+          scripture: "Matthew 2:23; Luke 4:16",
+          group: "jesus",
+        },
+        {
+          name: "Sea of Galilee",
+          lat: 32.8337,
+          lon: 35.5872,
+          description:
+            "A major setting for Jesus' teaching, miracles, calling of disciples, and ministry around Galilee.",
+          scripture: "Matthew 4:18-22; Mark 4:35-41",
+          group: "jesus",
+        },
+        {
+          name: "Egypt",
+          lat: 26.8206,
+          lon: 30.8025,
+          description:
+            "A place of refuge, oppression, judgment, and deliverance. Egypt keeps showing up because biblical geography refuses to be simple.",
+          scripture: "Genesis 12:10; Exodus 1-14; Matthew 2:13-15",
+          group: "exodus",
+        },
+        {
+          name: "Mount Sinai",
+          lat: 28.5397,
+          lon: 33.9754,
+          description:
+            "Traditionally associated with the giving of the Law after Israel's deliverance from Egypt.",
+          scripture: "Exodus 19-20",
+          group: "exodus",
+        },
+        {
+          name: "Babylon",
+          lat: 32.5364,
+          lon: 44.4208,
+          description:
+            "The empire and city tied to exile, judgment, pride, and the longing for restoration.",
+          scripture: "2 Kings 25; Daniel 1; Psalm 137",
+          group: "empire",
+        },
+        {
+          name: "Nineveh",
+          lat: 36.3594,
+          lon: 43.1529,
+          description:
+            "The great Assyrian city connected to Jonah's reluctant preaching and God's mercy toward a violent people.",
+          scripture: "Jonah 1-4; Nahum 1-3",
+          group: "empire",
+        },
+        {
+          name: "Ur",
+          lat: 30.9625,
+          lon: 46.1033,
+          description:
+            "The place associated with Abram's origins before God called him toward the land of promise.",
+          scripture: "Genesis 11:31; Genesis 12:1-3",
+          group: "abraham",
+        },
+        {
+          name: "Haran",
+          lat: 36.8651,
+          lon: 39.0313,
+          description:
+            "A major stop in Abram's journey before entering Canaan.",
+          scripture: "Genesis 11:31-32; Genesis 12:4-5",
+          group: "abraham",
+        },
+        {
+          name: "Canaan",
+          lat: 31.5,
+          lon: 34.9,
+          description:
+            "The promised land given in covenant promise, later central to Israel's story, kingdom, exile, and hope.",
+          scripture: "Genesis 12:5-7; Exodus 3:8",
+          group: "abraham",
+        },
+        {
+          name: "Rome",
+          lat: 41.9028,
+          lon: 12.4964,
+          description:
+            "The imperial center of the New Testament world and the destination of Paul's journey in Acts.",
+          scripture: "Acts 28; Romans 1:7",
+          group: "paul",
+        },
+      ];
+
+      const viewer = new Cesium.Viewer("bibleEarthMap", {
+        animation: false,
+        timeline: false,
+        geocoder: false,
+        homeButton: false,
+        sceneModePicker: false,
+        baseLayerPicker: false,
+        navigationHelpButton: false,
+        fullscreenButton: false,
+        infoBox: false,
+        selectionIndicator: false,
+        shouldAnimate: true,
+        baseLayer: false,
+        terrainProvider: new Cesium.EllipsoidTerrainProvider(),
+      });
+
+      viewer.scene.backgroundColor = Cesium.Color.fromCssColorString("#050611");
+      viewer.scene.globe.baseColor = Cesium.Color.fromCssColorString("#111827");
+      viewer.scene.globe.enableLighting = true;
+      viewer.scene.skyAtmosphere.show = true;
+      viewer.scene.fog.enabled = false;
+
+      // Keep controls open for dragging, wheel zooming, and pointer exploration.
+      viewer.scene.screenSpaceCameraController.enableRotate = true;
+      viewer.scene.screenSpaceCameraController.enableZoom = true;
+      viewer.scene.screenSpaceCameraController.enableTilt = true;
+      viewer.scene.screenSpaceCameraController.minimumZoomDistance = 800000;
+      viewer.scene.screenSpaceCameraController.maximumZoomDistance = 16000000;
+
+      const purple = Cesium.Color.fromCssColorString("#8b3dff");
+      const cream = Cesium.Color.fromCssColorString("#f7f2e8");
+
+      function addPlaceMarker(place) {
+        return viewer.entities.add({
+          name: place.name,
+          position: Cesium.Cartesian3.fromDegrees(place.lon, place.lat, 12000),
+          point: {
+            pixelSize: 13,
+            color: purple,
+            outlineColor: cream,
+            outlineWidth: 2,
+            heightReference: Cesium.HeightReference.NONE,
+            disableDepthTestDistance: Number.POSITIVE_INFINITY,
+          },
+          label: {
+            text: place.name,
+            font: "700 14px Arial",
+            fillColor: cream,
+            outlineColor: Cesium.Color.BLACK,
+            outlineWidth: 3,
+            style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+            pixelOffset: new Cesium.Cartesian2(0, -28),
+            scaleByDistance: new Cesium.NearFarScalar(1200000, 1, 9000000, 0.45),
+            disableDepthTestDistance: Number.POSITIVE_INFINITY,
+          },
+          properties: {
+            name: place.name,
+            description: place.description,
+            scripture: place.scripture,
+            group: place.group,
+          },
+        });
+      }
+
+      biblePlaces.forEach(addPlaceMarker);
+
+      const abrahamRoutePositions = [
+        Cesium.Cartesian3.fromDegrees(46.1033, 30.9625, 30000),
+        Cesium.Cartesian3.fromDegrees(39.0313, 36.8651, 30000),
+        Cesium.Cartesian3.fromDegrees(34.9, 31.5, 30000),
+      ];
+
+      const abrahamRoute = viewer.entities.add({
+        name: "Abraham's Journey",
+        show: true,
+        polyline: {
+          positions: abrahamRoutePositions,
+          width: 5,
+          material: new Cesium.PolylineGlowMaterialProperty({
+            glowPower: 0.22,
+            color: purple,
+          }),
+          clampToGround: false,
+        },
+      });
+
+      const card = document.getElementById("earthInfoCard");
+      const title = document.getElementById("earthPlaceTitle");
+      const description = document.getElementById("earthPlaceDescription");
+      const scripture = document.getElementById("earthPlaceScripture");
+
+      function openInfoCard(data) {
+        title.textContent = data.name;
+        description.textContent = data.description;
+        scripture.textContent = data.scripture || "";
+        card.classList.add("active");
+      }
+
+      function closeInfoCard() {
+        card.classList.remove("active");
+      }
+
+      function flyToAncientNearEast() {
+        viewer.camera.flyTo({
+          destination: Cesium.Cartesian3.fromDegrees(39.5, 31.5, 5200000),
+          orientation: {
+            heading: Cesium.Math.toRadians(0),
+            pitch: Cesium.Math.toRadians(-65),
+            roll: 0,
+          },
+          duration: 2.2,
+        });
+      }
+
+      function flyToAbrahamJourney() {
+        abrahamRoute.show = true;
+
+        viewer.camera.flyTo({
+          destination: Cesium.Cartesian3.fromDegrees(40.5, 33.5, 4300000),
+          orientation: {
+            heading: Cesium.Math.toRadians(0),
+            pitch: Cesium.Math.toRadians(-70),
+            roll: 0,
+          },
+          duration: 2.2,
+        });
+
+        openInfoCard({
+          name: "Abraham's Journey",
+          description:
+            "Abram's journey moves from Ur to Haran and then into Canaan. This route introduces the covenant promise, land, seed, blessing, and the story that leads toward Israel and ultimately Christ.",
+          scripture: "Genesis 11:31; Genesis 12:1-7",
+        });
+      }
+
+      function flyToJesusWorld() {
+        viewer.camera.flyTo({
+          destination: Cesium.Cartesian3.fromDegrees(35.25, 31.9, 1200000),
+          orientation: {
+            heading: Cesium.Math.toRadians(0),
+            pitch: Cesium.Math.toRadians(-67),
+            roll: 0,
+          },
+          duration: 2.2,
+        });
+
+        openInfoCard({
+          name: "Jesus' World",
+          description:
+            "Jesus' ministry was rooted in real places: Bethlehem, Nazareth, Galilee, Jerusalem, and the roads between them. The Gospels are not floating spiritual slogans. They are grounded in geography.",
+          scripture: "Matthew 2; Luke 2; Luke 4; John 4; Acts 1",
+        });
+      }
+
+      const clickHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+
+      clickHandler.setInputAction(function (movement) {
+        const pickedObject = viewer.scene.pick(movement.position);
+
+        if (!Cesium.defined(pickedObject) || !pickedObject.id) {
+          return;
+        }
+
+        const entity = pickedObject.id;
+
+        if (!entity.properties) {
+          return;
+        }
+
+        openInfoCard({
+          name: entity.properties.name.getValue(),
+          description: entity.properties.description.getValue(),
+          scripture: entity.properties.scripture.getValue(),
+        });
+
+        viewer.flyTo(entity, {
+          duration: 1.4,
+          offset: new Cesium.HeadingPitchRange(
+            0,
+            Cesium.Math.toRadians(-45),
+            900000
+          ),
+        });
+      }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+
+      document
+        .getElementById("resetBibleEarth")
+        ?.addEventListener("click", function () {
+          closeInfoCard();
+          flyToAncientNearEast();
+        });
+
+      document
+        .getElementById("showAbrahamRoute")
+        ?.addEventListener("click", flyToAbrahamJourney);
+
+      document
+        .getElementById("showJesusPlaces")
+        ?.addEventListener("click", flyToJesusWorld);
+
+      document
+        .getElementById("closeEarthInfo")
+        ?.addEventListener("click", closeInfoCard);
+
+      flyToAncientNearEast();
+    });
+  </script>
 
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 
