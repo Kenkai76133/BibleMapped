@@ -20,6 +20,10 @@
 
   <link rel="stylesheet" href="/src/home.css?v=footer-gunmetal-1" />
 
+  <script>
+    window.CESIUM_BASE_URL = "https://cdn.jsdelivr.net/npm/cesium@1.119.0/Build/Cesium/";
+  </script>
+
   <link
     href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
     rel="stylesheet"
@@ -175,7 +179,7 @@
 
     .bible-earth-map-wrap {
       position: relative;
-      min-height: 620px;
+      min-height: 720px;
       border-radius: 2.2rem;
       overflow: hidden;
       background: #050611;
@@ -186,8 +190,8 @@
 
     #bibleEarthMap {
       width: 100%;
-      height: 620px;
-      min-height: 620px;
+      height: 720px;
+      min-height: 720px;
       background: #050611;
     }
 
@@ -209,6 +213,7 @@
       transition:
         transform 260ms ease,
         opacity 260ms ease;
+      z-index: 10;
     }
 
     .earth-info-card.active {
@@ -268,7 +273,6 @@
       pointer-events: none;
     }
 
-    .cesium-viewer-bottom,
     .cesium-viewer-animationContainer,
     .cesium-viewer-timelineContainer,
     .cesium-viewer-toolbar,
@@ -276,8 +280,12 @@
       display: none !important;
     }
 
-    .cesium-widget-credits {
-      display: none !important;
+    .cesium-viewer-bottom {
+      opacity: 0.65;
+    }
+
+    .cesium-credit-logoContainer {
+      opacity: 0.65;
     }
 
     /* HERO */
@@ -835,13 +843,13 @@
       }
 
       .bible-earth-map-wrap {
-        min-height: 520px;
+        min-height: 560px;
         border-radius: 1.4rem;
       }
 
       #bibleEarthMap {
-        height: 520px;
-        min-height: 520px;
+        height: 560px;
+        min-height: 560px;
       }
 
       .atlas-image-bar-content {
@@ -882,12 +890,12 @@
       }
 
       .bible-earth-map-wrap {
-        min-height: 470px;
+        min-height: 500px;
       }
 
       #bibleEarthMap {
-        height: 470px;
-        min-height: 470px;
+        height: 500px;
+        min-height: 500px;
       }
 
       .earth-info-card {
@@ -1085,7 +1093,7 @@
         </div>
 
         <div class="earth-credit">
-          Built with CesiumJS. Location data starter set by Bible Mapped.
+          Built with CesiumJS. Uses free Natural Earth II imagery.
         </div>
       </div>
     </section>
@@ -1346,7 +1354,7 @@
   <script src="https://cdn.jsdelivr.net/npm/cesium@1.119.0/Build/Cesium/Cesium.js"></script>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", async function () {
       if (!window.Cesium) {
         console.error("CesiumJS did not load.");
         return;
@@ -1360,6 +1368,18 @@
 
       // Use CesiumJS without a paid Cesium Ion token.
       Cesium.Ion.defaultAccessToken = "";
+
+      let naturalEarthLayer = null;
+
+      try {
+        naturalEarthLayer = Cesium.ImageryLayer.fromProviderAsync(
+          Cesium.TileMapServiceImageryProvider.fromUrl(
+            Cesium.buildModuleUrl("Assets/Textures/NaturalEarthII")
+          )
+        );
+      } catch (error) {
+        console.warn("Natural Earth II imagery failed to initialize.", error);
+      }
 
       const biblePlaces = [
         {
@@ -1472,7 +1492,7 @@
         },
       ];
 
-      const viewer = new Cesium.Viewer("bibleEarthMap", {
+      const viewerOptions = {
         animation: false,
         timeline: false,
         geocoder: false,
@@ -1484,12 +1504,18 @@
         infoBox: false,
         selectionIndicator: false,
         shouldAnimate: true,
-        baseLayer: false,
         terrainProvider: new Cesium.EllipsoidTerrainProvider(),
-      });
+      };
 
+      if (naturalEarthLayer) {
+        viewerOptions.baseLayer = naturalEarthLayer;
+      }
+
+      const viewer = new Cesium.Viewer("bibleEarthMap", viewerOptions);
+
+      viewer.scene.mode = Cesium.SceneMode.SCENE3D;
       viewer.scene.backgroundColor = Cesium.Color.fromCssColorString("#050611");
-      viewer.scene.globe.baseColor = Cesium.Color.fromCssColorString("#111827");
+      viewer.scene.globe.baseColor = Cesium.Color.fromCssColorString("#101827");
       viewer.scene.globe.enableLighting = true;
       viewer.scene.skyAtmosphere.show = true;
       viewer.scene.fog.enabled = false;
@@ -1498,8 +1524,8 @@
       viewer.scene.screenSpaceCameraController.enableRotate = true;
       viewer.scene.screenSpaceCameraController.enableZoom = true;
       viewer.scene.screenSpaceCameraController.enableTilt = true;
-      viewer.scene.screenSpaceCameraController.minimumZoomDistance = 800000;
-      viewer.scene.screenSpaceCameraController.maximumZoomDistance = 16000000;
+      viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1200000;
+      viewer.scene.screenSpaceCameraController.maximumZoomDistance = 50000000;
 
       const purple = Cesium.Color.fromCssColorString("#8b3dff");
       const cream = Cesium.Color.fromCssColorString("#f7f2e8");
@@ -1576,10 +1602,10 @@
 
       function flyToAncientNearEast() {
         viewer.camera.flyTo({
-          destination: Cesium.Cartesian3.fromDegrees(39.5, 31.5, 5200000),
+          destination: Cesium.Cartesian3.fromDegrees(35.5, 28.5, 18500000),
           orientation: {
             heading: Cesium.Math.toRadians(0),
-            pitch: Cesium.Math.toRadians(-65),
+            pitch: Cesium.Math.toRadians(-90),
             roll: 0,
           },
           duration: 2.2,
@@ -1590,10 +1616,10 @@
         abrahamRoute.show = true;
 
         viewer.camera.flyTo({
-          destination: Cesium.Cartesian3.fromDegrees(40.5, 33.5, 4300000),
+          destination: Cesium.Cartesian3.fromDegrees(39.5, 33.5, 9000000),
           orientation: {
             heading: Cesium.Math.toRadians(0),
-            pitch: Cesium.Math.toRadians(-70),
+            pitch: Cesium.Math.toRadians(-85),
             roll: 0,
           },
           duration: 2.2,
@@ -1609,10 +1635,10 @@
 
       function flyToJesusWorld() {
         viewer.camera.flyTo({
-          destination: Cesium.Cartesian3.fromDegrees(35.25, 31.9, 1200000),
+          destination: Cesium.Cartesian3.fromDegrees(35.25, 31.9, 4500000),
           orientation: {
             heading: Cesium.Math.toRadians(0),
-            pitch: Cesium.Math.toRadians(-67),
+            pitch: Cesium.Math.toRadians(-80),
             roll: 0,
           },
           duration: 2.2,
