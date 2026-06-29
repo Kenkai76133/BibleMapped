@@ -24,11 +24,6 @@
     window.CESIUM_BASE_URL = "https://cdn.jsdelivr.net/npm/cesium@1.119.0/Build/Cesium/";
   </script>
 
-  <link
-    href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
-    rel="stylesheet"
-  />
-
   <!-- Bible Earth / CesiumJS -->
   <link
     href="https://cdn.jsdelivr.net/npm/cesium@1.119.0/Build/Cesium/Widgets/widgets.css"
@@ -78,12 +73,14 @@
     /* BIBLE MAPPED EARTH */
 
     .bible-earth-section {
+      position: relative;
+      isolation: isolate;
       width: 100%;
-      min-height: 92vh;
-      padding: 7rem 5vw 5rem;
-      display: grid;
-      grid-template-columns: minmax(280px, 0.85fr) minmax(320px, 1.4fr);
-      gap: 3rem;
+      min-height: calc(100vh - var(--nav-height));
+      padding: calc(var(--nav-height) + 3.5rem) 5vw 7rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.4rem;
       align-items: center;
       background:
         radial-gradient(circle at 75% 30%, rgba(139, 61, 255, 0.22), transparent 28%),
@@ -93,10 +90,23 @@
       overflow: hidden;
     }
 
+    .bible-earth-section::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: clamp(120px, 18vw, 240px);
+      z-index: 2;
+      background: linear-gradient(180deg, rgba(7, 8, 18, 0), #ffffff 88%);
+      pointer-events: none;
+    }
+
     .bible-earth-copy {
-      max-width: 620px;
+      width: min(980px, 100%);
       position: relative;
       z-index: 3;
+      text-align: center;
     }
 
     .section-kicker {
@@ -110,24 +120,29 @@
 
     .bible-earth-copy h1 {
       margin: 0;
-      font-size: clamp(2.7rem, 7vw, 6.3rem);
+      font-size: clamp(3.1rem, 8vw, 7.6rem);
       line-height: 0.9;
       letter-spacing: -0.07em;
-      max-width: 760px;
+      max-width: 980px;
+      margin-inline: auto;
     }
 
     .bible-earth-copy > p:not(.section-kicker) {
       margin: 1.5rem 0 0;
-      max-width: 560px;
+      max-width: 680px;
+      margin-inline: auto;
       font-size: clamp(1rem, 1.5vw, 1.2rem);
       line-height: 1.65;
       color: rgba(247, 242, 232, 0.78);
     }
 
     .bible-earth-actions {
-      margin-top: 2rem;
+      position: relative;
+      z-index: 3;
+      margin-top: -0.9rem;
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 0.8rem;
     }
 
@@ -160,9 +175,12 @@
     }
 
     .earth-note {
-      margin-top: 1.4rem;
+      position: relative;
+      z-index: 3;
+      margin-top: -1rem;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 0.7rem;
       color: rgba(247, 242, 232, 0.68);
       font-size: 0.92rem;
@@ -179,20 +197,20 @@
 
     .bible-earth-map-wrap {
       position: relative;
-      min-height: 720px;
-      border-radius: 2.2rem;
+      z-index: 3;
+      width: min(1180px, 100%);
+      min-height: min(68vh, 720px);
+      border-radius: 0;
       overflow: hidden;
-      background: #050611;
-      box-shadow:
-        0 35px 120px rgba(0, 0, 0, 0.42),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+      background: transparent;
+      box-shadow: none;
     }
 
     #bibleEarthMap {
       width: 100%;
-      height: 720px;
-      min-height: 720px;
-      background: #050611;
+      height: min(68vh, 720px);
+      min-height: 560px;
+      background: transparent;
     }
 
     .earth-info-card {
@@ -288,523 +306,7 @@
       opacity: 0.65;
     }
 
-
-
-    /* DATA-DRIVEN ATLAS CONTROLS */
-
-    .atlas-launch-panel {
-      margin-top: 1.65rem;
-      padding: 1rem;
-      border: 1px solid rgba(247, 242, 232, 0.16);
-      border-radius: 1.25rem;
-      background: rgba(255, 255, 255, 0.055);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-    }
-
-    .atlas-launch-heading {
-      margin: 0 0 0.8rem;
-      color: rgba(247, 242, 232, 0.72);
-      font-size: 0.72rem;
-      font-weight: 900;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .atlas-search-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 0.65rem;
-      margin-bottom: 0.9rem;
-    }
-
-    .atlas-search-row input {
-      width: 100%;
-      min-height: 44px;
-      border: 1px solid rgba(247, 242, 232, 0.18);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
-      color: #f7f2e8;
-      padding: 0 1rem;
-      font: inherit;
-      outline: none;
-    }
-
-    .atlas-search-row input::placeholder {
-      color: rgba(247, 242, 232, 0.48);
-    }
-
-    .atlas-search-row button,
-    .atlas-chip {
-      appearance: none;
-      border: 1px solid rgba(247, 242, 232, 0.2);
-      border-radius: 999px;
-      background: rgba(139, 61, 255, 0.16);
-      color: #f7f2e8;
-      min-height: 40px;
-      padding: 0 0.85rem;
-      font-size: 0.74rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
-    }
-
-    .atlas-search-row button:hover,
-    .atlas-chip:hover,
-    .atlas-chip.is-active {
-      transform: translateY(-1px);
-      background: #8b3dff;
-      border-color: #b892ff;
-    }
-
-    .atlas-control-groups {
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    .atlas-control-group strong {
-      display: block;
-      margin: 0 0 0.45rem;
-      color: rgba(247, 242, 232, 0.72);
-      font-size: 0.68rem;
-      font-weight: 900;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .atlas-chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-    }
-
-    .atlas-detail-dock {
-      margin-top: 1rem;
-      padding: clamp(1rem, 2vw, 1.35rem);
-      border: 1px solid var(--bm-border);
-      border-radius: 24px;
-      background: #ffffff;
-      box-shadow: 0 18px 44px rgba(31, 41, 51, 0.1);
-    }
-
-    .atlas-detail-kicker {
-      margin: 0 0 0.5rem;
-      color: var(--bm-purple);
-      font-size: 0.7rem;
-      font-weight: 900;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .atlas-detail-dock h2 {
-      margin: 0;
-      color: #16191d;
-      font-size: clamp(1.8rem, 4vw, 3.2rem);
-      line-height: 0.95;
-      letter-spacing: -0.055em;
-    }
-
-    .atlas-detail-summary {
-      margin: 0.85rem 0 1rem;
-      color: rgba(31, 41, 51, 0.74);
-      font-size: 1rem;
-      line-height: 1.55;
-    }
-
-    .atlas-detail-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.75rem;
-    }
-
-    .atlas-detail-block {
-      padding: 0.9rem;
-      border: 1px solid rgba(31, 41, 51, 0.1);
-      border-radius: 18px;
-      background: #fffdf7;
-    }
-
-    .atlas-detail-block strong {
-      display: block;
-      margin-bottom: 0.35rem;
-      color: #16191d;
-      font-size: 0.76rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .atlas-detail-block p {
-      margin: 0;
-      color: rgba(31, 41, 51, 0.74);
-      font-size: 0.88rem;
-      line-height: 1.45;
-    }
-
-    .atlas-related-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-      margin-top: 0.95rem;
-    }
-
-    .atlas-related-pill {
-      border: 1px solid rgba(139, 61, 255, 0.18);
-      border-radius: 999px;
-      background: rgba(139, 61, 255, 0.075);
-      color: var(--bm-purple-dark);
-      padding: 0.45rem 0.65rem;
-      font-size: 0.75rem;
-      font-weight: 900;
-      cursor: pointer;
-    }
-
-    .bm-map-marker.is-active .bm-map-marker-dot {
-      transform: scale(1.28);
-      background: #ffffff;
-      border-color: var(--bm-purple);
-      box-shadow: 0 0 0 6px rgba(139, 61, 255, 0.18), 0 12px 28px rgba(139, 61, 255, 0.36);
-    }
-
-    .bm-map-marker.is-muted {
-      opacity: 0.42;
-    }
-
-    /* HERO */
-
-    .atlas-hero {
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-      padding:
-        calc(var(--nav-height) + clamp(3.5rem, 7vw, 6rem))
-        clamp(1rem, 4vw, 2rem)
-        clamp(3.5rem, 6vw, 6rem);
-      background: #ffffff;
-    }
-
-    .atlas-hero::before {
-      content: "";
-      position: absolute;
-      inset: auto -10vw -22vw auto;
-      width: clamp(360px, 46vw, 720px);
-      height: clamp(360px, 46vw, 720px);
-      border-radius: 999px;
-      background:
-        radial-gradient(circle, rgba(139, 61, 255, 0.12), rgba(139, 61, 255, 0.04) 42%, rgba(139, 61, 255, 0) 70%);
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .atlas-hero-inner {
-      width: min(1180px, 100%);
-      margin: 0 auto;
-      display: grid;
-      gap: clamp(2rem, 5vw, 4rem);
-    }
-
-    .atlas-hero-copy {
-      width: min(860px, 100%);
-    }
-
-    .atlas-eyebrow {
-      margin: 0 0 1rem;
-      color: var(--bm-purple);
-      font-size: 0.78rem;
-      font-weight: 900;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .atlas-title {
-      margin: 0;
-      color: #16191d;
-      font-size: clamp(3.4rem, 8vw, 7.8rem);
-      line-height: 0.9;
-      letter-spacing: -0.07em;
-      font-weight: 950;
-    }
-
-    .atlas-title span {
-      display: block;
-    }
-
-    .atlas-title em {
-      font-style: italic;
-      color: var(--bm-purple-dark);
-    }
-
-    .atlas-subtitle {
-      width: min(720px, 100%);
-      margin: clamp(1.25rem, 3vw, 2rem) 0 0;
-      color: var(--bm-muted);
-      font-size: clamp(1.05rem, 2vw, 1.35rem);
-      line-height: 1.58;
-    }
-
-    .atlas-hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-top: clamp(1.6rem, 3vw, 2.4rem);
-    }
-
-    .atlas-start-btn,
-    .atlas-secondary-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 58px;
-      padding: 0 1.35rem;
-      text-decoration: none;
-      font-size: 0.82rem;
-      font-weight: 900;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      transition: transform 180ms ease, background 180ms ease, color 180ms ease;
-    }
-
-    .atlas-start-btn {
-      background: var(--bm-purple-dark);
-      color: #ffffff;
-    }
-
-    .atlas-secondary-btn {
-      border: 1px solid var(--bm-border);
-      background: #ffffff;
-      color: var(--bm-gunmetal);
-    }
-
-    .atlas-start-btn:hover,
-    .atlas-secondary-btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .atlas-secondary-btn:hover {
-      background: var(--bm-soft);
-    }
-
-    /* MAP */
-
-    .atlas-map-shell {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid var(--bm-border);
-      border-radius: clamp(18px, 3vw, 34px);
-      background: #ffffff;
-      box-shadow: var(--bm-shadow);
-    }
-
-    .atlas-map-topbar {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      right: 1rem;
-      z-index: 3;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      pointer-events: none;
-    }
-
-    .atlas-map-label {
-      display: inline-flex;
-      align-items: center;
-      min-height: 34px;
-      padding: 0 0.9rem;
-      border: 1px solid rgba(31, 41, 51, 0.12);
-      border-radius: 999px;
-      background: rgba(255, 253, 247, 0.92);
-      color: var(--bm-gunmetal);
-      box-shadow: 0 10px 24px rgba(31, 41, 51, 0.12);
-      font-size: 0.7rem;
-      font-weight: 900;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      pointer-events: auto;
-    }
-
-    .atlas-map-reset {
-      appearance: none;
-      border: 0;
-      min-height: 34px;
-      padding: 0 0.9rem;
-      border-radius: 999px;
-      background: var(--bm-purple-dark);
-      color: #ffffff;
-      box-shadow: 0 10px 24px rgba(109, 40, 255, 0.24);
-      font-size: 0.68rem;
-      font-weight: 900;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      cursor: pointer;
-      pointer-events: auto;
-    }
-
-    #bibleAtlasMap {
-      width: 100%;
-      height: clamp(360px, 58vw, 680px);
-    }
-
-    .atlas-map-caption {
-      margin: 1rem 0 0;
-      color: var(--bm-muted);
-      font-size: 0.96rem;
-      line-height: 1.55;
-    }
-
-    /* MAP MARKERS */
-
-    .bm-map-marker {
-      appearance: none;
-      border: 0;
-      background: transparent;
-      cursor: pointer;
-      padding: 0;
-      transform: translateY(-2px);
-    }
-
-    .bm-map-marker-dot {
-      display: block;
-      width: 18px;
-      height: 18px;
-      margin: 0 auto 5px;
-      border: 3px solid #ffffff;
-      border-radius: 999px;
-      background: var(--bm-purple);
-      box-shadow: 0 9px 20px rgba(139, 61, 255, 0.42);
-    }
-
-    .bm-map-marker-label {
-      display: block;
-      padding: 0.38rem 0.55rem;
-      border: 1px solid rgba(31, 41, 51, 0.14);
-      border-radius: 999px;
-      background: rgba(255, 253, 247, 0.94);
-      color: var(--bm-gunmetal);
-      box-shadow: 0 8px 20px rgba(31, 41, 51, 0.12);
-      font-size: 0.72rem;
-      font-weight: 900;
-      line-height: 1;
-      white-space: nowrap;
-    }
-
-    .maplibregl-popup-content {
-      padding: 0 !important;
-      border-radius: 22px !important;
-      overflow: hidden;
-      border: 1px solid rgba(31, 41, 51, 0.12);
-      box-shadow: 0 22px 55px rgba(31, 41, 51, 0.22) !important;
-    }
-
-    .maplibregl-popup-close-button {
-      width: 30px;
-      height: 30px;
-      font-size: 22px;
-      color: var(--bm-gunmetal);
-    }
-
-    .bm-map-popup {
-      width: min(340px, 78vw);
-      padding: 1.2rem;
-      background: #ffffff;
-      color: var(--bm-gunmetal);
-      text-align: left;
-    }
-
-    .bm-map-popup-kicker {
-      margin: 0 0 0.5rem;
-      color: var(--bm-purple);
-      font-size: 0.67rem;
-      font-weight: 900;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .bm-map-popup h3 {
-      margin: 0 0 0.85rem;
-      color: #16191d;
-      font-size: 1.65rem;
-      line-height: 1;
-      letter-spacing: -0.045em;
-    }
-
-    .bm-map-popup-block {
-      padding-top: 0.75rem;
-      border-top: 1px solid rgba(31, 41, 51, 0.1);
-    }
-
-    .bm-map-popup-block + .bm-map-popup-block {
-      margin-top: 0.75rem;
-    }
-
-    .bm-map-popup strong {
-      display: block;
-      margin-bottom: 0.25rem;
-      color: #16191d;
-      font-size: 0.78rem;
-      font-weight: 900;
-    }
-
-    .bm-map-popup p {
-      margin: 0;
-      color: rgba(31, 41, 51, 0.76);
-      font-size: 0.86rem;
-      line-height: 1.45;
-    }
-
-    .maplibregl-ctrl-group {
-      border-radius: 14px !important;
-      overflow: hidden;
-      box-shadow: 0 12px 28px rgba(31, 41, 51, 0.16) !important;
-    }
-
-    /* METHOD STRIP */
-
-    .atlas-method {
-      padding: 0 clamp(1rem, 4vw, 2rem) clamp(3.5rem, 7vw, 6rem);
-      background: #ffffff;
-    }
-
-    .atlas-method-inner {
-      width: min(1180px, 100%);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      border: 1px solid var(--bm-border);
-      border-radius: 999px;
-      overflow: hidden;
-      background: #ffffff;
-      box-shadow: 0 12px 38px rgba(31, 41, 51, 0.06);
-    }
-
-    .atlas-method-item {
-      padding: 1.2rem 1rem;
-      text-align: center;
-      border-right: 1px solid var(--bm-border);
-    }
-
-    .atlas-method-item:last-child {
-      border-right: 0;
-    }
-
-    .atlas-method-item strong {
-      display: block;
-      color: #16191d;
-      font-size: 1rem;
-      font-weight: 900;
-    }
-
-    .atlas-method-item span {
-      display: block;
-      margin-top: 0.25rem;
-      color: var(--bm-muted);
-      font-size: 0.86rem;
-    }
-
-    /* IMAGE BAR SECTIONS — wall-to-wall image bars, no white gaps */
+    /* IMAGE BAR SECTIONS � wall-to-wall image bars, no white gaps */
 
     .atlas-feature-stack {
       display: block;
@@ -932,6 +434,47 @@
       text-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
     }
 
+    .atlas-folder-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      max-width: 620px;
+      margin-top: 1.25rem;
+    }
+
+    .atlas-folder-item {
+      appearance: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      min-height: 36px;
+      padding: 0 0.82rem;
+      font: inherit;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      line-height: 1;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+      transition:
+        transform 180ms ease,
+        background 180ms ease,
+        border-color 180ms ease;
+    }
+
+    .atlas-folder-item:hover,
+    .atlas-folder-item:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(184, 146, 255, 0.9);
+      background: rgba(139, 61, 255, 0.72);
+      outline: none;
+    }
+
     .atlas-explore-button {
       position: absolute;
       right: max(1rem, calc((100vw - 1180px) / 2));
@@ -1016,13 +559,12 @@
 
     @media (max-width: 920px) {
       .bible-earth-section {
-        grid-template-columns: 1fr;
-        padding: 6rem 1.15rem 3rem;
-        gap: 2rem;
+        padding: calc(var(--nav-height) + 2rem) 1.15rem 4.5rem;
+        gap: 1.4rem;
       }
 
       .bible-earth-copy h1 {
-        font-size: clamp(2.8rem, 15vw, 5rem);
+        font-size: clamp(2.7rem, 13vw, 4.8rem);
       }
 
       .bible-earth-map-wrap {
@@ -1044,19 +586,6 @@
         right: 1rem;
       }
 
-      .atlas-method-inner {
-        grid-template-columns: repeat(2, 1fr);
-        border-radius: 28px;
-      }
-
-      .atlas-method-item:nth-child(2) {
-        border-right: 0;
-      }
-
-      .atlas-method-item:nth-child(1),
-      .atlas-method-item:nth-child(2) {
-        border-bottom: 1px solid var(--bm-border);
-      }
     }
 
     @media (max-width: 640px) {
@@ -1087,56 +616,10 @@
         width: calc(100% - 1.6rem);
       }
 
-      .atlas-hero {
-        padding-top: calc(var(--nav-height) + 2.2rem);
-      }
-
-      .atlas-title {
-        font-size: clamp(3rem, 17vw, 4.6rem);
-      }
-
-      .atlas-hero-actions {
+      .atlas-folder-items {
         display: grid;
-        width: min(260px, 100%);
-      }
-
-      .atlas-start-btn,
-      .atlas-secondary-btn {
-        width: 100%;
-      }
-
-      #bibleAtlasMap {
-        height: 360px;
-      }
-
-      .atlas-map-topbar {
-        align-items: flex-start;
-      }
-
-      .atlas-map-label {
-        max-width: 190px;
-        white-space: normal;
-        line-height: 1.2;
-        padding-block: 0.45rem;
-      }
-
-      .bm-map-marker-label {
-        display: none;
-      }
-
-      .atlas-method-inner {
         grid-template-columns: 1fr;
-        border-radius: 24px;
-      }
-
-      .atlas-method-item,
-      .atlas-method-item:nth-child(2) {
-        border-right: 0;
-        border-bottom: 1px solid var(--bm-border);
-      }
-
-      .atlas-method-item:last-child {
-        border-bottom: 0;
+        width: min(320px, 100%);
       }
 
       .atlas-feature-inner {
@@ -1165,31 +648,6 @@
         left: 1rem;
         right: 1rem;
         width: auto;
-      }
-    }
-
-
-    @media (max-width: 920px) {
-      .atlas-search-row {
-        grid-template-columns: 1fr;
-      }
-
-      .atlas-search-row button {
-        width: 100%;
-      }
-
-      .atlas-detail-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 640px) {
-      .atlas-launch-panel {
-        padding: 0.85rem;
-      }
-
-      .atlas-detail-grid {
-        grid-template-columns: 1fr;
       }
     }
 
@@ -1266,36 +724,6 @@
           Babylon, from Galilee to Rome. The Bible was not written above history,
           but inside it.
         </p>
-
-        <div class="bible-earth-actions">
-          <button class="earth-btn primary" id="resetBibleEarth" type="button">
-            Reset View
-          </button>
-
-          <button class="earth-btn" id="showAbrahamRoute" type="button">
-            Abraham&rsquo;s Journey
-          </button>
-
-          <button class="earth-btn" id="showJesusPlaces" type="button">
-            Jesus&rsquo; World
-          </button>
-        </div>
-
-        <div class="earth-note">
-          <span></span>
-          Click a purple marker to learn why that place matters.
-        </div>
-
-        <div class="atlas-launch-panel" aria-label="Bible Mapped Atlas controls">
-          <p class="atlas-launch-heading">Start with a person, place, region, or journey</p>
-
-          <div class="atlas-search-row">
-            <input id="atlasSearchInput" type="search" placeholder="Search Moses, Jerusalem, Exodus, Rome..." />
-            <button id="atlasSearchButton" type="button">Go</button>
-          </div>
-
-          <div class="atlas-control-groups" id="atlasQuickControls"></div>
-        </div>
       </div>
 
       <div class="bible-earth-map-wrap">
@@ -1315,218 +743,234 @@
           Built with CesiumJS. Uses free Natural Earth II imagery.
         </div>
       </div>
-    </section>
 
-    <section class="atlas-hero" aria-labelledby="atlasTitle">
-      <div class="atlas-hero-inner">
-        <div class="atlas-hero-copy premium-reveal">
-          <p class="atlas-eyebrow">MAPS • TIMELINES • CONTEXT</p>
+      <div class="bible-earth-actions">
+        <button class="earth-btn primary" id="resetBibleEarth" type="button">
+          Reset View
+        </button>
 
-          <h1 class="atlas-title" id="atlasTitle">
-            <span>Bible Mapped</span>
-            <span><em>Atlas</em></span>
-          </h1>
+        <button class="earth-btn" id="showAbrahamRoute" type="button">
+          Abraham&rsquo;s Journey
+        </button>
 
-          <p class="atlas-subtitle">
-            Trace Scripture through real places, ancient routes, kingdoms,
-            timelines, and meaning — from Eden to Abraham, from Egypt to Sinai,
-            from Jerusalem to the empty tomb, and from the Church to Rome.
-          </p>
+        <button class="earth-btn" id="showJesusPlaces" type="button">
+          Jesus&rsquo; World
+        </button>
+      </div>
 
-          <div class="atlas-hero-actions">
-            <a class="atlas-start-btn" href="#bibleAtlasMap">Start Exploring</a>
-            <a class="atlas-secondary-btn" href="#atlasSections">View Sections</a>
-          </div>
-        </div>
-
-        <div class="atlas-map-wrap premium-reveal">
-          <div class="atlas-map-shell">
-            <div class="atlas-map-topbar">
-              <span class="atlas-map-label">Interactive Bible Atlas</span>
-              <button class="atlas-map-reset" type="button" id="resetAtlasMap">
-                Reset Map
-              </button>
-            </div>
-
-            <div id="bibleAtlasMap" aria-label="Interactive Bible Mapped Atlas map"></div>
-          </div>
-
-          <p class="atlas-map-caption">
-            The Bible happened in real places. Tap a marker to see where it happened,
-            what happened there, and why it matters.
-          </p>
-
-          <aside class="atlas-detail-dock" id="atlasDetailDock" aria-live="polite">
-            <p class="atlas-detail-kicker" id="atlasDetailKicker">Bible Mapped Atlas</p>
-            <h2 id="atlasDetailTitle">Ancient Near East</h2>
-            <p class="atlas-detail-summary" id="atlasDetailSummary">
-              Choose a person, place, route, or region. The globe gives you the cinematic view, and the atlas map zooms into the study view.
-            </p>
-            <div class="atlas-detail-grid">
-              <div class="atlas-detail-block">
-                <strong>Where</strong>
-                <p id="atlasDetailWhere">The lands of the biblical world.</p>
-              </div>
-              <div class="atlas-detail-block">
-                <strong>Who</strong>
-                <p id="atlasDetailWho">People, prophets, kings, disciples, and empires.</p>
-              </div>
-              <div class="atlas-detail-block">
-                <strong>What</strong>
-                <p id="atlasDetailWhat">Movements, events, routes, and turning points.</p>
-              </div>
-              <div class="atlas-detail-block">
-                <strong>Why</strong>
-                <p id="atlasDetailWhy">Context helps Scripture become less abstract and more visible.</p>
-              </div>
-            </div>
-            <div class="atlas-related-row" id="atlasRelatedRow"></div>
-          </aside>
-        </div>
+      <div class="earth-note">
+        <span></span>
+        Choose a folder below to reveal its places, routes, and regions.
       </div>
     </section>
 
-    <section class="atlas-method premium-reveal" aria-label="Bible Mapped method">
-      <div class="atlas-method-inner">
-        <div class="atlas-method-item">
-          <strong>Where</strong>
-          <span>did it happen?</span>
-        </div>
-
-        <div class="atlas-method-item">
-          <strong>Who</strong>
-          <span>was there?</span>
-        </div>
-
-        <div class="atlas-method-item">
-          <strong>What</strong>
-          <span>happened?</span>
-        </div>
-
-        <div class="atlas-method-item">
-          <strong>Why</strong>
-          <span>does it matter?</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="atlas-feature-stack" id="atlasSections" aria-label="Bible Mapped Atlas sections">
-      <section class="atlas-feature premium-reveal pan-item" aria-labelledby="timelinesTitle">
+    <section class="atlas-feature-stack" id="atlasSections" aria-label="Bible Mapped Atlas folders">
+      <section class="atlas-feature premium-reveal pan-item" aria-labelledby="peopleTitle">
         <div class="atlas-feature-inner">
-          <a class="atlas-image-bar-media" href="/maps/timelines/" aria-label="Explore Timelines">
+          <a class="atlas-image-bar-media" href="#bible-earth" data-atlas-focus="people" aria-label="Focus People on Bible Mapped Earth">
             <img
-              src="/assets/maps-page/timelines-bar.jpg"
-              alt="Bible Mapped timelines visual"
+              src="/assets/bible-journey-people-hero-strip.png"
+              alt="Bible Mapped people visual"
               onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
             />
-            <span class="atlas-image-fallback">Add /assets/maps-page/timelines-bar.jpg</span>
+            <span class="atlas-image-fallback">People</span>
 
             <div class="atlas-image-bar-content">
-              <p class="eyebrow">STORY ORDER</p>
-              <h2 id="timelinesTitle">Timelines</h2>
+              <p class="eyebrow">PEOPLE</p>
+              <h2 id="peopleTitle">People</h2>
               <p>
-                Follow the Bible as one connected story across time, movement,
-                promise, kingdom, exile, Messiah, and mission.
+                Focus the globe through the lives of Abraham, Moses, Jesus,
+                Paul, and the people whose stories moved across real places.
               </p>
+              <div class="atlas-folder-items" aria-label="People focus options">
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="abraham">Abraham</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="moses">Moses</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="jesus">Jesus</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="paul">Paul</span>
+              </div>
             </div>
 
-            <span class="atlas-explore-button">Explore</span>
+            <span class="atlas-explore-button">Focus Globe</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="atlas-feature premium-reveal pan-item" aria-labelledby="placesTitle">
+        <div class="atlas-feature-inner">
+          <a class="atlas-image-bar-media" href="#bible-earth" data-atlas-focus="places" aria-label="Focus Places on Bible Mapped Earth">
+            <img
+              src="/assets/testament-maps-background.jpg"
+              alt="Bible Mapped places visual"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+            />
+            <span class="atlas-image-fallback">Places</span>
+
+            <div class="atlas-image-bar-content">
+              <p class="eyebrow">PLACES</p>
+              <h2 id="placesTitle">Places</h2>
+              <p>
+                Bring up the cities, mountains, waters, and empires that anchor
+                Scripture in the real world.
+              </p>
+              <div class="atlas-folder-items" aria-label="Place focus options">
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="jerusalem">Jerusalem</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="galilee">Galilee</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="egypt">Egypt</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="babylon">Babylon</span>
+              </div>
+            </div>
+
+            <span class="atlas-explore-button">Focus Globe</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="atlas-feature premium-reveal pan-item" aria-labelledby="journeysTitle">
+        <div class="atlas-feature-inner">
+          <a class="atlas-image-bar-media" href="#bible-earth" data-atlas-focus="journeys" aria-label="Focus Journeys on Bible Mapped Earth">
+            <img
+              src="/assets/map-graph-bg.png"
+              alt="Bible Mapped journeys visual"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+            />
+            <span class="atlas-image-fallback">Journeys</span>
+
+            <div class="atlas-image-bar-content">
+              <p class="eyebrow">JOURNEYS</p>
+              <h2 id="journeysTitle">Journeys</h2>
+              <p>
+                Reveal routes only when they matter: Abraham moving toward
+                promise, Israel moving through deliverance, and the gospel moving outward.
+              </p>
+              <div class="atlas-folder-items" aria-label="Journey focus options">
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="abraham-journey">Abraham</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="exodus-route">Exodus</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="jesus-world">Jesus</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="paul">Paul</span>
+              </div>
+            </div>
+
+            <span class="atlas-explore-button">Focus Globe</span>
           </a>
         </div>
       </section>
 
       <section class="atlas-feature premium-reveal pan-item" aria-labelledby="regionsTitle">
         <div class="atlas-feature-inner">
-          <a class="atlas-image-bar-media" href="/maps/regions/" aria-label="Explore Maps and Regions">
+          <a class="atlas-image-bar-media" href="#bible-earth" data-atlas-focus="regions" aria-label="Focus Regions on Bible Mapped Earth">
             <img
-              src="/assets/maps-page/maps-regions-bar.jpg"
-              alt="Bible Mapped maps and regions visual"
+              src="/assets/old-testament-locations-map.png"
+              alt="Bible Mapped regions visual"
               onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
             />
-            <span class="atlas-image-fallback">Add /assets/maps-page/maps-regions-bar.jpg</span>
+            <span class="atlas-image-fallback">Regions</span>
 
             <div class="atlas-image-bar-content">
-              <p class="eyebrow">PLACES</p>
-              <h2 id="regionsTitle">Maps &amp; Regions</h2>
+              <p class="eyebrow">REGIONS</p>
+              <h2 id="regionsTitle">Regions</h2>
               <p>
-                See the lands, cities, routes, and empires that shaped the world
-                behind the biblical text.
+                Zoom to broader biblical worlds: the promised land, the empire
+                corridor, Galilee and Judea, and the Ancient Near East.
               </p>
+              <div class="atlas-folder-items" aria-label="Region focus options">
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="promised-land">Promised Land</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="empire-region">Empires</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="jesus-world">Galilee/Judea</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="ancient-near-east">Ancient Near East</span>
+              </div>
             </div>
 
-            <span class="atlas-explore-button">Explore</span>
+            <span class="atlas-explore-button">Focus Globe</span>
           </a>
         </div>
       </section>
 
-      <section class="atlas-feature premium-reveal pan-item" aria-labelledby="routesTitle">
+      <section class="atlas-feature premium-reveal pan-item" aria-labelledby="timelinesTitle">
         <div class="atlas-feature-inner">
-          <a class="atlas-image-bar-media" href="/maps/routes/" aria-label="Explore Routes and Movements">
+          <a class="atlas-image-bar-media" href="#bible-earth" data-atlas-focus="timelines" aria-label="Focus Timelines on Bible Mapped Earth">
             <img
-              src="/assets/maps-page/routes-movements-bar.jpg"
-              alt="Bible Mapped routes and movements visual"
+              src="/assets/books-map-background.png"
+              alt="Bible Mapped timelines visual"
               onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
             />
-            <span class="atlas-image-fallback">Add /assets/maps-page/routes-movements-bar.jpg</span>
+            <span class="atlas-image-fallback">Timelines</span>
 
             <div class="atlas-image-bar-content">
-              <p class="eyebrow">JOURNEYS</p>
-              <h2 id="routesTitle">Routes &amp; Movements</h2>
+              <p class="eyebrow">TIMELINES</p>
+              <h2 id="timelinesTitle">Timelines</h2>
               <p>
-                Trace the journeys that carry the story forward — from Abraham’s
-                call to the Exodus, from Jesus in Galilee to Paul moving toward Rome.
+                Move from patriarchs to Exodus, exile, Messiah, and mission as
+                the story unfolds across geography.
               </p>
+              <div class="atlas-folder-items" aria-label="Timeline focus options">
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="ot-timeline">Old Testament</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="nt-timeline">New Testament</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="abraham-journey">Patriarchs</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="empire-region">Exile</span>
+              </div>
             </div>
 
-            <span class="atlas-explore-button">Explore</span>
+            <span class="atlas-explore-button">Focus Globe</span>
           </a>
         </div>
       </section>
 
       <section class="atlas-feature premium-reveal pan-item" aria-labelledby="chartsTitle">
         <div class="atlas-feature-inner">
-          <a class="atlas-image-bar-media" href="/maps/charts/" aria-label="Explore Charts">
+          <a class="atlas-image-bar-media" href="#bible-earth" data-atlas-focus="charts" aria-label="Focus Charts on Bible Mapped Earth">
             <img
-              src="/assets/maps-page/charts-bar.jpg"
+              src="/assets/formula-design.png"
               alt="Bible Mapped charts visual"
               onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
             />
-            <span class="atlas-image-fallback">Add /assets/maps-page/charts-bar.jpg</span>
+            <span class="atlas-image-fallback">Charts</span>
 
             <div class="atlas-image-bar-content">
-              <p class="eyebrow">PATTERNS</p>
+              <p class="eyebrow">CHARTS</p>
               <h2 id="chartsTitle">Charts</h2>
               <p>
-                Understand Scripture through movement, structure, geography,
-                covenant, empire, people, and meaning.
+                Use the globe as a live companion to patterns: covenant, empire,
+                gospel movement, people, places, and promise.
               </p>
+              <div class="atlas-folder-items" aria-label="Chart focus options">
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="covenant-chart">Covenant</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="empire-region">Empires</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="places">Places</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="people">People</span>
+              </div>
             </div>
 
-            <span class="atlas-explore-button">Explore</span>
+            <span class="atlas-explore-button">Focus Globe</span>
           </a>
         </div>
       </section>
 
       <section class="atlas-feature premium-reveal pan-item" aria-labelledby="studyPathsTitle">
         <div class="atlas-feature-inner">
-          <a class="atlas-image-bar-media" href="/maps/study-paths/" aria-label="Explore Study Paths">
+          <a class="atlas-image-bar-media" href="#bible-earth" data-atlas-focus="study-paths" aria-label="Focus Study Paths on Bible Mapped Earth">
             <img
-              src="/assets/maps-page/study-paths-bar.jpg"
+              src="/assets/case-study-folder.png"
               alt="Bible Mapped study paths visual"
               onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
             />
-            <span class="atlas-image-fallback">Add /assets/maps-page/study-paths-bar.jpg</span>
+            <span class="atlas-image-fallback">Study Paths</span>
 
             <div class="atlas-image-bar-content">
-              <p class="eyebrow">GUIDED STUDY</p>
+              <p class="eyebrow">STUDY PATHS</p>
               <h2 id="studyPathsTitle">Study Paths</h2>
               <p>
-                Start with a question, person, book, or journey and let the map
-                guide you into the Bible’s context.
+                Start with a question, person, place, journey, or theme and let
+                the globe pull the Bible's context into view.
               </p>
+              <div class="atlas-folder-items" aria-label="Study path focus options">
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="gospel-path">Gospel Path</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="abraham-journey">Promise</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="exodus-route">Deliverance</span>
+                <span class="atlas-folder-item" role="button" tabindex="0" data-atlas-focus="jesus-world">Jesus</span>
+              </div>
             </div>
 
-            <span class="atlas-explore-button">Explore</span>
+            <span class="atlas-explore-button">Focus Globe</span>
           </a>
         </div>
       </section>
@@ -1598,1113 +1042,677 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/cesium@1.119.0/Build/Cesium/Cesium.js"></script>
-  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const ATLAS_DATA = {
-        places: [
-          {
-            id: "eden",
-            type: "place",
-            name: "Eden",
-            coordinates: [43.5, 32.0],
-            globe: { lon: 43.5, lat: 32.0, height: 7200000, pitch: -82 },
-            map: { center: [43.5, 32.0], zoom: 5.1 },
-            where: "Associated with the ancient river world of Genesis.",
-            who: "Adam, Eve, the serpent, and God in the opening story.",
-            what: "Creation, garden life, rebellion, exile, and the first promise of redemption.",
-            why: "Eden introduces God's design for creation, worship, human vocation, and the tragedy of sin.",
-            summary: "The Bible opens with creation, garden life, rebellion, and exile.",
-            scripture: "Genesis 1–3"
-          },
-          {
-            id: "ur",
-            type: "place",
-            name: "Ur",
-            coordinates: [45.99, 30.96],
-            globe: { lon: 45.99, lat: 30.96, height: 5200000, pitch: -82 },
-            map: { center: [45.99, 30.96], zoom: 6.2 },
-            where: "Southern Mesopotamia.",
-            who: "Abram, Sarai, Terah, and Abram's family line.",
-            what: "Abram's family comes from Ur before the journey toward Canaan.",
-            why: "Ur begins the movement from civilization into covenant promise.",
-            summary: "Ur is connected to Abram's origin before the call toward the promised land.",
-            scripture: "Genesis 11–12"
-          },
-          {
-            id: "haran",
-            type: "place",
-            name: "Haran",
-            coordinates: [39.03, 36.86],
-            globe: { lon: 39.03, lat: 36.86, height: 5200000, pitch: -82 },
-            map: { center: [39.03, 36.86], zoom: 6.1 },
-            where: "Northern Mesopotamia.",
-            who: "Abram, Sarai, Terah, and later Jacob's family connections.",
-            what: "Abram pauses in Haran before continuing toward the land God promised.",
-            why: "Haran marks transition, waiting, and obedience in Abraham's journey.",
-            summary: "Haran is a major transition point in the patriarchal story.",
-            scripture: "Genesis 11–12"
-          },
-          {
-            id: "canaan",
-            type: "place",
-            name: "Canaan",
-            coordinates: [35.1, 31.7],
-            globe: { lon: 35.1, lat: 31.7, height: 4800000, pitch: -82 },
-            map: { center: [35.1, 31.7], zoom: 6.0 },
-            where: "The promised land at the center of Israel's story.",
-            who: "Abraham, Isaac, Jacob, Joshua, Israel, kings, prophets, and Jesus.",
-            what: "Canaan becomes the land of promise, settlement, kingdom, exile, and hope.",
-            why: "Canaan connects promise, covenant, land, obedience, judgment, and restoration.",
-            summary: "Canaan is the land where promise, covenant, kingdom, exile, and Messiah converge.",
-            scripture: "Genesis, Joshua, Judges, Kings"
-          },
-          {
-            id: "egypt",
-            type: "place",
-            name: "Egypt",
-            coordinates: [31.23, 30.04],
-            globe: { lon: 31.23, lat: 30.04, height: 5200000, pitch: -82 },
-            map: { center: [31.23, 30.04], zoom: 5.4 },
-            where: "Northeast Africa, centered here near the Nile Delta.",
-            who: "Joseph, Moses, Pharaoh, Israel, and the Holy Family in Matthew.",
-            what: "Egypt becomes a place of refuge, slavery, judgment, and deliverance.",
-            why: "Egypt reveals God as deliverer and sets the stage for Exodus and covenant.",
-            summary: "Egypt is refuge and oppression, judgment and deliverance, all at once. Humans do love making places complicated.",
-            scripture: "Genesis, Exodus, Matthew 2"
-          },
-          {
-            id: "sinai",
-            type: "place",
-            name: "Sinai",
-            coordinates: [33.97, 28.54],
-            globe: { lon: 33.97, lat: 28.54, height: 4200000, pitch: -82 },
-            map: { center: [33.97, 28.54], zoom: 6.2 },
-            where: "Sinai wilderness region.",
-            who: "Moses, Aaron, Israel, and the covenant community.",
-            what: "Israel receives the law, covenant instruction, and tabernacle pattern.",
-            why: "Sinai shows how a delivered people learn to live with a holy God.",
-            summary: "Sinai is the wilderness classroom where deliverance becomes covenant life.",
-            scripture: "Exodus, Leviticus, Numbers"
-          },
-          {
-            id: "bethlehem",
-            type: "place",
-            name: "Bethlehem",
-            coordinates: [35.2024, 31.7054],
-            globe: { lon: 35.2024, lat: 31.7054, height: 1800000, pitch: -76 },
-            map: { center: [35.2024, 31.7054], zoom: 9.8 },
-            where: "A town south of Jerusalem in the hill country of Judah.",
-            who: "Ruth, Boaz, David, Mary, Joseph, and Jesus.",
-            what: "Bethlehem ties David's line to the birth of the Messiah.",
-            why: "The small town becomes a major signpost of promise, kingship, and fulfillment.",
-            summary: "Bethlehem connects Ruth, David, and the birth of Jesus.",
-            scripture: "Ruth; Micah 5:2; Matthew 2; Luke 2"
-          },
-          {
-            id: "jerusalem",
-            type: "place",
-            name: "Jerusalem",
-            coordinates: [35.2137, 31.7683],
-            globe: { lon: 35.2137, lat: 31.7683, height: 1800000, pitch: -76 },
-            map: { center: [35.2137, 31.7683], zoom: 9.8 },
-            where: "Hill country of Judah.",
-            who: "David, Solomon, prophets, Jesus, the apostles, and the early church.",
-            what: "Jerusalem becomes the city of David, temple worship, prophetic warning, the cross, resurrection, and Pentecost.",
-            why: "Jerusalem gathers kingdom, worship, judgment, hope, death, and resurrection into one place.",
-            summary: "Jerusalem is one of the major anchor points of the biblical story.",
-            scripture: "2 Samuel 5; Psalm 48; Luke 24; Acts 2"
-          },
-          {
-            id: "galilee",
-            type: "place",
-            name: "Galilee",
-            coordinates: [35.55, 32.85],
-            globe: { lon: 35.55, lat: 32.85, height: 1700000, pitch: -76 },
-            map: { center: [35.55, 32.85], zoom: 8.5 },
-            where: "Northern Israel around the Sea of Galilee.",
-            who: "Jesus, Peter, Andrew, James, John, and many ordinary crowds.",
-            what: "Galilee becomes a major setting for Jesus' teaching, miracles, and calling of disciples.",
-            why: "Galilee shows the kingdom arriving among ordinary people and overlooked places.",
-            summary: "Galilee is where much of Jesus' public ministry unfolds.",
-            scripture: "Matthew, Mark, Luke, John"
-          },
-          {
-            id: "nazareth",
-            type: "place",
-            name: "Nazareth",
-            coordinates: [35.3035, 32.6996],
-            globe: { lon: 35.3035, lat: 32.6996, height: 1500000, pitch: -76 },
-            map: { center: [35.3035, 32.6996], zoom: 10.0 },
-            where: "A Galilean town.",
-            who: "Jesus, Mary, Joseph, and Jesus' hometown community.",
-            what: "Jesus grows up in Nazareth and is identified with this humble place.",
-            why: "Nazareth reminds readers that the Messiah enters ordinary human geography, not an abstract myth cloud.",
-            summary: "Nazareth is the hometown setting of Jesus' early life.",
-            scripture: "Matthew 2:23; Luke 4:16"
-          },
-          {
-            id: "babylon",
-            type: "place",
-            name: "Babylon",
-            coordinates: [44.42, 32.54],
-            globe: { lon: 44.42, lat: 32.54, height: 5200000, pitch: -82 },
-            map: { center: [44.42, 32.54], zoom: 6.5 },
-            where: "Mesopotamia, near ancient Babylon.",
-            who: "Nebuchadnezzar, Daniel, Ezekiel, exiles from Judah, and later biblical memory.",
-            what: "Babylon is tied to empire, exile, judgment, and longing for restoration.",
-            why: "Babylon shows what happens when God's people lose land, temple, and kingdom.",
-            summary: "Babylon is the exile city and a symbol of empire, pride, judgment, and longing.",
-            scripture: "2 Kings 25; Daniel; Psalm 137"
-          },
-          {
-            id: "susa",
-            type: "place",
-            name: "Susa",
-            coordinates: [48.26, 32.19],
-            globe: { lon: 48.26, lat: 32.19, height: 5600000, pitch: -82 },
-            map: { center: [48.26, 32.19], zoom: 6.4 },
-            where: "A royal city connected with the Persian Empire.",
-            who: "Esther, Mordecai, Ahasuerus, Haman, and the Jewish people in Persia.",
-            what: "Susa becomes the setting for Esther's courage and the deliverance of her people.",
-            why: "Susa shows God's providence at work even when His name is not directly stated in the story.",
-            summary: "Susa anchors the story of Esther in the Persian imperial world.",
-            scripture: "Esther"
-          },
-          {
-            id: "damascus",
-            type: "place",
-            name: "Damascus",
-            coordinates: [36.2765, 33.5138],
-            globe: { lon: 36.2765, lat: 33.5138, height: 2800000, pitch: -78 },
-            map: { center: [36.2765, 33.5138], zoom: 7.8 },
-            where: "Syria, northeast of Israel.",
-            who: "Paul, Ananias, and the early followers of Jesus.",
-            what: "Paul encounters the risen Jesus on the road to Damascus.",
-            why: "Damascus marks one of the most dramatic transformations in early Christian history.",
-            summary: "Damascus is tied to Paul's conversion and calling.",
-            scripture: "Acts 9; Acts 22; Acts 26"
-          },
-          {
-            id: "tarsus",
-            type: "place",
-            name: "Tarsus",
-            coordinates: [34.8951, 36.9188],
-            globe: { lon: 34.8951, lat: 36.9188, height: 3400000, pitch: -80 },
-            map: { center: [34.8951, 36.9188], zoom: 7.5 },
-            where: "Cilicia in southeastern Asia Minor.",
-            who: "Paul.",
-            what: "Tarsus is Paul's hometown and part of his Greco-Roman background.",
-            why: "Paul's background helps explain his movement between Jewish, Greek, and Roman worlds.",
-            summary: "Tarsus helps locate Paul in the wider Mediterranean world.",
-            scripture: "Acts 21:39; Acts 22:3"
-          },
-          {
-            id: "rome",
-            type: "place",
-            name: "Rome",
-            coordinates: [12.4964, 41.9028],
-            globe: { lon: 12.4964, lat: 41.9028, height: 6200000, pitch: -78 },
-            map: { center: [12.4964, 41.9028], zoom: 6.4 },
-            where: "Capital of the Roman Empire.",
-            who: "Paul, Roman Christians, imperial power, and the wider Gentile mission.",
-            what: "The gospel moves from Jerusalem toward Rome through the mission of the early church.",
-            why: "Rome represents the spread of the gospel into the heart of empire.",
-            summary: "Rome is the symbolic destination of Acts and a major New Testament context.",
-            scripture: "Acts 28; Romans"
-          }
-        ],
-        routes: [
-          {
-            id: "abraham-route",
-            type: "route",
-            name: "Abraham's Journey",
-            placeIds: ["ur", "haran", "canaan"],
-            globe: { lon: 39.5, lat: 33.5, height: 9000000, pitch: -85 },
-            map: { center: [39.5, 33.5], zoom: 4.7 },
-            where: "From southern Mesopotamia through Haran toward Canaan.",
-            who: "Abram, Sarai, Terah, Lot, and the covenant family.",
-            what: "God calls Abram toward the land of promise.",
-            why: "This route introduces land, seed, blessing, covenant, and the story line that leads toward Israel and Christ.",
-            summary: "Abram's journey moves from Ur to Haran and then into Canaan.",
-            scripture: "Genesis 11:31; Genesis 12:1–7"
-          },
-          {
-            id: "exodus-route",
-            type: "route",
-            name: "The Exodus Route",
-            placeIds: ["egypt", "sinai", "canaan"],
-            globe: { lon: 34.0, lat: 29.5, height: 6500000, pitch: -84 },
-            map: { center: [34.0, 29.5], zoom: 5.2 },
-            where: "From Egypt through the wilderness toward the promised land.",
-            who: "Moses, Aaron, Pharaoh, Israel, and the Lord who delivers.",
-            what: "Israel moves from slavery toward covenant and inheritance.",
-            why: "The Exodus becomes the Bible's defining pattern of rescue, covenant, and worship.",
-            summary: "The Exodus traces deliverance from Egypt and formation at Sinai.",
-            scripture: "Exodus 1–20; Numbers; Deuteronomy"
-          },
-          {
-            id: "jesus-ministry-route",
-            type: "route",
-            name: "Jesus' Ministry World",
-            placeIds: ["bethlehem", "nazareth", "galilee", "jerusalem"],
-            globe: { lon: 35.25, lat: 31.9, height: 4500000, pitch: -80 },
-            map: { center: [35.25, 31.9], zoom: 7.4 },
-            where: "Bethlehem, Nazareth, Galilee, Judea, and Jerusalem.",
-            who: "Jesus, Mary, Joseph, the disciples, crowds, leaders, and Rome in the background.",
-            what: "The Gospels unfold across real towns, roads, lakes, hills, and temple courts.",
-            why: "Jesus' ministry is grounded in geography, history, and covenant fulfillment.",
-            summary: "Jesus' life and ministry move through real places in Galilee and Judea.",
-            scripture: "Matthew, Mark, Luke, John"
-          },
-          {
-            id: "paul-route",
-            type: "route",
-            name: "Paul Toward Rome",
-            placeIds: ["tarsus", "damascus", "jerusalem", "rome"],
-            globe: { lon: 27.5, lat: 37.0, height: 9000000, pitch: -82 },
-            map: { center: [27.5, 37.0], zoom: 4.4 },
-            where: "From the eastern Mediterranean toward Rome.",
-            who: "Paul, Ananias, apostles, churches, Roman officials, and Gentile believers.",
-            what: "Paul moves through Jewish, Greek, and Roman worlds as the gospel spreads.",
-            why: "Paul's journeys show the gospel crossing cultures and moving toward the heart of empire.",
-            summary: "Paul's story carries the gospel from Jerusalem's world toward Rome.",
-            scripture: "Acts 9–28; Romans"
-          }
-        ],
-        people: [
-          {
-            id: "abraham",
-            type: "person",
-            name: "Abraham",
-            placeIds: ["ur", "haran", "canaan"],
-            routeIds: ["abraham-route"],
-            globe: { lon: 39.5, lat: 33.5, height: 9000000, pitch: -85 },
-            map: { center: [39.5, 33.5], zoom: 4.7 },
-            where: "Ur, Haran, and Canaan.",
-            who: "Abraham, Sarah, Lot, and the covenant family.",
-            what: "God calls Abraham and makes covenant promises of land, seed, and blessing.",
-            why: "Abraham's story becomes the foundation for Israel's identity and the promise that reaches the nations.",
-            summary: "Abraham's map is the beginning of the covenant journey.",
-            scripture: "Genesis 11–25"
-          },
-          {
-            id: "moses",
-            type: "person",
-            name: "Moses",
-            placeIds: ["egypt", "sinai", "canaan"],
-            routeIds: ["exodus-route"],
-            globe: { lon: 34.0, lat: 29.5, height: 6500000, pitch: -84 },
-            map: { center: [34.0, 29.5], zoom: 5.2 },
-            where: "Egypt, Sinai, wilderness, and the edge of the promised land.",
-            who: "Moses, Aaron, Pharaoh, Israel, and the Lord who delivers.",
-            what: "Moses leads Israel from slavery toward covenant life with God.",
-            why: "Moses' story explains deliverance, law, worship, covenant, and the shaping of Israel.",
-            summary: "Moses connects Egypt, Sinai, wilderness, and covenant.",
-            scripture: "Exodus, Leviticus, Numbers, Deuteronomy"
-          },
-          {
-            id: "david",
-            type: "person",
-            name: "David",
-            placeIds: ["bethlehem", "jerusalem"],
-            routeIds: [],
-            globe: { lon: 35.2, lat: 31.74, height: 1600000, pitch: -76 },
-            map: { center: [35.2, 31.74], zoom: 9.6 },
-            where: "Bethlehem and Jerusalem.",
-            who: "David, Saul, Jonathan, Solomon, and the kingdom of Israel.",
-            what: "David rises from shepherd to king and makes Jerusalem the royal city.",
-            why: "David's line becomes central to messianic hope and the promise fulfilled in Christ.",
-            summary: "David's geography connects Bethlehem, kingship, Jerusalem, and Messiah hope.",
-            scripture: "1–2 Samuel; Psalms"
-          },
-          {
-            id: "daniel",
-            type: "person",
-            name: "Daniel",
-            placeIds: ["jerusalem", "babylon", "susa"],
-            routeIds: [],
-            globe: { lon: 42.0, lat: 32.5, height: 6500000, pitch: -82 },
-            map: { center: [42.0, 32.5], zoom: 5.2 },
-            where: "Jerusalem, Babylon, and the Persian imperial world.",
-            who: "Daniel, exiles from Judah, Babylonian kings, and Persian rulers.",
-            what: "Daniel lives faithfully in exile under foreign empires.",
-            why: "Daniel shows God's rule over kingdoms even when His people are displaced.",
-            summary: "Daniel's map moves from Jerusalem's loss to faithfulness in exile.",
-            scripture: "Daniel"
-          },
-          {
-            id: "esther",
-            type: "person",
-            name: "Esther",
-            placeIds: ["susa"],
-            routeIds: [],
-            globe: { lon: 48.26, lat: 32.19, height: 5200000, pitch: -82 },
-            map: { center: [48.26, 32.19], zoom: 6.6 },
-            where: "Susa in the Persian Empire.",
-            who: "Esther, Mordecai, Ahasuerus, Haman, and the Jewish people.",
-            what: "Esther risks her life to plead for her people.",
-            why: "Esther shows providence, courage, and deliverance in exile.",
-            summary: "Esther's story is anchored in the Persian royal world.",
-            scripture: "Esther"
-          },
-          {
-            id: "jesus",
-            type: "person",
-            name: "Jesus",
-            placeIds: ["bethlehem", "nazareth", "galilee", "jerusalem"],
-            routeIds: ["jesus-ministry-route"],
-            globe: { lon: 35.25, lat: 31.9, height: 4500000, pitch: -80 },
-            map: { center: [35.25, 31.9], zoom: 7.4 },
-            where: "Bethlehem, Nazareth, Galilee, Samaria, Judea, and Jerusalem.",
-            who: "Jesus, Mary, Joseph, disciples, crowds, leaders, and Rome's shadow over Judea.",
-            what: "Jesus announces the kingdom, teaches, heals, dies, rises, and commissions His people.",
-            why: "Jesus is the center of Scripture, and His ministry is grounded in real places.",
-            summary: "Jesus' world is not abstract. It is Bethlehem, Nazareth, Galilee, Jerusalem, roads, water, hills, and people.",
-            scripture: "Matthew, Mark, Luke, John"
-          },
-          {
-            id: "peter",
-            type: "person",
-            name: "Peter",
-            placeIds: ["galilee", "jerusalem"],
-            routeIds: ["jesus-ministry-route"],
-            globe: { lon: 35.35, lat: 32.25, height: 2800000, pitch: -78 },
-            map: { center: [35.35, 32.25], zoom: 8.0 },
-            where: "Galilee and Jerusalem.",
-            who: "Peter, Jesus, the disciples, and the early church.",
-            what: "Peter is called by Jesus, fails, is restored, and becomes a major witness in Acts.",
-            why: "Peter's story shows discipleship, weakness, restoration, and bold witness.",
-            summary: "Peter's map moves from Galilean fisherman to Jerusalem witness.",
-            scripture: "Gospels; Acts 1–12"
-          },
-          {
-            id: "paul",
-            type: "person",
-            name: "Paul",
-            placeIds: ["tarsus", "damascus", "jerusalem", "rome"],
-            routeIds: ["paul-route"],
-            globe: { lon: 27.5, lat: 37.0, height: 9000000, pitch: -82 },
-            map: { center: [27.5, 37.0], zoom: 4.4 },
-            where: "Tarsus, Damascus, Jerusalem, the Mediterranean world, and Rome.",
-            who: "Paul, Ananias, apostles, churches, Roman officials, and Gentile believers.",
-            what: "Paul is transformed from persecutor to apostle and carries the gospel across the empire.",
-            why: "Paul's geography helps explain the movement of the gospel into the Gentile world.",
-            summary: "Paul's map carries the story from the eastern Mediterranean toward Rome.",
-            scripture: "Acts 9–28; Pauline Letters"
-          }
-        ],
-        zones: [
-          {
-            id: "ancient-near-east",
-            type: "zone",
-            name: "Ancient Near East",
-            placeIds: ["eden", "ur", "haran", "canaan", "egypt", "sinai", "babylon", "susa"],
-            routeIds: ["abraham-route", "exodus-route"],
-            globe: { lon: 35.5, lat: 28.5, height: 18500000, pitch: -90 },
-            map: { center: [34.5, 33.2], zoom: 3.85 },
-            where: "The larger Bible world from Egypt to Mesopotamia and from Canaan to Persia.",
-            who: "Patriarchs, Israel, prophets, empires, exiles, and covenant families.",
-            what: "The world where Genesis through the Prophets unfolds.",
-            why: "Seeing the whole region keeps the Bible from becoming floating religious slogans. Nobody needs more floating slogans.",
-            summary: "The default Bible-world view for the Atlas.",
-            scripture: "Genesis through the Prophets"
-          },
-          {
-            id: "canaan-israel",
-            type: "zone",
-            name: "Canaan / Israel",
-            placeIds: ["canaan", "bethlehem", "jerusalem", "galilee", "nazareth"],
-            routeIds: ["jesus-ministry-route"],
-            globe: { lon: 35.2, lat: 31.9, height: 4800000, pitch: -82 },
-            map: { center: [35.2, 31.9], zoom: 6.6 },
-            where: "The land of promise, kingdom, exile memory, and the Gospels.",
-            who: "Abraham, Israel, David, prophets, Jesus, and the apostles.",
-            what: "Promise, kingdom, temple, prophets, Messiah, cross, and resurrection converge here.",
-            why: "Canaan/Israel is the Bible's central stage for land, covenant, king, and Messiah.",
-            summary: "The central land of promise, kingdom, prophets, and Jesus.",
-            scripture: "Genesis; Joshua; Kings; Gospels"
-          },
-          {
-            id: "egypt-sinai",
-            type: "zone",
-            name: "Egypt / Sinai",
-            placeIds: ["egypt", "sinai", "canaan"],
-            routeIds: ["exodus-route"],
-            globe: { lon: 34.0, lat: 29.5, height: 6500000, pitch: -84 },
-            map: { center: [34.0, 29.5], zoom: 5.2 },
-            where: "Egypt, Sinai, wilderness, and the movement toward Canaan.",
-            who: "Joseph, Moses, Pharaoh, Aaron, Miriam, and Israel.",
-            what: "Refuge, slavery, plagues, Passover, sea crossing, law, and wilderness formation.",
-            why: "This zone shows rescue becoming covenant identity.",
-            summary: "The geography of Joseph, Moses, Exodus, Sinai, and wilderness formation.",
-            scripture: "Genesis; Exodus; Numbers"
-          },
-          {
-            id: "mesopotamia",
-            type: "zone",
-            name: "Mesopotamia",
-            placeIds: ["eden", "ur", "haran", "babylon"],
-            routeIds: ["abraham-route"],
-            globe: { lon: 43.0, lat: 33.0, height: 6500000, pitch: -84 },
-            map: { center: [43.0, 33.0], zoom: 5.1 },
-            where: "The river lands tied to beginnings, patriarchs, Assyria/Babylon, and exile.",
-            who: "Abraham, Daniel, Ezekiel, exiles, and imperial rulers.",
-            what: "Origins, call, empire, exile, and hope for return.",
-            why: "Mesopotamia shows that the Bible's story moves through the great powers of the ancient world.",
-            summary: "Origins, Abraham's call, Babylon, empire, and exile.",
-            scripture: "Genesis; Daniel; Ezekiel"
-          },
-          {
-            id: "persia-zone",
-            type: "zone",
-            name: "Persia",
-            placeIds: ["susa", "babylon"],
-            routeIds: [],
-            globe: { lon: 48.0, lat: 32.0, height: 6500000, pitch: -84 },
-            map: { center: [48.0, 32.0], zoom: 5.4 },
-            where: "The Persian imperial world east of Babylon.",
-            who: "Esther, Mordecai, Daniel's later setting, and Jewish communities in exile.",
-            what: "God's people live under foreign rule while providence and return shape the story.",
-            why: "Persia matters for exile, return, preservation, and God's quiet providence.",
-            summary: "The imperial context for Esther and the post-exile world.",
-            scripture: "Esther; Ezra; Nehemiah; Daniel"
-          },
-          {
-            id: "galilee-judea-samaria",
-            type: "zone",
-            name: "Galilee / Judea / Samaria",
-            placeIds: ["bethlehem", "nazareth", "galilee", "jerusalem"],
-            routeIds: ["jesus-ministry-route"],
-            globe: { lon: 35.25, lat: 31.9, height: 4300000, pitch: -80 },
-            map: { center: [35.25, 31.9], zoom: 7.4 },
-            where: "The land of the Gospels and the first chapters of Acts.",
-            who: "Jesus, Mary, Joseph, disciples, crowds, leaders, Samaritans, and the early church.",
-            what: "Birth, ministry, teaching, miracles, cross, resurrection, and witness begin here.",
-            why: "This zone makes the Gospels visible as a connected real-world movement.",
-            summary: "The Gospel-world zone for Jesus' life, ministry, death, and resurrection.",
-            scripture: "Matthew, Mark, Luke, John, Acts 1–2"
-          },
-          {
-            id: "mediterranean-rome",
-            type: "zone",
-            name: "Mediterranean / Rome",
-            placeIds: ["tarsus", "damascus", "jerusalem", "rome"],
-            routeIds: ["paul-route"],
-            globe: { lon: 27.5, lat: 37.0, height: 9000000, pitch: -82 },
-            map: { center: [27.5, 37.0], zoom: 4.4 },
-            where: "The eastern Mediterranean moving toward Rome.",
-            who: "Paul, apostles, churches, Roman officials, and Gentile believers.",
-            what: "The gospel spreads across cities, roads, seas, synagogues, homes, and courts.",
-            why: "This zone shows the early Church moving from local witness to empire-wide mission.",
-            summary: "The New Testament mission world from Jerusalem toward Rome.",
-            scripture: "Acts; Pauline Letters"
-          }
-        ]
+    document.addEventListener("DOMContentLoaded", async function () {
+      if (!window.Cesium) {
+        console.error("CesiumJS did not load.");
+        return;
+      }
+
+      const mapContainer = document.getElementById("bibleEarthMap");
+
+      if (!mapContainer) {
+        return;
+      }
+
+      Cesium.Ion.defaultAccessToken = "";
+
+      let naturalEarthLayer = null;
+
+      try {
+        naturalEarthLayer = Cesium.ImageryLayer.fromProviderAsync(
+          Cesium.TileMapServiceImageryProvider.fromUrl(
+            Cesium.buildModuleUrl("Assets/Textures/NaturalEarthII")
+          )
+        );
+      } catch (error) {
+        console.warn("Natural Earth II imagery failed to initialize.", error);
+      }
+
+      const biblePlaces = [
+        {
+          id: "jerusalem",
+          name: "Jerusalem",
+          lat: 31.7683,
+          lon: 35.2137,
+          description:
+            "The city of David, the temple, the cross, the resurrection, and the launch point of the church's witness.",
+          scripture: "2 Samuel 5; Psalm 48; Luke 24; Acts 2",
+        },
+        {
+          id: "bethlehem",
+          name: "Bethlehem",
+          lat: 31.7054,
+          lon: 35.2024,
+          description:
+            "The city of David and the birthplace of Jesus, tying the Messiah to David's line and Israel's hope.",
+          scripture: "Micah 5:2; Matthew 2:1; Luke 2:4-7",
+        },
+        {
+          id: "nazareth",
+          name: "Nazareth",
+          lat: 32.6996,
+          lon: 35.3035,
+          description:
+            "The hometown where Jesus grew up, reminding us that the Messiah came from humble, ordinary places too.",
+          scripture: "Matthew 2:23; Luke 4:16",
+        },
+        {
+          id: "sea-of-galilee",
+          name: "Sea of Galilee",
+          lat: 32.8337,
+          lon: 35.5872,
+          description:
+            "A major setting for Jesus' teaching, miracles, calling of disciples, and ministry around Galilee.",
+          scripture: "Matthew 4:18-22; Mark 4:35-41",
+        },
+        {
+          id: "egypt",
+          name: "Egypt",
+          lat: 26.8206,
+          lon: 30.8025,
+          description:
+            "A place of refuge, oppression, judgment, and deliverance throughout the biblical story.",
+          scripture: "Genesis 12:10; Exodus 1-14; Matthew 2:13-15",
+        },
+        {
+          id: "mount-sinai",
+          name: "Mount Sinai",
+          lat: 28.5397,
+          lon: 33.9754,
+          description:
+            "Traditionally associated with the giving of the Law after Israel's deliverance from Egypt.",
+          scripture: "Exodus 19-20",
+        },
+        {
+          id: "babylon",
+          name: "Babylon",
+          lat: 32.5364,
+          lon: 44.4208,
+          description:
+            "The empire and city tied to exile, judgment, pride, and the longing for restoration.",
+          scripture: "2 Kings 25; Daniel 1; Psalm 137",
+        },
+        {
+          id: "nineveh",
+          name: "Nineveh",
+          lat: 36.3594,
+          lon: 43.1529,
+          description:
+            "The great Assyrian city connected to Jonah's reluctant preaching and God's mercy toward a violent people.",
+          scripture: "Jonah 1-4; Nahum 1-3",
+        },
+        {
+          id: "ur",
+          name: "Ur",
+          lat: 30.9625,
+          lon: 46.1033,
+          description:
+            "The place associated with Abram's origins before God called him toward the land of promise.",
+          scripture: "Genesis 11:31; Genesis 12:1-3",
+        },
+        {
+          id: "haran",
+          name: "Haran",
+          lat: 36.8651,
+          lon: 39.0313,
+          description:
+            "A major stop in Abram's journey before entering Canaan.",
+          scripture: "Genesis 11:31-32; Genesis 12:4-5",
+        },
+        {
+          id: "canaan",
+          name: "Canaan",
+          lat: 31.5,
+          lon: 34.9,
+          description:
+            "The promised land central to Israel's story, kingdom, exile, and hope.",
+          scripture: "Genesis 12:5-7; Exodus 3:8",
+        },
+        {
+          id: "rome",
+          name: "Rome",
+          lat: 41.9028,
+          lon: 12.4964,
+          description:
+            "The imperial center of the New Testament world and the destination of Paul's journey in Acts.",
+          scripture: "Acts 28; Romans 1:7",
+        },
+      ];
+
+      const placeById = new Map(biblePlaces.map((place) => [place.id, place]));
+
+      const viewerOptions = {
+        animation: false,
+        timeline: false,
+        geocoder: false,
+        homeButton: false,
+        sceneModePicker: false,
+        baseLayerPicker: false,
+        navigationHelpButton: false,
+        fullscreenButton: false,
+        infoBox: false,
+        selectionIndicator: false,
+        shouldAnimate: true,
+        terrainProvider: new Cesium.EllipsoidTerrainProvider(),
       };
 
-      const index = buildAtlasIndex(ATLAS_DATA);
-      let cesiumViewer = null;
-      let atlasMap = null;
-      const globeRoutes = new Map();
-      const mapMarkers = new Map();
-      let mapReady = false;
-      let activeId = null;
-
-      const elements = {
-        earthCard: document.getElementById("earthInfoCard"),
-        earthTitle: document.getElementById("earthPlaceTitle"),
-        earthDescription: document.getElementById("earthPlaceDescription"),
-        earthScripture: document.getElementById("earthPlaceScripture"),
-        detailKicker: document.getElementById("atlasDetailKicker"),
-        detailTitle: document.getElementById("atlasDetailTitle"),
-        detailSummary: document.getElementById("atlasDetailSummary"),
-        detailWhere: document.getElementById("atlasDetailWhere"),
-        detailWho: document.getElementById("atlasDetailWho"),
-        detailWhat: document.getElementById("atlasDetailWhat"),
-        detailWhy: document.getElementById("atlasDetailWhy"),
-        relatedRow: document.getElementById("atlasRelatedRow"),
-        quickControls: document.getElementById("atlasQuickControls"),
-        searchInput: document.getElementById("atlasSearchInput"),
-        searchButton: document.getElementById("atlasSearchButton")
-      };
-
-      function buildAtlasIndex(data) {
-        const all = [...data.places, ...data.routes, ...data.people, ...data.zones];
-        const byId = new Map(all.map((item) => [item.id, item]));
-        return {
-          byId,
-          placesById: new Map(data.places.map((item) => [item.id, item])),
-          routesById: new Map(data.routes.map((item) => [item.id, item])),
-          all
-        };
+      if (naturalEarthLayer) {
+        viewerOptions.baseLayer = naturalEarthLayer;
       }
 
-      function typeLabel(type) {
-        return {
-          place: "Bible Mapped Place",
-          person: "Bible Character",
-          route: "Bible Journey",
-          zone: "Bible Region"
-        }[type] || "Bible Mapped Atlas";
+      const viewer = new Cesium.Viewer("bibleEarthMap", viewerOptions);
+
+      viewer.scene.mode = Cesium.SceneMode.SCENE3D;
+      viewer.scene.backgroundColor = Cesium.Color.fromCssColorString("#050611");
+      viewer.scene.globe.baseColor = Cesium.Color.fromCssColorString("#101827");
+      viewer.scene.globe.enableLighting = true;
+      viewer.scene.skyAtmosphere.show = true;
+      viewer.scene.fog.enabled = false;
+      viewer.scene.screenSpaceCameraController.enableRotate = true;
+      viewer.scene.screenSpaceCameraController.enableZoom = true;
+      viewer.scene.screenSpaceCameraController.enableTilt = true;
+      viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1200000;
+      viewer.scene.screenSpaceCameraController.maximumZoomDistance = 50000000;
+
+      const purple = Cesium.Color.fromCssColorString("#8b3dff");
+      const cream = Cesium.Color.fromCssColorString("#f7f2e8");
+      const markerEntities = new Map();
+      const routeEntities = new Map();
+
+      const card = document.getElementById("earthInfoCard");
+      const title = document.getElementById("earthPlaceTitle");
+      const description = document.getElementById("earthPlaceDescription");
+      const scripture = document.getElementById("earthPlaceScripture");
+
+      function openInfoCard(data) {
+        title.textContent = data.name;
+        description.textContent = data.description;
+        scripture.textContent = data.scripture || "";
+        card.classList.add("active");
       }
 
-      function itemPlaces(item) {
-        if (!item) return [];
-        if (item.type === "place") return [item.id];
-        return item.placeIds || [];
+      function closeInfoCard() {
+        card.classList.remove("active");
       }
 
-      function itemRoutes(item) {
-        if (!item) return [];
-        if (item.type === "route") return [item.id];
-        return item.routeIds || [];
+      function addPlaceMarker(place) {
+        return viewer.entities.add({
+          name: place.name,
+          show: false,
+          position: Cesium.Cartesian3.fromDegrees(place.lon, place.lat, 12000),
+          point: {
+            pixelSize: 13,
+            color: purple,
+            outlineColor: cream,
+            outlineWidth: 2,
+            heightReference: Cesium.HeightReference.NONE,
+            disableDepthTestDistance: Number.POSITIVE_INFINITY,
+          },
+          label: {
+            text: place.name,
+            font: "700 14px Arial",
+            fillColor: cream,
+            outlineColor: Cesium.Color.BLACK,
+            outlineWidth: 3,
+            style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+            pixelOffset: new Cesium.Cartesian2(0, -28),
+            scaleByDistance: new Cesium.NearFarScalar(1200000, 1, 9000000, 0.45),
+            disableDepthTestDistance: Number.POSITIVE_INFINITY,
+          },
+          properties: {
+            id: place.id,
+            name: place.name,
+            description: place.description,
+            scripture: place.scripture,
+          },
+        });
       }
 
-      function routeCoordinates(routeId) {
-        const route = index.routesById.get(routeId);
-        if (!route) return [];
-        return route.placeIds
-          .map((placeId) => index.placesById.get(placeId))
+      biblePlaces.forEach((place) => {
+        markerEntities.set(place.id, addPlaceMarker(place));
+      });
+
+      function addRoute(id, name, placeIds) {
+        const positions = placeIds
+          .map((placeId) => placeById.get(placeId))
           .filter(Boolean)
-          .map((place) => place.coordinates);
+          .map((place) => Cesium.Cartesian3.fromDegrees(place.lon, place.lat, 30000));
+
+        const entity = viewer.entities.add({
+          name,
+          show: false,
+          polyline: {
+            positions,
+            width: 5,
+            material: new Cesium.PolylineGlowMaterialProperty({
+              glowPower: 0.22,
+              color: purple,
+            }),
+            clampToGround: false,
+          },
+        });
+
+        routeEntities.set(id, entity);
+        return entity;
       }
 
-      function openEarthCard(item) {
-        if (!elements.earthCard) return;
-        elements.earthTitle.textContent = item.name;
-        elements.earthDescription.textContent = item.summary || item.what || "Explore this Bible Mapped item.";
-        elements.earthScripture.textContent = item.scripture || "";
-        elements.earthCard.classList.add("active");
-      }
+      addRoute("abraham-journey", "Abraham's Journey", ["ur", "haran", "canaan"]);
+      addRoute("exodus-route", "Exodus Route", ["egypt", "mount-sinai", "canaan"]);
+      addRoute("jesus-world-route", "Jesus' World", ["bethlehem", "nazareth", "sea-of-galilee", "jerusalem"]);
+      addRoute("paul-route", "Paul Toward Rome", ["jerusalem", "rome"]);
 
-      function closeEarthCard() {
-        elements.earthCard?.classList.remove("active");
-      }
+      const focusDefinitions = {
+        people: {
+          markers: ["ur", "haran", "canaan", "egypt", "mount-sinai", "bethlehem", "nazareth", "sea-of-galilee", "jerusalem", "rome"],
+          routes: [],
+          camera: [35.5, 31.5, 10500000, -82],
+          info: {
+            name: "People",
+            description: "People in Scripture move through real geography: patriarchs, prophets, Jesus, apostles, and witnesses.",
+            scripture: "Genesis 12; Exodus 3; Luke 4; Acts 28",
+          },
+        },
+        places: {
+          markers: ["jerusalem", "bethlehem", "nazareth", "sea-of-galilee", "egypt", "mount-sinai", "babylon", "nineveh", "ur", "haran", "canaan", "rome"],
+          routes: [],
+          camera: [35.5, 31.8, 9800000, -82],
+          info: {
+            name: "Places",
+            description: "The main Bible Mapped place set is now visible. Select a marker to read why that place matters.",
+            scripture: "Genesis to Acts",
+          },
+        },
+        journeys: {
+          markers: ["ur", "haran", "canaan", "egypt", "mount-sinai", "bethlehem", "nazareth", "sea-of-galilee", "jerusalem", "rome"],
+          routes: ["abraham-journey", "exodus-route", "jesus-world-route", "paul-route"],
+          camera: [36.5, 32.8, 11500000, -84],
+          info: {
+            name: "Journeys",
+            description: "The globe is showing the major route families: promise, deliverance, Jesus' world, and mission toward Rome.",
+            scripture: "Genesis 12; Exodus 12-19; Luke 2-4; Acts 28",
+          },
+        },
+        regions: {
+          markers: ["canaan", "jerusalem", "sea-of-galilee", "babylon", "nineveh", "egypt", "rome"],
+          routes: [],
+          camera: [35.5, 32.5, 9000000, -82],
+          info: {
+            name: "Regions",
+            description: "A regional view of the promised land, Egypt, Mesopotamia, Galilee/Judea, and Rome.",
+            scripture: "Genesis 12; Exodus 3; 2 Kings 25; Luke 2; Acts 28",
+          },
+        },
+        timelines: {
+          markers: ["ur", "canaan", "egypt", "mount-sinai", "babylon", "bethlehem", "jerusalem", "rome"],
+          routes: ["abraham-journey", "exodus-route", "paul-route"],
+          camera: [36.5, 32.5, 12500000, -86],
+          info: {
+            name: "Timelines",
+            description: "A story-order view: patriarchs, Exodus, exile, Messiah, and mission across the map.",
+            scripture: "Genesis; Exodus; Daniel; Luke; Acts",
+          },
+        },
+        charts: {
+          markers: ["ur", "canaan", "jerusalem", "babylon", "rome"],
+          routes: ["abraham-journey", "paul-route"],
+          camera: [36.5, 33, 12000000, -84],
+          info: {
+            name: "Charts",
+            description: "Chart patterns come alive when covenant, empire, promise, and mission are tied back to place.",
+            scripture: "Genesis 12; Daniel 1; Romans 1",
+          },
+        },
+        "study-paths": {
+          markers: ["ur", "canaan", "egypt", "mount-sinai", "bethlehem", "nazareth", "sea-of-galilee", "jerusalem", "rome"],
+          routes: ["abraham-journey", "exodus-route", "jesus-world-route", "paul-route"],
+          camera: [36, 32, 12000000, -84],
+          info: {
+            name: "Study Paths",
+            description: "Start with a route, person, place, or theme and let the globe show the geography behind the study.",
+            scripture: "Genesis to Acts",
+          },
+        },
+        abraham: {
+          markers: ["ur", "haran", "canaan", "egypt"],
+          routes: ["abraham-journey"],
+          camera: [39.5, 33.5, 9000000, -85],
+          info: {
+            name: "Abraham",
+            description: "Abram's journey moves from Ur to Haran and then into Canaan, with Egypt entering the story during famine.",
+            scripture: "Genesis 11:31; Genesis 12:1-10",
+          },
+        },
+        moses: {
+          markers: ["egypt", "mount-sinai", "canaan"],
+          routes: ["exodus-route"],
+          camera: [33.2, 29.5, 6500000, -82],
+          info: {
+            name: "Moses",
+            description: "The Moses story moves from Egypt through Sinai toward the land of promise.",
+            scripture: "Exodus 1-20; Deuteronomy 34",
+          },
+        },
+        jesus: {
+          markers: ["bethlehem", "nazareth", "sea-of-galilee", "jerusalem"],
+          routes: ["jesus-world-route"],
+          camera: [35.25, 31.9, 4500000, -80],
+          info: {
+            name: "Jesus",
+            description: "Jesus' world centers on Bethlehem, Nazareth, Galilee, Jerusalem, and the roads between them.",
+            scripture: "Matthew 2; Luke 2; Luke 4; John 4; Acts 1",
+          },
+        },
+        paul: {
+          markers: ["jerusalem", "rome"],
+          routes: ["paul-route"],
+          camera: [24, 39, 7800000, -82],
+          info: {
+            name: "Paul Toward Rome",
+            description: "The New Testament mission presses from Jerusalem toward the imperial center of Rome.",
+            scripture: "Acts 28; Romans 1:7",
+          },
+        },
+        jerusalem: {
+          markers: ["jerusalem"],
+          routes: [],
+          camera: [35.2137, 31.7683, 1800000, -70],
+          placeId: "jerusalem",
+        },
+        galilee: {
+          markers: ["nazareth", "sea-of-galilee"],
+          routes: ["jesus-world-route"],
+          camera: [35.48, 32.82, 1700000, -72],
+          info: {
+            name: "Galilee",
+            description: "Galilee gathers Nazareth, the Sea of Galilee, disciples, teaching, miracles, and ordinary villages.",
+            scripture: "Matthew 4; Mark 4; Luke 4",
+          },
+        },
+        egypt: {
+          markers: ["egypt", "mount-sinai"],
+          routes: ["exodus-route"],
+          camera: [31.2, 28.7, 3800000, -78],
+          placeId: "egypt",
+        },
+        babylon: {
+          markers: ["babylon", "nineveh", "jerusalem"],
+          routes: [],
+          camera: [43.5, 34.5, 5200000, -78],
+          placeId: "babylon",
+        },
+        "abraham-journey": null,
+        "exodus-route": null,
+        "jesus-world": null,
+        "promised-land": {
+          markers: ["canaan", "jerusalem", "bethlehem", "nazareth", "sea-of-galilee"],
+          routes: ["jesus-world-route"],
+          camera: [35.15, 31.9, 3200000, -78],
+          info: {
+            name: "Promised Land",
+            description: "Canaan and the land around Jerusalem, Bethlehem, Nazareth, and Galilee carry promise, kingdom, exile, Messiah, and hope.",
+            scripture: "Genesis 12:5-7; Joshua; Luke 2",
+          },
+        },
+        "empire-region": {
+          markers: ["babylon", "nineveh", "rome", "jerusalem"],
+          routes: ["paul-route"],
+          camera: [34, 38, 10000000, -82],
+          info: {
+            name: "Empires",
+            description: "Assyria, Babylon, and Rome frame much of the Bible's political world and the pressure around God's people.",
+            scripture: "Jonah; Daniel; Luke 2; Acts 28",
+          },
+        },
+        "ancient-near-east": {
+          markers: ["ur", "haran", "canaan", "egypt", "babylon", "nineveh"],
+          routes: ["abraham-journey", "exodus-route"],
+          camera: [39.5, 31.5, 11500000, -84],
+          info: {
+            name: "Ancient Near East",
+            description: "The shared world of Mesopotamia, Egypt, Canaan, empires, routes, and covenant beginnings.",
+            scripture: "Genesis 11-12; Exodus 1-20; Daniel 1",
+          },
+        },
+        "ot-timeline": {
+          markers: ["ur", "canaan", "egypt", "mount-sinai", "babylon", "nineveh"],
+          routes: ["abraham-journey", "exodus-route"],
+          camera: [39, 32, 11200000, -84],
+          info: {
+            name: "Old Testament Timeline",
+            description: "From patriarchs to Exodus, land, kingdom, prophets, and exile, the Old Testament keeps moving through real regions.",
+            scripture: "Genesis; Exodus; Kings; Prophets",
+          },
+        },
+        "nt-timeline": {
+          markers: ["bethlehem", "nazareth", "sea-of-galilee", "jerusalem", "rome"],
+          routes: ["jesus-world-route", "paul-route"],
+          camera: [27, 36, 8200000, -82],
+          info: {
+            name: "New Testament Timeline",
+            description: "Birth, ministry, cross, resurrection, church, and mission move from Judea and Galilee toward Rome.",
+            scripture: "Matthew; Luke; Acts; Romans",
+          },
+        },
+        "covenant-chart": {
+          markers: ["ur", "haran", "canaan", "jerusalem"],
+          routes: ["abraham-journey"],
+          camera: [39.5, 33.2, 8500000, -84],
+          info: {
+            name: "Covenant Pattern",
+            description: "The covenant promise begins with Abraham's call and keeps pulling the story toward land, blessing, kingdom, and Messiah.",
+            scripture: "Genesis 12:1-7; 2 Samuel 7; Luke 1",
+          },
+        },
+        "gospel-path": {
+          markers: ["bethlehem", "nazareth", "sea-of-galilee", "jerusalem", "rome"],
+          routes: ["jesus-world-route", "paul-route"],
+          camera: [27, 36, 8000000, -82],
+          info: {
+            name: "Gospel Path",
+            description: "The gospel is grounded in Jesus' places and then carried outward by the early church toward Rome.",
+            scripture: "Luke 2; Luke 24; Acts 1; Acts 28",
+          },
+        },
+      };
 
-      function renderDetail(item) {
-        if (!item || !elements.detailTitle) return;
+      focusDefinitions["abraham-journey"] = focusDefinitions.abraham;
+      focusDefinitions["exodus-route"] = focusDefinitions.moses;
+      focusDefinitions["jesus-world"] = focusDefinitions.jesus;
 
-        elements.detailKicker.textContent = typeLabel(item.type);
-        elements.detailTitle.textContent = item.name;
-        elements.detailSummary.textContent = item.summary || item.what || "Explore this item in the Bible Mapped Atlas.";
-        elements.detailWhere.textContent = item.where || "Connected to the Bible world.";
-        elements.detailWho.textContent = item.who || "People and groups connected to this part of Scripture.";
-        elements.detailWhat.textContent = item.what || "A biblical movement, setting, or event.";
-        elements.detailWhy.textContent = item.why || "Context helps the text become visible.";
-
-        if (!elements.relatedRow) return;
-        elements.relatedRow.innerHTML = "";
-
-        const relatedIds = [...new Set([...(item.placeIds || []), ...(item.routeIds || [])])];
-
-        relatedIds.forEach((id) => {
-          const related = index.byId.get(id);
-          if (!related) return;
-
-          const pill = document.createElement("button");
-          pill.className = "atlas-related-pill";
-          pill.type = "button";
-          pill.textContent = related.name;
-          pill.addEventListener("click", () => focusAtlasItem(related.id, { scrollToMap: true }));
-          elements.relatedRow.appendChild(pill);
+      function hideAtlasEntities() {
+        markerEntities.forEach((entity) => {
+          entity.show = false;
+        });
+        routeEntities.forEach((entity) => {
+          entity.show = false;
         });
       }
 
-      function renderControls() {
-        if (!elements.quickControls) return;
-
-        const groups = [
-          { label: "People", items: ATLAS_DATA.people },
-          { label: "Regions", items: ATLAS_DATA.zones },
-          { label: "Journeys", items: ATLAS_DATA.routes },
-          { label: "Places", items: ["jerusalem", "egypt", "sinai", "babylon", "rome"].map((id) => index.byId.get(id)).filter(Boolean) }
-        ];
-
-        elements.quickControls.innerHTML = "";
-
-        groups.forEach((group) => {
-          const wrap = document.createElement("div");
-          wrap.className = "atlas-control-group";
-
-          const title = document.createElement("strong");
-          title.textContent = group.label;
-          wrap.appendChild(title);
-
-          const row = document.createElement("div");
-          row.className = "atlas-chip-row";
-
-          group.items.forEach((item) => {
-            const button = document.createElement("button");
-            button.className = "atlas-chip";
-            button.type = "button";
-            button.textContent = item.name;
-            button.dataset.atlasId = item.id;
-            button.addEventListener("click", () => focusAtlasItem(item.id, { scrollToMap: true }));
-            row.appendChild(button);
-          });
-
-          wrap.appendChild(row);
-          elements.quickControls.appendChild(wrap);
+      function showMarkers(ids = []) {
+        ids.forEach((id) => {
+          const marker = markerEntities.get(id);
+          if (marker) marker.show = true;
         });
       }
 
-      function updateActiveButtons(id) {
-        document.querySelectorAll("[data-atlas-id]").forEach((button) => {
-          button.classList.toggle("is-active", button.dataset.atlasId === id);
+      function showRoutes(ids = []) {
+        ids.forEach((id) => {
+          const route = routeEntities.get(id);
+          if (route) route.show = true;
         });
       }
 
-      function searchAtlas() {
-        const query = (elements.searchInput?.value || "").trim().toLowerCase();
-        if (!query) return;
-
-        const found = index.all.find((item) => {
-          return (
-            item.name.toLowerCase().includes(query) ||
-            item.id.toLowerCase().includes(query) ||
-            (item.scripture || "").toLowerCase().includes(query)
-          );
+      function flyToCamera(camera) {
+        const [lon, lat, height, pitch = -82] = camera;
+        viewer.camera.flyTo({
+          destination: Cesium.Cartesian3.fromDegrees(lon, lat, height),
+          orientation: {
+            heading: Cesium.Math.toRadians(0),
+            pitch: Cesium.Math.toRadians(pitch),
+            roll: 0,
+          },
+          duration: 1.8,
         });
+      }
 
-        if (found) {
-          focusAtlasItem(found.id, { scrollToMap: true });
+      function focusAtlasItem(id) {
+        const focus = focusDefinitions[id] || focusDefinitions.places;
+        hideAtlasEntities();
+
+        if (focus.placeId) {
+          const place = placeById.get(focus.placeId);
+          showMarkers([focus.placeId]);
+          flyToCamera(focus.camera);
+          openInfoCard(place);
           return;
         }
 
-        if (elements.searchInput) {
-          elements.searchInput.value = "";
-          elements.searchInput.placeholder = "Nothing found. Try Moses, Paul, Egypt, Rome...";
-        }
+        showMarkers(focus.markers);
+        showRoutes(focus.routes);
+        flyToCamera(focus.camera);
+        openInfoCard(focus.info);
       }
-
-      function initCesium() {
-        if (!window.Cesium || !document.getElementById("bibleEarthMap")) return;
-
-        Cesium.Ion.defaultAccessToken = "";
-
-        const viewerOptions = {
-          animation: false,
-          timeline: false,
-          geocoder: false,
-          homeButton: false,
-          sceneModePicker: false,
-          baseLayerPicker: false,
-          navigationHelpButton: false,
-          fullscreenButton: false,
-          infoBox: false,
-          selectionIndicator: false,
-          shouldAnimate: true,
-          terrainProvider: new Cesium.EllipsoidTerrainProvider()
-        };
-
-        let providerPromise = null;
-
-        try {
-          providerPromise = Cesium.TileMapServiceImageryProvider.fromUrl(
-            Cesium.buildModuleUrl("Assets/Textures/NaturalEarthII")
-          );
-
-          if (Cesium.ImageryLayer && Cesium.ImageryLayer.fromProviderAsync) {
-            viewerOptions.baseLayer = Cesium.ImageryLayer.fromProviderAsync(providerPromise);
-          }
-        } catch (error) {
-          console.warn("Natural Earth II imagery failed to initialize.", error);
-        }
-
-        cesiumViewer = new Cesium.Viewer("bibleEarthMap", viewerOptions);
-
-        if (!viewerOptions.baseLayer && providerPromise) {
-          providerPromise.then((provider) => {
-            cesiumViewer.imageryLayers.removeAll();
-            cesiumViewer.imageryLayers.addImageryProvider(provider);
-          });
-        }
-
-        cesiumViewer.scene.mode = Cesium.SceneMode.SCENE3D;
-        cesiumViewer.scene.backgroundColor = Cesium.Color.fromCssColorString("#050611");
-        cesiumViewer.scene.globe.baseColor = Cesium.Color.fromCssColorString("#101827");
-        cesiumViewer.scene.globe.enableLighting = true;
-        cesiumViewer.scene.skyAtmosphere.show = true;
-        cesiumViewer.scene.fog.enabled = false;
-
-        cesiumViewer.scene.screenSpaceCameraController.enableRotate = true;
-        cesiumViewer.scene.screenSpaceCameraController.enableZoom = true;
-        cesiumViewer.scene.screenSpaceCameraController.enableTilt = true;
-        cesiumViewer.scene.screenSpaceCameraController.minimumZoomDistance = 900000;
-        cesiumViewer.scene.screenSpaceCameraController.maximumZoomDistance = 50000000;
-
-        const purple = Cesium.Color.fromCssColorString("#8b3dff");
-        const cream = Cesium.Color.fromCssColorString("#f7f2e8");
-
-        ATLAS_DATA.places.forEach((place) => {
-          cesiumViewer.entities.add({
-            id: `globe-place-${place.id}`,
-            name: place.name,
-            position: Cesium.Cartesian3.fromDegrees(place.coordinates[0], place.coordinates[1], 12000),
-            point: {
-              pixelSize: 13,
-              color: purple,
-              outlineColor: cream,
-              outlineWidth: 2,
-              heightReference: Cesium.HeightReference.NONE,
-              disableDepthTestDistance: Number.POSITIVE_INFINITY
-            },
-            label: {
-              text: place.name,
-              font: "700 14px Arial",
-              fillColor: cream,
-              outlineColor: Cesium.Color.BLACK,
-              outlineWidth: 3,
-              style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-              pixelOffset: new Cesium.Cartesian2(0, -28),
-              scaleByDistance: new Cesium.NearFarScalar(1200000, 1, 9000000, 0.45),
-              disableDepthTestDistance: Number.POSITIVE_INFINITY
-            },
-            properties: {
-              atlasId: place.id
-            }
-          });
-        });
-
-        ATLAS_DATA.routes.forEach((route) => {
-          const positions = routeCoordinates(route.id).map((coord) =>
-            Cesium.Cartesian3.fromDegrees(coord[0], coord[1], 30000)
-          );
-
-          const entity = cesiumViewer.entities.add({
-            id: `globe-route-${route.id}`,
-            name: route.name,
-            show: false,
-            polyline: {
-              positions,
-              width: 5,
-              material: new Cesium.PolylineGlowMaterialProperty({
-                glowPower: 0.22,
-                color: purple
-              }),
-              clampToGround: false
-            },
-            properties: {
-              atlasId: route.id
-            }
-          });
-
-          globeRoutes.set(route.id, entity);
-        });
-
-        const clickHandler = new Cesium.ScreenSpaceEventHandler(cesiumViewer.scene.canvas);
-
-        clickHandler.setInputAction((movement) => {
-          const pickedObject = cesiumViewer.scene.pick(movement.position);
-          if (!Cesium.defined(pickedObject) || !pickedObject.id) return;
-
-          const entity = pickedObject.id;
-          const atlasId = entity.properties?.atlasId?.getValue?.();
-          if (!atlasId) return;
-
-          focusAtlasItem(atlasId, { scrollToMap: false });
-        }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
-      }
-
-      function initMapLibre() {
-        if (!window.maplibregl || !document.getElementById("bibleAtlasMap")) return;
-
-        atlasMap = new maplibregl.Map({
-          container: "bibleAtlasMap",
-          style: {
-            version: 8,
-            sources: {
-              osm: {
-                type: "raster",
-                tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
-                tileSize: 256,
-                attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              }
-            },
-            layers: [
-              {
-                id: "osm",
-                type: "raster",
-                source: "osm",
-                paint: {
-                  "raster-opacity": 0.94,
-                  "raster-resampling": "linear"
-                }
-              }
-            ]
-          },
-          center: [34.5, 33.2],
-          zoom: 3.85,
-          minZoom: 2.2,
-          maxZoom: 12,
-          pitch: 0,
-          bearing: 0
-        });
-
-        atlasMap.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
-
-        atlasMap.on("load", () => {
-          mapReady = true;
-
-          atlasMap.addSource("active-routes", {
-            type: "geojson",
-            data: emptyRouteCollection()
-          });
-
-          atlasMap.addLayer({
-            id: "active-routes-line",
-            type: "line",
-            source: "active-routes",
-            layout: {
-              "line-cap": "round",
-              "line-join": "round"
-            },
-            paint: {
-              "line-color": "#8B3DFF",
-              "line-width": ["interpolate", ["linear"], ["zoom"], 3, 3, 8, 6, 11, 9],
-              "line-dasharray": [1.1, 1.35],
-              "line-opacity": 0.84
-            }
-          });
-
-          ATLAS_DATA.places.forEach((place) => {
-            const marker = document.createElement("button");
-            marker.className = "bm-map-marker";
-            marker.type = "button";
-            marker.setAttribute("aria-label", place.name);
-            marker.innerHTML = `
-              <span class="bm-map-marker-dot"></span>
-              <span class="bm-map-marker-label">${escapeHtml(place.name)}</span>
-            `;
-            marker.addEventListener("click", (event) => {
-              event.stopPropagation();
-              focusAtlasItem(place.id, { scrollToMap: false });
-            });
-
-            new maplibregl.Marker({ element: marker, anchor: "bottom" })
-              .setLngLat(place.coordinates)
-              .addTo(atlasMap);
-
-            mapMarkers.set(place.id, marker);
-          });
-
-          const startId = getStartIdFromUrl() || "ancient-near-east";
-          focusAtlasItem(startId, { scrollToMap: false, updateUrl: false });
-        });
-      }
-
-      function emptyRouteCollection() {
-        return {
-          type: "FeatureCollection",
-          features: []
-        };
-      }
-
-      function routesFeatureCollection(routeIds) {
-        return {
-          type: "FeatureCollection",
-          features: routeIds
-            .map((routeId) => {
-              const route = index.routesById.get(routeId);
-              const coordinates = routeCoordinates(routeId);
-              if (!route || coordinates.length < 2) return null;
-
-              return {
-                type: "Feature",
-                properties: { id: route.id, name: route.name },
-                geometry: {
-                  type: "LineString",
-                  coordinates
-                }
-              };
-            })
-            .filter(Boolean)
-        };
-      }
-
-      function updateRoutes(routeIds) {
-        const activeRoutes = new Set(routeIds);
-
-        globeRoutes.forEach((entity, routeId) => {
-          entity.show = activeRoutes.has(routeId);
-        });
-
-        if (mapReady && atlasMap?.getSource("active-routes")) {
-          atlasMap.getSource("active-routes").setData(routesFeatureCollection(routeIds));
-        }
-      }
-
-      function updateMarkerState(placeIds) {
-        const activePlaces = new Set(placeIds);
-        const hasActive = activePlaces.size > 0;
-
-        mapMarkers.forEach((marker, placeId) => {
-          marker.classList.toggle("is-active", activePlaces.has(placeId));
-          marker.classList.toggle("is-muted", hasActive && !activePlaces.has(placeId));
-        });
-      }
-
-      function moveGlobe(item) {
-        if (!cesiumViewer || !window.Cesium || !item?.globe) return;
-
-        cesiumViewer.camera.flyTo({
-          destination: Cesium.Cartesian3.fromDegrees(
-            item.globe.lon,
-            item.globe.lat,
-            item.globe.height
-          ),
-          orientation: {
-            heading: Cesium.Math.toRadians(item.globe.heading || 0),
-            pitch: Cesium.Math.toRadians(item.globe.pitch || -82),
-            roll: 0
-          },
-          duration: 2.2
-        });
-      }
-
-      function moveMap(item) {
-        if (!mapReady || !atlasMap || !item?.map) return;
-
-        atlasMap.flyTo({
-          center: item.map.center,
-          zoom: item.map.zoom,
-          pitch: item.map.pitch || 0,
-          bearing: item.map.bearing || 0,
-          speed: 0.85,
-          curve: 1.35,
-          essential: true
-        });
-      }
-
-      function focusAtlasItem(id, options = {}) {
-        const item = index.byId.get(id) || index.byId.get("ancient-near-east");
-        if (!item) return;
-
-        activeId = item.id;
-        const places = itemPlaces(item);
-        const routes = itemRoutes(item);
-
-        updateRoutes(routes);
-        updateMarkerState(places);
-        renderDetail(item);
-        openEarthCard(item);
-        moveGlobe(item);
-        moveMap(item);
-        updateActiveButtons(item.id);
-
-        if (options.scrollToMap) {
-          document.getElementById("bibleAtlasMap")?.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-          });
-        }
-
-        if (options.updateUrl !== false) {
-          const url = new URL(window.location.href);
-          url.searchParams.set("atlas", item.id);
-          window.history.replaceState({}, "", url);
-        }
-      }
-
-      function getStartIdFromUrl() {
-        const params = new URLSearchParams(window.location.search);
-        return params.get("atlas") || params.get("person") || params.get("place") || params.get("route") || params.get("zone");
-      }
-
-      function escapeHtml(value) {
-        return String(value).replace(/[&<>"]/g, (char) => {
-          return {
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;"
-          }[char];
-        });
-      }
-
-      renderControls();
-      initCesium();
-      initMapLibre();
-
-      document.getElementById("resetBibleEarth")?.addEventListener("click", () => {
-        closeEarthCard();
-        focusAtlasItem("ancient-near-east", { scrollToMap: false });
-      });
-
-      document.getElementById("showAbrahamRoute")?.addEventListener("click", () => {
-        focusAtlasItem("abraham-route", { scrollToMap: true });
-      });
-
-      document.getElementById("showJesusPlaces")?.addEventListener("click", () => {
-        focusAtlasItem("jesus", { scrollToMap: true });
-      });
-
-      document.getElementById("closeEarthInfo")?.addEventListener("click", closeEarthCard);
-
-      document.getElementById("resetAtlasMap")?.addEventListener("click", () => {
-        focusAtlasItem("ancient-near-east", { scrollToMap: false });
-      });
-
-      elements.searchButton?.addEventListener("click", searchAtlas);
-      elements.searchInput?.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") searchAtlas();
-      });
 
       window.focusAtlasItem = focusAtlasItem;
 
-      const revealItems = document.querySelectorAll(".premium-reveal, .pan-item");
+      function resetBibleEarth() {
+        hideAtlasEntities();
+        closeInfoCard();
+        flyToCamera([35.5, 28.5, 18500000, -90]);
+      }
 
-      const revealObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("in-view");
-            }
+      const clickHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+
+      clickHandler.setInputAction(function (movement) {
+        const pickedObject = viewer.scene.pick(movement.position);
+
+        if (!Cesium.defined(pickedObject) || !pickedObject.id) {
+          return;
+        }
+
+        const entity = pickedObject.id;
+
+        if (!entity.properties || entity.show === false) {
+          return;
+        }
+
+        openInfoCard({
+          name: entity.properties.name.getValue(),
+          description: entity.properties.description.getValue(),
+          scripture: entity.properties.scripture.getValue(),
+        });
+
+        viewer.flyTo(entity, {
+          duration: 1.4,
+          offset: new Cesium.HeadingPitchRange(
+            0,
+            Cesium.Math.toRadians(-45),
+            900000
+          ),
+        });
+      }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+
+      document
+        .getElementById("resetBibleEarth")
+        ?.addEventListener("click", resetBibleEarth);
+
+      document
+        .getElementById("showAbrahamRoute")
+        ?.addEventListener("click", function () {
+          focusAtlasItem("abraham-journey");
+        });
+
+      document
+        .getElementById("showJesusPlaces")
+        ?.addEventListener("click", function () {
+          focusAtlasItem("jesus-world");
+        });
+
+      document
+        .getElementById("closeEarthInfo")
+        ?.addEventListener("click", closeInfoCard);
+
+      document.querySelectorAll("[data-atlas-focus]").forEach((control) => {
+        control.addEventListener("click", function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          focusAtlasItem(control.dataset.atlasFocus);
+          document.getElementById("bible-earth")?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
           });
-        },
-        { threshold: 0.14 }
-      );
-
-      revealItems.forEach((item) => revealObserver.observe(item));
-
-      const panImages = document.querySelectorAll(".atlas-image-bar-media img");
-
-      function updateImagePan() {
-        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-
-        panImages.forEach((img) => {
-          const bar = img.closest(".atlas-image-bar-media");
-          if (!bar) return;
-
-          const rect = bar.getBoundingClientRect();
-          const progress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
-          const clamped = Math.max(0, Math.min(1, progress));
-          const panY = -48 * clamped;
-          img.style.setProperty("--pan-y", `${panY}px`);
-        });
-      }
-
-      let ticking = false;
-
-      function requestPanUpdate() {
-        if (ticking) return;
-
-        window.requestAnimationFrame(() => {
-          updateImagePan();
-          ticking = false;
         });
 
-        ticking = true;
-      }
+        control.addEventListener("keydown", function (event) {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          event.preventDefault();
+          focusAtlasItem(control.dataset.atlasFocus);
+          document.getElementById("bible-earth")?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        });
+      });
 
-      window.addEventListener("scroll", requestPanUpdate, { passive: true });
-      window.addEventListener("resize", requestPanUpdate);
-      window.addEventListener("load", requestPanUpdate);
-
-      requestPanUpdate();
+      resetBibleEarth();
     });
+  </script>
+  <script>
+    const revealItems = document.querySelectorAll(".premium-reveal, .pan-item");
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+          }
+        });
+      },
+      {
+        threshold: 0.14
+      }
+    );
+
+    revealItems.forEach((item) => revealObserver.observe(item));
+
+    const panImages = document.querySelectorAll(".atlas-image-bar-media img");
+
+    function updateImagePan() {
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+      panImages.forEach((img) => {
+        const bar = img.closest(".atlas-image-bar-media");
+        if (!bar) return;
+
+        const rect = bar.getBoundingClientRect();
+        const progress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
+        const clamped = Math.max(0, Math.min(1, progress));
+
+        const panY = -48 * clamped;
+        img.style.setProperty("--pan-y", `${panY}px`);
+      });
+    }
+
+    let ticking = false;
+
+    function requestPanUpdate() {
+      if (ticking) return;
+
+      window.requestAnimationFrame(() => {
+        updateImagePan();
+        ticking = false;
+      });
+
+      ticking = true;
+    }
+
+    window.addEventListener("scroll", requestPanUpdate, { passive: true });
+    window.addEventListener("resize", requestPanUpdate);
+    window.addEventListener("load", requestPanUpdate);
+
+    requestPanUpdate();
   </script>
 </body>
 </html>
