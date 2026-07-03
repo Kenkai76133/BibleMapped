@@ -959,6 +959,147 @@
       overflow: hidden !important;
     }
   </style>
+  <style id="homepage-title-system-overrides">
+    .home-section {
+      padding: clamp(4rem, 8vw, 7rem) 0;
+    }
+
+    .home-section.compact {
+      padding: clamp(3rem, 6vw, 5rem) 0;
+    }
+
+    html body .section-title {
+      display: block !important;
+      width: min(calc(100% - 32px), 1100px) !important;
+      max-width: 100% !important;
+      margin: 0 auto 1.5rem !important;
+      text-align: center !important;
+      font-size: clamp(2.4rem, 6vw, 5.25rem) !important;
+      line-height: 1.02 !important;
+      font-weight: 800 !important;
+      letter-spacing: -0.04em !important;
+      color: #151515 !important;
+      white-space: nowrap !important;
+      text-wrap: balance;
+      transform: none !important;
+    }
+
+    html body .section-kicker {
+      display: block !important;
+      width: max-content !important;
+      max-width: calc(100% - 32px) !important;
+      text-align: center !important;
+      margin: 0 auto 0.75rem !important;
+      font-size: 0.85rem !important;
+      line-height: 1 !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.16em !important;
+      text-transform: uppercase !important;
+      color: #8b3dff !important;
+      transform: none !important;
+    }
+
+    html body .section-subtitle {
+      width: min(calc(100% - 32px), 760px) !important;
+      margin: 0 auto 2rem !important;
+      text-align: center !important;
+      font-size: clamp(1rem, 2vw, 1.25rem) !important;
+      line-height: 1.5 !important;
+      color: #5f5f5f !important;
+      transform: none !important;
+    }
+
+    html body #aboutMappedToggle.section-title {
+      display: flex !important;
+      width: min(calc(100% - 32px), 1100px) !important;
+      justify-content: center !important;
+      border: 0 !important;
+      background: transparent !important;
+      cursor: pointer;
+    }
+
+    html body .home-people-static-title,
+    html body .home-people-static-title span,
+    html body .watch-videos-type-title {
+      display: block !important;
+      white-space: nowrap !important;
+      transform: none !important;
+    }
+
+    html body .watch-videos-type-title.typing::after,
+    html body .watch-videos-type-title.typed::after {
+      content: none !important;
+      display: none !important;
+    }
+
+    html body #aboutMappedToggle.about-mapped-toggle.section-title,
+    html body #homeTestamentMapsTitle.section-title,
+    html body #homePeopleFeatureTitle.section-title,
+    html body .watch-videos-copy h2.watch-videos-type-title.section-title {
+      display: block !important;
+      width: min(calc(100% - 32px), 1100px) !important;
+      max-width: 100% !important;
+      margin: 0 auto 1.5rem !important;
+      text-align: center !important;
+      font-size: clamp(2.4rem, 6vw, 5.25rem) !important;
+      line-height: 1.02 !important;
+      font-weight: 800 !important;
+      letter-spacing: -0.04em !important;
+      color: #151515 !important;
+      white-space: nowrap !important;
+      transform: none !important;
+    }
+
+    html body .watch-videos-copy h2.watch-videos-type-title.section-title {
+      min-height: 0 !important;
+      width: 100% !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    @media (max-width: 760px) {
+      html body .section-title,
+      html body .home-people-static-title,
+      html body .home-people-static-title span,
+      html body .watch-videos-type-title {
+        font-size: clamp(2rem, 10vw, 3.4rem) !important;
+        line-height: 1.05 !important;
+        white-space: normal !important;
+        letter-spacing: -0.035em !important;
+      }
+
+      html body #aboutMappedToggle.about-mapped-toggle.section-title,
+      html body #homeTestamentMapsTitle.section-title,
+      html body #homePeopleFeatureTitle.section-title,
+      html body .watch-videos-copy h2.watch-videos-type-title.section-title {
+        width: min(calc(100% - 32px), 760px) !important;
+        font-size: clamp(2rem, 10vw, 3.4rem) !important;
+        line-height: 1.05 !important;
+        white-space: normal !important;
+        letter-spacing: -0.035em !important;
+      }
+
+      html body .watch-videos-copy h2.watch-videos-type-title.section-title {
+        width: 100% !important;
+      }
+    }
+
+    @media (max-width: 420px) {
+      html body .section-title,
+      html body .home-people-static-title,
+      html body .home-people-static-title span,
+      html body .watch-videos-type-title {
+        font-size: clamp(1.85rem, 11vw, 2.8rem) !important;
+      }
+
+      html body #aboutMappedToggle.about-mapped-toggle.section-title,
+      html body #homeTestamentMapsTitle.section-title,
+      html body #homePeopleFeatureTitle.section-title,
+      html body .watch-videos-copy h2.watch-videos-type-title.section-title {
+        font-size: clamp(1.85rem, 11vw, 2.8rem) !important;
+      }
+    }
+  </style>
 </head>
 
 <body class="landing-start">
@@ -1045,7 +1186,7 @@
   <section class="landing-panel-section premium-reveal" id="about-biblemapped">
     <div class="minimal-bar about-mapped-shell" id="aboutMappedShell">
       <button
-        class="minimal-bar-toggle about-mapped-toggle parallax-item"
+        class="minimal-bar-toggle about-mapped-toggle section-title parallax-item"
         data-speed="-0.018"
         type="button"
         id="aboutMappedToggle"
@@ -1259,9 +1400,9 @@
   <section class="home-testament-maps" aria-labelledby="homeTestamentMapsTitle">
     <div class="home-testament-maps-inner">
       <div class="home-testament-maps-copy">
-        <p class="eyebrow">MAPS</p>
-        <h2 id="homeTestamentMapsTitle">Old and New Testament</h2>
-        <p>See the major places, routes, kingdoms, and journeys that hold the biblical story together.</p>
+        <p class="eyebrow section-kicker">MAPS</p>
+        <h2 id="homeTestamentMapsTitle" class="section-title">Old and New Testament</h2>
+        <p class="section-subtitle">See the major places, routes, kingdoms, and journeys that hold the biblical story together.</p>
 
         <div class="home-map-actions" aria-label="Open testament map images">
           <a class="home-map-action" href="/old-testament/">Old Testament</a>
@@ -1274,15 +1415,11 @@
   <section class="home-people-feature" aria-labelledby="homePeopleFeatureTitle">
     <div class="home-people-feature-inner">
       <div class="home-people-feature-copy">
-        <p class="eyebrow">PEOPLE</p>
+        <p class="eyebrow section-kicker">PEOPLE</p>
 
-        <h2 id="homePeopleFeatureTitle" class="home-people-static-title">
-          <span>The People</span>
-          <span>behind</span>
-          <span>the story</span>
-        </h2>
+        <h2 id="homePeopleFeatureTitle" class="home-people-static-title section-title">The People behind the story</h2>
 
-        <p>
+        <p class="section-subtitle">
           The Bible moves through real people with real names, stories, cultures, failures,
           questions, and faith. Explore the people behind the text and see how their world
           helps the story come alive.
@@ -1302,10 +1439,10 @@
     <div class="watch-videos-image-band" aria-label="Videos are rabbit holes">
       <div class="watch-videos-copy">
         <div class="watch-videos-title-wrap" data-title="Videos are Rabbit Holes">
-          <h2 class="watch-videos-type-title" data-type-text="Videos are Rabbit Holes">Videos are Rabbit Holes</h2>
+          <h2 class="watch-videos-type-title section-title typed" data-typed="true">Videos are Rabbit Holes</h2>
         </div>
 
-        <p>Strange facts. Big questions. Ancient context.<br />Follow the rabbit trail below.</p>
+        <p class="section-subtitle">Strange facts. Big questions. Ancient context. Follow the rabbit trail below.</p>
       </div>
 
       <img src="assets/videos-rabbit-holes.jpg" alt="Rabbit beside a rabbit hole" loading="lazy" />
