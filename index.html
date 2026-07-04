@@ -1163,6 +1163,88 @@
       }
     }
 
+
+
+    /* =========================================================
+       RABBIT HOLE SECTION RESTORE — NO VIDEOS
+       Keeps the Videos/Rabbit Hole section visible as a visual feature,
+       but hides the actual YouTube video carousel/embeds.
+       ========================================================= */
+
+    html body .landing-followup-bars[aria-labelledby="videosSectionTitle"] {
+      display: flex !important;
+      position: relative !important;
+      isolation: isolate !important;
+      overflow: hidden !important;
+      min-height: clamp(520px, 48vw, 680px) !important;
+      padding-top: clamp(72px, 8vw, 110px) !important;
+      padding-bottom: clamp(72px, 8vw, 110px) !important;
+      background: #fffdf7 !important;
+    }
+
+    html body .landing-followup-bars[aria-labelledby="videosSectionTitle"] .section-heading {
+      margin-bottom: clamp(26px, 4vw, 46px) !important;
+    }
+
+    html body .landing-followup-bars[aria-labelledby="videosSectionTitle"] .section-kicker {
+      color: var(--bm-purple, #8b3dff) !important;
+    }
+
+    html body .landing-followup-bars[aria-labelledby="videosSectionTitle"] .section-title {
+      color: var(--bm-ink, #111827) !important;
+    }
+
+    html body .landing-followup-bars[aria-labelledby="videosSectionTitle"] .section-subtitle {
+      max-width: 700px !important;
+      color: var(--bm-muted, #333b45) !important;
+    }
+
+    html body .watch-videos-image-band {
+      display: block !important;
+      width: min(860px, 92vw) !important;
+      margin: 0 auto !important;
+      border-radius: 0 !important;
+      overflow: hidden !important;
+      box-shadow: 0 24px 70px rgba(11, 18, 32, 0.16) !important;
+      background: #f4efe5 !important;
+    }
+
+    html body .watch-videos-image-band img {
+      display: block !important;
+      width: 100% !important;
+      height: clamp(240px, 34vw, 420px) !important;
+      object-fit: cover !important;
+      object-position: center center !important;
+      filter: none !important;
+      transform: scale(1.01) !important;
+    }
+
+    /* Hide the video carousel only. The rabbit hole image stays. */
+    html body .watch-videos-stage,
+    html body .watch-videos-marquee,
+    html body .watch-videos-track,
+    html body .watch-video-group,
+    html body .watch-video-card,
+    html body .watch-video-embed {
+      display: none !important;
+    }
+
+    @media (max-width: 700px) {
+      html body .landing-followup-bars[aria-labelledby="videosSectionTitle"] {
+        min-height: 500px !important;
+        padding-top: 72px !important;
+        padding-bottom: 72px !important;
+      }
+
+      html body .watch-videos-image-band {
+        width: min(620px, 94vw) !important;
+      }
+
+      html body .watch-videos-image-band img {
+        height: clamp(220px, 60vw, 340px) !important;
+      }
+    }
+
   </style>
 </head>
 
@@ -1531,53 +1613,53 @@
         <div class="watch-videos-track">
           <div class="watch-video-group">
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/lH3Uf1G-cUs" title="Why God Chose a Title" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/lH3Uf1G-cUs" title="Why God Chose a Title" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
 
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/1i123qXhBwg" title="Bible Mapped YouTube Short 2" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/1i123qXhBwg" title="Bible Mapped YouTube Short 2" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
 
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/9KO6829IwNM" title="Bible Mapped YouTube Short 3" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/9KO6829IwNM" title="Bible Mapped YouTube Short 3" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
 
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/vFDihb4G_ho" title="Bible Mapped YouTube Short 4" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/vFDihb4G_ho" title="Bible Mapped YouTube Short 4" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
 
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/8K71geGXido" title="Bible Mapped YouTube Short 5" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/8K71geGXido" title="Bible Mapped YouTube Short 5" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
 
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/bofUpxOZW5k" title="Bible Mapped YouTube Short 6" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/bofUpxOZW5k" title="Bible Mapped YouTube Short 6" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
           </div>
 
           <div class="watch-video-group" aria-hidden="true">
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/lH3Uf1G-cUs" title="Duplicate Why God Chose a Title" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/lH3Uf1G-cUs" title="Duplicate Why God Chose a Title" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
             </div>
 
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/1i123qXhBwg" title="Duplicate Bible Mapped YouTube Short 2" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/1i123qXhBwg" title="Duplicate Bible Mapped YouTube Short 2" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
             </div>
 
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/9KO6829IwNM" title="Duplicate Bible Mapped YouTube Short 3" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/9KO6829IwNM" title="Duplicate Bible Mapped YouTube Short 3" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
             </div>
 
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/vFDihb4G_ho" title="Duplicate Bible Mapped YouTube Short 4" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/vFDihb4G_ho" title="Duplicate Bible Mapped YouTube Short 4" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
             </div>
 
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/8K71geGXido" title="Duplicate Bible Mapped YouTube Short 5" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/8K71geGXido" title="Duplicate Bible Mapped YouTube Short 5" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
             </div>
 
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" src="https://www.youtube.com/embed/bofUpxOZW5k" title="Duplicate Bible Mapped YouTube Short 6" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/bofUpxOZW5k" title="Duplicate Bible Mapped YouTube Short 6" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
             </div>
           </div>
         </div>
