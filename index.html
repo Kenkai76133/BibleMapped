@@ -1245,6 +1245,421 @@
       }
     }
 
+
+
+    /* =========================================================
+       BIBLE MAPPED LANDING — FINAL LIVE FIX
+       Date: Maps expanded, buttons moved bottom, People image restored,
+       Rabbit Hole restored without videos.
+       ========================================================= */
+
+    /* ---------- MAPS SECTION: EXPAND, TITLE UP, BUTTONS BOTTOM ---------- */
+    html body .home-testament-maps {
+      position: relative !important;
+      isolation: isolate !important;
+      overflow: hidden !important;
+      min-height: clamp(720px, 64vw, 920px) !important;
+      height: auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      padding-top: clamp(42px, 4vw, 66px) !important;
+      padding-bottom: clamp(112px, 10vw, 150px) !important;
+      background-position: center center !important;
+      background-size: cover !important;
+    }
+
+    html body .home-testament-maps::before {
+      content: "" !important;
+      position: absolute !important;
+      inset: 0 !important;
+      z-index: -1 !important;
+      pointer-events: none !important;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.94) 0%,
+          rgba(255, 255, 255, 0.72) 26%,
+          rgba(255, 255, 255, 0.22) 58%,
+          rgba(255, 255, 255, 0.04) 100%
+        ) !important;
+    }
+
+    html body .home-testament-maps .section-heading {
+      position: relative !important;
+      z-index: 3 !important;
+      width: min(100%, 980px) !important;
+      margin: 0 auto !important;
+      padding-inline: 18px !important;
+      transform: none !important;
+    }
+
+    html body .home-testament-maps .section-kicker {
+      color: #8b3dff !important;
+      text-shadow: none !important;
+    }
+
+    html body .home-testament-maps .section-title {
+      color: #111827 !important;
+      max-width: 980px !important;
+      margin-inline: auto !important;
+      font-size: clamp(4rem, 6.9vw, 7.2rem) !important;
+      line-height: 0.9 !important;
+      letter-spacing: -0.07em !important;
+      text-shadow: none !important;
+      transform: none !important;
+    }
+
+    html body .home-testament-maps .section-subtitle {
+      max-width: 620px !important;
+      margin-top: clamp(16px, 2vw, 24px) !important;
+      color: #101827 !important;
+      font-size: clamp(1.08rem, 1.6vw, 1.38rem) !important;
+      line-height: 1.45 !important;
+      text-shadow: none !important;
+      transform: none !important;
+    }
+
+    html body .home-testament-maps-inner,
+    html body .home-testament-maps-copy {
+      position: static !important;
+      display: contents !important;
+    }
+
+    html body .home-testament-maps .home-map-actions {
+      position: absolute !important;
+      left: 50% !important;
+      bottom: clamp(44px, 5vw, 74px) !important;
+      z-index: 4 !important;
+      transform: translateX(-50%) !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      gap: clamp(0.85rem, 2vw, 1.25rem) !important;
+      width: auto !important;
+      margin: 0 !important;
+    }
+
+    html body .home-testament-maps .home-map-action {
+      position: relative !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      min-width: clamp(190px, 15vw, 235px) !important;
+      min-height: 58px !important;
+      padding: 0 30px !important;
+      border-radius: 0 !important;
+      border: 0 !important;
+      background: #101c35 !important;
+      color: #ffffff !important;
+      font-size: 0.88rem !important;
+      font-weight: 950 !important;
+      letter-spacing: 0.15em !important;
+      text-transform: uppercase !important;
+      text-decoration: none !important;
+      box-shadow: 0 22px 52px rgba(8, 18, 36, 0.24) !important;
+      transform: translateY(0) !important;
+      transition:
+        transform 240ms cubic-bezier(0.16, 0.9, 0.22, 1),
+        background 240ms ease,
+        box-shadow 240ms ease !important;
+    }
+
+    html body .home-testament-maps .home-map-action:hover,
+    html body .home-testament-maps .home-map-action:focus-visible {
+      background: #071225 !important;
+      transform: translateY(-9px) !important;
+      box-shadow: 0 30px 70px rgba(8, 18, 36, 0.32) !important;
+      outline: 0 !important;
+    }
+
+    /* ---------- PEOPLE SECTION: RESTORE IMAGE, TITLE UP, BUTTON BOTTOM ---------- */
+    html body .home-people-feature {
+      position: relative !important;
+      isolation: isolate !important;
+      overflow: hidden !important;
+      min-height: clamp(720px, 62vw, 900px) !important;
+      height: auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      padding-top: clamp(48px, 5vw, 76px) !important;
+      padding-bottom: clamp(120px, 10vw, 160px) !important;
+      background: #f7f2e8 !important;
+    }
+
+    html body .home-people-feature::before,
+    html body .home-people-feature::after,
+    html body .home-people-image-overlay {
+      display: none !important;
+      content: none !important;
+      opacity: 0 !important;
+      background: none !important;
+    }
+
+    html body .home-people-feature .section-heading {
+      position: relative !important;
+      z-index: 5 !important;
+      width: min(100%, 980px) !important;
+      margin: 0 auto !important;
+      padding-inline: 18px !important;
+      transform: none !important;
+    }
+
+    html body .home-people-feature .section-kicker {
+      color: #8b3dff !important;
+      text-shadow: none !important;
+    }
+
+    html body .home-people-feature .section-title {
+      max-width: 920px !important;
+      color: #111827 !important;
+      font-size: clamp(4rem, 6.5vw, 7rem) !important;
+      line-height: 0.9 !important;
+      letter-spacing: -0.07em !important;
+      text-shadow: none !important;
+      transform: none !important;
+    }
+
+    html body .home-people-feature .section-subtitle {
+      max-width: 720px !important;
+      margin-top: clamp(16px, 2vw, 24px) !important;
+      color: #333b45 !important;
+      font-size: clamp(1.05rem, 1.5vw, 1.28rem) !important;
+      line-height: 1.45 !important;
+      text-shadow: none !important;
+      transform: none !important;
+    }
+
+    /* Let the nested image escape and fill the whole People section */
+    html body .home-people-feature-inner {
+      position: static !important;
+      inset: auto !important;
+      z-index: auto !important;
+      display: block !important;
+      width: 100% !important;
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      pointer-events: none !important;
+    }
+
+    html body .home-people-feature-card {
+      position: absolute !important;
+      inset: 0 !important;
+      z-index: 1 !important;
+      display: block !important;
+      width: 100% !important;
+      height: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      overflow: hidden !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      pointer-events: none !important;
+    }
+
+    html body .home-people-feature-card img {
+      display: block !important;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      object-position: center bottom !important;
+      opacity: 1 !important;
+      filter: none !important;
+      transform: none !important;
+    }
+
+    html body .home-people-feature-copy {
+      position: absolute !important;
+      left: 50% !important;
+      bottom: clamp(42px, 5vw, 72px) !important;
+      z-index: 6 !important;
+      width: auto !important;
+      max-width: none !important;
+      margin: 0 !important;
+      transform: translateX(-50%) !important;
+      pointer-events: auto !important;
+    }
+
+    html body .home-people-feature-copy p {
+      display: none !important;
+    }
+
+    html body .home-people-feature-button {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      min-width: clamp(215px, 17vw, 260px) !important;
+      min-height: 58px !important;
+      padding: 0 32px !important;
+      border-radius: 0 !important;
+      border: 0 !important;
+      background: #101c35 !important;
+      color: #ffffff !important;
+      font-size: 0.86rem !important;
+      font-weight: 950 !important;
+      letter-spacing: 0.13em !important;
+      text-transform: uppercase !important;
+      text-decoration: none !important;
+      box-shadow: 0 22px 52px rgba(8, 18, 36, 0.24) !important;
+      transform: translateY(0) !important;
+      transition:
+        transform 240ms cubic-bezier(0.16, 0.9, 0.22, 1),
+        background 240ms ease,
+        box-shadow 240ms ease !important;
+    }
+
+    html body .home-people-feature-button:hover,
+    html body .home-people-feature-button:focus-visible {
+      background: #071225 !important;
+      transform: translateY(-9px) !important;
+      box-shadow: 0 30px 70px rgba(8, 18, 36, 0.32) !important;
+      outline: 0 !important;
+    }
+
+    /* ---------- RABBIT HOLE: BRING BACK SECTION, KEEP VIDEOS GONE ---------- */
+    html body .landing-followup-bars[aria-labelledby="videosSectionTitle"] {
+      display: flex !important;
+      position: relative !important;
+      isolation: isolate !important;
+      overflow: hidden !important;
+      min-height: clamp(560px, 50vw, 740px) !important;
+      padding-top: clamp(74px, 8vw, 112px) !important;
+      padding-bottom: clamp(78px, 8vw, 118px) !important;
+      background: #fffdf7 !important;
+    }
+
+    html body .landing-followup-bars[aria-labelledby="videosSectionTitle"] .section-heading {
+      position: relative !important;
+      z-index: 3 !important;
+      margin-bottom: clamp(28px, 4vw, 48px) !important;
+    }
+
+    html body .landing-followup-bars[aria-labelledby="videosSectionTitle"] .section-kicker {
+      color: #8b3dff !important;
+    }
+
+    html body .landing-followup-bars[aria-labelledby="videosSectionTitle"] .section-title {
+      color: #111827 !important;
+      font-size: clamp(3.5rem, 6vw, 6.5rem) !important;
+      line-height: 0.9 !important;
+      letter-spacing: -0.065em !important;
+    }
+
+    html body .landing-followup-bars[aria-labelledby="videosSectionTitle"] .section-subtitle {
+      max-width: 720px !important;
+      color: #333b45 !important;
+    }
+
+    html body .landing-followup-bars[aria-labelledby="videosSectionTitle"] .section-content {
+      width: min(940px, 94vw) !important;
+      margin: 0 auto !important;
+    }
+
+    html body .watch-videos-image-band {
+      display: block !important;
+      width: min(880px, 94vw) !important;
+      margin: 0 auto !important;
+      border-radius: 0 !important;
+      overflow: hidden !important;
+      background: #f4efe5 !important;
+      box-shadow: 0 24px 70px rgba(11, 18, 32, 0.16) !important;
+    }
+
+    html body .watch-videos-image-band img {
+      display: block !important;
+      width: 100% !important;
+      height: clamp(260px, 34vw, 430px) !important;
+      object-fit: cover !important;
+      object-position: center center !important;
+      filter: none !important;
+      transform: none !important;
+    }
+
+    html body .watch-videos-stage,
+    html body .watch-videos-marquee,
+    html body .watch-videos-track,
+    html body .watch-video-group,
+    html body .watch-video-card,
+    html body .watch-video-embed {
+      display: none !important;
+    }
+
+    /* ---------- MOBILE FINAL FIX ---------- */
+    @media (max-width: 760px) {
+      html body .home-testament-maps {
+        min-height: 660px !important;
+        padding-top: 54px !important;
+        padding-bottom: 130px !important;
+      }
+
+      html body .home-testament-maps .section-title {
+        font-size: clamp(2.7rem, 13vw, 4.1rem) !important;
+      }
+
+      html body .home-testament-maps .home-map-actions {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        width: min(260px, 86vw) !important;
+        bottom: 42px !important;
+      }
+
+      html body .home-testament-maps .home-map-action {
+        width: 100% !important;
+        min-width: 0 !important;
+      }
+
+      html body .home-people-feature {
+        min-height: 640px !important;
+        padding-top: 54px !important;
+        padding-bottom: 126px !important;
+      }
+
+      html body .home-people-feature .section-title {
+        font-size: clamp(2.65rem, 13vw, 4rem) !important;
+      }
+
+      html body .home-people-feature .section-subtitle {
+        max-width: 92vw !important;
+        font-size: 1rem !important;
+      }
+
+      html body .home-people-feature-copy {
+        bottom: 38px !important;
+      }
+
+      html body .landing-followup-bars[aria-labelledby="videosSectionTitle"] {
+        min-height: 520px !important;
+      }
+
+      html body .landing-followup-bars[aria-labelledby="videosSectionTitle"] .section-title {
+        font-size: clamp(2.6rem, 12vw, 4rem) !important;
+      }
+
+      html body .watch-videos-image-band img {
+        height: clamp(220px, 58vw, 340px) !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html body .home-testament-maps .home-map-action,
+      html body .home-people-feature-button {
+        transition: none !important;
+      }
+
+      html body .home-testament-maps .home-map-action:hover,
+      html body .home-testament-maps .home-map-action:focus-visible,
+      html body .home-people-feature-button:hover,
+      html body .home-people-feature-button:focus-visible {
+        transform: none !important;
+      }
+    }
+
   </style>
 </head>
 
@@ -1613,53 +2028,53 @@
         <div class="watch-videos-track">
           <div class="watch-video-group">
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/lH3Uf1G-cUs" title="Why God Chose a Title" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              <iframe class="watch-video-embed" data-data-src="https://www.youtube.com/embed/lH3Uf1G-cUs" title="Why God Chose a Title" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
 
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/1i123qXhBwg" title="Bible Mapped YouTube Short 2" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              <iframe class="watch-video-embed" data-data-src="https://www.youtube.com/embed/1i123qXhBwg" title="Bible Mapped YouTube Short 2" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
 
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/9KO6829IwNM" title="Bible Mapped YouTube Short 3" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              <iframe class="watch-video-embed" data-data-src="https://www.youtube.com/embed/9KO6829IwNM" title="Bible Mapped YouTube Short 3" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
 
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/vFDihb4G_ho" title="Bible Mapped YouTube Short 4" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              <iframe class="watch-video-embed" data-data-src="https://www.youtube.com/embed/vFDihb4G_ho" title="Bible Mapped YouTube Short 4" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
 
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/8K71geGXido" title="Bible Mapped YouTube Short 5" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              <iframe class="watch-video-embed" data-data-src="https://www.youtube.com/embed/8K71geGXido" title="Bible Mapped YouTube Short 5" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
 
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/bofUpxOZW5k" title="Bible Mapped YouTube Short 6" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              <iframe class="watch-video-embed" data-data-src="https://www.youtube.com/embed/bofUpxOZW5k" title="Bible Mapped YouTube Short 6" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
           </div>
 
           <div class="watch-video-group" aria-hidden="true">
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/lH3Uf1G-cUs" title="Duplicate Why God Chose a Title" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+              <iframe class="watch-video-embed" data-data-src="https://www.youtube.com/embed/lH3Uf1G-cUs" title="Duplicate Why God Chose a Title" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
             </div>
 
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/1i123qXhBwg" title="Duplicate Bible Mapped YouTube Short 2" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+              <iframe class="watch-video-embed" data-data-src="https://www.youtube.com/embed/1i123qXhBwg" title="Duplicate Bible Mapped YouTube Short 2" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
             </div>
 
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/9KO6829IwNM" title="Duplicate Bible Mapped YouTube Short 3" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+              <iframe class="watch-video-embed" data-data-src="https://www.youtube.com/embed/9KO6829IwNM" title="Duplicate Bible Mapped YouTube Short 3" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
             </div>
 
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/vFDihb4G_ho" title="Duplicate Bible Mapped YouTube Short 4" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+              <iframe class="watch-video-embed" data-data-src="https://www.youtube.com/embed/vFDihb4G_ho" title="Duplicate Bible Mapped YouTube Short 4" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
             </div>
 
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/8K71geGXido" title="Duplicate Bible Mapped YouTube Short 5" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+              <iframe class="watch-video-embed" data-data-src="https://www.youtube.com/embed/8K71geGXido" title="Duplicate Bible Mapped YouTube Short 5" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
             </div>
 
             <div class="watch-video-card">
-              <iframe class="watch-video-embed" data-src="https://www.youtube.com/embed/bofUpxOZW5k" title="Duplicate Bible Mapped YouTube Short 6" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+              <iframe class="watch-video-embed" data-data-src="https://www.youtube.com/embed/bofUpxOZW5k" title="Duplicate Bible Mapped YouTube Short 6" loading="lazy" tabindex="-1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
             </div>
           </div>
         </div>
