@@ -762,6 +762,407 @@
         font-size: 1.05rem;
       }
     }
+
+
+    /* =========================================================
+       BIBLE MAPPED LANDING PAGE — PREMIUM FINAL OVERRIDE
+       Purpose:
+       - Confirms this file is the landing page
+       - Makes Context text white
+       - Moves Maps section higher
+       - Changes map buttons to OT Maps / NT Maps in HTML below
+       - Removes People tint
+       - Pushes People title/description up
+       - Places Learn Their Story as a rectangle at bottom
+       - Keeps titles static while buttons pan up on hover
+       - Hides videos on landing page without deleting them
+       ========================================================= */
+
+    :root {
+      --bm-ink: #111827;
+      --bm-muted: #333b45;
+      --bm-cream: #fffdf7;
+      --bm-navy: #101c35;
+      --bm-navy-deep: #071225;
+      --bm-purple: #8b3dff;
+      --bm-shadow-soft: 0 24px 70px rgba(11, 18, 32, 0.18);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    html body {
+      background: #fffdf7;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---------- GLOBAL LANDING TITLE LOCK ---------- */
+    html body .landing-section .section-heading,
+    html body .landing-section .section-title,
+    html body .landing-section .section-subtitle,
+    html body .landing-section .section-kicker {
+      transform: none !important;
+      animation: none !important;
+      transition: none !important;
+    }
+
+    html body .landing-section .section-heading {
+      position: relative !important;
+      z-index: 5 !important;
+    }
+
+    html body .landing-section .section-kicker {
+      letter-spacing: 0.22em !important;
+      font-size: 0.72rem !important;
+      font-weight: 900 !important;
+    }
+
+    html body .landing-section .section-title {
+      font-weight: 900 !important;
+      letter-spacing: -0.065em !important;
+      text-wrap: balance !important;
+    }
+
+    html body .landing-section .section-subtitle {
+      text-wrap: balance !important;
+    }
+
+    /* ---------- CONTEXT SECTION: WHITE FONT ---------- */
+    html body #about-biblemapped {
+      position: relative !important;
+      isolation: isolate !important;
+      min-height: clamp(620px, 58vw, 760px) !important;
+      background:
+        url("assets/about-biblemapped-background.png") center / cover no-repeat !important;
+    }
+
+    html body #about-biblemapped::before {
+      content: "" !important;
+      position: absolute !important;
+      inset: 0 !important;
+      z-index: 0 !important;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(7, 10, 14, 0.64) 0%,
+          rgba(7, 10, 14, 0.48) 38%,
+          rgba(7, 10, 14, 0.22) 68%,
+          rgba(7, 10, 14, 0.08) 100%
+        ) !important;
+      pointer-events: none !important;
+    }
+
+    html body #about-biblemapped > * {
+      position: relative !important;
+      z-index: 2 !important;
+    }
+
+    html body #about-biblemapped .section-kicker {
+      color: #b985ff !important;
+      text-shadow: 0 8px 24px rgba(0, 0, 0, 0.42) !important;
+    }
+
+    html body #about-biblemapped .section-title,
+    html body #about-biblemapped .section-subtitle {
+      color: #fffdf7 !important;
+      text-shadow: 0 12px 34px rgba(0, 0, 0, 0.58) !important;
+    }
+
+    /* ---------- MAPS SECTION: HIGHER, CLEANER, MORE PREMIUM ---------- */
+    html body .home-testament-maps {
+      align-items: flex-start !important;
+      justify-content: flex-start !important;
+      min-height: clamp(430px, 43vw, 560px) !important;
+      padding-top: clamp(54px, 6vw, 82px) !important;
+      padding-bottom: clamp(80px, 8vw, 120px) !important;
+      background-position: center center !important;
+    }
+
+    html body .home-testament-maps::before {
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.88) 0%,
+          rgba(255, 255, 255, 0.58) 40%,
+          rgba(255, 255, 255, 0.18) 100%
+        ) !important;
+    }
+
+    html body .home-testament-maps .section-heading {
+      margin-bottom: clamp(24px, 3vw, 40px) !important;
+    }
+
+    html body .home-testament-maps .section-kicker {
+      color: var(--bm-purple) !important;
+    }
+
+    html body .home-testament-maps .section-title {
+      max-width: 980px !important;
+      color: var(--bm-ink) !important;
+    }
+
+    html body .home-testament-maps .section-subtitle {
+      color: #17202d !important;
+    }
+
+    html body .home-testament-maps .home-map-actions {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      gap: clamp(0.75rem, 1.6vw, 1rem) !important;
+      width: auto !important;
+      margin: clamp(2rem, 4vw, 3rem) auto 0 !important;
+    }
+
+    html body .home-testament-maps .home-map-action {
+      position: relative !important;
+      overflow: hidden !important;
+      border-radius: 0 !important;
+      min-width: 188px !important;
+      min-height: 56px !important;
+      padding: 0 28px !important;
+      background: var(--bm-navy) !important;
+      color: #ffffff !important;
+      letter-spacing: 0.14em !important;
+      box-shadow: 0 18px 38px rgba(16, 28, 53, 0.22) !important;
+      transform: translateY(0) !important;
+      transition:
+        transform 240ms cubic-bezier(0.16, 0.9, 0.22, 1),
+        background 240ms ease,
+        box-shadow 240ms ease !important;
+    }
+
+    html body .home-testament-maps .home-map-action::after {
+      content: "" !important;
+      position: absolute !important;
+      inset: 0 !important;
+      background:
+        linear-gradient(
+          120deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.18) 46%,
+          transparent 72%
+        ) !important;
+      transform: translateX(-140%) !important;
+      transition: transform 520ms ease !important;
+      pointer-events: none !important;
+    }
+
+    html body .home-testament-maps .home-map-action:hover,
+    html body .home-testament-maps .home-map-action:focus-visible {
+      transform: translateY(-8px) !important;
+      background: var(--bm-navy-deep) !important;
+      box-shadow: 0 24px 50px rgba(16, 28, 53, 0.28) !important;
+      outline: 0 !important;
+    }
+
+    html body .home-testament-maps .home-map-action:hover::after,
+    html body .home-testament-maps .home-map-action:focus-visible::after {
+      transform: translateX(140%) !important;
+    }
+
+    /* ---------- PEOPLE SECTION: NO TINT, TITLE UP, BUTTON BOTTOM ---------- */
+    html body .home-people-feature {
+      position: relative !important;
+      isolation: isolate !important;
+      overflow: hidden !important;
+      min-height: clamp(680px, 58vw, 820px) !important;
+      display: flex !important;
+      align-items: flex-start !important;
+      justify-content: flex-start !important;
+      padding-top: clamp(56px, 6vw, 84px) !important;
+      padding-bottom: clamp(110px, 10vw, 150px) !important;
+      background: #f7f2e8 !important;
+    }
+
+    html body .home-people-feature::before,
+    html body .home-people-feature::after,
+    html body .home-people-image-overlay {
+      display: none !important;
+      content: none !important;
+      opacity: 0 !important;
+      background: none !important;
+    }
+
+    html body .home-people-feature-card {
+      position: absolute !important;
+      inset: 0 !important;
+      z-index: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      margin: 0 !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      overflow: hidden !important;
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+
+    html body .home-people-feature-card img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      object-position: center bottom !important;
+      opacity: 1 !important;
+      filter: none !important;
+      transform: scale(1.01) !important;
+    }
+
+    html body .home-people-feature .section-heading {
+      position: relative !important;
+      z-index: 3 !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      padding-inline: 1rem !important;
+    }
+
+    html body .home-people-feature .section-kicker {
+      color: var(--bm-purple) !important;
+      text-shadow: none !important;
+    }
+
+    html body .home-people-feature .section-title {
+      color: var(--bm-ink) !important;
+      text-shadow: none !important;
+    }
+
+    html body .home-people-feature .section-subtitle {
+      max-width: 720px !important;
+      margin-top: 14px !important;
+      color: var(--bm-muted) !important;
+      text-shadow: none !important;
+    }
+
+    html body .home-people-feature-copy p {
+      display: none !important;
+    }
+
+    html body .home-people-feature-inner {
+      position: absolute !important;
+      inset: auto 0 clamp(34px, 4vw, 54px) 0 !important;
+      z-index: 4 !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: flex-end !important;
+      width: 100% !important;
+      pointer-events: none !important;
+    }
+
+    html body .home-people-feature-copy {
+      width: auto !important;
+      max-width: none !important;
+      margin: 0 auto !important;
+      pointer-events: auto !important;
+    }
+
+    html body .home-people-feature-button {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      min-width: 220px !important;
+      min-height: 58px !important;
+      padding: 0 30px !important;
+      border-radius: 0 !important;
+      background: var(--bm-navy) !important;
+      color: #ffffff !important;
+      font-size: 0.86rem !important;
+      font-weight: 900 !important;
+      letter-spacing: 0.12em !important;
+      text-transform: uppercase !important;
+      text-decoration: none !important;
+      box-shadow: 0 18px 38px rgba(16, 28, 53, 0.24) !important;
+      transform: translateY(0) !important;
+      transition:
+        transform 240ms cubic-bezier(0.16, 0.9, 0.22, 1),
+        background 240ms ease,
+        box-shadow 240ms ease !important;
+    }
+
+    html body .home-people-feature-button:hover,
+    html body .home-people-feature-button:focus-visible {
+      transform: translateY(-8px) !important;
+      background: var(--bm-navy-deep) !important;
+      box-shadow: 0 24px 50px rgba(16, 28, 53, 0.3) !important;
+      outline: 0 !important;
+    }
+
+    /* ---------- HIDE VIDEOS ON LANDING PAGE ---------- */
+    html body .landing-followup-bars[aria-labelledby="videosSectionTitle"] {
+      display: none !important;
+    }
+
+    /* ---------- RESPONSIVE CLEANUP ---------- */
+    @media (max-width: 900px) {
+      html body .home-testament-maps {
+        min-height: 460px !important;
+      }
+
+      html body .home-people-feature {
+        min-height: 660px !important;
+      }
+    }
+
+    @media (max-width: 700px) {
+      html body .landing-section .section-kicker {
+        font-size: 0.68rem !important;
+        letter-spacing: 0.18em !important;
+      }
+
+      html body .home-testament-maps {
+        min-height: 460px !important;
+        padding-top: 58px !important;
+      }
+
+      html body .home-testament-maps .home-map-actions {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        width: min(250px, 100%) !important;
+      }
+
+      html body .home-testament-maps .home-map-action {
+        width: 100% !important;
+      }
+
+      html body .home-people-feature {
+        min-height: 620px !important;
+        padding-top: 58px !important;
+      }
+
+      html body .home-people-feature .section-title {
+        font-size: clamp(2.35rem, 12vw, 3.6rem) !important;
+      }
+
+      html body .home-people-feature .section-subtitle {
+        font-size: 1rem !important;
+        max-width: 92vw !important;
+      }
+
+      html body .home-people-feature-inner {
+        bottom: 32px !important;
+      }
+
+      html body .home-people-feature-button {
+        min-width: 220px !important;
+        min-height: 56px !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html body .home-map-action,
+      html body .home-people-feature-button {
+        transition: none !important;
+      }
+
+      html body .home-map-action:hover,
+      html body .home-map-action:focus-visible,
+      html body .home-people-feature-button:hover,
+      html body .home-people-feature-button:focus-visible {
+        transform: none !important;
+      }
+    }
+
   </style>
 </head>
 
@@ -1081,7 +1482,7 @@
     <div class="section-content home-testament-maps-inner">
       <div class="home-testament-maps-copy">
         <div class="home-map-actions" aria-label="Open testament map images">
-          <a class="home-map-action" href="/old-testament/">Old Testament</a>
+          <a class="home-map-action" href="/old-testament/">OT Maps</a>
           <a class="home-map-action" href="/new-testament/">NT Maps</a>
         </div>
       </div>
