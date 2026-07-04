@@ -668,6 +668,100 @@
         font-size: clamp(2.05rem, 9vw, 3.15rem) !important;
       }
     }
+
+    /* Bible Mapped landing section title system */
+    html body .landing-section {
+      padding: clamp(72px, 10vw, 130px) 20px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+    }
+
+    html body .landing-section .section-heading {
+      width: min(100%, 960px) !important;
+      max-width: 960px;
+      margin: 0 auto clamp(32px, 5vw, 56px) !important;
+      text-align: center !important;
+    }
+
+    html body .landing-section .section-kicker {
+      display: inline-block;
+      margin-bottom: 14px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #8b3dff;
+    }
+
+    html body .landing-section .section-title {
+      width: min(100%, 900px) !important;
+      max-width: 900px;
+      margin: 0 auto 14px !important;
+      font-size: clamp(2.4rem, 5vw, 4.6rem);
+      line-height: 0.95;
+      font-weight: 850;
+      letter-spacing: -0.06em;
+      color: #151515;
+      text-align: center;
+      text-wrap: balance;
+    }
+
+    html body .landing-section .section-subtitle {
+      max-width: 650px;
+      margin: 0 auto !important;
+      font-size: clamp(1.05rem, 1.7vw, 1.35rem);
+      line-height: 1.45;
+      color: #2f2f2f;
+      text-align: center;
+      text-wrap: balance;
+    }
+
+    html body .landing-section .section-content {
+      max-width: 1120px;
+      margin: 0 auto !important;
+    }
+
+    html body #aboutMappedToggle[hidden] {
+      display: none !important;
+    }
+
+    html body .landing-section .home-testament-maps-copy,
+    html body .landing-section .home-people-feature-copy {
+      text-align: center !important;
+    }
+
+    html body .landing-section .home-map-actions {
+      justify-content: center !important;
+      margin-inline: auto !important;
+    }
+
+    html body .landing-section .watch-videos-image-band {
+      margin: 0 auto clamp(24px, 4vw, 44px) !important;
+    }
+
+    html body .landing-section .watch-videos-stage {
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    @media (max-width: 700px) {
+      html body .landing-section {
+        padding: 72px 18px !important;
+      }
+
+      html body .landing-section .section-title {
+        font-size: clamp(2.25rem, 13vw, 3.6rem);
+        line-height: 0.98;
+        letter-spacing: -0.055em;
+      }
+
+      html body .landing-section .section-subtitle {
+        font-size: 1.05rem;
+      }
+    }
   </style>
 </head>
 
@@ -752,7 +846,14 @@
     </div>
   </section>
 
-  <section class="landing-panel-section premium-reveal" id="about-biblemapped">
+  <section class="landing-section landing-panel-section premium-reveal" id="about-biblemapped">
+    <div class="section-heading">
+      <div class="section-kicker">Context</div>
+      <h2 class="section-title">The Bible Explained in Context</h2>
+      <p class="section-subtitle">Scripture makes more sense when you can see the where, who, what, and why behind the text.</p>
+    </div>
+
+    <div class="section-content">
     <div class="minimal-bar about-mapped-shell" id="aboutMappedShell">
       <button
         class="minimal-bar-toggle about-mapped-toggle parallax-item"
@@ -761,6 +862,9 @@
         id="aboutMappedToggle"
         aria-expanded="true"
         aria-controls="aboutMappedPanel"
+        hidden
+        aria-hidden="true"
+        tabindex="-1"
       >
         About Bible Mapped
       </button>
@@ -964,15 +1068,18 @@
         </div>
       </div>
     </div>
+    </div>
   </section>
 
-  <section class="home-testament-maps" aria-labelledby="homeTestamentMapsTitle">
-    <div class="home-testament-maps-inner">
-      <div class="home-testament-maps-copy">
-        <p class="eyebrow">MAPS</p>
-        <h2 id="homeTestamentMapsTitle">Old and New Testament</h2>
-        <p>See the major places, routes, kingdoms, and journeys that hold the biblical story together.</p>
+  <section class="landing-section home-testament-maps" aria-labelledby="homeTestamentMapsTitle">
+    <div class="section-heading">
+      <div class="section-kicker">Maps</div>
+      <h2 id="homeTestamentMapsTitle" class="section-title">Follow the Bible Across Real Places</h2>
+      <p class="section-subtitle">Trace Scripture through lands, cities, journeys, kingdoms, exile, and return.</p>
+    </div>
 
+    <div class="section-content home-testament-maps-inner">
+      <div class="home-testament-maps-copy">
         <div class="home-map-actions" aria-label="Open testament map images">
           <a class="home-map-action" href="/old-testament/">Old Testament</a>
           <a class="home-map-action" href="/new-testament/">NT Maps</a>
@@ -981,17 +1088,15 @@
     </div>
   </section>
 
-  <section class="home-people-feature" aria-labelledby="homePeopleFeatureTitle">
-    <div class="home-people-feature-inner">
+  <section class="landing-section home-people-feature" aria-labelledby="homePeopleFeatureTitle">
+    <div class="section-heading">
+      <div class="section-kicker">People</div>
+      <h2 id="homePeopleFeatureTitle" class="section-title">Meet the People Inside the Story</h2>
+      <p class="section-subtitle">See who they were, where they lived, and why their story matters.</p>
+    </div>
+
+    <div class="section-content home-people-feature-inner">
       <div class="home-people-feature-copy">
-        <p class="eyebrow">PEOPLE</p>
-
-        <h2 id="homePeopleFeatureTitle" class="home-people-static-title">
-          <span>The People</span>
-          <span>behind</span>
-          <span>the story</span>
-        </h2>
-
         <p>
           The Bible moves through real people with real names, stories, cultures, failures,
           questions, and faith. Explore the people behind the text and see how their world
@@ -1008,16 +1113,15 @@
     </div>
   </section>
 
-  <section class="landing-followup-bars premium-reveal" aria-label="Bible Mapped features">
+  <section class="landing-section landing-followup-bars premium-reveal" aria-labelledby="videosSectionTitle">
+    <div class="section-heading">
+      <div class="section-kicker">Videos</div>
+      <h2 id="videosSectionTitle" class="section-title">Videos Are Rabbit Holes</h2>
+      <p class="section-subtitle">Short visual studies that help you understand the Bible without getting buried alive in confusion.</p>
+    </div>
+
+    <div class="section-content">
     <div class="watch-videos-image-band" aria-label="Videos are rabbit holes">
-      <div class="watch-videos-copy">
-        <div class="watch-videos-title-wrap" data-title="Videos are Rabbit Holes">
-          <h2 class="watch-videos-type-title" data-type-text="Videos are Rabbit Holes">Videos are Rabbit Holes</h2>
-        </div>
-
-        <p>Strange facts. Big questions. Ancient context.<br />Follow the rabbit trail below.</p>
-      </div>
-
       <img src="assets/videos-rabbit-holes.jpg" alt="Rabbit beside a rabbit hole" loading="lazy" />
     </div>
 
@@ -1077,6 +1181,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </section>
 
