@@ -2674,6 +2674,76 @@
     }
 
 
+
+    /* =========================================================
+       BIBLE MAPPED CONTEXT ARROWS BETWEEN ICONS FIX
+       Put this LAST in the style block.
+       ========================================================= */
+
+    html body.landing-start #aboutMappedPanel .about-biblemapped-copy h3 {
+      position: static !important;
+    }
+
+    html body.landing-start #aboutMappedPanel .about-biblemapped-arrow {
+      position: absolute !important;
+      top: clamp(36px, 5vw, 58px) !important;
+      right: clamp(-34px, -2.8vw, -18px) !important;
+      z-index: 20 !important;
+
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+
+      color: var(--bm-purple, #8b3dff) !important;
+      font-family: Inter, Arial, Helvetica, sans-serif !important;
+      font-size: clamp(1.35rem, 2.2vw, 2rem) !important;
+      font-weight: 950 !important;
+      line-height: 1 !important;
+
+      text-shadow: 0 8px 18px rgba(0, 0, 0, 0.38) !important;
+      transform: none !important;
+      pointer-events: none !important;
+    }
+
+    html body.landing-start #aboutMappedPanel .about-biblemapped-item:hover .about-biblemapped-arrow {
+      color: #b985ff !important;
+      transform: translateX(5px) !important;
+    }
+
+    html body.landing-start #aboutMappedPanel .about-biblemapped-item:last-child .about-biblemapped-arrow {
+      display: none !important;
+    }
+
+    html body.landing-start #aboutMappedPanel .about-biblemapped-item {
+      position: relative !important;
+    }
+
+    html body.landing-start #aboutMappedPanel .about-biblemapped-copy h3 {
+      gap: 0 !important;
+    }
+
+    @media (max-width: 760px) {
+      html body.landing-start #aboutMappedPanel .about-biblemapped-arrow {
+        top: 32px !important;
+        right: -18px !important;
+        font-size: 1.35rem !important;
+      }
+
+      html body.landing-start #aboutMappedPanel .about-biblemapped-item:nth-child(2) .about-biblemapped-arrow,
+      html body.landing-start #aboutMappedPanel .about-biblemapped-item:last-child .about-biblemapped-arrow {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 420px) {
+      html body.landing-start #aboutMappedPanel .about-biblemapped-arrow {
+        top: 28px !important;
+        right: -14px !important;
+        font-size: 1.15rem !important;
+      }
+    }
+
+
   </style>
 </head>
 
