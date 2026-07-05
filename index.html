@@ -2744,7 +2744,139 @@
     }
 
 
-  </style>
+  
+
+    /* =========================================================
+       BIBLE MAPPED CONTEXT TITLE + CENTERED ICON FINAL FIX
+       Put last. Replaces the old repeated title with a sentence,
+       adds a soft readable shadow, and centers the icon row.
+       ========================================================= */
+
+    html body.landing-start #about-biblemapped .section-heading {
+      position: relative !important;
+      z-index: 10 !important;
+      width: min(1040px, calc(100% - 36px)) !important;
+      margin: 0 auto !important;
+      padding: clamp(12px, 2vw, 22px) clamp(14px, 2.4vw, 28px) !important;
+      isolation: isolate !important;
+    }
+
+    html body.landing-start #about-biblemapped .section-heading::before {
+      content: "" !important;
+      position: absolute !important;
+      inset: clamp(-10px, -1.2vw, -6px) clamp(-8px, -1vw, -4px) !important;
+      z-index: -1 !important;
+      border-radius: 28px !important;
+      background:
+        radial-gradient(
+          ellipse at center,
+          rgba(0, 0, 0, 0.38) 0%,
+          rgba(0, 0, 0, 0.24) 44%,
+          rgba(0, 0, 0, 0.08) 72%,
+          rgba(0, 0, 0, 0) 100%
+        ) !important;
+      filter: blur(2px) !important;
+      pointer-events: none !important;
+    }
+
+    html body.landing-start #about-biblemapped .section-kicker {
+      color: var(--bm-purple, #8b3dff) !important;
+      text-shadow: 0 6px 18px rgba(0, 0, 0, 0.45) !important;
+    }
+
+    html body.landing-start #about-biblemapped .section-title {
+      max-width: 980px !important;
+      color: #fffdf7 !important;
+      font-size: clamp(2.35rem, 4.65vw, 5.35rem) !important;
+      line-height: 0.98 !important;
+      letter-spacing: -0.062em !important;
+      text-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.45),
+        0 16px 42px rgba(0, 0, 0, 0.46) !important;
+    }
+
+    html body.landing-start #about-biblemapped .section-subtitle {
+      max-width: 760px !important;
+      color: rgba(255, 253, 247, 0.94) !important;
+      font-size: clamp(1rem, 1.45vw, 1.25rem) !important;
+      font-weight: 750 !important;
+      letter-spacing: 0.01em !important;
+      text-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.5),
+        0 12px 30px rgba(0, 0, 0, 0.42) !important;
+    }
+
+    html body.landing-start #about-biblemapped .section-content {
+      left: 50% !important;
+      right: auto !important;
+      bottom: clamp(30px, 4.4vw, 58px) !important;
+      width: min(1040px, calc(100% - 36px)) !important;
+      max-width: 1040px !important;
+      transform: translateX(-50%) !important;
+    }
+
+    html body.landing-start #about-biblemapped .about-mapped-shell,
+    html body.landing-start #aboutMappedPanel,
+    html body.landing-start #aboutMappedPanel.open,
+    html body.landing-start #aboutMappedPanel .minimal-panel-inner,
+    html body.landing-start #aboutMappedPanel .about-biblemapped-card {
+      width: 100% !important;
+      max-width: none !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    html body.landing-start #aboutMappedPanel .about-biblemapped-list {
+      width: 100% !important;
+      max-width: 1040px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      justify-content: center !important;
+      justify-items: center !important;
+      align-items: end !important;
+    }
+
+    html body.landing-start #aboutMappedPanel .about-biblemapped-item {
+      width: 100% !important;
+      max-width: 210px !important;
+      align-items: center !important;
+      text-align: center !important;
+    }
+
+    html body.landing-start #aboutMappedPanel .about-biblemapped-arrow {
+      color: var(--bm-purple, #8b3dff) !important;
+      text-shadow: 0 8px 18px rgba(0, 0, 0, 0.42) !important;
+    }
+
+    @media (max-width: 760px) {
+      html body.landing-start #about-biblemapped {
+        min-height: 800px !important;
+      }
+
+      html body.landing-start #about-biblemapped .section-heading {
+        width: min(620px, calc(100% - 28px)) !important;
+        padding: 10px 12px !important;
+      }
+
+      html body.landing-start #about-biblemapped .section-title {
+        font-size: clamp(2.05rem, 9.2vw, 3.35rem) !important;
+        line-height: 1 !important;
+      }
+
+      html body.landing-start #about-biblemapped .section-subtitle {
+        font-size: 0.98rem !important;
+      }
+
+      html body.landing-start #about-biblemapped .section-content {
+        width: min(560px, calc(100% - 28px)) !important;
+        bottom: 32px !important;
+      }
+
+      html body.landing-start #aboutMappedPanel .about-biblemapped-item {
+        max-width: 190px !important;
+      }
+    }
+</style>
 </head>
 
 <body class="landing-start">
@@ -2838,8 +2970,8 @@
   <section class="landing-section landing-panel-section premium-reveal" id="about-biblemapped">
     <div class="section-heading">
       <div class="section-kicker">Context</div>
-      <h2 class="section-title">The Bible Explained in Context</h2>
-      <p class="section-subtitle">Scripture makes more sense when you can see the where, who, what, and why behind the text.</p>
+      <h2 class="section-title">Scripture becomes clearer when you see where it happened, who was there, what was said, and why it mattered.</h2>
+      <p class="section-subtitle">Bible Mapped formula: place + people + message + purpose = context.</p>
     </div>
 
     <div class="section-content">
