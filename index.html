@@ -2493,6 +2493,187 @@
       background: #f7f2e8 !important;
     }
 
+
+    /* =========================================================
+       BIBLE MAPPED CONTEXT ICON ROW FIX
+       Keeps the page intact, but moves Where / Who / Why / What
+       to the bottom of "The Bible Explained in Context" section.
+       Arrows now point forward to the next icon in brand purple.
+       ========================================================= */
+
+    html body.landing-start #about-biblemapped {
+      position: relative !important;
+      min-height: clamp(660px, 62vw, 820px) !important;
+      padding-bottom: clamp(170px, 17vw, 240px) !important;
+    }
+
+    html body.landing-start #about-biblemapped .section-content {
+      position: absolute !important;
+      left: 50% !important;
+      right: auto !important;
+      bottom: clamp(28px, 4vw, 52px) !important;
+      z-index: 8 !important;
+      width: min(980px, calc(100% - 36px)) !important;
+      max-width: 980px !important;
+      margin: 0 !important;
+      transform: translateX(-50%) !important;
+      pointer-events: none !important;
+    }
+
+    html body.landing-start #aboutMappedPanel,
+    html body.landing-start #aboutMappedPanel.open,
+    html body.landing-start #aboutMappedPanel .minimal-panel-inner,
+    html body.landing-start #aboutMappedPanel .about-biblemapped-card {
+      width: 100% !important;
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      pointer-events: none !important;
+    }
+
+    html body.landing-start #aboutMappedPanel .about-biblemapped-list {
+      display: grid !important;
+      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+      align-items: end !important;
+      justify-content: center !important;
+      gap: clamp(18px, 3vw, 42px) !important;
+      width: 100% !important;
+      margin: 0 auto !important;
+      padding: 0 !important;
+      pointer-events: auto !important;
+    }
+
+    html body.landing-start #aboutMappedPanel .about-biblemapped-item {
+      position: relative !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: flex-end !important;
+      gap: 14px !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      text-align: center !important;
+      transform: none !important;
+    }
+
+    html body.landing-start #aboutMappedPanel .about-biblemapped-image-slot {
+      width: clamp(82px, 10vw, 126px) !important;
+      height: clamp(82px, 10vw, 126px) !important;
+      margin: 0 auto !important;
+      display: grid !important;
+      place-items: center !important;
+      border: 2px solid rgba(255, 253, 247, 0.92) !important;
+      border-radius: 24px !important;
+      background: rgba(255, 253, 247, 0.18) !important;
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.24), inset 0 0 0 1px rgba(255, 255, 255, 0.24) !important;
+      transform: none !important;
+    }
+
+    html body.landing-start #aboutMappedPanel .about-biblemapped-copy {
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      text-align: center !important;
+    }
+
+    html body.landing-start #aboutMappedPanel .about-biblemapped-copy h3 {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: clamp(8px, 1.2vw, 14px) !important;
+      margin: 0 !important;
+      color: #fffdf7 !important;
+      font-size: clamp(1.2rem, 2vw, 1.75rem) !important;
+      line-height: 1 !important;
+      text-align: center !important;
+      white-space: nowrap !important;
+      text-shadow: 0 10px 28px rgba(0, 0, 0, 0.46) !important;
+    }
+
+    html body.landing-start #aboutMappedPanel .about-biblemapped-copy p {
+      max-width: 210px !important;
+      margin: 10px auto 0 !important;
+      color: rgba(255, 253, 247, 0.9) !important;
+      font-size: clamp(0.78rem, 1vw, 0.95rem) !important;
+      line-height: 1.35 !important;
+      text-align: center !important;
+      text-shadow: 0 5px 16px rgba(0, 0, 0, 0.44) !important;
+    }
+
+    html body.landing-start #aboutMappedPanel .about-biblemapped-arrow {
+      display: inline-block !important;
+      color: var(--bm-purple, #8b3dff) !important;
+      font-family: Inter, Arial, Helvetica, sans-serif !important;
+      font-weight: 950 !important;
+      font-size: 1.05em !important;
+      line-height: 1 !important;
+      transform: translateY(-1px) !important;
+      transition: transform 220ms cubic-bezier(0.16, 0.9, 0.22, 1), color 220ms ease !important;
+    }
+
+    html body.landing-start #aboutMappedPanel .about-biblemapped-item:hover .about-biblemapped-arrow {
+      color: #b985ff !important;
+      transform: translate(6px, -1px) !important;
+    }
+
+    html body.landing-start #aboutMappedPanel .about-biblemapped-item:last-child .about-biblemapped-arrow {
+      display: none !important;
+    }
+
+    html body.landing-start #aboutMappedPanel .about-panel-formula {
+      display: none !important;
+    }
+
+    @media (max-width: 760px) {
+      html body.landing-start #about-biblemapped {
+        min-height: 760px !important;
+        padding-bottom: 40px !important;
+      }
+
+      html body.landing-start #about-biblemapped .section-content {
+        bottom: 32px !important;
+        width: min(560px, calc(100% - 28px)) !important;
+      }
+
+      html body.landing-start #aboutMappedPanel .about-biblemapped-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 24px 18px !important;
+      }
+
+      html body.landing-start #aboutMappedPanel .about-biblemapped-copy h3 {
+        font-size: 1.18rem !important;
+      }
+
+      html body.landing-start #aboutMappedPanel .about-biblemapped-copy p {
+        max-width: 170px !important;
+        font-size: 0.78rem !important;
+      }
+
+      html body.landing-start #aboutMappedPanel .about-biblemapped-item:nth-child(2) .about-biblemapped-arrow {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 420px) {
+      html body.landing-start #aboutMappedPanel .about-biblemapped-list {
+        gap: 20px 14px !important;
+      }
+
+      html body.landing-start #aboutMappedPanel .about-biblemapped-image-slot {
+        width: 78px !important;
+        height: 78px !important;
+        border-radius: 18px !important;
+      }
+
+      html body.landing-start #aboutMappedPanel .about-biblemapped-copy p {
+        display: none !important;
+      }
+    }
+
+
   </style>
 </head>
 
@@ -2624,7 +2805,7 @@
                 </div>
 
                 <div class="about-biblemapped-copy">
-                  <h3>Where <span class="about-biblemapped-arrow" aria-hidden="true">&larr;</span></h3>
+                  <h3>Where <span class="about-biblemapped-arrow" aria-hidden="true">&rarr;</span></h3>
                   <p>Trace biblical events through real geography and place.</p>
                 </div>
               </article>
@@ -2638,7 +2819,7 @@
                 </div>
 
                 <div class="about-biblemapped-copy">
-                  <h3>Who <span class="about-biblemapped-arrow" aria-hidden="true">&larr;</span></h3>
+                  <h3>Who <span class="about-biblemapped-arrow" aria-hidden="true">&rarr;</span></h3>
                   <p>Meet the people, cultures, and empires behind the text.</p>
                 </div>
               </article>
@@ -2652,7 +2833,7 @@
                 </div>
 
                 <div class="about-biblemapped-copy">
-                  <h3>Why <span class="about-biblemapped-arrow" aria-hidden="true">&larr;</span></h3>
+                  <h3>Why <span class="about-biblemapped-arrow" aria-hidden="true">&rarr;</span></h3>
                   <p>Discover context, purpose, and the bigger biblical story.</p>
                 </div>
               </article>
@@ -2667,7 +2848,7 @@
                 </div>
 
                 <div class="about-biblemapped-copy">
-                  <h3>What <span class="about-biblemapped-arrow" aria-hidden="true">&larr;</span></h3>
+                  <h3>What <span class="about-biblemapped-arrow" aria-hidden="true">&rarr;</span></h3>
                   <p>See how Scripture connects to meaning, faith, and everyday life.</p>
                 </div>
               </article>
