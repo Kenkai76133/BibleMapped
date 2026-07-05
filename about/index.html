@@ -548,6 +548,48 @@
       margin-top: 19px;
     }
 
+    .about-letter .pull-quote {
+      margin: clamp(26px, 4vw, 42px) 0;
+      max-width: 820px;
+      color: var(--charcoal);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: clamp(2rem, 5vw, 4.7rem);
+      font-weight: 950;
+      letter-spacing: -0.07em;
+      line-height: 0.95;
+      text-wrap: balance;
+    }
+
+    .about-question-list {
+      display: grid;
+      gap: 10px;
+      max-width: 78ch;
+      margin: 16px 0 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .about-question-list li {
+      position: relative;
+      padding-left: 22px;
+      color: var(--charcoal);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: clamp(1rem, 1.35vw, 1.14rem);
+      font-weight: 850;
+      line-height: 1.35;
+    }
+
+    .about-question-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.58em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--purple);
+    }
+
     .about-letter strong {
       color: var(--charcoal);
       font-weight: 950;
@@ -843,22 +885,36 @@
           <span class="section-kicker">About Me</span>
           <a class="about-home-link" href="../index.html">Home</a>
         </div>
-        <h1 id="aboutMeTitle" class="about-title scroll-reveal">Good day, I’m Calvin.</h1>
+        <h1 id="aboutMeTitle" class="about-title scroll-reveal">Hi everyone, it&rsquo;s Calvin.</h1>
 
         <article class="about-letter">
-          <p class="scroll-reveal">Hi everyone, it’s Calvin. I’m the heart behind Bible Mapped, a resource built to help people see the Bible in context — the where, the who, the what, and the why of Scripture. I believe the Bible was not written outside of history. It was written inside of it. These sacred books came through real people, in real places, across a real timeline, all inspired by God. And when we slow down enough to ask where something happened, who was involved, what was being said, and why it mattered, Scripture becomes clearer, deeper, and more connected to the life we are living right now.</p>
+          <p class="scroll-reveal">I’m the heart behind Bible Mapped, a resource built to help people see the Bible in context: the where, the who, the what, and the why of Scripture.</p>
 
-          <p class="scroll-reveal">I was raised around different Christian traditions — Church of Christ and Southern Baptist — and growing up around those different worlds made me notice something. One group would explain a passage one way, another group would explain it another way, and both would say they were following Christ. That did not make me want to throw tradition away, but it did make me ask a deeper question: What does the Bible actually say? Not just what did I inherit, not just what did I hear growing up, not just what does my group say, but what is God saying in His Word?</p>
+          <p class="scroll-reveal">I believe the Bible was not written outside of history. It was written inside of it. These sacred books came through real people, in real places, across a real timeline, all inspired by God. When we slow down and ask better questions, Scripture becomes clearer, deeper, and more connected to the life we are living right now.</p>
 
-          <p class="scroll-reveal">That question became personal for me in 2007. I was out witnessing for Christ, sharing the gospel with someone else, when I realized something I could not ignore: I needed Him too. I was talking about Jesus, but in that moment, I realized I needed to truly surrender to Him myself. That was when I accepted Christ. And accepting Christ was not just joining a church tradition. It was trusting Him, following Him, being forgiven by Him, and letting His Word become the foundation for my life.</p>
+          <p class="scroll-reveal">I was raised around different Christian traditions, including Church of Christ and Southern Baptist. Growing up around those different worlds made me notice how often people could read the same passage and explain it differently, while still saying they were following Christ. That did not make me want to throw tradition away, but it did make me ask a deeper question:</p>
 
-          <p class="scroll-reveal">I’m thankful for the traditions I came from, because tradition can give us language. It can give us discipline. It can give us a table. But tradition is not the meal. The meal is God’s Word. And the center of God’s Word is Jesus Christ. The Bible calls Christ the head of the church, the cornerstone, the way, the truth, and the life. So Bible Mapped is not here to defend church politics. It is here to help people hold on to Scripture and ask better questions.</p>
+          <p class="pull-quote scroll-reveal">What does the Bible actually say?</p>
 
-          <p class="scroll-reveal">That matters because context matters. If I say, “I want it all,” you know I don’t mean I want every ocean, every mountain, every star, and every planet in the universe. You understand what I mean because you understand the context. Scripture works the same way. The words matter. The place matters. The history matters. The genre matters. And Jesus matters most. Some passages are literal. Some are figurative. Some are poetry. Some are history. Some are prophecy. But all of it has to be read with care, humility, and a desire to understand what God is actually showing us.</p>
+          <p class="scroll-reveal">That question became personal for me in 2007. I was out witnessing for Christ, sharing the gospel with someone else, when I realized I needed Him too. I was talking about Jesus, but in that moment, I knew I needed to truly surrender to Him myself. That was when I accepted Christ.</p>
 
-          <p class="scroll-reveal">That is why Bible Mapped keeps asking questions. Where did this happen? Who was involved? What was being said? Why does it matter? Can I believe this? How does the place, the history, and the culture make the story fuller? Moses was real. His life had purpose. His story happened on the same earth you and I stand on today. And your life is a story too. You live in a real place, with real questions, real struggles, real purpose, and a real need to know the God who made you.</p>
+          <p class="scroll-reveal">I’m thankful for the traditions I came from. Tradition can give us language, discipline, and a table. But tradition is not the meal. The meal is God’s Word. And the center of God’s Word is Jesus Christ.</p>
 
-          <p class="scroll-reveal">So until Jesus returns, Bible Mapped will keep mapping the story, asking questions, testing claims, and helping people see Scripture more clearly. Follow along. Ask questions. Challenge us. And if there is a Bible story, place, passage, or question you want us to turn into a video, send it our way.</p>
+          <p class="scroll-reveal">Bible Mapped is not here to defend church politics. It is here to help people hold on to Scripture, ask better questions, and see how the Bible’s places, people, history, and context point us to the King.</p>
+
+          <p class="scroll-reveal">Context matters. The words matter. The place matters. The history matters. The genre matters. And Jesus matters most.</p>
+
+          <p class="scroll-reveal">That is why Bible Mapped keeps asking:</p>
+
+          <ul class="about-question-list scroll-reveal">
+            <li>Where did this happen?</li>
+            <li>Who was involved?</li>
+            <li>What was being said?</li>
+            <li>Why does it matter?</li>
+            <li>How does this point us to God?</li>
+          </ul>
+
+          <p class="scroll-reveal">So until Jesus returns, Bible Mapped will keep mapping the story, testing claims, asking questions, and helping people see Scripture more clearly.</p>
 
           <p class="closing-line scroll-reveal">Know your Bible. Know its history. Know the King it points to.</p>
 
