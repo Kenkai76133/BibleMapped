@@ -18,6 +18,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
+  <link rel="preload" as="image" href="assets/jesus-word-funnel-hero.png" fetchpriority="high" />
   <link rel="stylesheet" href="src/home.css?v=about-icons-solid-1" />
 
   <style id="about-biblemapped-critical">
@@ -2487,6 +2488,11 @@
       transform: none !important;
     }
 
+    /* PERFORMANCE: the visible People image is an <img>, so avoid a duplicate CSS background download */
+    html body.landing-start .home-people-feature {
+      background: #f7f2e8 !important;
+    }
+
   </style>
 </head>
 
@@ -2500,6 +2506,9 @@
               src="assets/header-brand-logo.png"
               alt="Bible Mapped"
               class="brand-logo"
+              width="1836"
+              height="304"
+              decoding="async"
             />
           </span>
         </a>
@@ -2545,8 +2554,11 @@
       class="hero-image"
       src="assets/jesus-word-funnel-hero.png"
       alt="Jesus formed from words"
+      width="1672"
+      height="941"
       loading="eager"
       fetchpriority="high"
+      decoding="sync"
     />
 
     <div class="hero-inner">
@@ -2670,6 +2682,11 @@
                     src="assets/formula-design.png"
                     alt="Bible Mapped Formula Design"
                     class="formula-hero-image"
+                    width="1280"
+                    height="720"
+                    loading="lazy"
+                    decoding="async"
+                    fetchpriority="low"
                     onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
                   />
 
@@ -2707,6 +2724,11 @@
                       <img
                         src="assets/formula-place.png"
                         alt="Map or visual of Samaria and Jacob’s well"
+                        width="1254"
+                        height="1254"
+                        loading="lazy"
+                        decoding="async"
+                        fetchpriority="low"
                         onerror="this.style.display='none';"
                       />
                     </div>
@@ -2731,6 +2753,11 @@
                       <img
                         src="assets/formula-people.png"
                         alt="Visual of Jesus and the Samaritan woman"
+                        width="1122"
+                        height="1402"
+                        loading="lazy"
+                        decoding="async"
+                        fetchpriority="low"
                         onerror="this.style.display='none';"
                       />
                     </div>
@@ -2760,6 +2787,11 @@
                       <img
                         src="assets/formula-time.png"
                         alt="Visual showing the meaning of John 4"
+                        width="1671"
+                        height="941"
+                        loading="lazy"
+                        decoding="async"
+                        fetchpriority="low"
                         onerror="this.style.display='none';"
                       />
                     </div>
@@ -2834,7 +2866,7 @@
 
       <figure class="home-people-feature-card">
         <span class="home-people-image-overlay" aria-hidden="true"></span>
-        <img src="assets/bible-journey-people-hero-strip.png" alt="Illustrated biblical people gathered around an open Bible" loading="lazy" />
+        <img src="assets/bible-journey-people-hero-strip.png" alt="Illustrated biblical people gathered around an open Bible" width="1672" height="941" loading="lazy" decoding="async" fetchpriority="low" />
       </figure>
     </div>
   </section>
@@ -2848,7 +2880,7 @@
 
     <div class="section-content">
     <div class="watch-videos-image-band" aria-label="Videos are rabbit holes">
-      <img src="assets/videos-rabbit-holes.jpg" alt="Rabbit beside a rabbit hole" loading="eager" />
+      <img src="assets/videos-rabbit-holes.jpg" alt="Rabbit beside a rabbit hole" width="1280" height="504" loading="lazy" decoding="async" fetchpriority="low" />
     </div>
     <div class="watch-youtube-action">
       <a
