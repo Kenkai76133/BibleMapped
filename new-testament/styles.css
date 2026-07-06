@@ -98,6 +98,7 @@ a {
 
 .nt-hero p,
 .context-copy p,
+.graphic-text p,
 .nt-library p {
   margin-top: 0;
   color: var(--muted);
@@ -132,7 +133,8 @@ a {
   cursor: zoom-in;
 }
 
-.context-section {
+.context-section,
+.paired-graphics-section {
   max-width: 1120px;
   margin: 0 auto;
   padding: 70px 22px;
@@ -140,12 +142,14 @@ a {
   text-align: center;
 }
 
-.context-copy {
+.context-copy,
+.graphic-text {
   max-width: 780px;
   margin: 0 auto 38px;
 }
 
 .context-copy h2,
+.graphic-text h2,
 .nt-library h2 {
   margin: 0 0 18px;
   font-family: Georgia, "Times New Roman", serif;
@@ -154,7 +158,8 @@ a {
   letter-spacing: 0;
 }
 
-.context-visual {
+.context-visual,
+.paired-graphics {
   width: min(92vw, 640px);
   margin: 0 auto;
 }
