@@ -473,15 +473,22 @@ body.lightbox-open {
 
 @media (max-width: 700px) {
   .image-lightbox.active {
-    overflow-y: auto;
+    overflow-y: hidden;
     overflow-x: hidden;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    background: #151515;
   }
 
   .image-lightbox img {
     width: 100vw;
     max-width: none;
-    height: auto;
+    height: 100vh;
+    height: 100dvh;
     margin: 0;
+    object-fit: cover;
+    object-position: center top;
   }
 
   body.lightbox-open {
