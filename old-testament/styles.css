@@ -475,15 +475,16 @@ body.lightbox-open {
   .image-lightbox.active {
     position: fixed !important;
     inset: 0 !important;
-    display: grid !important;
-    place-items: center !important;
-    overflow: hidden !important;
+    display: block !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
     width: 100vw !important;
     height: 100vh !important;
     height: 100svh !important;
     height: 100dvh !important;
     padding: 0 !important;
-    background: #151515 !important;
+    background: #ffffff !important;
+    -webkit-overflow-scrolling: touch !important;
   }
 
   .image-lightbox img {
@@ -491,21 +492,17 @@ body.lightbox-open {
     width: 100vw !important;
     min-width: 100vw !important;
     max-width: none !important;
-    height: 100vh !important;
-    height: 100svh !important;
-    height: 100dvh !important;
-    min-height: 100vh !important;
-    min-height: 100svh !important;
-    min-height: 100dvh !important;
+    height: auto !important;
+    min-height: 0 !important;
     margin: 0 !important;
-    object-fit: cover !important;
+    object-fit: contain !important;
     object-position: center top !important;
-    transform: scale(1.035) !important;
+    transform: none !important;
     transform-origin: center top !important;
   }
 
   body.lightbox-open {
     overflow: hidden !important;
-    touch-action: none !important;
+    touch-action: pan-y !important;
   }
 }
